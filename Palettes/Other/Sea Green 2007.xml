@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--Created by exporting the settings of a KryptonPalette instance.-->
-<!--For more information about Krypton visit www.ComponentFactory.com-->
+<!--For more information about Krypton visit -->
 <!--WARNING: Modifying this file may render it invalid for importing.-->
-<KryptonPalette Version="18" Generated="Friday, 25 May 2018, 12:02">
+<KryptonPalette Version="18" Generated="Friday, 26 February 2021, 08:03">
   <Properties>
     <ButtonStyles>
       <ButtonCommon>
@@ -489,7 +489,7 @@
         <GripLight Type="Color" Value="MintCream" />
       </Grip>
       <Menu>
-        <MenuItemText Type="Color" Value="White" />
+        <MenuItemText Type="Color" Value="Black" />
         <MenuItemPressedGradientBegin Type="Color" Value="42, 126, 43" />
         <MenuItemPressedGradientEnd Type="Color" Value="94, 184, 67" />
         <MenuItemPressedGradientMiddle Type="Color" Value="94, 184, 67" />
@@ -527,6 +527,7 @@
         <ToolStripPanelGradientEnd Type="Color" Value="94, 184, 67" />
       </ToolStrip>
     </ToolMenuStatus>
+    <CustomisedKryptonPaletteFilePath Type="String" Value="" />
     <BasePaletteMode Type="PaletteMode" Value="Office 2007 - Silver" />
   </Properties>
   <Images />
