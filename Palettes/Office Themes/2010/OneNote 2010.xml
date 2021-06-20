@@ -2,7 +2,7 @@
 <!--Created by exporting the settings of a KryptonPalette instance.-->
 <!--For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit-->
 <!--WARNING: Modifying this file may render it invalid for importing.-->
-<KryptonPalette Version="18" Generated="Sunday, 20 June 2021, 09:36">
+<KryptonPalette Version="18" Generated="Sunday, 20 June 2021, 10:11">
   <Properties>
     <ButtonStyles>
       <ButtonCommon>
@@ -198,6 +198,11 @@
     </Common>
     <FormStyles>
       <FormCommon>
+        <StateInactive>
+          <Back>
+            <Color1 Type="Color" Value="169, 119, 165" />
+          </Back>
+        </StateInactive>
         <StateActive>
           <Back>
             <Color1 Type="Color" Value="142, 79, 137" />
@@ -292,6 +297,15 @@
         </StateTracking>
       </GridSheet>
     </GridStyles>
+    <InputControlStyles>
+      <InputControlCommon>
+        <StateCommon>
+          <Back>
+            <Color1 Type="Color" Value="142, 79, 137" />
+          </Back>
+        </StateCommon>
+      </InputControlCommon>
+    </InputControlStyles>
     <LabelStyles>
       <LabelNormalControl>
         <StateDisabled>
@@ -341,6 +355,9 @@
         <StateCommon>
           <Color1 Type="Color" Value="142, 79, 137" />
         </StateCommon>
+        <StateDisabled>
+          <Color1 Type="Color" Value="169, 119, 165" />
+        </StateDisabled>
       </PanelCommon>
     </PanelStyles>
     <Ribbon>
