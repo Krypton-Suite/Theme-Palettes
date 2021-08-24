@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
         <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
         <OutputType>WinExe</OutputType>
@@ -22,13 +22,11 @@
         <Content Include="Resources\TopT.png" />
         <Content Include="Resources\TopTMS.png" />
     </ItemGroup>
-
     <ItemGroup>
       <PackageReference Include="Krypton.Navigator.Canary" Version="6.0.2108.1" />
       <PackageReference Include="Krypton.Ribbon.Canary" Version="6.0.2108.1" />
       <PackageReference Include="Krypton.Toolkit.Canary" Version="6.0.2108.1" />
     </ItemGroup>
-
     <PropertyGroup>
         <OutputPath>..\..\Binaries\Krypton Demos\$(Configuration)\</OutputPath>
         <ApplicationManifest>app.manifest</ApplicationManifest>
