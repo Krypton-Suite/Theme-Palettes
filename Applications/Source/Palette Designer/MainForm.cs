@@ -256,15 +256,6 @@ namespace PaletteDesigner
             buttonLive.Palette = _palette;
             control1Disabled.Palette = _palette;
             control1Normal.Palette = _palette;
-            textBoxDisabled.Palette = _palette;
-            textBoxNormal.Palette = _palette;
-            textBoxActive.Palette = _palette;
-            comboBoxDisabled.Palette = _palette;
-            comboBoxNormal.Palette = _palette;
-            comboBoxActive.Palette = _palette;
-            numericDisabled.Palette = _palette;
-            numericNormal.Palette = _palette;
-            numericActive.Palette = _palette;
             headerGroup1Disabled.Palette = _palette;
             headerGroup1Normal.Palette = _palette;
             header1Disabled.Palette = _palette;
@@ -313,7 +304,10 @@ namespace PaletteDesigner
             dataGridViewNormal.Palette = _palette;
             monthCalendarEnabled.Palette = _palette;
             monthCalendarDisabled.Palette = _palette;
+            
+            inputControls1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
+            
             UpdateChromeTMS();
         }
 
@@ -350,19 +344,23 @@ namespace PaletteDesigner
             dataTable1.Rows.Add("Un", "Deux", "Trios");
 
             // Add the chrome window to the Chrome + Strips page
-            _chromeTMS = new FormChromeTMS();
-            _chromeTMS.TopLevel = false;
-            _chromeTMS.Parent = pageDesignChromeTMS;
-            _chromeTMS.Dock = DockStyle.Fill;
-            _chromeTMS.InertForm = true;
+            _chromeTMS = new FormChromeTMS
+            {
+                TopLevel = false,
+                Parent = pageDesignChromeTMS,
+                Dock = DockStyle.Fill,
+                InertForm = true
+            };
             _chromeTMS.Show();
 
             // Add the chrome window with embedded Ribbon
-            _chromeRibbon = new FormChromeRibbon();
-            _chromeRibbon.TopLevel = false;
-            _chromeRibbon.Parent = pageDesignRibbon;
-            _chromeRibbon.Dock = DockStyle.Fill;
-            _chromeRibbon.InertForm = true;
+            _chromeRibbon = new FormChromeRibbon
+            {
+                TopLevel = false,
+                Parent = pageDesignRibbon,
+                Dock = DockStyle.Fill,
+                InertForm = true
+            };
             _chromeRibbon.Show();
 
             // Button fixed states
@@ -413,13 +411,6 @@ namespace PaletteDesigner
             header1Disabled.SetFixedState(PaletteState.Disabled);
             header1Normal.SetFixedState(PaletteState.Normal);
 
-            // Input controls fixed states
-            textBoxNormal.SetFixedState(false);
-            textBoxActive.SetFixedState(true);
-            comboBoxNormal.SetFixedState(false);
-            comboBoxActive.SetFixedState(true);
-            numericNormal.SetFixedState(false);
-            numericActive.SetFixedState(true);
 
             // Labels fixed states
             label1Disabled.SetFixedState(PaletteState.Disabled);
@@ -617,51 +608,6 @@ namespace PaletteDesigner
             control1Normal.GroupBorderStyle = borderStyle;
         }
 
-        private void kryptonNavigatorDesignInputControls_SelectedPageChanged(object sender, EventArgs e)
-        {
-            // Update the design page text with the selected style information
-            pageDesignInputControls.TextTitle = kryptonNavigatorDesignInputControls.SelectedPage.Text;
-            pageDesignInputControls.TextDescription = kryptonNavigatorDesignInputControls.SelectedPage.TextDescription;
-
-            InputControlStyle inputControlStyle;
-            bool alwaysActive = true;
-
-            // Work out the input control style to be used
-            switch (kryptonNavigatorDesignInputControls.SelectedIndex)
-            {
-                default:
-                case 0:
-                    inputControlStyle = InputControlStyle.Standalone;
-                    break;
-                case 1:
-                    inputControlStyle = InputControlStyle.Ribbon;
-                    alwaysActive = false;
-                    break;
-                case 2:
-                    inputControlStyle = InputControlStyle.Custom1;
-                    break;
-            }
-
-            // Update all the displayed controls with the new styles
-            textBoxDisabled.InputControlStyle = inputControlStyle;
-            textBoxNormal.InputControlStyle = inputControlStyle;
-            textBoxActive.InputControlStyle = inputControlStyle;
-            comboBoxDisabled.InputControlStyle = inputControlStyle;
-            comboBoxNormal.InputControlStyle = inputControlStyle;
-            comboBoxActive.InputControlStyle = inputControlStyle;
-            numericDisabled.InputControlStyle = inputControlStyle;
-            numericNormal.InputControlStyle = inputControlStyle;
-            numericActive.InputControlStyle = inputControlStyle;
-            textBoxDisabled.AlwaysActive = alwaysActive;
-            textBoxNormal.AlwaysActive = alwaysActive;
-            textBoxActive.AlwaysActive = alwaysActive;
-            comboBoxDisabled.AlwaysActive = alwaysActive;
-            comboBoxNormal.AlwaysActive = alwaysActive;
-            comboBoxActive.AlwaysActive = alwaysActive;
-            numericDisabled.AlwaysActive = alwaysActive;
-            numericNormal.AlwaysActive = alwaysActive;
-            numericActive.AlwaysActive = alwaysActive;
-        }
 
         private void kryptonNavigatorDesignHeaders_SelectedPageChanged(object sender, EventArgs e)
         {
