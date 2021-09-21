@@ -304,7 +304,8 @@ namespace PaletteDesigner
             dataGridViewNormal.Palette = _palette;
             monthCalendarEnabled.Palette = _palette;
             monthCalendarDisabled.Palette = _palette;
-            
+            kryptonListBox1.Palette = _palette;
+            kryptonListView1.Palette = _palette;
             inputControls1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
             
