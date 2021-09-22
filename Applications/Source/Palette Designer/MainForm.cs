@@ -30,6 +30,7 @@ namespace PaletteDesigner
         private FormChromeTMS _chromeTMS;
         private FormChromeRibbon _chromeRibbon;
         private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
+        private SettingsManager _settingsManager = new SettingsManager();
         #endregion
 
         #region Identity
@@ -348,7 +349,7 @@ namespace PaletteDesigner
         #region Event Handlers
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Settings.Default.StartMaximised)
+            if (_settingsManager.GetMaximised())
             {
                 WindowState = FormWindowState.Maximized;
             }
@@ -457,6 +458,8 @@ namespace PaletteDesigner
             // Define initial display pages
             kryptonNavigatorTop.SelectedPage = pageTopButtons;
             kryptonNavigatorDesign.SelectedPage = pageDesignButtons;
+
+            alwaysStartInAMaximisedStateToolStripMenuItem.Checked = _settingsManager.GetMaximised();
 
             CreateNewPalette();
         }
@@ -960,5 +963,15 @@ namespace PaletteDesigner
         }
 
         #endregion
+
+        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _settingsManager.SaveSettings();
+        }
     }
 }
