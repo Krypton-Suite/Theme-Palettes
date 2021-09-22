@@ -12,9 +12,11 @@
 
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Toolkit;
+using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
 {
@@ -27,6 +29,7 @@ namespace PaletteDesigner
         private KryptonPalette _palette;
         private FormChromeTMS _chromeTMS;
         private FormChromeRibbon _chromeRibbon;
+        private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
         #endregion
 
         #region Identity
@@ -36,6 +39,8 @@ namespace PaletteDesigner
         public MainForm()
         {
             InitializeComponent();
+
+            _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
         }
         #endregion
 
@@ -128,6 +133,8 @@ namespace PaletteDesigner
                 // Define the initial title bar string
                 UpdateTitlebar();
             }
+
+            _recentlyUsedDocumentsManager.AddRecentFile(filename);
         }
 
         private void Save()
@@ -175,6 +182,8 @@ namespace PaletteDesigner
                 // Define the initial title bar string
                 UpdateTitlebar();
             }
+
+            _recentlyUsedDocumentsManager.AddRecentFile(filename);
         }
 
         private void Exit()
@@ -339,6 +348,15 @@ namespace PaletteDesigner
         #region Event Handlers
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Settings.Default.StartMaximised)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+
             // Populate the sample data set
             dataTable1.Rows.Add("One", "Two", "Three");
             dataTable1.Rows.Add("Uno", "Dos", "Tres");
@@ -913,6 +931,34 @@ namespace PaletteDesigner
             // Mark a changed file with a star
             Text = "Palette Designer - " + _filename + (_dirty ? "*" : string.Empty);
         }
+        #endregion
+
+        #region Recently Used
+
+        private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
+        {
+            string fileName = (sender as ToolStripItem).Text;
+
+            if (!File.Exists(fileName))
+            {
+                if (KryptonMessageBox.Show($"{ fileName } doesn't exist. Remove from recent workspaces?", "File not found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            _palette.Import(fileName);
+        }
+
+        private void MyOwnRecentPaletteFilesGotCleared_Handler(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
     }
 }
