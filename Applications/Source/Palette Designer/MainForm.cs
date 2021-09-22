@@ -12,9 +12,11 @@
 
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Toolkit;
+using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
 {
@@ -27,6 +29,8 @@ namespace PaletteDesigner
         private KryptonPalette _palette;
         private FormChromeTMS _chromeTMS;
         private FormChromeRibbon _chromeRibbon;
+        private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
+        private SettingsManager _settingsManager = new SettingsManager();
         #endregion
 
         #region Identity
@@ -36,6 +40,8 @@ namespace PaletteDesigner
         public MainForm()
         {
             InitializeComponent();
+
+            _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
         }
         #endregion
 
@@ -128,6 +134,8 @@ namespace PaletteDesigner
                 // Define the initial title bar string
                 UpdateTitlebar();
             }
+
+            _recentlyUsedDocumentsManager.AddRecentFile(filename);
         }
 
         private void Save()
@@ -175,6 +183,8 @@ namespace PaletteDesigner
                 // Define the initial title bar string
                 UpdateTitlebar();
             }
+
+            _recentlyUsedDocumentsManager.AddRecentFile(filename);
         }
 
         private void Exit()
@@ -339,6 +349,15 @@ namespace PaletteDesigner
         #region Event Handlers
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (_settingsManager.GetMaximised())
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+
             // Populate the sample data set
             dataTable1.Rows.Add("One", "Two", "Three");
             dataTable1.Rows.Add("Uno", "Dos", "Tres");
@@ -439,6 +458,8 @@ namespace PaletteDesigner
             // Define initial display pages
             kryptonNavigatorTop.SelectedPage = pageTopButtons;
             kryptonNavigatorDesign.SelectedPage = pageDesignButtons;
+
+            alwaysStartInAMaximisedStateToolStripMenuItem.Checked = _settingsManager.GetMaximised();
 
             CreateNewPalette();
         }
@@ -914,5 +935,43 @@ namespace PaletteDesigner
             Text = "Palette Designer - " + _filename + (_dirty ? "*" : string.Empty);
         }
         #endregion
+
+        #region Recently Used
+
+        private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
+        {
+            string fileName = (sender as ToolStripItem).Text;
+
+            if (!File.Exists(fileName))
+            {
+                if (KryptonMessageBox.Show($"{ fileName } doesn't exist. Remove from recent workspaces?", "File not found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            _palette.Import(fileName);
+        }
+
+        private void MyOwnRecentPaletteFilesGotCleared_Handler(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _settingsManager.SaveSettings();
+        }
     }
 }
