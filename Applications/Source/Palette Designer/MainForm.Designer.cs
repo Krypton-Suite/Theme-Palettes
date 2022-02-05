@@ -5716,6 +5716,7 @@ namespace PaletteDesigner
             // 
             // menuPage1
             // 
+            this.menuPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuPage1.Location = new System.Drawing.Point(0, 0);
             this.menuPage1.Name = "menuPage1";
             this.menuPage1.Size = new System.Drawing.Size(867, 670);
