@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using Krypton.Toolkit;
@@ -7,15 +8,15 @@ namespace PaletteDesigner.Pages
 {
     public partial class InputControls : UserControl
     {
-        private readonly KryptonTextBox[] textBoxes;
-        private readonly KryptonComboBox[] comboBoxes;
-        private readonly KryptonRichTextBox[] richTextBoxes;
-        private readonly KryptonNumericUpDown[] numericUpDowns;
+        private readonly List<KryptonTextBox> textBoxes;
+        private readonly List<KryptonComboBox> comboBoxes;
+        private readonly List<KryptonRichTextBox> richTextBoxes;
+        private readonly List<KryptonNumericUpDown> numericUpDowns;
 
         public InputControls()
         {
             InitializeComponent();
-            textBoxes = new[]
+            textBoxes = new List<KryptonTextBox>(new[]
             {
                 textBoxDisabled,
                 textBoxNormal,
@@ -25,27 +26,27 @@ namespace PaletteDesigner.Pages
                 multiDisabled,
                 multiNormal,
                 multiActive
-            };
+            });
 
-            richTextBoxes = new[]
+            richTextBoxes = new List<KryptonRichTextBox>(new[]
             {
                 rtbDisabled,
                 rtbNormal,
                 rtbActive
-            };
+            });
 
-            comboBoxes = new[]
+            comboBoxes = new List<KryptonComboBox>( new[]
             {
                 comboBoxDisabled,
                 comboBoxNormal,
                 comboBoxActive
-            };
-            numericUpDowns = new[]
+            });
+            numericUpDowns = new List<KryptonNumericUpDown>( new[]
             {
                 numericDisabled,
                 numericNormal,
                 numericActive
-            };
+            });
 
             // Input controls fixed states
             textBoxNormal.SetFixedState(false);
@@ -64,22 +65,10 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonPalette palette)
         {
-            foreach (var control in textBoxes)
-            {
-                control.Palette = palette;
-            }
-            foreach (var control in comboBoxes)
-            {
-                control.Palette = palette;
-            }
-            foreach (var control in richTextBoxes)
-            {
-                control.Palette = palette;
-            }
-            foreach (var control in numericUpDowns)
-            {
-                control.Palette = palette;
-            }
+            textBoxes.ForEach(control => control.Palette = palette);
+            comboBoxes.ForEach(control => control.Palette = palette);
+            richTextBoxes.ForEach(control => control.Palette = palette);
+            numericUpDowns.ForEach(control => control.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }
@@ -110,49 +99,16 @@ namespace PaletteDesigner.Pages
             }
 
             // Update all the displayed controls with the new styles
-            foreach (var control in textBoxes)
-            {
-                control.InputControlStyle = inputControlStyle;
-            }
-            foreach (var control in comboBoxes)
-            {
-                control.InputControlStyle = inputControlStyle;
-            }
-            foreach (var control in richTextBoxes)
-            {
-                control.InputControlStyle = inputControlStyle;
-            }
-            foreach (var control in numericUpDowns)
-            {
-                control.InputControlStyle = inputControlStyle;
-            }
+            textBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            comboBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            richTextBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            numericUpDowns.ForEach(control => control.InputControlStyle = inputControlStyle);
 
-            textBoxDisabled.InputControlStyle = inputControlStyle;
-            textBoxNormal.InputControlStyle = inputControlStyle;
-            textBoxActive.InputControlStyle = inputControlStyle;
-            comboBoxDisabled.InputControlStyle = inputControlStyle;
-            comboBoxNormal.InputControlStyle = inputControlStyle;
-            comboBoxActive.InputControlStyle = inputControlStyle;
-            numericDisabled.InputControlStyle = inputControlStyle;
-            numericNormal.InputControlStyle = inputControlStyle;
-            numericActive.InputControlStyle = inputControlStyle;
+            textBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            comboBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            richTextBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            numericUpDowns.ForEach(control => control.AlwaysActive = alwaysActive);
 
-            foreach (var control in textBoxes)
-            {
-                control.AlwaysActive = alwaysActive;
-            }
-            foreach (var control in comboBoxes)
-            {
-                control.AlwaysActive = alwaysActive;
-            }
-            foreach (var control in richTextBoxes)
-            {
-                control.AlwaysActive = alwaysActive;
-            }
-            foreach (var control in numericUpDowns)
-            {
-                control.AlwaysActive = alwaysActive;
-            }
         }
 
     }

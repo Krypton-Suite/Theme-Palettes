@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 using Krypton.Toolkit;
 
@@ -6,12 +7,12 @@ namespace PaletteDesigner.Pages
 {
     public partial class TrackBar : UserControl
     {
-        private readonly KryptonTrackBar[] tBars;
+        private readonly List<KryptonTrackBar> tBars;
         public TrackBar()
         {
             InitializeComponent();
 
-            tBars = new[]
+            tBars = new List<KryptonTrackBar>(new[]
             {
                 kryptonTrackBar1,
                 kryptonTrackBar5,
@@ -30,7 +31,7 @@ namespace PaletteDesigner.Pages
                 kryptonTrackBar15,
                 kryptonTrackBar16
 
-            };
+            });
             // TrackBar fixed states
             kryptonTrackBar1.SetFixedState(PaletteState.Normal);
             kryptonTrackBar5.SetFixedState(PaletteState.Normal);
@@ -55,10 +56,7 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonPalette palette)
         {
-            foreach (var bar in tBars)
-            {
-                bar.Palette = palette;
-            }
+            tBars.ForEach(bar => bar.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }
