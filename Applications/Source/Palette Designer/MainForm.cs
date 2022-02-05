@@ -12,10 +12,14 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+
 using Krypton.Navigator;
 using Krypton.Toolkit;
+
 using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
@@ -30,7 +34,7 @@ namespace PaletteDesigner
         private FormChromeTMS _chromeTMS;
         private FormChromeRibbon _chromeRibbon;
         private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
-        private SettingsManager _settingsManager = new SettingsManager();
+        private SettingsManager _settingsManager = new();
         #endregion
 
         #region Identity
@@ -42,6 +46,216 @@ namespace PaletteDesigner
             InitializeComponent();
 
             _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
+
+            applyPalettesToBases = new List<VisualControlBase>(new VisualControlBase[]
+            {
+            buttonSpecT1,
+            buttonSpecT2,
+            buttonSpecT3,
+            buttonSpecT4,
+            buttonSpecG1,
+            buttonSpecG2,
+            buttonSpecG3,
+            buttonSpecG4,
+            buttonDisabled,
+            buttonDefaultFocus,
+            buttonNormal,
+            buttonTracking,
+            buttonPressed,
+            buttonCheckedNormal,
+            buttonCheckedTracking,
+            buttonCheckedPressed,
+            buttonLive,
+            control1Disabled,
+            control1Normal,
+            headerGroup1Disabled,
+            headerGroup1Normal,
+            header1Disabled,
+            header1Normal,
+            cbLive,
+            cbFocus,
+            cbUncheckedDisabled,
+            cbUncheckedNormal,
+            cbUncheckedTracking,
+            cbUncheckedPressed,
+            cbCheckedDisabled,
+            cbCheckedNormal,
+            cbCheckedTracking,
+            cbCheckedPressed,
+            cbIndeterminateDisabled,
+            cbIndeterminateNormal,
+            cbIndeterminateTracking,
+            cbIndeterminatePressed,
+            rbFocus,
+            rbLive1,
+            rbLive2,
+            rbCheckedNormal,
+            rbCheckedTracking,
+            rbCheckedPressed,
+            rbUncheckedDisabled,
+            rbUncheckedNormal,
+            rbUncheckedTracking,
+            rbUncheckedPressed,
+            label1Disabled,
+            label1Normal,
+            label1Visited,
+            label1NotVisited,
+            label1Pressed,
+            label1Live,
+            kryptonNavigatorTabs,
+            kryptonNavigator,
+            kryptonGroupBox1,
+            kryptonGroupBox2,
+            kryptonGroupBox3,
+            separator1Disabled,
+            separator1Normal,
+            separator1Tracking,
+            separator1Pressed,
+            separator1Live,
+            monthCalendarEnabled,
+            monthCalendarDisabled,
+            kryptonListBox1
+            }
+            );
+
+
+            applyPalettesToPanels = new List<KryptonPanel>(new[]
+                {
+            panel1Disabled,
+            panel1Normal,
+            panelLabelsBackground,
+            borderDesignSeparators,
+            borderDesignLabels,
+            borderDesignHeaders,
+            borderDesignPanels,
+            borderDesignButtons,
+            borderDesignControls,
+            borderDesignNavigator,
+            borderDesignTabs,
+            panelLabelsBackground,
+            kryptonPanelMainFill,
+                }
+            );
+
+            applyPalettesToPages = new List<KryptonPage>(new[]
+            {
+        pageTopButtonSpecs,
+        pageTopButtons,
+        pageTopControls,
+        pageTopHeaderGroup,
+        pageTopHeaders,
+        pageTopLabels,
+        pageTopNavigator,
+        pageTopPanels,
+        pageTopSeparators,
+        pageTopChromeTMS,
+        pageDesignButtonSpecs,
+        pageDesignButtons,
+        pageDesignControls,
+        pageDesignHeaderGroup,
+        pageDesignHeaders,
+        pageDesignLabels,
+        pageDesignNavigator,
+        pageDesignPanels,
+        pageDesignSeparators,
+        pageDesignChromeTMS,
+        pageButtonsStandalone,
+        pageButtonsLowProfile,
+        pageButtonsButtonSpec,
+        pageButtonsCustom1,
+        pageButtonsCustom2,
+        pageButtonsCustom3,
+        pageControlsClient,
+        pageControlsAlternate,
+        pageControlsCustom1,
+        pagePanelsClient,
+        pagePanelsAlternate,
+        pagePanelsCustom1,
+        pageHeadersPrimary,
+        pageHeadersSecondary,
+        pageHeadersCustom1,
+        pageHeadersCustom2,
+        pageLabelsNormalControl,
+        pageLabelsTitleControl,
+        pageLabelsCustom1,
+        pageLabelsCustom2,
+        pageLabelsCustom3,
+        pageSeparatorLowProfile,
+        pageSeparatorHighProfile,
+        pageSeparatorCustom1,
+        navigatorPage1,
+        navigatorPage2,
+        pageNavigatorBarCheckButtonGroupOutside,
+        pageNavigatorBarCheckButtonGroupInside,
+        pageNavigatorBarCheckButtonGroupOnly,
+        navigatorPage3,
+        pageTopTabs,
+        pageDesignTabs,
+        pageTabHighProfile,
+        pageTabStandardProfile,
+        pageTabLowProfile,
+        pageTabOneNote,
+        pageTabCustom1,
+        pageTabCustom2,
+        pageTabCustom3,
+        kryptonNavigatorTabs1,
+        kryptonNavigatorTabs2,
+        kryptonNavigatorTabs3,
+        pageButtonsNavigatorStack,
+        pageButtonsForm,
+        pageHeadersForm,
+        kryptonPage1,
+        pageLabelsNormalPanel,
+        pageLabelsTitlePanel,
+        pageButtonsAlternate,
+        pageButtonsRibbonCluster,
+        pageControlsToolTip,
+        pageLabelsToolTip,
+        pageTopRibbon,
+        pageDesignRibbon,
+        pageControlsRibbon,
+        pageButtonsNavigatorMini,
+        pageLabelsKeyTip,
+        pageTopCheckBox,
+        pageDesignCheckBox,
+        pageTopRadioButton,
+        pageDesignRadioButton,
+        pageDesignGrid,
+        pageTopGrids,
+        kryptonGridList,
+        kryptonGridSheet,
+        kryptonGridCustom1,
+        pageLabelsSuperTip,
+        pageButtonsInputControl,
+        pageTopInputControls,
+        pageDesignInputControls,
+        pageSeparatorHighInternalProfile,
+        pageButtonsListItem,
+        pageButtonsGallery,
+        pageButtonsNavigatorOverflow,
+        pageButtonsBreadCrumb,
+        pageButtonCalendarDay,
+        pageHeadersCalendar,
+        pageTopDateTime,
+        pageDesignDateTime,
+        pageHeadersDockActive,
+        pageHeadersDockInactive,
+        pageTabDock,
+        pageTabDockAutoHidden,
+        pageControlsGroupBox,
+        pageLabelsGroupBoxCaption,
+        pageButtonsFormClose,
+        pagePanelsRibbonInactive,
+        pageTopTrackBar,
+        pageDesignTrackBar,
+        pageButtonsCommand,
+        pageLabelsBoldControl,
+        pageLabelsItalicControl,
+        pageLabelsBoldPanel,
+        pageLabelsItalicPanel,
+        pageTopLists,
+        pageLists,
+            });
         }
         #endregion
 
@@ -53,8 +267,8 @@ namespace PaletteDesigner
             {
                 // Ask user if the current palette should be saved
                 switch (MessageBox.Show(this,
-                                        "Save changes to the current palette?",
-                                        "Palette Changed",
+                                        @"Save changes to the current palette?",
+                                        @"Palette Changed",
                                         MessageBoxButtons.YesNoCancel,
                                         MessageBoxIcon.Warning))
                 {
@@ -78,9 +292,9 @@ namespace PaletteDesigner
             if (_dirty)
             {
                 // Ask user if the current palette should be saved
-                switch (MessageBox.Show(this,
-                                        "Save changes to the current palette?",
-                                        "Palette Changed",
+                switch (KryptonMessageBox.Show(this,
+                                        @"Save changes to the current palette?",
+                                        @"Palette Changed",
                                         MessageBoxButtons.YesNoCancel,
                                         MessageBoxIcon.Warning))
                 {
@@ -95,12 +309,12 @@ namespace PaletteDesigner
             }
 
             // Create a fresh palette instance for loading into
-            KryptonPalette palette = new KryptonPalette();
+            var palette = new KryptonPalette();
 
             // Get the name of the file we imported from
             Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            string filename = palette.Import();
+            var filename = palette.Import();
             Cursor = Cursors.Default;
 
             // If the load succeeded
@@ -108,15 +322,19 @@ namespace PaletteDesigner
             {
                 // Need to unhook from any existing palette
                 if (_palette != null)
-                    _palette.PalettePaint -= new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+                {
+                    _palette.PalettePaint -= OnPalettePaint;
+                    _palette.BasePaletteChanged -= OnBaseChanged;
+                }
 
                 // Use the new instance instead
                 _palette = palette;
-                _chromeTMS.Palette = _palette;
+                _chromeTMS.Palette = palette;
                 _chromeRibbon.OverridePalette = _palette;
 
                 // We need to know when a change occurs to the palette settings
-                _palette.PalettePaint += new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+                _palette.PalettePaint += OnPalettePaint;
+                _palette.BasePaletteChanged += OnBaseChanged;
 
                 // Hook up the property grid to the palette
                 labelGridNormal.SelectedObject = _palette;
@@ -167,7 +385,7 @@ namespace PaletteDesigner
             // Get back the filename selected by the user
             Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            string filename = _palette.Export();
+            var filename = _palette.Export();
             Cursor = Cursors.Default;
 
             // If the save succeeded
@@ -194,8 +412,8 @@ namespace PaletteDesigner
             {
                 // Ask user if the current palette should be saved
                 switch (MessageBox.Show(this,
-                                        "Save changes to the current palette?",
-                                        "Palette Changed",
+                                        @"Save changes to the current palette?",
+                                        @"Palette Changed",
                                         MessageBoxButtons.YesNoCancel,
                                         MessageBoxIcon.Warning))
                 {
@@ -214,11 +432,18 @@ namespace PaletteDesigner
         #endregion
 
         #region Palettes
+
+        private readonly List<VisualControlBase> applyPalettesToBases;
+        private readonly List<KryptonPanel> applyPalettesToPanels;
+        private readonly List<KryptonPage> applyPalettesToPages;
         private void CreateNewPalette()
         {
             // Need to unhook from any existing palette
             if (_palette != null)
-                _palette.PalettePaint -= new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+            {
+                _palette.PalettePaint -= OnPalettePaint;
+                _palette.BasePaletteChanged -= OnBaseChanged;
+            }
 
             // Create a fresh palette instance
             _palette = new KryptonPalette();
@@ -226,7 +451,8 @@ namespace PaletteDesigner
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
-            _palette.PalettePaint += new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+            _palette.PalettePaint += OnPalettePaint;
+            _palette.BasePaletteChanged += OnBaseChanged;
 
             // Hook up the property grid to the palette
             labelGridNormal.SelectedObject = _palette;
@@ -245,81 +471,28 @@ namespace PaletteDesigner
             UpdateTitlebar();
         }
 
+        private void OnBaseChanged(object sender, EventArgs e)
+        {
+            ApplyPalette();
+        }
+
         private void ApplyPalette()
         {
-            buttonSpecT1.Palette = _palette;
-            buttonSpecT2.Palette = _palette;
-            buttonSpecT3.Palette = _palette;
-            buttonSpecT4.Palette = _palette;
-            buttonSpecG1.Palette = _palette;
-            buttonSpecG2.Palette = _palette;
-            buttonSpecG3.Palette = _palette;
-            buttonSpecG4.Palette = _palette;
-            buttonDisabled.Palette = _palette;
-            buttonDefaultFocus.Palette = _palette;
-            buttonNormal.Palette = _palette;
-            buttonTracking.Palette = _palette;
-            buttonPressed.Palette = _palette;
-            buttonCheckedNormal.Palette = _palette;
-            buttonCheckedTracking.Palette = _palette;
-            buttonCheckedPressed.Palette = _palette;
-            buttonLive.Palette = _palette;
-            control1Disabled.Palette = _palette;
-            control1Normal.Palette = _palette;
-            headerGroup1Disabled.Palette = _palette;
-            headerGroup1Normal.Palette = _palette;
-            header1Disabled.Palette = _palette;
-            header1Normal.Palette = _palette;
-            cbLive.Palette = _palette;
-            cbFocus.Palette = _palette;
-            cbUncheckedDisabled.Palette = _palette;
-            cbUncheckedNormal.Palette = _palette;
-            cbUncheckedTracking.Palette = _palette;
-            cbUncheckedPressed.Palette = _palette;
-            cbCheckedDisabled.Palette = _palette;
-            cbCheckedNormal.Palette = _palette;
-            cbCheckedTracking.Palette = _palette;
-            cbCheckedPressed.Palette = _palette;
-            cbIndeterminateDisabled.Palette = _palette;
-            cbIndeterminateNormal.Palette = _palette;
-            cbIndeterminateTracking.Palette = _palette;
-            cbIndeterminatePressed.Palette = _palette;
-            rbFocus.Palette = _palette;
-            rbLive1.Palette = _palette;
-            rbLive2.Palette = _palette;
-            rbCheckedNormal.Palette = _palette;
-            rbCheckedTracking.Palette = _palette;
-            rbCheckedPressed.Palette = _palette;
-            rbUncheckedDisabled.Palette = _palette;
-            rbUncheckedNormal.Palette = _palette;
-            rbUncheckedTracking.Palette = _palette;
-            rbUncheckedPressed.Palette = _palette;
-            label1Disabled.Palette = _palette;
-            label1Normal.Palette = _palette;
-            label1Visited.Palette = _palette;
-            label1NotVisited.Palette = _palette;
-            label1Pressed.Palette = _palette;
-            label1Live.Palette = _palette;
-            panelLabelsBackground.Palette = _palette;
-            kryptonNavigatorTabs.Palette = _palette;
-            kryptonNavigator.Palette = _palette;
-            panel1Disabled.Palette = _palette;
-            panel1Normal.Palette = _palette;
-            separator1Disabled.Palette = _palette;
-            separator1Normal.Palette = _palette;
-            separator1Tracking.Palette = _palette;
-            separator1Pressed.Palette = _palette;
-            separator1Live.Palette = _palette;
+            applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
+            applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
+
             dataGridViewDisabled.Palette = _palette;
             dataGridViewNormal.Palette = _palette;
-            monthCalendarEnabled.Palette = _palette;
-            monthCalendarDisabled.Palette = _palette;
-            kryptonListBox1.Palette = _palette;
             kryptonListView1.Palette = _palette;
+
             inputControls1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
-            
+
             UpdateChromeTMS();
+
+            // Hack until the pages are separated out:
+            var backClr = _palette.GetBackColor1(PaletteBackStyle.PanelClient, PaletteState.Normal);
+            applyPalettesToPages.ForEach(pg => pg.StateCommon.Page.Color1 = backClr);
         }
 
         private void UpdateChromeTMS()
@@ -331,7 +504,7 @@ namespace PaletteDesigner
             _chromeTMS.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
         }
 
-        void OnPalettePaint(object sender, PaletteLayoutEventArgs e)
+        private void OnPalettePaint(object sender, PaletteLayoutEventArgs e)
         {
             // Only interested the first time the palette is changed
             if (!_dirty)
@@ -342,7 +515,9 @@ namespace PaletteDesigner
 
             // Do we need to setup a new renderer for the ToolMenuStatus page?
             if (e.NeedColorTable)
+            {
                 UpdateChromeTMS();
+            }
         }
         #endregion
 
@@ -464,42 +639,23 @@ namespace PaletteDesigner
             CreateNewPalette();
         }
 
-        private void menuNew_Click(object sender, EventArgs e)
-        {
-            New();
-        }
+        private void menuNew_Click(object sender, EventArgs e) => New();
 
-        private void menuOpen_Click(object sender, EventArgs e)
-        {
-            Open();
-        }
+        private void menuOpen_Click(object sender, EventArgs e) => Open();
 
-        private void menuSave_Click(object sender, EventArgs e)
-        {
-            Save();
-        }
+        private void menuSave_Click(object sender, EventArgs e) => Save();
 
-        private void menuSaveAs_Click(object sender, EventArgs e)
-        {
-            SaveAs();
-        }
+        private void menuSaveAs_Click(object sender, EventArgs e) => SaveAs();
 
-        private void menuExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
+        private void menuExit_Click(object sender, EventArgs e) => Exit();
 
-        private void kryptonNavigatorTop_SelectedPageChanged(object sender, EventArgs e)
-        {
+        private void kryptonNavigatorTop_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the design navigator
             kryptonNavigatorDesign.SelectedIndex = kryptonNavigatorTop.SelectedIndex;
-        }
 
-        private void kryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e)
-        {
+        private void kryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the top navigator
             kryptonNavigatorTop.SelectedIndex = kryptonNavigatorDesign.SelectedIndex;
-        }
 
         private void kryptonNavigatorDesignButtons_SelectedPageChanged(object sender, EventArgs e)
         {
@@ -507,70 +663,30 @@ namespace PaletteDesigner
             pageDesignButtons.TextTitle = kryptonNavigatorDesignButtons.SelectedPage.Text;
             pageDesignButtons.TextDescription = kryptonNavigatorDesignButtons.SelectedPage.TextDescription;
 
-            ButtonStyle bs;
-
             // Work out the button style to be used
-            switch(kryptonNavigatorDesignButtons.SelectedIndex)
+            ButtonStyle bs = kryptonNavigatorDesignButtons.SelectedIndex switch
             {
-                default:
-                case 0:
-                    bs = ButtonStyle.Standalone;
-                    break;
-                case 1:
-                    bs = ButtonStyle.Alternate;
-                    break;
-                case 2:
-                    bs = ButtonStyle.LowProfile;
-                    break;
-                case 3:
-                    bs = ButtonStyle.BreadCrumb;
-                    break;
-                case 4:
-                    bs = ButtonStyle.CalendarDay;
-                    break;
-                case 5:
-                    bs = ButtonStyle.ButtonSpec;
-                    break;
-                case 6:
-                    bs = ButtonStyle.Cluster;
-                    break;
-                case 7:
-                    bs = ButtonStyle.NavigatorStack;
-                    break;
-                case 8:
-                    bs = ButtonStyle.NavigatorOverflow;
-                    break;
-                case 9:
-                    bs = ButtonStyle.NavigatorMini;
-                    break;
-                case 10:
-                    bs = ButtonStyle.InputControl;
-                    break;
-                case 11:
-                    bs = ButtonStyle.ListItem;
-                    break;
-                case 12:
-                    bs = ButtonStyle.Gallery;
-                    break;
-                case 13:
-                    bs = ButtonStyle.Form;
-                    break;
-                case 14:
-                    bs = ButtonStyle.FormClose;
-                    break;
-                case 15:
-                    bs = ButtonStyle.Command;
-                    break;
-                case 16:
-                    bs = ButtonStyle.Custom1;
-                    break;
-                case 17:
-                    bs = ButtonStyle.Custom2;
-                    break;
-                case 18:
-                    bs = ButtonStyle.Custom3;
-                    break;
-            }
+                0 => ButtonStyle.Standalone,
+                1 => ButtonStyle.Alternate,
+                2 => ButtonStyle.LowProfile,
+                3 => ButtonStyle.BreadCrumb,
+                4 => ButtonStyle.CalendarDay,
+                5 => ButtonStyle.ButtonSpec,
+                6 => ButtonStyle.Cluster,
+                7 => ButtonStyle.NavigatorStack,
+                8 => ButtonStyle.NavigatorOverflow,
+                9 => ButtonStyle.NavigatorMini,
+                10 => ButtonStyle.InputControl,
+                11 => ButtonStyle.ListItem,
+                12 => ButtonStyle.Gallery,
+                13 => ButtonStyle.Form,
+                14 => ButtonStyle.FormClose,
+                15 => ButtonStyle.Command,
+                16 => ButtonStyle.Custom1,
+                17 => ButtonStyle.Custom2,
+                18 => ButtonStyle.Custom3,
+                _ => ButtonStyle.Standalone
+            };
 
             // Update all the displayed buttons with the new style
             buttonDisabled.ButtonStyle = bs;
@@ -592,7 +708,7 @@ namespace PaletteDesigner
 
             PaletteBackStyle backStyle;
             PaletteBorderStyle borderStyle;
-            
+
             // Work out the group styles to be used
             switch (kryptonNavigatorDesignControls.SelectedIndex)
             {
@@ -637,37 +753,19 @@ namespace PaletteDesigner
             pageDesignHeaders.TextTitle = kryptonNavigatorDesignHeaders.SelectedPage.Text;
             pageDesignHeaders.TextDescription = kryptonNavigatorDesignHeaders.SelectedPage.TextDescription;
 
-            HeaderStyle hs;
-
             // Work out the header style to be used
-            switch (kryptonNavigatorDesignHeaders.SelectedIndex)
+            HeaderStyle hs = kryptonNavigatorDesignHeaders.SelectedIndex switch
             {
-                default:
-                case 0:
-                    hs = HeaderStyle.Primary;
-                    break;
-                case 1:
-                    hs = HeaderStyle.Secondary;
-                    break;
-                case 2:
-                    hs = HeaderStyle.DockActive;
-                    break;
-                case 3:
-                    hs = HeaderStyle.DockInactive;
-                    break;
-                case 4:
-                    hs = HeaderStyle.Calendar;
-                    break;
-                case 5:
-                    hs = HeaderStyle.Form;
-                    break;
-                case 6:
-                    hs = HeaderStyle.Custom1;
-                    break;
-                case 7:
-                    hs = HeaderStyle.Custom2;
-                    break;
-            }
+                0 => HeaderStyle.Primary,
+                1 => HeaderStyle.Secondary,
+                2 => HeaderStyle.DockActive,
+                3 => HeaderStyle.DockInactive,
+                4 => HeaderStyle.Calendar,
+                5 => HeaderStyle.Form,
+                6 => HeaderStyle.Custom1,
+                7 => HeaderStyle.Custom2,
+                _ => HeaderStyle.Primary
+            };
 
             // Update all the displayed controls with the new styles
             header1Disabled.HeaderStyle = hs;
@@ -680,58 +778,26 @@ namespace PaletteDesigner
             pageDesignLabels.TextTitle = kryptonNavigatorDesignLabels.SelectedPage.Text;
             pageDesignLabels.TextDescription = kryptonNavigatorDesignLabels.SelectedPage.TextDescription;
 
-            LabelStyle ls;
-
             // Work out the label style to be used
-            switch (kryptonNavigatorDesignLabels.SelectedIndex)
+            LabelStyle ls = kryptonNavigatorDesignLabels.SelectedIndex switch
             {
-                default:
-                case 0:
-                    ls = LabelStyle.NormalControl;
-                    break;
-                case 1:
-                    ls = LabelStyle.BoldControl;
-                    break;
-                case 2:
-                    ls = LabelStyle.ItalicControl;
-                    break;
-                case 3:
-                    ls = LabelStyle.TitleControl;
-                    break;
-                case 4:
-                    ls = LabelStyle.NormalPanel;
-                    break;
-                case 5:
-                    ls = LabelStyle.BoldPanel;
-                    break;
-                case 6:
-                    ls = LabelStyle.ItalicPanel;
-                    break;
-                case 7:
-                    ls = LabelStyle.TitlePanel;
-                    break;
-                case 8:
-                    ls = LabelStyle.GroupBoxCaption;
-                    break;
-                case 9:
-                    ls = LabelStyle.ToolTip;
-                    break;
-                case 10:
-                    ls = LabelStyle.SuperTip;
-                    break;
-                case 11:
-                    ls = LabelStyle.KeyTip;
-                    break;
-                case 12:
-                    ls = LabelStyle.Custom1;
-                    break;
-                case 13:
-                    ls = LabelStyle.Custom2;
-                    break;
-                case 14:
-                    ls = LabelStyle.Custom3;
-                    break;
-            }
+                0 => LabelStyle.NormalControl,
+                1 => LabelStyle.BoldControl,
+                2 => LabelStyle.ItalicControl,
+                3 => LabelStyle.TitleControl,
+                4 => LabelStyle.NormalPanel,
+                5 => LabelStyle.BoldPanel,
+                6 => LabelStyle.ItalicPanel,
+                7 => LabelStyle.TitlePanel,
+                8 => LabelStyle.GroupBoxCaption,
+                9 => LabelStyle.ToolTip,
+                10 => LabelStyle.SuperTip,
+                11 => LabelStyle.KeyTip,
+                12 => LabelStyle.Custom1,
+                13 => LabelStyle.Custom2,
+                14 => LabelStyle.Custom3,
+                _ => LabelStyle.NormalControl
+            };
 
             // Update all the displayed controls with the new styles
             label1Disabled.LabelStyle = ls;
@@ -744,30 +810,17 @@ namespace PaletteDesigner
 
         private void kryptonCheckSetLabels_CheckedButtonChanged(object sender, EventArgs e)
         {
-            switch (kryptonCheckSetLabels.CheckedIndex)
+            panelLabelsBackground.PanelBackStyle = kryptonCheckSetLabels.CheckedIndex switch
             {
-                case 0:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.PanelClient;
-                    break;
-                case 1:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.PanelAlternate;
-                    break;
-                case 2:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.PanelCustom1;
-                    break;
-                case 3:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.ControlClient;
-                    break;
-                case 4:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.ControlAlternate;
-                    break;
-                case 5:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.ControlCustom1;
-                    break;
-                case 6:
-                    panelLabelsBackground.PanelBackStyle = PaletteBackStyle.ControlToolTip;
-                    break;
-            }
+                0 => PaletteBackStyle.PanelClient,
+                1 => PaletteBackStyle.PanelAlternate,
+                2 => PaletteBackStyle.PanelCustom1,
+                3 => PaletteBackStyle.ControlClient,
+                4 => PaletteBackStyle.ControlAlternate,
+                5 => PaletteBackStyle.ControlCustom1,
+                6 => PaletteBackStyle.ControlToolTip,
+                _ => panelLabelsBackground.PanelBackStyle
+            };
 
             panelLabelsBackground.Refresh();
         }
@@ -779,37 +832,19 @@ namespace PaletteDesigner
             pageDesignTabs.TextDescription = kryptonNavigatorDesignTabs.SelectedPage.TextDescription;
 
             // Work out the tab style to show in the navigator
-            switch (kryptonNavigatorDesignTabs.SelectedIndex)
+            kryptonNavigatorTabs.Bar.TabStyle = kryptonNavigatorDesignTabs.SelectedIndex switch
             {
-                default:
-                case 0:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.HighProfile;
-                    break;
-                case 1:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.StandardProfile;
-                    break;
-                case 2:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.LowProfile;
-                    break;
-                case 3:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.OneNote;
-                    break;
-                case 4:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.Dock;
-                    break;
-                case 5:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.DockAutoHidden;
-                    break;
-                case 6:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.Custom1;
-                    break;
-                case 7:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.Custom2;
-                    break;
-                case 8:
-                    kryptonNavigatorTabs.Bar.TabStyle = TabStyle.Custom3;
-                    break;
-            }
+                0 => TabStyle.HighProfile,
+                1 => TabStyle.StandardProfile,
+                2 => TabStyle.LowProfile,
+                3 => TabStyle.OneNote,
+                4 => TabStyle.Dock,
+                5 => TabStyle.DockAutoHidden,
+                6 => TabStyle.Custom1,
+                7 => TabStyle.Custom2,
+                8 => TabStyle.Custom3,
+                _ => TabStyle.HighProfile
+            };
         }
 
         private void kryptonNavigatorDesignNavigator_SelectedPageChanged(object sender, EventArgs e)
@@ -819,19 +854,13 @@ namespace PaletteDesigner
             pageDesignNavigator.TextDescription = kryptonNavigatorDesignNavigator.SelectedPage.TextDescription;
 
             // Work out the navigator mode required
-            switch (kryptonNavigatorDesignNavigator.SelectedIndex)
+            kryptonNavigator.NavigatorMode = kryptonNavigatorDesignNavigator.SelectedIndex switch
             {
-                default:
-                case 0:
-                    kryptonNavigator.NavigatorMode = NavigatorMode.BarCheckButtonGroupOutside;
-                    break;
-                case 1:
-                    kryptonNavigator.NavigatorMode = NavigatorMode.BarCheckButtonGroupInside;
-                    break;
-                case 2:
-                    kryptonNavigator.NavigatorMode = NavigatorMode.BarCheckButtonGroupOnly;
-                    break;
-            }
+                0 => NavigatorMode.BarCheckButtonGroupOutside,
+                1 => NavigatorMode.BarCheckButtonGroupInside,
+                2 => NavigatorMode.BarCheckButtonGroupOnly,
+                _ => NavigatorMode.BarCheckButtonGroupOutside
+            };
         }
 
         private void kryptonNavigatorDesignPanels_SelectedPageChanged(object sender, EventArgs e)
@@ -840,25 +869,15 @@ namespace PaletteDesigner
             pageDesignPanels.TextTitle = kryptonNavigatorDesignPanels.SelectedPage.Text;
             pageDesignPanels.TextDescription = kryptonNavigatorDesignPanels.SelectedPage.TextDescription;
 
-            PaletteBackStyle backStyle;
-
             // Work out the panel style to be used
-            switch (kryptonNavigatorDesignPanels.SelectedIndex)
+            PaletteBackStyle backStyle = kryptonNavigatorDesignPanels.SelectedIndex switch
             {
-                default:
-                case 0:
-                    backStyle = PaletteBackStyle.PanelClient;
-                    break;
-                case 1:
-                    backStyle = PaletteBackStyle.PanelAlternate;
-                    break;
-                case 2:
-                    backStyle = PaletteBackStyle.PanelRibbonInactive;
-                    break;
-                case 3:
-                    backStyle = PaletteBackStyle.PanelCustom1;
-                    break;
-            }
+                0 => PaletteBackStyle.PanelClient,
+                1 => PaletteBackStyle.PanelAlternate,
+                2 => PaletteBackStyle.PanelRibbonInactive,
+                3 => PaletteBackStyle.PanelCustom1,
+                _ => PaletteBackStyle.PanelClient
+            };
 
             // Update all the displayed controls with the new styles
             panel1Disabled.PanelBackStyle = backStyle;
@@ -871,25 +890,15 @@ namespace PaletteDesigner
             pageDesignSeparators.TextTitle = kryptonNavigatorDesignSeparators.SelectedPage.Text;
             pageDesignSeparators.TextDescription = kryptonNavigatorDesignSeparators.SelectedPage.TextDescription;
 
-            SeparatorStyle separatorStyle;
-
             // Work out the navigator mode required
-            switch (kryptonNavigatorDesignSeparators.SelectedIndex)
+            SeparatorStyle separatorStyle = kryptonNavigatorDesignSeparators.SelectedIndex switch
             {
-                default:
-                case 0:
-                    separatorStyle = SeparatorStyle.LowProfile;
-                    break;
-                case 1:
-                    separatorStyle = SeparatorStyle.HighProfile;
-                    break;
-                case 2:
-                    separatorStyle = SeparatorStyle.HighInternalProfile;
-                    break;
-                case 3:
-                    separatorStyle = SeparatorStyle.Custom1;
-                    break;
-            }
+                0 => SeparatorStyle.LowProfile,
+                1 => SeparatorStyle.HighProfile,
+                2 => SeparatorStyle.HighInternalProfile,
+                3 => SeparatorStyle.Custom1,
+                _ => SeparatorStyle.LowProfile
+            };
 
             // Update all the displayed controls with the new styles
             separator1Disabled.SeparatorStyle = separatorStyle;
@@ -905,22 +914,14 @@ namespace PaletteDesigner
             pageDesignGrid.TextTitle = kryptonNavigatorDesignGrids.SelectedPage.Text;
             pageDesignGrid.TextDescription = kryptonNavigatorDesignGrids.SelectedPage.TextDescription;
 
-            DataGridViewStyle gridStyle;
-
             // Work out the navigator mode required
-            switch (kryptonNavigatorDesignGrids.SelectedIndex)
+            DataGridViewStyle gridStyle = kryptonNavigatorDesignGrids.SelectedIndex switch
             {
-                default:
-                case 0:
-                    gridStyle = DataGridViewStyle.List;
-                    break;
-                case 1:
-                    gridStyle = DataGridViewStyle.Sheet;
-                    break;
-                case 2:
-                    gridStyle = DataGridViewStyle.Custom1;
-                    break;
-            }
+                0 => DataGridViewStyle.List,
+                1 => DataGridViewStyle.Sheet,
+                2 => DataGridViewStyle.Custom1,
+                _ => DataGridViewStyle.List
+            };
 
             // Update all the displayed controls with the new styles
             dataGridViewDisabled.GridStyles.Style = gridStyle;
@@ -929,18 +930,17 @@ namespace PaletteDesigner
         #endregion
 
         #region Implementation
-        private void UpdateTitlebar()
-        {
+        private void UpdateTitlebar() =>
             // Mark a changed file with a star
-            Text = "Palette Designer - " + _filename + (_dirty ? "*" : string.Empty);
-        }
+            Text = $"Palette Designer - {_filename}{(_dirty ? "*" : string.Empty)}";
+
         #endregion
 
         #region Recently Used
 
         private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
         {
-            string fileName = (sender as ToolStripItem).Text;
+            var fileName = (sender as ToolStripItem).Text;
 
             if (!File.Exists(fileName))
             {
@@ -964,14 +964,8 @@ namespace PaletteDesigner
 
         #endregion
 
-        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
-        }
+        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e) => _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _settingsManager.SaveSettings();
-        }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
     }
 }

@@ -36,15 +36,9 @@ namespace PaletteDesigner
         /// </value>
         public string FilePath
         {
-            get
-            {
-                return filePath;
-            }
+            get => filePath;
 
-            set
-            {
-                filePath = value;
-            }
+            set => filePath = value;
         }
 
         /// <summary>
@@ -88,9 +82,9 @@ namespace PaletteDesigner
                     return;
                 }
 
-                string[] values = rK.GetValueNames();
+                var values = rK.GetValueNames();
 
-                foreach (string valueName in values)
+                foreach (var valueName in values)
                 {
                     rK.DeleteValue(valueName, true);
                 }
@@ -138,9 +132,9 @@ namespace PaletteDesigner
 
             ParentMenuItem.DropDownItems.Clear();
 
-            string[] valueNames = rK.GetValueNames();
+            var valueNames = rK.GetValueNames();
 
-            foreach (string valueName in valueNames)
+            foreach (var valueName in valueNames)
             {
                 s = rK.GetValue(valueName, null) as string;
 
@@ -165,7 +159,7 @@ namespace PaletteDesigner
 
             tSI = ParentMenuItem.DropDownItems.Add("&Clear list");
 
-            tSI.Click += new EventHandler(OnClearRecentFiles_Click);
+            tSI.Click += OnClearRecentFiles_Click;
 
             ParentMenuItem.Enabled = true;
         }
@@ -184,7 +178,7 @@ namespace PaletteDesigner
             {
                 RegistryKey rK = Registry.CurrentUser.CreateSubKey(SubKeyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-                for (int i = 0; true; i++)
+                for (var i = 0; true; i++)
                 {
                     s = rK.GetValue(i.ToString(), null) as string;
 
@@ -223,9 +217,9 @@ namespace PaletteDesigner
             {
                 RegistryKey rK = Registry.CurrentUser.OpenSubKey(SubKeyName, true);
 
-                string[] valuesNames = rK.GetValueNames();
+                var valuesNames = rK.GetValueNames();
 
-                foreach (string valueName in valuesNames)
+                foreach (var valueName in valuesNames)
                 {
                     if ((rK.GetValue(valueName, null) as string) == fileNameWithFullPath)
                     {
@@ -258,7 +252,10 @@ namespace PaletteDesigner
         /// <exception cref="ArgumentException">Bad argument.</exception>
         public MostRecentlyUsedDocumentsManager(ToolStripMenuItem parentMenuItem, string nameOfProgram, Action<object, EventArgs> onRecentFileClick, Action<object, EventArgs> onClearRecentFilesClick = null, bool useConfirmClearListDialogue = true)
         {
-            if (parentMenuItem == null || onRecentFileClick == null || nameOfProgram == null || nameOfProgram.Length == 0 || nameOfProgram.Contains("\\")) throw new ArgumentException("Bad argument.");
+            if (parentMenuItem == null || onRecentFileClick == null || nameOfProgram == null || nameOfProgram.Length == 0 || nameOfProgram.Contains("\\"))
+            {
+                throw new ArgumentException("Bad argument.");
+            }
 
             ParentMenuItem = parentMenuItem;
 

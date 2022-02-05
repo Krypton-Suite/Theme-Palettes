@@ -31,12 +31,12 @@ namespace PaletteDesigner.Pages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputControls));
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.multiActive = new Krypton.Toolkit.KryptonTextBox();
             this.rtbActive = new Krypton.Toolkit.KryptonRichTextBox();
             this.multiNormal = new Krypton.Toolkit.KryptonTextBox();
             this.rtbNormal = new Krypton.Toolkit.KryptonRichTextBox();
             this.multiDisabled = new Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWebBrowser1 = new Krypton.Toolkit.KryptonWebBrowser();
             this.rtbDisabled = new Krypton.Toolkit.KryptonRichTextBox();
             this.numericActive = new Krypton.Toolkit.KryptonNumericUpDown();
             this.numericNormal = new Krypton.Toolkit.KryptonNumericUpDown();
@@ -54,7 +54,6 @@ namespace PaletteDesigner.Pages
             this.kryptonPage2 = new Krypton.Navigator.KryptonPage();
             this.kryptonPage5 = new Krypton.Navigator.KryptonPage();
             this.kryptonPage6 = new Krypton.Navigator.KryptonPage();
-            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxActive)).BeginInit();
@@ -75,7 +74,6 @@ namespace PaletteDesigner.Pages
             this.kryptonPanel1.Controls.Add(this.multiNormal);
             this.kryptonPanel1.Controls.Add(this.rtbNormal);
             this.kryptonPanel1.Controls.Add(this.multiDisabled);
-            this.kryptonPanel1.Controls.Add(this.kryptonWebBrowser1);
             this.kryptonPanel1.Controls.Add(this.rtbDisabled);
             this.kryptonPanel1.Controls.Add(this.numericActive);
             this.kryptonPanel1.Controls.Add(this.numericNormal);
@@ -93,9 +91,17 @@ namespace PaletteDesigner.Pages
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.kryptonPanel1.Size = new System.Drawing.Size(867, 670);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(106, 482);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(637, 24);
+            this.kryptonLabel1.TabIndex = 37;
+            this.kryptonLabel1.Values.Text = "Note: Remember to drop the combo boxes to ensure the \"ListBox\" backgrounds are ap" +
+    "plied";
             // 
             // multiActive
             // 
@@ -141,13 +147,6 @@ namespace PaletteDesigner.Pages
             this.multiDisabled.TabIndex = 32;
             this.multiDisabled.Text = "Multiline \r\nkryptonTextBox1";
             // 
-            // kryptonWebBrowser1
-            // 
-            this.kryptonWebBrowser1.Location = new System.Drawing.Point(139, 517);
-            this.kryptonWebBrowser1.Name = "kryptonWebBrowser1";
-            this.kryptonWebBrowser1.Size = new System.Drawing.Size(117, 46);
-            this.kryptonWebBrowser1.TabIndex = 31;
-            // 
             // rtbDisabled
             // 
             this.rtbDisabled.Enabled = false;
@@ -162,7 +161,7 @@ namespace PaletteDesigner.Pages
             this.numericActive.Location = new System.Drawing.Point(410, 342);
             this.numericActive.Margin = new System.Windows.Forms.Padding(4);
             this.numericActive.Name = "numericActive";
-            this.numericActive.Size = new System.Drawing.Size(117, 26);
+            this.numericActive.Size = new System.Drawing.Size(57, 26);
             this.numericActive.TabIndex = 26;
             this.numericActive.Value = new decimal(new int[] {
             25,
@@ -175,7 +174,7 @@ namespace PaletteDesigner.Pages
             this.numericNormal.Location = new System.Drawing.Point(410, 213);
             this.numericNormal.Margin = new System.Windows.Forms.Padding(4);
             this.numericNormal.Name = "numericNormal";
-            this.numericNormal.Size = new System.Drawing.Size(117, 26);
+            this.numericNormal.Size = new System.Drawing.Size(57, 26);
             this.numericNormal.TabIndex = 25;
             this.numericNormal.Value = new decimal(new int[] {
             25,
@@ -189,7 +188,7 @@ namespace PaletteDesigner.Pages
             this.numericDisabled.Location = new System.Drawing.Point(410, 65);
             this.numericDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.numericDisabled.Name = "numericDisabled";
-            this.numericDisabled.Size = new System.Drawing.Size(117, 26);
+            this.numericDisabled.Size = new System.Drawing.Size(57, 26);
             this.numericDisabled.TabIndex = 24;
             this.numericDisabled.Value = new decimal(new int[] {
             25,
@@ -309,12 +308,24 @@ namespace PaletteDesigner.Pages
             // kryptonNavigatorDesignInputControls
             // 
             this.kryptonNavigatorDesignInputControls.AutoSize = true;
+            this.kryptonNavigatorDesignInputControls.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
+            this.kryptonNavigatorDesignInputControls.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
+            this.kryptonNavigatorDesignInputControls.Bar.BarMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
             this.kryptonNavigatorDesignInputControls.Bar.BarOrientation = Krypton.Toolkit.VisualOrientation.Left;
             this.kryptonNavigatorDesignInputControls.Bar.CheckButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
             this.kryptonNavigatorDesignInputControls.Bar.ItemOrientation = Krypton.Toolkit.ButtonOrientation.FixedTop;
             this.kryptonNavigatorDesignInputControls.Bar.ItemSizing = Krypton.Navigator.BarItemSizing.SameWidthAndHeight;
             this.kryptonNavigatorDesignInputControls.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.None;
+            this.kryptonNavigatorDesignInputControls.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
             this.kryptonNavigatorDesignInputControls.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
+            this.kryptonNavigatorDesignInputControls.Button.ContextButtonAction = Krypton.Navigator.ContextButtonAction.SelectPage;
+            this.kryptonNavigatorDesignInputControls.Button.ContextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
+            this.kryptonNavigatorDesignInputControls.Button.ContextMenuMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
+            this.kryptonNavigatorDesignInputControls.Button.ContextMenuMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
+            this.kryptonNavigatorDesignInputControls.Button.NextButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
+            this.kryptonNavigatorDesignInputControls.Button.NextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
+            this.kryptonNavigatorDesignInputControls.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
+            this.kryptonNavigatorDesignInputControls.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigatorDesignInputControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignInputControls.Location = new System.Drawing.Point(0, 0);
             this.kryptonNavigatorDesignInputControls.Margin = new System.Windows.Forms.Padding(4);
@@ -326,7 +337,7 @@ namespace PaletteDesigner.Pages
             this.kryptonPage6});
             this.kryptonNavigatorDesignInputControls.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignInputControls.SelectedIndex = 0;
-            this.kryptonNavigatorDesignInputControls.Size = new System.Drawing.Size(98, 670);
+            this.kryptonNavigatorDesignInputControls.Size = new System.Drawing.Size(96, 670);
             this.kryptonNavigatorDesignInputControls.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignInputControls.TabIndex = 17;
             this.kryptonNavigatorDesignInputControls.Text = "kryptonNavigator1";
@@ -378,15 +389,6 @@ namespace PaletteDesigner.Pages
             this.kryptonPage6.ToolTipTitle = "Page ToolTip";
             this.kryptonPage6.UniqueName = "B62AC6932C204028B62AC6932C204028";
             // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(106, 482);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(637, 24);
-            this.kryptonLabel1.TabIndex = 37;
-            this.kryptonLabel1.Values.Text = "Note: Remember to drop the combo boxes to ensure the \"ListBox\" backgrounds are ap" +
-    "plied";
-            // 
             // InputControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -433,7 +435,6 @@ namespace PaletteDesigner.Pages
         private Krypton.Toolkit.KryptonTextBox multiNormal;
         private Krypton.Toolkit.KryptonRichTextBox rtbNormal;
         private Krypton.Toolkit.KryptonTextBox multiDisabled;
-        private Krypton.Toolkit.KryptonWebBrowser kryptonWebBrowser1;
         private Krypton.Toolkit.KryptonRichTextBox rtbDisabled;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }

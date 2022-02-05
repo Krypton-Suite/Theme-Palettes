@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32120.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6EA0EB0-9DB1-43DC-BCB5-4017C3935CC3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palette Designer 2022", "Palette Designer 2022.csproj", "{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Ribbon 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Ribbon\Krypton.Ribbon 2022.csproj", "{2E2BD19B-E282-4841-9CF4-CD8959E90EED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Toolkit 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj", "{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Navigator 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Navigator\Krypton.Navigator 2022.csproj", "{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Canary|Any CPU = Canary|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Installer|Any CPU = Installer|Any CPU
+		Nightly|Any CPU = Nightly|Any CPU
+		Preview|Any CPU = Preview|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Signed|Any CPU = Signed|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Canary|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Canary|Any CPU.Build.0 = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Installer|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Installer|Any CPU.Build.0 = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Nightly|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Nightly|Any CPU.Build.0 = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Preview|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Preview|Any CPU.Build.0 = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Signed|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95E558B-858E-4EB5-8EEC-5D31EC130A4D}.Signed|Any CPU.Build.0 = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Canary|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Canary|Any CPU.Build.0 = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Installer|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Installer|Any CPU.Build.0 = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Nightly|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Nightly|Any CPU.Build.0 = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Preview|Any CPU.ActiveCfg = Preview|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Preview|Any CPU.Build.0 = Preview|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Signed|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Signed|Any CPU.Build.0 = Debug|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Canary|Any CPU.Build.0 = Canary|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Installer|Any CPU.ActiveCfg = Installer|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Installer|Any CPU.Build.0 = Installer|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Nightly|Any CPU.ActiveCfg = Nightly|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Nightly|Any CPU.Build.0 = Nightly|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Preview|Any CPU.ActiveCfg = Preview|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Preview|Any CPU.Build.0 = Preview|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Signed|Any CPU.ActiveCfg = Signed|Any CPU
+		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Signed|Any CPU.Build.0 = Signed|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Canary|Any CPU.Build.0 = Canary|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Installer|Any CPU.ActiveCfg = Installer|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Installer|Any CPU.Build.0 = Installer|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Nightly|Any CPU.ActiveCfg = Nightly|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Nightly|Any CPU.Build.0 = Nightly|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Preview|Any CPU.ActiveCfg = Preview|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Preview|Any CPU.Build.0 = Preview|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Signed|Any CPU.ActiveCfg = Signed|Any CPU
+		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Signed|Any CPU.Build.0 = Signed|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5355B5EE-25F1-495C-8FA8-42C27CF222C0}
+	EndGlobalSection
+EndGlobal
