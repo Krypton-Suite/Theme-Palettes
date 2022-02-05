@@ -81,6 +81,7 @@ namespace PaletteDesigner.Pages
                 control.Palette = palette;
             }
 
+            kryptonPanel1.Palette = palette;
         }
 
         private void KryptonNavigatorDesignInputControls_SelectedPageChanged(object sender, System.EventArgs e)

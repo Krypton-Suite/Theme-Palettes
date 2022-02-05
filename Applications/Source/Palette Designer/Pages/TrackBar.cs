@@ -60,6 +60,7 @@ namespace PaletteDesigner.Pages
                 bar.Palette = palette;
             }
 
+            kryptonPanel1.Palette = palette;
         }
     }
 }
