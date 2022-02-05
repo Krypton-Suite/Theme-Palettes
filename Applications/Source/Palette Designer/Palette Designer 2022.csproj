@@ -48,6 +48,9 @@
 
 
 	<ItemGroup>
+		<Compile Update="Pages\MenuPage.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 		<Compile Update="Pages\InputControls.cs">
 			<SubType>UserControl</SubType>
 		</Compile>

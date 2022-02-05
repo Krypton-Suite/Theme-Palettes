@@ -12,7 +12,6 @@ namespace PaletteDesigner
     public class MostRecentlyUsedDocumentsManager
     {
         #region Private members
-        private bool UseConfirmClearListDialogue;
 
         private string NameOfProgram;
 
@@ -21,8 +20,6 @@ namespace PaletteDesigner
         private string filePath;
 
         private ToolStripMenuItem ParentMenuItem;
-
-        private ToolStripMenuItem ClearListItem;
 
         private Action<object, EventArgs> OnRecentFileClick;
 
@@ -266,8 +263,6 @@ namespace PaletteDesigner
             OnClearRecentFilesClick = onClearRecentFilesClick;
 
             SubKeyName = string.Format($"Software\\{ NameOfProgram }\\MRU");
-
-            UseConfirmClearListDialogue = useConfirmClearListDialogue;
 
             RefreshRecentFilesMenu();
         }
