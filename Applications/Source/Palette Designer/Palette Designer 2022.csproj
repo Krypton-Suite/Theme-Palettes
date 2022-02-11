@@ -32,9 +32,9 @@
 	<Choose>
 		<When Condition="'$(SolutionName.Endswith(`Nuget`))'">
 			<ItemGroup>
-				<PackageReference Include="Krypton.Navigator.Nightly" Version="60.22.1.29-beta" />
-				<PackageReference Include="Krypton.Ribbon.Nightly" Version="60.22.1.29-beta" />
-				<PackageReference Include="Krypton.Toolkit.Nightly" Version="60.22.1.29-beta" />
+				<PackageReference Include="Krypton.Navigator.Nightly" Version="60.22.2.41-beta" />
+				<PackageReference Include="Krypton.Ribbon.Nightly" Version="60.22.2.41-beta" />
+				<PackageReference Include="Krypton.Toolkit.Nightly" Version="60.22.2.41-beta" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
