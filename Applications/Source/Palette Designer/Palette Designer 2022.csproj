@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+		<TargetFrameworks>net48;net5.0-windows;net6.0-windows</TargetFrameworks>
 		<OutputType>WinExe</OutputType>
 		<RootNamespace>PaletteDesigner</RootNamespace>
 		<AssemblyName>Palette Designer</AssemblyName>
@@ -32,9 +32,9 @@
 	<Choose>
 		<When Condition="'$(SolutionName.Endswith(`Nuget`))'">
 			<ItemGroup>
-				<PackageReference Include="Krypton.Navigator.Nightly" Version="60.22.1.29-beta" />
-				<PackageReference Include="Krypton.Ribbon.Nightly" Version="60.22.1.29-beta" />
-				<PackageReference Include="Krypton.Toolkit.Nightly" Version="60.22.1.29-beta" />
+				<PackageReference Include="Krypton.Navigator.Nightly" Version="60.22.2.41-beta" />
+				<PackageReference Include="Krypton.Ribbon.Nightly" Version="60.22.2.41-beta" />
+				<PackageReference Include="Krypton.Toolkit.Nightly" Version="60.22.2.41-beta" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
