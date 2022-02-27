@@ -10,6 +10,7 @@
  */
 #endregion
 
+using System;
 using System.Windows.Forms;
 
 using Krypton.Toolkit;
@@ -39,8 +40,21 @@ namespace PaletteDesigner
                 tmsToolStripContainer.LeftToolStripPanel.Renderer = value;
                 tmsToolStripContainer.RightToolStripPanel.Renderer = value;
                 tmsToolStripContainer.ContentPanel.Renderer = value;
+                bindingNavigator1.Renderer = value;
             }
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            bindingNavigatorMoveFirstItem.Enabled = Enabled;
+            bindingNavigatorMoveLastItem.Enabled = Enabled;
+            bindingNavigatorMoveNextItem.Enabled = Enabled;
+            bindingNavigatorMovePreviousItem.Enabled = Enabled;
+            bindingNavigatorPositionItem.Enabled = Enabled;
+
+            base.OnLoad(e);
+        }
+
         #endregion
     }
 }

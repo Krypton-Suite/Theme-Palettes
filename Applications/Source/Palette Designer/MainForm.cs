@@ -13,14 +13,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 using Krypton.Navigator;
 using Krypton.Toolkit;
-
-using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
 {
@@ -32,6 +29,7 @@ namespace PaletteDesigner
         private string _filename;
         private KryptonPalette _palette;
         private FormChromeTMS _chromeTMS;
+        private FormChromeTMS _chromeTMS2;
         private FormChromeRibbon _chromeRibbon;
         private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
         private SettingsManager _settingsManager = new();
@@ -330,6 +328,7 @@ namespace PaletteDesigner
                 // Use the new instance instead
                 _palette = palette;
                 _chromeTMS.Palette = palette;
+                _chromeTMS2.Palette = palette;
                 _chromeRibbon.OverridePalette = _palette;
 
                 // We need to know when a change occurs to the palette settings
@@ -448,6 +447,7 @@ namespace PaletteDesigner
             // Create a fresh palette instance
             _palette = new KryptonPalette();
             _chromeTMS.Palette = _palette;
+            _chromeTMS2.Palette = _palette;
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
@@ -503,6 +503,7 @@ namespace PaletteDesigner
 
             // Get the new toolstrip renderer based on the design palette
             _chromeTMS.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
+            _chromeTMS2.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
         }
 
         private void OnPalettePaint(object sender, PaletteLayoutEventArgs e)
@@ -525,14 +526,7 @@ namespace PaletteDesigner
         #region Event Handlers
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (_settingsManager.GetMaximised())
-            {
-                WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                WindowState = FormWindowState.Normal;
-            }
+            WindowState = _settingsManager.GetMaximised() ? FormWindowState.Maximized : FormWindowState.Normal;
 
             // Populate the sample data set
             dataTable1.Rows.Add("One", "Two", "Three");
@@ -544,10 +538,20 @@ namespace PaletteDesigner
             {
                 TopLevel = false,
                 Parent = pageDesignChromeTMS,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Top,
                 InertForm = true
             };
             _chromeTMS.Show();
+            _chromeTMS2 = new FormChromeTMS
+            {
+                TopLevel = false,
+                Parent = pageDesignChromeTMS,
+                Dock = DockStyle.Bottom,
+                InertForm = true,
+                Enabled = false,
+                TextExtra = @"Disabled"
+            };
+            _chromeTMS2.Show();
 
             // Add the chrome window with embedded Ribbon
             _chromeRibbon = new FormChromeRibbon
