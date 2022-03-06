@@ -54,6 +54,9 @@ namespace PaletteDesigner.Pages
             this.kryptonPage2 = new Krypton.Navigator.KryptonPage();
             this.kryptonPage5 = new Krypton.Navigator.KryptonPage();
             this.kryptonPage6 = new Krypton.Navigator.KryptonPage();
+            this.comboBoxDisabled2 = new Krypton.Toolkit.KryptonComboBox();
+            this.comboBoxNormal2 = new Krypton.Toolkit.KryptonComboBox();
+            this.comboBoxActive2 = new Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxActive)).BeginInit();
@@ -64,10 +67,16 @@ namespace PaletteDesigner.Pages
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxDisabled2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxNormal2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxActive2)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.comboBoxActive2);
+            this.kryptonPanel1.Controls.Add(this.comboBoxNormal2);
+            this.kryptonPanel1.Controls.Add(this.comboBoxDisabled2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.multiActive);
             this.kryptonPanel1.Controls.Add(this.rtbActive);
@@ -122,6 +131,7 @@ namespace PaletteDesigner.Pages
             // 
             // multiNormal
             // 
+            this.multiNormal.AlwaysActive = false;
             this.multiNormal.Location = new System.Drawing.Point(329, 248);
             this.multiNormal.Multiline = true;
             this.multiNormal.Name = "multiNormal";
@@ -131,6 +141,7 @@ namespace PaletteDesigner.Pages
             // 
             // rtbNormal
             // 
+            this.rtbNormal.AlwaysActive = false;
             this.rtbNormal.Location = new System.Drawing.Point(139, 248);
             this.rtbNormal.Name = "rtbNormal";
             this.rtbNormal.Size = new System.Drawing.Size(184, 46);
@@ -171,6 +182,7 @@ namespace PaletteDesigner.Pages
             // 
             // numericNormal
             // 
+            this.numericNormal.AlwaysActive = false;
             this.numericNormal.Location = new System.Drawing.Point(410, 213);
             this.numericNormal.Margin = new System.Windows.Forms.Padding(4);
             this.numericNormal.Name = "numericNormal";
@@ -247,6 +259,7 @@ namespace PaletteDesigner.Pages
             // 
             // comboBoxNormal
             // 
+            this.comboBoxNormal.AlwaysActive = false;
             this.comboBoxNormal.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxNormal.DropDownWidth = 121;
             this.comboBoxNormal.IntegralHeight = false;
@@ -288,6 +301,7 @@ namespace PaletteDesigner.Pages
             // 
             // textBoxNormal
             // 
+            this.textBoxNormal.AlwaysActive = false;
             this.textBoxNormal.Location = new System.Drawing.Point(139, 213);
             this.textBoxNormal.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNormal.Name = "textBoxNormal";
@@ -308,24 +322,12 @@ namespace PaletteDesigner.Pages
             // kryptonNavigatorDesignInputControls
             // 
             this.kryptonNavigatorDesignInputControls.AutoSize = true;
-            this.kryptonNavigatorDesignInputControls.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
-            this.kryptonNavigatorDesignInputControls.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignInputControls.Bar.BarMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
             this.kryptonNavigatorDesignInputControls.Bar.BarOrientation = Krypton.Toolkit.VisualOrientation.Left;
             this.kryptonNavigatorDesignInputControls.Bar.CheckButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
             this.kryptonNavigatorDesignInputControls.Bar.ItemOrientation = Krypton.Toolkit.ButtonOrientation.FixedTop;
             this.kryptonNavigatorDesignInputControls.Bar.ItemSizing = Krypton.Navigator.BarItemSizing.SameWidthAndHeight;
             this.kryptonNavigatorDesignInputControls.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.None;
-            this.kryptonNavigatorDesignInputControls.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
             this.kryptonNavigatorDesignInputControls.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
-            this.kryptonNavigatorDesignInputControls.Button.ContextButtonAction = Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigatorDesignInputControls.Button.ContextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignInputControls.Button.ContextMenuMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignInputControls.Button.ContextMenuMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignInputControls.Button.NextButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignInputControls.Button.NextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignInputControls.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignInputControls.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigatorDesignInputControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignInputControls.Location = new System.Drawing.Point(0, 0);
             this.kryptonNavigatorDesignInputControls.Margin = new System.Windows.Forms.Padding(4);
@@ -389,6 +391,53 @@ namespace PaletteDesigner.Pages
             this.kryptonPage6.ToolTipTitle = "Page ToolTip";
             this.kryptonPage6.UniqueName = "B62AC6932C204028B62AC6932C204028";
             // 
+            // comboBoxDisabled2
+            // 
+            this.comboBoxDisabled2.DrawMode = System.Windows.Forms.DrawMode.Normal;
+            this.comboBoxDisabled2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDisabled2.DropDownWidth = 121;
+            this.comboBoxDisabled2.Enabled = false;
+            this.comboBoxDisabled2.IntegralHeight = false;
+            this.comboBoxDisabled2.Items.AddRange(new object[] {
+            "DropList"});
+            this.comboBoxDisabled2.Location = new System.Drawing.Point(487, 65);
+            this.comboBoxDisabled2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxDisabled2.Name = "comboBoxDisabled2";
+            this.comboBoxDisabled2.Size = new System.Drawing.Size(117, 26);
+            this.comboBoxDisabled2.TabIndex = 38;
+            this.comboBoxDisabled2.Text = "DropList";
+            // 
+            // comboBoxNormal2
+            // 
+            this.comboBoxNormal2.AlwaysActive = false;
+            this.comboBoxNormal2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxNormal2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNormal2.DropDownWidth = 121;
+            this.comboBoxNormal2.IntegralHeight = false;
+            this.comboBoxNormal2.Items.AddRange(new object[] {
+            "DropList"});
+            this.comboBoxNormal2.Location = new System.Drawing.Point(487, 213);
+            this.comboBoxNormal2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxNormal2.Name = "comboBoxNormal2";
+            this.comboBoxNormal2.Size = new System.Drawing.Size(117, 25);
+            this.comboBoxNormal2.TabIndex = 39;
+            this.comboBoxNormal2.Text = "DropList";
+            // 
+            // comboBoxActive2
+            // 
+            this.comboBoxActive2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxActive2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxActive2.DropDownWidth = 121;
+            this.comboBoxActive2.IntegralHeight = false;
+            this.comboBoxActive2.Items.AddRange(new object[] {
+            "DropList"});
+            this.comboBoxActive2.Location = new System.Drawing.Point(487, 342);
+            this.comboBoxActive2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxActive2.Name = "comboBoxActive2";
+            this.comboBoxActive2.Size = new System.Drawing.Size(117, 25);
+            this.comboBoxActive2.TabIndex = 40;
+            this.comboBoxActive2.Text = "DropList";
+            // 
             // InputControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -407,6 +456,9 @@ namespace PaletteDesigner.Pages
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxDisabled2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxNormal2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxActive2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -437,5 +489,8 @@ namespace PaletteDesigner.Pages
         private Krypton.Toolkit.KryptonTextBox multiDisabled;
         private Krypton.Toolkit.KryptonRichTextBox rtbDisabled;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private Krypton.Toolkit.KryptonComboBox comboBoxActive2;
+        private Krypton.Toolkit.KryptonComboBox comboBoxNormal2;
+        private Krypton.Toolkit.KryptonComboBox comboBoxDisabled2;
     }
 }
