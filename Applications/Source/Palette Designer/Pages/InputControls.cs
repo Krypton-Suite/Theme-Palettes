@@ -38,6 +38,7 @@ namespace PaletteDesigner.Pages
             comboBoxes = new List<KryptonComboBox>( new[]
             {
                 comboBoxDisabled,
+                comboBoxDisabled2,
                 comboBoxNormal,
                 comboBoxActive
             });
