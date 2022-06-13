@@ -40,7 +40,9 @@ namespace PaletteDesigner.Pages
                 comboBoxDisabled,
                 comboBoxDisabled2,
                 comboBoxNormal,
-                comboBoxActive
+                comboBoxNormal2,
+                comboBoxActive,
+                comboBoxActive2
             });
             numericUpDowns = new List<KryptonNumericUpDown>( new[]
             {
