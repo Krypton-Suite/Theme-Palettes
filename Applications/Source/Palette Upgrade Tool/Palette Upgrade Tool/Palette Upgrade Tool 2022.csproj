@@ -1,16 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-    <TargetFrameworks>net48;net5.0-windows;net6.0-windows</TargetFrameworks>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>PaletteUpgradeTool</RootNamespace>
-    <AssemblyName>Palette Upgrade Tool</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-</PropertyGroup>
-    <PropertyGroup>
-    <ApplicationIcon>Resources\Krypton.ico</ApplicationIcon>
-</PropertyGroup>
+        <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+        <OutputType>WinExe</OutputType>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ApplicationIcon>Resources\Krypton.ico</ApplicationIcon>
+        <RootNamespace>PaletteUpgradeTool</RootNamespace>
+        <AssemblyName>Palette Upgrade Tool</AssemblyName>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <LangVersion>preview</LangVersion>
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <NeutralLanguage>en</NeutralLanguage>
+        <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+    </PropertyGroup>
+
     <Choose>
         <When Condition="'$(Platform)' == 'Nuget'">
             <ItemGroup>
@@ -19,12 +23,27 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2019.csproj" />
+                <ProjectReference Include="..\..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj" />
             </ItemGroup>
         </Otherwise>
     </Choose>
+
     <PropertyGroup>
-          <OutputPath>..\..\..\Binaries\Krypton Demos\$(Configuration)\</OutputPath>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-</PropertyGroup>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Update="Properties\Settings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\Settings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
 </Project>

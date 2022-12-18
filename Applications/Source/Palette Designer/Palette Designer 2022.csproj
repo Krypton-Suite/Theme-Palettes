@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net48;net5.0-windows;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
 		<OutputType>WinExe</OutputType>
+        <UseWindowsForms>true</UseWindowsForms>
 		<RootNamespace>PaletteDesigner</RootNamespace>
 		<AssemblyName>Palette Designer</AssemblyName>
 		<ApplicationIcon>Krypton.ico</ApplicationIcon>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<UseWindowsForms>true</UseWindowsForms>
 		<LangVersion>preview</LangVersion>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -84,4 +84,5 @@
 		<OutputPath>..\..\Binaries\Krypton Demos\$(Configuration)\</OutputPath>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
+
 </Project>

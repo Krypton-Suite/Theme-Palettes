@@ -1,6 +1,16 @@
-﻿using System;
+﻿#region BSD License
+/*
+ *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
+ *  
+ */
+#endregion
+
+using System;
 using System.Windows.Forms;
+
 using Krypton.Toolkit;
+
 using Microsoft.Win32;
 
 namespace PaletteDesigner
@@ -47,7 +57,11 @@ namespace PaletteDesigner
         {
             try
             {
-                DialogResult result = KryptonMessageBox.Show("You are about to clear your recent files list. Do you want to continue?", "Clear Recent Files", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = KryptonMessageBox.Show(
+                    "You are about to clear your recent files list. Do you want to continue?",
+                    "Clear Recent Files",
+                    KryptonMessageBoxButtons.YesNo,
+                    KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -94,7 +108,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: {ex.Message}",
+                    "Unexpected Error",
+                    KryptonMessageBoxButtons.OK,
+                    KryptonMessageBoxIcon.Error);
             }
         }
 
@@ -122,7 +139,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: {ex.Message}",
+                    "Unexpected Error",
+                    KryptonMessageBoxButtons.OK,
+                    KryptonMessageBoxIcon.Error);
 
                 return;
             }
@@ -197,7 +217,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: {ex.Message}",
+                    "Unexpected Error",
+                    KryptonMessageBoxButtons.OK,
+                    KryptonMessageBoxIcon.Error);
             }
 
             RefreshRecentFilesMenu();
@@ -262,7 +285,7 @@ namespace PaletteDesigner
 
             OnClearRecentFilesClick = onClearRecentFilesClick;
 
-            SubKeyName = string.Format($"Software\\{ NameOfProgram }\\MRU");
+            SubKeyName = string.Format($"Software\\{NameOfProgram}\\MRU");
 
             RefreshRecentFilesMenu();
         }

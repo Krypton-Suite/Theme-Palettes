@@ -5,11 +5,10 @@
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
  * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2021. All rights reserved. 
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
  *  
  */
 #endregion
-
 
 using System;
 using System.Collections.Generic;
@@ -31,8 +30,8 @@ namespace PaletteDesigner
         private FormChromeTMS _chromeTMS;
         private FormChromeTMS _chromeTMS2;
         private FormChromeRibbon _chromeRibbon;
-        private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
-        private SettingsManager _settingsManager = new();
+        private readonly MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
+        private readonly SettingsManager _settingsManager = new();
         #endregion
 
         #region Identity
@@ -293,8 +292,8 @@ namespace PaletteDesigner
                 switch (KryptonMessageBox.Show(this,
                                         @"Save changes to the current palette?",
                                         @"Palette Changed",
-                                        MessageBoxButtons.YesNoCancel,
-                                        MessageBoxIcon.Warning))
+                                        KryptonMessageBoxButtons.YesNoCancel,
+                                        KryptonMessageBoxIcon.Warning))
                 {
                     case DialogResult.Yes:
                         // Use existing save method
@@ -950,7 +949,9 @@ namespace PaletteDesigner
 
             if (!File.Exists(fileName))
             {
-                if (KryptonMessageBox.Show($"{ fileName } doesn't exist. Remove from recent workspaces?", "File not found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (KryptonMessageBox.Show($"{fileName} doesn't exist. Remove from `Recent Themes`?",
+                        "File not found",
+                        KryptonMessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
                 }
@@ -960,7 +961,15 @@ namespace PaletteDesigner
                 }
             }
 
-            _palette.Import(fileName);
+            try
+            {
+                _palette.Import(fileName, false);
+            }
+            catch
+            {
+                // https://github.com/Krypton-Suite/Theme-Palettes/issues/43
+                // Do nothing as the MB will displayed due to silent = `false`
+            }
         }
 
         private void MyOwnRecentPaletteFilesGotCleared_Handler(object sender, EventArgs e)

@@ -33,7 +33,6 @@
             this.kpnlBackground = new Krypton.Toolkit.KryptonPanel();
             this.klblStatus = new Krypton.Toolkit.KryptonLabel();
             this.kbtnClose = new Krypton.Toolkit.KryptonButton();
-            this.kbtnExport = new Krypton.Toolkit.KryptonButton();
             this.kbtnUpgrade = new Krypton.Toolkit.KryptonButton();
             this.krtbOutput = new Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonLabel3 = new Krypton.Toolkit.KryptonLabel();
@@ -56,7 +55,6 @@
             // 
             this.kpnlBackground.Controls.Add(this.klblStatus);
             this.kpnlBackground.Controls.Add(this.kbtnClose);
-            this.kpnlBackground.Controls.Add(this.kbtnExport);
             this.kpnlBackground.Controls.Add(this.kbtnUpgrade);
             this.kpnlBackground.Controls.Add(this.krtbOutput);
             this.kpnlBackground.Controls.Add(this.kryptonLabel3);
@@ -88,17 +86,6 @@
             this.kbtnClose.TabIndex = 10;
             this.kbtnClose.Values.Text = "C&lose";
             this.kbtnClose.Click += new System.EventHandler(this.kbtnClose_Click);
-            // 
-            // kbtnExport
-            // 
-            this.kbtnExport.Enabled = false;
-            this.kbtnExport.Location = new System.Drawing.Point(698, 238);
-            this.kbtnExport.Name = "kbtnExport";
-            this.kbtnExport.Size = new System.Drawing.Size(90, 25);
-            this.kbtnExport.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kbtnExport.TabIndex = 8;
-            this.kbtnExport.Values.Text = "E&xport";
-            this.kbtnExport.Click += new System.EventHandler(this.kbtnExport_Click);
             // 
             // kbtnUpgrade
             // 
@@ -211,7 +198,6 @@
             this.Name = "PaletteUpgradeTool";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Palette Upgrade Tool";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaletteUpgradeTool_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.kpnlBackground)).EndInit();
             this.kpnlBackground.ResumeLayout(false);
             this.kpnlBackground.PerformLayout();
@@ -226,7 +212,6 @@
         #endregion
 
         private Krypton.Toolkit.KryptonPanel kpnlBackground;
-        private Krypton.Toolkit.KryptonButton kbtnExport;
         private Krypton.Toolkit.KryptonButton kbtnUpgrade;
         private Krypton.Toolkit.KryptonRichTextBox krtbOutput;
         private Krypton.Toolkit.KryptonLabel kryptonLabel3;
