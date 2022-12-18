@@ -1,5 +1,16 @@
-﻿using System.Windows.Forms;
+﻿#region BSD License
+/*
+ * 
+ *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
+ *  
+ */
+#endregion
+
+using System.Windows.Forms;
+
 using Krypton.Toolkit;
+
 using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
@@ -44,9 +55,9 @@ namespace PaletteDesigner
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to save these settings with the current values?", 
-                    "Save Settings", 
-                    KryptonMessageBoxButtons.YesNo, 
+                DialogResult result = KryptonMessageBox.Show("Do you want to save these settings with the current values?",
+                    "Save Settings",
+                    KryptonMessageBoxButtons.YesNo,
                     KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
@@ -66,9 +77,9 @@ namespace PaletteDesigner
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to reset these settings with the default values?", 
-                    "Reset Settings", 
-                    KryptonMessageBoxButtons.YesNo, 
+                DialogResult result = KryptonMessageBox.Show("Do you want to reset these settings with the default values?",
+                    "Reset Settings",
+                    KryptonMessageBoxButtons.YesNo,
                     KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)

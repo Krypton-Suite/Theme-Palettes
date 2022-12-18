@@ -114,13 +114,13 @@ namespace PaletteUpgradeTool.Properties {
         ///    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;For more information about Krypton visit www.ComponentFactory.com&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
-        ///    &lt;KryptonPalette Version=&quot;18&quot;&gt;
+        ///    &lt;KryptonPalette Version=&quot;19&quot;&gt;
         ///      &lt;xsl:attribute name=&quot;Generated&quot;&gt;
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string v6to18 {
+        internal static string v6to19 {
             get {
-                return ResourceManager.GetString("v6to18", resourceCulture);
+                return ResourceManager.GetString("v6to19", resourceCulture);
             }
         }
     }

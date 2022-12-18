@@ -1,4 +1,13 @@
-﻿using System;
+﻿#region BSD License
+/*
+ * 
+ *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
+ *  
+ */
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -35,7 +44,7 @@ namespace PaletteDesigner.Pages
                 rtbActive
             });
 
-            comboBoxes = new List<KryptonComboBox>( new[]
+            comboBoxes = new List<KryptonComboBox>(new[]
             {
                 comboBoxDisabled,
                 comboBoxDisabled2,
@@ -44,7 +53,7 @@ namespace PaletteDesigner.Pages
                 comboBoxActive,
                 comboBoxActive2
             });
-            numericUpDowns = new List<KryptonNumericUpDown>( new[]
+            numericUpDowns = new List<KryptonNumericUpDown>(new[]
             {
                 numericDisabled,
                 numericNormal,
