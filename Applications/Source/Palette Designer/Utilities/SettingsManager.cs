@@ -8,7 +8,7 @@ namespace PaletteDesigner
     {
         #region Instance Fields
 
-        private Settings _settings = null;
+        private readonly Settings _settings = null;
 
         #endregion
 
@@ -44,7 +44,10 @@ namespace PaletteDesigner
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to save these settings with the current values?", "Save Settings", MessageBoxButtons.YesNo, KryptonMessageBoxIcon.QUESTION);
+                DialogResult result = KryptonMessageBox.Show("Do you want to save these settings with the current values?", 
+                    "Save Settings", 
+                    KryptonMessageBoxButtons.YesNo, 
+                    KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -63,7 +66,10 @@ namespace PaletteDesigner
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to reset these settings with the default values?", "Reset Settings", MessageBoxButtons.YesNo, KryptonMessageBoxIcon.QUESTION);
+                DialogResult result = KryptonMessageBox.Show("Do you want to reset these settings with the default values?", 
+                    "Reset Settings", 
+                    KryptonMessageBoxButtons.YesNo, 
+                    KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {

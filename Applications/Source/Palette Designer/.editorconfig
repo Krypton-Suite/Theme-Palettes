@@ -14,3 +14,5 @@ indent_style = space
 #sort System.* using directives alphabetically, and place them before other usings
 dotnet_sort_system_directives_first = true
 
+#warning CA1416: This call site is reachable on all platforms. '###.###' is only supported on: 'Windows' 7.0 and later.
+dotnet_diagnostic.CA1416.severity = None

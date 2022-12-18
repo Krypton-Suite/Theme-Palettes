@@ -47,7 +47,11 @@ namespace PaletteDesigner
         {
             try
             {
-                DialogResult result = KryptonMessageBox.Show("You are about to clear your recent files list. Do you want to continue?", "Clear Recent Files", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = KryptonMessageBox.Show(
+                    "You are about to clear your recent files list. Do you want to continue?", 
+                    "Clear Recent Files", 
+                    KryptonMessageBoxButtons.YesNo, 
+                    KryptonMessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -94,7 +98,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: { ex.Message }", 
+                    "Unexpected Error", 
+                    KryptonMessageBoxButtons.OK, 
+                    KryptonMessageBoxIcon.Error);
             }
         }
 
@@ -122,7 +129,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: { ex.Message }", 
+                    "Unexpected Error", 
+                    KryptonMessageBoxButtons.OK, 
+                    KryptonMessageBoxIcon.Error);
 
                 return;
             }
@@ -197,7 +207,10 @@ namespace PaletteDesigner
             }
             catch (Exception ex)
             {
-                KryptonMessageBox.Show($"Error: { ex.Message }", "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                KryptonMessageBox.Show($"Error: { ex.Message }", 
+                    "Unexpected Error", 
+                    KryptonMessageBoxButtons.OK, 
+                    KryptonMessageBoxIcon.Error);
             }
 
             RefreshRecentFilesMenu();

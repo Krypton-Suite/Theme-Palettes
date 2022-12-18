@@ -10,7 +10,6 @@
  */
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,8 +30,8 @@ namespace PaletteDesigner
         private FormChromeTMS _chromeTMS;
         private FormChromeTMS _chromeTMS2;
         private FormChromeRibbon _chromeRibbon;
-        private MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
-        private SettingsManager _settingsManager = new();
+        private readonly MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
+        private readonly SettingsManager _settingsManager = new();
         #endregion
 
         #region Identity
@@ -293,8 +292,8 @@ namespace PaletteDesigner
                 switch (KryptonMessageBox.Show(this,
                                         @"Save changes to the current palette?",
                                         @"Palette Changed",
-                                        MessageBoxButtons.YesNoCancel,
-                                        MessageBoxIcon.Warning))
+                                        KryptonMessageBoxButtons.YesNoCancel,
+                                        KryptonMessageBoxIcon.Warning))
                 {
                     case DialogResult.Yes:
                         // Use existing save method
@@ -950,7 +949,9 @@ namespace PaletteDesigner
 
             if (!File.Exists(fileName))
             {
-                if (KryptonMessageBox.Show($"{ fileName } doesn't exist. Remove from recent workspaces?", "File not found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (KryptonMessageBox.Show($"{fileName} doesn't exist. Remove from `Recent Themes`?",
+                        "File not found",
+                        KryptonMessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
                 }
@@ -960,7 +961,15 @@ namespace PaletteDesigner
                 }
             }
 
-            _palette.Import(fileName);
+            try
+            {
+                _palette.Import(fileName, false);
+            }
+            catch
+            {
+                // https://github.com/Krypton-Suite/Theme-Palettes/issues/43
+                // Do nothing as the MB will displayed due to silent = `false`
+            }
         }
 
         private void MyOwnRecentPaletteFilesGotCleared_Handler(object sender, EventArgs e)
