@@ -20,7 +20,7 @@ namespace PaletteDesigner.Pages
             InitializeComponent();
         }
 
-        public void ApplyPalette(KryptonPalette palette)
+        public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
             kryptonPanel1.Palette = palette;
 
