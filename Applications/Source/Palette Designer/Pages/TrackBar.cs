@@ -63,7 +63,7 @@ namespace PaletteDesigner.Pages
             kryptonTrackBar10.SetFixedState(PaletteState.Disabled);
         }
 
-        public void ApplyPalette(KryptonPalette palette)
+        public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
             tBars.ForEach(bar => bar.Palette = palette);
 

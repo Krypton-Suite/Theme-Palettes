@@ -26,7 +26,7 @@ namespace PaletteDesigner
         private bool _dirty;
         private bool _loaded;
         private string _filename;
-        private KryptonPalette _palette;
+        private KryptonCustomPaletteBase _palette;
         private FormChromeTMS _chromeTMS;
         private FormChromeTMS _chromeTMS2;
         private FormChromeRibbon _chromeRibbon;
@@ -306,7 +306,7 @@ namespace PaletteDesigner
             }
 
             // Create a fresh palette instance for loading into
-            var palette = new KryptonPalette();
+            var palette = new KryptonCustomPaletteBase();
 
             // Get the name of the file we imported from
             Cursor = Cursors.WaitCursor;
@@ -444,7 +444,7 @@ namespace PaletteDesigner
             }
 
             // Create a fresh palette instance
-            _palette = new KryptonPalette();
+            _palette = new KryptonCustomPaletteBase();
             _chromeTMS.Palette = _palette;
             _chromeTMS2.Palette = _palette;
             _chromeRibbon.OverridePalette = _palette;
@@ -955,10 +955,7 @@ namespace PaletteDesigner
                 {
                     _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
                 }
-                else
-                {
-                    return;
-                }
+                return;
             }
 
             try

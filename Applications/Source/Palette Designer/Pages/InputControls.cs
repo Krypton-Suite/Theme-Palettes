@@ -75,7 +75,7 @@ namespace PaletteDesigner.Pages
             KryptonNavigatorDesignInputControls_SelectedPageChanged(this, EventArgs.Empty);
         }
 
-        public void ApplyPalette(KryptonPalette palette)
+        public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
             textBoxes.ForEach(control => control.Palette = palette);
             comboBoxes.ForEach(control => control.Palette = palette);

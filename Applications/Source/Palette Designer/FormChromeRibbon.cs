@@ -24,7 +24,7 @@ namespace PaletteDesigner
         #endregion
 
         #region Public
-        public KryptonPalette OverridePalette
+        public KryptonCustomPaletteBase OverridePalette
         {
             set
             {
