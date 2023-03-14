@@ -6,11 +6,6 @@
  */
 #endregion
 
-using System;
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
 using Microsoft.Win32;
 
 namespace PaletteDesigner

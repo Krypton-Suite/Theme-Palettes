@@ -10,11 +10,6 @@
  */
 #endregion
 
-using System;
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
 namespace PaletteDesigner
 {
     public partial class FormChromeTMS : KryptonForm

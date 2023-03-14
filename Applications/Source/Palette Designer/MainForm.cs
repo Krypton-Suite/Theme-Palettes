@@ -10,13 +10,7 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-
-using Krypton.Navigator;
-using Krypton.Toolkit;
+using System.Diagnostics;
 
 namespace PaletteDesigner
 {
@@ -527,7 +521,7 @@ namespace PaletteDesigner
         private void Form1_Load(object sender, EventArgs e)
         {
             WindowState = _settingsManager.GetMaximised() ? FormWindowState.Maximized : FormWindowState.Normal;
-
+            
             // Populate the sample data set
             dataTable1.Rows.Add("One", "Two", "Three");
             dataTable1.Rows.Add("Uno", "Dos", "Tres");
@@ -979,5 +973,36 @@ namespace PaletteDesigner
         private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e) => _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
+
+        private void launchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_settingsManager.GetPaletteUpgradeToolLocation()))
+            {
+                try
+                {
+                    ProcessStartInfo psi = new(_settingsManager.GetPaletteUpgradeToolLocation());
+
+                    Process.Start(psi);
+                }
+                catch (Exception exc)
+                {
+                    KryptonMessageBox.Show($@"An error has occurred: {exc}", @"Error", KryptonMessageBoxButtons.OK,
+                        KryptonMessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                DialogResult result = KryptonMessageBox.Show(
+                    @"The location of the Palette Upgrade Tool could not be found. Would you like to locate it now?",
+                    @"Palette Upgrade Tool", KryptonMessageBoxButtons.YesNo, KryptonMessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    PaletteUpgradeToolLocator locator = new();
+
+                    locator.Show();
+                }
+            }
+        }
     }
 }

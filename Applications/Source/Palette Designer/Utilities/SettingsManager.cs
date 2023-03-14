@@ -7,12 +7,6 @@
  */
 #endregion
 
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
-using PaletteDesigner.Properties;
-
 namespace PaletteDesigner
 {
     public class SettingsManager
@@ -44,6 +38,14 @@ namespace PaletteDesigner
         ///   <br />
         /// </returns>
         public bool GetMaximised() => _settings.StartMaximised;
+
+        /// <summary>Sets the palette upgrade tool location.</summary>
+        /// <param name="value">The value.</param>
+        public void SetPaletteUpgradeToolLocation(string value) => _settings.PaletteUpgradeToolLocation = value;
+
+        /// <summary>Gets the palette upgrade tool location.</summary>
+        /// <returns></returns>
+        public string GetPaletteUpgradeToolLocation() => _settings.PaletteUpgradeToolLocation;
 
         #endregion
 
@@ -85,11 +87,15 @@ namespace PaletteDesigner
                 if (result == DialogResult.Yes)
                 {
                     SetMaximised(false);
+
+                    SetPaletteUpgradeToolLocation(string.Empty);
                 }
             }
             else
             {
                 SetMaximised(false);
+
+                SetPaletteUpgradeToolLocation(string.Empty);
             }
 
             SaveSettings(useConfirmation);

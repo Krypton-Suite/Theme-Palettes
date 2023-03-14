@@ -10,9 +10,6 @@
  */
 #endregion
 
-using System;
-using System.Windows.Forms;
-
 namespace PaletteDesigner
 {
     internal static class Program

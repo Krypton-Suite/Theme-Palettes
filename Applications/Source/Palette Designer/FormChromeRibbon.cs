@@ -10,8 +10,6 @@
  */
 #endregion
 
-using Krypton.Toolkit;
-
 namespace PaletteDesigner
 {
     public partial class FormChromeRibbon : KryptonForm

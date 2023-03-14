@@ -7,8 +7,6 @@
  */
 #endregion
 
-using System.Windows.Forms;
-
 namespace PaletteDesigner.Pages
 {
     public partial class BreadCrumbPage : UserControl

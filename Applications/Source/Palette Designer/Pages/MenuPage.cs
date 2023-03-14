@@ -7,10 +7,6 @@
  */
 #endregion
 
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
 namespace PaletteDesigner.Pages
 {
     public partial class MenuPage : UserControl
