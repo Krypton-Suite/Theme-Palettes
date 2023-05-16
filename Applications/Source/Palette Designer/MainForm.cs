@@ -10,8 +10,6 @@
  */
 #endregion
 
-using System.Diagnostics;
-
 namespace PaletteDesigner
 {
     public partial class MainForm : KryptonForm
@@ -521,7 +519,7 @@ namespace PaletteDesigner
         private void Form1_Load(object sender, EventArgs e)
         {
             WindowState = _settingsManager.GetMaximised() ? FormWindowState.Maximized : FormWindowState.Normal;
-            
+
             // Populate the sample data set
             dataTable1.Rows.Add("One", "Two", "Three");
             dataTable1.Rows.Add("Uno", "Dos", "Tres");
@@ -632,8 +630,6 @@ namespace PaletteDesigner
             // Define initial display pages
             kryptonNavigatorTop.SelectedPage = pageTopButtons;
             kryptonNavigatorDesign.SelectedPage = pageDesignButtons;
-
-            alwaysStartInAMaximisedStateToolStripMenuItem.Checked = _settingsManager.GetMaximised();
 
             CreateNewPalette();
         }
@@ -970,8 +966,6 @@ namespace PaletteDesigner
 
         #endregion
 
-        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e) => _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
 
         private void launchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
@@ -998,11 +992,18 @@ namespace PaletteDesigner
 
                 if (result == DialogResult.Yes)
                 {
-                    PaletteUpgradeToolLocator locator = new();
+                    SettingsControlPanel controlPanel = new();
 
-                    locator.Show();
+                    controlPanel.Show();
                 }
             }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsControlPanel controlPanel = new();
+
+            controlPanel.Show();
         }
     }
 }

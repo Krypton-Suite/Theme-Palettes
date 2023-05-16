@@ -30,12 +30,12 @@ namespace PaletteDesigner
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item 2");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Item 2");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Item 2");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Item 2");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Item 2");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Item 2");
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,12 +48,7 @@ namespace PaletteDesigner
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alwaysStartInAMaximisedStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.launchPaletteUpgradeToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kryptonThemeToolStripComboBox1 = new Krypton.Toolkit.KryptonThemeToolStripComboBox();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonNavigatorTop = new Krypton.Navigator.KryptonNavigator();
             this.pageTopRibbon = new Krypton.Navigator.KryptonPage();
             this.pageTopLists = new Krypton.Navigator.KryptonPage();
@@ -106,6 +101,7 @@ namespace PaletteDesigner
             this.pageControlsRibbon = new Krypton.Navigator.KryptonPage();
             this.pageControlsCustom1 = new Krypton.Navigator.KryptonPage();
             this.pageDesignInputControls = new Krypton.Navigator.KryptonPage();
+            this.inputControls1 = new PaletteDesigner.Pages.InputControls();
             this.pageDesignButtonSpecs = new Krypton.Navigator.KryptonPage();
             this.buttonSpecG4 = new Krypton.Toolkit.KryptonHeader();
             this.buttonSpecGeneric1 = new Krypton.Toolkit.ButtonSpecAny();
@@ -385,8 +381,11 @@ namespace PaletteDesigner
             this.pageTabCustom2 = new Krypton.Navigator.KryptonPage();
             this.pageTabCustom3 = new Krypton.Navigator.KryptonPage();
             this.pageDesignTrackBar = new Krypton.Navigator.KryptonPage();
+            this.trackBar1 = new PaletteDesigner.Pages.TrackBar();
             this.pageDesignMenuItems = new Krypton.Navigator.KryptonPage();
+            this.menuPage1 = new PaletteDesigner.Pages.MenuPage();
             this.pageDesignToolTips = new Krypton.Navigator.KryptonPage();
+            this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
             this.kryptonHeaderGroupProperties = new Krypton.Toolkit.KryptonHeaderGroup();
             this.labelGridNormal = new Krypton.Toolkit.KryptonPropertyGrid();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -402,10 +401,8 @@ namespace PaletteDesigner
             this.kryptonPage1 = new Krypton.Navigator.KryptonPage();
             this.kryptonCheckSetLabels = new Krypton.Toolkit.KryptonCheckSet(this.components);
             this.kryptonCheckSet1 = new Krypton.Toolkit.KryptonCheckSet(this.components);
-            this.inputControls1 = new PaletteDesigner.Pages.InputControls();
-            this.trackBar1 = new PaletteDesigner.Pages.TrackBar();
-            this.menuPage1 = new PaletteDesigner.Pages.MenuPage();
-            this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
+            this.launchPaletteUpgradeToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorTop)).BeginInit();
             this.kryptonNavigatorTop.SuspendLayout();
@@ -795,53 +792,20 @@ namespace PaletteDesigner
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alwaysStartInAMaximisedStateToolStripMenuItem,
-            this.toolStripMenuItem2,
             this.launchPaletteUpgradeToolToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.themeToolStripMenuItem});
+            this.toolStripMenuItem2,
+            this.settingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
-            // alwaysStartInAMaximisedStateToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.alwaysStartInAMaximisedStateToolStripMenuItem.CheckOnClick = true;
-            this.alwaysStartInAMaximisedStateToolStripMenuItem.Name = "alwaysStartInAMaximisedStateToolStripMenuItem";
-            this.alwaysStartInAMaximisedStateToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.alwaysStartInAMaximisedStateToolStripMenuItem.Text = "Always Start in a &Maximised State";
-            this.alwaysStartInAMaximisedStateToolStripMenuItem.Click += new System.EventHandler(this.alwaysStartInAMaximisedStateToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(247, 6);
-            // 
-            // launchPaletteUpgradeToolToolStripMenuItem
-            // 
-            this.launchPaletteUpgradeToolToolStripMenuItem.Name = "launchPaletteUpgradeToolToolStripMenuItem";
-            this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.launchPaletteUpgradeToolToolStripMenuItem.Text = "&Launch Palette Upgrade Tool";
-            this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.launchPaletteUpgradeToolToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(247, 6);
-            // 
-            // themeToolStripMenuItem
-            // 
-            this.themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kryptonThemeToolStripComboBox1});
-            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.themeToolStripMenuItem.Text = "T&heme";
-            // 
-            // kryptonThemeToolStripComboBox1
-            // 
-            this.kryptonThemeToolStripComboBox1.DropDownWidth = 200;
-            this.kryptonThemeToolStripComboBox1.Name = "kryptonThemeToolStripComboBox1";
-            this.kryptonThemeToolStripComboBox1.Size = new System.Drawing.Size(200, 23);
+            this.settingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("settingsToolStripMenuItem.Image")));
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.settingsToolStripMenuItem.Text = "Se&ttings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // kryptonNavigatorTop
             // 
@@ -1321,9 +1285,6 @@ namespace PaletteDesigner
             // 
             // kryptonGroupBox3
             // 
-            this.kryptonGroupBox3.CaptionStyle = Krypton.Toolkit.LabelStyle.GroupBoxCaption;
-            this.kryptonGroupBox3.GroupBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.kryptonGroupBox3.GroupBorderStyle = Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.kryptonGroupBox3.Location = new System.Drawing.Point(16, 353);
             this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
@@ -1342,22 +1303,20 @@ namespace PaletteDesigner
             this.kryptonListView3.FullRowSelect = true;
             this.kryptonListView3.GridLines = true;
             this.kryptonListView3.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
             this.kryptonListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem7,
+            listViewItem8});
             this.kryptonListView3.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView3.Location = new System.Drawing.Point(159, 11);
             this.kryptonListView3.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView3.Name = "kryptonListView3";
             this.kryptonListView3.OwnerDraw = true;
             this.kryptonListView3.Size = new System.Drawing.Size(168, 107);
-            this.kryptonListView3.StateCommon.Item.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView3.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView3.StateCommon.Item.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonListView3.TabIndex = 1;
             // 
             // kryptonListBox3
@@ -1381,9 +1340,6 @@ namespace PaletteDesigner
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.CaptionStyle = Krypton.Toolkit.LabelStyle.GroupBoxCaption;
-            this.kryptonGroupBox2.GroupBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.kryptonGroupBox2.GroupBorderStyle = Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.kryptonGroupBox2.Location = new System.Drawing.Point(18, 176);
             this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
@@ -1403,22 +1359,20 @@ namespace PaletteDesigner
             this.kryptonListView2.FullRowSelect = true;
             this.kryptonListView2.GridLines = true;
             this.kryptonListView2.HideSelection = false;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
             this.kryptonListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem9,
+            listViewItem10});
             this.kryptonListView2.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView2.Location = new System.Drawing.Point(159, 11);
             this.kryptonListView2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView2.Name = "kryptonListView2";
             this.kryptonListView2.OwnerDraw = true;
             this.kryptonListView2.Size = new System.Drawing.Size(168, 107);
-            this.kryptonListView2.StateCommon.Item.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView2.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView2.StateCommon.Item.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonListView2.TabIndex = 1;
             // 
             // kryptonListBox2
@@ -1443,10 +1397,7 @@ namespace PaletteDesigner
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.CaptionStyle = Krypton.Toolkit.LabelStyle.GroupBoxCaption;
             this.kryptonGroupBox1.Enabled = false;
-            this.kryptonGroupBox1.GroupBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.kryptonGroupBox1.GroupBorderStyle = Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.kryptonGroupBox1.Location = new System.Drawing.Point(16, 2);
             this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
@@ -1469,22 +1420,20 @@ namespace PaletteDesigner
             this.kryptonListView1.FullRowSelect = true;
             this.kryptonListView1.GridLines = true;
             this.kryptonListView1.HideSelection = false;
-            listViewItem5.StateImageIndex = 0;
-            listViewItem6.StateImageIndex = 0;
+            listViewItem11.StateImageIndex = 0;
+            listViewItem12.StateImageIndex = 0;
             this.kryptonListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem11,
+            listViewItem12});
             this.kryptonListView1.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView1.Location = new System.Drawing.Point(159, 11);
             this.kryptonListView1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView1.Name = "kryptonListView1";
             this.kryptonListView1.OwnerDraw = true;
             this.kryptonListView1.Size = new System.Drawing.Size(168, 107);
-            this.kryptonListView1.StateCommon.Item.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView1.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView1.StateCommon.Item.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonListView1.TabIndex = 1;
             // 
             // kryptonListBox1
@@ -1532,31 +1481,27 @@ namespace PaletteDesigner
             // 
             // labelControlsNormal
             // 
-            this.labelControlsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelControlsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelControlsNormal.Location = new System.Drawing.Point(283, 30);
             this.labelControlsNormal.Name = "labelControlsNormal";
             this.labelControlsNormal.Size = new System.Drawing.Size(78, 29);
-            this.labelControlsNormal.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelControlsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelControlsNormal.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelControlsNormal.TabIndex = 0;
             this.labelControlsNormal.Values.Text = "Normal";
             // 
             // labelControlsDisabled
             // 
-            this.labelControlsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelControlsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelControlsDisabled.Location = new System.Drawing.Point(119, 30);
             this.labelControlsDisabled.Name = "labelControlsDisabled";
             this.labelControlsDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelControlsDisabled.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelControlsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelControlsDisabled.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelControlsDisabled.TabIndex = 1;
             this.labelControlsDisabled.Values.Text = "Disabled";
             // 
@@ -1736,6 +1681,15 @@ namespace PaletteDesigner
             this.pageDesignInputControls.ToolTipTitle = "Page ToolTip";
             this.pageDesignInputControls.UniqueName = "D26489B08AA04FD0D26489B08AA04FD0";
             // 
+            // inputControls1
+            // 
+            this.inputControls1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputControls1.Location = new System.Drawing.Point(0, 0);
+            this.inputControls1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputControls1.Name = "inputControls1";
+            this.inputControls1.Size = new System.Drawing.Size(644, 544);
+            this.inputControls1.TabIndex = 0;
+            // 
             // pageDesignButtonSpecs
             // 
             this.pageDesignButtonSpecs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -1783,17 +1737,11 @@ namespace PaletteDesigner
             // buttonSpecGeneric1
             // 
             this.buttonSpecGeneric1.Image = global::PaletteDesigner.Properties.Resources.document_new;
-            this.buttonSpecGeneric1.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecGeneric1.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
-            this.buttonSpecGeneric1.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.buttonSpecGeneric1.UniqueName = "E3ECD10B03184164E3ECD10B03184164";
             // 
             // buttonSpecGeneric2
             // 
             this.buttonSpecGeneric2.Image = global::PaletteDesigner.Properties.Resources.environment;
-            this.buttonSpecGeneric2.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecGeneric2.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
-            this.buttonSpecGeneric2.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.buttonSpecGeneric2.UniqueName = "E2BD1D4F0EE64328E2BD1D4F0EE64328";
             // 
             // buttonSpecG3
@@ -1803,7 +1751,6 @@ namespace PaletteDesigner
             this.buttonSpecGeneric1,
             this.buttonSpecGeneric2});
             this.buttonSpecG3.Enabled = false;
-            this.buttonSpecG3.HeaderStyle = Krypton.Toolkit.HeaderStyle.Primary;
             this.buttonSpecG3.Location = new System.Drawing.Point(18, 362);
             this.buttonSpecG3.Name = "buttonSpecG3";
             this.buttonSpecG3.Size = new System.Drawing.Size(263, 37);
@@ -1833,7 +1780,6 @@ namespace PaletteDesigner
             this.buttonSpecG1.ButtonSpecs.AddRange(new Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecGeneric1,
             this.buttonSpecGeneric2});
-            this.buttonSpecG1.HeaderStyle = Krypton.Toolkit.HeaderStyle.Primary;
             this.buttonSpecG1.Location = new System.Drawing.Point(18, 275);
             this.buttonSpecG1.Name = "buttonSpecG1";
             this.buttonSpecG1.Size = new System.Drawing.Size(263, 37);
@@ -1874,113 +1820,81 @@ namespace PaletteDesigner
             // 
             // buttonSpecAny32
             // 
-            this.buttonSpecAny32.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny32.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny32.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny32.UniqueName = "D966DA3688534126D966DA3688534126";
             // 
             // buttonSpecAny31
             // 
-            this.buttonSpecAny31.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny31.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny31.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny31.UniqueName = "24881A5C3CD7484F24881A5C3CD7484F";
             // 
             // buttonSpecAny30
             // 
-            this.buttonSpecAny30.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny30.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny30.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny30.UniqueName = "9E75280CB89B46CA9E75280CB89B46CA";
             // 
             // buttonSpecAny29
             // 
-            this.buttonSpecAny29.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny29.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny29.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny29.UniqueName = "AA43031B0FEC4AF8AA43031B0FEC4AF8";
             // 
             // buttonSpecAny13
             // 
-            this.buttonSpecAny13.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny13.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny13.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny13.UniqueName = "7846E1DEE7074BB27846E1DEE7074BB2";
             // 
             // buttonSpecAny14
             // 
-            this.buttonSpecAny14.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny14.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny14.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny14.UniqueName = "3AB250A5C5A345C13AB250A5C5A345C1";
             // 
             // buttonSpecAny15
             // 
-            this.buttonSpecAny15.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny15.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny15.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny15.UniqueName = "441CC54390784327441CC54390784327";
             // 
             // buttonSpecAny16
             // 
-            this.buttonSpecAny16.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny16.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny16.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny16.UniqueName = "277B00322C984668277B00322C984668";
             // 
             // buttonSpecAny63
             // 
-            this.buttonSpecAny63.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny63.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny63.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny63.UniqueName = "4870673740E54FC3508C587FBCC6C0B5";
             // 
             // buttonSpecAny64
             // 
-            this.buttonSpecAny64.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny64.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny64.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny64.UniqueName = "20657E8FABC04EEED2AF1A185670DE36";
             // 
             // buttonSpecAny48
             // 
-            this.buttonSpecAny48.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny48.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny48.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny48.UniqueName = "D382E33950F648BFD382E33950F648BF";
             // 
             // buttonSpecAny49
             // 
-            this.buttonSpecAny49.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny49.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny49.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny49.UniqueName = "DDB1428C84944F88DDB1428C84944F88";
             // 
             // buttonSpecAny50
             // 
-            this.buttonSpecAny50.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny50.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny50.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny50.UniqueName = "0DEC427FE55A40100DEC427FE55A4010";
             // 
             // buttonSpecAny51
             // 
-            this.buttonSpecAny51.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny51.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny51.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny51.UniqueName = "D8FD73FF3B1144CED8FD73FF3B1144CE";
             // 
             // buttonSpecAny55
             // 
-            this.buttonSpecAny55.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny55.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny55.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny55.UniqueName = "ADE166B708AA4F7DADE166B708AA4F7D";
             // 
             // buttonSpecAny56
             // 
-            this.buttonSpecAny56.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny56.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny56.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny56.UniqueName = "D1A2751D743A4671D1A2751D743A4671";
             // 
@@ -2005,7 +1919,6 @@ namespace PaletteDesigner
             this.buttonSpecAny53,
             this.buttonSpecAny54});
             this.buttonSpecT3.Enabled = false;
-            this.buttonSpecT3.HeaderStyle = Krypton.Toolkit.HeaderStyle.Primary;
             this.buttonSpecT3.Location = new System.Drawing.Point(18, 143);
             this.buttonSpecT3.Name = "buttonSpecT3";
             this.buttonSpecT3.Size = new System.Drawing.Size(473, 37);
@@ -2016,113 +1929,81 @@ namespace PaletteDesigner
             // 
             // buttonSpecAny28
             // 
-            this.buttonSpecAny28.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny28.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny28.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny28.UniqueName = "5C9E40DBFF67472B5C9E40DBFF67472B";
             // 
             // buttonSpecAny27
             // 
-            this.buttonSpecAny27.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny27.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny27.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny27.UniqueName = "D083298345F74B62D083298345F74B62";
             // 
             // buttonSpecAny26
             // 
-            this.buttonSpecAny26.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny26.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny26.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny26.UniqueName = "18769F9D74FB47A118769F9D74FB47A1";
             // 
             // buttonSpecAny25
             // 
-            this.buttonSpecAny25.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny25.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny25.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny25.UniqueName = "3E7909E2B5C64C4A3E7909E2B5C64C4A";
             // 
             // buttonSpecAny9
             // 
-            this.buttonSpecAny9.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny9.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny9.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny9.UniqueName = "9C7B8F356F214F419C7B8F356F214F41";
             // 
             // buttonSpecAny10
             // 
-            this.buttonSpecAny10.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny10.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny10.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny10.UniqueName = "8BF5656D58804D618BF5656D58804D61";
             // 
             // buttonSpecAny11
             // 
-            this.buttonSpecAny11.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny11.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny11.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny11.UniqueName = "D9FC19B53D634F19D9FC19B53D634F19";
             // 
             // buttonSpecAny12
             // 
-            this.buttonSpecAny12.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny12.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny12.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny12.UniqueName = "C34EAD69BFAF4CD4C34EAD69BFAF4CD4";
             // 
             // buttonSpecAny61
             // 
-            this.buttonSpecAny61.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny61.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny61.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny61.UniqueName = "B14387545DF641EEFEA7734ED77BAFA2";
             // 
             // buttonSpecAny62
             // 
-            this.buttonSpecAny62.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny62.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny62.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny62.UniqueName = "7F6783F61FEF4D2F01BC70A81AF20DF4";
             // 
             // buttonSpecAny41
             // 
-            this.buttonSpecAny41.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny41.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny41.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny41.UniqueName = "28C3C35837724C5E28C3C35837724C5E";
             // 
             // buttonSpecAny42
             // 
-            this.buttonSpecAny42.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny42.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny42.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny42.UniqueName = "33FE2E62F13B445E33FE2E62F13B445E";
             // 
             // buttonSpecAny43
             // 
-            this.buttonSpecAny43.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny43.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny43.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny43.UniqueName = "4E04DE795D1C43FF4E04DE795D1C43FF";
             // 
             // buttonSpecAny44
             // 
-            this.buttonSpecAny44.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny44.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny44.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny44.UniqueName = "DCFF5679445B46E0DCFF5679445B46E0";
             // 
             // buttonSpecAny53
             // 
-            this.buttonSpecAny53.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny53.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny53.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny53.UniqueName = "3C6A9576CC634DA73C6A9576CC634DA7";
             // 
             // buttonSpecAny54
             // 
-            this.buttonSpecAny54.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny54.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny54.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny54.UniqueName = "697C060DC92C491D697C060DC92C491D";
             // 
@@ -2157,113 +2038,81 @@ namespace PaletteDesigner
             // 
             // buttonSpecAny24
             // 
-            this.buttonSpecAny24.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny24.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny24.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny24.UniqueName = "DCE3DBB8ECB948C9DCE3DBB8ECB948C9";
             // 
             // buttonSpecAny23
             // 
-            this.buttonSpecAny23.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny23.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny23.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny23.UniqueName = "E3137CCE36FF4E11E3137CCE36FF4E11";
             // 
             // buttonSpecAny22
             // 
-            this.buttonSpecAny22.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny22.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny22.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny22.UniqueName = "1DD7F90A3C0A494C1DD7F90A3C0A494C";
             // 
             // buttonSpecAny21
             // 
-            this.buttonSpecAny21.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny21.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny21.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny21.UniqueName = "2E2FC7337157478F2E2FC7337157478F";
             // 
             // buttonSpecAny5
             // 
-            this.buttonSpecAny5.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny5.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny5.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny5.UniqueName = "064B5F1CCCC24795064B5F1CCCC24795";
             // 
             // buttonSpecAny6
             // 
-            this.buttonSpecAny6.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny6.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny6.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny6.UniqueName = "519EBD952A024210519EBD952A024210";
             // 
             // buttonSpecAny7
             // 
-            this.buttonSpecAny7.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny7.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny7.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny7.UniqueName = "C7D28483934446A6C7D28483934446A6";
             // 
             // buttonSpecAny8
             // 
-            this.buttonSpecAny8.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny8.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny8.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny8.UniqueName = "1B2D8870C92F453F1B2D8870C92F453F";
             // 
             // buttonSpecAny59
             // 
-            this.buttonSpecAny59.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny59.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny59.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny59.UniqueName = "B2E349E046DE4EFDE0A61BF0F55DF83C";
             // 
             // buttonSpecAny60
             // 
-            this.buttonSpecAny60.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny60.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny60.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny60.UniqueName = "E11D4FD39CFF46FEC3859CFE529C0B20";
             // 
             // buttonSpecAny33
             // 
-            this.buttonSpecAny33.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny33.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny33.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny33.UniqueName = "D8799F9F897E4AE4D8799F9F897E4AE4";
             // 
             // buttonSpecAny38
             // 
-            this.buttonSpecAny38.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny38.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny38.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny38.UniqueName = "B6D5E93171BF47A4B6D5E93171BF47A4";
             // 
             // buttonSpecAny39
             // 
-            this.buttonSpecAny39.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny39.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny39.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny39.UniqueName = "72C99E766FCF4E2072C99E766FCF4E20";
             // 
             // buttonSpecAny40
             // 
-            this.buttonSpecAny40.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny40.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny40.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny40.UniqueName = "2C9A72BD23954DD82C9A72BD23954DD8";
             // 
             // buttonSpecAny47
             // 
-            this.buttonSpecAny47.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny47.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny47.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny47.UniqueName = "B5F9E4469C2846FDB5F9E4469C2846FD";
             // 
             // buttonSpecAny52
             // 
-            this.buttonSpecAny52.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny52.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny52.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny52.UniqueName = "0EFF1D41CC604FD00EFF1D41CC604FD0";
             // 
@@ -2287,7 +2136,6 @@ namespace PaletteDesigner
             this.buttonSpecAny37,
             this.buttonSpecAny46,
             this.buttonSpecAny45});
-            this.buttonSpecT1.HeaderStyle = Krypton.Toolkit.HeaderStyle.Primary;
             this.buttonSpecT1.Location = new System.Drawing.Point(18, 55);
             this.buttonSpecT1.Name = "buttonSpecT1";
             this.buttonSpecT1.Size = new System.Drawing.Size(471, 37);
@@ -2298,113 +2146,81 @@ namespace PaletteDesigner
             // 
             // buttonSpecAny20
             // 
-            this.buttonSpecAny20.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny20.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny20.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny20.UniqueName = "AF08F29D8981468DAF08F29D8981468D";
             // 
             // buttonSpecAny19
             // 
-            this.buttonSpecAny19.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny19.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny19.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny19.UniqueName = "F74ABC1CB84F4403F74ABC1CB84F4403";
             // 
             // buttonSpecAny18
             // 
-            this.buttonSpecAny18.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny18.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny18.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny18.UniqueName = "DB5F0890BC944C98DB5F0890BC944C98";
             // 
             // buttonSpecAny17
             // 
-            this.buttonSpecAny17.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny17.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny17.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny17.UniqueName = "F53F319649A04B9AF53F319649A04B9A";
             // 
             // buttonSpecAny4
             // 
-            this.buttonSpecAny4.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny4.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny4.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny4.UniqueName = "FF0A19FAD5324D8DFF0A19FAD5324D8D";
             // 
             // buttonSpecAny3
             // 
-            this.buttonSpecAny3.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny3.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny3.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny3.UniqueName = "F73579B2DA6348C5F73579B2DA6348C5";
             // 
             // buttonSpecAny2
             // 
-            this.buttonSpecAny2.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny2.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny2.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny2.UniqueName = "30AB8A391A3D474930AB8A391A3D4749";
             // 
             // buttonSpecAny1
             // 
-            this.buttonSpecAny1.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny1.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "AF4C13CF1AA14B78AF4C13CF1AA14B78";
             // 
             // buttonSpecAny57
             // 
-            this.buttonSpecAny57.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny57.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny57.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny57.UniqueName = "7D09362B81C6477B638F653E2A5E0A75";
             // 
             // buttonSpecAny58
             // 
-            this.buttonSpecAny58.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny58.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny58.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny58.UniqueName = "98A4817C07FE4AC3E2A1235FA4CD6FD8";
             // 
             // buttonSpecAny34
             // 
-            this.buttonSpecAny34.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny34.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny34.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny34.UniqueName = "0318BFE0697946700318BFE069794670";
             // 
             // buttonSpecAny35
             // 
-            this.buttonSpecAny35.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny35.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny35.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny35.UniqueName = "2161BA5EA78E40872161BA5EA78E4087";
             // 
             // buttonSpecAny36
             // 
-            this.buttonSpecAny36.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny36.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny36.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny36.UniqueName = "6576F4A3796842596576F4A379684259";
             // 
             // buttonSpecAny37
             // 
-            this.buttonSpecAny37.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny37.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny37.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny37.UniqueName = "6869A67401AF4E146869A67401AF4E14";
             // 
             // buttonSpecAny46
             // 
-            this.buttonSpecAny46.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny46.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny46.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny46.UniqueName = "633E45685BE04C5C633E45685BE04C5C";
             // 
             // buttonSpecAny45
             // 
-            this.buttonSpecAny45.Style = Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny45.ToolTipStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny45.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny45.UniqueName = "800E16C661F74C02800E16C661F74C02";
             // 
@@ -3176,46 +2992,40 @@ namespace PaletteDesigner
             // 
             // labelGridDisabled
             // 
-            this.labelGridDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelGridDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelGridDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelGridDisabled.Location = new System.Drawing.Point(100, 219);
             this.labelGridDisabled.Name = "labelGridDisabled";
             this.labelGridDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelGridDisabled.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelGridDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelGridDisabled.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelGridDisabled.TabIndex = 22;
             this.labelGridDisabled.Values.Text = "Disabled";
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel2.Location = new System.Drawing.Point(999, 401);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(78, 29);
-            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonLabel2.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel2.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.TabIndex = 23;
             this.kryptonLabel2.Values.Text = "Normal";
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel1.Location = new System.Drawing.Point(100, 24);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(78, 29);
-            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonLabel1.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel1.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Normal";
             // 
@@ -3381,9 +3191,7 @@ namespace PaletteDesigner
             this.labelHeaderGroupNormal.Location = new System.Drawing.Point(229, 23);
             this.labelHeaderGroupNormal.Name = "labelHeaderGroupNormal";
             this.labelHeaderGroupNormal.Size = new System.Drawing.Size(78, 29);
-            this.labelHeaderGroupNormal.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelHeaderGroupNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelHeaderGroupNormal.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelHeaderGroupNormal.TabIndex = 0;
             this.labelHeaderGroupNormal.Values.Text = "Normal";
             // 
@@ -3401,9 +3209,7 @@ namespace PaletteDesigner
             this.labelHeaderGroupDisabled.Location = new System.Drawing.Point(28, 23);
             this.labelHeaderGroupDisabled.Name = "labelHeaderGroupDisabled";
             this.labelHeaderGroupDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelHeaderGroupDisabled.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelHeaderGroupDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelHeaderGroupDisabled.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelHeaderGroupDisabled.TabIndex = 15;
             this.labelHeaderGroupDisabled.Values.Text = "Disabled";
             // 
@@ -3451,7 +3257,6 @@ namespace PaletteDesigner
             // header1Disabled
             // 
             this.header1Disabled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            this.header1Disabled.HeaderStyle = Krypton.Toolkit.HeaderStyle.Primary;
             this.header1Disabled.Location = new System.Drawing.Point(125, 31);
             this.header1Disabled.Name = "header1Disabled";
             this.header1Disabled.Size = new System.Drawing.Size(220, 37);
@@ -3654,31 +3459,27 @@ namespace PaletteDesigner
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.kryptonLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel6.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel6.Location = new System.Drawing.Point(24, 21);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(78, 29);
-            this.kryptonLabel6.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonLabel6.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel6.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel6.TabIndex = 0;
             this.kryptonLabel6.Values.Text = "Normal";
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel7.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel7.Location = new System.Drawing.Point(24, 268);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(88, 29);
-            this.kryptonLabel7.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonLabel7.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel7.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel7.TabIndex = 1;
             this.kryptonLabel7.Values.Text = "Disabled";
             // 
@@ -4397,31 +4198,27 @@ namespace PaletteDesigner
             // 
             // labelPanelsNormal
             // 
-            this.labelPanelsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelPanelsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelPanelsNormal.Location = new System.Drawing.Point(311, 30);
             this.labelPanelsNormal.Name = "labelPanelsNormal";
             this.labelPanelsNormal.Size = new System.Drawing.Size(78, 29);
-            this.labelPanelsNormal.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelPanelsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelPanelsNormal.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelPanelsNormal.TabIndex = 20;
             this.labelPanelsNormal.Values.Text = "Normal";
             // 
             // labelPanelsDisabled
             // 
-            this.labelPanelsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelPanelsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelPanelsDisabled.Location = new System.Drawing.Point(147, 30);
             this.labelPanelsDisabled.Name = "labelPanelsDisabled";
             this.labelPanelsDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelPanelsDisabled.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelPanelsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelPanelsDisabled.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelPanelsDisabled.TabIndex = 21;
             this.labelPanelsDisabled.Values.Text = "Disabled";
             // 
@@ -4746,16 +4543,14 @@ namespace PaletteDesigner
             // 
             // labelSeparatorsLive
             // 
-            this.labelSeparatorsLive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSeparatorsLive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsLive.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsLive.Location = new System.Drawing.Point(209, 301);
             this.labelSeparatorsLive.Name = "labelSeparatorsLive";
             this.labelSeparatorsLive.Size = new System.Drawing.Size(88, 29);
-            this.labelSeparatorsLive.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelSeparatorsLive.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelSeparatorsLive.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelSeparatorsLive.TabIndex = 25;
             this.labelSeparatorsLive.Values.Text = "Tracking";
             // 
@@ -4829,31 +4624,27 @@ namespace PaletteDesigner
             // 
             // labelSeparatorsPressed
             // 
-            this.labelSeparatorsPressed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSeparatorsPressed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsPressed.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsPressed.Location = new System.Drawing.Point(295, 162);
             this.labelSeparatorsPressed.Name = "labelSeparatorsPressed";
             this.labelSeparatorsPressed.Size = new System.Drawing.Size(79, 29);
-            this.labelSeparatorsPressed.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelSeparatorsPressed.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelSeparatorsPressed.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelSeparatorsPressed.TabIndex = 26;
             this.labelSeparatorsPressed.Values.Text = "Pressed";
             // 
             // labelSeparatorsTracking
             // 
-            this.labelSeparatorsTracking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSeparatorsTracking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsTracking.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsTracking.Location = new System.Drawing.Point(130, 162);
             this.labelSeparatorsTracking.Name = "labelSeparatorsTracking";
             this.labelSeparatorsTracking.Size = new System.Drawing.Size(88, 29);
-            this.labelSeparatorsTracking.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelSeparatorsTracking.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelSeparatorsTracking.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelSeparatorsTracking.TabIndex = 27;
             this.labelSeparatorsTracking.Values.Text = "Tracking";
             // 
@@ -4928,31 +4719,27 @@ namespace PaletteDesigner
             // 
             // labelSeparatorsNormal
             // 
-            this.labelSeparatorsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSeparatorsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsNormal.Location = new System.Drawing.Point(298, 30);
             this.labelSeparatorsNormal.Name = "labelSeparatorsNormal";
             this.labelSeparatorsNormal.Size = new System.Drawing.Size(78, 29);
-            this.labelSeparatorsNormal.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelSeparatorsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelSeparatorsNormal.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelSeparatorsNormal.TabIndex = 28;
             this.labelSeparatorsNormal.Values.Text = "Normal";
             // 
             // labelSeparatorsDisabled
             // 
-            this.labelSeparatorsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSeparatorsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsDisabled.Location = new System.Drawing.Point(129, 30);
             this.labelSeparatorsDisabled.Name = "labelSeparatorsDisabled";
             this.labelSeparatorsDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelSeparatorsDisabled.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.labelSeparatorsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelSeparatorsDisabled.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.labelSeparatorsDisabled.TabIndex = 29;
             this.labelSeparatorsDisabled.Values.Text = "Disabled";
             // 
@@ -5383,6 +5170,15 @@ namespace PaletteDesigner
             this.pageDesignTrackBar.ToolTipTitle = "Page ToolTip";
             this.pageDesignTrackBar.UniqueName = "6D312EEA9B3748726AAE3B39676B082E";
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBar1.Location = new System.Drawing.Point(0, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(644, 546);
+            this.trackBar1.TabIndex = 0;
+            // 
             // pageDesignMenuItems
             // 
             this.pageDesignMenuItems.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -5399,6 +5195,15 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.ToolTipTitle = "Page ToolTip";
             this.pageDesignMenuItems.UniqueName = "3b145a74e97040d083a4ebf8412d67ad";
             // 
+            // menuPage1
+            // 
+            this.menuPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuPage1.Location = new System.Drawing.Point(0, 0);
+            this.menuPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.menuPage1.Name = "menuPage1";
+            this.menuPage1.Size = new System.Drawing.Size(75, 81);
+            this.menuPage1.TabIndex = 0;
+            // 
             // pageDesignToolTips
             // 
             this.pageDesignToolTips.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -5413,6 +5218,14 @@ namespace PaletteDesigner
             this.pageDesignToolTips.TextTitle = "Tool Tips";
             this.pageDesignToolTips.ToolTipTitle = "Page ToolTip";
             this.pageDesignToolTips.UniqueName = "69d40018357b40e5a86f05bdb3fdc53b";
+            // 
+            // toolTipsPage1
+            // 
+            this.toolTipsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolTipsPage1.Location = new System.Drawing.Point(0, 0);
+            this.toolTipsPage1.Name = "toolTipsPage1";
+            this.toolTipsPage1.Size = new System.Drawing.Size(100, 100);
+            this.toolTipsPage1.TabIndex = 0;
             // 
             // kryptonHeaderGroupProperties
             // 
@@ -5544,40 +5357,17 @@ namespace PaletteDesigner
             this.kryptonCheckSetLabels.CheckedButton = this.labelsPanelClient;
             this.kryptonCheckSetLabels.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSetLabels_CheckedButtonChanged);
             // 
-            // inputControls1
+            // launchPaletteUpgradeToolToolStripMenuItem
             // 
-            this.inputControls1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inputControls1.Location = new System.Drawing.Point(0, 0);
-            this.inputControls1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.inputControls1.Name = "inputControls1";
-            this.inputControls1.Size = new System.Drawing.Size(644, 544);
-            this.inputControls1.TabIndex = 0;
+            this.launchPaletteUpgradeToolToolStripMenuItem.Name = "launchPaletteUpgradeToolToolStripMenuItem";
+            this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.launchPaletteUpgradeToolToolStripMenuItem.Text = "Launch Palette &Upgrade Tool";
+            this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.launchPaletteUpgradeToolToolStripMenuItem_Click);
             // 
-            // trackBar1
+            // toolStripMenuItem2
             // 
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(0, 0);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(644, 546);
-            this.trackBar1.TabIndex = 0;
-            // 
-            // menuPage1
-            // 
-            this.menuPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuPage1.Location = new System.Drawing.Point(0, 0);
-            this.menuPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.menuPage1.Name = "menuPage1";
-            this.menuPage1.Size = new System.Drawing.Size(75, 81);
-            this.menuPage1.TabIndex = 0;
-            // 
-            // toolTipsPage1
-            // 
-            this.toolTipsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolTipsPage1.Location = new System.Drawing.Point(0, 0);
-            this.toolTipsPage1.Name = "toolTipsPage1";
-            this.toolTipsPage1.Size = new System.Drawing.Size(100, 100);
-            this.toolTipsPage1.TabIndex = 0;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(226, 6);
             // 
             // MainForm
             // 
@@ -6267,7 +6057,6 @@ namespace PaletteDesigner
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private Krypton.Toolkit.KryptonListBox kryptonListBox1;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alwaysStartInAMaximisedStateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentThemesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private Krypton.Navigator.KryptonPage pageDesignMenuItems;
@@ -6275,10 +6064,8 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageTopToolTips;
         private Krypton.Navigator.KryptonPage pageDesignToolTips;
         private Pages.ToolTipsPage toolTipsPage1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem launchPaletteUpgradeToolToolStripMenuItem;
-        private ToolStripSeparator toolStripMenuItem3;
-        private ToolStripMenuItem themeToolStripMenuItem;
-        private KryptonThemeToolStripComboBox kryptonThemeToolStripComboBox1;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem launchPaletteUpgradeToolToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem2;
     }
 }

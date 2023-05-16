@@ -58,5 +58,29 @@ namespace PaletteDesigner.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AskForSaveConfirmation {
+            get {
+                return ((bool)(this["AskForSaveConfirmation"]));
+            }
+            set {
+                this["AskForSaveConfirmation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("33")]
+        public int ThemeSelectedIndex {
+            get {
+                return ((int)(this["ThemeSelectedIndex"]));
+            }
+            set {
+                this["ThemeSelectedIndex"] = value;
+            }
+        }
     }
 }
