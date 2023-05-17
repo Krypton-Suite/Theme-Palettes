@@ -7,12 +7,6 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
 namespace PaletteDesigner.Pages
 {
     public partial class InputControls : UserControl

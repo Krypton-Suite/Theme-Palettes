@@ -7,11 +7,6 @@
  */
 #endregion
 
-using System.Collections.Generic;
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
 namespace PaletteDesigner.Pages
 {
     public partial class TrackBar : UserControl

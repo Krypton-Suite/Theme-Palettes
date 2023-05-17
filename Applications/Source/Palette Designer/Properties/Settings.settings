@@ -5,5 +5,17 @@
     <Setting Name="StartMaximised" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="PaletteUpgradeToolLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Theme" Type="Krypton.Toolkit.PaletteMode" Scope="User">
+      <Value Profile="(Default)">Global</Value>
+    </Setting>
+    <Setting Name="AskForSaveConfirmation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ThemeSelectedIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">33</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

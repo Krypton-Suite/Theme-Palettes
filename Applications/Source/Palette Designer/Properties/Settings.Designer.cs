@@ -12,7 +12,7 @@ namespace PaletteDesigner.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -32,6 +32,54 @@ namespace PaletteDesigner.Properties {
             }
             set {
                 this["StartMaximised"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PaletteUpgradeToolLocation {
+            get {
+                return ((string)(this["PaletteUpgradeToolLocation"]));
+            }
+            set {
+                this["PaletteUpgradeToolLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Global")]
+        public global::Krypton.Toolkit.PaletteMode Theme {
+            get {
+                return ((global::Krypton.Toolkit.PaletteMode)(this["Theme"]));
+            }
+            set {
+                this["Theme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AskForSaveConfirmation {
+            get {
+                return ((bool)(this["AskForSaveConfirmation"]));
+            }
+            set {
+                this["AskForSaveConfirmation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("33")]
+        public int ThemeSelectedIndex {
+            get {
+                return ((int)(this["ThemeSelectedIndex"]));
+            }
+            set {
+                this["ThemeSelectedIndex"] = value;
             }
         }
     }

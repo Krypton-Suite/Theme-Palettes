@@ -7,12 +7,6 @@
  */
 #endregion
 
-using System.Windows.Forms;
-
-using Krypton.Toolkit;
-
-using PaletteDesigner.Properties;
-
 namespace PaletteDesigner
 {
     public class SettingsManager
@@ -44,6 +38,44 @@ namespace PaletteDesigner
         ///   <br />
         /// </returns>
         public bool GetMaximised() => _settings.StartMaximised;
+
+        /// <summary>Sets the ask for save confirmation.</summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetAskForSaveConfirmation(bool value) => _settings.AskForSaveConfirmation = value;
+
+        /// <summary>Gets the ask for save confirmation.</summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        public bool GetAskForSaveConfirmation() => _settings.AskForSaveConfirmation;
+
+        /// <summary>Sets the palette upgrade tool location.</summary>
+        /// <param name="value">The value.</param>
+        public void SetPaletteUpgradeToolLocation(string value) => _settings.PaletteUpgradeToolLocation = value;
+
+        /// <summary>Gets the palette upgrade tool location.</summary>
+        /// <returns></returns>
+        public string GetPaletteUpgradeToolLocation() => _settings.PaletteUpgradeToolLocation;
+
+        /// <summary>Sets the theme.</summary>
+        /// <param name="paletteMode">The palette mode.</param>
+        public void SetTheme(PaletteMode paletteMode) => _settings.Theme = paletteMode;
+
+        /// <summary>Gets the theme.</summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        public PaletteMode GetTheme() => _settings.Theme;
+
+        /// <summary>Sets the index of the theme selected.</summary>
+        /// <param name="value">The value.</param>
+        public void SetThemeSelectedIndex(int value) => _settings.ThemeSelectedIndex = value;
+
+        /// <summary>Gets the index of the theme selected.</summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        public int GetThemeSelectedIndex() => _settings.ThemeSelectedIndex;
 
         #endregion
 
@@ -85,11 +117,27 @@ namespace PaletteDesigner
                 if (result == DialogResult.Yes)
                 {
                     SetMaximised(false);
+
+                    SetAskForSaveConfirmation(true);
+
+                    SetPaletteUpgradeToolLocation(string.Empty);
+
+                    SetTheme(PaletteMode.Microsoft365Blue);
+
+                    SetThemeSelectedIndex(33);
                 }
             }
             else
             {
                 SetMaximised(false);
+
+                SetAskForSaveConfirmation(true);
+
+                SetPaletteUpgradeToolLocation(string.Empty);
+
+                SetTheme(PaletteMode.Microsoft365Blue);
+
+                SetThemeSelectedIndex(33);
             }
 
             SaveSettings(useConfirmation);

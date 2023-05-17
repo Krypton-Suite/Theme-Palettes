@@ -10,14 +10,6 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-
-using Krypton.Navigator;
-using Krypton.Toolkit;
-
 namespace PaletteDesigner
 {
     public partial class MainForm : KryptonForm
@@ -639,8 +631,6 @@ namespace PaletteDesigner
             kryptonNavigatorTop.SelectedPage = pageTopButtons;
             kryptonNavigatorDesign.SelectedPage = pageDesignButtons;
 
-            alwaysStartInAMaximisedStateToolStripMenuItem.Checked = _settingsManager.GetMaximised();
-
             CreateNewPalette();
         }
 
@@ -976,8 +966,44 @@ namespace PaletteDesigner
 
         #endregion
 
-        private void alwaysStartInAMaximisedStateToolStripMenuItem_Click(object sender, EventArgs e) => _settingsManager.SaveSettings(alwaysStartInAMaximisedStateToolStripMenuItem.Checked);
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
+
+        private void launchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_settingsManager.GetPaletteUpgradeToolLocation()))
+            {
+                try
+                {
+                    ProcessStartInfo psi = new(_settingsManager.GetPaletteUpgradeToolLocation());
+
+                    Process.Start(psi);
+                }
+                catch (Exception exc)
+                {
+                    KryptonMessageBox.Show($@"An error has occurred: {exc}", @"Error", KryptonMessageBoxButtons.OK,
+                        KryptonMessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                DialogResult result = KryptonMessageBox.Show(
+                    @"The location of the Palette Upgrade Tool could not be found. Would you like to locate it now?",
+                    @"Palette Upgrade Tool", KryptonMessageBoxButtons.YesNo, KryptonMessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    SettingsControlPanel controlPanel = new();
+
+                    controlPanel.Show();
+                }
+            }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsControlPanel controlPanel = new();
+
+            controlPanel.Show();
+        }
     }
 }
