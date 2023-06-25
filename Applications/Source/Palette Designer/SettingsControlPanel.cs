@@ -21,11 +21,11 @@ namespace PaletteDesigner
         {
             InitializeComponent();
 
-            kbtnCancel.Text = KryptonManager.Strings.Cancel;
+            kbtnCancel.Text = KryptonLanguageManager.GeneralToolkitStrings.Cancel;
 
-            kbtnOk.Text = KryptonManager.Strings.OK;
+            kbtnOk.Text = KryptonLanguageManager.GeneralToolkitStrings.OK;
 
-            kbtnReset.Text = KryptonManager.Strings.Reset;
+            kbtnReset.Text = KryptonLanguageManager.GeneralToolkitStrings.Reset;
         }
 
         private void SettingsControlPanel_Load(object sender, EventArgs e)
