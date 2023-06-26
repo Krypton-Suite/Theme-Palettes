@@ -23,9 +23,17 @@ namespace PaletteDesigner
 
             kbtnCancel.Text = KryptonLanguageManager.GeneralToolkitStrings.Cancel;
 
+            kbtnCancel.DialogResult = DialogResult.Cancel;
+
             kbtnOk.Text = KryptonLanguageManager.GeneralToolkitStrings.OK;
 
-            kbtnReset.Text = KryptonLanguageManager.GeneralToolkitStrings.Reset;
+            kbtnOk.DialogResult = DialogResult.OK;
+
+            kbtnReset.Text = KryptonLanguageManager.CustomToolkitStrings.Reset;
+
+            AcceptButton = kbtnOk;
+
+            CancelButton = kbtnCancel;
         }
 
         private void SettingsControlPanel_Load(object sender, EventArgs e)
