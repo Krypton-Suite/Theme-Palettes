@@ -11,12 +11,12 @@ namespace PaletteDesigner.Pages
 {
     public partial class TrackBar : UserControl
     {
-        private readonly List<KryptonTrackBar> tBars;
+        private readonly List<KryptonTrackBar> _tBars;
         public TrackBar()
         {
             InitializeComponent();
 
-            tBars = new List<KryptonTrackBar>(new[]
+            _tBars = new List<KryptonTrackBar>(new[]
             {
                 kryptonTrackBar1,
                 kryptonTrackBar5,
@@ -60,7 +60,7 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            tBars.ForEach(bar => bar.Palette = palette);
+            _tBars.ForEach(bar => bar.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }

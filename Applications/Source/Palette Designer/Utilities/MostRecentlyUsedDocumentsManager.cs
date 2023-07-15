@@ -18,17 +18,17 @@ namespace PaletteDesigner
     {
         #region Private members
 
-        private string NameOfProgram;
+        private string _nameOfProgram;
 
-        private string SubKeyName;
+        private string _subKeyName;
 
-        private string filePath;
+        private string _filePath;
 
-        private ToolStripMenuItem ParentMenuItem;
+        private ToolStripMenuItem _parentMenuItem;
 
-        private Action<object, EventArgs> OnRecentFileClick;
+        private Action<object, EventArgs>? _onRecentFileClick;
 
-        private Action<object, EventArgs> OnClearRecentFilesClick;
+        private Action<object, EventArgs>? _onClearRecentFilesClick;
 
         /// <summary>
         /// Gets or sets the file path.
@@ -38,9 +38,9 @@ namespace PaletteDesigner
         /// </value>
         public string FilePath
         {
-            get => filePath;
+            get => _filePath;
 
-            set => filePath = value;
+            set => _filePath = value;
         }
 
         /// <summary>
@@ -68,10 +68,7 @@ namespace PaletteDesigner
                 Console.WriteLine(ex.ToString());
             }
 
-            if (OnClearRecentFilesClick != null)
-            {
-                OnClearRecentFilesClick(obj, evt);
-            }
+            _onClearRecentFilesClick?.Invoke(obj, evt);
         }
 
         /// <summary>
@@ -81,7 +78,7 @@ namespace PaletteDesigner
         {
             try
             {
-                RegistryKey rK = Registry.CurrentUser.OpenSubKey(SubKeyName, true);
+                RegistryKey rK = Registry.CurrentUser.OpenSubKey(_subKeyName, true);
 
                 if (rK == null)
                 {
@@ -97,9 +94,9 @@ namespace PaletteDesigner
 
                 rK.Close();
 
-                ParentMenuItem.DropDownItems.Clear();
+                _parentMenuItem.DropDownItems.Clear();
 
-                ParentMenuItem.Enabled = false;
+                _parentMenuItem.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -119,15 +116,15 @@ namespace PaletteDesigner
 
             string s;
 
-            ToolStripItem tSI;
+            ToolStripItem tSi;
 
             try
             {
-                rK = Registry.CurrentUser.OpenSubKey(this.SubKeyName, false);
+                rK = Registry.CurrentUser.OpenSubKey(this._subKeyName, false);
 
                 if (rK == null)
                 {
-                    ParentMenuItem.Enabled = false;
+                    _parentMenuItem.Enabled = false;
 
                     return;
                 }
@@ -142,7 +139,7 @@ namespace PaletteDesigner
                 return;
             }
 
-            ParentMenuItem.DropDownItems.Clear();
+            _parentMenuItem.DropDownItems.Clear();
 
             var valueNames = rK.GetValueNames();
 
@@ -155,25 +152,25 @@ namespace PaletteDesigner
                     continue;
                 }
 
-                tSI = ParentMenuItem.DropDownItems.Add(s);
+                tSi = _parentMenuItem.DropDownItems.Add(s);
 
-                tSI.Click += new EventHandler(OnRecentFileClick);
+                tSi.Click += new EventHandler(_onRecentFileClick);
             }
 
-            if (ParentMenuItem.DropDownItems.Count == 0)
+            if (_parentMenuItem.DropDownItems.Count == 0)
             {
-                ParentMenuItem.Enabled = false;
+                _parentMenuItem.Enabled = false;
 
                 return;
             }
 
-            ParentMenuItem.DropDownItems.Add("-");
+            _parentMenuItem.DropDownItems.Add("-");
 
-            tSI = ParentMenuItem.DropDownItems.Add("&Clear list");
+            tSi = _parentMenuItem.DropDownItems.Add("&Clear list");
 
-            tSI.Click += OnClearRecentFiles_Click;
+            tSi.Click += OnClearRecentFiles_Click;
 
-            ParentMenuItem.Enabled = true;
+            _parentMenuItem.Enabled = true;
         }
         #endregion
 
@@ -188,7 +185,7 @@ namespace PaletteDesigner
 
             try
             {
-                RegistryKey rK = Registry.CurrentUser.CreateSubKey(SubKeyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+                RegistryKey rK = Registry.CurrentUser.CreateSubKey(_subKeyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
                 for (var i = 0; true; i++)
                 {
@@ -230,7 +227,7 @@ namespace PaletteDesigner
         {
             try
             {
-                RegistryKey rK = Registry.CurrentUser.OpenSubKey(SubKeyName, true);
+                RegistryKey rK = Registry.CurrentUser.OpenSubKey(_subKeyName, true);
 
                 var valuesNames = rK.GetValueNames();
 
@@ -272,15 +269,15 @@ namespace PaletteDesigner
                 throw new ArgumentException("Bad argument.");
             }
 
-            ParentMenuItem = parentMenuItem;
+            _parentMenuItem = parentMenuItem;
 
-            NameOfProgram = nameOfProgram;
+            _nameOfProgram = nameOfProgram;
 
-            OnRecentFileClick = onRecentFileClick;
+            _onRecentFileClick = onRecentFileClick;
 
-            OnClearRecentFilesClick = onClearRecentFilesClick;
+            _onClearRecentFilesClick = onClearRecentFilesClick;
 
-            SubKeyName = string.Format($"Software\\{NameOfProgram}\\MRU");
+            _subKeyName = string.Format($"Software\\{_nameOfProgram}\\MRU");
 
             RefreshRecentFilesMenu();
         }

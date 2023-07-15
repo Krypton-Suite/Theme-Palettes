@@ -18,7 +18,7 @@ namespace PaletteDesigner
         private bool _dirty;
         private bool _loaded;
         private string _filename;
-        private KryptonCustomPaletteBase _palette;
+        private KryptonCustomPaletteBase? _palette;
         private FormChromeTMS _chromeTMS;
         private FormChromeTMS _chromeTMS2;
         private FormChromeRibbon _chromeRibbon;
@@ -36,7 +36,7 @@ namespace PaletteDesigner
 
             _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
 
-            applyPalettesToBases = new List<VisualControlBase>(new VisualControlBase[]
+            _applyPalettesToBases = new List<VisualControlBase>(new VisualControlBase[]
             {
             buttonSpecT1,
             buttonSpecT2,
@@ -108,7 +108,7 @@ namespace PaletteDesigner
             );
 
 
-            applyPalettesToPanels = new List<KryptonPanel>(new[]
+            _applyPalettesToPanels = new List<KryptonPanel>(new[]
                 {
             panel1Disabled,
             panel1Normal,
@@ -126,7 +126,7 @@ namespace PaletteDesigner
                 }
             );
 
-            applyPalettesToPages = new List<KryptonPage>(new[]
+            _applyPalettesToPages = new List<KryptonPage>(new[]
             {
         pageTopButtonSpecs,
         pageTopButtons,
@@ -303,11 +303,21 @@ namespace PaletteDesigner
             // Get the name of the file we imported from
             Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            var filename = palette.Import();
+            string? filename;
+            try
+            {
+                filename = palette.Import();
+            }
+            catch
+            {
+                // Do not abort due to un supported xml file
+                filename = string.Empty;
+            }
+
             Cursor = Cursors.Default;
 
             // If the load succeeded
-            if (filename.Length > 0)
+            if (!string.IsNullOrWhiteSpace(filename))
             {
                 // Need to unhook from any existing palette
                 if (_palette != null)
@@ -330,7 +340,7 @@ namespace PaletteDesigner
                 labelGridNormal.SelectedObject = _palette;
 
                 // Use the loaded filename
-                _filename = filename;
+                _filename = filename!;
 
                 // Reset the state flags
                 _loaded = true;
@@ -340,10 +350,10 @@ namespace PaletteDesigner
                 ApplyPalette();
 
                 // Define the initial title bar string
-                UpdateTitlebar();
+                UpdateTitleBar();
+                _recentlyUsedDocumentsManager.AddRecentFile(filename!);
             }
 
-            _recentlyUsedDocumentsManager.AddRecentFile(filename);
         }
 
         private void Save()
@@ -354,14 +364,14 @@ namespace PaletteDesigner
                 // ...then just save it straight away
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                _palette.Export(_filename, true, false);
+                _palette!.Export(_filename, true, false);
                 Cursor = Cursors.Default;
 
                 // No longer dirty
                 _dirty = false;
 
                 // Define the initial title bar string
-                UpdateTitlebar();
+                UpdateTitleBar();
             }
             else
             {
@@ -375,24 +385,24 @@ namespace PaletteDesigner
             // Get back the filename selected by the user
             Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            var filename = _palette.Export();
+            var filename = _palette?.Export();
             Cursor = Cursors.Default;
 
             // If the save succeeded
-            if (filename.Length > 0)
+            if (!string.IsNullOrWhiteSpace(filename))
             {
                 // Remember associated file details
-                _filename = filename;
+                _filename = filename!;
                 _loaded = true;
 
                 // No longer dirty
                 _dirty = false;
 
                 // Define the initial title bar string
-                UpdateTitlebar();
+                UpdateTitleBar();
             }
 
-            _recentlyUsedDocumentsManager.AddRecentFile(filename);
+            _recentlyUsedDocumentsManager.AddRecentFile(filename!);
         }
 
         private void Exit()
@@ -423,9 +433,9 @@ namespace PaletteDesigner
 
         #region Palettes
 
-        private readonly List<VisualControlBase> applyPalettesToBases;
-        private readonly List<KryptonPanel> applyPalettesToPanels;
-        private readonly List<KryptonPage> applyPalettesToPages;
+        private readonly List<VisualControlBase> _applyPalettesToBases;
+        private readonly List<KryptonPanel> _applyPalettesToPanels;
+        private readonly List<KryptonPage> _applyPalettesToPages;
         private void CreateNewPalette()
         {
             // Need to unhook from any existing palette
@@ -459,7 +469,7 @@ namespace PaletteDesigner
             ApplyPalette();
 
             // Define the initial title bar string
-            UpdateTitlebar();
+            UpdateTitleBar();
         }
 
         private void OnBaseChanged(object sender, EventArgs e)
@@ -469,8 +479,13 @@ namespace PaletteDesigner
 
         private void ApplyPalette()
         {
-            applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
-            applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
+            if (_palette == null)
+            {
+                return;
+            }
+
+            _applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
+            _applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
 
             dataGridViewDisabled.Palette = _palette;
             dataGridViewNormal.Palette = _palette;
@@ -485,11 +500,16 @@ namespace PaletteDesigner
 
             // Hack until the pages are separated out:
             var backClr = _palette.GetBackColor1(PaletteBackStyle.PanelClient, PaletteState.Normal);
-            applyPalettesToPages.ForEach(pg => pg.StateCommon.Page.Color1 = backClr);
+            _applyPalettesToPages.ForEach(pg => pg.StateCommon.Page.Color1 = backClr);
         }
 
         private void UpdateChromeTMS()
         {
+            if (_palette == null)
+            {
+                return;
+            }
+
             // Get the global renderer
             IRenderer renderer = _palette.GetRenderer();
 
@@ -504,7 +524,7 @@ namespace PaletteDesigner
             if (!_dirty)
             {
                 _dirty = true;
-                UpdateTitlebar();
+                UpdateTitleBar();
             }
 
             // Do we need to setup a new renderer for the ToolMenuStatus page?
@@ -521,9 +541,9 @@ namespace PaletteDesigner
             WindowState = _settingsManager.GetMaximised() ? FormWindowState.Maximized : FormWindowState.Normal;
 
             // Populate the sample data set
-            dataTable1.Rows.Add("One", "Two", "Three");
-            dataTable1.Rows.Add("Uno", "Dos", "Tres");
-            dataTable1.Rows.Add("Un", "Deux", "Trios");
+            dataTable1.Rows.Add(@"One", @"Two", @"Three");
+            dataTable1.Rows.Add(@"Uno", @"Dos", @"Tres");
+            dataTable1.Rows.Add(@"Un", @"Deux", @"Trios");
 
             // Add the chrome window to the Chrome + Strips page
             _chromeTMS = new FormChromeTMS
@@ -634,26 +654,30 @@ namespace PaletteDesigner
             CreateNewPalette();
         }
 
-        private void menuNew_Click(object sender, EventArgs e) => New();
+        private void MenuNew_Click(object sender, EventArgs e) => New();
 
-        private void menuOpen_Click(object sender, EventArgs e) => Open();
+        private void MenuOpen_Click(object sender, EventArgs e) => Open();
 
-        private void menuSave_Click(object sender, EventArgs e) => Save();
+        private void MenuSave_Click(object sender, EventArgs e) => Save();
 
-        private void menuSaveAs_Click(object sender, EventArgs e) => SaveAs();
+        private void MenuSaveAs_Click(object sender, EventArgs e) => SaveAs();
 
-        private void menuExit_Click(object sender, EventArgs e) => Exit();
+        private void MenuExit_Click(object sender, EventArgs e) => Exit();
 
-        private void kryptonNavigatorTop_SelectedPageChanged(object sender, EventArgs e) =>
+        private void KryptonNavigatorTop_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the design navigator
             kryptonNavigatorDesign.SelectedIndex = kryptonNavigatorTop.SelectedIndex;
 
-        private void kryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e) =>
+        private void KryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the top navigator
             kryptonNavigatorTop.SelectedIndex = kryptonNavigatorDesign.SelectedIndex;
 
-        private void kryptonNavigatorDesignButtons_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignButtons_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignButtons.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignButtons.TextTitle = kryptonNavigatorDesignButtons.SelectedPage.Text;
             pageDesignButtons.TextDescription = kryptonNavigatorDesignButtons.SelectedPage.TextDescription;
@@ -695,8 +719,12 @@ namespace PaletteDesigner
             buttonLive.ButtonStyle = bs;
         }
 
-        private void kryptonNavigatorDesignControls_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignControls_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignControls.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignControls.TextTitle = kryptonNavigatorDesignControls.SelectedPage.Text;
             pageDesignControls.TextDescription = kryptonNavigatorDesignControls.SelectedPage.TextDescription;
@@ -741,9 +769,12 @@ namespace PaletteDesigner
             control1Normal.GroupBorderStyle = borderStyle;
         }
 
-
-        private void kryptonNavigatorDesignHeaders_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignHeaders_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignHeaders.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignHeaders.TextTitle = kryptonNavigatorDesignHeaders.SelectedPage.Text;
             pageDesignHeaders.TextDescription = kryptonNavigatorDesignHeaders.SelectedPage.TextDescription;
@@ -767,8 +798,12 @@ namespace PaletteDesigner
             header1Normal.HeaderStyle = hs;
         }
 
-        private void kryptonNavigatorDesignLabels_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignLabels_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignLabels.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignLabels.TextTitle = kryptonNavigatorDesignLabels.SelectedPage.Text;
             pageDesignLabels.TextDescription = kryptonNavigatorDesignLabels.SelectedPage.TextDescription;
@@ -803,7 +838,7 @@ namespace PaletteDesigner
             label1Live.LabelStyle = ls;
         }
 
-        private void kryptonCheckSetLabels_CheckedButtonChanged(object sender, EventArgs e)
+        private void KryptonCheckSetLabels_CheckedButtonChanged(object sender, EventArgs e)
         {
             panelLabelsBackground.PanelBackStyle = kryptonCheckSetLabels.CheckedIndex switch
             {
@@ -820,8 +855,12 @@ namespace PaletteDesigner
             panelLabelsBackground.Refresh();
         }
 
-        private void kryptonNavigatorDesignTabs_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignTabs_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignTabs.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignTabs.TextTitle = kryptonNavigatorDesignTabs.SelectedPage.Text;
             pageDesignTabs.TextDescription = kryptonNavigatorDesignTabs.SelectedPage.TextDescription;
@@ -842,8 +881,12 @@ namespace PaletteDesigner
             };
         }
 
-        private void kryptonNavigatorDesignNavigator_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignNavigator_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignNavigator.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignNavigator.TextTitle = kryptonNavigatorDesignNavigator.SelectedPage.Text;
             pageDesignNavigator.TextDescription = kryptonNavigatorDesignNavigator.SelectedPage.TextDescription;
@@ -858,8 +901,12 @@ namespace PaletteDesigner
             };
         }
 
-        private void kryptonNavigatorDesignPanels_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignPanels_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignPanels.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignPanels.TextTitle = kryptonNavigatorDesignPanels.SelectedPage.Text;
             pageDesignPanels.TextDescription = kryptonNavigatorDesignPanels.SelectedPage.TextDescription;
@@ -879,8 +926,12 @@ namespace PaletteDesigner
             panel1Normal.PanelBackStyle = backStyle;
         }
 
-        private void kryptonNavigatorDesignSeparators_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignSeparators_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignSeparators.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignSeparators.TextTitle = kryptonNavigatorDesignSeparators.SelectedPage.Text;
             pageDesignSeparators.TextDescription = kryptonNavigatorDesignSeparators.SelectedPage.TextDescription;
@@ -903,8 +954,12 @@ namespace PaletteDesigner
             separator1Live.SeparatorStyle = separatorStyle;
         }
 
-        private void kryptonNavigatorDesignGrids_SelectedPageChanged(object sender, EventArgs e)
+        private void KryptonNavigatorDesignGrids_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (kryptonNavigatorDesignGrids.SelectedPage == null)
+            {
+                return;
+            }
             // Update the design page text with the selected style information
             pageDesignGrid.TextTitle = kryptonNavigatorDesignGrids.SelectedPage.Text;
             pageDesignGrid.TextDescription = kryptonNavigatorDesignGrids.SelectedPage.TextDescription;
@@ -925,9 +980,9 @@ namespace PaletteDesigner
         #endregion
 
         #region Implementation
-        private void UpdateTitlebar() =>
+        private void UpdateTitleBar() =>
             // Mark a changed file with a star
-            Text = $"Palette Designer - {_filename}{(_dirty ? "*" : string.Empty)}";
+            Text = $@"Palette Designer - {_filename}{(_dirty ? "*" : string.Empty)}";
 
         #endregion
 
@@ -935,7 +990,11 @@ namespace PaletteDesigner
 
         private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
         {
-            var fileName = (sender as ToolStripItem).Text;
+            var fileName = (sender as ToolStripItem)?.Text;
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
 
             if (!File.Exists(fileName))
             {
@@ -943,14 +1002,14 @@ namespace PaletteDesigner
                         "File not found",
                         KryptonMessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
+                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName!);
                 }
                 return;
             }
 
             try
             {
-                _palette.Import(fileName, false);
+                _palette.Import(fileName!, false);
             }
             catch
             {
@@ -968,7 +1027,7 @@ namespace PaletteDesigner
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
 
-        private void launchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(_settingsManager.GetPaletteUpgradeToolLocation()))
             {
@@ -992,16 +1051,16 @@ namespace PaletteDesigner
 
                 if (result == DialogResult.Yes)
                 {
-                    SettingsControlPanel controlPanel = new();
+                    using var controlPanel = new SettingsControlPanel();
 
                     controlPanel.Show();
                 }
             }
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsControlPanel controlPanel = new();
+            using var controlPanel = new SettingsControlPanel();
 
             controlPanel.Show();
         }
