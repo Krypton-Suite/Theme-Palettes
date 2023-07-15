@@ -11,15 +11,15 @@ namespace PaletteDesigner.Pages
 {
     public partial class InputControls : UserControl
     {
-        private readonly List<KryptonTextBox> textBoxes;
-        private readonly List<KryptonComboBox> comboBoxes;
-        private readonly List<KryptonRichTextBox> richTextBoxes;
-        private readonly List<KryptonNumericUpDown> numericUpDowns;
+        private readonly List<KryptonTextBox> _textBoxes;
+        private readonly List<KryptonComboBox> _comboBoxes;
+        private readonly List<KryptonRichTextBox> _richTextBoxes;
+        private readonly List<KryptonNumericUpDown> _numericUpDowns;
 
         public InputControls()
         {
             InitializeComponent();
-            textBoxes = new List<KryptonTextBox>(new[]
+            _textBoxes = new List<KryptonTextBox>(new[]
             {
                 textBoxDisabled,
                 textBoxNormal,
@@ -31,14 +31,14 @@ namespace PaletteDesigner.Pages
                 multiActive
             });
 
-            richTextBoxes = new List<KryptonRichTextBox>(new[]
+            _richTextBoxes = new List<KryptonRichTextBox>(new[]
             {
                 rtbDisabled,
                 rtbNormal,
                 rtbActive
             });
 
-            comboBoxes = new List<KryptonComboBox>(new[]
+            _comboBoxes = new List<KryptonComboBox>(new[]
             {
                 comboBoxDisabled,
                 comboBoxDisabled2,
@@ -47,7 +47,7 @@ namespace PaletteDesigner.Pages
                 comboBoxActive,
                 comboBoxActive2
             });
-            numericUpDowns = new List<KryptonNumericUpDown>(new[]
+            _numericUpDowns = new List<KryptonNumericUpDown>(new[]
             {
                 numericDisabled,
                 numericNormal,
@@ -71,10 +71,10 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            textBoxes.ForEach(control => control.Palette = palette);
-            comboBoxes.ForEach(control => control.Palette = palette);
-            richTextBoxes.ForEach(control => control.Palette = palette);
-            numericUpDowns.ForEach(control => control.Palette = palette);
+            _textBoxes.ForEach(control => control.Palette = palette);
+            _comboBoxes.ForEach(control => control.Palette = palette);
+            _richTextBoxes.ForEach(control => control.Palette = palette);
+            _numericUpDowns.ForEach(control => control.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }
@@ -105,15 +105,15 @@ namespace PaletteDesigner.Pages
             }
 
             // Update all the displayed controls with the new styles
-            textBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            comboBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            richTextBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            numericUpDowns.ForEach(control => control.InputControlStyle = inputControlStyle);
+            _textBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            _comboBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            _richTextBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+            _numericUpDowns.ForEach(control => control.InputControlStyle = inputControlStyle);
 
-            textBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            comboBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            richTextBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            numericUpDowns.ForEach(control => control.AlwaysActive = alwaysActive);
+            _textBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            _comboBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            _richTextBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+            _numericUpDowns.ForEach(control => control.AlwaysActive = alwaysActive);
 
         }
 

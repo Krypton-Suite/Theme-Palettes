@@ -730,7 +730,7 @@ namespace PaletteDesigner
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.menuNew.Size = new System.Drawing.Size(155, 22);
             this.menuNew.Text = "New";
-            this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
+            this.menuNew.Click += new System.EventHandler(this.MenuNew_Click);
             // 
             // menuOpen
             // 
@@ -740,7 +740,7 @@ namespace PaletteDesigner
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.menuOpen.Size = new System.Drawing.Size(155, 22);
             this.menuOpen.Text = "Open...";
-            this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
+            this.menuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // menuSep1
             // 
@@ -755,7 +755,7 @@ namespace PaletteDesigner
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.menuSave.Size = new System.Drawing.Size(155, 22);
             this.menuSave.Text = "Save";
-            this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
+            this.menuSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
             // menuSaveAs
             // 
@@ -764,7 +764,7 @@ namespace PaletteDesigner
             this.menuSaveAs.Name = "menuSaveAs";
             this.menuSaveAs.Size = new System.Drawing.Size(155, 22);
             this.menuSaveAs.Text = "Save As...";
-            this.menuSaveAs.Click += new System.EventHandler(this.menuSaveAs_Click);
+            this.menuSaveAs.Click += new System.EventHandler(this.MenuSaveAs_Click);
             // 
             // menuSep2
             // 
@@ -787,7 +787,7 @@ namespace PaletteDesigner
             this.menuExit.Name = "menuExit";
             this.menuExit.Size = new System.Drawing.Size(155, 22);
             this.menuExit.Text = "Exit";
-            this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+            this.menuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -805,7 +805,7 @@ namespace PaletteDesigner
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.settingsToolStripMenuItem.Text = "Se&ttings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // kryptonNavigatorTop
             // 
@@ -863,7 +863,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorTop.StateCommon.CheckButton.Content.ShortText.TextV = Krypton.Toolkit.PaletteRelativeAlign.Far;
             this.kryptonNavigatorTop.TabIndex = 1;
             this.kryptonNavigatorTop.Text = "kryptonNavigator1";
-            this.kryptonNavigatorTop.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorTop_SelectedPageChanged);
+            this.kryptonNavigatorTop.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorTop_SelectedPageChanged);
             // 
             // pageTopRibbon
             // 
@@ -1247,7 +1247,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesign.Size = new System.Drawing.Size(645, 589);
             this.kryptonNavigatorDesign.TabIndex = 2;
             this.kryptonNavigatorDesign.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesign_SelectedPageChanged);
+            this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesign_SelectedPageChanged);
             // 
             // pageDesignRibbon
             // 
@@ -1579,7 +1579,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignControls.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignControls.TabIndex = 0;
             this.kryptonNavigatorDesignControls.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignControls.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignControls_SelectedPageChanged);
+            this.kryptonNavigatorDesignControls.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignControls_SelectedPageChanged);
             // 
             // pageControlsClient
             // 
@@ -2354,7 +2354,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignButtons.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignButtons.TabIndex = 0;
             this.kryptonNavigatorDesignButtons.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignButtons.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignButtons_SelectedPageChanged);
+            this.kryptonNavigatorDesignButtons.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignButtons_SelectedPageChanged);
             // 
             // pageButtonsStandalone
             // 
@@ -3117,7 +3117,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignGrids.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignGrids.TabIndex = 1;
             this.kryptonNavigatorDesignGrids.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignGrids.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignGrids_SelectedPageChanged);
+            this.kryptonNavigatorDesignGrids.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignGrids_SelectedPageChanged);
             // 
             // kryptonGridList
             // 
@@ -3327,7 +3327,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignHeaders.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignHeaders.TabIndex = 0;
             this.kryptonNavigatorDesignHeaders.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignHeaders.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignHeaders_SelectedPageChanged);
+            this.kryptonNavigatorDesignHeaders.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignHeaders_SelectedPageChanged);
             // 
             // pageHeadersPrimary
             // 
@@ -3748,7 +3748,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignLabels.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignLabels.TabIndex = 0;
             this.kryptonNavigatorDesignLabels.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignLabels.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignLabels_SelectedPageChanged);
+            this.kryptonNavigatorDesignLabels.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignLabels_SelectedPageChanged);
             // 
             // pageLabelsNormalControl
             // 
@@ -4033,7 +4033,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignNavigator.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignNavigator.TabIndex = 1;
             this.kryptonNavigatorDesignNavigator.Text = "kryptonNavigator2";
-            this.kryptonNavigatorDesignNavigator.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignNavigator_SelectedPageChanged);
+            this.kryptonNavigatorDesignNavigator.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignNavigator_SelectedPageChanged);
             // 
             // pageNavigatorBarCheckButtonGroupOutside
             // 
@@ -4280,7 +4280,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignPanels.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignPanels.TabIndex = 0;
             this.kryptonNavigatorDesignPanels.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignPanels.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignPanels_SelectedPageChanged);
+            this.kryptonNavigatorDesignPanels.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignPanels_SelectedPageChanged);
             // 
             // pagePanelsClient
             // 
@@ -4801,7 +4801,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignSeparators.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignSeparators.TabIndex = 0;
             this.kryptonNavigatorDesignSeparators.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignSeparators.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignSeparators_SelectedPageChanged);
+            this.kryptonNavigatorDesignSeparators.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignSeparators_SelectedPageChanged);
             // 
             // pageSeparatorLowProfile
             // 
@@ -5020,7 +5020,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignTabs.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignTabs.TabIndex = 0;
             this.kryptonNavigatorDesignTabs.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignTabs.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignTabs_SelectedPageChanged);
+            this.kryptonNavigatorDesignTabs.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignTabs_SelectedPageChanged);
             // 
             // pageTabHighProfile
             // 
@@ -5355,14 +5355,14 @@ namespace PaletteDesigner
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsControlClient);
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsControlToolTip);
             this.kryptonCheckSetLabels.CheckedButton = this.labelsPanelClient;
-            this.kryptonCheckSetLabels.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSetLabels_CheckedButtonChanged);
+            this.kryptonCheckSetLabels.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetLabels_CheckedButtonChanged);
             // 
             // launchPaletteUpgradeToolToolStripMenuItem
             // 
             this.launchPaletteUpgradeToolToolStripMenuItem.Name = "launchPaletteUpgradeToolToolStripMenuItem";
             this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.launchPaletteUpgradeToolToolStripMenuItem.Text = "Launch Palette &Upgrade Tool";
-            this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.launchPaletteUpgradeToolToolStripMenuItem_Click);
+            this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.LaunchPaletteUpgradeToolToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
