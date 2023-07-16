@@ -49,6 +49,10 @@
 		</Otherwise>
 	</Choose>
 
+	<ItemGroup>
+	  <PackageReference Include="VPKSoft.ScintillaTabbedTextControl" Version="1.1.5" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<Compile Update="Pages\MenuPage.cs">
