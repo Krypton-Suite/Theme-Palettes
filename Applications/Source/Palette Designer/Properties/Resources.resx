@@ -217,4 +217,92 @@
   <data name="Square Design 32 x 32 Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Square Design 32 x 32 Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="v2to6" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+  &lt;xsl:template match="KryptonPalette"&gt;
+    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
+    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
+    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
+    &lt;KryptonPalette Version="6"&gt;
+      &lt;xsl:attribute name="Generated"&gt;
+        &lt;xsl:value-of select="@Generated"/&gt;
+      &lt;/xsl:attribute&gt;
+      &lt;xsl:apply-templates select="*"/&gt;
+    &lt;/KryptonPalette&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="Button1"&gt;&lt;ButtonStandalone&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/ButtonStandalone&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Button2"&gt;&lt;ButtonLowProfile&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/ButtonLowProfile&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Button3"&gt;&lt;ButtonButtonSpec&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/ButtonButtonSpec&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Control1"&gt;&lt;ControlClient&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/ControlClient&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Control2"&gt;&lt;ControlAlternate&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/ControlAlternate&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Header1"&gt;&lt;HeaderPrimary&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/HeaderPrimary&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Header2"&gt;&lt;HeaderSecondary&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/HeaderSecondary&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Label1"&gt;&lt;LabelTitle&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/LabelTitle&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Label2"&gt;&lt;LabelNormal&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/LabelNormal&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Panel1"&gt;&lt;PanelClient&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/PanelClient&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Panel2"&gt;&lt;PanelAlternate&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/PanelAlternate&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Separator1"&gt;&lt;SeparatorLowProfile&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/SeparatorLowProfile&gt;&lt;/xsl:template&gt;
+  &lt;xsl:template match="Separator2"&gt;&lt;SeparatorHighProfile&gt;&lt;xsl:apply-templates select="*"/&gt;&lt;/SeparatorHighProfile&gt;&lt;/xsl:template&gt;
+
+  &lt;xsl:template match="*|@*"&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:apply-templates select="*|@*"/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</value>
+  </data>
+  <data name="v6to19" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+  &lt;xsl:template match="KryptonPalette"&gt;
+    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
+    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
+    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
+    &lt;KryptonPalette Version="19"&gt;
+      &lt;xsl:attribute name="Generated"&gt;
+        &lt;xsl:value-of select="@Generated"/&gt;
+      &lt;/xsl:attribute&gt;
+      &lt;xsl:apply-templates select="*"/&gt;
+    &lt;/KryptonPalette&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="BasePaletteMode[@Value='Professional - Red']"&gt;
+    &lt;BasePaletteMode&gt;
+      &lt;xsl:attribute name ="Type"&gt;PaletteMode&lt;/xsl:attribute&gt;
+      &lt;xsl:attribute name ="Value"&gt;Professional - Office 2003&lt;/xsl:attribute&gt;
+    &lt;/BasePaletteMode&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="BasePaletteMode[@Value='Professional - Green']"&gt;
+    &lt;BasePaletteMode&gt;
+      &lt;xsl:attribute name ="Type"&gt;PaletteMode&lt;/xsl:attribute&gt;
+      &lt;xsl:attribute name ="Value"&gt;Professional - Office 2003&lt;/xsl:attribute&gt;
+    &lt;/BasePaletteMode&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="Prefix"&gt;
+    &lt;Prefix&gt;
+      &lt;xsl:attribute name ="Type"&gt;PaletteTextHotkeyPrefix&lt;/xsl:attribute&gt;
+      &lt;xsl:attribute name ="Value"&gt;
+        &lt;xsl:value-of select="@Value"/&gt;
+      &lt;/xsl:attribute&gt;
+    &lt;/Prefix&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="BasePaletteMode[@Value='Professional - Red']"&gt;
+    &lt;BasePaletteMode&gt;
+      &lt;xsl:attribute name ="Type"&gt;PaletteMode&lt;/xsl:attribute&gt;
+      &lt;xsl:attribute name ="Value"&gt;Professional - Office 2003&lt;/xsl:attribute&gt;
+    &lt;/BasePaletteMode&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="*|@*"&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:apply-templates select="*|@*"/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</value>
+  </data>
 </root>

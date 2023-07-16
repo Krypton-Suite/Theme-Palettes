@@ -147,51 +147,51 @@ namespace PaletteUpgradeTool.UI
                             KryptonMessageBoxIcon.Warning);
                         break;
                     case < MINIMUM_VERSION_NUMBER:
-                    {
-                        string[] fileName = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_VERSION_NUMBER.ToString(), "' and upwards." };
-
-                        KryptonMessageBox.Show(this,
-                            string.Concat(fileName),
-                            "Incompatible Version",
-                            KryptonMessageBoxButtons.OK,
-                            KryptonMessageBoxIcon.Warning);
-                        break;
-                    }
-                    case <= MAXIMUM_VERSION_NUMBER:
-                    {
-                        krtbInput.Text = openFileDialog.FileName;
-
-                        SetInputVersionNumber(paletteFileNumber);
-
-                        FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
-
-                        string str = (fileInfo.Name.IndexOf(fileInfo.Extension) <= 0 ? fileInfo.Name : fileInfo.Name.Substring(0, fileInfo.Name.IndexOf(fileInfo.Extension)));
-
-                        string directoryName = fileInfo.DirectoryName;
-
-                        if (!directoryName.EndsWith("\\"))
                         {
-                            directoryName = string.Concat(directoryName, "\\");
+                            string[] fileName = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_VERSION_NUMBER.ToString(), "' and upwards." };
+
+                            KryptonMessageBox.Show(this,
+                                string.Concat(fileName),
+                                "Incompatible Version",
+                                KryptonMessageBoxButtons.OK,
+                                KryptonMessageBoxIcon.Warning);
+                            break;
                         }
+                    case <= MAXIMUM_VERSION_NUMBER:
+                        {
+                            krtbInput.Text = openFileDialog.FileName;
 
-                        KryptonRichTextBox richTextBox = krtbOutput;
+                            SetInputVersionNumber(paletteFileNumber);
 
-                        string[] strArrays = new string[] { directoryName, str, "_v", (MAXIMUM_VERSION_NUMBER + 1).ToString(), fileInfo.Extension };
+                            FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
 
-                        richTextBox.Text = string.Concat(strArrays);
-                        break;
-                    }
+                            string str = (fileInfo.Name.IndexOf(fileInfo.Extension) <= 0 ? fileInfo.Name : fileInfo.Name.Substring(0, fileInfo.Name.IndexOf(fileInfo.Extension)));
+
+                            string directoryName = fileInfo.DirectoryName;
+
+                            if (!directoryName.EndsWith("\\"))
+                            {
+                                directoryName = string.Concat(directoryName, "\\");
+                            }
+
+                            KryptonRichTextBox richTextBox = krtbOutput;
+
+                            string[] strArrays = new string[] { directoryName, str, "_v", (MAXIMUM_VERSION_NUMBER + 1).ToString(), fileInfo.Extension };
+
+                            richTextBox.Text = string.Concat(strArrays);
+                            break;
+                        }
                     default:
-                    {
-                        string[] fileName1 = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below." };
+                        {
+                            string[] fileName1 = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below." };
 
-                        KryptonMessageBox.Show(this,
-                            string.Concat(fileName1),
-                            "Incompatible Version",
-                            KryptonMessageBoxButtons.OK,
-                            KryptonMessageBoxIcon.Warning);
-                        break;
-                    }
+                            KryptonMessageBox.Show(this,
+                                string.Concat(fileName1),
+                                "Incompatible Version",
+                                KryptonMessageBoxButtons.OK,
+                                KryptonMessageBoxIcon.Warning);
+                            break;
+                        }
                 }
 
                 UpdateState();
@@ -363,9 +363,9 @@ namespace PaletteUpgradeTool.UI
         {
             try
             {
-                if ( string.IsNullOrWhiteSpace(filename) )
+                if (string.IsNullOrWhiteSpace(filename))
                 {
-                    return false; 
+                    return false;
                 }
                 var fileInfo = new FileInfo(filename);
                 return (!fileInfo.Exists || !fileInfo.IsReadOnly);

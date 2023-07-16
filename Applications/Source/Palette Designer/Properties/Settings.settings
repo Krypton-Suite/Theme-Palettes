@@ -5,9 +5,6 @@
     <Setting Name="StartMaximised" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PaletteUpgradeToolLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Theme" Type="Krypton.Toolkit.PaletteMode" Scope="User">
       <Value Profile="(Default)">Global</Value>
     </Setting>

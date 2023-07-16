@@ -43,8 +43,6 @@ namespace PaletteDesigner
             kchkStartMaximised.Checked = _settingsManager.GetMaximised();
 
             ktcmbTheme.SelectedIndex = _settingsManager.GetThemeSelectedIndex();
-
-            ktxtPaletteUpgradeToolLocation.Text = _settingsManager.GetPaletteUpgradeToolLocation();
         }
     }
 }
