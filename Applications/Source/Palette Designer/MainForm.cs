@@ -1029,33 +1029,9 @@ namespace PaletteDesigner
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_settingsManager.GetPaletteUpgradeToolLocation()))
-            {
-                try
-                {
-                    ProcessStartInfo psi = new(_settingsManager.GetPaletteUpgradeToolLocation());
+            using FormPaletteUpgradeTool paletteUpgradeTool = new();
 
-                    Process.Start(psi);
-                }
-                catch (Exception exc)
-                {
-                    KryptonMessageBox.Show($@"An error has occurred: {exc}", @"Error", KryptonMessageBoxButtons.OK,
-                        KryptonMessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                DialogResult result = KryptonMessageBox.Show(
-                    @"The location of the Palette Upgrade Tool could not be found. Would you like to locate it now?",
-                    @"Palette Upgrade Tool", KryptonMessageBoxButtons.YesNo, KryptonMessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    using var controlPanel = new SettingsControlPanel();
-
-                    controlPanel.Show();
-                }
-            }
+            paletteUpgradeTool.Show();
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)

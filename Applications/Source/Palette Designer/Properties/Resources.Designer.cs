@@ -389,5 +389,37 @@ namespace PaletteDesigner.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;1.0&quot;&gt;
+        ///  &lt;xsl:template match=&quot;KryptonPalette&quot;&gt;
+        ///    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
+        ///    &lt;KryptonPalette Version=&quot;6&quot;&gt;
+        ///      &lt;xsl:attri [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string v2to6 {
+            get {
+                return ResourceManager.GetString("v2to6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;1.0&quot;&gt;
+        ///  &lt;xsl:template match=&quot;KryptonPalette&quot;&gt;
+        ///    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
+        ///    &lt;KryptonPalette Version=&quot;19&quot;&gt;
+        ///      &lt;xsl:attr [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string v6to19 {
+            get {
+                return ResourceManager.GetString("v6to19", resourceCulture);
+            }
+        }
     }
 }

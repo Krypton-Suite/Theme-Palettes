@@ -35,8 +35,6 @@
             this.kryptonBorderEdge1 = new Krypton.Toolkit.KryptonBorderEdge();
             this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
             this.kchkAskForConfirmation = new Krypton.Toolkit.KryptonCheckBox();
-            this.ktxtPaletteUpgradeToolLocation = new Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
             this.ktcmbTheme = new Krypton.Toolkit.KryptonThemeComboBox();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.kchkStartMaximised = new Krypton.Toolkit.KryptonCheckBox();
@@ -54,7 +52,7 @@
             this.kryptonPanel1.Controls.Add(this.kbtnCancel);
             this.kryptonPanel1.Controls.Add(this.kryptonBorderEdge1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 187);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 121);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonPanel1.Size = new System.Drawing.Size(537, 50);
@@ -102,42 +100,22 @@
             // kryptonPanel2
             // 
             this.kryptonPanel2.Controls.Add(this.kchkAskForConfirmation);
-            this.kryptonPanel2.Controls.Add(this.ktxtPaletteUpgradeToolLocation);
-            this.kryptonPanel2.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel2.Controls.Add(this.ktcmbTheme);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel2.Controls.Add(this.kchkStartMaximised);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(537, 187);
+            this.kryptonPanel2.Size = new System.Drawing.Size(537, 121);
             this.kryptonPanel2.TabIndex = 2;
             // 
             // kchkAskForConfirmation
             // 
-            this.kchkAskForConfirmation.Location = new System.Drawing.Point(13, 149);
+            this.kchkAskForConfirmation.Location = new System.Drawing.Point(13, 92);
             this.kchkAskForConfirmation.Name = "kchkAskForConfirmation";
             this.kchkAskForConfirmation.Size = new System.Drawing.Size(318, 20);
             this.kchkAskForConfirmation.TabIndex = 5;
             this.kchkAskForConfirmation.Values.Text = "&Ask for confirmation when saving or resetting settings";
-            // 
-            // ktxtPaletteUpgradeToolLocation
-            // 
-            this.ktxtPaletteUpgradeToolLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.ktxtPaletteUpgradeToolLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.ktxtPaletteUpgradeToolLocation.Location = new System.Drawing.Point(13, 119);
-            this.ktxtPaletteUpgradeToolLocation.Name = "ktxtPaletteUpgradeToolLocation";
-            this.ktxtPaletteUpgradeToolLocation.Size = new System.Drawing.Size(512, 23);
-            this.ktxtPaletteUpgradeToolLocation.TabIndex = 4;
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.BoldControl;
-            this.kryptonLabel2.Location = new System.Drawing.Point(13, 92);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(191, 20);
-            this.kryptonLabel2.TabIndex = 3;
-            this.kryptonLabel2.Values.Text = "Palette Upgrade Tool Location:";
             // 
             // ktcmbTheme
             // 
@@ -172,7 +150,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.kbtnCancel;
-            this.ClientSize = new System.Drawing.Size(537, 237);
+            this.ClientSize = new System.Drawing.Size(537, 171);
             this.Controls.Add(this.kryptonPanel2);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -185,8 +163,6 @@
             this.Text = "Settings";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SettingsControlPanel_Load);
-            this.Controls.SetChildIndex(this.kryptonPanel1, 0);
-            this.Controls.SetChildIndex(this.kryptonPanel2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
@@ -210,7 +186,5 @@
         private KryptonLabel kryptonLabel1;
         private KryptonThemeComboBox ktcmbTheme;
         private KryptonCheckBox kchkAskForConfirmation;
-        private KryptonTextBox ktxtPaletteUpgradeToolLocation;
-        private KryptonLabel kryptonLabel2;
     }
 }

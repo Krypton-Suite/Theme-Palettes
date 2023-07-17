@@ -49,14 +49,6 @@ namespace PaletteDesigner
         /// </returns>
         public bool GetAskForSaveConfirmation() => _settings.AskForSaveConfirmation;
 
-        /// <summary>Sets the palette upgrade tool location.</summary>
-        /// <param name="value">The value.</param>
-        public void SetPaletteUpgradeToolLocation(string value) => _settings.PaletteUpgradeToolLocation = value;
-
-        /// <summary>Gets the palette upgrade tool location.</summary>
-        /// <returns></returns>
-        public string GetPaletteUpgradeToolLocation() => _settings.PaletteUpgradeToolLocation;
-
         /// <summary>Sets the theme.</summary>
         /// <param name="paletteMode">The palette mode.</param>
         public void SetTheme(PaletteMode paletteMode) => _settings.Theme = paletteMode;
@@ -120,8 +112,6 @@ namespace PaletteDesigner
 
                     SetAskForSaveConfirmation(true);
 
-                    SetPaletteUpgradeToolLocation(string.Empty);
-
                     SetTheme(PaletteMode.Microsoft365Blue);
 
                     SetThemeSelectedIndex(33);
@@ -132,8 +122,6 @@ namespace PaletteDesigner
                 SetMaximised(false);
 
                 SetAskForSaveConfirmation(true);
-
-                SetPaletteUpgradeToolLocation(string.Empty);
 
                 SetTheme(PaletteMode.Microsoft365Blue);
 
