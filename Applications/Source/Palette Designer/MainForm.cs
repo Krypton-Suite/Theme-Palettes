@@ -1029,7 +1029,7 @@ namespace PaletteDesigner
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormPaletteUpgradeTool paletteUpgradeTool = new();
+            using FormPaletteUpgradeTool paletteUpgradeTool = new();
 
             paletteUpgradeTool.Show();
         }
