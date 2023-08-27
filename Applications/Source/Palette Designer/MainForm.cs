@@ -10,6 +10,8 @@
  */
 #endregion
 
+using System.Threading.Tasks;
+
 namespace PaletteDesigner
 {
     public partial class MainForm : KryptonForm
@@ -524,7 +526,7 @@ namespace PaletteDesigner
             if (!_dirty)
             {
                 _dirty = true;
-                UpdateTitleBar();
+                Task.Run(() => BeginInvoke(UpdateTitleBar));
             }
 
             // Do we need to setup a new renderer for the ToolMenuStatus page?
