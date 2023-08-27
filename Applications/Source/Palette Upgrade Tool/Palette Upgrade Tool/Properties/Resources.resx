@@ -214,5 +214,6 @@
     &lt;/xsl:copy&gt;
   &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;</value>
+    <comment>Make sure to duplictae from / in the `KryptonCustomPaletteBase` code base</comment>
   </data>
 </root>
