@@ -1049,7 +1049,7 @@ namespace PaletteDesigner
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Why does'nt this work?
+            // TODO: Why doesn't this work?
             //using FormPaletteUpgradeTool paletteUpgradeTool = new();
 
             FormPaletteUpgradeTool paletteUpgradeTool = new FormPaletteUpgradeTool();
@@ -1059,7 +1059,7 @@ namespace PaletteDesigner
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Why does'nt this work?
+            // TODO: Why doesn't this work?
             //using var controlPanel = new SettingsControlPanel();
 
             SettingsControlPanel controlPanel = new SettingsControlPanel();
