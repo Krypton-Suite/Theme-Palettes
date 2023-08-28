@@ -8,9 +8,9 @@
 #endregion
 
 using System.Drawing;
+using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using System.Xml;
 
 namespace PaletteDesigner
 {
