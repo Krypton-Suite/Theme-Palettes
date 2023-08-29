@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             this.kbtnReset = new Krypton.Toolkit.KryptonButton();
             this.kbtnOk = new Krypton.Toolkit.KryptonButton();
             this.kbtnCancel = new Krypton.Toolkit.KryptonButton();
             this.kryptonBorderEdge1 = new Krypton.Toolkit.KryptonBorderEdge();
             this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
+            this.kchkUpgradePalette = new Krypton.Toolkit.KryptonCheckBox();
             this.kchkAskForConfirmation = new Krypton.Toolkit.KryptonCheckBox();
             this.ktcmbTheme = new Krypton.Toolkit.KryptonThemeComboBox();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.kchkStartMaximised = new Krypton.Toolkit.KryptonCheckBox();
+            this.kmTheme = new Krypton.Toolkit.KryptonManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -62,11 +65,12 @@
             // 
             this.kbtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.kbtnReset.Enabled = false;
-            this.kbtnReset.Location = new System.Drawing.Point(13, 13);
+            this.kbtnReset.Location = new System.Drawing.Point(12, 13);
             this.kbtnReset.Name = "kbtnReset";
             this.kbtnReset.Size = new System.Drawing.Size(90, 25);
             this.kbtnReset.TabIndex = 3;
             this.kbtnReset.Values.Text = "kryptonButton3";
+            this.kbtnReset.Click += new System.EventHandler(this.kbtnReset_Click);
             // 
             // kbtnOk
             // 
@@ -77,6 +81,7 @@
             this.kbtnOk.Size = new System.Drawing.Size(90, 25);
             this.kbtnOk.TabIndex = 2;
             this.kbtnOk.Values.Text = "kryptonButton2";
+            this.kbtnOk.Click += new System.EventHandler(this.kbtnOk_Click);
             // 
             // kbtnCancel
             // 
@@ -99,6 +104,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.kchkUpgradePalette);
             this.kryptonPanel2.Controls.Add(this.kchkAskForConfirmation);
             this.kryptonPanel2.Controls.Add(this.ktcmbTheme);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel1);
@@ -109,6 +115,15 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(537, 121);
             this.kryptonPanel2.TabIndex = 2;
             // 
+            // kchkUpgradePalette
+            // 
+            this.kchkUpgradePalette.Location = new System.Drawing.Point(169, 13);
+            this.kchkUpgradePalette.Name = "kchkUpgradePalette";
+            this.kchkUpgradePalette.Size = new System.Drawing.Size(226, 20);
+            this.kchkUpgradePalette.TabIndex = 6;
+            this.kchkUpgradePalette.Values.Text = "Always &upgrade palette on importing";
+            this.kchkUpgradePalette.CheckedChanged += new System.EventHandler(this.kchkUpgradePalette_CheckedChanged);
+            // 
             // kchkAskForConfirmation
             // 
             this.kchkAskForConfirmation.Location = new System.Drawing.Point(13, 92);
@@ -116,9 +131,11 @@
             this.kchkAskForConfirmation.Size = new System.Drawing.Size(318, 20);
             this.kchkAskForConfirmation.TabIndex = 5;
             this.kchkAskForConfirmation.Values.Text = "&Ask for confirmation when saving or resetting settings";
+            this.kchkAskForConfirmation.CheckedChanged += new System.EventHandler(this.kchkAskForConfirmation_CheckedChanged);
             // 
             // ktcmbTheme
             // 
+            this.ktcmbTheme.DisplayMember = "Key";
             this.ktcmbTheme.DropDownWidth = 512;
             this.ktcmbTheme.IntegralHeight = false;
             this.ktcmbTheme.Location = new System.Drawing.Point(13, 65);
@@ -126,6 +143,8 @@
             this.ktcmbTheme.Size = new System.Drawing.Size(512, 21);
             this.ktcmbTheme.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.ktcmbTheme.TabIndex = 2;
+            this.ktcmbTheme.ValueMember = "Value";
+            this.ktcmbTheme.SelectedIndexChanged += new System.EventHandler(this.ktcmbTheme_SelectedIndexChanged);
             // 
             // kryptonLabel1
             // 
@@ -143,6 +162,7 @@
             this.kchkStartMaximised.Size = new System.Drawing.Size(150, 20);
             this.kchkStartMaximised.TabIndex = 0;
             this.kchkStartMaximised.Values.Text = "Always start &maximised";
+            this.kchkStartMaximised.CheckedChanged += new System.EventHandler(this.kchkStartMaximised_CheckedChanged);
             // 
             // SettingsControlPanel
             // 
@@ -186,5 +206,7 @@
         private KryptonLabel kryptonLabel1;
         private KryptonThemeComboBox ktcmbTheme;
         private KryptonCheckBox kchkAskForConfirmation;
+        private KryptonCheckBox kchkUpgradePalette;
+        private KryptonManager kmTheme;
     }
 }

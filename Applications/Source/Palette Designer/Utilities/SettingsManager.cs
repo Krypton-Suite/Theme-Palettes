@@ -69,6 +69,16 @@ namespace PaletteDesigner
         /// </returns>
         public int GetThemeSelectedIndex() => _settings.ThemeSelectedIndex;
 
+        /// <summary>Sets the upgrade on import.</summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetUpgradeOnImport(bool value) => _settings.UpgradeOnImport = value;
+
+        /// <summary>Gets the upgrade on import.</summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        public bool GetUpgradeOnImport() => _settings.UpgradeOnImport;
+
         #endregion
 
         #region Public
@@ -126,6 +136,8 @@ namespace PaletteDesigner
                 SetTheme(PaletteMode.Microsoft365Blue);
 
                 SetThemeSelectedIndex(33);
+
+                SetUpgradeOnImport(false);
             }
 
             SaveSettings(useConfirmation);

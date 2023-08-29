@@ -308,52 +308,72 @@ namespace PaletteDesigner
             string? filename;
             try
             {
-                filename = palette.Import();
+                if (_settingsManager.GetUpgradeOnImport())
+                {
+                    using var paletteOpenFileDialog = new KryptonOpenFileDialog()
+                    {
+                        CheckFileExists = true,
+                        CheckPathExists = true,
+                        DefaultExt = @"xml",
+                        Filter = @"Palette files (*.xml)|*.xml|All files (*.*)|(*.*)",
+                        Title = @"Load Custom Palette"
+                    };
+
+                    string paletteFileName = (paletteOpenFileDialog.ShowDialog() == DialogResult.OK)
+                        ? paletteOpenFileDialog.FileName
+                        : string.Empty;
+
+                    palette.ImportWithUpgrade(File.OpenRead(paletteFileName));
+                }
+                else
+                {
+                    filename = palette.Import();
+
+                    Cursor = Cursors.Default;
+
+                    // If the load succeeded
+                    if (!string.IsNullOrWhiteSpace(filename))
+                    {
+                        // Need to unhook from any existing palette
+                        if (_palette != null)
+                        {
+                            _palette.PalettePaint -= OnPalettePaint;
+                            _palette.BasePaletteChanged -= OnBaseChanged;
+                        }
+
+                        // Use the new instance instead
+                        _palette = palette;
+                        _chromeTMS.Palette = palette;
+                        _chromeTMS2.Palette = palette;
+                        _chromeRibbon.OverridePalette = _palette;
+
+                        // We need to know when a change occurs to the palette settings
+                        _palette.PalettePaint += OnPalettePaint;
+                        _palette.BasePaletteChanged += OnBaseChanged;
+
+                        // Hook up the property grid to the palette
+                        labelGridNormal.SelectedObject = _palette;
+
+                        // Use the loaded filename
+                        _filename = filename!;
+
+                        // Reset the state flags
+                        _loaded = true;
+                        _dirty = false;
+
+                        // Apply the new palette to the design controls
+                        ApplyPalette();
+
+                        // Define the initial title bar string
+                        UpdateTitleBar();
+                        _recentlyUsedDocumentsManager.AddRecentFile(filename!);
+                    }
+                }
             }
             catch
             {
                 // Do not abort due to un supported xml file
                 filename = string.Empty;
-            }
-
-            Cursor = Cursors.Default;
-
-            // If the load succeeded
-            if (!string.IsNullOrWhiteSpace(filename))
-            {
-                // Need to unhook from any existing palette
-                if (_palette != null)
-                {
-                    _palette.PalettePaint -= OnPalettePaint;
-                    _palette.BasePaletteChanged -= OnBaseChanged;
-                }
-
-                // Use the new instance instead
-                _palette = palette;
-                _chromeTMS.Palette = palette;
-                _chromeTMS2.Palette = palette;
-                _chromeRibbon.OverridePalette = _palette;
-
-                // We need to know when a change occurs to the palette settings
-                _palette.PalettePaint += OnPalettePaint;
-                _palette.BasePaletteChanged += OnBaseChanged;
-
-                // Hook up the property grid to the palette
-                labelGridNormal.SelectedObject = _palette;
-
-                // Use the loaded filename
-                _filename = filename!;
-
-                // Reset the state flags
-                _loaded = true;
-                _dirty = false;
-
-                // Apply the new palette to the design controls
-                ApplyPalette();
-
-                // Define the initial title bar string
-                UpdateTitleBar();
-                _recentlyUsedDocumentsManager.AddRecentFile(filename!);
             }
 
         }
@@ -1031,14 +1051,20 @@ namespace PaletteDesigner
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using FormPaletteUpgradeTool paletteUpgradeTool = new();
+            // TODO: Why doesn't this work?
+            //using FormPaletteUpgradeTool paletteUpgradeTool = new();
+
+            FormPaletteUpgradeTool paletteUpgradeTool = new FormPaletteUpgradeTool();
 
             paletteUpgradeTool.Show();
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using var controlPanel = new SettingsControlPanel();
+            // TODO: Why doesn't this work?
+            //using var controlPanel = new SettingsControlPanel();
+
+            SettingsControlPanel controlPanel = new SettingsControlPanel();
 
             controlPanel.Show();
         }
