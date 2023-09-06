@@ -585,6 +585,9 @@ namespace PaletteDesigner
                 Enabled = false,
                 TextExtra = @"Disabled"
             };
+
+            _chromeTMS2.ToolStripKryptonProgressBar.Enabled = false;
+
             _chromeTMS2.Show();
 
             // Add the chrome window with embedded Ribbon
