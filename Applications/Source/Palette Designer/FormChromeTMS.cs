@@ -22,6 +22,9 @@ namespace PaletteDesigner
         #endregion
 
         #region Public
+
+        public KryptonProgressBarToolStripItem ToolStripKryptonProgressBar => kryptonProgressBarToolStripItem1;
+
         public ToolStripRenderer OverrideToolStripRenderer
         {
             set
