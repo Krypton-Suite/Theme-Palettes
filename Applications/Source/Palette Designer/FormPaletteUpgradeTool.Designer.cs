@@ -151,7 +151,7 @@
             this.kbtnCancel.Name = "kbtnCancel";
             this.kbtnCancel.Size = new System.Drawing.Size(90, 25);
             this.kbtnCancel.TabIndex = 1;
-            this.kbtnCancel.UseAsADialogButton = true;
+            this.kbtnCancel.Values.UseAsADialogButton = true;
             this.kbtnCancel.Values.Text = "Cance&l";
             this.kbtnCancel.Click += new System.EventHandler(this.kbtnCancel_Click);
             // 
