@@ -337,25 +337,25 @@ namespace PaletteDesigner
                         // Need to unhook from any existing palette
                         if (_palette != null)
                         {
-                            _palette.PalettePaint -= OnPalettePaint;
-                            _palette.BasePaletteChanged -= OnBaseChanged;
+                            _palette.PalettePaint -= OnPalettePaint!;
+                            _palette.BasePaletteChanged -= OnBaseChanged!;
                         }
 
                         // Use the new instance instead
                         _palette = palette;
-                        _chromeTMS.Palette = palette;
-                        _chromeTMS2.Palette = palette;
+                        _chromeTMS.LocalCustomPalette = palette;
+                        _chromeTMS2.LocalCustomPalette = palette;
                         _chromeRibbon.OverridePalette = _palette;
 
                         // We need to know when a change occurs to the palette settings
-                        _palette.PalettePaint += OnPalettePaint;
-                        _palette.BasePaletteChanged += OnBaseChanged;
+                        _palette.PalettePaint += OnPalettePaint!;
+                        _palette.BasePaletteChanged += OnBaseChanged!;
 
                         // Hook up the property grid to the palette
                         labelGridNormal.SelectedObject = _palette;
 
                         // Use the loaded filename
-                        _filename = filename!;
+                        _filename = filename;
 
                         // Reset the state flags
                         _loaded = true;
@@ -366,14 +366,14 @@ namespace PaletteDesigner
 
                         // Define the initial title bar string
                         UpdateTitleBar();
-                        _recentlyUsedDocumentsManager.AddRecentFile(filename!);
+                        _recentlyUsedDocumentsManager.AddRecentFile(filename);
                     }
                 }
             }
             catch
             {
                 // Do not abort due to un supported xml file
-                filename = string.Empty;
+                _filename = string.Empty;
             }
 
         }
@@ -414,7 +414,7 @@ namespace PaletteDesigner
             if (!string.IsNullOrWhiteSpace(filename))
             {
                 // Remember associated file details
-                _filename = filename!;
+                _filename = filename;
                 _loaded = true;
 
                 // No longer dirty
@@ -463,19 +463,19 @@ namespace PaletteDesigner
             // Need to unhook from any existing palette
             if (_palette != null)
             {
-                _palette.PalettePaint -= OnPalettePaint;
-                _palette.BasePaletteChanged -= OnBaseChanged;
+                _palette.PalettePaint -= OnPalettePaint!;
+                _palette.BasePaletteChanged -= OnBaseChanged!;
             }
 
             // Create a fresh palette instance
             _palette = new KryptonCustomPaletteBase();
-            _chromeTMS.Palette = _palette;
-            _chromeTMS2.Palette = _palette;
+            _chromeTMS.LocalCustomPalette = _palette;
+            _chromeTMS2.LocalCustomPalette = _palette;
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
-            _palette.PalettePaint += OnPalettePaint;
-            _palette.BasePaletteChanged += OnBaseChanged;
+            _palette.PalettePaint += OnPalettePaint!;
+            _palette.BasePaletteChanged += OnBaseChanged!;
 
             // Hook up the property grid to the palette
             labelGridNormal.SelectedObject = _palette;
@@ -506,7 +506,7 @@ namespace PaletteDesigner
                 return;
             }
 
-            _applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
+            _applyPalettesToBases.ForEach(vcb => vcb.LocalCustomPalette = _palette);
             _applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
 
             dataGridViewDisabled.Palette = _palette;
@@ -522,7 +522,7 @@ namespace PaletteDesigner
 
             // Hack until the pages are separated out:
             var backClr = _palette.GetBackColor1(PaletteBackStyle.PanelClient, PaletteState.Normal);
-            _applyPalettesToPages.ForEach(pg => pg.StateCommon.Page.Color1 = backClr);
+            _applyPalettesToPages.ForEach(pg => pg.StateCommon!.Page.Color1 = backClr);
         }
 
         private void UpdateChromeTMS()
@@ -761,7 +761,7 @@ namespace PaletteDesigner
             switch (kryptonNavigatorDesignControls.SelectedIndex)
             {
                 default:
-                case 0:
+                //case 0:
                     backStyle = PaletteBackStyle.ControlClient;
                     borderStyle = PaletteBorderStyle.ControlClient;
                     break;
@@ -1027,14 +1027,14 @@ namespace PaletteDesigner
                         "File not found",
                         KryptonMessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName!);
+                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
                 }
                 return;
             }
 
             try
             {
-                _palette.Import(fileName!, false);
+                _palette.Import(fileName, false);
             }
             catch
             {
@@ -1057,7 +1057,7 @@ namespace PaletteDesigner
             // TODO: Why doesn't this work?
             //using FormPaletteUpgradeTool paletteUpgradeTool = new();
 
-            FormPaletteUpgradeTool paletteUpgradeTool = new FormPaletteUpgradeTool();
+            var paletteUpgradeTool = new FormPaletteUpgradeTool();
 
             paletteUpgradeTool.Show();
         }
@@ -1067,7 +1067,7 @@ namespace PaletteDesigner
             // TODO: Why doesn't this work?
             //using var controlPanel = new SettingsControlPanel();
 
-            SettingsControlPanel controlPanel = new SettingsControlPanel();
+            var controlPanel = new SettingsControlPanel();
 
             controlPanel.Show();
         }

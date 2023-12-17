@@ -71,10 +71,10 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            _textBoxes.ForEach(control => control.Palette = palette);
-            _comboBoxes.ForEach(control => control.Palette = palette);
-            _richTextBoxes.ForEach(control => control.Palette = palette);
-            _numericUpDowns.ForEach(control => control.Palette = palette);
+            _textBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _comboBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _richTextBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _numericUpDowns.ForEach(control => control.LocalCustomPalette = palette);
 
             kryptonPanel1.Palette = palette;
         }
@@ -92,7 +92,7 @@ namespace PaletteDesigner.Pages
             switch (kryptonNavigatorDesignInputControls.SelectedIndex)
             {
                 default:
-                case 0:
+                //case 0:
                     inputControlStyle = InputControlStyle.Standalone;
                     break;
                 case 1:

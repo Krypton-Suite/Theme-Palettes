@@ -25,29 +25,24 @@ namespace PaletteDesigner.Pages
         {
             kryptonPanel1.Palette = palette;
 
-            kryptonButton1.Palette = palette;
+            kryptonButton1.LocalCustomPalette = palette;
 
-            kryptonGroupBox1.Palette = palette;
+            kryptonGroupBox1.LocalCustomPalette = palette;
 
-            krbToolTip.Palette = palette;
+            krbToolTip.LocalCustomPalette = palette;
 
-            krbSuperTip.Palette = palette;
+            krbSuperTip.LocalCustomPalette = palette;
 
-            krbKeyTip.Palette = palette;
+            krbKeyTip.LocalCustomPalette = palette;
 
-            kchkShowImage.Palette = palette;
+            kchkShowImage.LocalCustomPalette = palette;
         }
 
         private void kchkShowImage_CheckedChanged(object sender, EventArgs e)
         {
-            if (kchkShowImage.Checked)
-            {
-                kryptonButton1.ToolTipValues.Image = Resources.Square_Design_32_x_32_Green;
-            }
-            else
-            {
-                kryptonButton1.ToolTipValues.Image = null;
-            }
+            kryptonButton1.ToolTipValues.Image = kchkShowImage.Checked 
+                ? Resources.Square_Design_32_x_32_Green 
+                : null;
         }
 
         private void krbToolTip_CheckedChanged(object sender, EventArgs e)

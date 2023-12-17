@@ -60,7 +60,7 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            _tBars.ForEach(bar => bar.Palette = palette);
+            _tBars.ForEach(bar => bar.LocalCustomPalette = palette);
 
             kryptonPanel1.Palette = palette;
         }
