@@ -32,7 +32,7 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            kcmEverything.Palette = palette;
+            kcmEverything.LocalCustomPalette = palette;
             kryptonPanel1.Palette = palette;
         }
 
