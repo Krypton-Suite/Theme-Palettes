@@ -119,7 +119,6 @@ namespace PaletteDesigner
             // 
             // kryptonRibbon1
             // 
-            this.kryptonRibbon1.AllowFormIntegrate = true;
             this.kryptonRibbon1.InDesignHelperMode = true;
             this.kryptonRibbon1.Name = "kryptonRibbon1";
             this.kryptonRibbon1.QATButtons.AddRange(new System.ComponentModel.Component[] {
