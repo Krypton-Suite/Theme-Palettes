@@ -36,6 +36,11 @@ namespace PaletteDesigner
         {
             InitializeComponent();
 
+            _filename = string.Empty;
+            _chromeTMS = new FormChromeTMS();
+            _chromeTMS2 = new FormChromeTMS();
+            _chromeRibbon = new FormChromeRibbon();
+
             _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
 
             _applyPalettesToBases = new List<VisualControlBase>(new VisualControlBase[]
@@ -124,7 +129,7 @@ namespace PaletteDesigner
             borderDesignNavigator,
             borderDesignTabs,
             panelLabelsBackground,
-            kryptonPanelMainFill,
+            kryptonPanelMainFill
                 }
             );
 
@@ -245,7 +250,7 @@ namespace PaletteDesigner
         pageLabelsBoldPanel,
         pageLabelsItalicPanel,
         pageTopLists,
-        pageLists,
+        pageLists
             });
         }
         #endregion
@@ -305,7 +310,6 @@ namespace PaletteDesigner
             // Get the name of the file we imported from
             Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            string? filename;
             try
             {
                 if (_settingsManager.GetUpgradeOnImport())
@@ -327,7 +331,7 @@ namespace PaletteDesigner
                 }
                 else
                 {
-                    filename = palette.Import();
+                    var filename = palette.Import();
 
                     Cursor = Cursors.Default;
 
@@ -337,8 +341,8 @@ namespace PaletteDesigner
                         // Need to unhook from any existing palette
                         if (_palette != null)
                         {
-                            _palette.PalettePaint -= OnPalettePaint!;
-                            _palette.BasePaletteChanged -= OnBaseChanged!;
+                            _palette.PalettePaint -= OnPalettePaint;
+                            _palette.BasePaletteChanged -= OnBaseChanged;
                         }
 
                         // Use the new instance instead
@@ -348,8 +352,8 @@ namespace PaletteDesigner
                         _chromeRibbon.OverridePalette = _palette;
 
                         // We need to know when a change occurs to the palette settings
-                        _palette.PalettePaint += OnPalettePaint!;
-                        _palette.BasePaletteChanged += OnBaseChanged!;
+                        _palette.PalettePaint += OnPalettePaint;
+                        _palette.BasePaletteChanged += OnBaseChanged;
 
                         // Hook up the property grid to the palette
                         labelGridNormal.SelectedObject = _palette;
@@ -375,7 +379,6 @@ namespace PaletteDesigner
                 // Do not abort due to un supported xml file
                 _filename = string.Empty;
             }
-
         }
 
         private void Save()
@@ -414,7 +417,7 @@ namespace PaletteDesigner
             if (!string.IsNullOrWhiteSpace(filename))
             {
                 // Remember associated file details
-                _filename = filename;
+                _filename = filename!;
                 _loaded = true;
 
                 // No longer dirty
@@ -422,9 +425,8 @@ namespace PaletteDesigner
 
                 // Define the initial title bar string
                 UpdateTitleBar();
+                _recentlyUsedDocumentsManager.AddRecentFile(filename!);
             }
-
-            _recentlyUsedDocumentsManager.AddRecentFile(filename!);
         }
 
         private void Exit()
@@ -463,8 +465,8 @@ namespace PaletteDesigner
             // Need to unhook from any existing palette
             if (_palette != null)
             {
-                _palette.PalettePaint -= OnPalettePaint!;
-                _palette.BasePaletteChanged -= OnBaseChanged!;
+                _palette.PalettePaint -= OnPalettePaint;
+                _palette.BasePaletteChanged -= OnBaseChanged;
             }
 
             // Create a fresh palette instance
@@ -474,8 +476,8 @@ namespace PaletteDesigner
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
-            _palette.PalettePaint += OnPalettePaint!;
-            _palette.BasePaletteChanged += OnBaseChanged!;
+            _palette.PalettePaint += OnPalettePaint;
+            _palette.BasePaletteChanged += OnBaseChanged;
 
             // Hook up the property grid to the palette
             labelGridNormal.SelectedObject = _palette;
@@ -648,7 +650,6 @@ namespace PaletteDesigner
             header1Disabled.SetFixedState(PaletteState.Disabled);
             header1Normal.SetFixedState(PaletteState.Normal);
 
-
             // Labels fixed states
             label1Disabled.SetFixedState(PaletteState.Disabled);
             label1Normal.SetFixedState(PaletteState.Normal);
@@ -665,7 +666,6 @@ namespace PaletteDesigner
             separator1Normal.SetFixedState(PaletteState.Normal, PaletteState.Normal);
             separator1Tracking.SetFixedState(PaletteState.Normal, PaletteState.Tracking);
             separator1Pressed.SetFixedState(PaletteState.Normal, PaletteState.Pressed);
-
 
             // Remove the context menu from the design navigator, we only show this
             // during design time to make it easier to switch around pages for updating
@@ -1027,14 +1027,14 @@ namespace PaletteDesigner
                         "File not found",
                         KryptonMessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName);
+                    _recentlyUsedDocumentsManager.RemoveRecentFile(fileName!);
                 }
                 return;
             }
 
             try
             {
-                _palette.Import(fileName, false);
+                _palette.Import(fileName!, false);
             }
             catch
             {
@@ -1045,7 +1045,7 @@ namespace PaletteDesigner
 
         private void MyOwnRecentPaletteFilesGotCleared_Handler(object sender, EventArgs e)
         {
-
+            // ??
         }
 
         #endregion
