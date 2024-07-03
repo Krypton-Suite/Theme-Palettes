@@ -1,49 +1,66 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>net48;net481;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
-        <OutputType>WinExe</OutputType>
-        <UseWindowsForms>true</UseWindowsForms>
-        <ApplicationIcon>Resources\Krypton.ico</ApplicationIcon>
-        <RootNamespace>PaletteUpgradeTool</RootNamespace>
-        <AssemblyName>Palette Upgrade Tool</AssemblyName>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <LangVersion>preview</LangVersion>
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <AnalysisLevel>latest</AnalysisLevel>
-        <NeutralLanguage>en</NeutralLanguage>
-        <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
-    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net48;net481;net8.0-windows;net9.0-windows</TargetFrameworks>
+		<OutputType>WinExe</OutputType>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationIcon>Resources\Krypton.ico</ApplicationIcon>
+		<RootNamespace>PaletteUpgradeTool</RootNamespace>
+		<AssemblyName>Palette Upgrade Tool</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<LangVersion>preview</LangVersion>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<NeutralLanguage>en</NeutralLanguage>
+		<DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+	</PropertyGroup>
 
-    <Choose>
-        <When Condition="'$(Platform)' == 'Nuget'">
-            <ItemGroup>
-                <PackageReference Include="Krypton.Toolkit.Canary.Lite" Version="6.0.2106" />
-            </ItemGroup>
-        </When>
-        <Otherwise>
-            <ItemGroup>
-                <ProjectReference Include="..\..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj" />
-            </ItemGroup>
-        </Otherwise>
-    </Choose>
+	<Choose>
+		<When Condition="'$(Platform)' == 'Nuget'">
+			<ItemGroup>
+				<PackageReference Include="Krypton.Toolkit.Canary" Version="90.24.6.176-beta" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<ProjectReference Include="..\..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
 
-    <PropertyGroup>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
-    </PropertyGroup>
+	<PropertyGroup>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<PackageIcon>Krypton Icon 128 x 128.png</PackageIcon>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <Compile Update="Properties\Settings.Designer.cs">
-        <DesignTimeSharedInput>True</DesignTimeSharedInput>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Settings.settings</DependentUpon>
-      </Compile>
-    </ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+		<DesignTimeSharedInput>True</DesignTimeSharedInput>
+		<AutoGen>True</AutoGen>
+		<DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 
-    <ItemGroup>
-      <None Update="Properties\Settings.settings">
-        <Generator>SettingsSingleFileGenerator</Generator>
-        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      </None>
-    </ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+		<Generator>SettingsSingleFileGenerator</Generator>
+		<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	  <None Update="Resources\Krypton Icon 128 x 128.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 </Project>

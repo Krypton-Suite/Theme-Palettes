@@ -25,7 +25,7 @@ namespace PaletteUpgradeTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI.PaletteUpgradeTool());
+            Application.Run(new UI.PaletteUpgradeToolOld());
         }
     }
 }
