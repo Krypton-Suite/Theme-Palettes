@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,20 @@ namespace PaletteUpgradeTool
             bsaInputDirectory.Click += InputDirectory_Click;
 
             bsaOutputDirectory.Click += OutputDirectory_Click;
+
+            kcmiOpenInExplorer.Click += OpenInExplorer_Click;
+        }
+
+        private void OpenInExplorer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("explorer.exe", klbFiles.GetItemText(klbFiles.SelectedItem));
+            }
+            catch (Exception exception)
+            {
+                KryptonMessageBox.Show($"{exception.Message}");
+            }
         }
 
         private void OutputDirectory_Click(object sender, EventArgs e)
@@ -41,7 +56,7 @@ namespace PaletteUpgradeTool
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    ktxtInputDirectory.Text = Path.GetFullPath(dialog.SelectedPath);
+                    ktxtInputDirectory.Text = $@"{Path.GetFullPath(dialog.SelectedPath)}\";
                 }
             }
             else
@@ -52,14 +67,37 @@ namespace PaletteUpgradeTool
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    ktxtInputDirectory.Text = Path.GetFullPath(dialog.SelectedPath);
+                    ktxtInputDirectory.Text = $@"{Path.GetFullPath(dialog.SelectedPath)}\";
                 }
             }
+
+            FillListBox();
         }
 
         private void kcmdOutputDirectory_Execute(object sender, EventArgs e)
         {
+            if (kmMain.UseKryptonFileDialogs)
+            {
+                KryptonFolderBrowserDialog dialog = new KryptonFolderBrowserDialog();
 
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ktxtOutputDirectory.Text = $@"{Path.GetFullPath(dialog.SelectedPath)}\Palette Version {GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION}\";
+                }
+            }
+            else
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+                dialog.ShowNewFolderButton = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ktxtOutputDirectory.Text = $@"{Path.GetFullPath(dialog.SelectedPath)}\Palette Version {GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION}\";
+                }
+            }
+
+            kbtnUpgrade.Enabled = true;
         }
 
         private void kbtnOptions_Click(object sender, EventArgs e)
@@ -95,6 +133,17 @@ namespace PaletteUpgradeTool
 
         private void ktxtInputDirectory_TextChanged(object sender, EventArgs e)
         {
+            FillListBox();
+        }
+
+        private void FillListBox()
+        {
+            // Clear list box first
+            if (klbFiles.Items.Count > 0)
+            {
+                klbFiles.Items.Clear();
+            }
+
             if (ktxtInputDirectory.Text.EndsWith("\\"))
             {
                 // Fill listbox
@@ -103,6 +152,11 @@ namespace PaletteUpgradeTool
                     klbFiles.Items.Add(Path.GetFullPath(paletteFile));
                 }
             }
+        }
+
+        private void kbtnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

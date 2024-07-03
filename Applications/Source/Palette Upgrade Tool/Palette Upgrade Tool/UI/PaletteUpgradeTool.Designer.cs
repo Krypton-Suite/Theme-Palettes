@@ -40,16 +40,18 @@
             this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
-            this.ktxtInputDirectory = new Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
-            this.ktxtOutputDirectory = new Krypton.Toolkit.KryptonTextBox();
             this.klbFiles = new Krypton.Toolkit.KryptonListBox();
             this.kmMain = new Krypton.Toolkit.KryptonManager(this.components);
             this.kcmdInputDirectory = new Krypton.Toolkit.KryptonCommand();
             this.kcmdOutputDirectory = new Krypton.Toolkit.KryptonCommand();
             this.kcpbUpgrader = new Krypton.Toolkit.KryptonCustomPaletteBase(this.components);
+            this.ktxtInputDirectory = new Krypton.Toolkit.KryptonTextBox();
             this.bsaInputDirectory = new Krypton.Toolkit.ButtonSpecAny();
+            this.ktxtOutputDirectory = new Krypton.Toolkit.KryptonTextBox();
             this.bsaOutputDirectory = new Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonContextMenu1 = new Krypton.Toolkit.KryptonContextMenu();
+            this.kcmiOpenInExplorer = new Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kpnlTop)).BeginInit();
             this.kpnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,6 +142,7 @@
             this.kbtnCancel.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.kbtnCancel.Values.Text = "Cance&l";
             this.kbtnCancel.Values.UseAsADialogButton = true;
+            this.kbtnCancel.Click += new System.EventHandler(this.kbtnCancel_Click);
             // 
             // kryptonBorderEdge1
             // 
@@ -165,10 +168,10 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.kryptonLabel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ktxtInputDirectory, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.kryptonLabel2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.ktxtOutputDirectory, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.klbFiles, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ktxtInputDirectory, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ktxtOutputDirectory, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -191,43 +194,23 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "Input Directory:";
             // 
-            // ktxtInputDirectory
-            // 
-            this.ktxtInputDirectory.ButtonSpecs.Add(this.bsaInputDirectory);
-            this.ktxtInputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ktxtInputDirectory.Location = new System.Drawing.Point(3, 29);
-            this.ktxtInputDirectory.Name = "ktxtInputDirectory";
-            this.ktxtInputDirectory.ShowEllipsisButton = true;
-            this.ktxtInputDirectory.Size = new System.Drawing.Size(798, 24);
-            this.ktxtInputDirectory.TabIndex = 1;
-            this.ktxtInputDirectory.TextChanged += new System.EventHandler(this.ktxtInputDirectory_TextChanged);
-            // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.BoldPanel;
-            this.kryptonLabel2.Location = new System.Drawing.Point(3, 434);
+            this.kryptonLabel2.Location = new System.Drawing.Point(3, 433);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(798, 20);
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Values.Text = "Output Directory:";
             // 
-            // ktxtOutputDirectory
-            // 
-            this.ktxtOutputDirectory.ButtonSpecs.Add(this.bsaOutputDirectory);
-            this.ktxtOutputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ktxtOutputDirectory.Location = new System.Drawing.Point(3, 460);
-            this.ktxtOutputDirectory.Name = "ktxtOutputDirectory";
-            this.ktxtOutputDirectory.ShowEllipsisButton = true;
-            this.ktxtOutputDirectory.Size = new System.Drawing.Size(798, 24);
-            this.ktxtOutputDirectory.TabIndex = 3;
-            // 
             // klbFiles
             // 
             this.klbFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.klbFiles.Location = new System.Drawing.Point(3, 58);
+            this.klbFiles.KryptonContextMenu = this.kryptonContextMenu1;
+            this.klbFiles.Location = new System.Drawing.Point(3, 59);
             this.klbFiles.Name = "klbFiles";
-            this.klbFiles.Size = new System.Drawing.Size(798, 370);
+            this.klbFiles.Size = new System.Drawing.Size(798, 368);
             this.klbFiles.TabIndex = 4;
             // 
             // kcmdInputDirectory
@@ -246,20 +229,48 @@
             this.kcpbUpgrader.ThemeName = null;
             this.kcpbUpgrader.UseThemeFormChromeBorderWidth = Krypton.Toolkit.InheritBool.True;
             // 
+            // ktxtInputDirectory
+            // 
+            this.ktxtInputDirectory.ButtonSpecs.Add(this.bsaInputDirectory);
+            this.ktxtInputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ktxtInputDirectory.Location = new System.Drawing.Point(3, 29);
+            this.ktxtInputDirectory.Name = "ktxtInputDirectory";
+            this.ktxtInputDirectory.Size = new System.Drawing.Size(798, 24);
+            this.ktxtInputDirectory.TabIndex = 5;
+            // 
             // bsaInputDirectory
             // 
             this.bsaInputDirectory.Text = ".&..";
-            this.bsaInputDirectory.UniqueName = "0d3b0510e4d7448fa99f215406d23080";
+            this.bsaInputDirectory.UniqueName = "da6cc5d6a8ed49088147f9afc8973664";
+            // 
+            // ktxtOutputDirectory
+            // 
+            this.ktxtOutputDirectory.ButtonSpecs.Add(this.bsaOutputDirectory);
+            this.ktxtOutputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ktxtOutputDirectory.Location = new System.Drawing.Point(3, 459);
+            this.ktxtOutputDirectory.Name = "ktxtOutputDirectory";
+            this.ktxtOutputDirectory.Size = new System.Drawing.Size(798, 24);
+            this.ktxtOutputDirectory.TabIndex = 6;
             // 
             // bsaOutputDirectory
             // 
             this.bsaOutputDirectory.Text = ".&..";
-            this.bsaOutputDirectory.UniqueName = "9b8032b948c04f138e197e05f6460e29";
+            this.bsaOutputDirectory.UniqueName = "ef206969f60646f387c04ab2e0d1750a";
+            // 
+            // kryptonContextMenu1
+            // 
+            this.kryptonContextMenu1.Items.AddRange(new Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kcmiOpenInExplorer});
+            // 
+            // kcmiOpenInExplorer
+            // 
+            this.kcmiOpenInExplorer.Text = "Open in &Explorer";
             // 
             // PaletteUpgradeTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.kbtnCancel;
             this.ClientSize = new System.Drawing.Size(804, 650);
             this.Controls.Add(this.kryptonPanel2);
             this.Controls.Add(this.kryptonBorderEdge1);
@@ -301,11 +312,13 @@
         private Krypton.Toolkit.KryptonCustomPaletteBase kcpbUpgrader;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private Krypton.Toolkit.KryptonTextBox ktxtInputDirectory;
         private Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private Krypton.Toolkit.KryptonTextBox ktxtOutputDirectory;
         private Krypton.Toolkit.KryptonListBox klbFiles;
+        private Krypton.Toolkit.KryptonTextBox ktxtInputDirectory;
         private Krypton.Toolkit.ButtonSpecAny bsaInputDirectory;
+        private Krypton.Toolkit.KryptonTextBox ktxtOutputDirectory;
         private Krypton.Toolkit.ButtonSpecAny bsaOutputDirectory;
+        private Krypton.Toolkit.KryptonContextMenu kryptonContextMenu1;
+        private Krypton.Toolkit.KryptonContextMenuItem kcmiOpenInExplorer;
     }
 }
