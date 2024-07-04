@@ -61,22 +61,22 @@ namespace PaletteUpgradeTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static byte[] Krypton {
+        internal static System.Drawing.Icon Krypton {
             get {
                 object obj = ResourceManager.GetObject("Krypton", resourceCulture);
-                return ((byte[])(obj));
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] Krypton_Icon_128_x_128 {
+        internal static System.Drawing.Bitmap Krypton_Icon_128_x_128 {
             get {
-                object obj = ResourceManager.GetObject("Krypton Icon 128 x 128", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("Krypton_Icon_128_x_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -85,7 +85,7 @@ namespace PaletteUpgradeTool.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap Krypton_Icon_64_x_64 {
             get {
-                object obj = ResourceManager.GetObject("Krypton Icon 64 x 64", resourceCulture);
+                object obj = ResourceManager.GetObject("Krypton_Icon_64_x_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

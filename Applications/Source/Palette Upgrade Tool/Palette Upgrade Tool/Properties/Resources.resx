@@ -119,7 +119,13 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Krypton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>C:\Users\Peter William Wagner\Desktop\Krypton.ico;System.Byte[]</value>
+    <value>..\Resources\Krypton.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Krypton_Icon_128_x_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Krypton Icon 128 x 128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Krypton_Icon_64_x_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Krypton Icon 64 x 64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="v2to6" xml:space="preserve">
     <value>&lt;?xml version="1.0"?&gt;
@@ -156,12 +162,6 @@
     &lt;/xsl:copy&gt;
   &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;</value>
-  </data>
-  <data name="Krypton Icon 128 x 128" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>C:\Users\Peter William Wagner\Desktop\Krypton Icon 128 x 128.png;System.Byte[]</value>
-  </data>
-  <data name="Krypton Icon 64 x 64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>C:\Users\Peter William Wagner\Desktop\Krypton Icon 64 x 64.png;System.Byte[]</value>
   </data>
   <data name="v6to19" xml:space="preserve">
     <value>&lt;?xml version="1.0"?&gt;
@@ -215,8 +215,5 @@
   &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;</value>
     <comment>Make sure to duplictae from / in the `KryptonCustomPaletteBase` code base</comment>
-  </data>
-  <data name="Krypton Icon 64 x 64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Krypton Icon 64 x 64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

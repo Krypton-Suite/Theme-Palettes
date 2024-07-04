@@ -1,30 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Krypton.Toolkit;
-using PaletteUpgradeTool.Properties;
 
 namespace PaletteUpgradeTool
 {
-    public partial class PaletteUpgradeTool : KryptonForm
+    public partial class PaletteUpgradeToolTest : KryptonForm
     {
-        public PaletteUpgradeTool()
+        public PaletteUpgradeToolTest()
         {
             InitializeComponent();
 
-            Icon = Resources.Krypton;
+            bsaInputDirectory.Click += InputDirectory_Click;
+
+            bsaOutputDirectory.Click += OutputDirectory_Click;
+
+            kcmiOpenInExplorer.Click += OpenInExplorer_Click;
         }
 
-        private void kbtnOptions_Click(object sender, EventArgs e)
+        private void OpenInExplorer_Click(object sender, EventArgs e)
         {
-            var options = new PaletteUpgradeToolOptions();
-
-            options.ShowDialog();
+            try
+            {
+                Process.Start("explorer.exe", klbFiles.GetItemText(klbFiles.SelectedItem));
+            }
+            catch (Exception exception)
+            {
+                KryptonMessageBox.Show($"{exception.Message}");
+            }
         }
 
-        private void bsaBrowseInputDirectory_Click(object sender, EventArgs e)
+        private void OutputDirectory_Click(object sender, EventArgs e)
         {
-            if (kryptonManager1.UseKryptonFileDialogs)
+            kcmdOutputDirectory.PerformExecute();
+        }
+
+        private void InputDirectory_Click(object sender, EventArgs e)
+        {
+            kcmdInputDirectory.PerformExecute();
+        }
+
+        private void kcmdInputDirectory_Execute(object sender, EventArgs e)
+        {
+            if (kmMain.UseKryptonFileDialogs)
             {
                 KryptonFolderBrowserDialog dialog = new KryptonFolderBrowserDialog();
 
@@ -48,9 +74,9 @@ namespace PaletteUpgradeTool
             FillListBox();
         }
 
-        private void bsaBrowseOutputDirectory_Click(object sender, EventArgs e)
+        private void kcmdOutputDirectory_Execute(object sender, EventArgs e)
         {
-            if (kryptonManager1.UseKryptonFileDialogs)
+            if (kmMain.UseKryptonFileDialogs)
             {
                 KryptonFolderBrowserDialog dialog = new KryptonFolderBrowserDialog();
 
@@ -74,21 +100,25 @@ namespace PaletteUpgradeTool
             kbtnUpgrade.Enabled = true;
         }
 
-        private void kbtnCancel_Click(object sender, EventArgs e)
+        private void kbtnOptions_Click(object sender, EventArgs e)
         {
-            Close();
+
         }
 
         private void kbtnUpgrade_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-                UpgradePalettes(ktxtInputDirectory.Text, ktxtOutputDirectory.Text);
-            //}
-            //catch (Exception exception)
-            //{
-            //    KryptonMessageBox.Show($"{exception}");
-            //}
+            // Validate output path to check if it exists
+            ValidateOutputPath(ktxtOutputDirectory.Text);
+
+            // Loop through the file array
+            foreach (var paletteFile in GetPaletteFiles(ktxtInputDirectory.Text))
+            {
+                // Upgrade the file and store it into the newly created directory
+                kcpbUpgrader.ImportWithUpgrade(File.OpenRead(Path.GetFullPath(paletteFile)));
+
+                // Export the file
+                kcpbUpgrader.Export(File.OpenWrite($"{ktxtOutputDirectory}\\{paletteFile}.xml"), false);
+            }
         }
 
         private void ValidateOutputPath(string path)
@@ -124,20 +154,9 @@ namespace PaletteUpgradeTool
             }
         }
 
-        private void UpgradePalettes(string inputPath, string outputPath)
+        private void kbtnCancel_Click(object sender, EventArgs e)
         {
-            // Validate output path to check if it exists
-            ValidateOutputPath(outputPath);
-
-            // Loop through the file array
-            foreach (var paletteFile in GetPaletteFiles(inputPath))
-            {
-                // Upgrade the file and store it into the newly created directory
-                kcpbUpgrader.ImportWithUpgrade(File.OpenRead(Path.GetFullPath(paletteFile)));
-
-                // Export the file
-                kcpbUpgrader.Export(File.OpenWrite($"{outputPath}\\{paletteFile}.xml"), false);
-            }
+            Close();
         }
     }
 }
