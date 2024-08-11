@@ -56,7 +56,7 @@ namespace PaletteUpgradeTool
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    ktxtOutputDirectory.Text = $@"{Path.GetFullPath(dialog.SelectedPath)}\Palette Version {GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION}\";
+                    ktxtOutputDirectory.Text = $"{Path.GetFullPath(dialog.SelectedPath)}\\Palette Version {GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION}\\";
                 }
             }
             else
@@ -132,11 +132,16 @@ namespace PaletteUpgradeTool
             // Loop through the file array
             foreach (var paletteFile in GetPaletteFiles(inputPath))
             {
+                // Set a temporary file name
+                string tempFileName = Path.GetFileName(paletteFile);
+
                 // Upgrade the file and store it into the newly created directory
                 kcpbUpgrader.ImportWithUpgrade(File.OpenRead(Path.GetFullPath(paletteFile)));
 
                 // Export the file
-                kcpbUpgrader.Export(File.OpenWrite($"{outputPath}\\{paletteFile}.xml"), false);
+                kcpbUpgrader.Export(File.OpenWrite($"{outputPath}\\{tempFileName}"), false);
+
+                tempFileName = string.Empty;
             }
         }
     }
