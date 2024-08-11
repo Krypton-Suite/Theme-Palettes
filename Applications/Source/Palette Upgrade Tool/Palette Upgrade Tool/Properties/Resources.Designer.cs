@@ -19,7 +19,7 @@ namespace PaletteUpgradeTool.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -73,9 +73,9 @@ namespace PaletteUpgradeTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Square_Design_128_x_128_New_Green {
+        internal static System.Drawing.Bitmap Krypton_Icon_128_x_128 {
             get {
-                object obj = ResourceManager.GetObject("Square_Design_128_x_128_New_Green", resourceCulture);
+                object obj = ResourceManager.GetObject("Krypton_Icon_128_x_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace PaletteUpgradeTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Square_Design_64_x_64_New_Green {
+        internal static System.Drawing.Bitmap Krypton_Icon_64_x_64 {
             get {
-                object obj = ResourceManager.GetObject("Square_Design_64_x_64_New_Green", resourceCulture);
+                object obj = ResourceManager.GetObject("Krypton_Icon_64_x_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,11 +95,10 @@ namespace PaletteUpgradeTool.Properties {
         ///&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;1.0&quot;&gt;
         ///  &lt;xsl:template match=&quot;KryptonPalette&quot;&gt;
         ///    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
-        ///    &lt;xsl:comment&gt;For more information about Krypton visit www.ComponentFactory.com&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
         ///    &lt;KryptonPalette Version=&quot;6&quot;&gt;
-        ///      &lt;xsl:attribute name=&quot;Generated&quot;&gt;
-        ///  [rest of string was truncated]&quot;;.
+        ///      &lt;xsl:attri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string v2to6 {
             get {
@@ -112,11 +111,10 @@ namespace PaletteUpgradeTool.Properties {
         ///&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;1.0&quot;&gt;
         ///  &lt;xsl:template match=&quot;KryptonPalette&quot;&gt;
         ///    &lt;xsl:comment&gt;Created by exporting the settings of a KryptonPalette instance.&lt;/xsl:comment&gt;
-        ///    &lt;xsl:comment&gt;For more information about Krypton visit www.ComponentFactory.com&lt;/xsl:comment&gt;
+        ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
         ///    &lt;KryptonPalette Version=&quot;19&quot;&gt;
-        ///      &lt;xsl:attribute name=&quot;Generated&quot;&gt;
-        /// [rest of string was truncated]&quot;;.
+        ///      &lt;xsl:attr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string v6to19 {
             get {

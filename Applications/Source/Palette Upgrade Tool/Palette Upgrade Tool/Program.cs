@@ -10,9 +10,6 @@
  */
 #endregion
 
-using System;
-using System.Windows.Forms;
-
 namespace PaletteUpgradeTool
 {
     static class Program
@@ -25,7 +22,7 @@ namespace PaletteUpgradeTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI.PaletteUpgradeTool());
+            Application.Run(new UI.PaletteUpgradeToolOld());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PaletteUpgradeTool.UI
+﻿namespace PaletteUpgradeTool
 {
     partial class PaletteUpgradeTool
     {
@@ -29,236 +29,284 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaletteUpgradeTool));
-            this.kpnlBackground = new Krypton.Toolkit.KryptonPanel();
-            this.klblStatus = new Krypton.Toolkit.KryptonLabel();
-            this.kbtnClose = new Krypton.Toolkit.KryptonButton();
-            this.kbtnUpgrade = new Krypton.Toolkit.KryptonButton();
-            this.krtbOutput = new Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonLabel3 = new Krypton.Toolkit.KryptonLabel();
-            this.kbtnBrowse = new Krypton.Toolkit.KryptonButton();
-            this.krtbInput = new Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
+            this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonPictureBox1 = new Krypton.Toolkit.KryptonPictureBox();
+            this.kryptonWrapLabel1 = new Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonManager1 = new Krypton.Toolkit.KryptonManager(this.components);
+            this.kryptonCommand1 = new Krypton.Toolkit.KryptonCommand();
+            this.kryptonCommand2 = new Krypton.Toolkit.KryptonCommand();
+            this.kryptonContextMenu1 = new Krypton.Toolkit.KryptonContextMenu();
+            this.kcpbUpgrader = new Krypton.Toolkit.KryptonCustomPaletteBase(this.components);
+            this.kryptonBorderEdge1 = new Krypton.Toolkit.KryptonBorderEdge();
+            this.kryptonPanel3 = new Krypton.Toolkit.KryptonPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
-            this.tmrDetectModification = new System.Windows.Forms.Timer(this.components);
-            this.kpnlTop = new Krypton.Toolkit.KryptonPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.kMan = new Krypton.Toolkit.KryptonManager(this.components);
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.kpnlBackground)).BeginInit();
-            this.kpnlBackground.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnlTop)).BeginInit();
-            this.kpnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.ktxtInputDirectory = new Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
+            this.ktxtOutputDirectory = new Krypton.Toolkit.KryptonTextBox();
+            this.klbFiles = new Krypton.Toolkit.KryptonListBox();
+            this.kbtnOptions = new Krypton.Toolkit.KryptonButton();
+            this.kbtnCancel = new Krypton.Toolkit.KryptonButton();
+            this.kbtnUpgrade = new Krypton.Toolkit.KryptonButton();
+            this.bsaBrowseInputDirectory = new Krypton.Toolkit.ButtonSpecAny();
+            this.bsaBrowseOutputDirectory = new Krypton.Toolkit.ButtonSpecAny();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
+            this.kryptonPanel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kpnlBackground
+            // kryptonPanel1
             // 
-            this.kpnlBackground.Controls.Add(this.klblStatus);
-            this.kpnlBackground.Controls.Add(this.kbtnClose);
-            this.kpnlBackground.Controls.Add(this.kbtnUpgrade);
-            this.kpnlBackground.Controls.Add(this.krtbOutput);
-            this.kpnlBackground.Controls.Add(this.kryptonLabel3);
-            this.kpnlBackground.Controls.Add(this.kbtnBrowse);
-            this.kpnlBackground.Controls.Add(this.krtbInput);
-            this.kpnlBackground.Controls.Add(this.kryptonLabel2);
-            this.kpnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kpnlBackground.Location = new System.Drawing.Point(0, 139);
-            this.kpnlBackground.Margin = new System.Windows.Forms.Padding(4);
-            this.kpnlBackground.Name = "kpnlBackground";
-            this.kpnlBackground.Size = new System.Drawing.Size(1067, 412);
-            this.kpnlBackground.TabIndex = 0;
+            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel1);
+            this.kryptonPanel1.Controls.Add(this.kryptonPictureBox1);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlCustom1;
+            this.kryptonPanel1.Size = new System.Drawing.Size(800, 113);
+            this.kryptonPanel1.TabIndex = 0;
             // 
-            // klblStatus
+            // kryptonPictureBox1
             // 
-            this.klblStatus.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            this.klblStatus.Location = new System.Drawing.Point(16, 359);
-            this.klblStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.klblStatus.Name = "klblStatus";
-            this.klblStatus.Size = new System.Drawing.Size(410, 37);
-            this.klblStatus.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
-            this.klblStatus.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.klblStatus.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.klblStatus.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.klblStatus.TabIndex = 11;
-            this.klblStatus.Values.Text = "You must specify a valid input file.";
+            this.kryptonPictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonPictureBox1.Image = global::PaletteUpgradeTool.Properties.Resources.Krypton_Icon_64_x_64;
+            this.kryptonPictureBox1.Location = new System.Drawing.Point(700, 0);
+            this.kryptonPictureBox1.Name = "kryptonPictureBox1";
+            this.kryptonPictureBox1.Size = new System.Drawing.Size(100, 113);
+            this.kryptonPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.kryptonPictureBox1.TabIndex = 0;
+            this.kryptonPictureBox1.TabStop = false;
             // 
-            // kbtnClose
+            // kryptonWrapLabel1
             // 
-            this.kbtnClose.Location = new System.Drawing.Point(931, 366);
-            this.kbtnClose.Margin = new System.Windows.Forms.Padding(4);
-            this.kbtnClose.Name = "kbtnClose";
-            this.kbtnClose.Size = new System.Drawing.Size(120, 31);
-            this.kbtnClose.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kbtnClose.StateCommon.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kbtnClose.StateCommon.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kbtnClose.TabIndex = 10;
-            this.kbtnClose.Values.Text = "C&lose";
-            this.kbtnClose.Click += new System.EventHandler(this.kbtnClose_Click);
+            this.kryptonWrapLabel1.AutoSize = false;
+            this.kryptonWrapLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 13.5F, System.Drawing.FontStyle.Bold);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
+            this.kryptonWrapLabel1.Padding = new System.Windows.Forms.Padding(5);
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(700, 113);
+            this.kryptonWrapLabel1.Text = "Palette Upgrade Tool (Beta) β";
+            this.kryptonWrapLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.kryptonWrapLabel1.UseCompatibleTextRendering = true;
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Controls.Add(this.kbtnUpgrade);
+            this.kryptonPanel2.Controls.Add(this.kbtnCancel);
+            this.kryptonPanel2.Controls.Add(this.kbtnOptions);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonPanel2.Location = new System.Drawing.Point(0, 610);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
+            this.kryptonPanel2.Size = new System.Drawing.Size(800, 50);
+            this.kryptonPanel2.TabIndex = 1;
+            // 
+            // kryptonCommand1
+            // 
+            this.kryptonCommand1.Text = "kryptonCommand1";
+            // 
+            // kryptonCommand2
+            // 
+            this.kryptonCommand2.Text = "kryptonCommand2";
+            // 
+            // kcpbUpgrader
+            // 
+            this.kcpbUpgrader.BasePaletteType = Krypton.Toolkit.BasePaletteType.Custom;
+            this.kcpbUpgrader.ThemeName = null;
+            this.kcpbUpgrader.UseThemeFormChromeBorderWidth = Krypton.Toolkit.InheritBool.True;
+            // 
+            // kryptonBorderEdge1
+            // 
+            this.kryptonBorderEdge1.BorderStyle = Krypton.Toolkit.PaletteBorderStyle.HeaderPrimary;
+            this.kryptonBorderEdge1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonBorderEdge1.Location = new System.Drawing.Point(0, 609);
+            this.kryptonBorderEdge1.Name = "kryptonBorderEdge1";
+            this.kryptonBorderEdge1.Size = new System.Drawing.Size(800, 1);
+            this.kryptonBorderEdge1.Text = "kryptonBorderEdge1";
+            // 
+            // kryptonPanel3
+            // 
+            this.kryptonPanel3.Controls.Add(this.tableLayoutPanel1);
+            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 113);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Size = new System.Drawing.Size(800, 496);
+            this.kryptonPanel3.TabIndex = 3;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.kryptonLabel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ktxtInputDirectory, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.kryptonLabel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ktxtOutputDirectory, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.klbFiles, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 496);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.BoldPanel;
+            this.kryptonLabel1.Location = new System.Drawing.Point(3, 3);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(794, 20);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Input Directory:";
+            // 
+            // ktxtInputDirectory
+            // 
+            this.ktxtInputDirectory.ButtonSpecs.Add(this.bsaBrowseInputDirectory);
+            this.ktxtInputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ktxtInputDirectory.Location = new System.Drawing.Point(3, 29);
+            this.ktxtInputDirectory.Name = "ktxtInputDirectory";
+            this.ktxtInputDirectory.Size = new System.Drawing.Size(794, 24);
+            this.ktxtInputDirectory.TabIndex = 1;
+            this.ktxtInputDirectory.Text = "kryptonTextBox1";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.BoldPanel;
+            this.kryptonLabel2.Location = new System.Drawing.Point(3, 444);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(794, 20);
+            this.kryptonLabel2.TabIndex = 2;
+            this.kryptonLabel2.Values.Text = "Output Directory:";
+            // 
+            // ktxtOutputDirectory
+            // 
+            this.ktxtOutputDirectory.ButtonSpecs.Add(this.bsaBrowseOutputDirectory);
+            this.ktxtOutputDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ktxtOutputDirectory.Location = new System.Drawing.Point(3, 470);
+            this.ktxtOutputDirectory.Name = "ktxtOutputDirectory";
+            this.ktxtOutputDirectory.Size = new System.Drawing.Size(794, 24);
+            this.ktxtOutputDirectory.TabIndex = 3;
+            this.ktxtOutputDirectory.Text = "kryptonTextBox2";
+            // 
+            // klbFiles
+            // 
+            this.klbFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.klbFiles.Location = new System.Drawing.Point(3, 58);
+            this.klbFiles.Name = "klbFiles";
+            this.klbFiles.Size = new System.Drawing.Size(794, 380);
+            this.klbFiles.TabIndex = 4;
+            // 
+            // kbtnOptions
+            // 
+            this.kbtnOptions.Location = new System.Drawing.Point(12, 13);
+            this.kbtnOptions.Name = "kbtnOptions";
+            this.kbtnOptions.Size = new System.Drawing.Size(90, 25);
+            this.kbtnOptions.TabIndex = 0;
+            this.kbtnOptions.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.kbtnOptions.Values.Text = "O&ptions";
+            this.kbtnOptions.Click += new System.EventHandler(this.kbtnOptions_Click);
+            // 
+            // kbtnCancel
+            // 
+            this.kbtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.kbtnCancel.Location = new System.Drawing.Point(698, 13);
+            this.kbtnCancel.Name = "kbtnCancel";
+            this.kbtnCancel.Size = new System.Drawing.Size(90, 25);
+            this.kbtnCancel.TabIndex = 1;
+            this.kbtnCancel.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.kbtnCancel.Values.Text = "Cance&l";
+            this.kbtnCancel.Values.UseAsADialogButton = true;
+            this.kbtnCancel.Click += new System.EventHandler(this.kbtnCancel_Click);
             // 
             // kbtnUpgrade
             // 
             this.kbtnUpgrade.Enabled = false;
-            this.kbtnUpgrade.Location = new System.Drawing.Point(931, 235);
-            this.kbtnUpgrade.Margin = new System.Windows.Forms.Padding(4);
+            this.kbtnUpgrade.Location = new System.Drawing.Point(602, 13);
             this.kbtnUpgrade.Name = "kbtnUpgrade";
-            this.kbtnUpgrade.Size = new System.Drawing.Size(120, 31);
-            this.kbtnUpgrade.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kbtnUpgrade.StateCommon.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kbtnUpgrade.StateCommon.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kbtnUpgrade.TabIndex = 7;
+            this.kbtnUpgrade.Size = new System.Drawing.Size(90, 25);
+            this.kbtnUpgrade.TabIndex = 2;
+            this.kbtnUpgrade.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.kbtnUpgrade.Values.Text = "&Upgrade";
             this.kbtnUpgrade.Click += new System.EventHandler(this.kbtnUpgrade_Click);
             // 
-            // krtbOutput
+            // bsaBrowseInputDirectory
             // 
-            this.krtbOutput.Location = new System.Drawing.Point(16, 224);
-            this.krtbOutput.Margin = new System.Windows.Forms.Padding(4);
-            this.krtbOutput.Name = "krtbOutput";
-            this.krtbOutput.Size = new System.Drawing.Size(905, 118);
-            this.krtbOutput.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.krtbOutput.TabIndex = 6;
-            this.krtbOutput.Text = "";
-            this.krtbOutput.TextChanged += new System.EventHandler(this.krtbOutput_TextChanged);
+            this.bsaBrowseInputDirectory.Text = ".&..";
+            this.bsaBrowseInputDirectory.UniqueName = "c205ee999e4247bcbfe0a548e67162bb";
+            this.bsaBrowseInputDirectory.Click += new System.EventHandler(this.bsaBrowseInputDirectory_Click);
             // 
-            // kryptonLabel3
+            // bsaBrowseOutputDirectory
             // 
-            this.kryptonLabel3.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            this.kryptonLabel3.Location = new System.Drawing.Point(16, 185);
-            this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(195, 32);
-            this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel3.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kryptonLabel3.TabIndex = 5;
-            this.kryptonLabel3.Values.Text = "Output Palette File";
-            // 
-            // kbtnBrowse
-            // 
-            this.kbtnBrowse.Location = new System.Drawing.Point(931, 103);
-            this.kbtnBrowse.Margin = new System.Windows.Forms.Padding(4);
-            this.kbtnBrowse.Name = "kbtnBrowse";
-            this.kbtnBrowse.Size = new System.Drawing.Size(120, 31);
-            this.kbtnBrowse.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kbtnBrowse.StateCommon.Content.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kbtnBrowse.StateCommon.Content.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kbtnBrowse.TabIndex = 4;
-            this.kbtnBrowse.Values.Text = "&Browse";
-            this.kbtnBrowse.Click += new System.EventHandler(this.kbtnBrowse_Click);
-            // 
-            // krtbInput
-            // 
-            this.krtbInput.Location = new System.Drawing.Point(16, 59);
-            this.krtbInput.Margin = new System.Windows.Forms.Padding(4);
-            this.krtbInput.Name = "krtbInput";
-            this.krtbInput.ReadOnly = true;
-            this.krtbInput.Size = new System.Drawing.Size(905, 118);
-            this.krtbInput.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.krtbInput.TabIndex = 3;
-            this.krtbInput.Text = "";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            this.kryptonLabel2.Location = new System.Drawing.Point(16, 20);
-            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(178, 32);
-            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kryptonLabel2.TabIndex = 2;
-            this.kryptonLabel2.Values.Text = "Input Palette File";
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            this.kryptonLabel1.Location = new System.Drawing.Point(16, 81);
-            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(259, 37);
-            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.kryptonLabel1.TabIndex = 1;
-            this.kryptonLabel1.Values.Text = "Palette Upgrade Tool";
-            // 
-            // tmrDetectModification
-            // 
-            this.tmrDetectModification.Enabled = true;
-            this.tmrDetectModification.Interval = 250;
-            // 
-            // kpnlTop
-            // 
-            this.kpnlTop.Controls.Add(this.pictureBox1);
-            this.kpnlTop.Controls.Add(this.kryptonLabel1);
-            this.kpnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kpnlTop.Location = new System.Drawing.Point(0, 0);
-            this.kpnlTop.Margin = new System.Windows.Forms.Padding(4);
-            this.kpnlTop.Name = "kpnlTop";
-            this.kpnlTop.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlCustom1;
-            this.kpnlTop.Size = new System.Drawing.Size(1067, 139);
-            this.kpnlTop.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::PaletteUpgradeTool.Properties.Resources.Square_Design_64_x_64_New_Green;
-            this.pictureBox1.Location = new System.Drawing.Point(920, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(147, 139);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.bsaBrowseOutputDirectory.Text = ".&..";
+            this.bsaBrowseOutputDirectory.UniqueName = "1c9813f6c04040889c4bd1bdc08cd88c";
+            this.bsaBrowseOutputDirectory.Click += new System.EventHandler(this.bsaBrowseOutputDirectory_Click);
             // 
             // PaletteUpgradeTool
             // 
-            this.AcceptButton = this.kbtnClose;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 551);
-            this.Controls.Add(this.kpnlBackground);
-            this.Controls.Add(this.kpnlTop);
+            this.ClientSize = new System.Drawing.Size(800, 660);
+            this.Controls.Add(this.kryptonPanel3);
+            this.Controls.Add(this.kryptonBorderEdge1);
+            this.Controls.Add(this.kryptonPanel2);
+            this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PaletteUpgradeTool";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Palette Upgrade Tool";
-            ((System.ComponentModel.ISupportInitialize)(this.kpnlBackground)).EndInit();
-            this.kpnlBackground.ResumeLayout(false);
-            this.kpnlBackground.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnlTop)).EndInit();
-            this.kpnlTop.ResumeLayout(false);
-            this.kpnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "Palette Upgrade Tool (Beta) β";
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
+            this.kryptonPanel3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Krypton.Toolkit.KryptonPanel kpnlBackground;
-        private Krypton.Toolkit.KryptonButton kbtnUpgrade;
-        private Krypton.Toolkit.KryptonRichTextBox krtbOutput;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private Krypton.Toolkit.KryptonButton kbtnBrowse;
-        private Krypton.Toolkit.KryptonRichTextBox krtbInput;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private Krypton.Toolkit.KryptonPictureBox kryptonPictureBox1;
+        private Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
+        private Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private Krypton.Toolkit.KryptonManager kryptonManager1;
+        private Krypton.Toolkit.KryptonCommand kryptonCommand1;
+        private Krypton.Toolkit.KryptonCommand kryptonCommand2;
+        private Krypton.Toolkit.KryptonContextMenu kryptonContextMenu1;
+        private Krypton.Toolkit.KryptonCustomPaletteBase kcpbUpgrader;
+        private Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge1;
+        private Krypton.Toolkit.KryptonPanel kryptonPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private Krypton.Toolkit.KryptonButton kbtnClose;
-        private System.Windows.Forms.Timer tmrDetectModification;
-        private Krypton.Toolkit.KryptonLabel klblStatus;
-        private Krypton.Toolkit.KryptonPanel kpnlTop;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private Krypton.Toolkit.KryptonManager kMan;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Timer timer1;
+        private Krypton.Toolkit.KryptonTextBox ktxtInputDirectory;
+        private Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private Krypton.Toolkit.KryptonTextBox ktxtOutputDirectory;
+        private Krypton.Toolkit.KryptonListBox klbFiles;
+        private Krypton.Toolkit.KryptonButton kbtnOptions;
+        private Krypton.Toolkit.KryptonButton kbtnCancel;
+        private Krypton.Toolkit.KryptonButton kbtnUpgrade;
+        private Krypton.Toolkit.ButtonSpecAny bsaBrowseInputDirectory;
+        private Krypton.Toolkit.ButtonSpecAny bsaBrowseOutputDirectory;
     }
 }
