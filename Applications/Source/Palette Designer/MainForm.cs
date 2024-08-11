@@ -513,7 +513,7 @@ namespace PaletteDesigner
 
             dataGridViewDisabled.Palette = _palette;
             dataGridViewNormal.Palette = _palette;
-            kryptonListView1.Palette = _palette;
+            //kryptonListView1.Palette = _palette;
 
             inputControls1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
