@@ -10,17 +10,10 @@
  */
 #endregion
 
-using System;
 using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-
-using Krypton.Toolkit;
-
-using PaletteUpgradeTool.Properties;
 
 namespace PaletteUpgradeTool.UI
 {

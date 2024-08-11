@@ -10,9 +10,6 @@
  */
 #endregion
 
-using System;
-using System.Windows.Forms;
-
 namespace PaletteUpgradeTool
 {
     static class Program
