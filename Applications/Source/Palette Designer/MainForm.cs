@@ -43,215 +43,195 @@ namespace PaletteDesigner
 
             _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
 
-            _applyPalettesToBases = new List<VisualControlBase>(new VisualControlBase[]
-            {
-            buttonSpecT1,
-            buttonSpecT2,
-            buttonSpecT3,
-            buttonSpecT4,
-            buttonSpecG1,
-            buttonSpecG2,
-            buttonSpecG3,
-            buttonSpecG4,
-            buttonDisabled,
-            buttonDefaultFocus,
-            buttonNormal,
-            buttonTracking,
-            buttonPressed,
-            buttonCheckedNormal,
-            buttonCheckedTracking,
-            buttonCheckedPressed,
-            buttonLive,
-            control1Disabled,
-            control1Normal,
-            headerGroup1Disabled,
-            headerGroup1Normal,
-            header1Disabled,
-            header1Normal,
-            cbLive,
-            cbFocus,
-            cbUncheckedDisabled,
-            cbUncheckedNormal,
-            cbUncheckedTracking,
-            cbUncheckedPressed,
-            cbCheckedDisabled,
-            cbCheckedNormal,
-            cbCheckedTracking,
-            cbCheckedPressed,
-            cbIndeterminateDisabled,
-            cbIndeterminateNormal,
-            cbIndeterminateTracking,
-            cbIndeterminatePressed,
-            rbFocus,
-            rbLive1,
-            rbLive2,
-            rbCheckedNormal,
-            rbCheckedTracking,
-            rbCheckedPressed,
-            rbUncheckedDisabled,
-            rbUncheckedNormal,
-            rbUncheckedTracking,
-            rbUncheckedPressed,
-            label1Disabled,
-            label1Normal,
-            label1Visited,
-            label1NotVisited,
-            label1Pressed,
-            label1Live,
-            kryptonNavigatorTabs,
-            kryptonNavigator,
-            kryptonGroupBox1,
-            kryptonGroupBox2,
-            kryptonGroupBox3,
-            separator1Disabled,
-            separator1Normal,
-            separator1Tracking,
-            separator1Pressed,
-            separator1Live,
-            monthCalendarEnabled,
-            monthCalendarDisabled,
-            kryptonListBox1
-            }
-            );
-
-
-            _applyPalettesToPanels = new List<KryptonPanel>(new[]
+            _applyPalettesToBases =
+            [
+                ..new VisualControlBase[]
                 {
-            panel1Disabled,
-            panel1Normal,
-            panelLabelsBackground,
-            borderDesignSeparators,
-            borderDesignLabels,
-            borderDesignHeaders,
-            borderDesignPanels,
-            borderDesignButtons,
-            borderDesignControls,
-            borderDesignNavigator,
-            borderDesignTabs,
-            panelLabelsBackground,
-            kryptonPanelMainFill
+                    buttonSpecT1,
+                    buttonSpecT2,
+                    buttonSpecT3,
+                    buttonSpecT4,
+                    buttonSpecG1,
+                    buttonSpecG2,
+                    buttonSpecG3,
+                    buttonSpecG4,
+                    control1Disabled,
+                    control1Normal,
+                    headerGroup1Disabled,
+                    headerGroup1Normal,
+                    header1Disabled,
+                    header1Normal,
+                    cbLive,
+                    cbFocus,
+                    cbUncheckedDisabled,
+                    cbUncheckedNormal,
+                    cbUncheckedTracking,
+                    cbUncheckedPressed,
+                    cbCheckedDisabled,
+                    cbCheckedNormal,
+                    cbCheckedTracking,
+                    cbCheckedPressed,
+                    cbIndeterminateDisabled,
+                    cbIndeterminateNormal,
+                    cbIndeterminateTracking,
+                    cbIndeterminatePressed,
+                    rbFocus,
+                    rbLive1,
+                    rbLive2,
+                    rbCheckedNormal,
+                    rbCheckedTracking,
+                    rbCheckedPressed,
+                    rbUncheckedDisabled,
+                    rbUncheckedNormal,
+                    rbUncheckedTracking,
+                    rbUncheckedPressed,
+                    label1Disabled,
+                    label1Normal,
+                    label1Visited,
+                    label1NotVisited,
+                    label1Pressed,
+                    label1Live,
+                    kryptonNavigatorTabs,
+                    kryptonNavigator,
+                    kryptonGroupBox1,
+                    kryptonGroupBox2,
+                    kryptonGroupBox3,
+                    separator1Disabled,
+                    separator1Normal,
+                    separator1Tracking,
+                    separator1Pressed,
+                    separator1Live,
+                    monthCalendarEnabled,
+                    monthCalendarDisabled,
+                    kryptonListBox1
                 }
-            );
 
-            _applyPalettesToPages = new List<KryptonPage>(new[]
-            {
-        pageTopButtonSpecs,
-        pageTopButtons,
-        pageTopControls,
-        pageTopHeaderGroup,
-        pageTopHeaders,
-        pageTopLabels,
-        pageTopNavigator,
-        pageTopPanels,
-        pageTopSeparators,
-        pageTopChromeTMS,
-        pageDesignButtonSpecs,
-        pageDesignButtons,
-        pageDesignControls,
-        pageDesignHeaderGroup,
-        pageDesignHeaders,
-        pageDesignLabels,
-        pageDesignNavigator,
-        pageDesignPanels,
-        pageDesignSeparators,
-        pageDesignChromeTMS,
-        pageButtonsStandalone,
-        pageButtonsLowProfile,
-        pageButtonsButtonSpec,
-        pageButtonsCustom1,
-        pageButtonsCustom2,
-        pageButtonsCustom3,
-        pageControlsClient,
-        pageControlsAlternate,
-        pageControlsCustom1,
-        pagePanelsClient,
-        pagePanelsAlternate,
-        pagePanelsCustom1,
-        pageHeadersPrimary,
-        pageHeadersSecondary,
-        pageHeadersCustom1,
-        pageHeadersCustom2,
-        pageLabelsNormalControl,
-        pageLabelsTitleControl,
-        pageLabelsCustom1,
-        pageLabelsCustom2,
-        pageLabelsCustom3,
-        pageSeparatorLowProfile,
-        pageSeparatorHighProfile,
-        pageSeparatorCustom1,
-        navigatorPage1,
-        navigatorPage2,
-        pageNavigatorBarCheckButtonGroupOutside,
-        pageNavigatorBarCheckButtonGroupInside,
-        pageNavigatorBarCheckButtonGroupOnly,
-        navigatorPage3,
-        pageTopTabs,
-        pageDesignTabs,
-        pageTabHighProfile,
-        pageTabStandardProfile,
-        pageTabLowProfile,
-        pageTabOneNote,
-        pageTabCustom1,
-        pageTabCustom2,
-        pageTabCustom3,
-        kryptonNavigatorTabs1,
-        kryptonNavigatorTabs2,
-        kryptonNavigatorTabs3,
-        pageButtonsNavigatorStack,
-        pageButtonsForm,
-        pageHeadersForm,
-        kryptonPage1,
-        pageLabelsNormalPanel,
-        pageLabelsTitlePanel,
-        pageButtonsAlternate,
-        pageButtonsRibbonCluster,
-        pageControlsToolTip,
-        pageLabelsToolTip,
-        pageTopRibbon,
-        pageDesignRibbon,
-        pageControlsRibbon,
-        pageButtonsNavigatorMini,
-        pageLabelsKeyTip,
-        pageTopCheckBox,
-        pageDesignCheckBox,
-        pageTopRadioButton,
-        pageDesignRadioButton,
-        pageDesignGrid,
-        pageTopGrids,
-        kryptonGridList,
-        kryptonGridSheet,
-        kryptonGridCustom1,
-        pageLabelsSuperTip,
-        pageButtonsInputControl,
-        pageTopInputControls,
-        pageDesignInputControls,
-        pageSeparatorHighInternalProfile,
-        pageButtonsListItem,
-        pageButtonsGallery,
-        pageButtonsNavigatorOverflow,
-        pageButtonsBreadCrumb,
-        pageButtonCalendarDay,
-        pageHeadersCalendar,
-        pageTopDateTime,
-        pageDesignDateTime,
-        pageHeadersDockActive,
-        pageHeadersDockInactive,
-        pageTabDock,
-        pageTabDockAutoHidden,
-        pageControlsGroupBox,
-        pageLabelsGroupBoxCaption,
-        pageButtonsFormClose,
-        pagePanelsRibbonInactive,
-        pageTopTrackBar,
-        pageDesignTrackBar,
-        pageButtonsCommand,
-        pageLabelsBoldControl,
-        pageLabelsItalicControl,
-        pageLabelsBoldPanel,
-        pageLabelsItalicPanel,
-        pageTopLists,
-        pageLists
-            });
+            ];
+
+
+            _applyPalettesToPanels =
+            [
+                ..new[]
+                {
+                    panel1Disabled,
+                    panel1Normal,
+                    panelLabelsBackground,
+                    borderDesignSeparators,
+                    borderDesignLabels,
+                    borderDesignHeaders,
+                    borderDesignPanels,
+                    borderDesignControls,
+                    borderDesignNavigator,
+                    borderDesignTabs,
+                    panelLabelsBackground,
+                    kryptonPanelMainFill
+                }
+
+            ];
+
+            _applyPalettesToPages =
+            [
+                ..new[]
+                {
+                    pageTopButtonSpecs,
+                    pageTopButtons,
+                    pageTopControls,
+                    pageTopHeaderGroup,
+                    pageTopHeaders,
+                    pageTopLabels,
+                    pageTopNavigator,
+                    pageTopPanels,
+                    pageTopSeparators,
+                    pageTopChromeTMS,
+                    pageDesignButtonSpecs,
+                    pageDesignButtons,
+                    pageDesignControls,
+                    pageDesignHeaderGroup,
+                    pageDesignHeaders,
+                    pageDesignLabels,
+                    pageDesignNavigator,
+                    pageDesignPanels,
+                    pageDesignSeparators,
+                    pageDesignChromeTMS,
+                    pageControlsClient,
+                    pageControlsAlternate,
+                    pageControlsCustom1,
+                    pagePanelsClient,
+                    pagePanelsAlternate,
+                    pagePanelsCustom1,
+                    pageHeadersPrimary,
+                    pageHeadersSecondary,
+                    pageHeadersCustom1,
+                    pageHeadersCustom2,
+                    pageLabelsNormalControl,
+                    pageLabelsTitleControl,
+                    pageLabelsCustom1,
+                    pageLabelsCustom2,
+                    pageLabelsCustom3,
+                    pageSeparatorLowProfile,
+                    pageSeparatorHighProfile,
+                    pageSeparatorCustom1,
+                    navigatorPage1,
+                    navigatorPage2,
+                    pageNavigatorBarCheckButtonGroupOutside,
+                    pageNavigatorBarCheckButtonGroupInside,
+                    pageNavigatorBarCheckButtonGroupOnly,
+                    navigatorPage3,
+                    pageTopTabs,
+                    pageDesignTabs,
+                    pageTabHighProfile,
+                    pageTabStandardProfile,
+                    pageTabLowProfile,
+                    pageTabOneNote,
+                    pageTabCustom1,
+                    pageTabCustom2,
+                    pageTabCustom3,
+                    kryptonNavigatorTabs1,
+                    kryptonNavigatorTabs2,
+                    kryptonNavigatorTabs3,
+                    pageHeadersForm,
+                    kryptonPage1,
+                    pageLabelsNormalPanel,
+                    pageLabelsTitlePanel,
+                    pageControlsToolTip,
+                    pageLabelsToolTip,
+                    pageTopRibbon,
+                    pageDesignRibbon,
+                    pageControlsRibbon,
+                    pageLabelsKeyTip,
+                    pageTopCheckBox,
+                    pageDesignCheckBox,
+                    pageTopRadioButton,
+                    pageDesignRadioButton,
+                    pageDesignGrid,
+                    pageTopGrids,
+                    kryptonGridList,
+                    kryptonGridSheet,
+                    kryptonGridCustom1,
+                    pageLabelsSuperTip,
+                    pageTopInputControls,
+                    pageDesignInputControls,
+                    pageSeparatorHighInternalProfile,
+                    pageHeadersCalendar,
+                    pageTopDateTime,
+                    pageDesignDateTime,
+                    pageHeadersDockActive,
+                    pageHeadersDockInactive,
+                    pageTabDock,
+                    pageTabDockAutoHidden,
+                    pageControlsGroupBox,
+                    pageLabelsGroupBoxCaption,
+                    pagePanelsRibbonInactive,
+                    pageTopTrackBar,
+                    pageDesignTrackBar,
+                    pageLabelsBoldControl,
+                    pageLabelsItalicControl,
+                    pageLabelsBoldPanel,
+                    pageLabelsItalicPanel,
+                    pageTopLists,
+                    pageLists
+                }
+            ];
         }
         #endregion
 
@@ -347,8 +327,8 @@ namespace PaletteDesigner
 
                         // Use the new instance instead
                         _palette = palette;
-                        _chromeTMS.LocalCustomPalette = palette;
-                        _chromeTMS2.LocalCustomPalette = palette;
+                        _chromeTMS.Palette = palette;
+                        _chromeTMS2.Palette = palette;
                         _chromeRibbon.OverridePalette = _palette;
 
                         // We need to know when a change occurs to the palette settings
@@ -471,8 +451,8 @@ namespace PaletteDesigner
 
             // Create a fresh palette instance
             _palette = new KryptonCustomPaletteBase();
-            _chromeTMS.LocalCustomPalette = _palette;
-            _chromeTMS2.LocalCustomPalette = _palette;
+            _chromeTMS.Palette = _palette;
+            _chromeTMS2.Palette = _palette;
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
@@ -508,7 +488,7 @@ namespace PaletteDesigner
                 return;
             }
 
-            _applyPalettesToBases.ForEach(vcb => vcb.LocalCustomPalette = _palette);
+            _applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
             _applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
 
             dataGridViewDisabled.Palette = _palette;
@@ -602,15 +582,6 @@ namespace PaletteDesigner
             };
             _chromeRibbon.Show();
 
-            // Button fixed states
-            buttonDisabled.SetFixedState(PaletteState.Disabled);
-            buttonDefaultFocus.SetFixedState(PaletteState.NormalDefaultOverride);
-            buttonNormal.SetFixedState(PaletteState.Normal);
-            buttonTracking.SetFixedState(PaletteState.Tracking);
-            buttonPressed.SetFixedState(PaletteState.Pressed);
-            buttonCheckedNormal.SetFixedState(PaletteState.CheckedNormal);
-            buttonCheckedTracking.SetFixedState(PaletteState.CheckedTracking);
-            buttonCheckedPressed.SetFixedState(PaletteState.CheckedPressed);
 
             // CheckBox fixed states
             cbFocus.SetFixedState(true, true, false, false);
@@ -696,53 +667,6 @@ namespace PaletteDesigner
         private void KryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the top navigator
             kryptonNavigatorTop.SelectedIndex = kryptonNavigatorDesign.SelectedIndex;
-
-        private void KryptonNavigatorDesignButtons_SelectedPageChanged(object sender, EventArgs e)
-        {
-            if (kryptonNavigatorDesignButtons.SelectedPage == null)
-            {
-                return;
-            }
-            // Update the design page text with the selected style information
-            pageDesignButtons.TextTitle = kryptonNavigatorDesignButtons.SelectedPage.Text;
-            pageDesignButtons.TextDescription = kryptonNavigatorDesignButtons.SelectedPage.TextDescription;
-
-            // Work out the button style to be used
-            ButtonStyle bs = kryptonNavigatorDesignButtons.SelectedIndex switch
-            {
-                0 => ButtonStyle.Standalone,
-                1 => ButtonStyle.Alternate,
-                2 => ButtonStyle.LowProfile,
-                3 => ButtonStyle.BreadCrumb,
-                4 => ButtonStyle.CalendarDay,
-                5 => ButtonStyle.ButtonSpec,
-                6 => ButtonStyle.Cluster,
-                7 => ButtonStyle.NavigatorStack,
-                8 => ButtonStyle.NavigatorOverflow,
-                9 => ButtonStyle.NavigatorMini,
-                10 => ButtonStyle.InputControl,
-                11 => ButtonStyle.ListItem,
-                12 => ButtonStyle.Gallery,
-                13 => ButtonStyle.Form,
-                14 => ButtonStyle.FormClose,
-                15 => ButtonStyle.Command,
-                16 => ButtonStyle.Custom1,
-                17 => ButtonStyle.Custom2,
-                18 => ButtonStyle.Custom3,
-                _ => ButtonStyle.Standalone
-            };
-
-            // Update all the displayed buttons with the new style
-            buttonDisabled.ButtonStyle = bs;
-            buttonDefaultFocus.ButtonStyle = bs;
-            buttonNormal.ButtonStyle = bs;
-            buttonTracking.ButtonStyle = bs;
-            buttonPressed.ButtonStyle = bs;
-            buttonCheckedNormal.ButtonStyle = bs;
-            buttonCheckedTracking.ButtonStyle = bs;
-            buttonCheckedPressed.ButtonStyle = bs;
-            buttonLive.ButtonStyle = bs;
-        }
 
         private void KryptonNavigatorDesignControls_SelectedPageChanged(object sender, EventArgs e)
         {

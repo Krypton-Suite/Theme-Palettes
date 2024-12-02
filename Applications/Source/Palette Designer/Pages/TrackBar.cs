@@ -16,26 +16,29 @@ namespace PaletteDesigner.Pages
         {
             InitializeComponent();
 
-            _tBars = new List<KryptonTrackBar>(new[]
-            {
-                kryptonTrackBar1,
-                kryptonTrackBar5,
-                kryptonTrackBar2,
-                kryptonTrackBar6,
-                kryptonTrackBar3,
-                kryptonTrackBar7,
-                kryptonTrackBar4,
-                kryptonTrackBar8,
-                kryptonTrackBar9,
-                kryptonTrackBar10,
-                kryptonTrackBar11,
-                kryptonTrackBar12,
-                kryptonTrackBar13,
-                kryptonTrackBar14,
-                kryptonTrackBar15,
-                kryptonTrackBar16
+            _tBars =
+            [
+                ..new[]
+                {
+                    kryptonTrackBar1,
+                    kryptonTrackBar5,
+                    kryptonTrackBar2,
+                    kryptonTrackBar6,
+                    kryptonTrackBar3,
+                    kryptonTrackBar7,
+                    kryptonTrackBar4,
+                    kryptonTrackBar8,
+                    kryptonTrackBar9,
+                    kryptonTrackBar10,
+                    kryptonTrackBar11,
+                    kryptonTrackBar12,
+                    kryptonTrackBar13,
+                    kryptonTrackBar14,
+                    kryptonTrackBar15,
+                    kryptonTrackBar16
 
-            });
+                }
+            ];
             // TrackBar fixed states
             kryptonTrackBar1.SetFixedState(PaletteState.Normal);
             kryptonTrackBar5.SetFixedState(PaletteState.Normal);
@@ -60,7 +63,7 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            _tBars.ForEach(bar => bar.LocalCustomPalette = palette);
+            _tBars.ForEach(bar => bar.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }
