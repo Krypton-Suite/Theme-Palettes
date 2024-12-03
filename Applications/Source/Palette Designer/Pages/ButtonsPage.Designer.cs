@@ -23,6 +23,7 @@ partial class ButtonsPage
     {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ButtonsPage));
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonColorButton1 = new Krypton.Toolkit.KryptonColorButton();
             this.buttonLive = new Krypton.Toolkit.KryptonCheckButton();
             this.borderDesignButtons = new Krypton.Toolkit.KryptonPanel();
             this.kryptonNavigatorDesignButtons = new Krypton.Navigator.KryptonNavigator();
@@ -81,6 +82,7 @@ partial class ButtonsPage
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonColorButton1);
             this.kryptonPanel1.Controls.Add(this.buttonLive);
             this.kryptonPanel1.Controls.Add(this.borderDesignButtons);
             this.kryptonPanel1.Controls.Add(this.kryptonNavigatorDesignButtons);
@@ -98,6 +100,15 @@ partial class ButtonsPage
             this.kryptonPanel1.Size = new System.Drawing.Size(867, 670);
             this.kryptonPanel1.TabIndex = 0;
             // 
+            // kryptonColorButton1
+            // 
+            this.kryptonColorButton1.Location = new System.Drawing.Point(308, 371);
+            this.kryptonColorButton1.Name = "kryptonColorButton1";
+            this.kryptonColorButton1.Size = new System.Drawing.Size(212, 34);
+            this.kryptonColorButton1.TabIndex = 28;
+            this.kryptonColorButton1.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonColorButton1.Values.Image")));
+            this.kryptonColorButton1.Values.Text = "kryptonColorButton1";
+            // 
             // buttonLive
             // 
             this.buttonLive.AutoSize = true;
@@ -106,7 +117,6 @@ partial class ButtonsPage
             this.buttonLive.Name = "buttonLive";
             this.buttonLive.Size = new System.Drawing.Size(120, 34);
             this.buttonLive.TabIndex = 27;
-            this.buttonLive.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonLive.Values.Image")));
             this.buttonLive.Values.Text = "Live";
             // 
             // borderDesignButtons
@@ -637,5 +647,5 @@ partial class ButtonsPage
     private KryptonCheckButton buttonTracking;
     private KryptonCheckButton buttonDefaultFocus;
     private KryptonPanel kryptonPanel1;
-
+    private KryptonColorButton kryptonColorButton1;
 }

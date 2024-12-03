@@ -7,8 +7,7 @@ namespace PaletteDesigner.Pages;
 
 public partial class ButtonsPage : UserControl
 {
-    private readonly List<KryptonButton> _textBoxes;
-    private readonly List<KryptonPage> _pageButtons;
+    private readonly List<KryptonButton> _pageButtons;
 
     public ButtonsPage()
     {
@@ -23,7 +22,7 @@ public partial class ButtonsPage : UserControl
         buttonCheckedTracking.SetFixedState(PaletteState.CheckedTracking);
         buttonCheckedPressed.SetFixedState(PaletteState.CheckedPressed);
 
-        _textBoxes =
+        _pageButtons =
         [
             ..new[]
             {
@@ -35,42 +34,42 @@ public partial class ButtonsPage : UserControl
                 buttonCheckedNormal,
                 buttonCheckedTracking,
                 buttonCheckedPressed,
-                buttonLive,
+                buttonLive
             }
         ];
 
-        _pageButtons =
-        [
-            ..new[]
-            {
-                pageButtonsStandalone,
-                pageButtonsLowProfile,
-                pageButtonsButtonSpec,
-                pageButtonsCustom1,
-                pageButtonsCustom2,
-                pageButtonsCustom3,
-                pageButtonsNavigatorStack,
-                pageButtonsForm,
-                pageButtonsAlternate,
-                pageButtonsRibbonCluster,
-                pageButtonsNavigatorMini,
-                pageButtonsInputControl,
-                pageButtonsListItem,
-                pageButtonsGallery,
-                pageButtonsNavigatorOverflow,
-                pageButtonsBreadCrumb,
-                pageButtonCalendarDay,
-                pageButtonsFormClose,
-                pageButtonsCommand
-            }
-        ];
+        //_pageButtons =
+        //[
+        //    ..new[]
+        //    {
+        //        pageButtonsStandalone,
+        //        pageButtonsLowProfile,
+        //        pageButtonsButtonSpec,
+        //        pageButtonsCustom1,
+        //        pageButtonsCustom2,
+        //        pageButtonsCustom3,
+        //        pageButtonsNavigatorStack,
+        //        pageButtonsForm,
+        //        pageButtonsAlternate,
+        //        pageButtonsRibbonCluster,
+        //        pageButtonsNavigatorMini,
+        //        pageButtonsInputControl,
+        //        pageButtonsListItem,
+        //        pageButtonsGallery,
+        //        pageButtonsNavigatorOverflow,
+        //        pageButtonsBreadCrumb,
+        //        pageButtonCalendarDay,
+        //        pageButtonsFormClose,
+        //        pageButtonsCommand
+        //    }
+        //];
 
     }
 
     public void ApplyPalette(KryptonCustomPaletteBase palette)
     {
-        _textBoxes.ForEach(control => control.Palette = palette);
-        //_pageButtons.ForEach(control => control.Palette = palette);
+        _pageButtons.ForEach(control => control.Palette = palette);
+        kryptonColorButton1.Palette = palette;
 
         kryptonPanel1.Palette = palette;
     }
