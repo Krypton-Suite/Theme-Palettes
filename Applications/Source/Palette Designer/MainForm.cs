@@ -336,7 +336,7 @@ namespace PaletteDesigner
                         _palette.BasePaletteChanged += OnBaseChanged;
 
                         // Hook up the property grid to the palette
-                        labelGridNormal.SelectedObject = _palette;
+                        propertyGrid.SelectedObject = _palette;
 
                         // Use the loaded filename
                         _filename = filename;
@@ -460,7 +460,7 @@ namespace PaletteDesigner
             _palette.BasePaletteChanged += OnBaseChanged;
 
             // Hook up the property grid to the palette
-            labelGridNormal.SelectedObject = _palette;
+            propertyGrid.SelectedObject = _palette;
 
             // Does not have a filename as yet
             _filename = "(New Palette)";
@@ -499,6 +499,7 @@ namespace PaletteDesigner
             trackBar1.ApplyPalette(_palette);
             menuPage1.ApplyPalette(_palette);
             toolTipsPage1.ApplyPalette(_palette);
+            buttonsPage1.ApplyPalette(_palette);
 
             UpdateChromeTMS();
 
@@ -994,6 +995,11 @@ namespace PaletteDesigner
             var controlPanel = new SettingsControlPanel();
 
             controlPanel.Show();
+        }
+
+        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            ApplyPalette();
         }
     }
 }

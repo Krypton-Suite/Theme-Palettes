@@ -78,8 +78,6 @@ namespace PaletteDesigner
             this.kryptonPanelMainFill = new Krypton.Toolkit.KryptonPanel();
             this.kryptonSplitContainerMain = new Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonNavigatorDesign = new Krypton.Navigator.KryptonNavigator();
-            this.pageDesignButtons = new Krypton.Navigator.KryptonPage();
-            this.buttonsPage1 = new PaletteDesigner.Pages.ButtonsPage();
             this.pageDesignRibbon = new Krypton.Navigator.KryptonPage();
             this.pageLists = new Krypton.Navigator.KryptonPage();
             this.kryptonGroupBox3 = new Krypton.Toolkit.KryptonGroupBox();
@@ -185,6 +183,8 @@ namespace PaletteDesigner
             this.buttonSpecAny45 = new Krypton.Toolkit.ButtonSpecAny();
             this.labelButtonSpecsTyped = new Krypton.Toolkit.KryptonLabel();
             this.labelButtonSpecsGeneric = new Krypton.Toolkit.KryptonLabel();
+            this.pageDesignButtons = new Krypton.Navigator.KryptonPage();
+            this.buttonsPage1 = new PaletteDesigner.Pages.ButtonsPage();
             this.pageDesignCheckBox = new Krypton.Navigator.KryptonPage();
             this.cbLive = new Krypton.Toolkit.KryptonCheckBox();
             this.cbFocus = new Krypton.Toolkit.KryptonCheckBox();
@@ -362,7 +362,7 @@ namespace PaletteDesigner
             this.pageDesignToolTips = new Krypton.Navigator.KryptonPage();
             this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
             this.kryptonHeaderGroupProperties = new Krypton.Toolkit.KryptonHeaderGroup();
-            this.labelGridNormal = new Krypton.Toolkit.KryptonPropertyGrid();
+            this.propertyGrid = new Krypton.Toolkit.KryptonPropertyGrid();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -410,8 +410,6 @@ namespace PaletteDesigner
             this.kryptonSplitContainerMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesign)).BeginInit();
             this.kryptonNavigatorDesign.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).BeginInit();
-            this.pageDesignButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignRibbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageLists)).BeginInit();
             this.pageLists.SuspendLayout();
@@ -448,6 +446,8 @@ namespace PaletteDesigner
             this.pageDesignInputControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtonSpecs)).BeginInit();
             this.pageDesignButtonSpecs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).BeginInit();
+            this.pageDesignButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignCheckBox)).BeginInit();
             this.pageDesignCheckBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignChromeTMS)).BeginInit();
@@ -1234,33 +1234,6 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesign.TabIndex = 2;
             this.kryptonNavigatorDesign.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesign_SelectedPageChanged);
-            // 
-            // pageDesignButtons
-            // 
-            this.pageDesignButtons.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageDesignButtons.Controls.Add(this.buttonsPage1);
-            this.pageDesignButtons.Flags = 65535;
-            this.pageDesignButtons.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageLarge")));
-            this.pageDesignButtons.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageMedium")));
-            this.pageDesignButtons.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageSmall")));
-            this.pageDesignButtons.LastVisibleSet = true;
-            this.pageDesignButtons.Margin = new System.Windows.Forms.Padding(4);
-            this.pageDesignButtons.MinimumSize = new System.Drawing.Size(67, 62);
-            this.pageDesignButtons.Name = "pageDesignButtons";
-            this.pageDesignButtons.Size = new System.Drawing.Size(857, 672);
-            this.pageDesignButtons.Text = "Design Buttons";
-            this.pageDesignButtons.TextDescription = "Standalone is the main button style and intended for individual button instances." +
-    "";
-            this.pageDesignButtons.TextTitle = "Standalone";
-            this.pageDesignButtons.ToolTipTitle = "Page ToolTip";
-            this.pageDesignButtons.UniqueName = "5F8CCF195F9E4E775F8CCF195F9E4E77";
-            // 
-            // buttonsPage1
-            // 
-            this.buttonsPage1.Location = new System.Drawing.Point(0, 0);
-            this.buttonsPage1.Name = "buttonsPage1";
-            this.buttonsPage1.Size = new System.Drawing.Size(867, 670);
-            this.buttonsPage1.TabIndex = 0;
             // 
             // pageDesignRibbon
             // 
@@ -2275,6 +2248,33 @@ namespace PaletteDesigner
             this.labelButtonSpecsGeneric.Size = new System.Drawing.Size(229, 35);
             this.labelButtonSpecsGeneric.TabIndex = 30;
             this.labelButtonSpecsGeneric.Values.Text = "Generic ButtonSpec";
+            // 
+            // pageDesignButtons
+            // 
+            this.pageDesignButtons.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pageDesignButtons.Controls.Add(this.buttonsPage1);
+            this.pageDesignButtons.Flags = 65535;
+            this.pageDesignButtons.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageLarge")));
+            this.pageDesignButtons.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageMedium")));
+            this.pageDesignButtons.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageSmall")));
+            this.pageDesignButtons.LastVisibleSet = true;
+            this.pageDesignButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignButtons.MinimumSize = new System.Drawing.Size(67, 62);
+            this.pageDesignButtons.Name = "pageDesignButtons";
+            this.pageDesignButtons.Size = new System.Drawing.Size(857, 672);
+            this.pageDesignButtons.Text = "Design Buttons";
+            this.pageDesignButtons.TextDescription = "Standalone is the main button style and intended for individual button instances." +
+    "";
+            this.pageDesignButtons.TextTitle = "Standalone";
+            this.pageDesignButtons.ToolTipTitle = "Page ToolTip";
+            this.pageDesignButtons.UniqueName = "5F8CCF195F9E4E775F8CCF195F9E4E77";
+            // 
+            // buttonsPage1
+            // 
+            this.buttonsPage1.Location = new System.Drawing.Point(0, 0);
+            this.buttonsPage1.Name = "buttonsPage1";
+            this.buttonsPage1.Size = new System.Drawing.Size(867, 670);
+            this.buttonsPage1.TabIndex = 0;
             // 
             // pageDesignCheckBox
             // 
@@ -4964,7 +4964,7 @@ namespace PaletteDesigner
             // 
             // kryptonHeaderGroupProperties.Panel
             // 
-            this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.labelGridNormal);
+            this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.propertyGrid);
             this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(664, 735);
             this.kryptonHeaderGroupProperties.TabIndex = 0;
             this.kryptonHeaderGroupProperties.ValuesPrimary.Heading = "Properties";
@@ -4972,24 +4972,25 @@ namespace PaletteDesigner
             // 
             // labelGridNormal
             // 
-            this.labelGridNormal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.CategoryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.CommandsBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelGridNormal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelGridNormal.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
-            this.labelGridNormal.HelpForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(196)))), ((int)(((byte)(216)))));
-            this.labelGridNormal.Location = new System.Drawing.Point(0, 0);
-            this.labelGridNormal.Margin = new System.Windows.Forms.Padding(4);
-            this.labelGridNormal.Name = "labelGridNormal";
-            this.labelGridNormal.Size = new System.Drawing.Size(662, 697);
-            this.labelGridNormal.TabIndex = 0;
-            this.labelGridNormal.ToolbarVisible = false;
-            this.labelGridNormal.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.CategoryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.CommandsBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.propertyGrid.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
+            this.propertyGrid.HelpForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(196)))), ((int)(((byte)(216)))));
+            this.propertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.Size = new System.Drawing.Size(662, 697);
+            this.propertyGrid.TabIndex = 0;
+            this.propertyGrid.ToolbarVisible = false;
+            this.propertyGrid.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -5102,10 +5103,6 @@ namespace PaletteDesigner
             this.Controls.Add(this.kryptonNavigatorTop);
             this.Controls.Add(this.mainMenuStrip);
             this.Controls.Add(this.mainToolStripContainer);
-            this.FormTitleAlign = Krypton.Toolkit.PaletteRelativeAlign.Near;
-            this.GroupBackStyle = Krypton.Toolkit.PaletteBackStyle.FormMain;
-            this.GroupBorderStyle = Krypton.Toolkit.PaletteBorderStyle.FormMain;
-            this.HeaderStyle = Krypton.Toolkit.HeaderStyle.Form;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -5149,8 +5146,6 @@ namespace PaletteDesigner
             this.kryptonSplitContainerMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesign)).EndInit();
             this.kryptonNavigatorDesign.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).EndInit();
-            this.pageDesignButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignRibbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageLists)).EndInit();
             this.pageLists.ResumeLayout(false);
@@ -5189,6 +5184,8 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtonSpecs)).EndInit();
             this.pageDesignButtonSpecs.ResumeLayout(false);
             this.pageDesignButtonSpecs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).EndInit();
+            this.pageDesignButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignCheckBox)).EndInit();
             this.pageDesignCheckBox.ResumeLayout(false);
             this.pageDesignCheckBox.PerformLayout();
@@ -5441,7 +5438,7 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripMenuItem menuSaveAs;
         private System.Windows.Forms.ToolStripSeparator menuSep2;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
-        private Krypton.Toolkit.KryptonPropertyGrid labelGridNormal;
+        private Krypton.Toolkit.KryptonPropertyGrid propertyGrid;
         private Krypton.Toolkit.KryptonPanel borderDesignControls;
         private Krypton.Toolkit.KryptonLabel labelControlsNormal;
         private Krypton.Toolkit.KryptonLabel labelControlsDisabled;

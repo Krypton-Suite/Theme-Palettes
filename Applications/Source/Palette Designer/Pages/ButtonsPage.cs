@@ -70,7 +70,7 @@ public partial class ButtonsPage : UserControl
     public void ApplyPalette(KryptonCustomPaletteBase palette)
     {
         _textBoxes.ForEach(control => control.Palette = palette);
-        _pageButtons.ForEach(control => control.Palette = palette);
+        //_pageButtons.ForEach(control => control.Palette = palette);
 
         kryptonPanel1.Palette = palette;
     }
