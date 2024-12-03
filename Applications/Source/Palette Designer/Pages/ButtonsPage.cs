@@ -76,48 +76,41 @@ public partial class ButtonsPage : UserControl
 
     private void kryptonNavigatorDesignButtons_SelectedPageChanged(object sender, EventArgs e)
     {
-            if (kryptonNavigatorDesignButtons.SelectedPage == null)
-            {
-                return;
-            }
-            // Update the design page text with the selected style information
-            //pageDesignButtons.TextTitle = kryptonNavigatorDesignButtons.SelectedPage.Text;
-            //pageDesignButtons.TextDescription = kryptonNavigatorDesignButtons.SelectedPage.TextDescription;
-
-            // Work out the button style to be used
-            ButtonStyle bs = kryptonNavigatorDesignButtons.SelectedIndex switch
-            {
-                0 => ButtonStyle.Standalone,
-                1 => ButtonStyle.Alternate,
-                2 => ButtonStyle.LowProfile,
-                3 => ButtonStyle.BreadCrumb,
-                4 => ButtonStyle.CalendarDay,
-                5 => ButtonStyle.ButtonSpec,
-                6 => ButtonStyle.Cluster,
-                7 => ButtonStyle.NavigatorStack,
-                8 => ButtonStyle.NavigatorOverflow,
-                9 => ButtonStyle.NavigatorMini,
-                10 => ButtonStyle.InputControl,
-                11 => ButtonStyle.ListItem,
-                12 => ButtonStyle.Gallery,
-                13 => ButtonStyle.Form,
-                14 => ButtonStyle.FormClose,
-                15 => ButtonStyle.Command,
-                16 => ButtonStyle.Custom1,
-                17 => ButtonStyle.Custom2,
-                18 => ButtonStyle.Custom3,
-                _ => ButtonStyle.Standalone
-            };
-
-            // Update all the displayed buttons with the new style
-            buttonDisabled.ButtonStyle = bs;
-            buttonDefaultFocus.ButtonStyle = bs;
-            buttonNormal.ButtonStyle = bs;
-            buttonTracking.ButtonStyle = bs;
-            buttonPressed.ButtonStyle = bs;
-            buttonCheckedNormal.ButtonStyle = bs;
-            buttonCheckedTracking.ButtonStyle = bs;
-            buttonCheckedPressed.ButtonStyle = bs;
-            buttonLive.ButtonStyle = bs;
+        if (kryptonNavigatorDesignButtons.SelectedPage == null)
+        {
+            return;
         }
+        // Update the design page text with the selected style information
+        //pageDesignButtons.TextTitle = kryptonNavigatorDesignButtons.SelectedPage.Text;
+        //pageDesignButtons.TextDescription = kryptonNavigatorDesignButtons.SelectedPage.TextDescription;
+
+        // Work out the button style to be used
+        ButtonStyle bs = kryptonNavigatorDesignButtons.SelectedIndex switch
+        {
+            0 => ButtonStyle.Standalone,
+            1 => ButtonStyle.Alternate,
+            2 => ButtonStyle.LowProfile,
+            3 => ButtonStyle.BreadCrumb,
+            4 => ButtonStyle.CalendarDay,
+            5 => ButtonStyle.ButtonSpec,
+            6 => ButtonStyle.Cluster,
+            7 => ButtonStyle.NavigatorStack,
+            8 => ButtonStyle.NavigatorOverflow,
+            9 => ButtonStyle.NavigatorMini,
+            10 => ButtonStyle.InputControl,
+            11 => ButtonStyle.ListItem,
+            12 => ButtonStyle.Gallery,
+            13 => ButtonStyle.Form,
+            14 => ButtonStyle.FormClose,
+            15 => ButtonStyle.Command,
+            16 => ButtonStyle.Custom1,
+            17 => ButtonStyle.Custom2,
+            18 => ButtonStyle.Custom3,
+            _ => ButtonStyle.Standalone
+        };
+
+        // Update all the displayed buttons with the new style
+        _pageButtons.ForEach(control => control.ButtonStyle = bs);
+        kryptonColorButton1.ButtonStyle = bs;
     }
+}
