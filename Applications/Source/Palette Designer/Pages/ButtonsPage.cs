@@ -7,7 +7,7 @@ namespace PaletteDesigner.Pages;
 
 public partial class ButtonsPage : UserControl
 {
-    private readonly List<KryptonButton> _pageButtons;
+    private readonly List<KryptonDropButton> _pageButtons;
 
     public ButtonsPage()
     {
@@ -22,6 +22,18 @@ public partial class ButtonsPage : UserControl
         buttonCheckedTracking.SetFixedState(PaletteState.CheckedTracking);
         buttonCheckedPressed.SetFixedState(PaletteState.CheckedPressed);
 
+        kryptonDropButton1.SetFixedState(PaletteState.Disabled);
+        kryptonDropButton2.SetFixedState(PaletteState.NormalDefaultOverride);
+        kryptonDropButton5.SetFixedState(PaletteState.Normal);
+        kryptonDropButton3.SetFixedState(PaletteState.Tracking);
+        kryptonDropButton6.SetFixedState(PaletteState.Pressed);
+
+        kryptonButton10.SetFixedState(PaletteState.Disabled);
+        kryptonButton11.SetFixedState(PaletteState.NormalDefaultOverride);
+        kryptonButton14.SetFixedState(PaletteState.Normal);
+        kryptonButton12.SetFixedState(PaletteState.Tracking);
+        kryptonButton15.SetFixedState(PaletteState.Pressed);
+
         _pageButtons =
         [
             ..new[]
@@ -34,7 +46,19 @@ public partial class ButtonsPage : UserControl
                 buttonCheckedNormal,
                 buttonCheckedTracking,
                 buttonCheckedPressed,
-                buttonLive
+                buttonLive,
+                kryptonDropButton1,
+                kryptonDropButton2,
+                kryptonDropButton3,
+                kryptonDropButton4,
+                kryptonDropButton5,
+                kryptonDropButton6,
+                kryptonButton10,
+                kryptonButton11,
+                kryptonButton12,
+                kryptonButton13,
+                kryptonButton14,
+                kryptonButton15
             }
         ];
 

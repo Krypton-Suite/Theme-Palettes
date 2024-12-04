@@ -23,8 +23,31 @@ partial class ButtonsPage
     {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ButtonsPage));
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
-            this.kryptonColorButton1 = new Krypton.Toolkit.KryptonColorButton();
+            this.kryptonGroupBox3 = new Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonButton10 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton11 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton12 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton13 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton14 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton15 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonGroupBox2 = new Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonDropButton1 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonDropButton2 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonDropButton3 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonDropButton4 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonDropButton5 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonDropButton6 = new Krypton.Toolkit.KryptonDropButton();
+            this.kryptonGroupBox1 = new Krypton.Toolkit.KryptonGroupBox();
+            this.buttonDisabled = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonDefaultFocus = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonTracking = new Krypton.Toolkit.KryptonCheckButton();
             this.buttonLive = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonNormal = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonPressed = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonCheckedNormal = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonCheckedPressed = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonCheckedTracking = new Krypton.Toolkit.KryptonCheckButton();
+            this.kryptonColorButton1 = new Krypton.Toolkit.KryptonColorButton();
             this.borderDesignButtons = new Krypton.Toolkit.KryptonPanel();
             this.kryptonNavigatorDesignButtons = new Krypton.Navigator.KryptonNavigator();
             this.pageButtonsStandalone = new Krypton.Navigator.KryptonPage();
@@ -46,16 +69,20 @@ partial class ButtonsPage
             this.pageButtonsCustom1 = new Krypton.Navigator.KryptonPage();
             this.pageButtonsCustom2 = new Krypton.Navigator.KryptonPage();
             this.pageButtonsCustom3 = new Krypton.Navigator.KryptonPage();
-            this.buttonCheckedPressed = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonCheckedTracking = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonCheckedNormal = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonDisabled = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonPressed = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonNormal = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonTracking = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonDefaultFocus = new Krypton.Toolkit.KryptonCheckButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
+            this.kryptonGroupBox2.Panel.SuspendLayout();
+            this.kryptonGroupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
+            this.kryptonGroupBox1.Panel.SuspendLayout();
+            this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.borderDesignButtons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignButtons)).BeginInit();
             this.kryptonNavigatorDesignButtons.SuspendLayout();
@@ -82,42 +109,331 @@ partial class ButtonsPage
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonColorButton1);
-            this.kryptonPanel1.Controls.Add(this.buttonLive);
             this.kryptonPanel1.Controls.Add(this.borderDesignButtons);
             this.kryptonPanel1.Controls.Add(this.kryptonNavigatorDesignButtons);
-            this.kryptonPanel1.Controls.Add(this.buttonCheckedPressed);
-            this.kryptonPanel1.Controls.Add(this.buttonCheckedTracking);
-            this.kryptonPanel1.Controls.Add(this.buttonCheckedNormal);
-            this.kryptonPanel1.Controls.Add(this.buttonDisabled);
-            this.kryptonPanel1.Controls.Add(this.buttonPressed);
-            this.kryptonPanel1.Controls.Add(this.buttonNormal);
-            this.kryptonPanel1.Controls.Add(this.buttonTracking);
-            this.kryptonPanel1.Controls.Add(this.buttonDefaultFocus);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(867, 670);
+            this.kryptonPanel1.Size = new System.Drawing.Size(799, 670);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonGroupBox3
+            // 
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(354, 316);
+            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            // 
+            // kryptonGroupBox3.Panel
+            // 
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton10);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton11);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton12);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton13);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton14);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton15);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(218, 321);
+            this.kryptonGroupBox3.TabIndex = 32;
+            this.kryptonGroupBox3.Values.Heading = "Krypton Buttons:";
+            // 
+            // kryptonButton10
+            // 
+            this.kryptonButton10.AutoSize = true;
+            this.kryptonButton10.Enabled = false;
+            this.kryptonButton10.Location = new System.Drawing.Point(4, 4);
+            this.kryptonButton10.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton10.Name = "kryptonButton10";
+            this.kryptonButton10.ShowSplitOption = true;
+            this.kryptonButton10.Size = new System.Drawing.Size(159, 36);
+            this.kryptonButton10.TabIndex = 19;
+            this.kryptonButton10.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton10.Values.Text = "Disabled";
+            // 
+            // kryptonButton11
+            // 
+            this.kryptonButton11.AutoSize = true;
+            this.kryptonButton11.Enabled = false;
+            this.kryptonButton11.Location = new System.Drawing.Point(4, 172);
+            this.kryptonButton11.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton11.Name = "kryptonButton11";
+            this.kryptonButton11.Size = new System.Drawing.Size(186, 36);
+            this.kryptonButton11.TabIndex = 21;
+            this.kryptonButton11.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton11.Values.Text = "Default + Focus";
+            // 
+            // kryptonButton12
+            // 
+            this.kryptonButton12.AutoSize = true;
+            this.kryptonButton12.Enabled = false;
+            this.kryptonButton12.Location = new System.Drawing.Point(4, 88);
+            this.kryptonButton12.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton12.Name = "kryptonButton12";
+            this.kryptonButton12.Size = new System.Drawing.Size(159, 36);
+            this.kryptonButton12.TabIndex = 22;
+            this.kryptonButton12.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton12.Values.Text = "Tracking";
+            // 
+            // kryptonButton13
+            // 
+            this.kryptonButton13.AutoSize = true;
+            this.kryptonButton13.Location = new System.Drawing.Point(4, 224);
+            this.kryptonButton13.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton13.Name = "kryptonButton13";
+            this.kryptonButton13.Size = new System.Drawing.Size(186, 36);
+            this.kryptonButton13.TabIndex = 27;
+            this.kryptonButton13.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton13.Values.Text = "Click - Hover - etc.";
+            // 
+            // kryptonButton14
+            // 
+            this.kryptonButton14.AutoSize = true;
+            this.kryptonButton14.Enabled = false;
+            this.kryptonButton14.Location = new System.Drawing.Point(4, 46);
+            this.kryptonButton14.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton14.Name = "kryptonButton14";
+            this.kryptonButton14.Size = new System.Drawing.Size(159, 36);
+            this.kryptonButton14.TabIndex = 20;
+            this.kryptonButton14.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton14.Values.Text = "Normal";
+            // 
+            // kryptonButton15
+            // 
+            this.kryptonButton15.AutoSize = true;
+            this.kryptonButton15.Enabled = false;
+            this.kryptonButton15.Location = new System.Drawing.Point(4, 130);
+            this.kryptonButton15.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonButton15.Name = "kryptonButton15";
+            this.kryptonButton15.Size = new System.Drawing.Size(159, 36);
+            this.kryptonButton15.TabIndex = 23;
+            this.kryptonButton15.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
+            this.kryptonButton15.Values.Text = "Pressed";
+            // 
+            // kryptonGroupBox2
+            // 
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(124, 316);
+            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            // 
+            // kryptonGroupBox2.Panel
+            // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton1);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton2);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton3);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton4);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton5);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton6);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(210, 321);
+            this.kryptonGroupBox2.TabIndex = 31;
+            this.kryptonGroupBox2.Values.Heading = "DropButtons:";
+            // 
+            // kryptonDropButton1
+            // 
+            this.kryptonDropButton1.AutoSize = true;
+            this.kryptonDropButton1.Enabled = false;
+            this.kryptonDropButton1.Location = new System.Drawing.Point(4, 4);
+            this.kryptonDropButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton1.Name = "kryptonDropButton1";
+            this.kryptonDropButton1.Size = new System.Drawing.Size(159, 34);
+            this.kryptonDropButton1.TabIndex = 19;
+            this.kryptonDropButton1.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton1.Values.Text = "Disabled";
+            // 
+            // kryptonDropButton2
+            // 
+            this.kryptonDropButton2.AutoSize = true;
+            this.kryptonDropButton2.Enabled = false;
+            this.kryptonDropButton2.Location = new System.Drawing.Point(4, 172);
+            this.kryptonDropButton2.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton2.Name = "kryptonDropButton2";
+            this.kryptonDropButton2.Size = new System.Drawing.Size(186, 34);
+            this.kryptonDropButton2.TabIndex = 21;
+            this.kryptonDropButton2.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton2.Values.Text = "Default + Focus";
+            // 
+            // kryptonDropButton3
+            // 
+            this.kryptonDropButton3.AutoSize = true;
+            this.kryptonDropButton3.Enabled = false;
+            this.kryptonDropButton3.Location = new System.Drawing.Point(4, 88);
+            this.kryptonDropButton3.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton3.Name = "kryptonDropButton3";
+            this.kryptonDropButton3.Size = new System.Drawing.Size(159, 34);
+            this.kryptonDropButton3.TabIndex = 22;
+            this.kryptonDropButton3.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton3.Values.Text = "Tracking";
+            // 
+            // kryptonDropButton4
+            // 
+            this.kryptonDropButton4.AutoSize = true;
+            this.kryptonDropButton4.Location = new System.Drawing.Point(4, 224);
+            this.kryptonDropButton4.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton4.Name = "kryptonDropButton4";
+            this.kryptonDropButton4.Size = new System.Drawing.Size(186, 34);
+            this.kryptonDropButton4.Splitter = false;
+            this.kryptonDropButton4.TabIndex = 27;
+            this.kryptonDropButton4.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton4.Values.Text = "Click - Hover - etc.";
+            // 
+            // kryptonDropButton5
+            // 
+            this.kryptonDropButton5.AutoSize = true;
+            this.kryptonDropButton5.Enabled = false;
+            this.kryptonDropButton5.Location = new System.Drawing.Point(4, 46);
+            this.kryptonDropButton5.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton5.Name = "kryptonDropButton5";
+            this.kryptonDropButton5.Size = new System.Drawing.Size(159, 34);
+            this.kryptonDropButton5.TabIndex = 20;
+            this.kryptonDropButton5.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton5.Values.Text = "Normal";
+            // 
+            // kryptonDropButton6
+            // 
+            this.kryptonDropButton6.AutoSize = true;
+            this.kryptonDropButton6.Enabled = false;
+            this.kryptonDropButton6.Location = new System.Drawing.Point(4, 130);
+            this.kryptonDropButton6.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonDropButton6.Name = "kryptonDropButton6";
+            this.kryptonDropButton6.Size = new System.Drawing.Size(159, 34);
+            this.kryptonDropButton6.TabIndex = 23;
+            this.kryptonDropButton6.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
+            this.kryptonDropButton6.Values.Text = "Pressed";
+            // 
+            // kryptonGroupBox1
+            // 
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(121, 4);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
+            // 
+            // kryptonGroupBox1.Panel
+            // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonDisabled);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonDefaultFocus);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonTracking);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonLive);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonNormal);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonPressed);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonCheckedNormal);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonCheckedPressed);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.buttonCheckedTracking);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(379, 256);
+            this.kryptonGroupBox1.TabIndex = 30;
+            this.kryptonGroupBox1.Values.Heading = "CheckButtons:";
+            // 
+            // buttonDisabled
+            // 
+            this.buttonDisabled.AutoSize = true;
+            this.buttonDisabled.Enabled = false;
+            this.buttonDisabled.Location = new System.Drawing.Point(4, 4);
+            this.buttonDisabled.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDisabled.Name = "buttonDisabled";
+            this.buttonDisabled.Size = new System.Drawing.Size(159, 34);
+            this.buttonDisabled.TabIndex = 19;
+            this.buttonDisabled.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDisabled.Values.Image")));
+            this.buttonDisabled.Values.Text = "Disabled";
+            // 
+            // buttonDefaultFocus
+            // 
+            this.buttonDefaultFocus.AutoSize = true;
+            this.buttonDefaultFocus.Enabled = false;
+            this.buttonDefaultFocus.Location = new System.Drawing.Point(183, 4);
+            this.buttonDefaultFocus.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDefaultFocus.Name = "buttonDefaultFocus";
+            this.buttonDefaultFocus.Size = new System.Drawing.Size(186, 34);
+            this.buttonDefaultFocus.TabIndex = 21;
+            this.buttonDefaultFocus.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDefaultFocus.Values.Image")));
+            this.buttonDefaultFocus.Values.Text = "Default + Focus";
+            // 
+            // buttonTracking
+            // 
+            this.buttonTracking.AutoSize = true;
+            this.buttonTracking.Enabled = false;
+            this.buttonTracking.Location = new System.Drawing.Point(4, 88);
+            this.buttonTracking.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonTracking.Name = "buttonTracking";
+            this.buttonTracking.Size = new System.Drawing.Size(159, 34);
+            this.buttonTracking.TabIndex = 22;
+            this.buttonTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonTracking.Values.Image")));
+            this.buttonTracking.Values.Text = "Tracking";
+            // 
+            // buttonLive
+            // 
+            this.buttonLive.AutoSize = true;
+            this.buttonLive.Location = new System.Drawing.Point(28, 181);
+            this.buttonLive.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLive.Name = "buttonLive";
+            this.buttonLive.Size = new System.Drawing.Size(269, 34);
+            this.buttonLive.TabIndex = 27;
+            this.buttonLive.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
+            this.buttonLive.Values.Text = "Click - Hover - etc.";
+            // 
+            // buttonNormal
+            // 
+            this.buttonNormal.AutoSize = true;
+            this.buttonNormal.Enabled = false;
+            this.buttonNormal.Location = new System.Drawing.Point(4, 46);
+            this.buttonNormal.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonNormal.Name = "buttonNormal";
+            this.buttonNormal.Size = new System.Drawing.Size(159, 34);
+            this.buttonNormal.TabIndex = 20;
+            this.buttonNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonNormal.Values.Image")));
+            this.buttonNormal.Values.Text = "Normal";
+            // 
+            // buttonPressed
+            // 
+            this.buttonPressed.AutoSize = true;
+            this.buttonPressed.Enabled = false;
+            this.buttonPressed.Location = new System.Drawing.Point(4, 130);
+            this.buttonPressed.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonPressed.Name = "buttonPressed";
+            this.buttonPressed.Size = new System.Drawing.Size(159, 34);
+            this.buttonPressed.TabIndex = 23;
+            this.buttonPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonPressed.Values.Image")));
+            this.buttonPressed.Values.Text = "Pressed";
+            // 
+            // buttonCheckedNormal
+            // 
+            this.buttonCheckedNormal.AutoSize = true;
+            this.buttonCheckedNormal.Enabled = false;
+            this.buttonCheckedNormal.Location = new System.Drawing.Point(183, 46);
+            this.buttonCheckedNormal.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCheckedNormal.Name = "buttonCheckedNormal";
+            this.buttonCheckedNormal.Size = new System.Drawing.Size(187, 34);
+            this.buttonCheckedNormal.TabIndex = 24;
+            this.buttonCheckedNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedNormal.Values.Image")));
+            this.buttonCheckedNormal.Values.Text = "Checked Normal";
+            // 
+            // buttonCheckedPressed
+            // 
+            this.buttonCheckedPressed.AutoSize = true;
+            this.buttonCheckedPressed.Enabled = false;
+            this.buttonCheckedPressed.Location = new System.Drawing.Point(183, 130);
+            this.buttonCheckedPressed.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCheckedPressed.Name = "buttonCheckedPressed";
+            this.buttonCheckedPressed.Size = new System.Drawing.Size(188, 34);
+            this.buttonCheckedPressed.TabIndex = 26;
+            this.buttonCheckedPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedPressed.Values.Image")));
+            this.buttonCheckedPressed.Values.Text = "Checked Pressed";
+            // 
+            // buttonCheckedTracking
+            // 
+            this.buttonCheckedTracking.AutoSize = true;
+            this.buttonCheckedTracking.Enabled = false;
+            this.buttonCheckedTracking.Location = new System.Drawing.Point(183, 88);
+            this.buttonCheckedTracking.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCheckedTracking.Name = "buttonCheckedTracking";
+            this.buttonCheckedTracking.Size = new System.Drawing.Size(188, 34);
+            this.buttonCheckedTracking.TabIndex = 25;
+            this.buttonCheckedTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedTracking.Values.Image")));
+            this.buttonCheckedTracking.Values.Text = "Checked Tracking";
             // 
             // kryptonColorButton1
             // 
-            this.kryptonColorButton1.Location = new System.Drawing.Point(308, 371);
+            this.kryptonColorButton1.Location = new System.Drawing.Point(208, 274);
             this.kryptonColorButton1.Name = "kryptonColorButton1";
             this.kryptonColorButton1.Size = new System.Drawing.Size(212, 34);
             this.kryptonColorButton1.TabIndex = 28;
             this.kryptonColorButton1.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonColorButton1.Values.Image")));
             this.kryptonColorButton1.Values.Text = "kryptonColorButton1";
-            // 
-            // buttonLive
-            // 
-            this.buttonLive.AutoSize = true;
-            this.buttonLive.Location = new System.Drawing.Point(435, 313);
-            this.buttonLive.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLive.Name = "buttonLive";
-            this.buttonLive.Size = new System.Drawing.Size(120, 34);
-            this.buttonLive.TabIndex = 27;
-            this.buttonLive.Values.Text = "Live";
             // 
             // borderDesignButtons
             // 
@@ -355,7 +671,7 @@ partial class ButtonsPage
             this.pageButtonsInputControl.Name = "pageButtonsInputControl";
             this.pageButtonsInputControl.Size = new System.Drawing.Size(133, 123);
             this.pageButtonsInputControl.Text = "Input Control";
-            this.pageButtonsInputControl.TextDescription = "Input Control is used as the drop down button inside input controls.";
+            this.pageButtonsInputControl.TextDescription = "Input Control is used as the drop-down button inside input controls.";
             this.pageButtonsInputControl.ToolTipTitle = "Page ToolTip";
             this.pageButtonsInputControl.UniqueName = "563FAF44653F46E5563FAF44653F46E5";
             // 
@@ -478,118 +794,29 @@ partial class ButtonsPage
             this.pageButtonsCustom3.ToolTipTitle = "Page ToolTip";
             this.pageButtonsCustom3.UniqueName = "C2E105865C8444A2C2E105865C8444A2";
             // 
-            // buttonCheckedPressed
-            // 
-            this.buttonCheckedPressed.AutoSize = true;
-            this.buttonCheckedPressed.Enabled = false;
-            this.buttonCheckedPressed.Location = new System.Drawing.Point(527, 244);
-            this.buttonCheckedPressed.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCheckedPressed.Name = "buttonCheckedPressed";
-            this.buttonCheckedPressed.ShowSplitOption = true;
-            this.buttonCheckedPressed.Size = new System.Drawing.Size(188, 34);
-            this.buttonCheckedPressed.TabIndex = 26;
-            this.buttonCheckedPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedPressed.Values.Image")));
-            this.buttonCheckedPressed.Values.Text = "Checked Pressed";
-            // 
-            // buttonCheckedTracking
-            // 
-            this.buttonCheckedTracking.AutoSize = true;
-            this.buttonCheckedTracking.Enabled = false;
-            this.buttonCheckedTracking.Location = new System.Drawing.Point(527, 174);
-            this.buttonCheckedTracking.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCheckedTracking.Name = "buttonCheckedTracking";
-            this.buttonCheckedTracking.ShowSplitOption = true;
-            this.buttonCheckedTracking.Size = new System.Drawing.Size(196, 34);
-            this.buttonCheckedTracking.TabIndex = 25;
-            this.buttonCheckedTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedTracking.Values.Image")));
-            this.buttonCheckedTracking.Values.Text = "Checked Tracking";
-            // 
-            // buttonCheckedNormal
-            // 
-            this.buttonCheckedNormal.AutoSize = true;
-            this.buttonCheckedNormal.Enabled = false;
-            this.buttonCheckedNormal.Location = new System.Drawing.Point(527, 106);
-            this.buttonCheckedNormal.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCheckedNormal.Name = "buttonCheckedNormal";
-            this.buttonCheckedNormal.ShowSplitOption = true;
-            this.buttonCheckedNormal.Size = new System.Drawing.Size(187, 34);
-            this.buttonCheckedNormal.TabIndex = 24;
-            this.buttonCheckedNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedNormal.Values.Image")));
-            this.buttonCheckedNormal.Values.Text = "Checked Normal";
-            // 
-            // buttonDisabled
-            // 
-            this.buttonDisabled.AutoSize = true;
-            this.buttonDisabled.Enabled = false;
-            this.buttonDisabled.Location = new System.Drawing.Point(308, 37);
-            this.buttonDisabled.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonDisabled.Name = "buttonDisabled";
-            this.buttonDisabled.ShowSplitOption = true;
-            this.buttonDisabled.Size = new System.Drawing.Size(159, 34);
-            this.buttonDisabled.TabIndex = 19;
-            this.buttonDisabled.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDisabled.Values.Image")));
-            this.buttonDisabled.Values.Text = "Disabled";
-            // 
-            // buttonPressed
-            // 
-            this.buttonPressed.AutoSize = true;
-            this.buttonPressed.Enabled = false;
-            this.buttonPressed.Location = new System.Drawing.Point(308, 244);
-            this.buttonPressed.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonPressed.Name = "buttonPressed";
-            this.buttonPressed.ShowSplitOption = true;
-            this.buttonPressed.Size = new System.Drawing.Size(159, 34);
-            this.buttonPressed.TabIndex = 23;
-            this.buttonPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonPressed.Values.Image")));
-            this.buttonPressed.Values.Text = "Pressed";
-            // 
-            // buttonNormal
-            // 
-            this.buttonNormal.AutoSize = true;
-            this.buttonNormal.Enabled = false;
-            this.buttonNormal.Location = new System.Drawing.Point(308, 106);
-            this.buttonNormal.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonNormal.Name = "buttonNormal";
-            this.buttonNormal.ShowSplitOption = true;
-            this.buttonNormal.Size = new System.Drawing.Size(159, 34);
-            this.buttonNormal.TabIndex = 20;
-            this.buttonNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonNormal.Values.Image")));
-            this.buttonNormal.Values.Text = "Normal";
-            // 
-            // buttonTracking
-            // 
-            this.buttonTracking.AutoSize = true;
-            this.buttonTracking.Enabled = false;
-            this.buttonTracking.Location = new System.Drawing.Point(308, 174);
-            this.buttonTracking.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonTracking.Name = "buttonTracking";
-            this.buttonTracking.ShowSplitOption = true;
-            this.buttonTracking.Size = new System.Drawing.Size(159, 34);
-            this.buttonTracking.TabIndex = 22;
-            this.buttonTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonTracking.Values.Image")));
-            this.buttonTracking.Values.Text = "Tracking";
-            // 
-            // buttonDefaultFocus
-            // 
-            this.buttonDefaultFocus.AutoSize = true;
-            this.buttonDefaultFocus.Enabled = false;
-            this.buttonDefaultFocus.Location = new System.Drawing.Point(527, 37);
-            this.buttonDefaultFocus.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonDefaultFocus.Name = "buttonDefaultFocus";
-            this.buttonDefaultFocus.ShowSplitOption = true;
-            this.buttonDefaultFocus.Size = new System.Drawing.Size(179, 34);
-            this.buttonDefaultFocus.TabIndex = 21;
-            this.buttonDefaultFocus.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDefaultFocus.Values.Image")));
-            this.buttonDefaultFocus.Values.Text = "Default + Focus";
-            // 
             // ButtonsPage
             // 
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ButtonsPage";
-            this.Size = new System.Drawing.Size(867, 670);
+            this.Size = new System.Drawing.Size(799, 670);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
+            this.kryptonGroupBox3.Panel.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
+            this.kryptonGroupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
+            this.kryptonGroupBox2.Panel.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
+            this.kryptonGroupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
+            this.kryptonGroupBox1.Panel.ResumeLayout(false);
+            this.kryptonGroupBox1.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
+            this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.borderDesignButtons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignButtons)).EndInit();
             this.kryptonNavigatorDesignButtons.ResumeLayout(false);
@@ -648,4 +875,19 @@ partial class ButtonsPage
     private KryptonCheckButton buttonDefaultFocus;
     private KryptonPanel kryptonPanel1;
     private KryptonColorButton kryptonColorButton1;
+    private KryptonGroupBox kryptonGroupBox2;
+    private KryptonDropButton kryptonDropButton1;
+    private KryptonDropButton kryptonDropButton2;
+    private KryptonDropButton kryptonDropButton3;
+    private KryptonDropButton kryptonDropButton4;
+    private KryptonDropButton kryptonDropButton5;
+    private KryptonDropButton kryptonDropButton6;
+    private KryptonGroupBox kryptonGroupBox1;
+    private KryptonGroupBox kryptonGroupBox3;
+    private KryptonButton kryptonButton10;
+    private KryptonButton kryptonButton11;
+    private KryptonButton kryptonButton12;
+    private KryptonButton kryptonButton13;
+    private KryptonButton kryptonButton14;
+    private KryptonButton kryptonButton15;
 }
