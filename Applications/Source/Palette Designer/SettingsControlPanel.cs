@@ -21,15 +21,15 @@ namespace PaletteDesigner
         {
             InitializeComponent();
 
-            kbtnCancel.Text = KryptonManager.Strings.GeneralStrings.Cancel;
+            kbtnCancel.Text = KryptonLanguageManager.GeneralToolkitStrings.Cancel;
 
             kbtnCancel.DialogResult = DialogResult.Cancel;
 
-            kbtnOk.Text = KryptonManager.Strings.GeneralStrings.OK;
+            kbtnOk.Text = KryptonLanguageManager.GeneralToolkitStrings.OK;
 
             kbtnOk.DialogResult = DialogResult.OK;
 
-            kbtnReset.Text = KryptonManager.Strings.CustomStrings.Reset;
+            kbtnReset.Text = KryptonLanguageManager.CustomToolkitStrings.Reset;
 
             AcceptButton = kbtnOk;
 

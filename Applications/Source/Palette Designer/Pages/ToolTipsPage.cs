@@ -25,17 +25,17 @@ namespace PaletteDesigner.Pages
         {
             kryptonPanel1.Palette = palette;
 
-            kryptonButton1.LocalCustomPalette = palette;
+            kryptonButton1.Palette = palette;
 
-            kryptonGroupBox1.LocalCustomPalette = palette;
+            kryptonGroupBox1.Palette = palette;
 
-            krbToolTip.LocalCustomPalette = palette;
+            krbToolTip.Palette = palette;
 
-            krbSuperTip.LocalCustomPalette = palette;
+            krbSuperTip.Palette = palette;
 
-            krbKeyTip.LocalCustomPalette = palette;
+            krbKeyTip.Palette = palette;
 
-            kchkShowImage.LocalCustomPalette = palette;
+            kchkShowImage.Palette = palette;
         }
 
         private void kchkShowImage_CheckedChanged(object sender, EventArgs e)

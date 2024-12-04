@@ -1,3 +1,5 @@
+using PaletteDesigner.Pages;
+
 namespace PaletteDesigner
 {
     partial class MainForm
@@ -182,36 +184,7 @@ namespace PaletteDesigner
             this.labelButtonSpecsTyped = new Krypton.Toolkit.KryptonLabel();
             this.labelButtonSpecsGeneric = new Krypton.Toolkit.KryptonLabel();
             this.pageDesignButtons = new Krypton.Navigator.KryptonPage();
-            this.buttonLive = new Krypton.Toolkit.KryptonCheckButton();
-            this.borderDesignButtons = new Krypton.Toolkit.KryptonPanel();
-            this.kryptonNavigatorDesignButtons = new Krypton.Navigator.KryptonNavigator();
-            this.pageButtonsStandalone = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsAlternate = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsLowProfile = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsBreadCrumb = new Krypton.Navigator.KryptonPage();
-            this.pageButtonCalendarDay = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsButtonSpec = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsRibbonCluster = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsNavigatorStack = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsNavigatorOverflow = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsNavigatorMini = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsInputControl = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsListItem = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsGallery = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsForm = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsFormClose = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsCommand = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsCustom1 = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsCustom2 = new Krypton.Navigator.KryptonPage();
-            this.pageButtonsCustom3 = new Krypton.Navigator.KryptonPage();
-            this.buttonCheckedPressed = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonCheckedTracking = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonCheckedNormal = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonDisabled = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonPressed = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonNormal = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonTracking = new Krypton.Toolkit.KryptonCheckButton();
-            this.buttonDefaultFocus = new Krypton.Toolkit.KryptonCheckButton();
+            this.buttonsPage1 = new PaletteDesigner.Pages.ButtonsPage();
             this.pageDesignCheckBox = new Krypton.Navigator.KryptonPage();
             this.cbLive = new Krypton.Toolkit.KryptonCheckBox();
             this.cbFocus = new Krypton.Toolkit.KryptonCheckBox();
@@ -389,7 +362,7 @@ namespace PaletteDesigner
             this.pageDesignToolTips = new Krypton.Navigator.KryptonPage();
             this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
             this.kryptonHeaderGroupProperties = new Krypton.Toolkit.KryptonHeaderGroup();
-            this.labelGridNormal = new Krypton.Toolkit.KryptonPropertyGrid();
+            this.propertyGrid = new Krypton.Toolkit.KryptonPropertyGrid();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -475,28 +448,6 @@ namespace PaletteDesigner
             this.pageDesignButtonSpecs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).BeginInit();
             this.pageDesignButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.borderDesignButtons)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignButtons)).BeginInit();
-            this.kryptonNavigatorDesignButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsStandalone)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsAlternate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsLowProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsBreadCrumb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonCalendarDay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsButtonSpec)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsRibbonCluster)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorStack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorOverflow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorMini)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsInputControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsListItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsGallery)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsFormClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCommand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignCheckBox)).BeginInit();
             this.pageDesignCheckBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignChromeTMS)).BeginInit();
@@ -701,8 +652,8 @@ namespace PaletteDesigner
             this.optionsToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.mainMenuStrip.Size = new System.Drawing.Size(1158, 24);
+            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1544, 28);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip";
             // 
@@ -719,7 +670,7 @@ namespace PaletteDesigner
             this.toolStripMenuItem1,
             this.menuExit});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(37, 20);
+            this.menuFile.Size = new System.Drawing.Size(46, 24);
             this.menuFile.Text = "File";
             // 
             // menuNew
@@ -728,7 +679,7 @@ namespace PaletteDesigner
             this.menuNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuNew.Name = "menuNew";
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuNew.Size = new System.Drawing.Size(155, 22);
+            this.menuNew.Size = new System.Drawing.Size(192, 26);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.MenuNew_Click);
             // 
@@ -738,14 +689,14 @@ namespace PaletteDesigner
             this.menuOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuOpen.Name = "menuOpen";
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuOpen.Size = new System.Drawing.Size(155, 22);
+            this.menuOpen.Size = new System.Drawing.Size(192, 26);
             this.menuOpen.Text = "Open...";
             this.menuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // menuSep1
             // 
             this.menuSep1.Name = "menuSep1";
-            this.menuSep1.Size = new System.Drawing.Size(152, 6);
+            this.menuSep1.Size = new System.Drawing.Size(189, 6);
             // 
             // menuSave
             // 
@@ -753,7 +704,7 @@ namespace PaletteDesigner
             this.menuSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSave.Name = "menuSave";
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuSave.Size = new System.Drawing.Size(155, 22);
+            this.menuSave.Size = new System.Drawing.Size(192, 26);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
@@ -762,30 +713,30 @@ namespace PaletteDesigner
             this.menuSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("menuSaveAs.Image")));
             this.menuSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSaveAs.Name = "menuSaveAs";
-            this.menuSaveAs.Size = new System.Drawing.Size(155, 22);
+            this.menuSaveAs.Size = new System.Drawing.Size(192, 26);
             this.menuSaveAs.Text = "Save As...";
             this.menuSaveAs.Click += new System.EventHandler(this.MenuSaveAs_Click);
             // 
             // menuSep2
             // 
             this.menuSep2.Name = "menuSep2";
-            this.menuSep2.Size = new System.Drawing.Size(152, 6);
+            this.menuSep2.Size = new System.Drawing.Size(189, 6);
             // 
             // recentThemesToolStripMenuItem
             // 
             this.recentThemesToolStripMenuItem.Name = "recentThemesToolStripMenuItem";
-            this.recentThemesToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.recentThemesToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.recentThemesToolStripMenuItem.Text = "&Recent Themes";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(155, 22);
+            this.menuExit.Size = new System.Drawing.Size(192, 26);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -796,26 +747,26 @@ namespace PaletteDesigner
             this.toolStripMenuItem2,
             this.settingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // launchPaletteUpgradeToolToolStripMenuItem
             // 
             this.launchPaletteUpgradeToolToolStripMenuItem.Name = "launchPaletteUpgradeToolToolStripMenuItem";
-            this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.launchPaletteUpgradeToolToolStripMenuItem.Text = "Launch Palette &Upgrade Tool";
             this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.LaunchPaletteUpgradeToolToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(226, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(279, 6);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("settingsToolStripMenuItem.Image")));
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.settingsToolStripMenuItem.Text = "Se&ttings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -835,7 +786,8 @@ namespace PaletteDesigner
             this.kryptonNavigatorTop.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigatorTop.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonNavigatorTop.Location = new System.Drawing.Point(0, 24);
+            this.kryptonNavigatorTop.Location = new System.Drawing.Point(0, 28);
+            this.kryptonNavigatorTop.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorTop.Name = "kryptonNavigatorTop";
             this.kryptonNavigatorTop.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorTop.Owner = null;
@@ -863,7 +815,7 @@ namespace PaletteDesigner
             this.pageTopMenuItems,
             this.pageTopToolTips});
             this.kryptonNavigatorTop.SelectedIndex = 0;
-            this.kryptonNavigatorTop.Size = new System.Drawing.Size(1158, 51);
+            this.kryptonNavigatorTop.Size = new System.Drawing.Size(1544, 55);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5, 5, 5, 0);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -883,9 +835,10 @@ namespace PaletteDesigner
             this.pageTopRibbon.Flags = 65535;
             this.pageTopRibbon.ImageSmall = global::PaletteDesigner.Properties.Resources.TopRibbon;
             this.pageTopRibbon.LastVisibleSet = true;
-            this.pageTopRibbon.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopRibbon.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopRibbon.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopRibbon.Name = "pageTopRibbon";
-            this.pageTopRibbon.Size = new System.Drawing.Size(100, 100);
+            this.pageTopRibbon.Size = new System.Drawing.Size(133, 123);
             this.pageTopRibbon.Text = "Ribbon";
             this.pageTopRibbon.ToolTipTitle = "Page ToolTip";
             this.pageTopRibbon.UniqueName = "F7A49B746D4C486AF7A49B746D4C486A";
@@ -896,10 +849,10 @@ namespace PaletteDesigner
             this.pageTopLists.Flags = 65534;
             this.pageTopLists.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonGActual;
             this.pageTopLists.LastVisibleSet = true;
-            this.pageTopLists.Margin = new System.Windows.Forms.Padding(2);
-            this.pageTopLists.MinimumSize = new System.Drawing.Size(38, 41);
+            this.pageTopLists.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pageTopLists.MinimumSize = new System.Drawing.Size(51, 50);
             this.pageTopLists.Name = "pageTopLists";
-            this.pageTopLists.Size = new System.Drawing.Size(75, 81);
+            this.pageTopLists.Size = new System.Drawing.Size(100, 100);
             this.pageTopLists.Text = "Lists";
             this.pageTopLists.ToolTipTitle = "Page ToolTip";
             this.pageTopLists.UniqueName = "f7b778d5010243c187721c2618d605fe";
@@ -912,9 +865,10 @@ namespace PaletteDesigner
             this.pageTopControls.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopControls.ImageMedium")));
             this.pageTopControls.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopControls.ImageSmall")));
             this.pageTopControls.LastVisibleSet = true;
-            this.pageTopControls.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopControls.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopControls.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopControls.Name = "pageTopControls";
-            this.pageTopControls.Size = new System.Drawing.Size(787, 50);
+            this.pageTopControls.Size = new System.Drawing.Size(1049, 62);
             this.pageTopControls.Text = "Controls";
             this.pageTopControls.ToolTipTitle = "Page ToolTip";
             this.pageTopControls.UniqueName = "3BAC6637703940CB3BAC6637703940CB";
@@ -925,9 +879,10 @@ namespace PaletteDesigner
             this.pageTopInputControls.Flags = 65535;
             this.pageTopInputControls.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopInputControls.ImageSmall")));
             this.pageTopInputControls.LastVisibleSet = true;
-            this.pageTopInputControls.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopInputControls.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopInputControls.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopInputControls.Name = "pageTopInputControls";
-            this.pageTopInputControls.Size = new System.Drawing.Size(100, 100);
+            this.pageTopInputControls.Size = new System.Drawing.Size(133, 123);
             this.pageTopInputControls.Text = "Input Controls";
             this.pageTopInputControls.ToolTipTitle = "Page ToolTip";
             this.pageTopInputControls.UniqueName = "D367C5BB74D04696D367C5BB74D04696";
@@ -940,9 +895,10 @@ namespace PaletteDesigner
             this.pageTopButtonSpecs.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopButtonSpecs.ImageMedium")));
             this.pageTopButtonSpecs.ImageSmall = global::PaletteDesigner.Properties.Resources.TopBS;
             this.pageTopButtonSpecs.LastVisibleSet = true;
-            this.pageTopButtonSpecs.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopButtonSpecs.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopButtonSpecs.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopButtonSpecs.Name = "pageTopButtonSpecs";
-            this.pageTopButtonSpecs.Size = new System.Drawing.Size(787, 50);
+            this.pageTopButtonSpecs.Size = new System.Drawing.Size(1049, 62);
             this.pageTopButtonSpecs.Text = "ButtonSpecs";
             this.pageTopButtonSpecs.ToolTipTitle = "Page ToolTip";
             this.pageTopButtonSpecs.UniqueName = "3482463805154E213482463805154E21";
@@ -955,9 +911,10 @@ namespace PaletteDesigner
             this.pageTopButtons.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopButtons.ImageMedium")));
             this.pageTopButtons.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopButtons.ImageSmall")));
             this.pageTopButtons.LastVisibleSet = true;
-            this.pageTopButtons.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopButtons.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopButtons.Name = "pageTopButtons";
-            this.pageTopButtons.Size = new System.Drawing.Size(787, 50);
+            this.pageTopButtons.Size = new System.Drawing.Size(1049, 62);
             this.pageTopButtons.Text = "Buttons";
             this.pageTopButtons.ToolTipTitle = "Page ToolTip";
             this.pageTopButtons.UniqueName = "56048893FA064ECE56048893FA064ECE";
@@ -968,9 +925,10 @@ namespace PaletteDesigner
             this.pageTopCheckBox.Flags = 65535;
             this.pageTopCheckBox.ImageSmall = global::PaletteDesigner.Properties.Resources.TopCB;
             this.pageTopCheckBox.LastVisibleSet = true;
-            this.pageTopCheckBox.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopCheckBox.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopCheckBox.Name = "pageTopCheckBox";
-            this.pageTopCheckBox.Size = new System.Drawing.Size(100, 100);
+            this.pageTopCheckBox.Size = new System.Drawing.Size(133, 123);
             this.pageTopCheckBox.Text = "CheckBox";
             this.pageTopCheckBox.ToolTipTitle = "Page ToolTip";
             this.pageTopCheckBox.UniqueName = "745B9534A0BD44F7745B9534A0BD44F7";
@@ -983,9 +941,10 @@ namespace PaletteDesigner
             this.pageTopChromeTMS.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopChromeTMS.ImageMedium")));
             this.pageTopChromeTMS.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopChromeTMS.ImageSmall")));
             this.pageTopChromeTMS.LastVisibleSet = true;
-            this.pageTopChromeTMS.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopChromeTMS.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopChromeTMS.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopChromeTMS.Name = "pageTopChromeTMS";
-            this.pageTopChromeTMS.Size = new System.Drawing.Size(787, 50);
+            this.pageTopChromeTMS.Size = new System.Drawing.Size(1049, 62);
             this.pageTopChromeTMS.Text = "Chrome + TMS";
             this.pageTopChromeTMS.ToolTipTitle = "Page ToolTip";
             this.pageTopChromeTMS.UniqueName = "E85832DBA6CF476EE85832DBA6CF476E";
@@ -996,9 +955,10 @@ namespace PaletteDesigner
             this.pageTopGrids.Flags = 65535;
             this.pageTopGrids.ImageSmall = global::PaletteDesigner.Properties.Resources.TopGrid;
             this.pageTopGrids.LastVisibleSet = true;
-            this.pageTopGrids.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopGrids.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopGrids.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopGrids.Name = "pageTopGrids";
-            this.pageTopGrids.Size = new System.Drawing.Size(100, 100);
+            this.pageTopGrids.Size = new System.Drawing.Size(133, 123);
             this.pageTopGrids.Text = "Grids";
             this.pageTopGrids.ToolTipTitle = "Page ToolTip";
             this.pageTopGrids.UniqueName = "AF995F9D48C04DF2AF995F9D48C04DF2";
@@ -1011,9 +971,10 @@ namespace PaletteDesigner
             this.pageTopHeaderGroup.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaderGroup.ImageMedium")));
             this.pageTopHeaderGroup.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaderGroup.ImageSmall")));
             this.pageTopHeaderGroup.LastVisibleSet = true;
-            this.pageTopHeaderGroup.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopHeaderGroup.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopHeaderGroup.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopHeaderGroup.Name = "pageTopHeaderGroup";
-            this.pageTopHeaderGroup.Size = new System.Drawing.Size(787, 50);
+            this.pageTopHeaderGroup.Size = new System.Drawing.Size(1049, 62);
             this.pageTopHeaderGroup.Text = "HeaderGroup";
             this.pageTopHeaderGroup.ToolTipTitle = "Page ToolTip";
             this.pageTopHeaderGroup.UniqueName = "4E56EC4CBFD442284E56EC4CBFD44228";
@@ -1026,9 +987,10 @@ namespace PaletteDesigner
             this.pageTopHeaders.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaders.ImageMedium")));
             this.pageTopHeaders.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaders.ImageSmall")));
             this.pageTopHeaders.LastVisibleSet = true;
-            this.pageTopHeaders.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopHeaders.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopHeaders.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopHeaders.Name = "pageTopHeaders";
-            this.pageTopHeaders.Size = new System.Drawing.Size(787, 50);
+            this.pageTopHeaders.Size = new System.Drawing.Size(1049, 62);
             this.pageTopHeaders.Text = "Headers";
             this.pageTopHeaders.ToolTipTitle = "Page ToolTip";
             this.pageTopHeaders.UniqueName = "8C92BD9E0DED45D28C92BD9E0DED45D2";
@@ -1039,9 +1001,10 @@ namespace PaletteDesigner
             this.pageTopDateTime.Flags = 65535;
             this.pageTopDateTime.ImageSmall = global::PaletteDesigner.Properties.Resources.TopDT;
             this.pageTopDateTime.LastVisibleSet = true;
-            this.pageTopDateTime.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopDateTime.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopDateTime.Name = "pageTopDateTime";
-            this.pageTopDateTime.Size = new System.Drawing.Size(100, 100);
+            this.pageTopDateTime.Size = new System.Drawing.Size(133, 123);
             this.pageTopDateTime.Text = "Date Time";
             this.pageTopDateTime.ToolTipTitle = "Page ToolTip";
             this.pageTopDateTime.UniqueName = "26E3658BC339416626E3658BC3394166";
@@ -1054,9 +1017,10 @@ namespace PaletteDesigner
             this.pageTopLabels.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopLabels.ImageMedium")));
             this.pageTopLabels.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopLabels.ImageSmall")));
             this.pageTopLabels.LastVisibleSet = true;
-            this.pageTopLabels.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopLabels.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopLabels.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopLabels.Name = "pageTopLabels";
-            this.pageTopLabels.Size = new System.Drawing.Size(787, 50);
+            this.pageTopLabels.Size = new System.Drawing.Size(1049, 62);
             this.pageTopLabels.Text = "Labels";
             this.pageTopLabels.ToolTipTitle = "Page ToolTip";
             this.pageTopLabels.UniqueName = "E32EFBB14A214C75E32EFBB14A214C75";
@@ -1069,9 +1033,10 @@ namespace PaletteDesigner
             this.pageTopNavigator.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopNavigator.ImageMedium")));
             this.pageTopNavigator.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopNavigator.ImageSmall")));
             this.pageTopNavigator.LastVisibleSet = true;
-            this.pageTopNavigator.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopNavigator.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopNavigator.Name = "pageTopNavigator";
-            this.pageTopNavigator.Size = new System.Drawing.Size(787, 50);
+            this.pageTopNavigator.Size = new System.Drawing.Size(1049, 62);
             this.pageTopNavigator.Text = "Navigator";
             this.pageTopNavigator.ToolTipTitle = "Page ToolTip";
             this.pageTopNavigator.UniqueName = "D7426FCF612042A2D7426FCF612042A2";
@@ -1084,9 +1049,10 @@ namespace PaletteDesigner
             this.pageTopPanels.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopPanels.ImageMedium")));
             this.pageTopPanels.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopPanels.ImageSmall")));
             this.pageTopPanels.LastVisibleSet = true;
-            this.pageTopPanels.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopPanels.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopPanels.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopPanels.Name = "pageTopPanels";
-            this.pageTopPanels.Size = new System.Drawing.Size(787, 50);
+            this.pageTopPanels.Size = new System.Drawing.Size(1049, 62);
             this.pageTopPanels.Text = "Panels";
             this.pageTopPanels.ToolTipTitle = "Page ToolTip";
             this.pageTopPanels.UniqueName = "0E2D1DD7365B4A8F0E2D1DD7365B4A8F";
@@ -1097,9 +1063,10 @@ namespace PaletteDesigner
             this.pageTopRadioButton.Flags = 65535;
             this.pageTopRadioButton.ImageSmall = global::PaletteDesigner.Properties.Resources.TopRB;
             this.pageTopRadioButton.LastVisibleSet = true;
-            this.pageTopRadioButton.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopRadioButton.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopRadioButton.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopRadioButton.Name = "pageTopRadioButton";
-            this.pageTopRadioButton.Size = new System.Drawing.Size(100, 100);
+            this.pageTopRadioButton.Size = new System.Drawing.Size(133, 123);
             this.pageTopRadioButton.Text = "RadioButton";
             this.pageTopRadioButton.ToolTipTitle = "Page ToolTip";
             this.pageTopRadioButton.UniqueName = "E7F6061FFA694A7DE7F6061FFA694A7D";
@@ -1112,9 +1079,10 @@ namespace PaletteDesigner
             this.pageTopSeparators.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopSeparators.ImageMedium")));
             this.pageTopSeparators.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopSeparators.ImageSmall")));
             this.pageTopSeparators.LastVisibleSet = true;
-            this.pageTopSeparators.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopSeparators.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopSeparators.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopSeparators.Name = "pageTopSeparators";
-            this.pageTopSeparators.Size = new System.Drawing.Size(787, 50);
+            this.pageTopSeparators.Size = new System.Drawing.Size(1049, 62);
             this.pageTopSeparators.Text = "Separators";
             this.pageTopSeparators.ToolTipTitle = "Page ToolTip";
             this.pageTopSeparators.UniqueName = "AA052D0D183F4125AA052D0D183F4125";
@@ -1127,9 +1095,10 @@ namespace PaletteDesigner
             this.pageTopTabs.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTopTabs.ImageMedium")));
             this.pageTopTabs.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopTabs.ImageSmall")));
             this.pageTopTabs.LastVisibleSet = true;
-            this.pageTopTabs.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopTabs.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopTabs.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopTabs.Name = "pageTopTabs";
-            this.pageTopTabs.Size = new System.Drawing.Size(100, 100);
+            this.pageTopTabs.Size = new System.Drawing.Size(133, 123);
             this.pageTopTabs.Text = "Tabs";
             this.pageTopTabs.ToolTipTitle = "Page ToolTip";
             this.pageTopTabs.UniqueName = "461B49C26EBB4816461B49C26EBB4816";
@@ -1140,9 +1109,10 @@ namespace PaletteDesigner
             this.pageTopTrackBar.Flags = 65534;
             this.pageTopTrackBar.ImageSmall = global::PaletteDesigner.Properties.Resources.TopTrackBar2;
             this.pageTopTrackBar.LastVisibleSet = true;
-            this.pageTopTrackBar.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopTrackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopTrackBar.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopTrackBar.Name = "pageTopTrackBar";
-            this.pageTopTrackBar.Size = new System.Drawing.Size(100, 100);
+            this.pageTopTrackBar.Size = new System.Drawing.Size(133, 123);
             this.pageTopTrackBar.Text = "TrackBar";
             this.pageTopTrackBar.ToolTipTitle = "Page ToolTip";
             this.pageTopTrackBar.UniqueName = "8EA51AFFC0D843D551B44BCB916273AC";
@@ -1152,10 +1122,10 @@ namespace PaletteDesigner
             this.pageTopMenuItems.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopMenuItems.Flags = 65534;
             this.pageTopMenuItems.LastVisibleSet = true;
-            this.pageTopMenuItems.Margin = new System.Windows.Forms.Padding(2);
-            this.pageTopMenuItems.MinimumSize = new System.Drawing.Size(38, 41);
+            this.pageTopMenuItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pageTopMenuItems.MinimumSize = new System.Drawing.Size(51, 50);
             this.pageTopMenuItems.Name = "pageTopMenuItems";
-            this.pageTopMenuItems.Size = new System.Drawing.Size(75, 81);
+            this.pageTopMenuItems.Size = new System.Drawing.Size(100, 100);
             this.pageTopMenuItems.Text = "Menu Items";
             this.pageTopMenuItems.ToolTipTitle = "Page ToolTip";
             this.pageTopMenuItems.UniqueName = "95c2ec35c075402bac013139a5f5b16a";
@@ -1165,9 +1135,10 @@ namespace PaletteDesigner
             this.pageTopToolTips.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopToolTips.Flags = 65534;
             this.pageTopToolTips.LastVisibleSet = true;
-            this.pageTopToolTips.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopToolTips.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTopToolTips.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTopToolTips.Name = "pageTopToolTips";
-            this.pageTopToolTips.Size = new System.Drawing.Size(100, 100);
+            this.pageTopToolTips.Size = new System.Drawing.Size(133, 123);
             this.pageTopToolTips.Text = "ToolTips";
             this.pageTopToolTips.ToolTipTitle = "Page ToolTip";
             this.pageTopToolTips.UniqueName = "a5f1868720aa41f2bdba83ff2b9fb8f1";
@@ -1176,17 +1147,19 @@ namespace PaletteDesigner
             // 
             this.kryptonPanelMainFill.Controls.Add(this.kryptonSplitContainerMain);
             this.kryptonPanelMainFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanelMainFill.Location = new System.Drawing.Point(0, 75);
+            this.kryptonPanelMainFill.Location = new System.Drawing.Point(0, 83);
+            this.kryptonPanelMainFill.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonPanelMainFill.Name = "kryptonPanelMainFill";
-            this.kryptonPanelMainFill.Padding = new System.Windows.Forms.Padding(5);
-            this.kryptonPanelMainFill.Size = new System.Drawing.Size(1158, 599);
+            this.kryptonPanelMainFill.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.kryptonPanelMainFill.Size = new System.Drawing.Size(1544, 747);
             this.kryptonPanelMainFill.TabIndex = 2;
             // 
             // kryptonSplitContainerMain
             // 
             this.kryptonSplitContainerMain.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainerMain.Location = new System.Drawing.Point(5, 5);
+            this.kryptonSplitContainerMain.Location = new System.Drawing.Point(7, 6);
+            this.kryptonSplitContainerMain.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonSplitContainerMain.Name = "kryptonSplitContainerMain";
             // 
             // kryptonSplitContainerMain.Panel1
@@ -1199,8 +1172,8 @@ namespace PaletteDesigner
             this.kryptonSplitContainerMain.Panel2.Controls.Add(this.kryptonHeaderGroupProperties);
             this.kryptonSplitContainerMain.Panel2MinSize = 200;
             this.kryptonSplitContainerMain.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainerMain.Size = new System.Drawing.Size(1148, 589);
-            this.kryptonSplitContainerMain.SplitterDistance = 645;
+            this.kryptonSplitContainerMain.Size = new System.Drawing.Size(1530, 735);
+            this.kryptonSplitContainerMain.SplitterDistance = 859;
             this.kryptonSplitContainerMain.SplitterWidth = 7;
             this.kryptonSplitContainerMain.TabIndex = 0;
             // 
@@ -1229,6 +1202,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesign.Header.HeaderValuesPrimary.MapHeading = Krypton.Navigator.MapKryptonPageText.Text;
             this.kryptonNavigatorDesign.Header.HeaderValuesPrimary.MapImage = Krypton.Navigator.MapKryptonPageImage.SmallMedium;
             this.kryptonNavigatorDesign.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesign.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesign.Name = "kryptonNavigatorDesign";
             this.kryptonNavigatorDesign.NavigatorMode = Krypton.Navigator.NavigatorMode.HeaderGroup;
             this.kryptonNavigatorDesign.Owner = null;
@@ -1256,7 +1230,7 @@ namespace PaletteDesigner
             this.pageDesignMenuItems,
             this.pageDesignToolTips});
             this.kryptonNavigatorDesign.SelectedIndex = 0;
-            this.kryptonNavigatorDesign.Size = new System.Drawing.Size(645, 589);
+            this.kryptonNavigatorDesign.Size = new System.Drawing.Size(859, 735);
             this.kryptonNavigatorDesign.TabIndex = 2;
             this.kryptonNavigatorDesign.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesign_SelectedPageChanged);
@@ -1267,10 +1241,11 @@ namespace PaletteDesigner
             this.pageDesignRibbon.Flags = 65535;
             this.pageDesignRibbon.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonRibbon;
             this.pageDesignRibbon.LastVisibleSet = true;
-            this.pageDesignRibbon.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignRibbon.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignRibbon.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignRibbon.Name = "pageDesignRibbon";
-            this.pageDesignRibbon.Padding = new System.Windows.Forms.Padding(20);
-            this.pageDesignRibbon.Size = new System.Drawing.Size(643, 536);
+            this.pageDesignRibbon.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.pageDesignRibbon.Size = new System.Drawing.Size(857, 672);
             this.pageDesignRibbon.Text = "Design Ribbon";
             this.pageDesignRibbon.TextDescription = "Preview appearance of the Ribbon control.";
             this.pageDesignRibbon.TextTitle = "";
@@ -1285,10 +1260,10 @@ namespace PaletteDesigner
             this.pageLists.Controls.Add(this.kryptonGroupBox1);
             this.pageLists.Flags = 65534;
             this.pageLists.LastVisibleSet = true;
-            this.pageLists.Margin = new System.Windows.Forms.Padding(2);
-            this.pageLists.MinimumSize = new System.Drawing.Size(38, 41);
+            this.pageLists.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pageLists.MinimumSize = new System.Drawing.Size(51, 50);
             this.pageLists.Name = "pageLists";
-            this.pageLists.Size = new System.Drawing.Size(644, 544);
+            this.pageLists.Size = new System.Drawing.Size(859, 670);
             this.pageLists.Text = "List Controls";
             this.pageLists.TextDescription = "List Control; Then the List View";
             this.pageLists.TextTitle = "";
@@ -1297,15 +1272,15 @@ namespace PaletteDesigner
             // 
             // kryptonGroupBox3
             // 
-            this.kryptonGroupBox3.Location = new System.Drawing.Point(16, 353);
-            this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 434);
+            this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
             // 
             // kryptonGroupBox3.Panel
             // 
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonListView3);
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonListBox3);
-            this.kryptonGroupBox3.Size = new System.Drawing.Size(601, 162);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(801, 199);
             this.kryptonGroupBox3.TabIndex = 2;
             this.kryptonGroupBox3.Values.Heading = "Allways Active";
             // 
@@ -1321,11 +1296,12 @@ namespace PaletteDesigner
             listViewItem1,
             listViewItem2});
             this.kryptonListView3.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
-            this.kryptonListView3.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView3.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListView3.Location = new System.Drawing.Point(212, 14);
+            this.kryptonListView3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView3.Name = "kryptonListView3";
             this.kryptonListView3.OwnerDraw = true;
-            this.kryptonListView3.Size = new System.Drawing.Size(168, 107);
+            this.kryptonListView3.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.kryptonListView3.Size = new System.Drawing.Size(224, 132);
             this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView3.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
@@ -1343,24 +1319,24 @@ namespace PaletteDesigner
             "List 1",
             "List 2",
             "List 3"});
-            this.kryptonListBox3.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListBox3.Location = new System.Drawing.Point(21, 7);
+            this.kryptonListBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListBox3.Name = "kryptonListBox3";
             this.kryptonListBox3.ScrollAlwaysVisible = true;
-            this.kryptonListBox3.Size = new System.Drawing.Size(98, 110);
+            this.kryptonListBox3.Size = new System.Drawing.Size(131, 135);
             this.kryptonListBox3.TabIndex = 0;
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(18, 176);
-            this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(24, 217);
+            this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
             // 
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonListView2);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonListBox2);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(601, 162);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(801, 199);
             this.kryptonGroupBox2.TabIndex = 1;
             this.kryptonGroupBox2.Values.Heading = "Enabled";
             // 
@@ -1377,11 +1353,12 @@ namespace PaletteDesigner
             listViewItem3,
             listViewItem4});
             this.kryptonListView2.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
-            this.kryptonListView2.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView2.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListView2.Location = new System.Drawing.Point(212, 14);
+            this.kryptonListView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView2.Name = "kryptonListView2";
             this.kryptonListView2.OwnerDraw = true;
-            this.kryptonListView2.Size = new System.Drawing.Size(168, 107);
+            this.kryptonListView2.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.kryptonListView2.Size = new System.Drawing.Size(224, 132);
             this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView2.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
@@ -1400,25 +1377,25 @@ namespace PaletteDesigner
             "List 1",
             "List 2",
             "List 3"});
-            this.kryptonListBox2.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListBox2.Location = new System.Drawing.Point(21, 7);
+            this.kryptonListBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListBox2.Name = "kryptonListBox2";
             this.kryptonListBox2.ScrollAlwaysVisible = true;
-            this.kryptonListBox2.Size = new System.Drawing.Size(98, 110);
+            this.kryptonListBox2.Size = new System.Drawing.Size(131, 135);
             this.kryptonListBox2.TabIndex = 0;
             // 
             // kryptonGroupBox1
             // 
             this.kryptonGroupBox1.Enabled = false;
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(16, 2);
-            this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(21, 2);
+            this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
             // 
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonListView1);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonListBox1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(601, 167);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(801, 206);
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "Disabled";
             // 
@@ -1438,11 +1415,12 @@ namespace PaletteDesigner
             listViewItem5,
             listViewItem6});
             this.kryptonListView1.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
-            this.kryptonListView1.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView1.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListView1.Location = new System.Drawing.Point(212, 14);
+            this.kryptonListView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView1.Name = "kryptonListView1";
             this.kryptonListView1.OwnerDraw = true;
-            this.kryptonListView1.Size = new System.Drawing.Size(168, 107);
+            this.kryptonListView1.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.kryptonListView1.Size = new System.Drawing.Size(224, 132);
             this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView1.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
@@ -1461,11 +1439,11 @@ namespace PaletteDesigner
             "List 1",
             "List 2",
             "List 3"});
-            this.kryptonListBox1.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonListBox1.Location = new System.Drawing.Point(21, 7);
+            this.kryptonListBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListBox1.Name = "kryptonListBox1";
             this.kryptonListBox1.ScrollAlwaysVisible = true;
-            this.kryptonListBox1.Size = new System.Drawing.Size(98, 110);
+            this.kryptonListBox1.Size = new System.Drawing.Size(131, 135);
             this.kryptonListBox1.TabIndex = 0;
             // 
             // pageDesignControls
@@ -1482,9 +1460,10 @@ namespace PaletteDesigner
             this.pageDesignControls.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignControls.ImageMedium")));
             this.pageDesignControls.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignControls.ImageSmall")));
             this.pageDesignControls.LastVisibleSet = true;
-            this.pageDesignControls.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignControls.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignControls.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignControls.Name = "pageDesignControls";
-            this.pageDesignControls.Size = new System.Drawing.Size(644, 544);
+            this.pageDesignControls.Size = new System.Drawing.Size(859, 670);
             this.pageDesignControls.Text = "Design Controls";
             this.pageDesignControls.TextDescription = "Client is the main style for the client area of Krypton controls.";
             this.pageDesignControls.TextTitle = "Client";
@@ -1497,9 +1476,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelControlsNormal.Location = new System.Drawing.Point(283, 30);
+            this.labelControlsNormal.Location = new System.Drawing.Point(377, 37);
+            this.labelControlsNormal.Margin = new System.Windows.Forms.Padding(4);
             this.labelControlsNormal.Name = "labelControlsNormal";
-            this.labelControlsNormal.Size = new System.Drawing.Size(78, 29);
+            this.labelControlsNormal.Size = new System.Drawing.Size(96, 35);
             this.labelControlsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelControlsNormal.TabIndex = 0;
             this.labelControlsNormal.Values.Text = "Normal";
@@ -1510,34 +1490,38 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelControlsDisabled.Location = new System.Drawing.Point(119, 30);
+            this.labelControlsDisabled.Location = new System.Drawing.Point(159, 37);
+            this.labelControlsDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.labelControlsDisabled.Name = "labelControlsDisabled";
-            this.labelControlsDisabled.Size = new System.Drawing.Size(88, 29);
+            this.labelControlsDisabled.Size = new System.Drawing.Size(108, 35);
             this.labelControlsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelControlsDisabled.TabIndex = 1;
             this.labelControlsDisabled.Values.Text = "Disabled";
             // 
             // control1Normal
             // 
-            this.control1Normal.Location = new System.Drawing.Point(283, 62);
+            this.control1Normal.Location = new System.Drawing.Point(377, 76);
+            this.control1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.control1Normal.Name = "control1Normal";
-            this.control1Normal.Size = new System.Drawing.Size(100, 100);
+            this.control1Normal.Size = new System.Drawing.Size(133, 123);
             this.control1Normal.TabIndex = 17;
             // 
             // control1Disabled
             // 
-            this.control1Disabled.Location = new System.Drawing.Point(119, 62);
+            this.control1Disabled.Location = new System.Drawing.Point(159, 76);
+            this.control1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.control1Disabled.Name = "control1Disabled";
-            this.control1Disabled.Size = new System.Drawing.Size(100, 100);
+            this.control1Disabled.Size = new System.Drawing.Size(133, 123);
             this.control1Disabled.TabIndex = 16;
             // 
             // borderDesignControls
             // 
             this.borderDesignControls.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignControls.Location = new System.Drawing.Point(73, 0);
+            this.borderDesignControls.Location = new System.Drawing.Point(87, 0);
+            this.borderDesignControls.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignControls.Name = "borderDesignControls";
             this.borderDesignControls.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignControls.Size = new System.Drawing.Size(1, 544);
+            this.borderDesignControls.Size = new System.Drawing.Size(1, 670);
             this.borderDesignControls.TabIndex = 2;
             // 
             // kryptonNavigatorDesignControls
@@ -1570,6 +1554,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignControls.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignControls.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignControls.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignControls.Name = "kryptonNavigatorDesignControls";
             this.kryptonNavigatorDesignControls.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignControls.Owner = null;
@@ -1583,7 +1568,7 @@ namespace PaletteDesigner
             this.pageControlsCustom1});
             this.kryptonNavigatorDesignControls.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignControls.SelectedIndex = 0;
-            this.kryptonNavigatorDesignControls.Size = new System.Drawing.Size(73, 544);
+            this.kryptonNavigatorDesignControls.Size = new System.Drawing.Size(87, 670);
             this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -1600,9 +1585,10 @@ namespace PaletteDesigner
             this.pageControlsClient.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsClient.ImageLarge")));
             this.pageControlsClient.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsClient.ImageMedium")));
             this.pageControlsClient.LastVisibleSet = true;
-            this.pageControlsClient.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsClient.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsClient.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsClient.Name = "pageControlsClient";
-            this.pageControlsClient.Size = new System.Drawing.Size(50, 500);
+            this.pageControlsClient.Size = new System.Drawing.Size(67, 615);
             this.pageControlsClient.Text = "Client";
             this.pageControlsClient.TextDescription = "Client is the main style for the client area of Krypton controls.";
             this.pageControlsClient.ToolTipTitle = "Page ToolTip";
@@ -1615,9 +1601,10 @@ namespace PaletteDesigner
             this.pageControlsAlternate.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsAlternate.ImageLarge")));
             this.pageControlsAlternate.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsAlternate.ImageMedium")));
             this.pageControlsAlternate.LastVisibleSet = true;
-            this.pageControlsAlternate.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsAlternate.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsAlternate.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsAlternate.Name = "pageControlsAlternate";
-            this.pageControlsAlternate.Size = new System.Drawing.Size(50, 500);
+            this.pageControlsAlternate.Size = new System.Drawing.Size(67, 615);
             this.pageControlsAlternate.Text = "Alternate";
             this.pageControlsAlternate.TextDescription = "Alternate provides a complementary variation on the Client style.";
             this.pageControlsAlternate.ToolTipTitle = "Page ToolTip";
@@ -1628,9 +1615,10 @@ namespace PaletteDesigner
             this.pageControlsGroupBox.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsGroupBox.Flags = 65534;
             this.pageControlsGroupBox.LastVisibleSet = true;
-            this.pageControlsGroupBox.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsGroupBox.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsGroupBox.Name = "pageControlsGroupBox";
-            this.pageControlsGroupBox.Size = new System.Drawing.Size(100, 100);
+            this.pageControlsGroupBox.Size = new System.Drawing.Size(133, 123);
             this.pageControlsGroupBox.Text = "GroupBox";
             this.pageControlsGroupBox.TextDescription = "GroupBox is applied as the default for KryptonGroupBox instances.";
             this.pageControlsGroupBox.ToolTipTitle = "Page ToolTip";
@@ -1641,9 +1629,10 @@ namespace PaletteDesigner
             this.pageControlsToolTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsToolTip.Flags = 65535;
             this.pageControlsToolTip.LastVisibleSet = true;
-            this.pageControlsToolTip.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsToolTip.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsToolTip.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsToolTip.Name = "pageControlsToolTip";
-            this.pageControlsToolTip.Size = new System.Drawing.Size(100, 100);
+            this.pageControlsToolTip.Size = new System.Drawing.Size(133, 123);
             this.pageControlsToolTip.Text = "ToolTip";
             this.pageControlsToolTip.TextDescription = "ToolTip is used for popup windows showing additional context information.";
             this.pageControlsToolTip.ToolTipTitle = "Page ToolTip";
@@ -1654,9 +1643,10 @@ namespace PaletteDesigner
             this.pageControlsRibbon.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsRibbon.Flags = 65535;
             this.pageControlsRibbon.LastVisibleSet = true;
-            this.pageControlsRibbon.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsRibbon.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsRibbon.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsRibbon.Name = "pageControlsRibbon";
-            this.pageControlsRibbon.Size = new System.Drawing.Size(100, 100);
+            this.pageControlsRibbon.Size = new System.Drawing.Size(133, 123);
             this.pageControlsRibbon.Text = "Ribbon";
             this.pageControlsRibbon.TextDescription = "Ribbon is used to achieve a compatible appearance to that of the Ribbon.";
             this.pageControlsRibbon.ToolTipTitle = "Page ToolTip";
@@ -1669,9 +1659,10 @@ namespace PaletteDesigner
             this.pageControlsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsCustom1.ImageLarge")));
             this.pageControlsCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsCustom1.ImageMedium")));
             this.pageControlsCustom1.LastVisibleSet = true;
-            this.pageControlsCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageControlsCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pageControlsCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageControlsCustom1.Name = "pageControlsCustom1";
-            this.pageControlsCustom1.Size = new System.Drawing.Size(50, 500);
+            this.pageControlsCustom1.Size = new System.Drawing.Size(67, 615);
             this.pageControlsCustom1.Text = "Custom 1";
             this.pageControlsCustom1.TextDescription = "Custom 1 style inherits from Client and is intended for your own custom use.";
             this.pageControlsCustom1.ToolTipTitle = "Page ToolTip";
@@ -1684,9 +1675,10 @@ namespace PaletteDesigner
             this.pageDesignInputControls.Flags = 65535;
             this.pageDesignInputControls.ImageSmall = global::PaletteDesigner.Properties.Resources.KTextBox;
             this.pageDesignInputControls.LastVisibleSet = true;
-            this.pageDesignInputControls.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignInputControls.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignInputControls.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignInputControls.Name = "pageDesignInputControls";
-            this.pageDesignInputControls.Size = new System.Drawing.Size(644, 544);
+            this.pageDesignInputControls.Size = new System.Drawing.Size(859, 670);
             this.pageDesignInputControls.Text = "Design Input Controls";
             this.pageDesignInputControls.TextDescription = "Standalone is appropriate for input controls on a main form.";
             this.pageDesignInputControls.TextTitle = "Standalone";
@@ -1697,9 +1689,9 @@ namespace PaletteDesigner
             // 
             this.inputControls1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputControls1.Location = new System.Drawing.Point(0, 0);
-            this.inputControls1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputControls1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputControls1.Name = "inputControls1";
-            this.inputControls1.Size = new System.Drawing.Size(644, 544);
+            this.inputControls1.Size = new System.Drawing.Size(859, 670);
             this.inputControls1.TabIndex = 0;
             // 
             // pageDesignButtonSpecs
@@ -1720,9 +1712,10 @@ namespace PaletteDesigner
             this.pageDesignButtonSpecs.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtonSpecs.ImageMedium")));
             this.pageDesignButtonSpecs.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonBSActual;
             this.pageDesignButtonSpecs.LastVisibleSet = true;
-            this.pageDesignButtonSpecs.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignButtonSpecs.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignButtonSpecs.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignButtonSpecs.Name = "pageDesignButtonSpecs";
-            this.pageDesignButtonSpecs.Size = new System.Drawing.Size(644, 544);
+            this.pageDesignButtonSpecs.Size = new System.Drawing.Size(859, 670);
             this.pageDesignButtonSpecs.StateCommon.Page.Color1 = System.Drawing.Color.Red;
             this.pageDesignButtonSpecs.Text = "Design ButtonSpecs";
             this.pageDesignButtonSpecs.TextDescription = "Design appearnce of typed and generic button specifications.";
@@ -1737,9 +1730,10 @@ namespace PaletteDesigner
             this.buttonSpecG4.ButtonSpecs.Add(this.buttonSpecGeneric2);
             this.buttonSpecG4.Enabled = false;
             this.buttonSpecG4.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
-            this.buttonSpecG4.Location = new System.Drawing.Point(18, 407);
+            this.buttonSpecG4.Location = new System.Drawing.Point(24, 501);
+            this.buttonSpecG4.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecG4.Name = "buttonSpecG4";
-            this.buttonSpecG4.Size = new System.Drawing.Size(263, 28);
+            this.buttonSpecG4.Size = new System.Drawing.Size(351, 34);
             this.buttonSpecG4.TabIndex = 28;
             this.buttonSpecG4.Values.Description = "";
             this.buttonSpecG4.Values.Heading = "Disabled";
@@ -1761,9 +1755,10 @@ namespace PaletteDesigner
             this.buttonSpecG3.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG3.ButtonSpecs.Add(this.buttonSpecGeneric2);
             this.buttonSpecG3.Enabled = false;
-            this.buttonSpecG3.Location = new System.Drawing.Point(18, 362);
+            this.buttonSpecG3.Location = new System.Drawing.Point(24, 446);
+            this.buttonSpecG3.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecG3.Name = "buttonSpecG3";
-            this.buttonSpecG3.Size = new System.Drawing.Size(263, 37);
+            this.buttonSpecG3.Size = new System.Drawing.Size(351, 46);
             this.buttonSpecG3.TabIndex = 27;
             this.buttonSpecG3.Values.Description = "";
             this.buttonSpecG3.Values.Heading = "Disabled";
@@ -1775,9 +1770,10 @@ namespace PaletteDesigner
             this.buttonSpecG2.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG2.ButtonSpecs.Add(this.buttonSpecGeneric2);
             this.buttonSpecG2.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
-            this.buttonSpecG2.Location = new System.Drawing.Point(18, 319);
+            this.buttonSpecG2.Location = new System.Drawing.Point(24, 393);
+            this.buttonSpecG2.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecG2.Name = "buttonSpecG2";
-            this.buttonSpecG2.Size = new System.Drawing.Size(263, 28);
+            this.buttonSpecG2.Size = new System.Drawing.Size(351, 34);
             this.buttonSpecG2.TabIndex = 26;
             this.buttonSpecG2.Values.Description = "";
             this.buttonSpecG2.Values.Heading = "Header2";
@@ -1788,9 +1784,10 @@ namespace PaletteDesigner
             this.buttonSpecG1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecG1.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG1.ButtonSpecs.Add(this.buttonSpecGeneric2);
-            this.buttonSpecG1.Location = new System.Drawing.Point(18, 275);
+            this.buttonSpecG1.Location = new System.Drawing.Point(24, 338);
+            this.buttonSpecG1.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecG1.Name = "buttonSpecG1";
-            this.buttonSpecG1.Size = new System.Drawing.Size(263, 37);
+            this.buttonSpecG1.Size = new System.Drawing.Size(351, 46);
             this.buttonSpecG1.TabIndex = 25;
             this.buttonSpecG1.Values.Description = "";
             this.buttonSpecG1.Values.Heading = "Header1";
@@ -1817,9 +1814,10 @@ namespace PaletteDesigner
             this.buttonSpecT4.ButtonSpecs.Add(this.buttonSpecAny56);
             this.buttonSpecT4.Enabled = false;
             this.buttonSpecT4.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
-            this.buttonSpecT4.Location = new System.Drawing.Point(18, 187);
+            this.buttonSpecT4.Location = new System.Drawing.Point(24, 230);
+            this.buttonSpecT4.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecT4.Name = "buttonSpecT4";
-            this.buttonSpecT4.Size = new System.Drawing.Size(435, 36);
+            this.buttonSpecT4.Size = new System.Drawing.Size(580, 44);
             this.buttonSpecT4.TabIndex = 24;
             this.buttonSpecT4.Values.Description = "";
             this.buttonSpecT4.Values.Heading = "Disabled";
@@ -1925,9 +1923,10 @@ namespace PaletteDesigner
             this.buttonSpecT3.ButtonSpecs.Add(this.buttonSpecAny53);
             this.buttonSpecT3.ButtonSpecs.Add(this.buttonSpecAny54);
             this.buttonSpecT3.Enabled = false;
-            this.buttonSpecT3.Location = new System.Drawing.Point(18, 143);
+            this.buttonSpecT3.Location = new System.Drawing.Point(24, 176);
+            this.buttonSpecT3.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecT3.Name = "buttonSpecT3";
-            this.buttonSpecT3.Size = new System.Drawing.Size(473, 37);
+            this.buttonSpecT3.Size = new System.Drawing.Size(631, 46);
             this.buttonSpecT3.TabIndex = 23;
             this.buttonSpecT3.Values.Description = "";
             this.buttonSpecT3.Values.Heading = "Disabled";
@@ -2033,9 +2032,10 @@ namespace PaletteDesigner
             this.buttonSpecT2.ButtonSpecs.Add(this.buttonSpecAny47);
             this.buttonSpecT2.ButtonSpecs.Add(this.buttonSpecAny52);
             this.buttonSpecT2.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
-            this.buttonSpecT2.Location = new System.Drawing.Point(18, 99);
+            this.buttonSpecT2.Location = new System.Drawing.Point(24, 122);
+            this.buttonSpecT2.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecT2.Name = "buttonSpecT2";
-            this.buttonSpecT2.Size = new System.Drawing.Size(434, 36);
+            this.buttonSpecT2.Size = new System.Drawing.Size(579, 44);
             this.buttonSpecT2.TabIndex = 22;
             this.buttonSpecT2.Values.Description = "";
             this.buttonSpecT2.Values.Heading = "Header2";
@@ -2140,9 +2140,10 @@ namespace PaletteDesigner
             this.buttonSpecT1.ButtonSpecs.Add(this.buttonSpecAny37);
             this.buttonSpecT1.ButtonSpecs.Add(this.buttonSpecAny46);
             this.buttonSpecT1.ButtonSpecs.Add(this.buttonSpecAny45);
-            this.buttonSpecT1.Location = new System.Drawing.Point(18, 55);
+            this.buttonSpecT1.Location = new System.Drawing.Point(24, 68);
+            this.buttonSpecT1.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSpecT1.Name = "buttonSpecT1";
-            this.buttonSpecT1.Size = new System.Drawing.Size(471, 37);
+            this.buttonSpecT1.Size = new System.Drawing.Size(628, 46);
             this.buttonSpecT1.TabIndex = 21;
             this.buttonSpecT1.Values.Description = "";
             this.buttonSpecT1.Values.Heading = "Header1";
@@ -2231,43 +2232,36 @@ namespace PaletteDesigner
             // labelButtonSpecsTyped
             // 
             this.labelButtonSpecsTyped.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelButtonSpecsTyped.Location = new System.Drawing.Point(18, 24);
+            this.labelButtonSpecsTyped.Location = new System.Drawing.Point(24, 30);
+            this.labelButtonSpecsTyped.Margin = new System.Windows.Forms.Padding(4);
             this.labelButtonSpecsTyped.Name = "labelButtonSpecsTyped";
-            this.labelButtonSpecsTyped.Size = new System.Drawing.Size(172, 29);
+            this.labelButtonSpecsTyped.Size = new System.Drawing.Size(214, 35);
             this.labelButtonSpecsTyped.TabIndex = 29;
             this.labelButtonSpecsTyped.Values.Text = "Typed ButtonSpec";
             // 
             // labelButtonSpecsGeneric
             // 
             this.labelButtonSpecsGeneric.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelButtonSpecsGeneric.Location = new System.Drawing.Point(18, 244);
+            this.labelButtonSpecsGeneric.Location = new System.Drawing.Point(24, 300);
+            this.labelButtonSpecsGeneric.Margin = new System.Windows.Forms.Padding(4);
             this.labelButtonSpecsGeneric.Name = "labelButtonSpecsGeneric";
-            this.labelButtonSpecsGeneric.Size = new System.Drawing.Size(184, 29);
+            this.labelButtonSpecsGeneric.Size = new System.Drawing.Size(229, 35);
             this.labelButtonSpecsGeneric.TabIndex = 30;
             this.labelButtonSpecsGeneric.Values.Text = "Generic ButtonSpec";
             // 
             // pageDesignButtons
             // 
             this.pageDesignButtons.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageDesignButtons.Controls.Add(this.buttonLive);
-            this.pageDesignButtons.Controls.Add(this.borderDesignButtons);
-            this.pageDesignButtons.Controls.Add(this.kryptonNavigatorDesignButtons);
-            this.pageDesignButtons.Controls.Add(this.buttonCheckedPressed);
-            this.pageDesignButtons.Controls.Add(this.buttonCheckedTracking);
-            this.pageDesignButtons.Controls.Add(this.buttonCheckedNormal);
-            this.pageDesignButtons.Controls.Add(this.buttonDisabled);
-            this.pageDesignButtons.Controls.Add(this.buttonPressed);
-            this.pageDesignButtons.Controls.Add(this.buttonNormal);
-            this.pageDesignButtons.Controls.Add(this.buttonTracking);
-            this.pageDesignButtons.Controls.Add(this.buttonDefaultFocus);
+            this.pageDesignButtons.Controls.Add(this.buttonsPage1);
             this.pageDesignButtons.Flags = 65535;
             this.pageDesignButtons.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageLarge")));
             this.pageDesignButtons.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageMedium")));
             this.pageDesignButtons.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignButtons.ImageSmall")));
             this.pageDesignButtons.LastVisibleSet = true;
-            this.pageDesignButtons.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignButtons.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignButtons.Name = "pageDesignButtons";
-            this.pageDesignButtons.Size = new System.Drawing.Size(462, 535);
+            this.pageDesignButtons.Size = new System.Drawing.Size(857, 672);
             this.pageDesignButtons.Text = "Design Buttons";
             this.pageDesignButtons.TextDescription = "Standalone is the main button style and intended for individual button instances." +
     "";
@@ -2275,441 +2269,12 @@ namespace PaletteDesigner
             this.pageDesignButtons.ToolTipTitle = "Page ToolTip";
             this.pageDesignButtons.UniqueName = "5F8CCF195F9E4E775F8CCF195F9E4E77";
             // 
-            // buttonLive
+            // buttonsPage1
             // 
-            this.buttonLive.AutoSize = true;
-            this.buttonLive.Location = new System.Drawing.Point(218, 254);
-            this.buttonLive.Name = "buttonLive";
-            this.buttonLive.Size = new System.Drawing.Size(90, 28);
-            this.buttonLive.TabIndex = 16;
-            this.buttonLive.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonLive.Values.Image")));
-            this.buttonLive.Values.Text = "Live";
-            // 
-            // borderDesignButtons
-            // 
-            this.borderDesignButtons.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignButtons.Location = new System.Drawing.Point(92, 0);
-            this.borderDesignButtons.Name = "borderDesignButtons";
-            this.borderDesignButtons.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignButtons.Size = new System.Drawing.Size(1, 535);
-            this.borderDesignButtons.TabIndex = 1;
-            // 
-            // kryptonNavigatorDesignButtons
-            // 
-            this.kryptonNavigatorDesignButtons.AutoSize = true;
-            this.kryptonNavigatorDesignButtons.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
-            this.kryptonNavigatorDesignButtons.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignButtons.Bar.BarMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignButtons.Bar.BarMultiline = Krypton.Navigator.BarMultiline.Singleline;
-            this.kryptonNavigatorDesignButtons.Bar.BarOrientation = Krypton.Toolkit.VisualOrientation.Left;
-            this.kryptonNavigatorDesignButtons.Bar.CheckButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.kryptonNavigatorDesignButtons.Bar.ItemAlignment = Krypton.Toolkit.RelativePositionAlign.Near;
-            this.kryptonNavigatorDesignButtons.Bar.ItemMaximumSize = new System.Drawing.Size(200, 200);
-            this.kryptonNavigatorDesignButtons.Bar.ItemMinimumSize = new System.Drawing.Size(20, 20);
-            this.kryptonNavigatorDesignButtons.Bar.ItemOrientation = Krypton.Toolkit.ButtonOrientation.FixedTop;
-            this.kryptonNavigatorDesignButtons.Bar.ItemSizing = Krypton.Navigator.BarItemSizing.SameWidthAndHeight;
-            this.kryptonNavigatorDesignButtons.Bar.TabBorderStyle = Krypton.Toolkit.TabBorderStyle.RoundedOutsizeMedium;
-            this.kryptonNavigatorDesignButtons.Bar.TabStyle = Krypton.Toolkit.TabStyle.HighProfile;
-            this.kryptonNavigatorDesignButtons.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.None;
-            this.kryptonNavigatorDesignButtons.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.kryptonNavigatorDesignButtons.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
-            this.kryptonNavigatorDesignButtons.Button.ContextButtonAction = Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigatorDesignButtons.Button.ContextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignButtons.Button.ContextMenuMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignButtons.Button.ContextMenuMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignButtons.Button.NextButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignButtons.Button.NextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignButtons.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignButtons.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignButtons.ControlKryptonFormFeatures = false;
-            this.kryptonNavigatorDesignButtons.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonNavigatorDesignButtons.Location = new System.Drawing.Point(0, 0);
-            this.kryptonNavigatorDesignButtons.Name = "kryptonNavigatorDesignButtons";
-            this.kryptonNavigatorDesignButtons.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
-            this.kryptonNavigatorDesignButtons.Owner = null;
-            this.kryptonNavigatorDesignButtons.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.kryptonNavigatorDesignButtons.Pages.AddRange(new Krypton.Navigator.KryptonPage[] {
-            this.pageButtonsStandalone,
-            this.pageButtonsAlternate,
-            this.pageButtonsLowProfile,
-            this.pageButtonsBreadCrumb,
-            this.pageButtonCalendarDay,
-            this.pageButtonsButtonSpec,
-            this.pageButtonsRibbonCluster,
-            this.pageButtonsNavigatorStack,
-            this.pageButtonsNavigatorOverflow,
-            this.pageButtonsNavigatorMini,
-            this.pageButtonsInputControl,
-            this.pageButtonsListItem,
-            this.pageButtonsGallery,
-            this.pageButtonsForm,
-            this.pageButtonsFormClose,
-            this.pageButtonsCommand,
-            this.pageButtonsCustom1,
-            this.pageButtonsCustom2,
-            this.pageButtonsCustom3});
-            this.kryptonNavigatorDesignButtons.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
-            this.kryptonNavigatorDesignButtons.SelectedIndex = 0;
-            this.kryptonNavigatorDesignButtons.Size = new System.Drawing.Size(92, 535);
-            this.kryptonNavigatorDesignButtons.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignButtons.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
-            this.kryptonNavigatorDesignButtons.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignButtons.StateCommon.Bar.BarPaddingTabs = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignButtons.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignButtons.TabIndex = 0;
-            this.kryptonNavigatorDesignButtons.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignButtons.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignButtons_SelectedPageChanged);
-            // 
-            // pageButtonsStandalone
-            // 
-            this.pageButtonsStandalone.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsStandalone.Flags = 65535;
-            this.pageButtonsStandalone.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsStandalone.ImageLarge")));
-            this.pageButtonsStandalone.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsStandalone.ImageMedium")));
-            this.pageButtonsStandalone.LastVisibleSet = true;
-            this.pageButtonsStandalone.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsStandalone.Name = "pageButtonsStandalone";
-            this.pageButtonsStandalone.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsStandalone.Text = "Standalone";
-            this.pageButtonsStandalone.TextDescription = "Standalone is the main button style and intended for individual button instances." +
-    "";
-            this.pageButtonsStandalone.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsStandalone.UniqueName = "37C6B25023EE41AD37C6B25023EE41AD";
-            // 
-            // pageButtonsAlternate
-            // 
-            this.pageButtonsAlternate.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsAlternate.Flags = 65535;
-            this.pageButtonsAlternate.LastVisibleSet = true;
-            this.pageButtonsAlternate.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsAlternate.Name = "pageButtonsAlternate";
-            this.pageButtonsAlternate.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsAlternate.Text = "Alternate";
-            this.pageButtonsAlternate.TextDescription = "Alternate is the alternative standalone button style.";
-            this.pageButtonsAlternate.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsAlternate.UniqueName = "69A8A8D80810484369A8A8D808104843";
-            // 
-            // pageButtonsLowProfile
-            // 
-            this.pageButtonsLowProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsLowProfile.Flags = 65535;
-            this.pageButtonsLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsLowProfile.ImageLarge")));
-            this.pageButtonsLowProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsLowProfile.ImageMedium")));
-            this.pageButtonsLowProfile.LastVisibleSet = true;
-            this.pageButtonsLowProfile.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsLowProfile.Name = "pageButtonsLowProfile";
-            this.pageButtonsLowProfile.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsLowProfile.Text = "Low Profile";
-            this.pageButtonsLowProfile.TextDescription = "Low Profile style is a less prominent variation for individual button instances.";
-            this.pageButtonsLowProfile.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsLowProfile.UniqueName = "CEF16160BF1146BFCEF16160BF1146BF";
-            // 
-            // pageButtonsBreadCrumb
-            // 
-            this.pageButtonsBreadCrumb.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsBreadCrumb.Flags = 65535;
-            this.pageButtonsBreadCrumb.LastVisibleSet = true;
-            this.pageButtonsBreadCrumb.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsBreadCrumb.Name = "pageButtonsBreadCrumb";
-            this.pageButtonsBreadCrumb.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsBreadCrumb.Text = "Bread Crumb";
-            this.pageButtonsBreadCrumb.TextDescription = "Bread Crumb is used to draw each individual crumb inside the KryptonBreadCrumb.";
-            this.pageButtonsBreadCrumb.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsBreadCrumb.UniqueName = "9083C1AC254644EE9083C1AC254644EE";
-            // 
-            // pageButtonCalendarDay
-            // 
-            this.pageButtonCalendarDay.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonCalendarDay.Flags = 65535;
-            this.pageButtonCalendarDay.LastVisibleSet = true;
-            this.pageButtonCalendarDay.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonCalendarDay.Name = "pageButtonCalendarDay";
-            this.pageButtonCalendarDay.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonCalendarDay.Text = "Calendar Day";
-            this.pageButtonCalendarDay.TextDescription = "Calendar Day is used for drawing each day entry within the calendar.";
-            this.pageButtonCalendarDay.ToolTipTitle = "Page ToolTip";
-            this.pageButtonCalendarDay.UniqueName = "1C1B572BB01A40641C1B572BB01A4064";
-            // 
-            // pageButtonsButtonSpec
-            // 
-            this.pageButtonsButtonSpec.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsButtonSpec.Flags = 65535;
-            this.pageButtonsButtonSpec.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsButtonSpec.ImageLarge")));
-            this.pageButtonsButtonSpec.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsButtonSpec.ImageMedium")));
-            this.pageButtonsButtonSpec.LastVisibleSet = true;
-            this.pageButtonsButtonSpec.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsButtonSpec.Name = "pageButtonsButtonSpec";
-            this.pageButtonsButtonSpec.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsButtonSpec.Text = "ButtonSpec";
-            this.pageButtonsButtonSpec.TextDescription = "ButtonSpec is the default style for buttons created via ButtonSpec collections.";
-            this.pageButtonsButtonSpec.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsButtonSpec.UniqueName = "31198AD4E0DB40BF31198AD4E0DB40BF";
-            // 
-            // pageButtonsRibbonCluster
-            // 
-            this.pageButtonsRibbonCluster.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsRibbonCluster.Flags = 65535;
-            this.pageButtonsRibbonCluster.LastVisibleSet = true;
-            this.pageButtonsRibbonCluster.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsRibbonCluster.Name = "pageButtonsRibbonCluster";
-            this.pageButtonsRibbonCluster.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsRibbonCluster.Text = "Cluster";
-            this.pageButtonsRibbonCluster.TextDescription = "Buttons inside a Ribbon cluster have their own style.";
-            this.pageButtonsRibbonCluster.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsRibbonCluster.UniqueName = "40D019DF2E9A467340D019DF2E9A4673";
-            // 
-            // pageButtonsNavigatorStack
-            // 
-            this.pageButtonsNavigatorStack.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsNavigatorStack.Flags = 65535;
-            this.pageButtonsNavigatorStack.LastVisibleSet = true;
-            this.pageButtonsNavigatorStack.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsNavigatorStack.Name = "pageButtonsNavigatorStack";
-            this.pageButtonsNavigatorStack.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsNavigatorStack.Text = "Nav Stack";
-            this.pageButtonsNavigatorStack.TextDescription = "Navigator Stack is the default style for stack buttons in the KryptonNavigator.";
-            this.pageButtonsNavigatorStack.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsNavigatorStack.UniqueName = "4AFE01312A0D4DBB4AFE01312A0D4DBB";
-            // 
-            // pageButtonsNavigatorOverflow
-            // 
-            this.pageButtonsNavigatorOverflow.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsNavigatorOverflow.Flags = 65535;
-            this.pageButtonsNavigatorOverflow.LastVisibleSet = true;
-            this.pageButtonsNavigatorOverflow.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsNavigatorOverflow.Name = "pageButtonsNavigatorOverflow";
-            this.pageButtonsNavigatorOverflow.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsNavigatorOverflow.Text = "Nav Overflow";
-            this.pageButtonsNavigatorOverflow.TextDescription = "Navigator Overflow is the style for buttons placed on the overflow area of the Ou" +
-    "tlook modes.";
-            this.pageButtonsNavigatorOverflow.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsNavigatorOverflow.UniqueName = "B2269535DD084621B2269535DD084621";
-            // 
-            // pageButtonsNavigatorMini
-            // 
-            this.pageButtonsNavigatorMini.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsNavigatorMini.Flags = 65535;
-            this.pageButtonsNavigatorMini.LastVisibleSet = true;
-            this.pageButtonsNavigatorMini.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsNavigatorMini.Name = "pageButtonsNavigatorMini";
-            this.pageButtonsNavigatorMini.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsNavigatorMini.Text = "Nav Mini";
-            this.pageButtonsNavigatorMini.TextDescription = "Navigator Mini is the default style for the mini button used in the KryptonNaviga" +
-    "tor.";
-            this.pageButtonsNavigatorMini.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsNavigatorMini.UniqueName = "AD5F157B621F4B10AD5F157B621F4B10";
-            // 
-            // pageButtonsInputControl
-            // 
-            this.pageButtonsInputControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsInputControl.Flags = 65535;
-            this.pageButtonsInputControl.LastVisibleSet = true;
-            this.pageButtonsInputControl.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsInputControl.Name = "pageButtonsInputControl";
-            this.pageButtonsInputControl.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsInputControl.Text = "Input Control";
-            this.pageButtonsInputControl.TextDescription = "Input Control is used as the drop down button inside input controls.";
-            this.pageButtonsInputControl.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsInputControl.UniqueName = "563FAF44653F46E5563FAF44653F46E5";
-            // 
-            // pageButtonsListItem
-            // 
-            this.pageButtonsListItem.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsListItem.Flags = 65535;
-            this.pageButtonsListItem.LastVisibleSet = true;
-            this.pageButtonsListItem.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsListItem.Name = "pageButtonsListItem";
-            this.pageButtonsListItem.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsListItem.Text = "List Item";
-            this.pageButtonsListItem.TextDescription = "List Item is used as the display of items inside lists.";
-            this.pageButtonsListItem.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsListItem.UniqueName = "31BB921AEA374D7E31BB921AEA374D7E";
-            // 
-            // pageButtonsGallery
-            // 
-            this.pageButtonsGallery.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsGallery.Flags = 65535;
-            this.pageButtonsGallery.LastVisibleSet = true;
-            this.pageButtonsGallery.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsGallery.Name = "pageButtonsGallery";
-            this.pageButtonsGallery.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsGallery.Text = "Gallery";
-            this.pageButtonsGallery.TextDescription = "Gallery is the button style for the three up/down/dropdown control buttons.";
-            this.pageButtonsGallery.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsGallery.UniqueName = "EF0BB7D061A34A41EF0BB7D061A34A41";
-            // 
-            // pageButtonsForm
-            // 
-            this.pageButtonsForm.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsForm.Flags = 65535;
-            this.pageButtonsForm.LastVisibleSet = true;
-            this.pageButtonsForm.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsForm.Name = "pageButtonsForm";
-            this.pageButtonsForm.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsForm.Text = "Form";
-            this.pageButtonsForm.TextDescription = "Form style is used as the default for min/max/restore buttons on a KryptonForm.";
-            this.pageButtonsForm.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsForm.UniqueName = "76C0F19D5CAC4E6B76C0F19D5CAC4E6B";
-            // 
-            // pageButtonsFormClose
-            // 
-            this.pageButtonsFormClose.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsFormClose.Flags = 65534;
-            this.pageButtonsFormClose.LastVisibleSet = true;
-            this.pageButtonsFormClose.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsFormClose.Name = "pageButtonsFormClose";
-            this.pageButtonsFormClose.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsFormClose.Text = "Form Close";
-            this.pageButtonsFormClose.TextDescription = "Form Close style is used as the default for close buttons on a KryptonForm.";
-            this.pageButtonsFormClose.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsFormClose.UniqueName = "0655DBDF14BD48A3CEA6FBAEC14F3E64";
-            // 
-            // pageButtonsCommand
-            // 
-            this.pageButtonsCommand.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsCommand.Flags = 65534;
-            this.pageButtonsCommand.LastVisibleSet = true;
-            this.pageButtonsCommand.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsCommand.Name = "pageButtonsCommand";
-            this.pageButtonsCommand.Size = new System.Drawing.Size(100, 100);
-            this.pageButtonsCommand.Text = "Command";
-            this.pageButtonsCommand.TextDescription = "Command style is used for the custom command buttons inside the KryponTaskDialog." +
-    "";
-            this.pageButtonsCommand.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsCommand.UniqueName = "BDF278722644422EF29A3E5CDD9CC5BA";
-            // 
-            // pageButtonsCustom1
-            // 
-            this.pageButtonsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsCustom1.Flags = 65535;
-            this.pageButtonsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom1.ImageLarge")));
-            this.pageButtonsCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom1.ImageMedium")));
-            this.pageButtonsCustom1.LastVisibleSet = true;
-            this.pageButtonsCustom1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsCustom1.Name = "pageButtonsCustom1";
-            this.pageButtonsCustom1.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsCustom1.Text = "Custom 1";
-            this.pageButtonsCustom1.TextDescription = "Custom 1 style inherits from Standalone and is intended for your own custom use.";
-            this.pageButtonsCustom1.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsCustom1.UniqueName = "D5D960581C2941EAD5D960581C2941EA";
-            // 
-            // pageButtonsCustom2
-            // 
-            this.pageButtonsCustom2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsCustom2.Flags = 65535;
-            this.pageButtonsCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom2.ImageLarge")));
-            this.pageButtonsCustom2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom2.ImageMedium")));
-            this.pageButtonsCustom2.LastVisibleSet = true;
-            this.pageButtonsCustom2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsCustom2.Name = "pageButtonsCustom2";
-            this.pageButtonsCustom2.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsCustom2.Text = "Custom 2";
-            this.pageButtonsCustom2.TextDescription = "Custom 2 style inherits from Standalone and is intended for your own custom use.";
-            this.pageButtonsCustom2.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsCustom2.UniqueName = "B41A275F5EFB4B41B41A275F5EFB4B41";
-            // 
-            // pageButtonsCustom3
-            // 
-            this.pageButtonsCustom3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageButtonsCustom3.Flags = 65535;
-            this.pageButtonsCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom3.ImageLarge")));
-            this.pageButtonsCustom3.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom3.ImageMedium")));
-            this.pageButtonsCustom3.LastVisibleSet = true;
-            this.pageButtonsCustom3.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageButtonsCustom3.Name = "pageButtonsCustom3";
-            this.pageButtonsCustom3.Size = new System.Drawing.Size(50, 500);
-            this.pageButtonsCustom3.Text = "Custom 3";
-            this.pageButtonsCustom3.TextDescription = "Custom 3 style inherits from Standalone and is intended for your own custom use.";
-            this.pageButtonsCustom3.ToolTipTitle = "Page ToolTip";
-            this.pageButtonsCustom3.UniqueName = "C2E105865C8444A2C2E105865C8444A2";
-            // 
-            // buttonCheckedPressed
-            // 
-            this.buttonCheckedPressed.AutoSize = true;
-            this.buttonCheckedPressed.Enabled = false;
-            this.buttonCheckedPressed.Location = new System.Drawing.Point(287, 198);
-            this.buttonCheckedPressed.Name = "buttonCheckedPressed";
-            this.buttonCheckedPressed.Size = new System.Drawing.Size(141, 28);
-            this.buttonCheckedPressed.TabIndex = 15;
-            this.buttonCheckedPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedPressed.Values.Image")));
-            this.buttonCheckedPressed.Values.Text = "Checked Pressed";
-            // 
-            // buttonCheckedTracking
-            // 
-            this.buttonCheckedTracking.AutoSize = true;
-            this.buttonCheckedTracking.Enabled = false;
-            this.buttonCheckedTracking.Location = new System.Drawing.Point(287, 141);
-            this.buttonCheckedTracking.Name = "buttonCheckedTracking";
-            this.buttonCheckedTracking.Size = new System.Drawing.Size(147, 28);
-            this.buttonCheckedTracking.TabIndex = 14;
-            this.buttonCheckedTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedTracking.Values.Image")));
-            this.buttonCheckedTracking.Values.Text = "Checked Tracking";
-            // 
-            // buttonCheckedNormal
-            // 
-            this.buttonCheckedNormal.AutoSize = true;
-            this.buttonCheckedNormal.Enabled = false;
-            this.buttonCheckedNormal.Location = new System.Drawing.Point(287, 86);
-            this.buttonCheckedNormal.Name = "buttonCheckedNormal";
-            this.buttonCheckedNormal.Size = new System.Drawing.Size(140, 28);
-            this.buttonCheckedNormal.TabIndex = 13;
-            this.buttonCheckedNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedNormal.Values.Image")));
-            this.buttonCheckedNormal.Values.Text = "Checked Normal";
-            // 
-            // buttonDisabled
-            // 
-            this.buttonDisabled.AutoSize = true;
-            this.buttonDisabled.Enabled = false;
-            this.buttonDisabled.Location = new System.Drawing.Point(123, 30);
-            this.buttonDisabled.Name = "buttonDisabled";
-            this.buttonDisabled.Size = new System.Drawing.Size(119, 28);
-            this.buttonDisabled.TabIndex = 8;
-            this.buttonDisabled.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDisabled.Values.Image")));
-            this.buttonDisabled.Values.Text = "Disabled";
-            // 
-            // buttonPressed
-            // 
-            this.buttonPressed.AutoSize = true;
-            this.buttonPressed.Enabled = false;
-            this.buttonPressed.Location = new System.Drawing.Point(123, 198);
-            this.buttonPressed.Name = "buttonPressed";
-            this.buttonPressed.Size = new System.Drawing.Size(119, 28);
-            this.buttonPressed.TabIndex = 12;
-            this.buttonPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonPressed.Values.Image")));
-            this.buttonPressed.Values.Text = "Pressed";
-            // 
-            // buttonNormal
-            // 
-            this.buttonNormal.AutoSize = true;
-            this.buttonNormal.Enabled = false;
-            this.buttonNormal.Location = new System.Drawing.Point(123, 86);
-            this.buttonNormal.Name = "buttonNormal";
-            this.buttonNormal.Size = new System.Drawing.Size(119, 28);
-            this.buttonNormal.TabIndex = 9;
-            this.buttonNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonNormal.Values.Image")));
-            this.buttonNormal.Values.Text = "Normal";
-            // 
-            // buttonTracking
-            // 
-            this.buttonTracking.AutoSize = true;
-            this.buttonTracking.Enabled = false;
-            this.buttonTracking.Location = new System.Drawing.Point(123, 141);
-            this.buttonTracking.Name = "buttonTracking";
-            this.buttonTracking.Size = new System.Drawing.Size(119, 28);
-            this.buttonTracking.TabIndex = 11;
-            this.buttonTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonTracking.Values.Image")));
-            this.buttonTracking.Values.Text = "Tracking";
-            // 
-            // buttonDefaultFocus
-            // 
-            this.buttonDefaultFocus.AutoSize = true;
-            this.buttonDefaultFocus.Enabled = false;
-            this.buttonDefaultFocus.Location = new System.Drawing.Point(287, 30);
-            this.buttonDefaultFocus.Name = "buttonDefaultFocus";
-            this.buttonDefaultFocus.Size = new System.Drawing.Size(134, 28);
-            this.buttonDefaultFocus.TabIndex = 10;
-            this.buttonDefaultFocus.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDefaultFocus.Values.Image")));
-            this.buttonDefaultFocus.Values.Text = "Default + Focus";
+            this.buttonsPage1.Location = new System.Drawing.Point(0, 0);
+            this.buttonsPage1.Name = "buttonsPage1";
+            this.buttonsPage1.Size = new System.Drawing.Size(867, 670);
+            this.buttonsPage1.TabIndex = 0;
             // 
             // pageDesignCheckBox
             // 
@@ -2732,10 +2297,11 @@ namespace PaletteDesigner
             this.pageDesignCheckBox.Flags = 65535;
             this.pageDesignCheckBox.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignCheckBox.ImageSmall")));
             this.pageDesignCheckBox.LastVisibleSet = true;
-            this.pageDesignCheckBox.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignCheckBox.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignCheckBox.Name = "pageDesignCheckBox";
-            this.pageDesignCheckBox.Padding = new System.Windows.Forms.Padding(20);
-            this.pageDesignCheckBox.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignCheckBox.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.pageDesignCheckBox.Size = new System.Drawing.Size(616, 645);
             this.pageDesignCheckBox.Text = "Design CheckBox";
             this.pageDesignCheckBox.TextDescription = "Preview appearance of the CheckBox control.";
             this.pageDesignCheckBox.TextTitle = "";
@@ -2746,18 +2312,20 @@ namespace PaletteDesigner
             // 
             this.cbLive.Checked = true;
             this.cbLive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbLive.Location = new System.Drawing.Point(205, 228);
+            this.cbLive.Location = new System.Drawing.Point(273, 281);
+            this.cbLive.Margin = new System.Windows.Forms.Padding(4);
             this.cbLive.Name = "cbLive";
-            this.cbLive.Size = new System.Drawing.Size(45, 20);
+            this.cbLive.Size = new System.Drawing.Size(51, 24);
             this.cbLive.TabIndex = 14;
             this.cbLive.ThreeState = true;
             this.cbLive.Values.Text = "Live";
             // 
             // cbFocus
             // 
-            this.cbFocus.Location = new System.Drawing.Point(205, 190);
+            this.cbFocus.Location = new System.Drawing.Point(273, 234);
+            this.cbFocus.Margin = new System.Windows.Forms.Padding(4);
             this.cbFocus.Name = "cbFocus";
-            this.cbFocus.Size = new System.Drawing.Size(55, 20);
+            this.cbFocus.Size = new System.Drawing.Size(64, 24);
             this.cbFocus.TabIndex = 13;
             this.cbFocus.Values.Text = "Focus";
             // 
@@ -2765,9 +2333,10 @@ namespace PaletteDesigner
             // 
             this.cbIndeterminateTracking.Checked = true;
             this.cbIndeterminateTracking.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cbIndeterminateTracking.Location = new System.Drawing.Point(23, 266);
+            this.cbIndeterminateTracking.Location = new System.Drawing.Point(31, 327);
+            this.cbIndeterminateTracking.Margin = new System.Windows.Forms.Padding(4);
             this.cbIndeterminateTracking.Name = "cbIndeterminateTracking";
-            this.cbIndeterminateTracking.Size = new System.Drawing.Size(150, 20);
+            this.cbIndeterminateTracking.Size = new System.Drawing.Size(182, 24);
             this.cbIndeterminateTracking.TabIndex = 12;
             this.cbIndeterminateTracking.Values.Text = "Indeterminate Tracking";
             // 
@@ -2775,9 +2344,10 @@ namespace PaletteDesigner
             // 
             this.cbIndeterminatePressed.Checked = true;
             this.cbIndeterminatePressed.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cbIndeterminatePressed.Location = new System.Drawing.Point(23, 304);
+            this.cbIndeterminatePressed.Location = new System.Drawing.Point(31, 374);
+            this.cbIndeterminatePressed.Margin = new System.Windows.Forms.Padding(4);
             this.cbIndeterminatePressed.Name = "cbIndeterminatePressed";
-            this.cbIndeterminatePressed.Size = new System.Drawing.Size(145, 20);
+            this.cbIndeterminatePressed.Size = new System.Drawing.Size(177, 24);
             this.cbIndeterminatePressed.TabIndex = 11;
             this.cbIndeterminatePressed.Values.Text = "Indeterminate Pressed";
             // 
@@ -2785,9 +2355,10 @@ namespace PaletteDesigner
             // 
             this.cbIndeterminateNormal.Checked = true;
             this.cbIndeterminateNormal.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cbIndeterminateNormal.Location = new System.Drawing.Point(23, 228);
+            this.cbIndeterminateNormal.Location = new System.Drawing.Point(31, 281);
+            this.cbIndeterminateNormal.Margin = new System.Windows.Forms.Padding(4);
             this.cbIndeterminateNormal.Name = "cbIndeterminateNormal";
-            this.cbIndeterminateNormal.Size = new System.Drawing.Size(144, 20);
+            this.cbIndeterminateNormal.Size = new System.Drawing.Size(175, 24);
             this.cbIndeterminateNormal.TabIndex = 10;
             this.cbIndeterminateNormal.Values.Text = "Indeterminate Normal";
             // 
@@ -2795,9 +2366,10 @@ namespace PaletteDesigner
             // 
             this.cbIndeterminateDisabled.Checked = true;
             this.cbIndeterminateDisabled.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cbIndeterminateDisabled.Location = new System.Drawing.Point(23, 190);
+            this.cbIndeterminateDisabled.Location = new System.Drawing.Point(31, 234);
+            this.cbIndeterminateDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.cbIndeterminateDisabled.Name = "cbIndeterminateDisabled";
-            this.cbIndeterminateDisabled.Size = new System.Drawing.Size(151, 20);
+            this.cbIndeterminateDisabled.Size = new System.Drawing.Size(183, 24);
             this.cbIndeterminateDisabled.TabIndex = 9;
             this.cbIndeterminateDisabled.Values.Text = "Indeterminate Disabled";
             // 
@@ -2805,9 +2377,10 @@ namespace PaletteDesigner
             // 
             this.cbCheckedTracking.Checked = true;
             this.cbCheckedTracking.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCheckedTracking.Location = new System.Drawing.Point(205, 99);
+            this.cbCheckedTracking.Location = new System.Drawing.Point(273, 122);
+            this.cbCheckedTracking.Margin = new System.Windows.Forms.Padding(4);
             this.cbCheckedTracking.Name = "cbCheckedTracking";
-            this.cbCheckedTracking.Size = new System.Drawing.Size(120, 20);
+            this.cbCheckedTracking.Size = new System.Drawing.Size(145, 24);
             this.cbCheckedTracking.TabIndex = 8;
             this.cbCheckedTracking.Values.Text = "Checked Tracking";
             // 
@@ -2815,9 +2388,10 @@ namespace PaletteDesigner
             // 
             this.cbCheckedPressed.Checked = true;
             this.cbCheckedPressed.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCheckedPressed.Location = new System.Drawing.Point(205, 137);
+            this.cbCheckedPressed.Location = new System.Drawing.Point(273, 169);
+            this.cbCheckedPressed.Margin = new System.Windows.Forms.Padding(4);
             this.cbCheckedPressed.Name = "cbCheckedPressed";
-            this.cbCheckedPressed.Size = new System.Drawing.Size(115, 20);
+            this.cbCheckedPressed.Size = new System.Drawing.Size(139, 24);
             this.cbCheckedPressed.TabIndex = 7;
             this.cbCheckedPressed.Values.Text = "Checked Pressed";
             // 
@@ -2825,9 +2399,10 @@ namespace PaletteDesigner
             // 
             this.cbCheckedNormal.Checked = true;
             this.cbCheckedNormal.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCheckedNormal.Location = new System.Drawing.Point(205, 61);
+            this.cbCheckedNormal.Location = new System.Drawing.Point(273, 75);
+            this.cbCheckedNormal.Margin = new System.Windows.Forms.Padding(4);
             this.cbCheckedNormal.Name = "cbCheckedNormal";
-            this.cbCheckedNormal.Size = new System.Drawing.Size(114, 20);
+            this.cbCheckedNormal.Size = new System.Drawing.Size(138, 24);
             this.cbCheckedNormal.TabIndex = 6;
             this.cbCheckedNormal.Values.Text = "Checked Normal";
             // 
@@ -2835,49 +2410,55 @@ namespace PaletteDesigner
             // 
             this.cbCheckedDisabled.Checked = true;
             this.cbCheckedDisabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCheckedDisabled.Location = new System.Drawing.Point(205, 23);
+            this.cbCheckedDisabled.Location = new System.Drawing.Point(273, 28);
+            this.cbCheckedDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.cbCheckedDisabled.Name = "cbCheckedDisabled";
-            this.cbCheckedDisabled.Size = new System.Drawing.Size(121, 20);
+            this.cbCheckedDisabled.Size = new System.Drawing.Size(146, 24);
             this.cbCheckedDisabled.TabIndex = 5;
             this.cbCheckedDisabled.Values.Text = "Checked Disabled";
             // 
             // cbUncheckedTracking
             // 
-            this.cbUncheckedTracking.Location = new System.Drawing.Point(23, 99);
+            this.cbUncheckedTracking.Location = new System.Drawing.Point(31, 122);
+            this.cbUncheckedTracking.Margin = new System.Windows.Forms.Padding(4);
             this.cbUncheckedTracking.Name = "cbUncheckedTracking";
-            this.cbUncheckedTracking.Size = new System.Drawing.Size(133, 20);
+            this.cbUncheckedTracking.Size = new System.Drawing.Size(162, 24);
             this.cbUncheckedTracking.TabIndex = 4;
             this.cbUncheckedTracking.Values.Text = "Unchecked Tracking";
             // 
             // cbUncheckedPressed
             // 
-            this.cbUncheckedPressed.Location = new System.Drawing.Point(23, 137);
+            this.cbUncheckedPressed.Location = new System.Drawing.Point(31, 169);
+            this.cbUncheckedPressed.Margin = new System.Windows.Forms.Padding(4);
             this.cbUncheckedPressed.Name = "cbUncheckedPressed";
-            this.cbUncheckedPressed.Size = new System.Drawing.Size(129, 20);
+            this.cbUncheckedPressed.Size = new System.Drawing.Size(156, 24);
             this.cbUncheckedPressed.TabIndex = 3;
             this.cbUncheckedPressed.Values.Text = "Unchecked Pressed";
             // 
             // cbUncheckedNormal
             // 
-            this.cbUncheckedNormal.Location = new System.Drawing.Point(23, 61);
+            this.cbUncheckedNormal.Location = new System.Drawing.Point(31, 75);
+            this.cbUncheckedNormal.Margin = new System.Windows.Forms.Padding(4);
             this.cbUncheckedNormal.Name = "cbUncheckedNormal";
-            this.cbUncheckedNormal.Size = new System.Drawing.Size(128, 20);
+            this.cbUncheckedNormal.Size = new System.Drawing.Size(155, 24);
             this.cbUncheckedNormal.TabIndex = 2;
             this.cbUncheckedNormal.Values.Text = "Unchecked Normal";
             // 
             // cbUncheckedDisabled
             // 
-            this.cbUncheckedDisabled.Location = new System.Drawing.Point(23, 23);
+            this.cbUncheckedDisabled.Location = new System.Drawing.Point(31, 28);
+            this.cbUncheckedDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.cbUncheckedDisabled.Name = "cbUncheckedDisabled";
-            this.cbUncheckedDisabled.Size = new System.Drawing.Size(134, 20);
+            this.cbUncheckedDisabled.Size = new System.Drawing.Size(163, 24);
             this.cbUncheckedDisabled.TabIndex = 1;
             this.cbUncheckedDisabled.Values.Text = "Unchecked Disabled";
             // 
             // kryptonCheckBox1
             // 
-            this.kryptonCheckBox1.Location = new System.Drawing.Point(880, 29);
+            this.kryptonCheckBox1.Location = new System.Drawing.Point(1173, 36);
+            this.kryptonCheckBox1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonCheckBox1.Name = "kryptonCheckBox1";
-            this.kryptonCheckBox1.Size = new System.Drawing.Size(134, 20);
+            this.kryptonCheckBox1.Size = new System.Drawing.Size(163, 24);
             this.kryptonCheckBox1.TabIndex = 0;
             this.kryptonCheckBox1.Values.Text = "Unchecked Disabled";
             // 
@@ -2889,10 +2470,11 @@ namespace PaletteDesigner
             this.pageDesignChromeTMS.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignChromeTMS.ImageMedium")));
             this.pageDesignChromeTMS.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonTMS;
             this.pageDesignChromeTMS.LastVisibleSet = true;
-            this.pageDesignChromeTMS.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignChromeTMS.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignChromeTMS.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignChromeTMS.Name = "pageDesignChromeTMS";
-            this.pageDesignChromeTMS.Padding = new System.Windows.Forms.Padding(20);
-            this.pageDesignChromeTMS.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignChromeTMS.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.pageDesignChromeTMS.Size = new System.Drawing.Size(616, 645);
             this.pageDesignChromeTMS.Text = "Design Chrome + TMS";
             this.pageDesignChromeTMS.TextDescription = "Preview settings for custom chrome and Tool, Menu, Context and Status strips.";
             this.pageDesignChromeTMS.TextTitle = "";
@@ -2911,9 +2493,10 @@ namespace PaletteDesigner
             this.pageDesignGrid.Flags = 65535;
             this.pageDesignGrid.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignGrid.ImageSmall")));
             this.pageDesignGrid.LastVisibleSet = true;
-            this.pageDesignGrid.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignGrid.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignGrid.Name = "pageDesignGrid";
-            this.pageDesignGrid.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignGrid.Size = new System.Drawing.Size(616, 645);
             this.pageDesignGrid.Text = "Design Grids";
             this.pageDesignGrid.TextDescription = "List is the default grid style.";
             this.pageDesignGrid.TextTitle = "List";
@@ -2932,10 +2515,11 @@ namespace PaletteDesigner
             this.dataGridViewDisabled.DataMember = "Table1";
             this.dataGridViewDisabled.DataSource = this.dataSetGrid;
             this.dataGridViewDisabled.Enabled = false;
-            this.dataGridViewDisabled.Location = new System.Drawing.Point(100, 250);
+            this.dataGridViewDisabled.Location = new System.Drawing.Point(133, 308);
+            this.dataGridViewDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDisabled.Name = "dataGridViewDisabled";
             this.dataGridViewDisabled.RowHeadersWidth = 51;
-            this.dataGridViewDisabled.Size = new System.Drawing.Size(308, 136);
+            this.dataGridViewDisabled.Size = new System.Drawing.Size(411, 167);
             this.dataGridViewDisabled.TabIndex = 21;
             // 
             // column1DataGridViewTextBoxColumn1
@@ -3001,9 +2585,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelGridDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelGridDisabled.Location = new System.Drawing.Point(100, 219);
+            this.labelGridDisabled.Location = new System.Drawing.Point(133, 270);
+            this.labelGridDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.labelGridDisabled.Name = "labelGridDisabled";
-            this.labelGridDisabled.Size = new System.Drawing.Size(88, 29);
+            this.labelGridDisabled.Size = new System.Drawing.Size(108, 35);
             this.labelGridDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelGridDisabled.TabIndex = 22;
             this.labelGridDisabled.Values.Text = "Disabled";
@@ -3014,9 +2599,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel2.Location = new System.Drawing.Point(999, 401);
+            this.kryptonLabel2.Location = new System.Drawing.Point(1332, 494);
+            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(78, 29);
+            this.kryptonLabel2.Size = new System.Drawing.Size(96, 35);
             this.kryptonLabel2.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel2.TabIndex = 23;
             this.kryptonLabel2.Values.Text = "Normal";
@@ -3027,9 +2613,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel1.Location = new System.Drawing.Point(100, 24);
+            this.kryptonLabel1.Location = new System.Drawing.Point(133, 30);
+            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(78, 29);
+            this.kryptonLabel1.Size = new System.Drawing.Size(96, 35);
             this.kryptonLabel1.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Normal";
@@ -3045,10 +2632,11 @@ namespace PaletteDesigner
             this.column3DataGridViewTextBoxColumn});
             this.dataGridViewNormal.DataMember = "Table1";
             this.dataGridViewNormal.DataSource = this.dataSetGrid;
-            this.dataGridViewNormal.Location = new System.Drawing.Point(100, 55);
+            this.dataGridViewNormal.Location = new System.Drawing.Point(133, 68);
+            this.dataGridViewNormal.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewNormal.Name = "dataGridViewNormal";
             this.dataGridViewNormal.RowHeadersWidth = 51;
-            this.dataGridViewNormal.Size = new System.Drawing.Size(308, 136);
+            this.dataGridViewNormal.Size = new System.Drawing.Size(411, 167);
             this.dataGridViewNormal.TabIndex = 2;
             // 
             // column1DataGridViewTextBoxColumn
@@ -3105,6 +2693,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignGrids.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignGrids.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignGrids.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignGrids.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignGrids.Name = "kryptonNavigatorDesignGrids";
             this.kryptonNavigatorDesignGrids.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignGrids.Owner = null;
@@ -3115,7 +2704,7 @@ namespace PaletteDesigner
             this.kryptonGridCustom1});
             this.kryptonNavigatorDesignGrids.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignGrids.SelectedIndex = 0;
-            this.kryptonNavigatorDesignGrids.Size = new System.Drawing.Size(71, 524);
+            this.kryptonNavigatorDesignGrids.Size = new System.Drawing.Size(85, 645);
             this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -3132,9 +2721,10 @@ namespace PaletteDesigner
             this.kryptonGridList.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridList.ImageLarge")));
             this.kryptonGridList.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridList.ImageMedium")));
             this.kryptonGridList.LastVisibleSet = true;
-            this.kryptonGridList.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonGridList.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonGridList.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonGridList.Name = "kryptonGridList";
-            this.kryptonGridList.Size = new System.Drawing.Size(50, 500);
+            this.kryptonGridList.Size = new System.Drawing.Size(67, 615);
             this.kryptonGridList.Text = "List";
             this.kryptonGridList.TextDescription = "List is the default grid style.";
             this.kryptonGridList.ToolTipTitle = "Page ToolTip";
@@ -3147,9 +2737,10 @@ namespace PaletteDesigner
             this.kryptonGridSheet.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridSheet.ImageLarge")));
             this.kryptonGridSheet.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridSheet.ImageMedium")));
             this.kryptonGridSheet.LastVisibleSet = true;
-            this.kryptonGridSheet.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonGridSheet.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonGridSheet.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonGridSheet.Name = "kryptonGridSheet";
-            this.kryptonGridSheet.Size = new System.Drawing.Size(50, 500);
+            this.kryptonGridSheet.Size = new System.Drawing.Size(67, 615);
             this.kryptonGridSheet.Text = "Sheet";
             this.kryptonGridSheet.TextDescription = "Sheet is used when a worksheet style is required.";
             this.kryptonGridSheet.ToolTipTitle = "Page ToolTip";
@@ -3162,9 +2753,10 @@ namespace PaletteDesigner
             this.kryptonGridCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridCustom1.ImageLarge")));
             this.kryptonGridCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridCustom1.ImageMedium")));
             this.kryptonGridCustom1.LastVisibleSet = true;
-            this.kryptonGridCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonGridCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonGridCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonGridCustom1.Name = "kryptonGridCustom1";
-            this.kryptonGridCustom1.Size = new System.Drawing.Size(50, 500);
+            this.kryptonGridCustom1.Size = new System.Drawing.Size(67, 615);
             this.kryptonGridCustom1.Text = "Custom 1";
             this.kryptonGridCustom1.TextDescription = "Custom 1 style inherits from List and is intended for your own custom use.";
             this.kryptonGridCustom1.ToolTipTitle = "Page ToolTip";
@@ -3182,9 +2774,10 @@ namespace PaletteDesigner
             this.pageDesignHeaderGroup.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignHeaderGroup.ImageMedium")));
             this.pageDesignHeaderGroup.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignHeaderGroup.ImageSmall")));
             this.pageDesignHeaderGroup.LastVisibleSet = true;
-            this.pageDesignHeaderGroup.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignHeaderGroup.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignHeaderGroup.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignHeaderGroup.Name = "pageDesignHeaderGroup";
-            this.pageDesignHeaderGroup.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignHeaderGroup.Size = new System.Drawing.Size(616, 645);
             this.pageDesignHeaderGroup.Text = "Design HeaderGroup";
             this.pageDesignHeaderGroup.TextDescription = "Define common properties applied to all HeaderGroups.";
             this.pageDesignHeaderGroup.TextTitle = "";
@@ -3194,36 +2787,40 @@ namespace PaletteDesigner
             // labelHeaderGroupNormal
             // 
             this.labelHeaderGroupNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelHeaderGroupNormal.Location = new System.Drawing.Point(229, 23);
+            this.labelHeaderGroupNormal.Location = new System.Drawing.Point(305, 28);
+            this.labelHeaderGroupNormal.Margin = new System.Windows.Forms.Padding(4);
             this.labelHeaderGroupNormal.Name = "labelHeaderGroupNormal";
-            this.labelHeaderGroupNormal.Size = new System.Drawing.Size(78, 29);
+            this.labelHeaderGroupNormal.Size = new System.Drawing.Size(96, 35);
             this.labelHeaderGroupNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelHeaderGroupNormal.TabIndex = 0;
             this.labelHeaderGroupNormal.Values.Text = "Normal";
             // 
             // headerGroup1Disabled
             // 
-            this.headerGroup1Disabled.Location = new System.Drawing.Point(28, 55);
+            this.headerGroup1Disabled.Location = new System.Drawing.Point(37, 68);
+            this.headerGroup1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.headerGroup1Disabled.Name = "headerGroup1Disabled";
-            this.headerGroup1Disabled.Size = new System.Drawing.Size(158, 150);
+            this.headerGroup1Disabled.Size = new System.Drawing.Size(211, 185);
             this.headerGroup1Disabled.TabIndex = 14;
             this.headerGroup1Disabled.ValuesPrimary.Image = ((System.Drawing.Image)(resources.GetObject("headerGroup1Disabled.ValuesPrimary.Image")));
             // 
             // labelHeaderGroupDisabled
             // 
             this.labelHeaderGroupDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelHeaderGroupDisabled.Location = new System.Drawing.Point(28, 23);
+            this.labelHeaderGroupDisabled.Location = new System.Drawing.Point(37, 28);
+            this.labelHeaderGroupDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.labelHeaderGroupDisabled.Name = "labelHeaderGroupDisabled";
-            this.labelHeaderGroupDisabled.Size = new System.Drawing.Size(88, 29);
+            this.labelHeaderGroupDisabled.Size = new System.Drawing.Size(108, 35);
             this.labelHeaderGroupDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelHeaderGroupDisabled.TabIndex = 15;
             this.labelHeaderGroupDisabled.Values.Text = "Disabled";
             // 
             // headerGroup1Normal
             // 
-            this.headerGroup1Normal.Location = new System.Drawing.Point(229, 55);
+            this.headerGroup1Normal.Location = new System.Drawing.Point(305, 68);
+            this.headerGroup1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.headerGroup1Normal.Name = "headerGroup1Normal";
-            this.headerGroup1Normal.Size = new System.Drawing.Size(158, 150);
+            this.headerGroup1Normal.Size = new System.Drawing.Size(211, 185);
             this.headerGroup1Normal.TabIndex = 17;
             this.headerGroup1Normal.ValuesPrimary.Image = ((System.Drawing.Image)(resources.GetObject("headerGroup1Normal.ValuesPrimary.Image")));
             // 
@@ -3239,9 +2836,10 @@ namespace PaletteDesigner
             this.pageDesignHeaders.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignHeaders.ImageMedium")));
             this.pageDesignHeaders.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignHeaders.ImageSmall")));
             this.pageDesignHeaders.LastVisibleSet = true;
-            this.pageDesignHeaders.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignHeaders.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignHeaders.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignHeaders.Name = "pageDesignHeaders";
-            this.pageDesignHeaders.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignHeaders.Size = new System.Drawing.Size(616, 645);
             this.pageDesignHeaders.Text = "Design Headers";
             this.pageDesignHeaders.TextDescription = "Primary is intended for main headers that provide section titles.";
             this.pageDesignHeaders.TextTitle = "Primary";
@@ -3252,9 +2850,10 @@ namespace PaletteDesigner
             // 
             this.header1Normal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.header1Normal.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
-            this.header1Normal.Location = new System.Drawing.Point(125, 97);
+            this.header1Normal.Location = new System.Drawing.Point(167, 119);
+            this.header1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.header1Normal.Name = "header1Normal";
-            this.header1Normal.Size = new System.Drawing.Size(220, 28);
+            this.header1Normal.Size = new System.Drawing.Size(293, 34);
             this.header1Normal.TabIndex = 4;
             this.header1Normal.Values.Description = "Normal";
             this.header1Normal.Values.Heading = "Normal";
@@ -3263,9 +2862,10 @@ namespace PaletteDesigner
             // header1Disabled
             // 
             this.header1Disabled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            this.header1Disabled.Location = new System.Drawing.Point(125, 31);
+            this.header1Disabled.Location = new System.Drawing.Point(167, 38);
+            this.header1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.header1Disabled.Name = "header1Disabled";
-            this.header1Disabled.Size = new System.Drawing.Size(220, 37);
+            this.header1Disabled.Size = new System.Drawing.Size(293, 46);
             this.header1Disabled.TabIndex = 3;
             this.header1Disabled.Values.Description = "Disabled";
             this.header1Disabled.Values.Heading = "Disabled";
@@ -3274,10 +2874,11 @@ namespace PaletteDesigner
             // borderDesignHeaders
             // 
             this.borderDesignHeaders.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignHeaders.Location = new System.Drawing.Point(91, 0);
+            this.borderDesignHeaders.Location = new System.Drawing.Point(111, 0);
+            this.borderDesignHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignHeaders.Name = "borderDesignHeaders";
             this.borderDesignHeaders.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignHeaders.Size = new System.Drawing.Size(1, 524);
+            this.borderDesignHeaders.Size = new System.Drawing.Size(1, 645);
             this.borderDesignHeaders.TabIndex = 2;
             // 
             // kryptonNavigatorDesignHeaders
@@ -3310,6 +2911,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignHeaders.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignHeaders.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignHeaders.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignHeaders.Name = "kryptonNavigatorDesignHeaders";
             this.kryptonNavigatorDesignHeaders.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignHeaders.Owner = null;
@@ -3325,7 +2927,7 @@ namespace PaletteDesigner
             this.pageHeadersCustom2});
             this.kryptonNavigatorDesignHeaders.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignHeaders.SelectedIndex = 7;
-            this.kryptonNavigatorDesignHeaders.Size = new System.Drawing.Size(91, 524);
+            this.kryptonNavigatorDesignHeaders.Size = new System.Drawing.Size(111, 645);
             this.kryptonNavigatorDesignHeaders.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignHeaders.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignHeaders.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -3342,9 +2944,10 @@ namespace PaletteDesigner
             this.pageHeadersPrimary.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersPrimary.ImageLarge")));
             this.pageHeadersPrimary.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersPrimary.ImageMedium")));
             this.pageHeadersPrimary.LastVisibleSet = true;
-            this.pageHeadersPrimary.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersPrimary.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersPrimary.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersPrimary.Name = "pageHeadersPrimary";
-            this.pageHeadersPrimary.Size = new System.Drawing.Size(50, 500);
+            this.pageHeadersPrimary.Size = new System.Drawing.Size(67, 615);
             this.pageHeadersPrimary.Text = "Primary";
             this.pageHeadersPrimary.TextDescription = "Primary is intended for main headers that provide section titles.";
             this.pageHeadersPrimary.ToolTipTitle = "Page ToolTip";
@@ -3357,9 +2960,10 @@ namespace PaletteDesigner
             this.pageHeadersSecondary.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersSecondary.ImageLarge")));
             this.pageHeadersSecondary.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersSecondary.ImageMedium")));
             this.pageHeadersSecondary.LastVisibleSet = true;
-            this.pageHeadersSecondary.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersSecondary.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersSecondary.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersSecondary.Name = "pageHeadersSecondary";
-            this.pageHeadersSecondary.Size = new System.Drawing.Size(50, 500);
+            this.pageHeadersSecondary.Size = new System.Drawing.Size(67, 615);
             this.pageHeadersSecondary.Text = "Secondary";
             this.pageHeadersSecondary.TextDescription = "Secondary is intended for headers that provide subsiduary titles.";
             this.pageHeadersSecondary.ToolTipTitle = "Page ToolTip";
@@ -3370,9 +2974,10 @@ namespace PaletteDesigner
             this.pageHeadersDockActive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersDockActive.Flags = 65535;
             this.pageHeadersDockActive.LastVisibleSet = true;
-            this.pageHeadersDockActive.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersDockActive.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersDockActive.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersDockActive.Name = "pageHeadersDockActive";
-            this.pageHeadersDockActive.Size = new System.Drawing.Size(100, 100);
+            this.pageHeadersDockActive.Size = new System.Drawing.Size(133, 123);
             this.pageHeadersDockActive.Text = "Dock Active";
             this.pageHeadersDockActive.ToolTipTitle = "Page ToolTip";
             this.pageHeadersDockActive.UniqueName = "72D516AF5DB94F2872D516AF5DB94F28";
@@ -3382,9 +2987,10 @@ namespace PaletteDesigner
             this.pageHeadersDockInactive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersDockInactive.Flags = 65535;
             this.pageHeadersDockInactive.LastVisibleSet = true;
-            this.pageHeadersDockInactive.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersDockInactive.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersDockInactive.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersDockInactive.Name = "pageHeadersDockInactive";
-            this.pageHeadersDockInactive.Size = new System.Drawing.Size(100, 100);
+            this.pageHeadersDockInactive.Size = new System.Drawing.Size(133, 123);
             this.pageHeadersDockInactive.Text = "Dock Inactive";
             this.pageHeadersDockInactive.ToolTipTitle = "Page ToolTip";
             this.pageHeadersDockInactive.UniqueName = "C2A22856527D4EADC2A22856527D4EAD";
@@ -3394,9 +3000,10 @@ namespace PaletteDesigner
             this.pageHeadersCalendar.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersCalendar.Flags = 65535;
             this.pageHeadersCalendar.LastVisibleSet = true;
-            this.pageHeadersCalendar.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersCalendar.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersCalendar.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersCalendar.Name = "pageHeadersCalendar";
-            this.pageHeadersCalendar.Size = new System.Drawing.Size(100, 100);
+            this.pageHeadersCalendar.Size = new System.Drawing.Size(133, 123);
             this.pageHeadersCalendar.Text = "Calendar";
             this.pageHeadersCalendar.TextDescription = "Calendar is used by the header for each month within the month calendar.";
             this.pageHeadersCalendar.ToolTipTitle = "Page ToolTip";
@@ -3407,9 +3014,10 @@ namespace PaletteDesigner
             this.pageHeadersForm.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersForm.Flags = 65535;
             this.pageHeadersForm.LastVisibleSet = true;
-            this.pageHeadersForm.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersForm.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersForm.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersForm.Name = "pageHeadersForm";
-            this.pageHeadersForm.Size = new System.Drawing.Size(100, 100);
+            this.pageHeadersForm.Size = new System.Drawing.Size(133, 123);
             this.pageHeadersForm.Text = "Form";
             this.pageHeadersForm.TextDescription = "Form style is used for a KryptonForm caption.";
             this.pageHeadersForm.ToolTipTitle = "Page ToolTip";
@@ -3422,9 +3030,10 @@ namespace PaletteDesigner
             this.pageHeadersCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom1.ImageLarge")));
             this.pageHeadersCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom1.ImageMedium")));
             this.pageHeadersCustom1.LastVisibleSet = true;
-            this.pageHeadersCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersCustom1.Name = "pageHeadersCustom1";
-            this.pageHeadersCustom1.Size = new System.Drawing.Size(50, 500);
+            this.pageHeadersCustom1.Size = new System.Drawing.Size(67, 615);
             this.pageHeadersCustom1.Text = "Custom 1";
             this.pageHeadersCustom1.TextDescription = "Custom 1 style inherits from Primary and is intended for your own custom use.";
             this.pageHeadersCustom1.ToolTipTitle = "Page ToolTip";
@@ -3437,9 +3046,10 @@ namespace PaletteDesigner
             this.pageHeadersCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom2.ImageLarge")));
             this.pageHeadersCustom2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom2.ImageMedium")));
             this.pageHeadersCustom2.LastVisibleSet = true;
-            this.pageHeadersCustom2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageHeadersCustom2.Margin = new System.Windows.Forms.Padding(4);
+            this.pageHeadersCustom2.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageHeadersCustom2.Name = "pageHeadersCustom2";
-            this.pageHeadersCustom2.Size = new System.Drawing.Size(50, 500);
+            this.pageHeadersCustom2.Size = new System.Drawing.Size(67, 615);
             this.pageHeadersCustom2.Text = "Custom 2";
             this.pageHeadersCustom2.TextDescription = "Custom 2 style inherits from Primary and is intended for your own custom use.";
             this.pageHeadersCustom2.ToolTipTitle = "Page ToolTip";
@@ -3454,9 +3064,10 @@ namespace PaletteDesigner
             this.pageDesignDateTime.Controls.Add(this.monthCalendarEnabled);
             this.pageDesignDateTime.Flags = 65535;
             this.pageDesignDateTime.LastVisibleSet = true;
-            this.pageDesignDateTime.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignDateTime.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignDateTime.Name = "pageDesignDateTime";
-            this.pageDesignDateTime.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignDateTime.Size = new System.Drawing.Size(616, 645);
             this.pageDesignDateTime.Text = "Design Date Time";
             this.pageDesignDateTime.TextDescription = "View how the date time related styles are drawn.";
             this.pageDesignDateTime.TextTitle = "";
@@ -3469,9 +3080,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel6.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel6.Location = new System.Drawing.Point(24, 21);
+            this.kryptonLabel6.Location = new System.Drawing.Point(32, 26);
+            this.kryptonLabel6.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(78, 29);
+            this.kryptonLabel6.Size = new System.Drawing.Size(96, 35);
             this.kryptonLabel6.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel6.TabIndex = 0;
             this.kryptonLabel6.Values.Text = "Normal";
@@ -3482,9 +3094,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel7.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel7.Location = new System.Drawing.Point(24, 268);
+            this.kryptonLabel7.Location = new System.Drawing.Point(32, 330);
+            this.kryptonLabel7.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(88, 29);
+            this.kryptonLabel7.Size = new System.Drawing.Size(108, 35);
             this.kryptonLabel7.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel7.TabIndex = 1;
             this.kryptonLabel7.Values.Text = "Disabled";
@@ -3492,23 +3105,25 @@ namespace PaletteDesigner
             // monthCalendarDisabled
             // 
             this.monthCalendarDisabled.Enabled = false;
-            this.monthCalendarDisabled.Location = new System.Drawing.Point(24, 303);
+            this.monthCalendarDisabled.Location = new System.Drawing.Point(32, 373);
+            this.monthCalendarDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.monthCalendarDisabled.Name = "monthCalendarDisabled";
             this.monthCalendarDisabled.SelectionEnd = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             this.monthCalendarDisabled.SelectionStart = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             this.monthCalendarDisabled.ShowWeekNumbers = true;
-            this.monthCalendarDisabled.Size = new System.Drawing.Size(259, 182);
+            this.monthCalendarDisabled.Size = new System.Drawing.Size(328, 218);
             this.monthCalendarDisabled.TabIndex = 1;
             this.monthCalendarDisabled.TodayDate = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             // 
             // monthCalendarEnabled
             // 
-            this.monthCalendarEnabled.Location = new System.Drawing.Point(24, 55);
+            this.monthCalendarEnabled.Location = new System.Drawing.Point(32, 68);
+            this.monthCalendarEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.monthCalendarEnabled.Name = "monthCalendarEnabled";
             this.monthCalendarEnabled.SelectionEnd = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             this.monthCalendarEnabled.SelectionStart = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             this.monthCalendarEnabled.ShowWeekNumbers = true;
-            this.monthCalendarEnabled.Size = new System.Drawing.Size(259, 182);
+            this.monthCalendarEnabled.Size = new System.Drawing.Size(328, 218);
             this.monthCalendarEnabled.TabIndex = 0;
             this.monthCalendarEnabled.TodayDate = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
             // 
@@ -3527,9 +3142,10 @@ namespace PaletteDesigner
             this.pageDesignLabels.Controls.Add(this.kryptonNavigatorDesignLabels);
             this.pageDesignLabels.Flags = 65535;
             this.pageDesignLabels.LastVisibleSet = true;
-            this.pageDesignLabels.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignLabels.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignLabels.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignLabels.Name = "pageDesignLabels";
-            this.pageDesignLabels.Size = new System.Drawing.Size(644, 546);
+            this.pageDesignLabels.Size = new System.Drawing.Size(859, 672);
             this.pageDesignLabels.Text = "Design Labels";
             this.pageDesignLabels.TextDescription = "Normal is appropriate for standard control labelling. ";
             this.pageDesignLabels.TextTitle = "Normal";
@@ -3539,54 +3155,60 @@ namespace PaletteDesigner
             // labelsControlToolTip
             // 
             this.labelsControlToolTip.AutoSize = true;
-            this.labelsControlToolTip.Location = new System.Drawing.Point(322, 213);
+            this.labelsControlToolTip.Location = new System.Drawing.Point(429, 262);
+            this.labelsControlToolTip.Margin = new System.Windows.Forms.Padding(4);
             this.labelsControlToolTip.Name = "labelsControlToolTip";
-            this.labelsControlToolTip.Size = new System.Drawing.Size(126, 26);
+            this.labelsControlToolTip.Size = new System.Drawing.Size(168, 32);
             this.labelsControlToolTip.TabIndex = 29;
             this.labelsControlToolTip.Values.Text = "Control - ToolTip";
             // 
             // labelsControlCustom1
             // 
             this.labelsControlCustom1.AutoSize = true;
-            this.labelsControlCustom1.Location = new System.Drawing.Point(322, 250);
+            this.labelsControlCustom1.Location = new System.Drawing.Point(429, 308);
+            this.labelsControlCustom1.Margin = new System.Windows.Forms.Padding(4);
             this.labelsControlCustom1.Name = "labelsControlCustom1";
-            this.labelsControlCustom1.Size = new System.Drawing.Size(140, 26);
+            this.labelsControlCustom1.Size = new System.Drawing.Size(187, 32);
             this.labelsControlCustom1.TabIndex = 28;
             this.labelsControlCustom1.Values.Text = "Control - Custom 1";
             // 
             // labelsControlAlternate
             // 
             this.labelsControlAlternate.AutoSize = true;
-            this.labelsControlAlternate.Location = new System.Drawing.Point(322, 176);
+            this.labelsControlAlternate.Location = new System.Drawing.Point(429, 217);
+            this.labelsControlAlternate.Margin = new System.Windows.Forms.Padding(4);
             this.labelsControlAlternate.Name = "labelsControlAlternate";
-            this.labelsControlAlternate.Size = new System.Drawing.Size(137, 26);
+            this.labelsControlAlternate.Size = new System.Drawing.Size(183, 32);
             this.labelsControlAlternate.TabIndex = 27;
             this.labelsControlAlternate.Values.Text = "Control - Alternate";
             // 
             // labelsControlClient
             // 
             this.labelsControlClient.AutoSize = true;
-            this.labelsControlClient.Location = new System.Drawing.Point(322, 139);
+            this.labelsControlClient.Location = new System.Drawing.Point(429, 171);
+            this.labelsControlClient.Margin = new System.Windows.Forms.Padding(4);
             this.labelsControlClient.Name = "labelsControlClient";
-            this.labelsControlClient.Size = new System.Drawing.Size(115, 26);
+            this.labelsControlClient.Size = new System.Drawing.Size(153, 32);
             this.labelsControlClient.TabIndex = 26;
             this.labelsControlClient.Values.Text = "Control - Client";
             // 
             // labelsPanelCustom1
             // 
             this.labelsPanelCustom1.AutoSize = true;
-            this.labelsPanelCustom1.Location = new System.Drawing.Point(322, 102);
+            this.labelsPanelCustom1.Location = new System.Drawing.Point(429, 126);
+            this.labelsPanelCustom1.Margin = new System.Windows.Forms.Padding(4);
             this.labelsPanelCustom1.Name = "labelsPanelCustom1";
-            this.labelsPanelCustom1.Size = new System.Drawing.Size(126, 26);
+            this.labelsPanelCustom1.Size = new System.Drawing.Size(168, 32);
             this.labelsPanelCustom1.TabIndex = 25;
             this.labelsPanelCustom1.Values.Text = "Panel - Custom 1";
             // 
             // labelsPanelAlternate
             // 
             this.labelsPanelAlternate.AutoSize = true;
-            this.labelsPanelAlternate.Location = new System.Drawing.Point(322, 65);
+            this.labelsPanelAlternate.Location = new System.Drawing.Point(429, 80);
+            this.labelsPanelAlternate.Margin = new System.Windows.Forms.Padding(4);
             this.labelsPanelAlternate.Name = "labelsPanelAlternate";
-            this.labelsPanelAlternate.Size = new System.Drawing.Size(124, 26);
+            this.labelsPanelAlternate.Size = new System.Drawing.Size(165, 32);
             this.labelsPanelAlternate.TabIndex = 24;
             this.labelsPanelAlternate.Values.Text = "Panel - Alternate";
             // 
@@ -3594,9 +3216,10 @@ namespace PaletteDesigner
             // 
             this.labelsPanelClient.AutoSize = true;
             this.labelsPanelClient.Checked = true;
-            this.labelsPanelClient.Location = new System.Drawing.Point(322, 28);
+            this.labelsPanelClient.Location = new System.Drawing.Point(429, 34);
+            this.labelsPanelClient.Margin = new System.Windows.Forms.Padding(4);
             this.labelsPanelClient.Name = "labelsPanelClient";
-            this.labelsPanelClient.Size = new System.Drawing.Size(115, 26);
+            this.labelsPanelClient.Size = new System.Drawing.Size(153, 32);
             this.labelsPanelClient.TabIndex = 23;
             this.labelsPanelClient.Values.Text = "Panel - Client";
             // 
@@ -3608,17 +3231,19 @@ namespace PaletteDesigner
             this.panelLabelsBackground.Controls.Add(this.label1Pressed);
             this.panelLabelsBackground.Controls.Add(this.label1NotVisited);
             this.panelLabelsBackground.Controls.Add(this.label1Visited);
-            this.panelLabelsBackground.Location = new System.Drawing.Point(125, 28);
+            this.panelLabelsBackground.Location = new System.Drawing.Point(167, 34);
+            this.panelLabelsBackground.Margin = new System.Windows.Forms.Padding(4);
             this.panelLabelsBackground.Name = "panelLabelsBackground";
-            this.panelLabelsBackground.Size = new System.Drawing.Size(179, 302);
+            this.panelLabelsBackground.Size = new System.Drawing.Size(239, 372);
             this.panelLabelsBackground.TabIndex = 22;
             // 
             // label1Disabled
             // 
             this.label1Disabled.Enabled = false;
-            this.label1Disabled.Location = new System.Drawing.Point(10, 21);
+            this.label1Disabled.Location = new System.Drawing.Point(13, 26);
+            this.label1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.label1Disabled.Name = "label1Disabled";
-            this.label1Disabled.Size = new System.Drawing.Size(117, 20);
+            this.label1Disabled.Size = new System.Drawing.Size(139, 24);
             this.label1Disabled.TabIndex = 0;
             this.label1Disabled.Values.ExtraText = "(Label)";
             this.label1Disabled.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
@@ -3626,9 +3251,10 @@ namespace PaletteDesigner
             // 
             // label1Live
             // 
-            this.label1Live.Location = new System.Drawing.Point(10, 256);
+            this.label1Live.Location = new System.Drawing.Point(13, 315);
+            this.label1Live.Margin = new System.Windows.Forms.Padding(4);
             this.label1Live.Name = "label1Live";
-            this.label1Live.Size = new System.Drawing.Size(113, 20);
+            this.label1Live.Size = new System.Drawing.Size(134, 24);
             this.label1Live.TabIndex = 1;
             this.label1Live.Values.ExtraText = "(LinkLabel)";
             this.label1Live.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Live.Values.Image")));
@@ -3637,9 +3263,10 @@ namespace PaletteDesigner
             // label1Normal
             // 
             this.label1Normal.Enabled = false;
-            this.label1Normal.Location = new System.Drawing.Point(10, 68);
+            this.label1Normal.Location = new System.Drawing.Point(13, 84);
+            this.label1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.label1Normal.Name = "label1Normal";
-            this.label1Normal.Size = new System.Drawing.Size(110, 20);
+            this.label1Normal.Size = new System.Drawing.Size(131, 24);
             this.label1Normal.TabIndex = 2;
             this.label1Normal.Values.ExtraText = "(Label)";
             this.label1Normal.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
@@ -3648,9 +3275,10 @@ namespace PaletteDesigner
             // label1Pressed
             // 
             this.label1Pressed.Enabled = false;
-            this.label1Pressed.Location = new System.Drawing.Point(10, 210);
+            this.label1Pressed.Location = new System.Drawing.Point(13, 258);
+            this.label1Pressed.Margin = new System.Windows.Forms.Padding(4);
             this.label1Pressed.Name = "label1Pressed";
-            this.label1Pressed.Size = new System.Drawing.Size(133, 20);
+            this.label1Pressed.Size = new System.Drawing.Size(160, 24);
             this.label1Pressed.TabIndex = 3;
             this.label1Pressed.Values.ExtraText = "(LinkLabel)";
             this.label1Pressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Pressed.Values.Image")));
@@ -3659,9 +3287,10 @@ namespace PaletteDesigner
             // label1NotVisited
             // 
             this.label1NotVisited.Enabled = false;
-            this.label1NotVisited.Location = new System.Drawing.Point(10, 115);
+            this.label1NotVisited.Location = new System.Drawing.Point(13, 142);
+            this.label1NotVisited.Margin = new System.Windows.Forms.Padding(4);
             this.label1NotVisited.Name = "label1NotVisited";
-            this.label1NotVisited.Size = new System.Drawing.Size(149, 20);
+            this.label1NotVisited.Size = new System.Drawing.Size(179, 24);
             this.label1NotVisited.TabIndex = 4;
             this.label1NotVisited.Values.ExtraText = "(LinkLabel)";
             this.label1NotVisited.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1NotVisited.Values.Image")));
@@ -3671,9 +3300,10 @@ namespace PaletteDesigner
             // 
             this.label1Visited.Enabled = false;
             this.label1Visited.LinkVisited = true;
-            this.label1Visited.Location = new System.Drawing.Point(10, 162);
+            this.label1Visited.Location = new System.Drawing.Point(13, 199);
+            this.label1Visited.Margin = new System.Windows.Forms.Padding(4);
             this.label1Visited.Name = "label1Visited";
-            this.label1Visited.Size = new System.Drawing.Size(128, 20);
+            this.label1Visited.Size = new System.Drawing.Size(154, 24);
             this.label1Visited.TabIndex = 5;
             this.label1Visited.Values.ExtraText = "(LinkLabel)";
             this.label1Visited.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Visited.Values.Image")));
@@ -3682,10 +3312,11 @@ namespace PaletteDesigner
             // borderDesignLabels
             // 
             this.borderDesignLabels.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignLabels.Location = new System.Drawing.Point(111, 0);
+            this.borderDesignLabels.Location = new System.Drawing.Point(135, 0);
+            this.borderDesignLabels.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignLabels.Name = "borderDesignLabels";
             this.borderDesignLabels.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignLabels.Size = new System.Drawing.Size(1, 546);
+            this.borderDesignLabels.Size = new System.Drawing.Size(1, 672);
             this.borderDesignLabels.TabIndex = 2;
             // 
             // kryptonNavigatorDesignLabels
@@ -3718,6 +3349,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignLabels.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignLabels.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignLabels.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignLabels.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignLabels.Name = "kryptonNavigatorDesignLabels";
             this.kryptonNavigatorDesignLabels.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignLabels.Owner = null;
@@ -3740,7 +3372,7 @@ namespace PaletteDesigner
             this.pageLabelsCustom3});
             this.kryptonNavigatorDesignLabels.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignLabels.SelectedIndex = 0;
-            this.kryptonNavigatorDesignLabels.Size = new System.Drawing.Size(111, 546);
+            this.kryptonNavigatorDesignLabels.Size = new System.Drawing.Size(135, 672);
             this.kryptonNavigatorDesignLabels.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignLabels.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignLabels.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -3757,9 +3389,10 @@ namespace PaletteDesigner
             this.pageLabelsNormalControl.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsNormalControl.ImageLarge")));
             this.pageLabelsNormalControl.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsNormalControl.ImageMedium")));
             this.pageLabelsNormalControl.LastVisibleSet = true;
-            this.pageLabelsNormalControl.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsNormalControl.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsNormalControl.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsNormalControl.Name = "pageLabelsNormalControl";
-            this.pageLabelsNormalControl.Size = new System.Drawing.Size(50, 500);
+            this.pageLabelsNormalControl.Size = new System.Drawing.Size(67, 615);
             this.pageLabelsNormalControl.Text = "Normal (Control)";
             this.pageLabelsNormalControl.TextDescription = "Normal is appropriate for standard control labelling on control background.";
             this.pageLabelsNormalControl.ToolTipTitle = "Page ToolTip";
@@ -3770,9 +3403,10 @@ namespace PaletteDesigner
             this.pageLabelsBoldControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsBoldControl.Flags = 65534;
             this.pageLabelsBoldControl.LastVisibleSet = true;
-            this.pageLabelsBoldControl.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsBoldControl.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsBoldControl.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsBoldControl.Name = "pageLabelsBoldControl";
-            this.pageLabelsBoldControl.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsBoldControl.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsBoldControl.Text = "Bold (Control)";
             this.pageLabelsBoldControl.TextDescription = "Bold is appropriate for a title labelling on control background.";
             this.pageLabelsBoldControl.ToolTipTitle = "Page ToolTip";
@@ -3783,9 +3417,10 @@ namespace PaletteDesigner
             this.pageLabelsItalicControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsItalicControl.Flags = 65534;
             this.pageLabelsItalicControl.LastVisibleSet = true;
-            this.pageLabelsItalicControl.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsItalicControl.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsItalicControl.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsItalicControl.Name = "pageLabelsItalicControl";
-            this.pageLabelsItalicControl.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsItalicControl.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsItalicControl.Text = "Italic (Control)";
             this.pageLabelsItalicControl.TextDescription = "Italic is appropriate for emphasised labelling on control background.";
             this.pageLabelsItalicControl.ToolTipTitle = "Page ToolTip";
@@ -3798,9 +3433,10 @@ namespace PaletteDesigner
             this.pageLabelsTitleControl.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsTitleControl.ImageLarge")));
             this.pageLabelsTitleControl.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsTitleControl.ImageMedium")));
             this.pageLabelsTitleControl.LastVisibleSet = true;
-            this.pageLabelsTitleControl.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsTitleControl.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsTitleControl.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsTitleControl.Name = "pageLabelsTitleControl";
-            this.pageLabelsTitleControl.Size = new System.Drawing.Size(50, 500);
+            this.pageLabelsTitleControl.Size = new System.Drawing.Size(67, 615);
             this.pageLabelsTitleControl.Text = "Title (Control)";
             this.pageLabelsTitleControl.TextDescription = "Title provides a section level heading label on a control background.";
             this.pageLabelsTitleControl.ToolTipTitle = "Page ToolTip";
@@ -3811,9 +3447,10 @@ namespace PaletteDesigner
             this.pageLabelsNormalPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsNormalPanel.Flags = 65535;
             this.pageLabelsNormalPanel.LastVisibleSet = true;
-            this.pageLabelsNormalPanel.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsNormalPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsNormalPanel.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsNormalPanel.Name = "pageLabelsNormalPanel";
-            this.pageLabelsNormalPanel.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsNormalPanel.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsNormalPanel.Text = "Normal (Panel)";
             this.pageLabelsNormalPanel.TextDescription = "Normal is appropriate for standard control labelling on panel background.";
             this.pageLabelsNormalPanel.ToolTipTitle = "Page ToolTip";
@@ -3824,9 +3461,10 @@ namespace PaletteDesigner
             this.pageLabelsBoldPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsBoldPanel.Flags = 65534;
             this.pageLabelsBoldPanel.LastVisibleSet = true;
-            this.pageLabelsBoldPanel.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsBoldPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsBoldPanel.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsBoldPanel.Name = "pageLabelsBoldPanel";
-            this.pageLabelsBoldPanel.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsBoldPanel.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsBoldPanel.Text = "Bold (Panel)";
             this.pageLabelsBoldPanel.TextDescription = "Bold is appropriate for a title labelling on panel background.";
             this.pageLabelsBoldPanel.ToolTipTitle = "Page ToolTip";
@@ -3837,9 +3475,10 @@ namespace PaletteDesigner
             this.pageLabelsItalicPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsItalicPanel.Flags = 65534;
             this.pageLabelsItalicPanel.LastVisibleSet = true;
-            this.pageLabelsItalicPanel.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsItalicPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsItalicPanel.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsItalicPanel.Name = "pageLabelsItalicPanel";
-            this.pageLabelsItalicPanel.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsItalicPanel.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsItalicPanel.Text = "Italic (Panel)";
             this.pageLabelsItalicPanel.TextDescription = "Bold is appropriate for emphasised labelling on panel background.";
             this.pageLabelsItalicPanel.ToolTipTitle = "Page ToolTip";
@@ -3850,9 +3489,10 @@ namespace PaletteDesigner
             this.pageLabelsTitlePanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsTitlePanel.Flags = 65535;
             this.pageLabelsTitlePanel.LastVisibleSet = true;
-            this.pageLabelsTitlePanel.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsTitlePanel.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsTitlePanel.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsTitlePanel.Name = "pageLabelsTitlePanel";
-            this.pageLabelsTitlePanel.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsTitlePanel.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsTitlePanel.Text = "Title (Panel)";
             this.pageLabelsTitlePanel.TextDescription = "Title provides a section level heading label on a panel background.";
             this.pageLabelsTitlePanel.ToolTipTitle = "Page ToolTip";
@@ -3863,9 +3503,10 @@ namespace PaletteDesigner
             this.pageLabelsGroupBoxCaption.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsGroupBoxCaption.Flags = 65534;
             this.pageLabelsGroupBoxCaption.LastVisibleSet = true;
-            this.pageLabelsGroupBoxCaption.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsGroupBoxCaption.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsGroupBoxCaption.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsGroupBoxCaption.Name = "pageLabelsGroupBoxCaption";
-            this.pageLabelsGroupBoxCaption.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsGroupBoxCaption.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsGroupBoxCaption.Text = "GroupBox";
             this.pageLabelsGroupBoxCaption.TextDescription = "GroupBox is used as the default for KryptonGroupBox captions.";
             this.pageLabelsGroupBoxCaption.ToolTipTitle = "Page ToolTip";
@@ -3876,9 +3517,10 @@ namespace PaletteDesigner
             this.pageLabelsToolTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsToolTip.Flags = 65535;
             this.pageLabelsToolTip.LastVisibleSet = true;
-            this.pageLabelsToolTip.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsToolTip.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsToolTip.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsToolTip.Name = "pageLabelsToolTip";
-            this.pageLabelsToolTip.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsToolTip.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsToolTip.Text = "ToolTip";
             this.pageLabelsToolTip.TextDescription = "ToolTip is used for popup windows showing additional context information. ";
             this.pageLabelsToolTip.ToolTipTitle = "Page ToolTip";
@@ -3889,9 +3531,10 @@ namespace PaletteDesigner
             this.pageLabelsSuperTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsSuperTip.Flags = 65535;
             this.pageLabelsSuperTip.LastVisibleSet = true;
-            this.pageLabelsSuperTip.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsSuperTip.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsSuperTip.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsSuperTip.Name = "pageLabelsSuperTip";
-            this.pageLabelsSuperTip.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsSuperTip.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsSuperTip.Text = "SuperTip";
             this.pageLabelsSuperTip.TextDescription = "SuperTip is used for tool tips that have extensive information presented. ";
             this.pageLabelsSuperTip.ToolTipTitle = "Page ToolTip";
@@ -3902,9 +3545,10 @@ namespace PaletteDesigner
             this.pageLabelsKeyTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsKeyTip.Flags = 65535;
             this.pageLabelsKeyTip.LastVisibleSet = true;
-            this.pageLabelsKeyTip.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsKeyTip.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsKeyTip.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsKeyTip.Name = "pageLabelsKeyTip";
-            this.pageLabelsKeyTip.Size = new System.Drawing.Size(100, 100);
+            this.pageLabelsKeyTip.Size = new System.Drawing.Size(133, 123);
             this.pageLabelsKeyTip.Text = "KeyTip";
             this.pageLabelsKeyTip.TextDescription = "KeyTip is used for key tips that are available from the Ribbon control.";
             this.pageLabelsKeyTip.ToolTipTitle = "Page ToolTip";
@@ -3917,10 +3561,11 @@ namespace PaletteDesigner
             this.pageLabelsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom1.ImageLarge")));
             this.pageLabelsCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom1.ImageMedium")));
             this.pageLabelsCustom1.LastVisibleSet = true;
-            this.pageLabelsCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsCustom1.Name = "pageLabelsCustom1";
             this.pageLabelsCustom1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.pageLabelsCustom1.Size = new System.Drawing.Size(50, 500);
+            this.pageLabelsCustom1.Size = new System.Drawing.Size(67, 615);
             this.pageLabelsCustom1.Text = "Custom 1";
             this.pageLabelsCustom1.TextDescription = "Custom 1 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom1.ToolTipTitle = "Page ToolTip";
@@ -3933,9 +3578,10 @@ namespace PaletteDesigner
             this.pageLabelsCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom2.ImageLarge")));
             this.pageLabelsCustom2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom2.ImageMedium")));
             this.pageLabelsCustom2.LastVisibleSet = true;
-            this.pageLabelsCustom2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsCustom2.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsCustom2.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsCustom2.Name = "pageLabelsCustom2";
-            this.pageLabelsCustom2.Size = new System.Drawing.Size(50, 500);
+            this.pageLabelsCustom2.Size = new System.Drawing.Size(67, 615);
             this.pageLabelsCustom2.Text = "Custom 2";
             this.pageLabelsCustom2.TextDescription = "Custom 2 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom2.ToolTipTitle = "Page ToolTip";
@@ -3948,9 +3594,10 @@ namespace PaletteDesigner
             this.pageLabelsCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom3.ImageLarge")));
             this.pageLabelsCustom3.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom3.ImageMedium")));
             this.pageLabelsCustom3.LastVisibleSet = true;
-            this.pageLabelsCustom3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageLabelsCustom3.Margin = new System.Windows.Forms.Padding(4);
+            this.pageLabelsCustom3.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageLabelsCustom3.Name = "pageLabelsCustom3";
-            this.pageLabelsCustom3.Size = new System.Drawing.Size(50, 500);
+            this.pageLabelsCustom3.Size = new System.Drawing.Size(67, 615);
             this.pageLabelsCustom3.Text = "Custom 3";
             this.pageLabelsCustom3.TextDescription = "Custom 3 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom3.ToolTipTitle = "Page ToolTip";
@@ -3967,9 +3614,10 @@ namespace PaletteDesigner
             this.pageDesignNavigator.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignNavigator.ImageMedium")));
             this.pageDesignNavigator.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignNavigator.ImageSmall")));
             this.pageDesignNavigator.LastVisibleSet = true;
-            this.pageDesignNavigator.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignNavigator.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignNavigator.Name = "pageDesignNavigator";
-            this.pageDesignNavigator.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignNavigator.Size = new System.Drawing.Size(616, 645);
             this.pageDesignNavigator.Text = "Design Navigator";
             this.pageDesignNavigator.TextDescription = "Appearance of navigator when using Bar-CheckButton-Group-Outside mode.";
             this.pageDesignNavigator.TextTitle = "Bar Outside";
@@ -3979,10 +3627,11 @@ namespace PaletteDesigner
             // borderDesignNavigator
             // 
             this.borderDesignNavigator.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignNavigator.Location = new System.Drawing.Point(82, 0);
+            this.borderDesignNavigator.Location = new System.Drawing.Point(99, 0);
+            this.borderDesignNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignNavigator.Name = "borderDesignNavigator";
             this.borderDesignNavigator.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignNavigator.Size = new System.Drawing.Size(1, 524);
+            this.borderDesignNavigator.Size = new System.Drawing.Size(1, 645);
             this.borderDesignNavigator.TabIndex = 2;
             // 
             // kryptonNavigatorDesignNavigator
@@ -4015,6 +3664,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignNavigator.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignNavigator.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignNavigator.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignNavigator.Name = "kryptonNavigatorDesignNavigator";
             this.kryptonNavigatorDesignNavigator.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignNavigator.Owner = null;
@@ -4025,7 +3675,7 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupOnly});
             this.kryptonNavigatorDesignNavigator.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignNavigator.SelectedIndex = 0;
-            this.kryptonNavigatorDesignNavigator.Size = new System.Drawing.Size(82, 524);
+            this.kryptonNavigatorDesignNavigator.Size = new System.Drawing.Size(99, 645);
             this.kryptonNavigatorDesignNavigator.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignNavigator.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignNavigator.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -4042,9 +3692,10 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupOutside.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOutside.ImageLarge")));
             this.pageNavigatorBarCheckButtonGroupOutside.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOutside.ImageMedium")));
             this.pageNavigatorBarCheckButtonGroupOutside.LastVisibleSet = true;
-            this.pageNavigatorBarCheckButtonGroupOutside.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageNavigatorBarCheckButtonGroupOutside.Margin = new System.Windows.Forms.Padding(4);
+            this.pageNavigatorBarCheckButtonGroupOutside.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageNavigatorBarCheckButtonGroupOutside.Name = "pageNavigatorBarCheckButtonGroupOutside";
-            this.pageNavigatorBarCheckButtonGroupOutside.Size = new System.Drawing.Size(50, 500);
+            this.pageNavigatorBarCheckButtonGroupOutside.Size = new System.Drawing.Size(67, 615);
             this.pageNavigatorBarCheckButtonGroupOutside.Text = "Bar Outside";
             this.pageNavigatorBarCheckButtonGroupOutside.TextDescription = "Appearance of when using Bar-CheckButton-Group-Outside mode.";
             this.pageNavigatorBarCheckButtonGroupOutside.ToolTipTitle = "Page ToolTip";
@@ -4057,9 +3708,10 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupInside.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupInside.ImageLarge")));
             this.pageNavigatorBarCheckButtonGroupInside.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupInside.ImageMedium")));
             this.pageNavigatorBarCheckButtonGroupInside.LastVisibleSet = true;
-            this.pageNavigatorBarCheckButtonGroupInside.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageNavigatorBarCheckButtonGroupInside.Margin = new System.Windows.Forms.Padding(4);
+            this.pageNavigatorBarCheckButtonGroupInside.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageNavigatorBarCheckButtonGroupInside.Name = "pageNavigatorBarCheckButtonGroupInside";
-            this.pageNavigatorBarCheckButtonGroupInside.Size = new System.Drawing.Size(50, 500);
+            this.pageNavigatorBarCheckButtonGroupInside.Size = new System.Drawing.Size(67, 615);
             this.pageNavigatorBarCheckButtonGroupInside.Text = "Bar Inside";
             this.pageNavigatorBarCheckButtonGroupInside.TextDescription = "Appearance of when using Bar-CheckButton-Group-Inside mode.";
             this.pageNavigatorBarCheckButtonGroupInside.ToolTipTitle = "Page ToolTip";
@@ -4072,9 +3724,10 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupOnly.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOnly.ImageLarge")));
             this.pageNavigatorBarCheckButtonGroupOnly.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOnly.ImageMedium")));
             this.pageNavigatorBarCheckButtonGroupOnly.LastVisibleSet = true;
-            this.pageNavigatorBarCheckButtonGroupOnly.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageNavigatorBarCheckButtonGroupOnly.Margin = new System.Windows.Forms.Padding(4);
+            this.pageNavigatorBarCheckButtonGroupOnly.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageNavigatorBarCheckButtonGroupOnly.Name = "pageNavigatorBarCheckButtonGroupOnly";
-            this.pageNavigatorBarCheckButtonGroupOnly.Size = new System.Drawing.Size(50, 500);
+            this.pageNavigatorBarCheckButtonGroupOnly.Size = new System.Drawing.Size(67, 615);
             this.pageNavigatorBarCheckButtonGroupOnly.Text = "Bar Only";
             this.pageNavigatorBarCheckButtonGroupOnly.TextDescription = "Appearance of when using Bar-CheckButton-Group-Only mode.";
             this.pageNavigatorBarCheckButtonGroupOnly.ToolTipTitle = "Page ToolTip";
@@ -4094,7 +3747,8 @@ namespace PaletteDesigner
             this.kryptonNavigator.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
             this.kryptonNavigator.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigator.ControlKryptonFormFeatures = false;
-            this.kryptonNavigator.Location = new System.Drawing.Point(102, 28);
+            this.kryptonNavigator.Location = new System.Drawing.Point(136, 34);
+            this.kryptonNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigator.Name = "kryptonNavigator";
             this.kryptonNavigator.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             this.kryptonNavigator.Owner = null;
@@ -4116,9 +3770,10 @@ namespace PaletteDesigner
             this.navigatorPage1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage1.ImageMedium")));
             this.navigatorPage1.ImageSmall = global::PaletteDesigner.Properties.Resources.environment;
             this.navigatorPage1.LastVisibleSet = true;
-            this.navigatorPage1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.navigatorPage1.Margin = new System.Windows.Forms.Padding(4);
+            this.navigatorPage1.MinimumSize = new System.Drawing.Size(67, 62);
             this.navigatorPage1.Name = "navigatorPage1";
-            this.navigatorPage1.Size = new System.Drawing.Size(303, 137);
+            this.navigatorPage1.Size = new System.Drawing.Size(303, 133);
             this.navigatorPage1.Text = "Page 1";
             this.navigatorPage1.TextDescription = "Page 1 Description";
             this.navigatorPage1.TextTitle = "Page 1 Title";
@@ -4133,9 +3788,10 @@ namespace PaletteDesigner
             this.navigatorPage2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage2.ImageMedium")));
             this.navigatorPage2.ImageSmall = global::PaletteDesigner.Properties.Resources.document_new;
             this.navigatorPage2.LastVisibleSet = true;
-            this.navigatorPage2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.navigatorPage2.Margin = new System.Windows.Forms.Padding(4);
+            this.navigatorPage2.MinimumSize = new System.Drawing.Size(67, 62);
             this.navigatorPage2.Name = "navigatorPage2";
-            this.navigatorPage2.Size = new System.Drawing.Size(283, 137);
+            this.navigatorPage2.Size = new System.Drawing.Size(377, 169);
             this.navigatorPage2.Text = "Page 2";
             this.navigatorPage2.TextDescription = "Page 2 Description";
             this.navigatorPage2.TextTitle = "Page 2 Title";
@@ -4150,9 +3806,10 @@ namespace PaletteDesigner
             this.navigatorPage3.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage3.ImageMedium")));
             this.navigatorPage3.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage3.ImageSmall")));
             this.navigatorPage3.LastVisibleSet = true;
-            this.navigatorPage3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.navigatorPage3.Margin = new System.Windows.Forms.Padding(4);
+            this.navigatorPage3.MinimumSize = new System.Drawing.Size(67, 62);
             this.navigatorPage3.Name = "navigatorPage3";
-            this.navigatorPage3.Size = new System.Drawing.Size(283, 137);
+            this.navigatorPage3.Size = new System.Drawing.Size(377, 169);
             this.navigatorPage3.Text = "Page 3";
             this.navigatorPage3.TextDescription = "Page 3 Description";
             this.navigatorPage3.TextTitle = "Page 3 Title";
@@ -4173,9 +3830,10 @@ namespace PaletteDesigner
             this.pageDesignPanels.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignPanels.ImageMedium")));
             this.pageDesignPanels.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignPanels.ImageSmall")));
             this.pageDesignPanels.LastVisibleSet = true;
-            this.pageDesignPanels.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignPanels.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignPanels.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignPanels.Name = "pageDesignPanels";
-            this.pageDesignPanels.Size = new System.Drawing.Size(462, 535);
+            this.pageDesignPanels.Size = new System.Drawing.Size(616, 658);
             this.pageDesignPanels.Text = "Design Panels";
             this.pageDesignPanels.TextDescription = "Client is the main style for the client area of Krypton panels.";
             this.pageDesignPanels.TextTitle = "Client";
@@ -4184,16 +3842,18 @@ namespace PaletteDesigner
             // 
             // panel1Normal
             // 
-            this.panel1Normal.Location = new System.Drawing.Point(311, 62);
+            this.panel1Normal.Location = new System.Drawing.Point(415, 76);
+            this.panel1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.panel1Normal.Name = "panel1Normal";
-            this.panel1Normal.Size = new System.Drawing.Size(100, 100);
+            this.panel1Normal.Size = new System.Drawing.Size(133, 123);
             this.panel1Normal.TabIndex = 19;
             // 
             // panel1Disabled
             // 
-            this.panel1Disabled.Location = new System.Drawing.Point(147, 62);
+            this.panel1Disabled.Location = new System.Drawing.Point(196, 76);
+            this.panel1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.panel1Disabled.Name = "panel1Disabled";
-            this.panel1Disabled.Size = new System.Drawing.Size(100, 100);
+            this.panel1Disabled.Size = new System.Drawing.Size(133, 123);
             this.panel1Disabled.TabIndex = 18;
             // 
             // labelPanelsNormal
@@ -4202,9 +3862,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelPanelsNormal.Location = new System.Drawing.Point(311, 30);
+            this.labelPanelsNormal.Location = new System.Drawing.Point(415, 37);
+            this.labelPanelsNormal.Margin = new System.Windows.Forms.Padding(4);
             this.labelPanelsNormal.Name = "labelPanelsNormal";
-            this.labelPanelsNormal.Size = new System.Drawing.Size(78, 29);
+            this.labelPanelsNormal.Size = new System.Drawing.Size(96, 35);
             this.labelPanelsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelPanelsNormal.TabIndex = 20;
             this.labelPanelsNormal.Values.Text = "Normal";
@@ -4215,9 +3876,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelPanelsDisabled.Location = new System.Drawing.Point(147, 30);
+            this.labelPanelsDisabled.Location = new System.Drawing.Point(196, 37);
+            this.labelPanelsDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.labelPanelsDisabled.Name = "labelPanelsDisabled";
-            this.labelPanelsDisabled.Size = new System.Drawing.Size(88, 29);
+            this.labelPanelsDisabled.Size = new System.Drawing.Size(108, 35);
             this.labelPanelsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelPanelsDisabled.TabIndex = 21;
             this.labelPanelsDisabled.Values.Text = "Disabled";
@@ -4225,10 +3887,11 @@ namespace PaletteDesigner
             // borderDesignPanels
             // 
             this.borderDesignPanels.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignPanels.Location = new System.Drawing.Point(103, 0);
+            this.borderDesignPanels.Location = new System.Drawing.Point(125, 0);
+            this.borderDesignPanels.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignPanels.Name = "borderDesignPanels";
             this.borderDesignPanels.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignPanels.Size = new System.Drawing.Size(1, 535);
+            this.borderDesignPanels.Size = new System.Drawing.Size(1, 658);
             this.borderDesignPanels.TabIndex = 3;
             // 
             // kryptonNavigatorDesignPanels
@@ -4261,6 +3924,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignPanels.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignPanels.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignPanels.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignPanels.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignPanels.Name = "kryptonNavigatorDesignPanels";
             this.kryptonNavigatorDesignPanels.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignPanels.Owner = null;
@@ -4272,7 +3936,7 @@ namespace PaletteDesigner
             this.pagePanelsCustom1});
             this.kryptonNavigatorDesignPanels.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignPanels.SelectedIndex = 0;
-            this.kryptonNavigatorDesignPanels.Size = new System.Drawing.Size(103, 535);
+            this.kryptonNavigatorDesignPanels.Size = new System.Drawing.Size(125, 658);
             this.kryptonNavigatorDesignPanels.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignPanels.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignPanels.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -4289,9 +3953,10 @@ namespace PaletteDesigner
             this.pagePanelsClient.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsClient.ImageLarge")));
             this.pagePanelsClient.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsClient.ImageMedium")));
             this.pagePanelsClient.LastVisibleSet = true;
-            this.pagePanelsClient.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pagePanelsClient.Margin = new System.Windows.Forms.Padding(4);
+            this.pagePanelsClient.MinimumSize = new System.Drawing.Size(67, 62);
             this.pagePanelsClient.Name = "pagePanelsClient";
-            this.pagePanelsClient.Size = new System.Drawing.Size(50, 500);
+            this.pagePanelsClient.Size = new System.Drawing.Size(67, 615);
             this.pagePanelsClient.Text = "Client";
             this.pagePanelsClient.TextDescription = "Client is the main style for client area of Krypton panels.";
             this.pagePanelsClient.ToolTipTitle = "Page ToolTip";
@@ -4304,9 +3969,10 @@ namespace PaletteDesigner
             this.pagePanelsAlternate.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsAlternate.ImageLarge")));
             this.pagePanelsAlternate.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsAlternate.ImageMedium")));
             this.pagePanelsAlternate.LastVisibleSet = true;
-            this.pagePanelsAlternate.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pagePanelsAlternate.Margin = new System.Windows.Forms.Padding(4);
+            this.pagePanelsAlternate.MinimumSize = new System.Drawing.Size(67, 62);
             this.pagePanelsAlternate.Name = "pagePanelsAlternate";
-            this.pagePanelsAlternate.Size = new System.Drawing.Size(50, 500);
+            this.pagePanelsAlternate.Size = new System.Drawing.Size(67, 615);
             this.pagePanelsAlternate.Text = "Alternate";
             this.pagePanelsAlternate.TextDescription = "Alternate provides a complementary variation on the Client style.";
             this.pagePanelsAlternate.ToolTipTitle = "Page ToolTip";
@@ -4317,9 +3983,10 @@ namespace PaletteDesigner
             this.pagePanelsRibbonInactive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pagePanelsRibbonInactive.Flags = 65534;
             this.pagePanelsRibbonInactive.LastVisibleSet = true;
-            this.pagePanelsRibbonInactive.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pagePanelsRibbonInactive.Margin = new System.Windows.Forms.Padding(4);
+            this.pagePanelsRibbonInactive.MinimumSize = new System.Drawing.Size(67, 62);
             this.pagePanelsRibbonInactive.Name = "pagePanelsRibbonInactive";
-            this.pagePanelsRibbonInactive.Size = new System.Drawing.Size(100, 100);
+            this.pagePanelsRibbonInactive.Size = new System.Drawing.Size(133, 123);
             this.pagePanelsRibbonInactive.Text = "Ribbon Inactive";
             this.pagePanelsRibbonInactive.TextDescription = "Ribbon Inactive provides the ribbon background style when inside an inactive Form" +
     ".";
@@ -4333,9 +4000,10 @@ namespace PaletteDesigner
             this.pagePanelsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsCustom1.ImageLarge")));
             this.pagePanelsCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsCustom1.ImageMedium")));
             this.pagePanelsCustom1.LastVisibleSet = true;
-            this.pagePanelsCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pagePanelsCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pagePanelsCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pagePanelsCustom1.Name = "pagePanelsCustom1";
-            this.pagePanelsCustom1.Size = new System.Drawing.Size(50, 500);
+            this.pagePanelsCustom1.Size = new System.Drawing.Size(67, 615);
             this.pagePanelsCustom1.Text = "Custom 1";
             this.pagePanelsCustom1.TextDescription = "Custom 1 style inherits from Client and is intended for your own custom use.";
             this.pagePanelsCustom1.ToolTipTitle = "Page ToolTip";
@@ -4359,9 +4027,10 @@ namespace PaletteDesigner
             this.pageDesignRadioButton.Flags = 65535;
             this.pageDesignRadioButton.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignRadioButton.ImageSmall")));
             this.pageDesignRadioButton.LastVisibleSet = true;
-            this.pageDesignRadioButton.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignRadioButton.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignRadioButton.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignRadioButton.Name = "pageDesignRadioButton";
-            this.pageDesignRadioButton.Size = new System.Drawing.Size(439, 500);
+            this.pageDesignRadioButton.Size = new System.Drawing.Size(585, 615);
             this.pageDesignRadioButton.Text = "Design RadioButton";
             this.pageDesignRadioButton.TextDescription = "Preview appearance of the RadioButton control.";
             this.pageDesignRadioButton.TextTitle = "";
@@ -4370,35 +4039,39 @@ namespace PaletteDesigner
             // 
             // rbLive2
             // 
-            this.rbLive2.Location = new System.Drawing.Point(205, 99);
+            this.rbLive2.Location = new System.Drawing.Point(273, 122);
+            this.rbLive2.Margin = new System.Windows.Forms.Padding(4);
             this.rbLive2.Name = "rbLive2";
-            this.rbLive2.Size = new System.Drawing.Size(54, 20);
+            this.rbLive2.Size = new System.Drawing.Size(63, 24);
             this.rbLive2.TabIndex = 11;
             this.rbLive2.Values.Text = "Live 2";
             // 
             // kryptonRadioButton11
             // 
-            this.kryptonRadioButton11.Location = new System.Drawing.Point(902, 15);
+            this.kryptonRadioButton11.Location = new System.Drawing.Point(1203, 18);
+            this.kryptonRadioButton11.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonRadioButton11.Name = "kryptonRadioButton11";
-            this.kryptonRadioButton11.Size = new System.Drawing.Size(29, 20);
+            this.kryptonRadioButton11.Size = new System.Drawing.Size(32, 24);
             this.kryptonRadioButton11.TabIndex = 10;
             this.kryptonRadioButton11.Values.Text = "2";
             // 
             // rbLive1
             // 
             this.rbLive1.Checked = true;
-            this.rbLive1.Location = new System.Drawing.Point(205, 61);
+            this.rbLive1.Location = new System.Drawing.Point(273, 75);
+            this.rbLive1.Margin = new System.Windows.Forms.Padding(4);
             this.rbLive1.Name = "rbLive1";
-            this.rbLive1.Size = new System.Drawing.Size(54, 20);
+            this.rbLive1.Size = new System.Drawing.Size(63, 24);
             this.rbLive1.TabIndex = 9;
             this.rbLive1.Values.Text = "Live 1";
             // 
             // rbFocus
             // 
             this.rbFocus.AutoCheck = false;
-            this.rbFocus.Location = new System.Drawing.Point(205, 23);
+            this.rbFocus.Location = new System.Drawing.Point(273, 28);
+            this.rbFocus.Margin = new System.Windows.Forms.Padding(4);
             this.rbFocus.Name = "rbFocus";
-            this.rbFocus.Size = new System.Drawing.Size(54, 20);
+            this.rbFocus.Size = new System.Drawing.Size(63, 24);
             this.rbFocus.TabIndex = 8;
             this.rbFocus.Values.Text = "Focus";
             // 
@@ -4406,9 +4079,10 @@ namespace PaletteDesigner
             // 
             this.rbCheckedTracking.AutoCheck = false;
             this.rbCheckedTracking.Checked = true;
-            this.rbCheckedTracking.Location = new System.Drawing.Point(23, 266);
+            this.rbCheckedTracking.Location = new System.Drawing.Point(31, 327);
+            this.rbCheckedTracking.Margin = new System.Windows.Forms.Padding(4);
             this.rbCheckedTracking.Name = "rbCheckedTracking";
-            this.rbCheckedTracking.Size = new System.Drawing.Size(119, 20);
+            this.rbCheckedTracking.Size = new System.Drawing.Size(144, 24);
             this.rbCheckedTracking.TabIndex = 7;
             this.rbCheckedTracking.Values.Text = "Checked Tracking";
             // 
@@ -4416,9 +4090,10 @@ namespace PaletteDesigner
             // 
             this.rbCheckedPressed.AutoCheck = false;
             this.rbCheckedPressed.Checked = true;
-            this.rbCheckedPressed.Location = new System.Drawing.Point(23, 304);
+            this.rbCheckedPressed.Location = new System.Drawing.Point(31, 374);
+            this.rbCheckedPressed.Margin = new System.Windows.Forms.Padding(4);
             this.rbCheckedPressed.Name = "rbCheckedPressed";
-            this.rbCheckedPressed.Size = new System.Drawing.Size(114, 20);
+            this.rbCheckedPressed.Size = new System.Drawing.Size(138, 24);
             this.rbCheckedPressed.TabIndex = 6;
             this.rbCheckedPressed.Values.Text = "Checked Pressed";
             // 
@@ -4426,9 +4101,10 @@ namespace PaletteDesigner
             // 
             this.rbCheckedNormal.AutoCheck = false;
             this.rbCheckedNormal.Checked = true;
-            this.rbCheckedNormal.Location = new System.Drawing.Point(23, 228);
+            this.rbCheckedNormal.Location = new System.Drawing.Point(31, 281);
+            this.rbCheckedNormal.Margin = new System.Windows.Forms.Padding(4);
             this.rbCheckedNormal.Name = "rbCheckedNormal";
-            this.rbCheckedNormal.Size = new System.Drawing.Size(113, 20);
+            this.rbCheckedNormal.Size = new System.Drawing.Size(137, 24);
             this.rbCheckedNormal.TabIndex = 5;
             this.rbCheckedNormal.Values.Text = "Checked Normal";
             // 
@@ -4436,45 +4112,50 @@ namespace PaletteDesigner
             // 
             this.rbCheckedDisabled.AutoCheck = false;
             this.rbCheckedDisabled.Checked = true;
-            this.rbCheckedDisabled.Location = new System.Drawing.Point(23, 190);
+            this.rbCheckedDisabled.Location = new System.Drawing.Point(31, 234);
+            this.rbCheckedDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.rbCheckedDisabled.Name = "rbCheckedDisabled";
-            this.rbCheckedDisabled.Size = new System.Drawing.Size(120, 20);
+            this.rbCheckedDisabled.Size = new System.Drawing.Size(145, 24);
             this.rbCheckedDisabled.TabIndex = 4;
             this.rbCheckedDisabled.Values.Text = "Checked Disabled";
             // 
             // rbUncheckedTracking
             // 
             this.rbUncheckedTracking.AutoCheck = false;
-            this.rbUncheckedTracking.Location = new System.Drawing.Point(23, 99);
+            this.rbUncheckedTracking.Location = new System.Drawing.Point(31, 122);
+            this.rbUncheckedTracking.Margin = new System.Windows.Forms.Padding(4);
             this.rbUncheckedTracking.Name = "rbUncheckedTracking";
-            this.rbUncheckedTracking.Size = new System.Drawing.Size(132, 20);
+            this.rbUncheckedTracking.Size = new System.Drawing.Size(161, 24);
             this.rbUncheckedTracking.TabIndex = 3;
             this.rbUncheckedTracking.Values.Text = "Unchecked Tracking";
             // 
             // rbUncheckedPressed
             // 
             this.rbUncheckedPressed.AutoCheck = false;
-            this.rbUncheckedPressed.Location = new System.Drawing.Point(23, 137);
+            this.rbUncheckedPressed.Location = new System.Drawing.Point(31, 169);
+            this.rbUncheckedPressed.Margin = new System.Windows.Forms.Padding(4);
             this.rbUncheckedPressed.Name = "rbUncheckedPressed";
-            this.rbUncheckedPressed.Size = new System.Drawing.Size(128, 20);
+            this.rbUncheckedPressed.Size = new System.Drawing.Size(155, 24);
             this.rbUncheckedPressed.TabIndex = 2;
             this.rbUncheckedPressed.Values.Text = "Unchecked Pressed";
             // 
             // rbUncheckedNormal
             // 
             this.rbUncheckedNormal.AutoCheck = false;
-            this.rbUncheckedNormal.Location = new System.Drawing.Point(23, 61);
+            this.rbUncheckedNormal.Location = new System.Drawing.Point(31, 75);
+            this.rbUncheckedNormal.Margin = new System.Windows.Forms.Padding(4);
             this.rbUncheckedNormal.Name = "rbUncheckedNormal";
-            this.rbUncheckedNormal.Size = new System.Drawing.Size(127, 20);
+            this.rbUncheckedNormal.Size = new System.Drawing.Size(154, 24);
             this.rbUncheckedNormal.TabIndex = 1;
             this.rbUncheckedNormal.Values.Text = "Unchecked Normal";
             // 
             // rbUncheckedDisabled
             // 
             this.rbUncheckedDisabled.AutoCheck = false;
-            this.rbUncheckedDisabled.Location = new System.Drawing.Point(23, 23);
+            this.rbUncheckedDisabled.Location = new System.Drawing.Point(31, 28);
+            this.rbUncheckedDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.rbUncheckedDisabled.Name = "rbUncheckedDisabled";
-            this.rbUncheckedDisabled.Size = new System.Drawing.Size(133, 20);
+            this.rbUncheckedDisabled.Size = new System.Drawing.Size(162, 24);
             this.rbUncheckedDisabled.TabIndex = 0;
             this.rbUncheckedDisabled.Values.Text = "Unchecked Disabled";
             // 
@@ -4498,9 +4179,10 @@ namespace PaletteDesigner
             this.pageDesignSeparators.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignSeparators.ImageMedium")));
             this.pageDesignSeparators.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignSeparators.ImageSmall")));
             this.pageDesignSeparators.LastVisibleSet = true;
-            this.pageDesignSeparators.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignSeparators.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignSeparators.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignSeparators.Name = "pageDesignSeparators";
-            this.pageDesignSeparators.Size = new System.Drawing.Size(439, 500);
+            this.pageDesignSeparators.Size = new System.Drawing.Size(585, 615);
             this.pageDesignSeparators.Text = "Design Separators";
             this.pageDesignSeparators.TextDescription = "Low Profile style is a low visibility display of a separator.";
             this.pageDesignSeparators.TextTitle = "Low Profile";
@@ -4510,7 +4192,8 @@ namespace PaletteDesigner
             // separator1Live
             // 
             this.separator1Live.Cursor = System.Windows.Forms.Cursors.Default;
-            this.separator1Live.Location = new System.Drawing.Point(201, 332);
+            this.separator1Live.Location = new System.Drawing.Point(268, 409);
+            this.separator1Live.Margin = new System.Windows.Forms.Padding(4);
             this.separator1Live.Name = "separator1Live";
             this.separator1Live.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -4521,24 +4204,26 @@ namespace PaletteDesigner
             // separator1Live.Panel2
             // 
             this.separator1Live.Panel2.Controls.Add(this.kryptonGroup12);
-            this.separator1Live.Size = new System.Drawing.Size(100, 80);
-            this.separator1Live.SplitterDistance = 34;
+            this.separator1Live.Size = new System.Drawing.Size(133, 98);
+            this.separator1Live.SplitterDistance = 41;
             this.separator1Live.TabIndex = 24;
             // 
             // kryptonGroup11
             // 
             this.kryptonGroup11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup11.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup11.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup11.Name = "kryptonGroup11";
-            this.kryptonGroup11.Size = new System.Drawing.Size(100, 34);
+            this.kryptonGroup11.Size = new System.Drawing.Size(133, 41);
             this.kryptonGroup11.TabIndex = 0;
             // 
             // kryptonGroup12
             // 
             this.kryptonGroup12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup12.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup12.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup12.Name = "kryptonGroup12";
-            this.kryptonGroup12.Size = new System.Drawing.Size(100, 41);
+            this.kryptonGroup12.Size = new System.Drawing.Size(133, 52);
             this.kryptonGroup12.TabIndex = 0;
             // 
             // labelSeparatorsLive
@@ -4547,9 +4232,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsLive.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelSeparatorsLive.Location = new System.Drawing.Point(209, 301);
+            this.labelSeparatorsLive.Location = new System.Drawing.Point(279, 370);
+            this.labelSeparatorsLive.Margin = new System.Windows.Forms.Padding(4);
             this.labelSeparatorsLive.Name = "labelSeparatorsLive";
-            this.labelSeparatorsLive.Size = new System.Drawing.Size(88, 29);
+            this.labelSeparatorsLive.Size = new System.Drawing.Size(108, 35);
             this.labelSeparatorsLive.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsLive.TabIndex = 25;
             this.labelSeparatorsLive.Values.Text = "Tracking";
@@ -4557,7 +4243,8 @@ namespace PaletteDesigner
             // separator1Pressed
             // 
             this.separator1Pressed.Cursor = System.Windows.Forms.Cursors.Default;
-            this.separator1Pressed.Location = new System.Drawing.Point(284, 193);
+            this.separator1Pressed.Location = new System.Drawing.Point(379, 238);
+            this.separator1Pressed.Margin = new System.Windows.Forms.Padding(4);
             this.separator1Pressed.Name = "separator1Pressed";
             this.separator1Pressed.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -4568,30 +4255,33 @@ namespace PaletteDesigner
             // separator1Pressed.Panel2
             // 
             this.separator1Pressed.Panel2.Controls.Add(this.kryptonGroup8);
-            this.separator1Pressed.Size = new System.Drawing.Size(100, 80);
-            this.separator1Pressed.SplitterDistance = 34;
+            this.separator1Pressed.Size = new System.Drawing.Size(133, 98);
+            this.separator1Pressed.SplitterDistance = 41;
             this.separator1Pressed.TabIndex = 22;
             // 
             // kryptonGroup7
             // 
             this.kryptonGroup7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup7.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup7.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup7.Name = "kryptonGroup7";
-            this.kryptonGroup7.Size = new System.Drawing.Size(100, 34);
+            this.kryptonGroup7.Size = new System.Drawing.Size(133, 41);
             this.kryptonGroup7.TabIndex = 0;
             // 
             // kryptonGroup8
             // 
             this.kryptonGroup8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup8.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup8.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup8.Name = "kryptonGroup8";
-            this.kryptonGroup8.Size = new System.Drawing.Size(100, 41);
+            this.kryptonGroup8.Size = new System.Drawing.Size(133, 52);
             this.kryptonGroup8.TabIndex = 0;
             // 
             // separator1Tracking
             // 
             this.separator1Tracking.Cursor = System.Windows.Forms.Cursors.Default;
-            this.separator1Tracking.Location = new System.Drawing.Point(120, 193);
+            this.separator1Tracking.Location = new System.Drawing.Point(160, 238);
+            this.separator1Tracking.Margin = new System.Windows.Forms.Padding(4);
             this.separator1Tracking.Name = "separator1Tracking";
             this.separator1Tracking.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -4602,24 +4292,26 @@ namespace PaletteDesigner
             // separator1Tracking.Panel2
             // 
             this.separator1Tracking.Panel2.Controls.Add(this.kryptonGroup6);
-            this.separator1Tracking.Size = new System.Drawing.Size(100, 80);
-            this.separator1Tracking.SplitterDistance = 34;
+            this.separator1Tracking.Size = new System.Drawing.Size(133, 98);
+            this.separator1Tracking.SplitterDistance = 41;
             this.separator1Tracking.TabIndex = 21;
             // 
             // kryptonGroup5
             // 
             this.kryptonGroup5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup5.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup5.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup5.Name = "kryptonGroup5";
-            this.kryptonGroup5.Size = new System.Drawing.Size(100, 34);
+            this.kryptonGroup5.Size = new System.Drawing.Size(133, 41);
             this.kryptonGroup5.TabIndex = 0;
             // 
             // kryptonGroup6
             // 
             this.kryptonGroup6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup6.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup6.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup6.Name = "kryptonGroup6";
-            this.kryptonGroup6.Size = new System.Drawing.Size(100, 41);
+            this.kryptonGroup6.Size = new System.Drawing.Size(133, 52);
             this.kryptonGroup6.TabIndex = 0;
             // 
             // labelSeparatorsPressed
@@ -4628,9 +4320,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsPressed.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelSeparatorsPressed.Location = new System.Drawing.Point(295, 162);
+            this.labelSeparatorsPressed.Location = new System.Drawing.Point(393, 199);
+            this.labelSeparatorsPressed.Margin = new System.Windows.Forms.Padding(4);
             this.labelSeparatorsPressed.Name = "labelSeparatorsPressed";
-            this.labelSeparatorsPressed.Size = new System.Drawing.Size(79, 29);
+            this.labelSeparatorsPressed.Size = new System.Drawing.Size(97, 35);
             this.labelSeparatorsPressed.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsPressed.TabIndex = 26;
             this.labelSeparatorsPressed.Values.Text = "Pressed";
@@ -4641,9 +4334,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsTracking.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelSeparatorsTracking.Location = new System.Drawing.Point(130, 162);
+            this.labelSeparatorsTracking.Location = new System.Drawing.Point(173, 199);
+            this.labelSeparatorsTracking.Margin = new System.Windows.Forms.Padding(4);
             this.labelSeparatorsTracking.Name = "labelSeparatorsTracking";
-            this.labelSeparatorsTracking.Size = new System.Drawing.Size(88, 29);
+            this.labelSeparatorsTracking.Size = new System.Drawing.Size(108, 35);
             this.labelSeparatorsTracking.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsTracking.TabIndex = 27;
             this.labelSeparatorsTracking.Values.Text = "Tracking";
@@ -4651,7 +4345,8 @@ namespace PaletteDesigner
             // separator1Normal
             // 
             this.separator1Normal.Cursor = System.Windows.Forms.Cursors.Default;
-            this.separator1Normal.Location = new System.Drawing.Point(283, 62);
+            this.separator1Normal.Location = new System.Drawing.Point(377, 76);
+            this.separator1Normal.Margin = new System.Windows.Forms.Padding(4);
             this.separator1Normal.Name = "separator1Normal";
             this.separator1Normal.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -4662,31 +4357,34 @@ namespace PaletteDesigner
             // separator1Normal.Panel2
             // 
             this.separator1Normal.Panel2.Controls.Add(this.kryptonGroup4);
-            this.separator1Normal.Size = new System.Drawing.Size(100, 80);
-            this.separator1Normal.SplitterDistance = 33;
+            this.separator1Normal.Size = new System.Drawing.Size(133, 98);
+            this.separator1Normal.SplitterDistance = 40;
             this.separator1Normal.TabIndex = 18;
             // 
             // kryptonGroup3
             // 
             this.kryptonGroup3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup3.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup3.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup3.Name = "kryptonGroup3";
-            this.kryptonGroup3.Size = new System.Drawing.Size(100, 33);
+            this.kryptonGroup3.Size = new System.Drawing.Size(133, 40);
             this.kryptonGroup3.TabIndex = 0;
             // 
             // kryptonGroup4
             // 
             this.kryptonGroup4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup4.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup4.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup4.Name = "kryptonGroup4";
-            this.kryptonGroup4.Size = new System.Drawing.Size(100, 42);
+            this.kryptonGroup4.Size = new System.Drawing.Size(133, 53);
             this.kryptonGroup4.TabIndex = 0;
             // 
             // separator1Disabled
             // 
             this.separator1Disabled.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Disabled.Enabled = false;
-            this.separator1Disabled.Location = new System.Drawing.Point(119, 62);
+            this.separator1Disabled.Location = new System.Drawing.Point(159, 76);
+            this.separator1Disabled.Margin = new System.Windows.Forms.Padding(4);
             this.separator1Disabled.Name = "separator1Disabled";
             this.separator1Disabled.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -4697,24 +4395,26 @@ namespace PaletteDesigner
             // separator1Disabled.Panel2
             // 
             this.separator1Disabled.Panel2.Controls.Add(this.kryptonGroup2);
-            this.separator1Disabled.Size = new System.Drawing.Size(100, 80);
-            this.separator1Disabled.SplitterDistance = 34;
+            this.separator1Disabled.Size = new System.Drawing.Size(133, 98);
+            this.separator1Disabled.SplitterDistance = 41;
             this.separator1Disabled.TabIndex = 15;
             // 
             // kryptonGroup1
             // 
             this.kryptonGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup1.Name = "kryptonGroup1";
-            this.kryptonGroup1.Size = new System.Drawing.Size(100, 34);
+            this.kryptonGroup1.Size = new System.Drawing.Size(133, 41);
             this.kryptonGroup1.TabIndex = 0;
             // 
             // kryptonGroup2
             // 
             this.kryptonGroup2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup2.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroup2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonGroup2.Name = "kryptonGroup2";
-            this.kryptonGroup2.Size = new System.Drawing.Size(100, 41);
+            this.kryptonGroup2.Size = new System.Drawing.Size(133, 52);
             this.kryptonGroup2.TabIndex = 0;
             // 
             // labelSeparatorsNormal
@@ -4723,9 +4423,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelSeparatorsNormal.Location = new System.Drawing.Point(298, 30);
+            this.labelSeparatorsNormal.Location = new System.Drawing.Point(397, 37);
+            this.labelSeparatorsNormal.Margin = new System.Windows.Forms.Padding(4);
             this.labelSeparatorsNormal.Name = "labelSeparatorsNormal";
-            this.labelSeparatorsNormal.Size = new System.Drawing.Size(78, 29);
+            this.labelSeparatorsNormal.Size = new System.Drawing.Size(96, 35);
             this.labelSeparatorsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsNormal.TabIndex = 28;
             this.labelSeparatorsNormal.Values.Text = "Normal";
@@ -4736,9 +4437,10 @@ namespace PaletteDesigner
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelSeparatorsDisabled.Location = new System.Drawing.Point(129, 30);
+            this.labelSeparatorsDisabled.Location = new System.Drawing.Point(172, 37);
+            this.labelSeparatorsDisabled.Margin = new System.Windows.Forms.Padding(4);
             this.labelSeparatorsDisabled.Name = "labelSeparatorsDisabled";
-            this.labelSeparatorsDisabled.Size = new System.Drawing.Size(88, 29);
+            this.labelSeparatorsDisabled.Size = new System.Drawing.Size(108, 35);
             this.labelSeparatorsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsDisabled.TabIndex = 29;
             this.labelSeparatorsDisabled.Values.Text = "Disabled";
@@ -4746,10 +4448,11 @@ namespace PaletteDesigner
             // borderDesignSeparators
             // 
             this.borderDesignSeparators.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignSeparators.Location = new System.Drawing.Point(89, 0);
+            this.borderDesignSeparators.Location = new System.Drawing.Point(108, 0);
+            this.borderDesignSeparators.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignSeparators.Name = "borderDesignSeparators";
             this.borderDesignSeparators.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignSeparators.Size = new System.Drawing.Size(1, 500);
+            this.borderDesignSeparators.Size = new System.Drawing.Size(1, 615);
             this.borderDesignSeparators.TabIndex = 4;
             // 
             // kryptonNavigatorDesignSeparators
@@ -4782,6 +4485,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignSeparators.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignSeparators.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignSeparators.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignSeparators.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignSeparators.Name = "kryptonNavigatorDesignSeparators";
             this.kryptonNavigatorDesignSeparators.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignSeparators.Owner = null;
@@ -4793,7 +4497,7 @@ namespace PaletteDesigner
             this.pageSeparatorCustom1});
             this.kryptonNavigatorDesignSeparators.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignSeparators.SelectedIndex = 0;
-            this.kryptonNavigatorDesignSeparators.Size = new System.Drawing.Size(89, 500);
+            this.kryptonNavigatorDesignSeparators.Size = new System.Drawing.Size(108, 615);
             this.kryptonNavigatorDesignSeparators.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignSeparators.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignSeparators.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -4810,9 +4514,10 @@ namespace PaletteDesigner
             this.pageSeparatorLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorLowProfile.ImageLarge")));
             this.pageSeparatorLowProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorLowProfile.ImageMedium")));
             this.pageSeparatorLowProfile.LastVisibleSet = true;
-            this.pageSeparatorLowProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageSeparatorLowProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageSeparatorLowProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageSeparatorLowProfile.Name = "pageSeparatorLowProfile";
-            this.pageSeparatorLowProfile.Size = new System.Drawing.Size(50, 500);
+            this.pageSeparatorLowProfile.Size = new System.Drawing.Size(67, 615);
             this.pageSeparatorLowProfile.Text = "Low";
             this.pageSeparatorLowProfile.TextDescription = "Low Profile style is a low visibility display of a separator.";
             this.pageSeparatorLowProfile.ToolTipTitle = "Page ToolTip";
@@ -4825,9 +4530,10 @@ namespace PaletteDesigner
             this.pageSeparatorHighProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorHighProfile.ImageLarge")));
             this.pageSeparatorHighProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorHighProfile.ImageMedium")));
             this.pageSeparatorHighProfile.LastVisibleSet = true;
-            this.pageSeparatorHighProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageSeparatorHighProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageSeparatorHighProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageSeparatorHighProfile.Name = "pageSeparatorHighProfile";
-            this.pageSeparatorHighProfile.Size = new System.Drawing.Size(50, 500);
+            this.pageSeparatorHighProfile.Size = new System.Drawing.Size(67, 615);
             this.pageSeparatorHighProfile.Text = "High";
             this.pageSeparatorHighProfile.TextDescription = "High Profile style is a high visibility display of a separator.";
             this.pageSeparatorHighProfile.ToolTipTitle = "Page ToolTip";
@@ -4838,9 +4544,10 @@ namespace PaletteDesigner
             this.pageSeparatorHighInternalProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageSeparatorHighInternalProfile.Flags = 65535;
             this.pageSeparatorHighInternalProfile.LastVisibleSet = true;
-            this.pageSeparatorHighInternalProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageSeparatorHighInternalProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageSeparatorHighInternalProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageSeparatorHighInternalProfile.Name = "pageSeparatorHighInternalProfile";
-            this.pageSeparatorHighInternalProfile.Size = new System.Drawing.Size(100, 100);
+            this.pageSeparatorHighInternalProfile.Size = new System.Drawing.Size(133, 123);
             this.pageSeparatorHighInternalProfile.Text = "High Internal";
             this.pageSeparatorHighInternalProfile.TextDescription = "High Internal Profile style is a high visibility display of an internal  separato" +
     "r.";
@@ -4854,9 +4561,10 @@ namespace PaletteDesigner
             this.pageSeparatorCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorCustom1.ImageLarge")));
             this.pageSeparatorCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorCustom1.ImageMedium")));
             this.pageSeparatorCustom1.LastVisibleSet = true;
-            this.pageSeparatorCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageSeparatorCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pageSeparatorCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageSeparatorCustom1.Name = "pageSeparatorCustom1";
-            this.pageSeparatorCustom1.Size = new System.Drawing.Size(50, 500);
+            this.pageSeparatorCustom1.Size = new System.Drawing.Size(67, 615);
             this.pageSeparatorCustom1.Text = "Custom 1";
             this.pageSeparatorCustom1.TextDescription = "Custom 1 style inherits from Low Profile and is intended for your own custom use." +
     "";
@@ -4874,9 +4582,10 @@ namespace PaletteDesigner
             this.pageDesignTabs.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignTabs.ImageMedium")));
             this.pageDesignTabs.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignTabs.ImageSmall")));
             this.pageDesignTabs.LastVisibleSet = true;
-            this.pageDesignTabs.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignTabs.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignTabs.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignTabs.Name = "pageDesignTabs";
-            this.pageDesignTabs.Size = new System.Drawing.Size(462, 524);
+            this.pageDesignTabs.Size = new System.Drawing.Size(616, 645);
             this.pageDesignTabs.Text = "Design Tabs";
             this.pageDesignTabs.TextDescription = "High Profile is appropriate when the selected page needs to stand out.";
             this.pageDesignTabs.TextTitle = "High Profile";
@@ -4897,7 +4606,8 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
             this.kryptonNavigatorTabs.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigatorTabs.ControlKryptonFormFeatures = false;
-            this.kryptonNavigatorTabs.Location = new System.Drawing.Point(141, 32);
+            this.kryptonNavigatorTabs.Location = new System.Drawing.Point(188, 39);
+            this.kryptonNavigatorTabs.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorTabs.Name = "kryptonNavigatorTabs";
             this.kryptonNavigatorTabs.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             this.kryptonNavigatorTabs.Owner = null;
@@ -4919,9 +4629,10 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs1.ImageMedium")));
             this.kryptonNavigatorTabs1.ImageSmall = global::PaletteDesigner.Properties.Resources.environment;
             this.kryptonNavigatorTabs1.LastVisibleSet = true;
-            this.kryptonNavigatorTabs1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonNavigatorTabs1.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonNavigatorTabs1.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonNavigatorTabs1.Name = "kryptonNavigatorTabs1";
-            this.kryptonNavigatorTabs1.Size = new System.Drawing.Size(283, 123);
+            this.kryptonNavigatorTabs1.Size = new System.Drawing.Size(283, 119);
             this.kryptonNavigatorTabs1.Text = "Page 1";
             this.kryptonNavigatorTabs1.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs1.UniqueName = "E903D110CD804DC4E903D110CD804DC4";
@@ -4934,9 +4645,10 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs2.ImageMedium")));
             this.kryptonNavigatorTabs2.ImageSmall = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonNavigatorTabs2.LastVisibleSet = true;
-            this.kryptonNavigatorTabs2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonNavigatorTabs2.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonNavigatorTabs2.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonNavigatorTabs2.Name = "kryptonNavigatorTabs2";
-            this.kryptonNavigatorTabs2.Size = new System.Drawing.Size(100, 100);
+            this.kryptonNavigatorTabs2.Size = new System.Drawing.Size(133, 123);
             this.kryptonNavigatorTabs2.Text = "Page 2";
             this.kryptonNavigatorTabs2.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs2.UniqueName = "49A9A449D97C4EBF49A9A449D97C4EBF";
@@ -4949,9 +4661,10 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs3.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs3.ImageMedium")));
             this.kryptonNavigatorTabs3.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs3.ImageSmall")));
             this.kryptonNavigatorTabs3.LastVisibleSet = true;
-            this.kryptonNavigatorTabs3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonNavigatorTabs3.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonNavigatorTabs3.MinimumSize = new System.Drawing.Size(67, 62);
             this.kryptonNavigatorTabs3.Name = "kryptonNavigatorTabs3";
-            this.kryptonNavigatorTabs3.Size = new System.Drawing.Size(100, 100);
+            this.kryptonNavigatorTabs3.Size = new System.Drawing.Size(133, 123);
             this.kryptonNavigatorTabs3.Text = "Page 3";
             this.kryptonNavigatorTabs3.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs3.UniqueName = "ECD1F28E6CB04389ECD1F28E6CB04389";
@@ -4959,10 +4672,11 @@ namespace PaletteDesigner
             // borderDesignTabs
             // 
             this.borderDesignTabs.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignTabs.Location = new System.Drawing.Point(116, 0);
+            this.borderDesignTabs.Location = new System.Drawing.Point(141, 0);
+            this.borderDesignTabs.Margin = new System.Windows.Forms.Padding(4);
             this.borderDesignTabs.Name = "borderDesignTabs";
             this.borderDesignTabs.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignTabs.Size = new System.Drawing.Size(1, 524);
+            this.borderDesignTabs.Size = new System.Drawing.Size(1, 645);
             this.borderDesignTabs.TabIndex = 3;
             // 
             // kryptonNavigatorDesignTabs
@@ -4996,6 +4710,7 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignTabs.ControlKryptonFormFeatures = false;
             this.kryptonNavigatorDesignTabs.Dock = System.Windows.Forms.DockStyle.Left;
             this.kryptonNavigatorDesignTabs.Location = new System.Drawing.Point(0, 0);
+            this.kryptonNavigatorDesignTabs.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonNavigatorDesignTabs.Name = "kryptonNavigatorDesignTabs";
             this.kryptonNavigatorDesignTabs.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
             this.kryptonNavigatorDesignTabs.Owner = null;
@@ -5012,7 +4727,7 @@ namespace PaletteDesigner
             this.pageTabCustom3});
             this.kryptonNavigatorDesignTabs.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonNavigatorDesignTabs.SelectedIndex = 0;
-            this.kryptonNavigatorDesignTabs.Size = new System.Drawing.Size(116, 524);
+            this.kryptonNavigatorDesignTabs.Size = new System.Drawing.Size(141, 645);
             this.kryptonNavigatorDesignTabs.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorDesignTabs.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
             this.kryptonNavigatorDesignTabs.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -5029,9 +4744,10 @@ namespace PaletteDesigner
             this.pageTabHighProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabHighProfile.ImageLarge")));
             this.pageTabHighProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabHighProfile.ImageMedium")));
             this.pageTabHighProfile.LastVisibleSet = true;
-            this.pageTabHighProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabHighProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabHighProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabHighProfile.Name = "pageTabHighProfile";
-            this.pageTabHighProfile.Size = new System.Drawing.Size(148, 73);
+            this.pageTabHighProfile.Size = new System.Drawing.Size(197, 90);
             this.pageTabHighProfile.Text = "High Profile";
             this.pageTabHighProfile.TextDescription = "High Profile is appropriate when the selected page needs to stand out.";
             this.pageTabHighProfile.ToolTipTitle = "Page ToolTip";
@@ -5044,9 +4760,10 @@ namespace PaletteDesigner
             this.pageTabStandardProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabStandardProfile.ImageLarge")));
             this.pageTabStandardProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabStandardProfile.ImageMedium")));
             this.pageTabStandardProfile.LastVisibleSet = true;
-            this.pageTabStandardProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabStandardProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabStandardProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabStandardProfile.Name = "pageTabStandardProfile";
-            this.pageTabStandardProfile.Size = new System.Drawing.Size(100, 100);
+            this.pageTabStandardProfile.Size = new System.Drawing.Size(133, 123);
             this.pageTabStandardProfile.Text = "Standard Profile";
             this.pageTabStandardProfile.TextDescription = "Standard Profile is appropriate for most scenarios.";
             this.pageTabStandardProfile.ToolTipTitle = "Page ToolTip";
@@ -5059,9 +4776,10 @@ namespace PaletteDesigner
             this.pageTabLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabLowProfile.ImageLarge")));
             this.pageTabLowProfile.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabLowProfile.ImageMedium")));
             this.pageTabLowProfile.LastVisibleSet = true;
-            this.pageTabLowProfile.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabLowProfile.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabLowProfile.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabLowProfile.Name = "pageTabLowProfile";
-            this.pageTabLowProfile.Size = new System.Drawing.Size(100, 100);
+            this.pageTabLowProfile.Size = new System.Drawing.Size(133, 123);
             this.pageTabLowProfile.Text = "Low Profile";
             this.pageTabLowProfile.TextDescription = "Low Profile is appropriate when only the selected page should be obvious.";
             this.pageTabLowProfile.ToolTipTitle = "Page ToolTip";
@@ -5074,9 +4792,10 @@ namespace PaletteDesigner
             this.pageTabOneNote.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabOneNote.ImageLarge")));
             this.pageTabOneNote.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabOneNote.ImageMedium")));
             this.pageTabOneNote.LastVisibleSet = true;
-            this.pageTabOneNote.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabOneNote.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabOneNote.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabOneNote.Name = "pageTabOneNote";
-            this.pageTabOneNote.Size = new System.Drawing.Size(100, 100);
+            this.pageTabOneNote.Size = new System.Drawing.Size(133, 123);
             this.pageTabOneNote.Text = "OneNote";
             this.pageTabOneNote.TextDescription = "OneNote is intended to mimic Microsoft OneNote appearance.";
             this.pageTabOneNote.ToolTipTitle = "Page ToolTip";
@@ -5087,9 +4806,10 @@ namespace PaletteDesigner
             this.pageTabDock.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabDock.Flags = 65535;
             this.pageTabDock.LastVisibleSet = true;
-            this.pageTabDock.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabDock.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabDock.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabDock.Name = "pageTabDock";
-            this.pageTabDock.Size = new System.Drawing.Size(100, 100);
+            this.pageTabDock.Size = new System.Drawing.Size(133, 123);
             this.pageTabDock.Text = "Dock";
             this.pageTabDock.ToolTipTitle = "Page ToolTip";
             this.pageTabDock.UniqueName = "560DFB2C3B88492C560DFB2C3B88492C";
@@ -5099,9 +4819,10 @@ namespace PaletteDesigner
             this.pageTabDockAutoHidden.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabDockAutoHidden.Flags = 65535;
             this.pageTabDockAutoHidden.LastVisibleSet = true;
-            this.pageTabDockAutoHidden.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabDockAutoHidden.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabDockAutoHidden.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabDockAutoHidden.Name = "pageTabDockAutoHidden";
-            this.pageTabDockAutoHidden.Size = new System.Drawing.Size(100, 100);
+            this.pageTabDockAutoHidden.Size = new System.Drawing.Size(133, 123);
             this.pageTabDockAutoHidden.Text = "Dock AutoHidden";
             this.pageTabDockAutoHidden.ToolTipTitle = "Page ToolTip";
             this.pageTabDockAutoHidden.UniqueName = "028B6F04D305460D028B6F04D305460D";
@@ -5113,9 +4834,10 @@ namespace PaletteDesigner
             this.pageTabCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom1.ImageLarge")));
             this.pageTabCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom1.ImageMedium")));
             this.pageTabCustom1.LastVisibleSet = true;
-            this.pageTabCustom1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabCustom1.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabCustom1.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabCustom1.Name = "pageTabCustom1";
-            this.pageTabCustom1.Size = new System.Drawing.Size(100, 100);
+            this.pageTabCustom1.Size = new System.Drawing.Size(133, 123);
             this.pageTabCustom1.Text = "Custom 1";
             this.pageTabCustom1.TextDescription = "Custom 1 style inherits from High Profile and is intended for your own custom use" +
     ".";
@@ -5129,9 +4851,10 @@ namespace PaletteDesigner
             this.pageTabCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom2.ImageLarge")));
             this.pageTabCustom2.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom2.ImageMedium")));
             this.pageTabCustom2.LastVisibleSet = true;
-            this.pageTabCustom2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabCustom2.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabCustom2.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabCustom2.Name = "pageTabCustom2";
-            this.pageTabCustom2.Size = new System.Drawing.Size(100, 100);
+            this.pageTabCustom2.Size = new System.Drawing.Size(133, 123);
             this.pageTabCustom2.Text = "Custom 2";
             this.pageTabCustom2.TextDescription = "Custom 2 style inherits from High Profile and is intended for your own custom use" +
     ".";
@@ -5145,9 +4868,10 @@ namespace PaletteDesigner
             this.pageTabCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom3.ImageLarge")));
             this.pageTabCustom3.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom3.ImageMedium")));
             this.pageTabCustom3.LastVisibleSet = true;
-            this.pageTabCustom3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTabCustom3.Margin = new System.Windows.Forms.Padding(4);
+            this.pageTabCustom3.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageTabCustom3.Name = "pageTabCustom3";
-            this.pageTabCustom3.Size = new System.Drawing.Size(100, 100);
+            this.pageTabCustom3.Size = new System.Drawing.Size(133, 123);
             this.pageTabCustom3.Text = "Custom 3";
             this.pageTabCustom3.TextDescription = "Custom 3 style inherits from High Profile and is intended for your own custom use" +
     ".";
@@ -5161,9 +4885,10 @@ namespace PaletteDesigner
             this.pageDesignTrackBar.Flags = 65534;
             this.pageDesignTrackBar.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonTrackBar;
             this.pageDesignTrackBar.LastVisibleSet = true;
-            this.pageDesignTrackBar.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignTrackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignTrackBar.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignTrackBar.Name = "pageDesignTrackBar";
-            this.pageDesignTrackBar.Size = new System.Drawing.Size(644, 546);
+            this.pageDesignTrackBar.Size = new System.Drawing.Size(859, 672);
             this.pageDesignTrackBar.Text = "Design TrackBar";
             this.pageDesignTrackBar.TextDescription = "TrackBar appearance in vertical and horizontal settings.";
             this.pageDesignTrackBar.TextTitle = "TrackBar";
@@ -5174,9 +4899,9 @@ namespace PaletteDesigner
             // 
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trackBar1.Location = new System.Drawing.Point(0, 0);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(644, 546);
+            this.trackBar1.Size = new System.Drawing.Size(859, 672);
             this.trackBar1.TabIndex = 0;
             // 
             // pageDesignMenuItems
@@ -5185,10 +4910,10 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.Controls.Add(this.menuPage1);
             this.pageDesignMenuItems.Flags = 65534;
             this.pageDesignMenuItems.LastVisibleSet = true;
-            this.pageDesignMenuItems.Margin = new System.Windows.Forms.Padding(2);
-            this.pageDesignMenuItems.MinimumSize = new System.Drawing.Size(38, 41);
+            this.pageDesignMenuItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pageDesignMenuItems.MinimumSize = new System.Drawing.Size(51, 50);
             this.pageDesignMenuItems.Name = "pageDesignMenuItems";
-            this.pageDesignMenuItems.Size = new System.Drawing.Size(75, 81);
+            this.pageDesignMenuItems.Size = new System.Drawing.Size(100, 100);
             this.pageDesignMenuItems.Text = "Design Menu";
             this.pageDesignMenuItems.TextDescription = "Menu Items appearance and colours";
             this.pageDesignMenuItems.TextTitle = "Menu Items";
@@ -5199,9 +4924,9 @@ namespace PaletteDesigner
             // 
             this.menuPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuPage1.Location = new System.Drawing.Point(0, 0);
-            this.menuPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.menuPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.menuPage1.Name = "menuPage1";
-            this.menuPage1.Size = new System.Drawing.Size(75, 81);
+            this.menuPage1.Size = new System.Drawing.Size(100, 100);
             this.menuPage1.TabIndex = 0;
             // 
             // pageDesignToolTips
@@ -5210,9 +4935,10 @@ namespace PaletteDesigner
             this.pageDesignToolTips.Controls.Add(this.toolTipsPage1);
             this.pageDesignToolTips.Flags = 65534;
             this.pageDesignToolTips.LastVisibleSet = true;
-            this.pageDesignToolTips.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignToolTips.Margin = new System.Windows.Forms.Padding(4);
+            this.pageDesignToolTips.MinimumSize = new System.Drawing.Size(67, 62);
             this.pageDesignToolTips.Name = "pageDesignToolTips";
-            this.pageDesignToolTips.Size = new System.Drawing.Size(100, 100);
+            this.pageDesignToolTips.Size = new System.Drawing.Size(133, 123);
             this.pageDesignToolTips.Text = "Design ToolTips";
             this.pageDesignToolTips.TextDescription = "Tool Tips appearance and colours";
             this.pageDesignToolTips.TextTitle = "Tool Tips";
@@ -5223,8 +4949,9 @@ namespace PaletteDesigner
             // 
             this.toolTipsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolTipsPage1.Location = new System.Drawing.Point(0, 0);
+            this.toolTipsPage1.Margin = new System.Windows.Forms.Padding(5);
             this.toolTipsPage1.Name = "toolTipsPage1";
-            this.toolTipsPage1.Size = new System.Drawing.Size(100, 100);
+            this.toolTipsPage1.Size = new System.Drawing.Size(133, 123);
             this.toolTipsPage1.TabIndex = 0;
             // 
             // kryptonHeaderGroupProperties
@@ -5232,35 +4959,38 @@ namespace PaletteDesigner
             this.kryptonHeaderGroupProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroupProperties.HeaderVisibleSecondary = false;
             this.kryptonHeaderGroupProperties.Location = new System.Drawing.Point(0, 0);
+            this.kryptonHeaderGroupProperties.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeaderGroupProperties.Name = "kryptonHeaderGroupProperties";
             // 
             // kryptonHeaderGroupProperties.Panel
             // 
-            this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.labelGridNormal);
-            this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(496, 589);
+            this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.propertyGrid);
+            this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(664, 735);
             this.kryptonHeaderGroupProperties.TabIndex = 0;
             this.kryptonHeaderGroupProperties.ValuesPrimary.Heading = "Properties";
             this.kryptonHeaderGroupProperties.ValuesPrimary.Image = null;
             // 
             // labelGridNormal
             // 
-            this.labelGridNormal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.CategoryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.CommandsBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelGridNormal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelGridNormal.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
-            this.labelGridNormal.HelpForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.labelGridNormal.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(196)))), ((int)(((byte)(216)))));
-            this.labelGridNormal.Location = new System.Drawing.Point(0, 0);
-            this.labelGridNormal.Name = "labelGridNormal";
-            this.labelGridNormal.Size = new System.Drawing.Size(494, 557);
-            this.labelGridNormal.TabIndex = 0;
-            this.labelGridNormal.ToolbarVisible = false;
-            this.labelGridNormal.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelGridNormal.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.CategoryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.CommandsBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.propertyGrid.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
+            this.propertyGrid.HelpForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(196)))), ((int)(((byte)(216)))));
+            this.propertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.Size = new System.Drawing.Size(662, 697);
+            this.propertyGrid.TabIndex = 0;
+            this.propertyGrid.ToolbarVisible = false;
+            this.propertyGrid.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -5315,11 +5045,13 @@ namespace PaletteDesigner
             // 
             // mainToolStripContainer.ContentPanel
             // 
-            this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1158, 649);
+            this.mainToolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1544, 805);
             this.mainToolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainToolStripContainer.Location = new System.Drawing.Point(0, 0);
+            this.mainToolStripContainer.Margin = new System.Windows.Forms.Padding(4);
             this.mainToolStripContainer.Name = "mainToolStripContainer";
-            this.mainToolStripContainer.Size = new System.Drawing.Size(1158, 674);
+            this.mainToolStripContainer.Size = new System.Drawing.Size(1544, 830);
             this.mainToolStripContainer.TabIndex = 0;
             this.mainToolStripContainer.Text = "toolStripContainer1";
             // 
@@ -5364,16 +5096,17 @@ namespace PaletteDesigner
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1158, 674);
+            this.ClientSize = new System.Drawing.Size(1544, 830);
             this.Controls.Add(this.kryptonPanelMainFill);
             this.Controls.Add(this.kryptonNavigatorTop);
             this.Controls.Add(this.mainMenuStrip);
             this.Controls.Add(this.mainToolStripContainer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenuStrip;
-            this.MinimumSize = new System.Drawing.Size(410, 372);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(541, 447);
             this.Name = "MainForm";
             this.Text = "Palette Designer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -5453,29 +5186,6 @@ namespace PaletteDesigner
             this.pageDesignButtonSpecs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtons)).EndInit();
             this.pageDesignButtons.ResumeLayout(false);
-            this.pageDesignButtons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.borderDesignButtons)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignButtons)).EndInit();
-            this.kryptonNavigatorDesignButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsStandalone)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsAlternate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsLowProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsBreadCrumb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonCalendarDay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsButtonSpec)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsRibbonCluster)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorStack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorOverflow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsNavigatorMini)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsInputControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsListItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsGallery)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsFormClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCommand)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignCheckBox)).EndInit();
             this.pageDesignCheckBox.ResumeLayout(false);
             this.pageDesignCheckBox.PerformLayout();
@@ -5711,13 +5421,6 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageDesignPanels;
         private Krypton.Navigator.KryptonPage pageDesignSeparators;
         private Krypton.Navigator.KryptonPage pageDesignChromeTMS;
-        private Krypton.Navigator.KryptonNavigator kryptonNavigatorDesignButtons;
-        private Krypton.Navigator.KryptonPage pageButtonsStandalone;
-        private Krypton.Navigator.KryptonPage pageButtonsLowProfile;
-        private Krypton.Navigator.KryptonPage pageButtonsButtonSpec;
-        private Krypton.Navigator.KryptonPage pageButtonsCustom1;
-        private Krypton.Navigator.KryptonPage pageButtonsCustom2;
-        private Krypton.Navigator.KryptonPage pageButtonsCustom3;
         private Krypton.Navigator.KryptonNavigator kryptonNavigatorDesignControls;
         private Krypton.Navigator.KryptonPage pageControlsClient;
         private Krypton.Navigator.KryptonPage pageControlsAlternate;
@@ -5735,17 +5438,8 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripMenuItem menuSaveAs;
         private System.Windows.Forms.ToolStripSeparator menuSep2;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
-        private Krypton.Toolkit.KryptonPropertyGrid labelGridNormal;
+        private Krypton.Toolkit.KryptonPropertyGrid propertyGrid;
         private Krypton.Toolkit.KryptonPanel borderDesignControls;
-        private Krypton.Toolkit.KryptonPanel borderDesignButtons;
-        private Krypton.Toolkit.KryptonCheckButton buttonCheckedPressed;
-        private Krypton.Toolkit.KryptonCheckButton buttonCheckedTracking;
-        private Krypton.Toolkit.KryptonCheckButton buttonCheckedNormal;
-        private Krypton.Toolkit.KryptonCheckButton buttonDisabled;
-        private Krypton.Toolkit.KryptonCheckButton buttonPressed;
-        private Krypton.Toolkit.KryptonCheckButton buttonNormal;
-        private Krypton.Toolkit.KryptonCheckButton buttonTracking;
-        private Krypton.Toolkit.KryptonCheckButton buttonDefaultFocus;
         private Krypton.Toolkit.KryptonLabel labelControlsNormal;
         private Krypton.Toolkit.KryptonLabel labelControlsDisabled;
         private Krypton.Toolkit.KryptonGroup control1Normal;
@@ -5857,7 +5551,6 @@ namespace PaletteDesigner
         private Krypton.Toolkit.KryptonLinkLabel label1NotVisited;
         private Krypton.Toolkit.KryptonLinkLabel label1Pressed;
         private Krypton.Toolkit.KryptonLinkLabel label1Visited;
-        private Krypton.Toolkit.KryptonCheckButton buttonLive;
         private Krypton.Toolkit.KryptonLinkLabel label1Live;
         private Krypton.Toolkit.KryptonSplitContainer separator1Live;
         private Krypton.Toolkit.KryptonGroup kryptonGroup11;
@@ -5881,8 +5574,6 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage kryptonNavigatorTabs2;
         private Krypton.Navigator.KryptonPage kryptonNavigatorTabs3;
         private Krypton.Toolkit.KryptonManager kryptonManager;
-        private Krypton.Navigator.KryptonPage pageButtonsNavigatorStack;
-        private Krypton.Navigator.KryptonPage pageButtonsForm;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny48;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny49;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny50;
@@ -5911,15 +5602,12 @@ namespace PaletteDesigner
         private Krypton.Toolkit.KryptonCheckButton labelsControlCustom1;
         private Krypton.Toolkit.KryptonCheckButton labelsControlAlternate;
         private Krypton.Toolkit.KryptonCheckButton labelsControlClient;
-        private Krypton.Navigator.KryptonPage pageButtonsAlternate;
-        private Krypton.Navigator.KryptonPage pageButtonsRibbonCluster;
         private Krypton.Navigator.KryptonPage pageControlsToolTip;
         private Krypton.Navigator.KryptonPage pageLabelsToolTip;
         private Krypton.Toolkit.KryptonCheckButton labelsControlToolTip;
         private Krypton.Navigator.KryptonPage pageTopRibbon;
         private Krypton.Navigator.KryptonPage pageDesignRibbon;
         private Krypton.Navigator.KryptonPage pageControlsRibbon;
-        private Krypton.Navigator.KryptonPage pageButtonsNavigatorMini;
         private Krypton.Navigator.KryptonPage pageLabelsKeyTip;
         private Krypton.Navigator.KryptonPage pageTopCheckBox;
         private Krypton.Navigator.KryptonPage pageDesignCheckBox;
@@ -5976,15 +5664,9 @@ namespace PaletteDesigner
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private Krypton.Navigator.KryptonPage pageLabelsSuperTip;
-        private Krypton.Navigator.KryptonPage pageButtonsInputControl;
         private Krypton.Navigator.KryptonPage pageTopInputControls;
         private Krypton.Navigator.KryptonPage pageDesignInputControls;
         private Krypton.Navigator.KryptonPage pageSeparatorHighInternalProfile;
-        private Krypton.Navigator.KryptonPage pageButtonsListItem;
-        private Krypton.Navigator.KryptonPage pageButtonsGallery;
-        private Krypton.Navigator.KryptonPage pageButtonsNavigatorOverflow;
-        private Krypton.Navigator.KryptonPage pageButtonsBreadCrumb;
-        private Krypton.Navigator.KryptonPage pageButtonCalendarDay;
         private Krypton.Navigator.KryptonPage pageHeadersCalendar;
         private Krypton.Navigator.KryptonPage pageTopDateTime;
         private Krypton.Navigator.KryptonPage pageDesignDateTime;
@@ -6012,7 +5694,6 @@ namespace PaletteDesigner
         private System.Windows.Forms.DataGridViewTextBoxColumn column3DataGridViewTextBoxColumn;
         private Krypton.Navigator.KryptonPage pageControlsGroupBox;
         private Krypton.Navigator.KryptonPage pageLabelsGroupBoxCaption;
-        private Krypton.Navigator.KryptonPage pageButtonsFormClose;
         private Krypton.Navigator.KryptonPage pagePanelsRibbonInactive;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny63;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny64;
@@ -6024,7 +5705,6 @@ namespace PaletteDesigner
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny58;
         private Krypton.Navigator.KryptonPage pageTopTrackBar;
         private Krypton.Navigator.KryptonPage pageDesignTrackBar;
-        private Krypton.Navigator.KryptonPage pageButtonsCommand;
         private Krypton.Navigator.KryptonPage pageLabelsBoldControl;
         private Krypton.Navigator.KryptonPage pageLabelsItalicControl;
         private Krypton.Navigator.KryptonPage pageLabelsBoldPanel;
@@ -6032,6 +5712,7 @@ namespace PaletteDesigner
         private Pages.TrackBar trackBar1;
         private Pages.InputControls inputControls1;
         private Pages.MenuPage menuPage1;
+        private Pages.ButtonsPage buttonsPage1;
         private Krypton.Navigator.KryptonPage pageTopLists;
         private Krypton.Navigator.KryptonPage pageLists;
         private Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;

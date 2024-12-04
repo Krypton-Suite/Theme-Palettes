@@ -19,40 +19,52 @@ namespace PaletteDesigner.Pages
         public InputControls()
         {
             InitializeComponent();
-            _textBoxes = new List<KryptonTextBox>(new[]
-            {
-                textBoxDisabled,
-                textBoxNormal,
-                textBoxActive,
+            _textBoxes =
+            [
+                ..new[]
+                {
+                    textBoxDisabled,
+                    textBoxNormal,
+                    textBoxActive,
 
 
-                multiDisabled,
-                multiNormal,
-                multiActive
-            });
+                    multiDisabled,
+                    multiNormal,
+                    multiActive
+                }
+            ];
 
-            _richTextBoxes = new List<KryptonRichTextBox>(new[]
-            {
-                rtbDisabled,
-                rtbNormal,
-                rtbActive
-            });
+            _richTextBoxes =
+            [
+                ..new[]
+                {
+                    rtbDisabled,
+                    rtbNormal,
+                    rtbActive
+                }
+            ];
 
-            _comboBoxes = new List<KryptonComboBox>(new[]
-            {
-                comboBoxDisabled,
-                comboBoxDisabled2,
-                comboBoxNormal,
-                comboBoxNormal2,
-                comboBoxActive,
-                comboBoxActive2
-            });
-            _numericUpDowns = new List<KryptonNumericUpDown>(new[]
-            {
-                numericDisabled,
-                numericNormal,
-                numericActive
-            });
+            _comboBoxes =
+            [
+                ..new[]
+                {
+                    comboBoxDisabled,
+                    comboBoxDisabled2,
+                    comboBoxNormal,
+                    comboBoxNormal2,
+                    comboBoxActive,
+                    comboBoxActive2
+                }
+            ];
+            _numericUpDowns =
+            [
+                ..new[]
+                {
+                    numericDisabled,
+                    numericNormal,
+                    numericActive
+                }
+            ];
 
             // Input controls fixed states
             textBoxNormal.SetFixedState(false);
@@ -71,10 +83,10 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            _textBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _comboBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _richTextBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _numericUpDowns.ForEach(control => control.LocalCustomPalette = palette);
+            _textBoxes.ForEach(control => control.Palette = palette);
+            _comboBoxes.ForEach(control => control.Palette = palette);
+            _richTextBoxes.ForEach(control => control.Palette = palette);
+            _numericUpDowns.ForEach(control => control.Palette = palette);
 
             kryptonPanel1.Palette = palette;
         }

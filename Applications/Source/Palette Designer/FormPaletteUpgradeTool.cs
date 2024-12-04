@@ -245,7 +245,8 @@ namespace PaletteDesigner
 
                 writer.Close();
 
-                object[] text = new object[] { "Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", InputVersionNumber, "' to version '", 19.ToString(), "' has succeeded." };
+                object[] text = ["Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", InputVersionNumber, "' to version '", 19.ToString(), "' has succeeded."
+                ];
 
                 KryptonMessageBox.Show(this, string.Concat(text), "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
 
@@ -280,7 +281,8 @@ namespace PaletteDesigner
                         break;
                     case < MINIMUM_PALETTE_FILE_VERSION:
                         {
-                            string[] fileName = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_PALETTE_FILE_VERSION.ToString(), "' and upwards." };
+                            string[] fileName = ["File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_PALETTE_FILE_VERSION.ToString(), "' and upwards."
+                            ];
 
                             KryptonMessageBox.Show(this,
                                 string.Concat(fileName),
@@ -310,7 +312,8 @@ namespace PaletteDesigner
 
                                 KryptonRichTextBox richTextBox = krtbOutput;
 
-                                string[] strArrays = new string[] { directoryName, str, "_v", (MAXIMUM_PALETTE_FILE_VERSION + 1).ToString(), fileInfo.Extension };
+                                string[] strArrays = [directoryName, str, "_v", (MAXIMUM_PALETTE_FILE_VERSION + 1).ToString(), fileInfo.Extension
+                                ];
 
                                 richTextBox.Text = string.Concat(strArrays);
                             }
@@ -319,7 +322,8 @@ namespace PaletteDesigner
                         }
                     default:
                         {
-                            string[] fileName1 = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below." };
+                            string[] fileName1 = ["File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below."
+                            ];
 
                             KryptonMessageBox.Show(this,
                                 string.Concat(fileName1),

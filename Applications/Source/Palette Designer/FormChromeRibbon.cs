@@ -26,9 +26,9 @@ namespace PaletteDesigner
         {
             set
             {
-                LocalCustomPalette = value;
+                Palette = value;
                 kryptonPanel1.Palette = value;
-                kryptonRibbon1.LocalCustomPalette = value;
+                kryptonRibbon1.Palette = value;
             }
         }
         #endregion

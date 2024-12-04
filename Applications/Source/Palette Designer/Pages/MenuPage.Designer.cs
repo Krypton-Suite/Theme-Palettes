@@ -32,6 +32,8 @@ namespace PaletteDesigner.Pages
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPage));
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonButton2 = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.kcmEverything = new Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuHeading4 = new Krypton.Toolkit.KryptonContextMenuHeading();
@@ -105,8 +107,6 @@ namespace PaletteDesigner.Pages
             this.kryptonContextMenuMonthCalendar1 = new Krypton.Toolkit.KryptonContextMenuMonthCalendar();
             this.kryptonContextMenuSeparator30 = new Krypton.Toolkit.KryptonContextMenuSeparator();
             this.kryptonContextMenuCheckBox5 = new Krypton.Toolkit.KryptonContextMenuCheckBox();
-            this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +120,24 @@ namespace PaletteDesigner.Pages
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(867, 670);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonButton2
+            // 
+            this.kryptonButton2.Location = new System.Drawing.Point(53, 180);
+            this.kryptonButton2.Name = "kryptonButton2";
+            this.kryptonButton2.Size = new System.Drawing.Size(240, 43);
+            this.kryptonButton2.TabIndex = 1;
+            this.kryptonButton2.Values.Text = "Disabled Menu Items ->";
+            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(53, 75);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(240, 43);
+            this.kryptonButton1.TabIndex = 0;
+            this.kryptonButton1.Values.Text = "Enabled Menu Items ->";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // imageList
             // 
@@ -424,10 +442,7 @@ namespace PaletteDesigner.Pages
             // 
             this.kryptonContextMenuItem65.ExtraText = "Server error";
             this.kryptonContextMenuItem65.Image = ((System.Drawing.Image)(resources.GetObject("kryptonContextMenuItem65.Image")));
-            this.kryptonContextMenuItem65.StateNormal.ItemTextAlternate.Image.Effect = Krypton.Toolkit.PaletteImageEffect.Inherit;
             this.kryptonContextMenuItem65.StateNormal.ItemTextAlternate.LongText.Color1 = System.Drawing.Color.Red;
-            this.kryptonContextMenuItem65.StateNormal.ItemTextAlternate.LongText.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonContextMenuItem65.StateNormal.ItemTextAlternate.LongText.Trim = Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonContextMenuItem65.Text = "Server Beta";
             // 
             // kryptonContextMenuItem66
@@ -462,20 +477,17 @@ namespace PaletteDesigner.Pages
             // kryptonContextMenuRadioButton5
             // 
             this.kryptonContextMenuRadioButton5.ExtraText = "";
-            this.kryptonContextMenuRadioButton5.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
             this.kryptonContextMenuRadioButton5.Text = "One";
             // 
             // kryptonContextMenuRadioButton6
             // 
             this.kryptonContextMenuRadioButton6.Checked = true;
             this.kryptonContextMenuRadioButton6.ExtraText = "";
-            this.kryptonContextMenuRadioButton6.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
             this.kryptonContextMenuRadioButton6.Text = "Two";
             // 
             // kryptonContextMenuCheckBox3
             // 
             this.kryptonContextMenuCheckBox3.ExtraText = "";
-            this.kryptonContextMenuCheckBox3.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
             this.kryptonContextMenuCheckBox3.Text = "Enabled";
             this.kryptonContextMenuCheckBox3.ThreeState = true;
             // 
@@ -483,13 +495,10 @@ namespace PaletteDesigner.Pages
             // 
             this.kryptonContextMenuLinkLabel2.ExtraText = "";
             this.kryptonContextMenuLinkLabel2.Image = ((System.Drawing.Image)(resources.GetObject("kryptonContextMenuLinkLabel2.Image")));
-            this.kryptonContextMenuLinkLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            this.kryptonContextMenuLinkLabel2.LinkBehavior = Krypton.Toolkit.KryptonLinkBehavior.AlwaysUnderline;
             this.kryptonContextMenuLinkLabel2.Text = "Show Help";
             // 
             // kryptonContextMenuCheckButton3
             // 
-            this.kryptonContextMenuCheckButton3.ButtonStyle = Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonContextMenuCheckButton3.Text = "Show Dialog";
             // 
             // kryptonContextMenuItems25
@@ -519,7 +528,6 @@ namespace PaletteDesigner.Pages
             // 
             // kryptonContextMenuImageSelect3
             // 
-            this.kryptonContextMenuImageSelect3.ButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
             this.kryptonContextMenuImageSelect3.ImageIndexEnd = 3;
             this.kryptonContextMenuImageSelect3.ImageIndexStart = 0;
             this.kryptonContextMenuImageSelect3.ImageList = this.imageList;
@@ -527,7 +535,6 @@ namespace PaletteDesigner.Pages
             // 
             // kryptonContextMenuImageSelect4
             // 
-            this.kryptonContextMenuImageSelect4.ButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
             this.kryptonContextMenuImageSelect4.ImageIndexEnd = 10;
             this.kryptonContextMenuImageSelect4.ImageIndexStart = 4;
             this.kryptonContextMenuImageSelect4.ImageList = this.imageList;
@@ -544,9 +551,6 @@ namespace PaletteDesigner.Pages
             // 
             // kryptonContextMenuMonthCalendar1
             // 
-            this.kryptonContextMenuMonthCalendar1.DayOfWeekStyle = Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar1.DayStyle = Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar1.HeaderStyle = Krypton.Toolkit.HeaderStyle.Calendar;
             this.kryptonContextMenuMonthCalendar1.SelectionEnd = new System.DateTime(2009, 3, 11, 0, 0, 0, 0);
             this.kryptonContextMenuMonthCalendar1.SelectionStart = new System.DateTime(2009, 3, 11, 0, 0, 0, 0);
             this.kryptonContextMenuMonthCalendar1.TodayDate = new System.DateTime(2009, 3, 11, 0, 0, 0, 0);
@@ -554,25 +558,6 @@ namespace PaletteDesigner.Pages
             // kryptonContextMenuCheckBox5
             // 
             this.kryptonContextMenuCheckBox5.ExtraText = "";
-            this.kryptonContextMenuCheckBox5.LabelStyle = Krypton.Toolkit.LabelStyle.NormalPanel;
-            // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Location = new System.Drawing.Point(53, 75);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(240, 43);
-            this.kryptonButton1.TabIndex = 0;
-            this.kryptonButton1.Values.Text = "Enabled Menu Items ->";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // kryptonButton2
-            // 
-            this.kryptonButton2.Location = new System.Drawing.Point(53, 180);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.Size = new System.Drawing.Size(240, 43);
-            this.kryptonButton2.TabIndex = 1;
-            this.kryptonButton2.Values.Text = "Disabled Menu Items ->";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
             // MenuPage
             // 
