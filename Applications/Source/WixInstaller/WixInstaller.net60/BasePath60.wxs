@@ -1,0 +1,44 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="KryptonToolkitPaletteDir">
+            <Component Id="cmpu2caOpH4Ul6C5rLEOVYr5DqBoOQ" Guid="*">
+                <File Id="filAfsxBGtwPrSrSOxpvCAWoLP8gMI" KeyPath="yes" Source="$(var.BasePath60)\Krypton.Navigator.dll" />
+            </Component>
+            <Component Id="cmpG4p8_O_B77mmUhE9MXDPoy48FI8" Guid="*">
+                <File Id="filqrnkjrEbpXcRp79tMSdbB.H6IOQ" KeyPath="yes" Source="$(var.BasePath60)\Krypton.Ribbon.dll" />
+            </Component>
+            <Component Id="cmpc7eFw3d.TLrQ4_RFrgW6LyI4V2g" Guid="*">
+                <File Id="filPTq4ay.WuobMu9rdUFUqDRmv7nY" KeyPath="yes" Source="$(var.BasePath60)\Krypton.Toolkit.dll" />
+            </Component>
+            <Component Id="cmpEWKt3N7Iehn5N4VC42BgrpM4PHk" Guid="*">
+                <File Id="filZlHLjJNgxLVq5SeUkRiomNTa5c0" KeyPath="yes" Source="$(var.BasePath60)\Palette Designer.deps.json" />
+            </Component>
+            <Component Id="cmpSPL950v0ZLU.Ke2CQF3kiPgXfZI" Guid="*">
+                <File Id="filWVmm1iO35uXdtt7fhzxQd6mXC3E" KeyPath="yes" Source="$(var.BasePath60)\Palette Designer.dll" />
+            </Component>
+            <Component Id="cmp2ieeAIfdQ_SzIpTv9KMu6L5tFCc" Guid="*">
+                <File Id="fildriKbJZB0tIJ8m3UvSlphk9__n8" KeyPath="yes" Source="$(var.BasePath60)\Palette Designer.dll.config" />
+            </Component>
+            <Component Id="cmpcJ6aHkk5OdQv9_42_0oUEldlh0M" Guid="*">
+                <File Id="filhQsjT0U1td9UL.47RdNgnZLqxFE" KeyPath="yes" Source="$(var.BasePath60)\Palette Designer.exe" />
+            </Component>
+            
+            <Component Id="cmprpChtldJIJYctT00Sj_3Hmpy14I" Guid="*">
+                <File Id="filT2RmNnx9O0YtZ3kHH3FEvPSdHRg" KeyPath="yes" Source="$(var.BasePath60)\Palette Designer.runtimeconfig.json" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="BasePath60">
+            <ComponentRef Id="cmpu2caOpH4Ul6C5rLEOVYr5DqBoOQ" />
+            <ComponentRef Id="cmpG4p8_O_B77mmUhE9MXDPoy48FI8" />
+            <ComponentRef Id="cmpc7eFw3d.TLrQ4_RFrgW6LyI4V2g" />
+            <ComponentRef Id="cmpEWKt3N7Iehn5N4VC42BgrpM4PHk" />
+            <ComponentRef Id="cmpSPL950v0ZLU.Ke2CQF3kiPgXfZI" />
+            <ComponentRef Id="cmp2ieeAIfdQ_SzIpTv9KMu6L5tFCc" />
+            <ComponentRef Id="cmpcJ6aHkk5OdQv9_42_0oUEldlh0M" />
+            
+            <ComponentRef Id="cmprpChtldJIJYctT00Sj_3Hmpy14I" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

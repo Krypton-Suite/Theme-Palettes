@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Z_Solution Items", "Z_Solution Items", "{384299E8-CD78-4074-8BED-61D580DED90A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palette Upgrade Tool 2022", "Palette Upgrade Tool\Palette Upgrade Tool 2022.csproj", "{37DC8402-4AA9-4451-8244-7037FF94C68C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37DC8402-4AA9-4451-8244-7037FF94C68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DC8402-4AA9-4451-8244-7037FF94C68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DC8402-4AA9-4451-8244-7037FF94C68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DC8402-4AA9-4451-8244-7037FF94C68C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E59C937A-8492-4E5C-89AD-206459D301C1}
+	EndGlobalSection
+EndGlobal
