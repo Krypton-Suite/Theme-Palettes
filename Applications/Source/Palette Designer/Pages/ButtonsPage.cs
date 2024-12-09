@@ -7,7 +7,8 @@ namespace PaletteDesigner.Pages;
 
 public partial class ButtonsPage : UserControl
 {
-    private readonly List<KryptonDropButton> _pageButtons;
+    private readonly List<KryptonButton> _pageButtons;
+    private readonly List<KryptonDropButton> _pageButtons2;
 
     public ButtonsPage()
     {
@@ -36,7 +37,7 @@ public partial class ButtonsPage : UserControl
 
         _pageButtons =
         [
-            ..new[]
+            ..new []
             {
                 buttonDisabled,
                 buttonDefaultFocus,
@@ -47,12 +48,6 @@ public partial class ButtonsPage : UserControl
                 buttonCheckedTracking,
                 buttonCheckedPressed,
                 buttonLive,
-                kryptonDropButton1,
-                kryptonDropButton2,
-                kryptonDropButton3,
-                kryptonDropButton4,
-                kryptonDropButton5,
-                kryptonDropButton6,
                 kryptonButton10,
                 kryptonButton11,
                 kryptonButton12,
@@ -62,6 +57,18 @@ public partial class ButtonsPage : UserControl
             }
         ];
 
+        _pageButtons2 =
+        [
+            ..new[]
+            {
+                kryptonDropButton1,
+                kryptonDropButton2,
+                kryptonDropButton3,
+                kryptonDropButton4,
+                kryptonDropButton5,
+                kryptonDropButton6,
+            }
+        ];
         //_pageButtons =
         //[
         //    ..new[]
@@ -93,6 +100,7 @@ public partial class ButtonsPage : UserControl
     public void ApplyPalette(KryptonCustomPaletteBase palette)
     {
         _pageButtons.ForEach(control => control.Palette = palette);
+        _pageButtons2.ForEach(control => control.Palette = palette);
         kryptonColorButton1.Palette = palette;
 
         kryptonPanel1.Palette = palette;
@@ -135,6 +143,7 @@ public partial class ButtonsPage : UserControl
 
         // Update all the displayed buttons with the new style
         _pageButtons.ForEach(control => control.ButtonStyle = bs);
+        _pageButtons2.ForEach(control => control.ButtonStyle = bs);
         kryptonColorButton1.ButtonStyle = bs;
     }
 }

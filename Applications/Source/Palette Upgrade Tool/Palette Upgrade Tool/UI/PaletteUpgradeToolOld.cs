@@ -347,13 +347,6 @@ namespace PaletteUpgradeTool.UI
             }
         }
 
-        private void kbtnUseNewUI_Click(object sender, EventArgs e)
-        {
-            var putNew = new PaletteUpgradeTool();
-
-            putNew.Show();
-        }
-
         /// <summary>
         /// Validates the output filename.
         /// </summary>

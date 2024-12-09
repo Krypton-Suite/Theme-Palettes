@@ -1,0 +1,19 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+  <?define KryptonToolkitPaletteSource=$(sys.SOURCEFILEDIR)..\..\..\Binaries\Krypton Palette\Release\net48?>
+
+  <Fragment>
+
+    <DirectoryRef Id="KryptonToolkitPaletteDir" />
+
+    <util:CloseApplication CloseMessage="yes" Id="ClosePaletteDesignerApp" Target="Palette Designer.exe" RebootPrompt="no" />
+    <util:CloseApplication CloseMessage="yes" Id="ClosePaletteUpgradeToolApp" Target="Palette Upgrade Tool.exe" RebootPrompt="no" />
+
+    <ComponentGroup Id="KryptonToolkitPalette">
+            <!--<Component >
+                <File Source="$(var.KryptonToolkitPaletteSource)\Krypton.Toolkit.dll" KeyPath="yes" />
+            </Component>-->
+
+        </ComponentGroup>
+        </Fragment>
+</Wix>
