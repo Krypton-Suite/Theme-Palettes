@@ -15,10 +15,10 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("5.500.6011.0")]
-[assembly: AssemblyFileVersion("5.500.6011.0")]
-[assembly: AssemblyInformationalVersion("4.5.11.0")]
-[assembly: AssemblyCopyright("© Component Factory Pty Ltd, 2006 - 2016. All rights reserved.")]
+[assembly: AssemblyVersion("85.24.10.288")]
+[assembly: AssemblyFileVersion("85.24.10.288")]
+[assembly: AssemblyInformationalVersion("85.24.10.288")]
+[assembly: AssemblyCopyright("© Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved.")]
 [assembly: AssemblyProduct("Palette Designer")]
 [assembly: AssemblyDefaultAlias("PaletteDesigner.dll")]
 [assembly: AssemblyTitle("Palette Designer")]
@@ -34,3 +34,4 @@ using System.Runtime.InteropServices;
 [assembly: Dependency("System.Windows.Forms", LoadHint.Always)]
 [assembly: Dependency("Krypton.Toolkit", LoadHint.Always)]
 [assembly: Dependency("Krypton.Navigator", LoadHint.Always)]
+[assembly: Dependency("Krypton.Ribbon", LoadHint.Always)]

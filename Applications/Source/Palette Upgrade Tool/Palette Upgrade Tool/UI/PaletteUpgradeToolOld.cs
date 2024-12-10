@@ -20,7 +20,7 @@ namespace PaletteUpgradeTool.UI
     public partial class PaletteUpgradeToolOld : KryptonForm
     {
         #region Variables
-        private const int MINIMUM_VERSION_NUMBER = 2, MAXIMUM_VERSION_NUMBER = 18;
+        private const int MINIMUM_VERSION_NUMBER = 2, MAXIMUM_VERSION_NUMBER = 19;
 
         #endregion
 
@@ -82,7 +82,7 @@ namespace PaletteUpgradeTool.UI
                     xslCompiledTransform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
                     end = TransformXml(xslCompiledTransform, end);
                 }
-                else if (GetInputVersionNumber() <= MAXIMUM_VERSION_NUMBER)
+                else if (GetInputVersionNumber() < MAXIMUM_VERSION_NUMBER)
                 {
                     var streamReader = new StringReader(Resources.v6to19);
                     var xmlTextReader = XmlReader.Create(streamReader);
@@ -150,7 +150,7 @@ namespace PaletteUpgradeTool.UI
                                 KryptonMessageBoxIcon.Warning);
                             break;
                         }
-                    case <= MAXIMUM_VERSION_NUMBER:
+                    case < MAXIMUM_VERSION_NUMBER:
                         {
                             krtbInput.Text = openFileDialog.FileName;
 
@@ -169,7 +169,7 @@ namespace PaletteUpgradeTool.UI
 
                             KryptonRichTextBox richTextBox = krtbOutput;
 
-                            string[] strArrays = new string[] { directoryName, str, "_v", (MAXIMUM_VERSION_NUMBER + 1).ToString(), fileInfo.Extension };
+                            string[] strArrays = new string[] { directoryName, str, "_v", MAXIMUM_VERSION_NUMBER.ToString(), fileInfo.Extension };
 
                             richTextBox.Text = string.Concat(strArrays);
                             break;
@@ -289,7 +289,7 @@ namespace PaletteUpgradeTool.UI
             bool length = krtbInput.Text.Length > 0;
             bool flag0 = ValidOutputDirectory(krtbOutput.Text);
             bool flag1 = ValidOutputFilename(krtbOutput.Text);
-            bool flag2 = (GetInputVersionNumber() >= MINIMUM_VERSION_NUMBER && GetInputVersionNumber() <= MAXIMUM_VERSION_NUMBER);
+            bool flag2 = (GetInputVersionNumber() >= MINIMUM_VERSION_NUMBER && GetInputVersionNumber() < MAXIMUM_VERSION_NUMBER);
 
             kbtnUpgrade.Enabled = (length && flag0 && flag1 && flag2);
 
@@ -297,9 +297,7 @@ namespace PaletteUpgradeTool.UI
             {
                 klblStatus.ForeColor = Color.Green;
 
-                int num = MAXIMUM_VERSION_NUMBER + 1;
-
-                klblStatus.Text = $"Convert to output version ' {num}'.";
+                klblStatus.Text = $"Convert to output version ' {MAXIMUM_VERSION_NUMBER}'.";
 
                 return;
             }
