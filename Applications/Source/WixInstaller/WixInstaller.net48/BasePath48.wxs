@@ -1,0 +1,42 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="KryptonToolkitPaletteDir">
+            <Component Id="cmpu2caOpH4Ul6C5rLEOVYr5DqBoOQ" Guid="*">
+                <File Id="filAfsxBGtwPrSrSOxpvCAWoLP8gMI" KeyPath="yes" Source="$(var.BasePath48)\Krypton.Navigator.dll" />
+            </Component>
+            <Component Id="cmpG4p8_O_B77mmUhE9MXDPoy48FI8" Guid="*">
+                <File Id="filqrnkjrEbpXcRp79tMSdbB.H6IOQ" KeyPath="yes" Source="$(var.BasePath48)\Krypton.Ribbon.dll" />
+            </Component>
+            <Component Id="cmpc7eFw3d.TLrQ4_RFrgW6LyI4V2g" Guid="*">
+                <File Id="filPTq4ay.WuobMu9rdUFUqDRmv7nY" KeyPath="yes" Source="$(var.BasePath48)\Krypton.Toolkit.dll" />
+            </Component>
+            <Component Id="cmpcJ6aHkk5OdQv9_42_0oUEldlh0M" Guid="*">
+                <File Id="filhQsjT0U1td9UL.47RdNgnZLqxFE" KeyPath="yes" Source="$(var.BasePath48)\Palette Designer.exe" />
+            </Component>
+            <Component Id="cmp2cgMKg8HGx1Sny56H4wRNQTZYo0" Guid="*">
+                <File Id="fil55wbtitCqU4OO5sRS80ZVwfs8v8" KeyPath="yes" Source="$(var.BasePath48)\Palette Designer.exe.config" />
+            </Component>
+            
+            <Component Id="cmpxkR4DAQJy7_xj2K.mwOKjvEUUnk" Guid="*">
+                <File Id="filjfxd4hNwJAKd3YsNwa62Fh3pkaU" KeyPath="yes" Source="$(var.BasePath48)\Palette Upgrade Tool.exe" />
+            </Component>
+            <Component Id="cmpHN_1qiQXtURsnSgN7yk91F2CwbE" Guid="*">
+                <File Id="filZjKsdUiyOgbS3O7sf7yaLv.0kJA" KeyPath="yes" Source="$(var.BasePath48)\Palette Upgrade Tool.exe.config" />
+            </Component>
+            
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="BasePath48">
+            <ComponentRef Id="cmpu2caOpH4Ul6C5rLEOVYr5DqBoOQ" />
+            <ComponentRef Id="cmpG4p8_O_B77mmUhE9MXDPoy48FI8" />
+            <ComponentRef Id="cmpc7eFw3d.TLrQ4_RFrgW6LyI4V2g" />
+            <ComponentRef Id="cmpcJ6aHkk5OdQv9_42_0oUEldlh0M" />
+            <ComponentRef Id="cmp2cgMKg8HGx1Sny56H4wRNQTZYo0" />
+            
+            <ComponentRef Id="cmpxkR4DAQJy7_xj2K.mwOKjvEUUnk" />
+            <ComponentRef Id="cmpHN_1qiQXtURsnSgN7yk91F2CwbE" />
+            
+        </ComponentGroup>
+    </Fragment>
+</Wix>

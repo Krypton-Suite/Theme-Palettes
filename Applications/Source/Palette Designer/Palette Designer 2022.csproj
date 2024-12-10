@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;net481;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net481;net8.0-windows;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
+    <OutputPath>..\..\Binaries\Krypton Palette\$(Configuration)\</OutputPath>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>PaletteDesigner</RootNamespace>
     <AssemblyName>Palette Designer</AssemblyName>
     <ApplicationIcon>Krypton.ico</ApplicationIcon>
@@ -37,9 +39,8 @@
   <Choose>
     <When Condition="'$(SolutionName.Endswith(`Nuget`))'">
       <ItemGroup>
-        <PackageReference Include="Krypton.Navigator.Nightly" Version="60.22.2.41-beta" />
-        <PackageReference Include="Krypton.Ribbon.Nightly" Version="60.22.2.41-beta" />
-        <PackageReference Include="Krypton.Toolkit.Nightly" Version="60.22.2.41-beta" />
+        <PackageReference Include="Krypton.Navigator" Version="90.24.11.317" />
+        <PackageReference Include="Krypton.Ribbon" Version="90.24.11.317" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -84,11 +85,5 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
-  <PropertyGroup>
-    <OutputPath>..\..\Binaries\Krypton Demos\$(Configuration)\</OutputPath>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
 
 </Project>

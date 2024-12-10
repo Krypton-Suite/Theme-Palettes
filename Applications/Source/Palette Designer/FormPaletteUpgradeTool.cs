@@ -1,9 +1,7 @@
 ﻿#region BSD License
 /*
- * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2023 - 2023. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2023 - 2024. All rights reserved. 
  */
 #endregion
 
@@ -20,13 +18,13 @@ namespace PaletteDesigner
 
         private const int MINIMUM_PALETTE_FILE_VERSION = 2;
 
-        private const int MAXIMUM_PALETTE_FILE_VERSION = 20;
+        private const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
 
         #endregion
 
         #region Public
 
-        public int InputVersionNumber { get; set; }
+        private int _inputVersionNumber;
 
         #endregion
 
@@ -46,11 +44,11 @@ namespace PaletteDesigner
         #region Setters and Getters
         /// <summary>Sets the InputVersionNumber to the value of value.</summary>
         /// <param name="value">The desired value of InputVersionNumber.</param>
-        private void SetInputVersionNumber(int value) => InputVersionNumber = value;
+        private void SetInputVersionNumber(int value) => _inputVersionNumber = value;
 
         /// <summary>Returns the value of the InputVersionNumber.</summary>
         /// <returns>The value of the InputVersionNumber.</returns>
-        private int GetInputVersionNumber() => InputVersionNumber;
+        private int GetInputVersionNumber() => _inputVersionNumber;
 
         #endregion
 
@@ -122,7 +120,7 @@ namespace PaletteDesigner
             bool length = krtbInput.Text.Length > 0;
             bool flag0 = ValidOutputDirectory(krtbOutput.Text);
             bool flag1 = ValidOutputFilename(krtbOutput.Text);
-            bool flag2 = (GetInputVersionNumber() >= MINIMUM_PALETTE_FILE_VERSION && GetInputVersionNumber() <= MAXIMUM_PALETTE_FILE_VERSION);
+            bool flag2 = (GetInputVersionNumber() >= MINIMUM_PALETTE_FILE_VERSION && GetInputVersionNumber() < MAXIMUM_PALETTE_FILE_VERSION);
 
             kbtnUpgrade.Enabled = (length && flag0 && flag1 && flag2);
 
@@ -130,9 +128,7 @@ namespace PaletteDesigner
             {
                 klblStatus.ForeColor = Color.Green;
 
-                int num = MAXIMUM_PALETTE_FILE_VERSION + 1;
-
-                klblStatus.Text = $"Convert to output version ' {num}'.";
+                klblStatus.Text = $"Convert to output version ' {MAXIMUM_PALETTE_FILE_VERSION}'.";
 
                 return;
             }
@@ -213,7 +209,7 @@ namespace PaletteDesigner
         {
             try
             {
-                StreamReader reader = new StreamReader(krtbInput.Text);
+                var reader = new StreamReader(krtbInput.Text);
 
                 string end = reader.ReadToEnd();
 
@@ -226,9 +222,9 @@ namespace PaletteDesigner
                     xslCompiledTransform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
                     end = TransformXml(xslCompiledTransform, end);
                 }
-                else if (GetInputVersionNumber() <= MAXIMUM_PALETTE_FILE_VERSION)
+                else if (GetInputVersionNumber() < MAXIMUM_PALETTE_FILE_VERSION)
                 {
-                    var streamReader = new StringReader(Resources.v6to19);
+                    var streamReader = new StringReader(Resources.v6to20);
                     var xmlTextReader = XmlReader.Create(streamReader);
                     var xslCompiledTransform1 = new XslCompiledTransform();
                     xslCompiledTransform1.Load(xmlTextReader);
@@ -245,7 +241,7 @@ namespace PaletteDesigner
 
                 writer.Close();
 
-                object[] text = ["Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", InputVersionNumber, "' to version '", 19.ToString(), "' has succeeded."
+                object[] text = ["Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", _inputVersionNumber, "' to version '", MAXIMUM_PALETTE_FILE_VERSION.ToString(), "' has succeeded."
                 ];
 
                 KryptonMessageBox.Show(this, string.Concat(text), "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
@@ -291,7 +287,7 @@ namespace PaletteDesigner
                                 KryptonMessageBoxIcon.Warning);
                             break;
                         }
-                    case <= MAXIMUM_PALETTE_FILE_VERSION:
+                    case < MAXIMUM_PALETTE_FILE_VERSION:
                         {
                             krtbInput.Text = openFileDialog.FileName;
 
@@ -358,7 +354,7 @@ namespace PaletteDesigner
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter writer = new StreamWriter(Path.GetFullPath(saveFileDialog.FileName));
+                var writer = new StreamWriter(Path.GetFullPath(saveFileDialog.FileName));
 
                 writer.Write(krtbOutput.Text);
 

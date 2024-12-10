@@ -1,9 +1,7 @@
 ﻿#region BSD License
 /*
- * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
  */
 #endregion
 
@@ -83,10 +81,10 @@ namespace PaletteDesigner.Pages
 
         public void ApplyPalette(KryptonCustomPaletteBase palette)
         {
-            _textBoxes.ForEach(control => control.Palette = palette);
-            _comboBoxes.ForEach(control => control.Palette = palette);
-            _richTextBoxes.ForEach(control => control.Palette = palette);
-            _numericUpDowns.ForEach(control => control.Palette = palette);
+            _textBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _comboBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _richTextBoxes.ForEach(control => control.LocalCustomPalette = palette);
+            _numericUpDowns.ForEach(control => control.LocalCustomPalette = palette);
 
             kryptonPanel1.Palette = palette;
         }

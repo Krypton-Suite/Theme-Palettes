@@ -30,12 +30,12 @@
         {
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox1 = new Krypton.Toolkit.KryptonGroupBox();
+            this.comboBoxLabelStyles = new Krypton.Toolkit.KryptonComboBox();
             this.kchkShowImage = new Krypton.Toolkit.KryptonCheckBox();
             this.krbKeyTip = new Krypton.Toolkit.KryptonRadioButton();
             this.krbSuperTip = new Krypton.Toolkit.KryptonRadioButton();
             this.krbToolTip = new Krypton.Toolkit.KryptonRadioButton();
             this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
-            this.comboBoxLabelStyles = new Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
@@ -51,15 +51,16 @@
             this.kryptonPanel1.Controls.Add(this.kryptonButton1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(650, 544);
+            this.kryptonPanel1.Size = new System.Drawing.Size(867, 670);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(0, 470);
+            this.kryptonGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -69,17 +70,31 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.krbKeyTip);
             this.kryptonGroupBox1.Panel.Controls.Add(this.krbSuperTip);
             this.kryptonGroupBox1.Panel.Controls.Add(this.krbToolTip);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(650, 74);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(867, 91);
             this.kryptonGroupBox1.TabIndex = 2;
             this.kryptonGroupBox1.Values.Heading = "Tool Tip Types";
+            // 
+            // comboBoxLabelStyles
+            // 
+            this.comboBoxLabelStyles.AlwaysActive = false;
+            this.comboBoxLabelStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLabelStyles.DropDownWidth = 121;
+            this.comboBoxLabelStyles.IntegralHeight = false;
+            this.comboBoxLabelStyles.Location = new System.Drawing.Point(372, 18);
+            this.comboBoxLabelStyles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxLabelStyles.Name = "comboBoxLabelStyles";
+            this.comboBoxLabelStyles.Size = new System.Drawing.Size(204, 26);
+            this.comboBoxLabelStyles.TabIndex = 23;
+            this.comboBoxLabelStyles.SelectedIndexChanged += new System.EventHandler(this.comboBoxLabelStyles_SelectedIndexChanged);
             // 
             // kchkShowImage
             // 
             this.kchkShowImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kchkShowImage.Location = new System.Drawing.Point(499, 17);
+            this.kchkShowImage.Location = new System.Drawing.Point(684, 21);
+            this.kchkShowImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kchkShowImage.Name = "kchkShowImage";
-            this.kchkShowImage.Size = new System.Drawing.Size(135, 20);
+            this.kchkShowImage.Size = new System.Drawing.Size(163, 24);
             this.kchkShowImage.TabIndex = 3;
             this.kchkShowImage.Values.Text = "Show ToolTip &Image";
             this.kchkShowImage.CheckedChanged += new System.EventHandler(this.kchkShowImage_CheckedChanged);
@@ -88,9 +103,10 @@
             // 
             this.krbKeyTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.krbKeyTip.Location = new System.Drawing.Point(163, 17);
+            this.krbKeyTip.Location = new System.Drawing.Point(217, 21);
+            this.krbKeyTip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.krbKeyTip.Name = "krbKeyTip";
-            this.krbKeyTip.Size = new System.Drawing.Size(59, 20);
+            this.krbKeyTip.Size = new System.Drawing.Size(69, 24);
             this.krbKeyTip.TabIndex = 2;
             this.krbKeyTip.Values.Text = "&KeyTip";
             this.krbKeyTip.CheckedChanged += new System.EventHandler(this.krbKeyTip_CheckedChanged);
@@ -100,9 +116,10 @@
             this.krbSuperTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.krbSuperTip.Checked = true;
-            this.krbSuperTip.Location = new System.Drawing.Point(85, 17);
+            this.krbSuperTip.Location = new System.Drawing.Point(113, 21);
+            this.krbSuperTip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.krbSuperTip.Name = "krbSuperTip";
-            this.krbSuperTip.Size = new System.Drawing.Size(71, 20);
+            this.krbSuperTip.Size = new System.Drawing.Size(84, 24);
             this.krbSuperTip.TabIndex = 1;
             this.krbSuperTip.Values.Text = "S&uperTip";
             this.krbSuperTip.CheckedChanged += new System.EventHandler(this.krbSuperTip_CheckedChanged);
@@ -111,45 +128,36 @@
             // 
             this.krbToolTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.krbToolTip.Location = new System.Drawing.Point(15, 18);
+            this.krbToolTip.Location = new System.Drawing.Point(20, 22);
+            this.krbToolTip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.krbToolTip.Name = "krbToolTip";
-            this.krbToolTip.Size = new System.Drawing.Size(63, 20);
+            this.krbToolTip.Size = new System.Drawing.Size(74, 24);
             this.krbToolTip.TabIndex = 0;
             this.krbToolTip.Values.Text = "&ToolTip";
             this.krbToolTip.CheckedChanged += new System.EventHandler(this.krbToolTip_CheckedChanged);
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(40, 61);
-            this.kryptonButton1.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonButton1.Location = new System.Drawing.Point(48, 144);
+            this.kryptonButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(180, 35);
+            this.kryptonButton1.Size = new System.Drawing.Size(240, 43);
             this.kryptonButton1.TabIndex = 1;
             this.kryptonButton1.ToolTipValues.Description = "This is a Krypton ToolTip. There are three types, they are:-\r\n    - ToolTip\r\n    " +
     "- SuperTip\r\n    - KeyTip";
             this.kryptonButton1.ToolTipValues.EnableToolTips = true;
             this.kryptonButton1.ToolTipValues.Heading = "Krypton ToolTip Example";
+            this.kryptonButton1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.kryptonButton1.Values.Text = "Hover Over Me";
-            // 
-            // comboBoxLabelStyles
-            // 
-            this.comboBoxLabelStyles.AlwaysActive = false;
-            this.comboBoxLabelStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxLabelStyles.DropDownWidth = 121;
-            this.comboBoxLabelStyles.IntegralHeight = false;
-            this.comboBoxLabelStyles.Location = new System.Drawing.Point(279, 15);
-            this.comboBoxLabelStyles.Name = "comboBoxLabelStyles";
-            this.comboBoxLabelStyles.Size = new System.Drawing.Size(153, 21);
-            this.comboBoxLabelStyles.TabIndex = 23;
-            this.comboBoxLabelStyles.SelectedIndexChanged += new System.EventHandler(this.comboBoxLabelStyles_SelectedIndexChanged);
             // 
             // ToolTipsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ToolTipsPage";
-            this.Size = new System.Drawing.Size(650, 544);
+            this.Size = new System.Drawing.Size(867, 670);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();

@@ -32,12 +32,18 @@ namespace PaletteDesigner
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item 2");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Item 2");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Item1");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Item 2");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item1"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item 2"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item1"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item 2"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item1"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Item 2"}, -1, System.Drawing.SystemColors.ControlText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Segoe UI", 9F));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -362,7 +368,7 @@ namespace PaletteDesigner
             this.pageDesignToolTips = new Krypton.Navigator.KryptonPage();
             this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
             this.kryptonHeaderGroupProperties = new Krypton.Toolkit.KryptonHeaderGroup();
-            this.propertyGrid = new Krypton.Toolkit.KryptonPropertyGrid();
+            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1295,16 +1301,11 @@ namespace PaletteDesigner
             this.kryptonListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
-            this.kryptonListView3.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView3.Location = new System.Drawing.Point(212, 14);
             this.kryptonListView3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView3.Name = "kryptonListView3";
-            this.kryptonListView3.OwnerDraw = true;
             this.kryptonListView3.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView3.Size = new System.Drawing.Size(224, 132);
-            this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
-            this.kryptonListView3.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView3.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView3.TabIndex = 1;
             // 
             // kryptonListBox3
@@ -1342,7 +1343,6 @@ namespace PaletteDesigner
             // 
             // kryptonListView2
             // 
-            this.kryptonListView2.AlwaysActive = false;
             this.kryptonListView2.CheckBoxes = true;
             this.kryptonListView2.FullRowSelect = true;
             this.kryptonListView2.GridLines = true;
@@ -1352,16 +1352,11 @@ namespace PaletteDesigner
             this.kryptonListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem3,
             listViewItem4});
-            this.kryptonListView2.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView2.Location = new System.Drawing.Point(212, 14);
             this.kryptonListView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView2.Name = "kryptonListView2";
-            this.kryptonListView2.OwnerDraw = true;
             this.kryptonListView2.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView2.Size = new System.Drawing.Size(224, 132);
-            this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
-            this.kryptonListView2.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView2.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView2.TabIndex = 1;
             // 
             // kryptonListBox2
@@ -1414,16 +1409,11 @@ namespace PaletteDesigner
             this.kryptonListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem5,
             listViewItem6});
-            this.kryptonListView1.ItemStyle = Krypton.Toolkit.ButtonStyle.ListItem;
             this.kryptonListView1.Location = new System.Drawing.Point(212, 14);
             this.kryptonListView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonListView1.Name = "kryptonListView1";
-            this.kryptonListView1.OwnerDraw = true;
             this.kryptonListView1.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView1.Size = new System.Drawing.Size(224, 132);
-            this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
-            this.kryptonListView1.StateCommon.Item.Content.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonListView1.StateCommon.Item.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonListView1.TabIndex = 1;
             // 
             // kryptonListBox1
@@ -3160,6 +3150,7 @@ namespace PaletteDesigner
             this.labelsControlToolTip.Name = "labelsControlToolTip";
             this.labelsControlToolTip.Size = new System.Drawing.Size(168, 32);
             this.labelsControlToolTip.TabIndex = 29;
+            this.labelsControlToolTip.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlToolTip.Values.Text = "Control - ToolTip";
             // 
             // labelsControlCustom1
@@ -3170,6 +3161,7 @@ namespace PaletteDesigner
             this.labelsControlCustom1.Name = "labelsControlCustom1";
             this.labelsControlCustom1.Size = new System.Drawing.Size(187, 32);
             this.labelsControlCustom1.TabIndex = 28;
+            this.labelsControlCustom1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlCustom1.Values.Text = "Control - Custom 1";
             // 
             // labelsControlAlternate
@@ -3180,6 +3172,7 @@ namespace PaletteDesigner
             this.labelsControlAlternate.Name = "labelsControlAlternate";
             this.labelsControlAlternate.Size = new System.Drawing.Size(183, 32);
             this.labelsControlAlternate.TabIndex = 27;
+            this.labelsControlAlternate.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlAlternate.Values.Text = "Control - Alternate";
             // 
             // labelsControlClient
@@ -3190,6 +3183,7 @@ namespace PaletteDesigner
             this.labelsControlClient.Name = "labelsControlClient";
             this.labelsControlClient.Size = new System.Drawing.Size(153, 32);
             this.labelsControlClient.TabIndex = 26;
+            this.labelsControlClient.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlClient.Values.Text = "Control - Client";
             // 
             // labelsPanelCustom1
@@ -3200,6 +3194,7 @@ namespace PaletteDesigner
             this.labelsPanelCustom1.Name = "labelsPanelCustom1";
             this.labelsPanelCustom1.Size = new System.Drawing.Size(168, 32);
             this.labelsPanelCustom1.TabIndex = 25;
+            this.labelsPanelCustom1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelCustom1.Values.Text = "Panel - Custom 1";
             // 
             // labelsPanelAlternate
@@ -3210,6 +3205,7 @@ namespace PaletteDesigner
             this.labelsPanelAlternate.Name = "labelsPanelAlternate";
             this.labelsPanelAlternate.Size = new System.Drawing.Size(165, 32);
             this.labelsPanelAlternate.TabIndex = 24;
+            this.labelsPanelAlternate.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelAlternate.Values.Text = "Panel - Alternate";
             // 
             // labelsPanelClient
@@ -3221,6 +3217,7 @@ namespace PaletteDesigner
             this.labelsPanelClient.Name = "labelsPanelClient";
             this.labelsPanelClient.Size = new System.Drawing.Size(153, 32);
             this.labelsPanelClient.TabIndex = 23;
+            this.labelsPanelClient.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelClient.Values.Text = "Panel - Client";
             // 
             // panelLabelsBackground
@@ -4970,26 +4967,17 @@ namespace PaletteDesigner
             this.kryptonHeaderGroupProperties.ValuesPrimary.Heading = "Properties";
             this.kryptonHeaderGroupProperties.ValuesPrimary.Image = null;
             // 
-            // labelGridNormal
+            // propertyGrid
             // 
             this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGrid.CategoryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.propertyGrid.CommandsBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGrid.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.propertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.propertyGrid.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
-            this.propertyGrid.HelpForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.propertyGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(196)))), ((int)(((byte)(216)))));
             this.propertyGrid.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(4);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(662, 697);
             this.propertyGrid.TabIndex = 0;
             this.propertyGrid.ToolbarVisible = false;
-            this.propertyGrid.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // dataGridViewTextBoxColumn1
@@ -5438,7 +5426,7 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripMenuItem menuSaveAs;
         private System.Windows.Forms.ToolStripSeparator menuSep2;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
-        private Krypton.Toolkit.KryptonPropertyGrid propertyGrid;
+        private System.Windows.Forms.PropertyGrid propertyGrid;
         private Krypton.Toolkit.KryptonPanel borderDesignControls;
         private Krypton.Toolkit.KryptonLabel labelControlsNormal;
         private Krypton.Toolkit.KryptonLabel labelControlsDisabled;

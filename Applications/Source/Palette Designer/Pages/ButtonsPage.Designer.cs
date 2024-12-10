@@ -145,7 +145,6 @@ partial class ButtonsPage
             this.kryptonButton10.Location = new System.Drawing.Point(4, 4);
             this.kryptonButton10.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonButton10.Name = "kryptonButton10";
-            this.kryptonButton10.ShowSplitOption = true;
             this.kryptonButton10.Size = new System.Drawing.Size(159, 36);
             this.kryptonButton10.TabIndex = 19;
             this.kryptonButton10.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;

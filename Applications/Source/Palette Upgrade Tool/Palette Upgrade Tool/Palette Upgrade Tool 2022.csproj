@@ -3,6 +3,8 @@
     <TargetFrameworks>net48;net481;net8.0-windows;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
+    <OutputPath>..\..\..\Binaries\Krypton Palette\$(Configuration)\</OutputPath>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Krypton.ico</ApplicationIcon>
     <RootNamespace>PaletteUpgradeTool</RootNamespace>
     <AssemblyName>Palette Upgrade Tool</AssemblyName>
@@ -19,9 +21,9 @@
   </PropertyGroup>
 
   <Choose>
-    <When Condition="'$(Platform)' == 'Nuget'">
+    <When Condition="'$(SolutionName.Endswith(`Nuget`))'">
       <ItemGroup>
-        <PackageReference Include="Krypton.Toolkit.Canary" Version="90.24.6.176-beta" />
+        <PackageReference Include="Krypton.Toolkit.Canary" Version="90.24.10.296-beta" />
       </ItemGroup>
     </When>
     <Otherwise>
