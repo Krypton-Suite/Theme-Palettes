@@ -1,9 +1,7 @@
 ﻿#region BSD License
 /*
- * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
  */
 #endregion
 
@@ -21,15 +19,15 @@ namespace PaletteDesigner
         {
             InitializeComponent();
 
-            kbtnCancel.Text = KryptonLanguageManager.GeneralToolkitStrings.Cancel;
+            kbtnCancel.Text = KryptonManager.Strings.GeneralStrings.Cancel;
 
             kbtnCancel.DialogResult = DialogResult.Cancel;
 
-            kbtnOk.Text = KryptonLanguageManager.GeneralToolkitStrings.OK;
+            kbtnOk.Text = KryptonManager.Strings.GeneralStrings.OK;
 
             kbtnOk.DialogResult = DialogResult.OK;
 
-            kbtnReset.Text = KryptonLanguageManager.CustomToolkitStrings.Reset;
+            kbtnReset.Text = KryptonManager.Strings.CustomStrings.Reset;
 
             AcceptButton = kbtnOk;
 

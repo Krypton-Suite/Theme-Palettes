@@ -36,7 +36,7 @@ namespace PaletteDesigner
 
                 reader.Close();
 
-                using (var streamReader = new StreamReader(Resources.v6to19))
+                using (var streamReader = new StreamReader(Resources.v6to20))
                 {
                     using (var xmlTextReader = XmlReader.Create(streamReader))
                     {

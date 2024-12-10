@@ -1,9 +1,7 @@
 ﻿#region BSD License
 /*
- * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
  */
 #endregion
 
@@ -25,17 +23,17 @@ namespace PaletteDesigner.Pages
         {
             kryptonPanel1.Palette = palette;
 
-            kryptonButton1.Palette = palette;
+            kryptonButton1.LocalCustomPalette = palette;
 
-            kryptonGroupBox1.Palette = palette;
+            kryptonGroupBox1.LocalCustomPalette = palette;
 
-            krbToolTip.Palette = palette;
+            krbToolTip.LocalCustomPalette = palette;
 
-            krbSuperTip.Palette = palette;
+            krbSuperTip.LocalCustomPalette = palette;
 
-            krbKeyTip.Palette = palette;
+            krbKeyTip.LocalCustomPalette = palette;
 
-            kchkShowImage.Palette = palette;
+            kchkShowImage.LocalCustomPalette = palette;
         }
 
         private void kchkShowImage_CheckedChanged(object sender, EventArgs e)

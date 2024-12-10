@@ -3,11 +3,15 @@
  *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2024 - 2024. All rights reserved.
  */
 
+using Krypton.Toolkit;
+
 namespace PaletteDesigner.Pages;
 
 public partial class ButtonsPage : UserControl
 {
-    private readonly List<KryptonDropButton> _pageButtons;
+    private readonly List<KryptonButton> _pageButtons;
+    private readonly List<KryptonDropButton> _pageButtons2;
+    private readonly List<KryptonGroupBox> _kryptonGroupBoxs;
 
     public ButtonsPage()
     {
@@ -36,7 +40,7 @@ public partial class ButtonsPage : UserControl
 
         _pageButtons =
         [
-            ..new[]
+            ..new []
             {
                 buttonDisabled,
                 buttonDefaultFocus,
@@ -47,12 +51,6 @@ public partial class ButtonsPage : UserControl
                 buttonCheckedTracking,
                 buttonCheckedPressed,
                 buttonLive,
-                kryptonDropButton1,
-                kryptonDropButton2,
-                kryptonDropButton3,
-                kryptonDropButton4,
-                kryptonDropButton5,
-                kryptonDropButton6,
                 kryptonButton10,
                 kryptonButton11,
                 kryptonButton12,
@@ -62,6 +60,27 @@ public partial class ButtonsPage : UserControl
             }
         ];
 
+        _pageButtons2 =
+        [
+            ..new[]
+            {
+                kryptonDropButton1,
+                kryptonDropButton2,
+                kryptonDropButton3,
+                kryptonDropButton4,
+                kryptonDropButton5,
+                kryptonDropButton6,
+            }
+        ];
+        _kryptonGroupBoxs =
+        [
+            ..new[]
+            {
+                kryptonGroupBox1,
+                kryptonGroupBox2,
+                kryptonGroupBox3
+            }
+        ];
         //_pageButtons =
         //[
         //    ..new[]
@@ -92,8 +111,10 @@ public partial class ButtonsPage : UserControl
 
     public void ApplyPalette(KryptonCustomPaletteBase palette)
     {
-        _pageButtons.ForEach(control => control.Palette = palette);
-        kryptonColorButton1.Palette = palette;
+        _pageButtons.ForEach(control => control.LocalCustomPalette = palette);
+        _pageButtons2.ForEach(control => control.LocalCustomPalette = palette);
+        _kryptonGroupBoxs.ForEach(control => control.LocalCustomPalette = palette);
+        kryptonColorButton1.LocalCustomPalette = palette;
 
         kryptonPanel1.Palette = palette;
     }
@@ -135,6 +156,7 @@ public partial class ButtonsPage : UserControl
 
         // Update all the displayed buttons with the new style
         _pageButtons.ForEach(control => control.ButtonStyle = bs);
+        _pageButtons2.ForEach(control => control.ButtonStyle = bs);
         kryptonColorButton1.ButtonStyle = bs;
     }
 }

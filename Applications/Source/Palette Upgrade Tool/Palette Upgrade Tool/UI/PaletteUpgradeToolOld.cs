@@ -5,7 +5,7 @@
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
  * 
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
  *  
  */
 #endregion
@@ -20,18 +20,13 @@ namespace PaletteUpgradeTool.UI
     public partial class PaletteUpgradeToolOld : KryptonForm
     {
         #region Variables
-        private const int MINIMUM_VERSION_NUMBER = 2, MAXIMUM_VERSION_NUMBER = 18;
+        private const int MINIMUM_VERSION_NUMBER = 2, MAXIMUM_VERSION_NUMBER = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
 
         #endregion
 
-        #region Properties        
-        /// <summary>
-        /// Gets or sets the input version number.
-        /// </summary>
-        /// <value>
-        /// The input version number.
-        /// </value>
-        public int InputVersionNumber { get; set; }
+        #region Properties
+
+        private int _inputVersionNumber;
 
         #endregion
 
@@ -69,9 +64,9 @@ namespace PaletteUpgradeTool.UI
         {
             try
             {
-                StreamReader reader = new StreamReader(krtbInput.Text);
+                var reader = new StreamReader(krtbInput.Text);
 
-                string end = reader.ReadToEnd();
+                var end = reader.ReadToEnd();
 
                 reader.Close();
 
@@ -82,9 +77,9 @@ namespace PaletteUpgradeTool.UI
                     xslCompiledTransform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
                     end = TransformXml(xslCompiledTransform, end);
                 }
-                else if (GetInputVersionNumber() <= MAXIMUM_VERSION_NUMBER)
+                else if (GetInputVersionNumber() < MAXIMUM_VERSION_NUMBER)
                 {
-                    var streamReader = new StringReader(Resources.v6to19);
+                    var streamReader = new StringReader(Resources.v6to20);
                     var xmlTextReader = XmlReader.Create(streamReader);
                     var xslCompiledTransform1 = new XslCompiledTransform();
                     xslCompiledTransform1.Load(xmlTextReader);
@@ -101,7 +96,7 @@ namespace PaletteUpgradeTool.UI
 
                 writer.Close();
 
-                object[] text = new object[] { "Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", InputVersionNumber, "' to version '", 19.ToString(), "' has succeeded." };
+                var text = new object[] { "Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", _inputVersionNumber, "' to version '", MAXIMUM_VERSION_NUMBER.ToString(), "' has succeeded." };
 
                 KryptonMessageBox.Show(this, string.Concat(text), "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
 
@@ -128,7 +123,7 @@ namespace PaletteUpgradeTool.UI
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                int paletteFileNumber = GetPaletteFileNumber(openFileDialog.FileName);
+                var paletteFileNumber = GetPaletteFileNumber(openFileDialog.FileName);
 
                 switch (paletteFileNumber)
                 {
@@ -141,7 +136,7 @@ namespace PaletteUpgradeTool.UI
                         break;
                     case < MINIMUM_VERSION_NUMBER:
                         {
-                            string[] fileName = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_VERSION_NUMBER.ToString(), "' and upwards." };
+                            var fileName = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_VERSION_NUMBER.ToString(), "' and upwards." };
 
                             KryptonMessageBox.Show(this,
                                 string.Concat(fileName),
@@ -150,17 +145,19 @@ namespace PaletteUpgradeTool.UI
                                 KryptonMessageBoxIcon.Warning);
                             break;
                         }
-                    case <= MAXIMUM_VERSION_NUMBER:
+                    case < MAXIMUM_VERSION_NUMBER:
                         {
                             krtbInput.Text = openFileDialog.FileName;
 
                             SetInputVersionNumber(paletteFileNumber);
 
-                            FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                            var fileInfo = new FileInfo(openFileDialog.FileName);
 
-                            string str = (fileInfo.Name.IndexOf(fileInfo.Extension) <= 0 ? fileInfo.Name : fileInfo.Name.Substring(0, fileInfo.Name.IndexOf(fileInfo.Extension)));
+                            var str = (fileInfo.Name.IndexOf(fileInfo.Extension) <= 0 
+                                ? fileInfo.Name 
+                                : fileInfo.Name.Substring(0, fileInfo.Name.IndexOf(fileInfo.Extension)));
 
-                            string directoryName = fileInfo.DirectoryName;
+                            var directoryName = fileInfo.DirectoryName;
 
                             if (!directoryName.EndsWith("\\"))
                             {
@@ -169,14 +166,14 @@ namespace PaletteUpgradeTool.UI
 
                             KryptonRichTextBox richTextBox = krtbOutput;
 
-                            string[] strArrays = new string[] { directoryName, str, "_v", (MAXIMUM_VERSION_NUMBER + 1).ToString(), fileInfo.Extension };
+                            var strArrays = new string[] { directoryName, str, "_v", MAXIMUM_VERSION_NUMBER.ToString(), fileInfo.Extension };
 
                             richTextBox.Text = string.Concat(strArrays);
                             break;
                         }
                     default:
                         {
-                            string[] fileName1 = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below." };
+                            var fileName1 = new string[] { "File '", openFileDialog.FileName, "' contains palette format version '", paletteFileNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", (MAXIMUM_VERSION_NUMBER-1).ToString(), "' and below." };
 
                             KryptonMessageBox.Show(this,
                                 string.Concat(fileName1),
@@ -209,7 +206,7 @@ namespace PaletteUpgradeTool.UI
         /// <param name="value">The desired value of InputVersionNumber.</param>
         private void SetInputVersionNumber(int value)
         {
-            InputVersionNumber = value;
+            _inputVersionNumber = value;
         }
 
         /// <summary>
@@ -218,7 +215,7 @@ namespace PaletteUpgradeTool.UI
         /// <returns>The value of the InputVersionNumber.</returns>
         private int GetInputVersionNumber()
         {
-            return InputVersionNumber;
+            return _inputVersionNumber;
         }
         #endregion
 
@@ -236,7 +233,7 @@ namespace PaletteUpgradeTool.UI
 
                 if (xPathNavigator != null)
                 {
-                    string attribute = xPathNavigator.GetAttribute("Version", string.Empty);
+                    var attribute = xPathNavigator.GetAttribute("Version", string.Empty);
 
                     if (!string.IsNullOrEmpty(attribute))
                     {
@@ -264,13 +261,13 @@ namespace PaletteUpgradeTool.UI
         /// <returns></returns>
         private string TransformXml(XslCompiledTransform transform, string xml)
         {
-            StringReader reader = new StringReader(xml);
+            var reader = new StringReader(xml);
 
-            StringWriter writer = new StringWriter();
+            var writer = new StringWriter();
 
-            XmlTextReader xmlTextReader = new XmlTextReader(reader);
+            var xmlTextReader = new XmlTextReader(reader);
 
-            XmlTextWriter xmlTextWriter = new XmlTextWriter(writer)
+            var xmlTextWriter = new XmlTextWriter(writer)
             {
                 Formatting = Formatting.Indented,
                 Indentation = 4
@@ -286,10 +283,10 @@ namespace PaletteUpgradeTool.UI
         /// </summary>
         private void UpdateState()
         {
-            bool length = krtbInput.Text.Length > 0;
-            bool flag0 = ValidOutputDirectory(krtbOutput.Text);
-            bool flag1 = ValidOutputFilename(krtbOutput.Text);
-            bool flag2 = (GetInputVersionNumber() >= MINIMUM_VERSION_NUMBER && GetInputVersionNumber() <= MAXIMUM_VERSION_NUMBER);
+            var length = krtbInput.Text.Length > 0;
+            var flag0 = ValidOutputDirectory(krtbOutput.Text);
+            var flag1 = ValidOutputFilename(krtbOutput.Text);
+            var flag2 = (GetInputVersionNumber() >= MINIMUM_VERSION_NUMBER && GetInputVersionNumber() < MAXIMUM_VERSION_NUMBER);
 
             kbtnUpgrade.Enabled = (length && flag0 && flag1 && flag2);
 
@@ -297,9 +294,7 @@ namespace PaletteUpgradeTool.UI
             {
                 klblStatus.ForeColor = Color.Green;
 
-                int num = MAXIMUM_VERSION_NUMBER + 1;
-
-                klblStatus.Text = $"Convert to output version ' {num}'.";
+                klblStatus.Text = $"Convert to output version ' {MAXIMUM_VERSION_NUMBER}'.";
 
                 return;
             }
