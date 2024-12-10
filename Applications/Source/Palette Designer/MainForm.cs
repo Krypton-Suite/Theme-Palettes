@@ -327,8 +327,8 @@ namespace PaletteDesigner
 
                         // Use the new instance instead
                         _palette = palette;
-                        _chromeTMS.Palette = palette;
-                        _chromeTMS2.Palette = palette;
+                        _chromeTMS.LocalCustomPalette = palette;
+                        _chromeTMS2.LocalCustomPalette = palette;
                         _chromeRibbon.OverridePalette = _palette;
 
                         // We need to know when a change occurs to the palette settings
@@ -451,8 +451,8 @@ namespace PaletteDesigner
 
             // Create a fresh palette instance
             _palette = new KryptonCustomPaletteBase();
-            _chromeTMS.Palette = _palette;
-            _chromeTMS2.Palette = _palette;
+            _chromeTMS.LocalCustomPalette = _palette;
+            _chromeTMS2.LocalCustomPalette = _palette;
             _chromeRibbon.OverridePalette = _palette;
 
             // We need to know when a change occurs to the palette settings
@@ -488,12 +488,12 @@ namespace PaletteDesigner
                 return;
             }
 
-            _applyPalettesToBases.ForEach(vcb => vcb.Palette = _palette);
+            _applyPalettesToBases.ForEach(vcb => vcb.LocalCustomPalette = _palette);
             _applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
 
             dataGridViewDisabled.Palette = _palette;
             dataGridViewNormal.Palette = _palette;
-            kryptonListView1.Palette = _palette;
+            kryptonListView1.LocalCustomPalette = _palette;
 
             inputControls1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
@@ -979,9 +979,6 @@ namespace PaletteDesigner
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Why doesn't this work?
-            //using FormPaletteUpgradeTool paletteUpgradeTool = new();
-
             var paletteUpgradeTool = new FormPaletteUpgradeTool();
 
             paletteUpgradeTool.Show();
@@ -989,9 +986,6 @@ namespace PaletteDesigner
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Why doesn't this work?
-            //using var controlPanel = new SettingsControlPanel();
-
             var controlPanel = new SettingsControlPanel();
 
             controlPanel.Show();

@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29521.150
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palette Designer 2019", "Palette Designer 2019.csproj", "{A9435693-714C-47AB-BF4F-115AF7D568CC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6EA0EB0-9DB1-43DC-BCB5-4017C3935CC3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palette Designer 2022", "Palette Designer 2022.csproj", "{6B28CF7A-F38F-41E8-8FD7-D7E122151E10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A9435693-714C-47AB-BF4F-115AF7D568CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9435693-714C-47AB-BF4F-115AF7D568CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9435693-714C-47AB-BF4F-115AF7D568CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9435693-714C-47AB-BF4F-115AF7D568CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B28CF7A-F38F-41E8-8FD7-D7E122151E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B28CF7A-F38F-41E8-8FD7-D7E122151E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B28CF7A-F38F-41E8-8FD7-D7E122151E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B28CF7A-F38F-41E8-8FD7-D7E122151E10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
