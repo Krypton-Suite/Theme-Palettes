@@ -7,7 +7,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup>
-    <OutputName>Samples.v100.24.11.327-beta.Net48</OutputName>
+    <OutputName>Palette.v100.24.11.327-beta.Net48</OutputName>
     <Name>WixInstaller.net48</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">

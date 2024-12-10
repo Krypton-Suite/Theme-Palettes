@@ -2,10 +2,10 @@
 	<!-- do not change this ever !-->
 	<?define UpgradeCode = "38FC3474-F06B-4C57-8869-15B23AEBFB48" ?>
 
-	<?define Version = "90.24.11.317" ?>
+	<?define Version = "100.24.11.327" ?>
 	<!--"!(bind.FileVersion.Krypton.Toolkit.dll)" -->
 
-	<?define ProductName = "Krypton Toolkit Palette Net90 Apps"?>
+	<?define ProductName = "Krypton Toolkit Palette Net48 Apps"?>
 
 	<Package Version="$(var.Version)" UpgradeCode="$(var.UpgradeCode)" Name="$(var.ProductName)" Language="1033" Manufacturer="https://github.com/Krypton-Suite" Scope="perUser">
 		<SummaryInformation Keywords="Installer" Description="$(var.ProductName)" />
