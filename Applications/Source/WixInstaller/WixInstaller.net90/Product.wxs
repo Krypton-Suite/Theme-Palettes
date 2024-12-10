@@ -71,7 +71,7 @@
 			<Directory Id="ProgramMenuDir" Name="Krypton Toolkit Palette" />
 		</StandardDirectory>
 		<StandardDirectory Id="CommonAppDataFolder">
-			<Directory Id="KryptonToolkitPaletteDir" Name="Krypton Toolkit Palette Net80" />
+			<Directory Id="KryptonToolkitPaletteDir" Name="Krypton Toolkit Palette Net90" />
 		</StandardDirectory>
 	</Package>
 
