@@ -1,4 +1,3 @@
-using PaletteDesigner.Pages;
 
 namespace PaletteDesigner
 {

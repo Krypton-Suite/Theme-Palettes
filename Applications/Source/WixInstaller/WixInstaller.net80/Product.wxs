@@ -1,6 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
 	<!-- do not change this ever !-->
-	<?define UpgradeCode = "38FC3474-F06B-4C57-8869-15B23AEBFB60" ?>
+	<?define UpgradeCode = "38FC3474-F06B-4C57-8869-15B23AEBFB80" ?>
 
 	<?define Version = "80.23.4.180" ?>
 	<!--"!(bind.FileVersion.Krypton.Toolkit.dll)" -->

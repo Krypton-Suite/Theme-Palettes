@@ -20,7 +20,7 @@ namespace PaletteDesigner
 
         private const int MINIMUM_PALETTE_FILE_VERSION = 2;
 
-        private const int MAXIMUM_PALETTE_FILE_VERSION = 20;
+        private const int MAXIMUM_PALETTE_FILE_VERSION = 19;
 
         #endregion
 

@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Palette Upgrade Tool")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -44,7 +44,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.500.606.0")]
-[assembly: AssemblyFileVersion("5.500.606.0")]
+[assembly: AssemblyVersion("85.24.10.288")]
+[assembly: AssemblyFileVersion("85.24.10.288")]
 [assembly: NeutralResourcesLanguage("en-US")]
 

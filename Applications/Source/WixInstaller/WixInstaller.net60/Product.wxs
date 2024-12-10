@@ -1,11 +1,11 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
 	<!-- do not change this ever !-->
-	<?define UpgradeCode = "38FC3474-F06B-4C57-8869-15B23AEBFB60" ?>
+	<?define UpgradeCode = "38FC3474-F06B-4C57-8869-15B23AEBFB66" ?>
 
 	<?define Version = "90.24.2.52" ?>
 	<!--"!(bind.FileVersion.Krypton.Toolkit.dll)" -->
 
-	<?define ProductName = "Krypton Toolkit Palette Net90 Apps"?>
+	<?define ProductName = "Krypton Toolkit Palette Net60 Apps"?>
 
 	<Package Version="$(var.Version)" UpgradeCode="$(var.UpgradeCode)" Name="$(var.ProductName)" Language="1033" Manufacturer="https://github.com/Krypton-Suite" Scope="perUser">
 		<SummaryInformation Keywords="Installer" Description="$(var.ProductName)" />
@@ -71,7 +71,7 @@
 			<Directory Id="ProgramMenuDir" Name="Krypton Toolkit Palette" />
 		</StandardDirectory>
 		<StandardDirectory Id="CommonAppDataFolder">
-			<Directory Id="KryptonToolkitPaletteDir" Name="Krypton Toolkit Palette Net80" />
+			<Directory Id="KryptonToolkitPaletteDir" Name="Krypton Toolkit Palette Net60" />
 		</StandardDirectory>
 	</Package>
 
