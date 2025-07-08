@@ -1,11 +1,17 @@
 ﻿#region BSD License
 /*
- * 
+ *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved.
+ *
  */
 #endregion
+
+// @tobitege: remove this and related code once Input- and MessageBox visuals are fixed!
+// This define will show standard MessageBoxes instead of KryptonMessageBoxes.
+#define USE_SYSTEM_MESSAGEBOX
+
+using PaletteDesigner.Properties;
 
 namespace PaletteDesigner
 {
@@ -13,7 +19,7 @@ namespace PaletteDesigner
     {
         #region Instance Fields
 
-        private readonly Settings _settings = null;
+        private readonly Settings _settings = Settings.Default;
 
         #endregion
 
@@ -22,7 +28,7 @@ namespace PaletteDesigner
         /// <summary>Initializes a new instance of the <see cref="SettingsManager" /> class.</summary>
         public SettingsManager()
         {
-            _settings = new Settings();
+            _settings = Settings.Default;
         }
 
         #endregion
@@ -83,16 +89,28 @@ namespace PaletteDesigner
 
         #region Public
 
-        /// <summary>Saves the settings.</summary>
-        /// <param name="useConfirmation">if set to <c>true</c> [use confirmation].</param>
-        public void SaveSettings(bool useConfirmation = false)
+        /// <summary>
+        /// Saves the settings, supplying an owner window so any confirmation dialog appears on top.
+        /// </summary>
+        /// <param name="owner">Owner window for the message box.</param>
+        /// <param name="useConfirmation">Whether to prompt the user for confirmation.</param>
+        public void SaveSettings(IWin32Window owner, bool useConfirmation = false)
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to save these settings with the current values?",
+#if USE_SYSTEM_MESSAGEBOX
+                DialogResult result = MessageBox.Show(owner,
+                    "Do you want to save these settings with the current values?",
+                    "Save Settings",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+#else
+                DialogResult result = KryptonMessageBox.Show(owner,
+                    "Do you want to save these settings with the current values?",
                     "Save Settings",
                     KryptonMessageBoxButtons.YesNo,
                     KryptonMessageBoxIcon.Question);
+#endif
 
                 if (result == DialogResult.Yes)
                 {
@@ -105,16 +123,28 @@ namespace PaletteDesigner
             }
         }
 
-        /// <summary>Resets the settings.</summary>
-        /// <param name="useConfirmation">if set to <c>true</c> [use confirmation].</param>
-        public void ResetSettings(bool useConfirmation = false)
+        /// <summary>
+        /// Resets the settings with an owner window for the confirmation dialog.
+        /// </summary>
+        /// <param name="owner">Owner window for the message box.</param>
+        /// <param name="useConfirmation">Whether to prompt the user for confirmation.</param>
+        public void ResetSettings(IWin32Window owner, bool useConfirmation = false)
         {
             if (useConfirmation)
             {
-                DialogResult result = KryptonMessageBox.Show("Do you want to reset these settings with the default values?",
+#if USE_SYSTEM_MESSAGEBOX
+                DialogResult result = MessageBox.Show(owner,
+                    "Do you want to reset these settings with the default values?",
+                    "Reset Settings",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+#else
+                DialogResult result = KryptonMessageBox.Show(owner,
+                    "Do you want to reset these settings with the default values?",
                     "Reset Settings",
                     KryptonMessageBoxButtons.YesNo,
                     KryptonMessageBoxIcon.Question);
+#endif
 
                 if (result == DialogResult.Yes)
                 {
@@ -140,7 +170,21 @@ namespace PaletteDesigner
                 SetUpgradeOnImport(false);
             }
 
-            SaveSettings(useConfirmation);
+            SaveSettings(owner, useConfirmation);
+        }
+
+        /// <summary>Saves the settings.</summary>
+        /// <param name="useConfirmation">if set to <c>true</c> [use confirmation].</param>
+        public void SaveSettings(bool useConfirmation = false)
+        {
+            SaveSettings(owner: null, useConfirmation);
+        }
+
+        /// <summary>Resets the settings.</summary>
+        /// <param name="useConfirmation">if set to <c>true</c> [use confirmation].</param>
+        public void ResetSettings(bool useConfirmation = false)
+        {
+            ResetSettings(owner: null, useConfirmation);
         }
 
         #endregion

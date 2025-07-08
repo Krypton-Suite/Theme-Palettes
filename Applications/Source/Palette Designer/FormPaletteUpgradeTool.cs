@@ -1,7 +1,7 @@
 ﻿#region BSD License
 /*
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2023 - 2024. All rights reserved. 
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2023 - 2024. All rights reserved.
  */
 #endregion
 
@@ -93,23 +93,17 @@ namespace PaletteDesigner
         /// <param name="transform">The transform.</param>
         /// <param name="xml">The XML.</param>
         /// <returns></returns>
-        private string TransformXml(XslCompiledTransform transform, string xml)
+        private static string TransformXml(XslCompiledTransform transform, string xml)
         {
-            StringReader reader = new StringReader(xml);
-
-            StringWriter writer = new StringWriter();
-
-            XmlTextReader xmlTextReader = new XmlTextReader(reader);
-
-            XmlTextWriter xmlTextWriter = new XmlTextWriter(writer)
+            using (var reader = new StringReader(xml))
+            using (var writer = new StringWriter())
+            using (var xmlReader = new XmlTextReader(reader))
+            using (var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented, Indentation = 4 })
             {
-                Formatting = Formatting.Indented,
-                Indentation = 4
-            };
+                transform.Transform(xmlReader, xmlWriter);
 
-            transform.Transform(xmlTextReader, xmlTextWriter);
-
-            return writer.ToString();
+                return writer.ToString();
+            }
         }
 
         /// <summary>
@@ -209,42 +203,41 @@ namespace PaletteDesigner
         {
             try
             {
-                var reader = new StreamReader(krtbInput.Text);
+                // Read the original palette XML
+                string xml;
+                using (var reader = new StreamReader(krtbInput.Text))
+                {
+                    xml = reader.ReadToEnd();
+                }
 
-                string end = reader.ReadToEnd();
-
-                reader.Close();
-
+                // Apply the required transformation(s)
                 if (GetInputVersionNumber() < 6)
                 {
-                    var xslCompiledTransform = new XslCompiledTransform();
-
-                    xslCompiledTransform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
-                    end = TransformXml(xslCompiledTransform, end);
+                    var transform = new XslCompiledTransform();
+                    transform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
+                    xml = TransformXml(transform, xml);
                 }
                 else if (GetInputVersionNumber() < MAXIMUM_PALETTE_FILE_VERSION)
                 {
-                    var streamReader = new StringReader(Resources.v6to20);
-                    var xmlTextReader = XmlReader.Create(streamReader);
-                    var xslCompiledTransform1 = new XslCompiledTransform();
-                    xslCompiledTransform1.Load(xmlTextReader);
-                    end = TransformXml(xslCompiledTransform1, end);
+                    var transform = new XslCompiledTransform();
+                    using (var sr = new StringReader(Resources.v6to20))
+                    using (var xr = XmlReader.Create(sr))
+                    {
+                        transform.Load(xr);
+                    }
+                    xml = TransformXml(transform, xml);
                 }
 
-                var writer = new StreamWriter(krtbOutput.Text);
+                // Write the upgraded XML to the chosen output file
+                using (var writer = new StreamWriter(krtbOutput.Text, false))
+                {
+                    writer.WriteLine("<?xml version=\"1.0\"?>");
+                    writer.Write(xml);
+                }
 
-                writer.WriteLine("<?xml version=\"1.0\"?>");
+                string message = $"Input file: {krtbInput.Text}\nOutput file: {krtbOutput.Text}\n\nUpgrade from version '{_inputVersionNumber}' to version '{MAXIMUM_PALETTE_FILE_VERSION}' has succeeded.";
 
-                writer.Write(end);
-
-                writer.Flush();
-
-                writer.Close();
-
-                object[] text = ["Input file: ", krtbInput.Text, "\nOutput file: ", krtbOutput.Text, "\n\nUpgrade from version '", _inputVersionNumber, "' to version '", MAXIMUM_PALETTE_FILE_VERSION.ToString(), "' has succeeded."
-                ];
-
-                KryptonMessageBox.Show(this, string.Concat(text), "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
+                KryptonMessageBox.Show(this, message, "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
 
                 kbtnUpgrade.Enabled = false;
             }
@@ -258,8 +251,8 @@ namespace PaletteDesigner
         {
             KryptonOpenFileDialog openFileDialog = new()
             {
-                Title = @"Open a Existing Krypton Palette File:",
-                Filter = @"Krypton Palette XML Files (*.xml)|*.xml"
+                Title = @"Open an existing Krypton palette file:",
+                Filter = @"Krypton palette XML files (*.xml)|*.xml"
             };
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -293,27 +286,11 @@ namespace PaletteDesigner
 
                             SetInputVersionNumber(paletteFileVersionNumber);
 
-                            FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                            string directoryName = Path.GetDirectoryName(openFileDialog.FileName) ?? string.Empty;
+                            string baseName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                            string extension = Path.GetExtension(openFileDialog.FileName);
 
-                            if (fileInfo != null)
-                            {
-                                string str = (fileInfo.Name.IndexOf(fileInfo.Extension) <= 0 ? fileInfo.Name : fileInfo.Name.Substring(0, fileInfo.Name.IndexOf(fileInfo.Extension)));
-
-                                string directoryName = fileInfo.DirectoryName;
-
-                                if (!directoryName.EndsWith("\\"))
-                                {
-                                    directoryName = string.Concat(directoryName, "\\");
-                                }
-
-                                KryptonRichTextBox richTextBox = krtbOutput;
-
-                                string[] strArrays = [directoryName, str, "_v", (MAXIMUM_PALETTE_FILE_VERSION + 1).ToString(), fileInfo.Extension
-                                ];
-
-                                richTextBox.Text = string.Concat(strArrays);
-                            }
-
+                            krtbOutput.Text = Path.Combine(directoryName, $"{baseName}_v{MAXIMUM_PALETTE_FILE_VERSION}{extension}");
                             break;
                         }
                     default:
@@ -348,19 +325,15 @@ namespace PaletteDesigner
         {
             KryptonSaveFileDialog saveFileDialog = new()
             {
-                Title = @"Save Krypton Palette File:",
-                Filter = @"Krypton Palette XML Files (*.xml)|*.xml"
+                Title = @"Save Krypton palette file as:",
+                Filter = @"Krypton palette XML files (*.xml)|*.xml",
+                InitialDirectory = Path.GetDirectoryName(krtbOutput.Text),
+                FileName = Path.GetFileName(krtbOutput.Text)
             };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var writer = new StreamWriter(Path.GetFullPath(saveFileDialog.FileName));
-
-                writer.Write(krtbOutput.Text);
-
-                writer.Close();
-
-                writer.Dispose();
+                krtbOutput.Text = Path.GetFullPath(saveFileDialog.FileName);
             }
         }
     }

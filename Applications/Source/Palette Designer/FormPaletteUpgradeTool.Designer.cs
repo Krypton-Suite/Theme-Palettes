@@ -47,6 +47,8 @@
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.kcmdBrowseForOriginalFile = new Krypton.Toolkit.KryptonCommand();
+            this.kbtnBrowseInput = new Krypton.Toolkit.KryptonButton();
+            this.kbtnBrowseOutput = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
@@ -56,9 +58,9 @@
             this.kryptonPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // kryptonPanel1
-            // 
+            //
             this.kryptonPanel1.Controls.Add(this.kryptonComboBox1);
             this.kryptonPanel1.Controls.Add(this.kbtnUpgrade);
             this.kryptonPanel1.Controls.Add(this.kbtnCancel);
@@ -70,9 +72,9 @@
             this.kryptonPanel1.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
             this.kryptonPanel1.Size = new System.Drawing.Size(905, 62);
             this.kryptonPanel1.TabIndex = 0;
-            // 
+            //
             // kryptonComboBox1
-            // 
+            //
             this.kryptonComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.kryptonComboBox1.DropDownWidth = 121;
             this.kryptonComboBox1.IntegralHeight = false;
@@ -83,9 +85,9 @@
             this.kryptonComboBox1.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.kryptonComboBox1.TabIndex = 3;
             this.kryptonComboBox1.Visible = false;
-            // 
+            //
             // kbtnUpgrade
-            // 
+            //
             this.kbtnUpgrade.Enabled = false;
             this.kbtnUpgrade.Location = new System.Drawing.Point(639, 15);
             this.kbtnUpgrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -95,9 +97,9 @@
             this.kbtnUpgrade.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.kbtnUpgrade.Values.Text = "&Upgrade";
             this.kbtnUpgrade.Click += new System.EventHandler(this.kbtnUpgrade_Click);
-            // 
+            //
             // kbtnCancel
-            // 
+            //
             this.kbtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.kbtnCancel.Location = new System.Drawing.Point(767, 16);
             this.kbtnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -107,9 +109,9 @@
             this.kbtnCancel.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.kbtnCancel.Values.Text = "Cance&l";
             this.kbtnCancel.Click += new System.EventHandler(this.kbtnCancel_Click);
-            // 
+            //
             // kryptonBorderEdge1
-            // 
+            //
             this.kryptonBorderEdge1.BorderStyle = Krypton.Toolkit.PaletteBorderStyle.HeaderPrimary;
             this.kryptonBorderEdge1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonBorderEdge1.Location = new System.Drawing.Point(0, 0);
@@ -117,49 +119,49 @@
             this.kryptonBorderEdge1.Name = "kryptonBorderEdge1";
             this.kryptonBorderEdge1.Size = new System.Drawing.Size(905, 1);
             this.kryptonBorderEdge1.Text = "kryptonBorderEdge1";
-            // 
+            //
             // kryptonPanel2
-            // 
+            //
             this.kryptonPanel2.Controls.Add(this.krtbInput);
             this.kryptonPanel2.Controls.Add(this.krtbOutput);
             this.kryptonPanel2.Controls.Add(this.klblStatus);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel2.Controls.Add(this.kryptonPanel3);
+            this.kryptonPanel2.Controls.Add(this.kbtnBrowseInput);
+            this.kryptonPanel2.Controls.Add(this.kbtnBrowseOutput);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(905, 494);
             this.kryptonPanel2.TabIndex = 1;
-            // 
+            //
             // krtbInput
-            // 
-            this.krtbInput.ButtonSpecs.Add(this.bsaBrowseForOriginal);
+            //
             this.krtbInput.Location = new System.Drawing.Point(17, 164);
             this.krtbInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.krtbInput.Name = "krtbInput";
             this.krtbInput.Size = new System.Drawing.Size(869, 118);
             this.krtbInput.TabIndex = 7;
             this.krtbInput.Text = "";
-            // 
+            //
             // bsaBrowseForOriginal
-            // 
+            //
             this.bsaBrowseForOriginal.Enabled = Krypton.Toolkit.ButtonEnabled.True;
             this.bsaBrowseForOriginal.KryptonCommand = this.kcmdBrowseForUpgradedFile;
             this.bsaBrowseForOriginal.Text = "Browse";
             this.bsaBrowseForOriginal.UniqueName = "bb6174a6bb674e219e076702012a00aa";
             this.bsaBrowseForOriginal.Click += new System.EventHandler(this.bsaBrowseForOriginal_Click);
-            // 
+            //
             // kcmdBrowseForUpgradedFile
-            // 
+            //
             this.kcmdBrowseForUpgradedFile.AssignedButtonSpec = this.buttonSpecAny1;
             this.kcmdBrowseForUpgradedFile.Text = "&...";
             this.kcmdBrowseForUpgradedFile.Execute += new System.EventHandler(this.kcmdBrowseForUpgradedFile_Execute);
-            // 
+            //
             // krtbOutput
-            // 
-            this.krtbOutput.ButtonSpecs.Add(this.buttonSpecAny1);
+            //
             this.krtbOutput.Location = new System.Drawing.Point(17, 321);
             this.krtbOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.krtbOutput.Name = "krtbOutput";
@@ -167,15 +169,15 @@
             this.krtbOutput.TabIndex = 6;
             this.krtbOutput.Text = "";
             this.krtbOutput.TextChanged += new System.EventHandler(this.krtbOutput_TextChanged);
-            // 
+            //
             // buttonSpecAny1
-            // 
+            //
             this.buttonSpecAny1.Enabled = Krypton.Toolkit.ButtonEnabled.True;
             this.buttonSpecAny1.KryptonCommand = this.kcmdBrowseForUpgradedFile;
             this.buttonSpecAny1.UniqueName = "bb6174a6bb674e219e076702012a00aa";
-            // 
+            //
             // klblStatus
-            // 
+            //
             this.klblStatus.LabelStyle = Krypton.Toolkit.LabelStyle.BoldControl;
             this.klblStatus.Location = new System.Drawing.Point(17, 447);
             this.klblStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -186,9 +188,9 @@
             this.klblStatus.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblStatus.TabIndex = 5;
             this.klblStatus.Values.Text = "kryptonLabel4";
-            // 
+            //
             // kryptonLabel3
-            // 
+            //
             this.kryptonLabel3.LabelStyle = Krypton.Toolkit.LabelStyle.BoldControl;
             this.kryptonLabel3.Location = new System.Drawing.Point(17, 289);
             this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -196,9 +198,9 @@
             this.kryptonLabel3.Size = new System.Drawing.Size(168, 24);
             this.kryptonLabel3.TabIndex = 3;
             this.kryptonLabel3.Values.Text = "Upgraded Palette File";
-            // 
+            //
             // kryptonLabel2
-            // 
+            //
             this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.BoldControl;
             this.kryptonLabel2.Location = new System.Drawing.Point(17, 132);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -206,9 +208,9 @@
             this.kryptonLabel2.Size = new System.Drawing.Size(154, 24);
             this.kryptonLabel2.TabIndex = 1;
             this.kryptonLabel2.Values.Text = "Original Palette File";
-            // 
+            //
             // kryptonPanel3
-            // 
+            //
             this.kryptonPanel3.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel3.Controls.Add(this.pictureBox1);
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -218,9 +220,9 @@
             this.kryptonPanel3.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlCustom1;
             this.kryptonPanel3.Size = new System.Drawing.Size(905, 123);
             this.kryptonPanel3.TabIndex = 0;
-            // 
+            //
             // kryptonLabel1
-            // 
+            //
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitlePanel;
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
@@ -229,9 +231,9 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(772, 123);
             this.kryptonLabel1.TabIndex = 1;
             this.kryptonLabel1.Values.Text = "Palette Upgrade Tool";
-            // 
+            //
             // pictureBox1
-            // 
+            //
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -242,14 +244,34 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
+            //
             // kcmdBrowseForOriginalFile
-            // 
+            //
             this.kcmdBrowseForOriginalFile.Text = "&...";
             this.kcmdBrowseForOriginalFile.Execute += new System.EventHandler(this.kcmdBrowseForOriginalFile_Execute);
-            // 
+            //
+            // kbtnBrowseInput
+            //
+            this.kbtnBrowseInput.Location = new System.Drawing.Point(793, 128);
+            this.kbtnBrowseInput.Margin = new System.Windows.Forms.Padding(4);
+            this.kbtnBrowseInput.Name = "kbtnBrowseInput";
+            this.kbtnBrowseInput.Size = new System.Drawing.Size(93, 28);
+            this.kbtnBrowseInput.TabIndex = 8;
+            this.kbtnBrowseInput.Values.Text = "Browse...";
+            this.kbtnBrowseInput.Click += new System.EventHandler(this.kcmdBrowseForOriginalFile_Execute);
+            //
+            // kbtnBrowseOutput
+            //
+            this.kbtnBrowseOutput.Location = new System.Drawing.Point(793, 285);
+            this.kbtnBrowseOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.kbtnBrowseOutput.Name = "kbtnBrowseOutput";
+            this.kbtnBrowseOutput.Size = new System.Drawing.Size(93, 28);
+            this.kbtnBrowseOutput.TabIndex = 9;
+            this.kbtnBrowseOutput.Values.Text = "Browse...";
+            this.kbtnBrowseOutput.Click += new System.EventHandler(this.kcmdBrowseForUpgradedFile_Execute);
+            //
             // FormPaletteUpgradeTool
-            // 
+            //
             this.AcceptButton = this.kbtnUpgrade;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -302,5 +324,7 @@
         private ButtonSpecAny buttonSpecAny1;
         private KryptonRichTextBox krtbInput;
         private ButtonSpecAny bsaBrowseForOriginal;
+        private KryptonButton kbtnBrowseInput;
+        private KryptonButton kbtnBrowseOutput;
     }
 }

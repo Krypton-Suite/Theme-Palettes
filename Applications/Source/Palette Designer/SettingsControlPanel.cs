@@ -1,7 +1,7 @@
 ﻿#region BSD License
 /*
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved.
  */
 #endregion
 
@@ -32,6 +32,9 @@ namespace PaletteDesigner
             AcceptButton = kbtnOk;
 
             CancelButton = kbtnCancel;
+
+            // Ensure the dialog buttons close the panel when modeless
+            kbtnCancel.Click += KbtnCancel_Click;
         }
 
         private void SettingsControlPanel_Load(object sender, EventArgs e)
@@ -77,18 +80,57 @@ namespace PaletteDesigner
 
         private void kbtnReset_Click(object sender, EventArgs e)
         {
-            _settingsManager.ResetSettings(_settingsManager.GetAskForSaveConfirmation());
+            var ask = _settingsManager.GetAskForSaveConfirmation();
+
+            if (ask && TopMost)
+            {
+                bool oldTopMost = TopMost;
+                try
+                {
+                    TopMost = false;
+                    _settingsManager.ResetSettings(this, true);
+                }
+                finally
+                {
+                    TopMost = oldTopMost;
+                }
+            }
+            else
+            {
+                _settingsManager.ResetSettings(this, ask);
+            }
 
             EnableResetButton(true);
         }
 
         private void kbtnOk_Click(object sender, EventArgs e)
         {
-            _settingsManager.SaveSettings(_settingsManager.GetAskForSaveConfirmation());
 
-            DialogResult = DialogResult.OK;
+            var ask = _settingsManager.GetAskForSaveConfirmation();
+
+            if (ask && TopMost)
+            {
+                bool oldTopMost = TopMost;
+                try
+                {
+                    TopMost = false;
+                    _settingsManager.SaveSettings(this, true);
+                }
+                finally
+                {
+                    TopMost = oldTopMost;
+                }
+            }
+            else
+            {
+                _settingsManager.SaveSettings(this, ask);
+            }
+
+            Close();
         }
 
         private void EnableResetButton(bool enable) => kbtnReset.Enabled = enable;
+
+        private void KbtnCancel_Click(object sender, EventArgs e) => Close();
     }
 }
