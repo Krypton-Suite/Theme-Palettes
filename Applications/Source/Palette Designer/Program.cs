@@ -5,7 +5,7 @@
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
  *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2023. All rights reserved.
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2025. All rights reserved.
  *
  */
 #endregion
@@ -16,7 +16,7 @@ namespace PaletteDesigner
 {
     internal static class Program
     {
-#if NET48 || NET481 || NET472 || NET471 || NET47 || NET462 || NET461 || NET46
+#if NETFRAMEWORK
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
 #endif
@@ -27,7 +27,7 @@ namespace PaletteDesigner
         private static void Main()
         {
             // Enable High-DPI support for Windows Forms
-#if NET48 || NET481 || NET472 || NET471 || NET47 || NET462 || NET461 || NET46
+#if NETFRAMEWORK
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 SetProcessDPIAware();
@@ -35,7 +35,6 @@ namespace PaletteDesigner
 #else
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
 #endif
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

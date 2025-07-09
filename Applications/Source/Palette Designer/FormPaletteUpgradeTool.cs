@@ -1,7 +1,10 @@
 ﻿#region BSD License
 /*
+ * Original BSD 3-Clause License (https://github.com/ComponentFactory/Krypton/blob/master/LICENSE)
+ *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
+ *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2023 - 2024. All rights reserved.
+ *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac & Ahmed Abdelhameed et al. 2017 - 2025. All rights reserved.
  */
 #endregion
 
@@ -96,8 +99,11 @@ namespace PaletteDesigner
         private static string TransformXml(XslCompiledTransform transform, string xml)
         {
             using (var reader = new StringReader(xml))
+
             using (var writer = new StringWriter())
+
             using (var xmlReader = new XmlTextReader(reader))
+
             using (var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented, Indentation = 4 })
             {
                 transform.Transform(xmlReader, xmlWriter);
@@ -220,7 +226,9 @@ namespace PaletteDesigner
                 else if (GetInputVersionNumber() < MAXIMUM_PALETTE_FILE_VERSION)
                 {
                     var transform = new XslCompiledTransform();
+
                     using (var sr = new StringReader(Resources.v6to20))
+
                     using (var xr = XmlReader.Create(sr))
                     {
                         transform.Load(xr);
