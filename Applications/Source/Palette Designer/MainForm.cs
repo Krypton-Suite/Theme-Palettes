@@ -1,12 +1,10 @@
 ﻿#region BSD License
 /*
- * 
  * Original BSD 3-Clause License (https://github.com/ComponentFactory/Krypton/blob/master/LICENSE)
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
- * 
+ *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2024. All rights reserved. 
- *  
+ *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac & Ahmed Abdelhameed et al. 2017 - 2025. All rights reserved.
  */
 #endregion
 
@@ -42,6 +40,8 @@ namespace PaletteDesigner
             _chromeRibbon = new FormChromeRibbon();
 
             _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
+
+            KryptonManager.GlobalPaletteChanged += OnGlobalPaletteChanged;
 
             _applyPalettesToBases =
             [
@@ -502,10 +502,6 @@ namespace PaletteDesigner
             buttonsPage1.ApplyPalette(_palette);
 
             UpdateChromeTMS();
-
-            // Hack until the pages are separated out:
-            var backClr = _palette.GetBackColor1(PaletteBackStyle.PanelClient, PaletteState.Normal);
-            _applyPalettesToPages.ForEach(pg => pg.StateCommon!.Page.Color1 = backClr);
         }
 
         private void UpdateChromeTMS()
@@ -645,8 +641,8 @@ namespace PaletteDesigner
             kryptonNavigatorDesign.Button.ButtonDisplayLogic = ButtonDisplayLogic.None;
 
             // Define initial display pages
-            kryptonNavigatorTop.SelectedPage = pageTopButtons;
-            kryptonNavigatorDesign.SelectedPage = pageDesignButtons;
+            kryptonNavigatorTop.SelectedPage = pageTopRibbon;
+            kryptonNavigatorDesign.SelectedPage = pageDesignRibbon;
 
             CreateNewPalette();
         }
@@ -977,6 +973,24 @@ namespace PaletteDesigner
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            KryptonManager.GlobalPaletteChanged -= OnGlobalPaletteChanged;
+            base.OnFormClosed(e);
+        }
+
+        private void OnGlobalPaletteChanged(object? sender, EventArgs e)
+        {
+            if (_palette == null)
+            {
+                return;
+            }
+
+            _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
+
+            ApplyPalette();
+        }
+
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var paletteUpgradeTool = new FormPaletteUpgradeTool();
@@ -988,7 +1002,7 @@ namespace PaletteDesigner
         {
             var controlPanel = new SettingsControlPanel();
 
-            controlPanel.Show();
+            controlPanel.Show(this);
         }
 
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
