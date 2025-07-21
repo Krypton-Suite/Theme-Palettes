@@ -1,7 +1,7 @@
 ﻿#region BSD License
 /*
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2025. All rights reserved.
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), tobitege et al. 2017 - 2025. All rights reserved.
  */
 #endregion
 
@@ -12,69 +12,79 @@ namespace PaletteDesigner
         #region Instance Fields
 
         private readonly SettingsManager _settingsManager = new();
+        private readonly KryptonManager _manager;
+        // Pending changes until OK
+        private bool _newAskForConfirmation;
+        private bool _newStartMaximised;
+        private int _newThemeIndex;
+        private bool _newUpgradeOnImport;
+        private PaletteMode _originalPaletteMode;
+        private bool _committed;
 
         #endregion
 
-        public SettingsControlPanel()
+        /// <summary>
+        /// Initializes a new instance of the SettingsControlPanel using existing global KryptonManager.
+        /// </summary>
+        public SettingsControlPanel(KryptonManager manager)
         {
             InitializeComponent();
 
+            _manager = manager;
+            _originalPaletteMode = _manager.GlobalPaletteMode;
+            _committed = false;
+            FormClosing += SettingsControlPanel_FormClosing;
+
             kbtnCancel.Text = KryptonManager.Strings.GeneralStrings.Cancel;
-
-            kbtnCancel.DialogResult = DialogResult.Cancel;
-
             kbtnOk.Text = KryptonManager.Strings.GeneralStrings.OK;
-
-            kbtnOk.DialogResult = DialogResult.OK;
-
             kbtnReset.Text = KryptonManager.Strings.CustomStrings.Reset;
-
-            AcceptButton = kbtnOk;
-
-            CancelButton = kbtnCancel;
-
-            // Ensure the dialog buttons close the panel when modeless
-            kbtnCancel.Click += KbtnCancel_Click;
         }
 
         private void SettingsControlPanel_Load(object sender, EventArgs e)
         {
-            kchkAskForConfirmation.Checked = _settingsManager.GetAskForSaveConfirmation();
+            // Load persisted settings into controls and pending variables
+            _newAskForConfirmation = _settingsManager.GetAskForSaveConfirmation();
+            kchkAskForConfirmation.Checked = _newAskForConfirmation;
 
-            kchkStartMaximised.Checked = _settingsManager.GetMaximised();
+            _newStartMaximised = _settingsManager.GetMaximised();
+            kchkStartMaximised.Checked = _newStartMaximised;
 
-            ktcmbTheme.SelectedIndex = _settingsManager.GetThemeSelectedIndex();
+            _newThemeIndex = _settingsManager.GetThemeSelectedIndex();
+            ktcmbTheme.SelectedIndex = _newThemeIndex;
 
-            kchkUpgradePalette.Checked = _settingsManager.GetUpgradeOnImport();
+            _newUpgradeOnImport = _settingsManager.GetUpgradeOnImport();
+            kchkUpgradePalette.Checked = _newUpgradeOnImport;
 
+            // Ensure dialog theme is up to date
+            PaletteMode = _settingsManager.GetTheme();
             EnableResetButton(false);
         }
 
         private void kchkStartMaximised_CheckedChanged(object sender, EventArgs e)
         {
-            _settingsManager.SetMaximised(kchkStartMaximised.Checked);
-
+            // Buffer change
+            _newStartMaximised = kchkStartMaximised.Checked;
             EnableResetButton(true);
         }
 
         private void kchkUpgradePalette_CheckedChanged(object sender, EventArgs e)
         {
-            _settingsManager.SetUpgradeOnImport(kchkUpgradePalette.Checked);
-
+            // Buffer change
+            _newUpgradeOnImport = kchkUpgradePalette.Checked;
             EnableResetButton(true);
         }
 
         private void ktcmbTheme_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settingsManager.SetTheme(ThemeManager.GetPaletteMode(kmTheme));
-
+            // Buffer change of selected theme
+            _newThemeIndex = ktcmbTheme.SelectedIndex;
             EnableResetButton(true);
         }
 
         private void kchkAskForConfirmation_CheckedChanged(object sender, EventArgs e)
         {
-            _settingsManager.SetAskForSaveConfirmation(kchkAskForConfirmation.Checked);
-
+            // Buffer change
+            _newAskForConfirmation = kchkAskForConfirmation.Checked;
             EnableResetButton(true);
         }
 
@@ -100,13 +110,33 @@ namespace PaletteDesigner
                 _settingsManager.ResetSettings(this, ask);
             }
 
+            // Reload UI and pending values after reset
+            _newAskForConfirmation = _settingsManager.GetAskForSaveConfirmation();
+            kchkAskForConfirmation.Checked = _newAskForConfirmation;
+            _newStartMaximised = _settingsManager.GetMaximised();
+            kchkStartMaximised.Checked = _newStartMaximised;
+            _newThemeIndex = _settingsManager.GetThemeSelectedIndex();
+            ktcmbTheme.SelectedIndex = _newThemeIndex;
+            _newUpgradeOnImport = _settingsManager.GetUpgradeOnImport();
+            kchkUpgradePalette.Checked = _newUpgradeOnImport;
+
             EnableResetButton(true);
         }
 
         private void kbtnOk_Click(object sender, EventArgs e)
         {
+            // Commit buffered changes
+            _settingsManager.SetAskForSaveConfirmation(_newAskForConfirmation);
+            _committed = true;
+            _settingsManager.SetMaximised(_newStartMaximised);
+            _settingsManager.SetUpgradeOnImport(_newUpgradeOnImport);
+            // Apply theme selection
+            var selectedName = ktcmbTheme.GetItemText(ktcmbTheme.SelectedItem);
+            var selectedMode = ThemeManager.GetThemeManagerMode(selectedName);
+            _settingsManager.SetTheme(selectedMode);
+            _settingsManager.SetThemeSelectedIndex(_newThemeIndex);
 
-            var ask = _settingsManager.GetAskForSaveConfirmation();
+            var ask = _newAskForConfirmation;
 
             if (ask && TopMost)
             {
@@ -126,11 +156,21 @@ namespace PaletteDesigner
                 _settingsManager.SaveSettings(this, ask);
             }
 
+            // Apply the new global palette
+            ThemeManager.ApplyTheme(_settingsManager.GetTheme(), new KryptonManager());
             Close();
         }
 
-        private void EnableResetButton(bool enable) => kbtnReset.Enabled = enable;
-
         private void KbtnCancel_Click(object sender, EventArgs e) => Close();
+
+        private void SettingsControlPanel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_committed)
+            {
+                _manager.GlobalPaletteMode = _originalPaletteMode;
+            }
+        }
+
+        private void EnableResetButton(bool enable) => kbtnReset.Enabled = enable;
     }
 }

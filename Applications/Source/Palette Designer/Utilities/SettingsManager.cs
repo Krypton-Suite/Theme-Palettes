@@ -12,6 +12,7 @@
 #define USE_SYSTEM_MESSAGEBOX
 
 using PaletteDesigner.Properties;
+using System.Drawing;
 
 namespace PaletteDesigner
 {
@@ -74,6 +75,23 @@ namespace PaletteDesigner
         ///   <br />
         /// </returns>
         public bool GetUpgradeOnImport() => _settings.UpgradeOnImport;
+
+        public void SetMainSplitterDistance(int value) => _settings.MainSplitterDistance = value;
+        public int GetMainSplitterDistance() => _settings.MainSplitterDistance;
+
+        public void SetPropertiesSplitterDistance(int value) => _settings.PropertiesSplitterDistance = value;
+        public int GetPropertiesSplitterDistance() => _settings.PropertiesSplitterDistance;
+
+        public void SetPropertyGridFontSize(float size) => _settings.PropertyGridFontSize = size;
+        public float GetPropertyGridFontSize() => _settings.PropertyGridFontSize;
+
+        /// <summary>Sets the window bounds.</summary>
+        /// <param name="value">The window bounds rectangle.</param>
+        public void SetWindowBounds(Rectangle value) => _settings.WindowBounds = value;
+
+        /// <summary>Gets the window bounds.</summary>
+        /// <returns>The saved window bounds.</returns>
+        public Rectangle GetWindowBounds() => _settings.WindowBounds;
 
         #endregion
 

@@ -1,7 +1,7 @@
 ﻿#region BSD License
 /*
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2017 - 2025. All rights reserved. 
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), tobitege et al. 2017 - 2025. All rights reserved.
  */
 #endregion
 
@@ -12,6 +12,8 @@ namespace PaletteDesigner.Pages
         public ToolTipsPage()
         {
             InitializeComponent();
+
+            Dock = DockStyle.Fill;
 
             foreach (var item in Enum.GetValues(typeof(LabelStyle)))
             {
@@ -38,8 +40,8 @@ namespace PaletteDesigner.Pages
 
         private void kchkShowImage_CheckedChanged(object sender, EventArgs e)
         {
-            kryptonButton1.ToolTipValues.Image = kchkShowImage.Checked 
-                ? Resources.Square_Design_32_x_32_Green 
+            kryptonButton1.ToolTipValues.Image = kchkShowImage.Checked
+                ? Resources.Square_Design_32_x_32_Green
                 : null;
         }
 

@@ -9,20 +9,20 @@
 //------------------------------------------------------------------------------
 
 namespace PaletteDesigner.Properties {
-    
-    
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
+
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -34,7 +34,7 @@ namespace PaletteDesigner.Properties {
                 this["StartMaximised"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Global")]
@@ -46,7 +46,7 @@ namespace PaletteDesigner.Properties {
                 this["Theme"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -58,7 +58,7 @@ namespace PaletteDesigner.Properties {
                 this["AskForSaveConfirmation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("33")]
@@ -70,7 +70,7 @@ namespace PaletteDesigner.Properties {
                 this["ThemeSelectedIndex"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -80,6 +80,54 @@ namespace PaletteDesigner.Properties {
             }
             set {
                 this["UpgradeOnImport"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 800, 600")]
+        public global::System.Drawing.Rectangle WindowBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["WindowBounds"]));
+            }
+            set {
+                this["WindowBounds"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int MainSplitterDistance {
+            get {
+                return ((int)(this["MainSplitterDistance"]));
+            }
+            set {
+                this["MainSplitterDistance"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("248")]
+        public int PropertiesSplitterDistance {
+            get {
+                return ((int)(this["PropertiesSplitterDistance"]));
+            }
+            set {
+                this["PropertiesSplitterDistance"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public float PropertyGridFontSize {
+            get {
+                return ((float)(this["PropertyGridFontSize"]));
+            }
+            set {
+                this["PropertyGridFontSize"] = value;
             }
         }
     }

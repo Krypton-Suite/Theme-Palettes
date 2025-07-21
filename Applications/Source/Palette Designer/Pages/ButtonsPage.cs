@@ -1,6 +1,6 @@
 ﻿/*
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), et al. 2024 - 2025. All rights reserved.
+ *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), tobitege et al. 2024 - 2025. All rights reserved.
  */
 
 using Krypton.Toolkit;
@@ -16,6 +16,10 @@ public partial class ButtonsPage : UserControl
     public ButtonsPage()
     {
         InitializeComponent();
+
+        // Ensure the buttons page fills the available space within its parent container
+        Dock = DockStyle.Fill;
+
         // Button fixed states
         buttonDisabled.SetFixedState(PaletteState.Disabled);
         buttonDefaultFocus.SetFixedState(PaletteState.NormalDefaultOverride);

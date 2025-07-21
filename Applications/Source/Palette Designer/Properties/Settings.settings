@@ -17,5 +17,11 @@
     <Setting Name="UpgradeOnImport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="WindowBounds" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0,0,800,600</Value>
+    </Setting>
+    <Setting Name="PropertyGridFontSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
