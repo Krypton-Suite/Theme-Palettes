@@ -142,5 +142,17 @@ namespace PaletteDesigner.Properties {
                 this["SettingsControlPanelBounds"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExportClassFolder {
+            get {
+                return ((string)(this["ExportClassFolder"]));
+            }
+            set {
+                this["ExportClassFolder"] = value;
+            }
+        }
     }
 }

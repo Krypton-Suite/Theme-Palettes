@@ -98,6 +98,9 @@ public class SettingsManager
     /// <returns>The saved SettingsControlPanel bounds.</returns>
     public Rectangle GetSettingsControlPanelBounds() => _settings.SettingsControlPanelBounds;
 
+    public void SetExportClassFolder(string path) => _settings.ExportClassFolder = path;
+    public string GetExportClassFolder() => _settings.ExportClassFolder;
+
     #endregion
 
     #region Public

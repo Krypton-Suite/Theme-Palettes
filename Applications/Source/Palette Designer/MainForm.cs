@@ -1576,6 +1576,13 @@ namespace PaletteDesigner
             _contextMenu.Items.Add(new ToolStripSeparator());
             _contextMenu.Items.Add("Reset Filters\tCtrl+Shift+R", null, (_, __) => ClearRowFilter());
 
+            // Insert export options
+            _contextMenu.Items.Add(new ToolStripSeparator());
+            _contextMenu.Items.Add("Export as CSV", null, (_, __) => ExportPaletteAsCsv());
+#if DEBUG
+            _contextMenu.Items.Add("Export as Class", null, (_, __) => ExportPaletteAsClass());
+#endif
+
             _colorTableGrid.ContextMenuStrip = _contextMenu;
         }
 
@@ -1804,6 +1811,81 @@ namespace PaletteDesigner
         {
             const string body = "F6: Edit cell color\nCtrl+C / Ctrl+V: Copy / Paste color\nCtrl+F: Search color\nCtrl+Shift+C: Filter by color\nCtrl+Shift+F: Filter by name\nCtrl+Shift+R: Reset filters\nRight-click grid for context menu\n+ / –: Adjust font size";
             MessageBox.Show(this, body, "Palette Designer – Shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ExportPaletteAsCsv()
+        {
+            string baseName = Path.GetFileNameWithoutExtension(_filename);
+            if (string.IsNullOrWhiteSpace(baseName) || baseName.StartsWith("(", StringComparison.Ordinal))
+            {
+                baseName = "CustomPalette";
+            }
+
+            using var dlg = new KryptonSaveFileDialog
+            {
+                DefaultExt = "csv",
+                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Title = "Export Palette as CSV",
+                FileName = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + ".csv"
+            };
+
+            if (dlg.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            try
+            {
+                using var sw = new StreamWriter(dlg.FileName, false, Encoding.UTF8);
+                sw.WriteLine("Id,Value,Name");
+
+                foreach (DataGridViewRow row in _colorTableGrid.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    var id = row.Cells[0].Value;
+                    var name = row.Cells[1].Value;
+                    var col = row.Cells[2].Style.BackColor;
+                    string value = $"#{col.R:X2}{col.G:X2}{col.B:X2}";
+                    sw.WriteLine($"{id},{value},{name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"Failed to export CSV.\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportPaletteAsClass()
+        {
+            if (_palette is null)
+            {
+                return;
+            }
+
+            string baseName = Path.GetFileNameWithoutExtension(_filename);
+            if (string.IsNullOrWhiteSpace(baseName) || baseName.StartsWith("(", StringComparison.Ordinal))
+            {
+                baseName = "CustomPalette";
+            }
+
+            string className = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + "_BaseScheme";
+
+            using var expDlg = new ExportBaseSchemeClass(_palette, className, _settingsManager);
+            expDlg.ShowDialog(this);
+        }
+
+        private static string ToColorExpr(Color c)
+        {
+            if (c.IsEmpty)
+            {
+                return "GlobalStaticValues.EMPTY_COLOR";
+            }
+
+            return c.A != 255
+                ? $"Color.FromArgb({c.A}, {c.R}, {c.G}, {c.B})"
+                : $"Color.FromArgb({c.R}, {c.G}, {c.B})";
         }
 
         #endregion
