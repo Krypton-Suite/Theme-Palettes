@@ -7,11 +7,6 @@
  */
 #endregion
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-
 namespace PaletteDesigner.Utilities;
 
 /// <summary>
@@ -32,18 +27,17 @@ internal static class ThemeArrayInspector
         "_schemeVisualStudioColors"    // used by Visual Studio 2010 *Variation themes
     ];
 
-    private static IReadOnlyList<string> _cachedEnumNames;
+    private static IReadOnlyList<string> _cachedEnumNames = [];
 
     // Menu special entries that may be ignored for certain outputs (kept for parity with original logic).
-    private static readonly HashSet<string> MenuNames = new HashSet<string>(new[]
-    {
+    private static readonly HashSet<string> MenuNames = new([
         "MenuItemText",
         "MenuMarginGradientStart",
         "MenuMarginGradientMiddle",
         "MenuMarginGradientEnd",
         "DisabledMenuItemText",
         "MenuStripText"
-    }, StringComparer.Ordinal);
+    ], StringComparer.Ordinal);
 
     /// <summary>
     /// Performs the discrepancy analysis for a palette type's source file.

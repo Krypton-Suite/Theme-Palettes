@@ -130,5 +130,17 @@ namespace PaletteDesigner.Properties {
                 this["PropertyGridFontSize"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 400, 300")]
+        public global::System.Drawing.Rectangle SettingsControlPanelBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["SettingsControlPanelBounds"]));
+            }
+            set {
+                this["SettingsControlPanelBounds"] = value;
+            }
+        }
     }
 }

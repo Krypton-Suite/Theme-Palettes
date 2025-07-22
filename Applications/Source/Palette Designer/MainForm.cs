@@ -8,14 +8,6 @@
  */
 #endregion
 
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using PaletteDesigner.Utilities;
-using Krypton.Toolkit;
-
 namespace PaletteDesigner
 {
     public partial class MainForm : KryptonForm
@@ -529,7 +521,7 @@ namespace PaletteDesigner
             UpdateTitleBar();
         }
 
-        private void OnBaseChanged(object sender, EventArgs e)
+        private void OnBaseChanged(object? sender, EventArgs e)
         {
             ApplyPalette();
         }
@@ -586,7 +578,10 @@ namespace PaletteDesigner
                 {
                     try
                     {
-                        color = (Color)m.Invoke(_palette, new object[] { eVal });
+                        if (m.Invoke(_palette, new object[] { eVal }) is Color col1)
+                        {
+                            color = col1;
+                        }
                     }
                     catch
                     {
@@ -600,7 +595,10 @@ namespace PaletteDesigner
                     {
                         try
                         {
-                            color = (Color)mb.Invoke(kcp.BasePalette, new object[] { eVal });
+                            if (mb.Invoke(kcp.BasePalette, new object[] { eVal }) is Color col2)
+                            {
+                                color = col2;
+                            }
                         }
                         catch
                         {
@@ -834,7 +832,7 @@ namespace PaletteDesigner
             base.OnFormClosed(e);
         }
 
-        private void OnPalettePaint(object sender, PaletteLayoutEventArgs e)
+        private void OnPalettePaint(object? sender, PaletteLayoutEventArgs e)
         {
             // Only interested the first time the palette is changed
             if (!_dirty)
@@ -1235,31 +1233,8 @@ namespace PaletteDesigner
         /// Ensures window bounds are entirely or partially visible on at least one connected screen.
         /// If not, it re-centers the window within the primary screen and adjusts size if necessary.
         /// </summary>
-        private static Rectangle AdjustBoundsToVisibleScreens(Rectangle bounds)
-        {
-            // Check if the stored rectangle intersects with any screen working area.
-            bool intersects = Screen.AllScreens.Any(s => s.WorkingArea.IntersectsWith(bounds));
-
-            if (intersects)
-            {
-                // Also clamp size so it is not larger than the intersecting screen.
-                Screen screen = Screen.FromRectangle(bounds);
-                Rectangle wa = screen.WorkingArea;
-                int width = Math.Min(bounds.Width, wa.Width);
-                int height = Math.Min(bounds.Height, wa.Height);
-                int x = Math.Min(Math.Max(bounds.X, wa.Left), wa.Right - width);
-                int y = Math.Min(Math.Max(bounds.Y, wa.Top), wa.Bottom - height);
-                return new Rectangle(x, y, width, height);
-            }
-
-            // Otherwise, fallback to centered within the primary screen.
-            Rectangle primary = Screen.PrimaryScreen.WorkingArea;
-            int w = Math.Min(bounds.Width, primary.Width);
-            int h = Math.Min(bounds.Height, primary.Height);
-            int centeredX = primary.Left + (primary.Width - w) / 2;
-            int centeredY = primary.Top + (primary.Height - h) / 2;
-            return new Rectangle(centeredX, centeredY, w, h);
-        }
+        private static Rectangle AdjustBoundsToVisibleScreens(Rectangle bounds) =>
+            WindowBoundsHelper.AdjustBoundsToVisibleScreens(bounds);
 
         private void CopyColorsFromBasePalette()
         {
@@ -1306,12 +1281,12 @@ namespace PaletteDesigner
         private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
         {
             var fileName = (sender as ToolStripItem)?.Text;
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(fileName) || _palette == null)
             {
                 return;
             }
 
-            if (!File.Exists(fileName))
+            if (!File.Exists(fileName!))
             {
                 if (KryptonMessageBox.Show($"{fileName} doesn't exist. Remove from `Recent Themes`?",
                         "File not found",
@@ -1505,7 +1480,7 @@ namespace PaletteDesigner
                     var text = cell.FormattedValue?.ToString() ?? cell.Value?.ToString();
                     if (!string.IsNullOrEmpty(text))
                     {
-                        TryCopyToClipboard(text);
+                        TryCopyToClipboard(text!);
                         return true;
                     }
                 }
@@ -1541,8 +1516,10 @@ namespace PaletteDesigner
                 {
                     if (keyData == (Keys.Control | Keys.C))
                     {
-                        var c = (Color)selItem.Value;
-                        TryCopyToClipboard($"#{c.R:X2}{c.G:X2}{c.B:X2}");
+                        if (selItem.Value is Color cVal)
+                        {
+                            TryCopyToClipboard($"#{cVal.R:X2}{cVal.G:X2}{cVal.B:X2}");
+                        }
                         return true;
                     }
                     if (keyData == (Keys.Control | Keys.V))
@@ -1552,7 +1529,7 @@ namespace PaletteDesigner
                         {
                             try
                             {
-                                selItem.PropertyDescriptor.SetValue(selItem.Parent?.Value ?? propertyGrid.SelectedObject, newCol);
+                                selItem.PropertyDescriptor.SetValue((selItem.Parent?.Value ?? propertyGrid.SelectedObject)!, newCol);
                                 propertyGrid.Refresh();
                                 ApplyPalette();
                             }
@@ -1605,37 +1582,62 @@ namespace PaletteDesigner
         private static bool TryParseColorString(string? input, out Color color)
         {
             color = Color.Empty;
-            if (string.IsNullOrWhiteSpace(input)) return false;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
 
-            input = input.Trim();
+            input = input!.Trim();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
 
             // Hex with #
             if (input.StartsWith("#", StringComparison.Ordinal))
             {
-                try { color = ColorTranslator.FromHtml(input); return true; } catch { }
+                try
+                {
+                    color = ColorTranslator.FromHtml(input);
+                    return true;
+                }
+                catch { }
             }
 
             // Hex without #
-            if (input.Length == 6 || input.Length == 8)
+            if (input != null && (input.Length == 6 || input.Length == 8))
             {
-                try { color = ColorTranslator.FromHtml("#" + input); return true; } catch { }
+                try
+                {
+                    color = ColorTranslator.FromHtml("#" + input);
+                    return true;
+                }
+                catch { }
             }
 
             // RGB triplet
-            var parts = input.Split(new[] { ',', ';' }, StringSplitOptions.None);
-            if (parts.Length == 3 &&
-                byte.TryParse(parts[0].Trim(), out byte r) &&
-                byte.TryParse(parts[1].Trim(), out byte g) &&
-                byte.TryParse(parts[2].Trim(), out byte b))
+            if (input != null)
             {
-                color = Color.FromArgb(r, g, b); return true;
+                var parts = input.Split([',', ';'], StringSplitOptions.None);
+                if (parts.Length == 3 &&
+                    byte.TryParse(parts[0].Trim(), out byte r) &&
+                    byte.TryParse(parts[1].Trim(), out byte g) &&
+                    byte.TryParse(parts[2].Trim(), out byte b))
+                {
+                    color = Color.FromArgb(r, g, b);
+                    return true;
+                }
             }
 
             // Named color
-            var named = Color.FromName(input);
-            if (named.IsKnownColor || named.IsNamedColor)
+            if (input != null)
             {
-                color = named; return true;
+                var named = Color.FromName(input);
+                if (named.IsKnownColor || named.IsNamedColor)
+                {
+                    color = named;
+                    return true;
+                }
             }
 
             return false;
@@ -1650,7 +1652,10 @@ namespace PaletteDesigner
                 DefaultResponse = "#"
             });
 
-            if (!TryParseColorString(input, out var target)) return;
+            if (!TryParseColorString(input, out var target))
+            {
+                return;
+            }
 
             int startRow = _colorTableGrid.CurrentCell?.RowIndex ?? 0;
             int totalRows = _colorTableGrid.Rows.Count;

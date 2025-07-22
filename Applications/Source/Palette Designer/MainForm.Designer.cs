@@ -5480,12 +5480,6 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageHeadersDockInactive;
         private Krypton.Navigator.KryptonPage pageTabDock;
         private Krypton.Navigator.KryptonPage pageTabDockAutoHidden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column1DataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column2DataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column3DataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column1DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column3DataGridViewTextBoxColumn;
         private Krypton.Navigator.KryptonPage pageControlsGroupBox;
         private Krypton.Navigator.KryptonPage pageLabelsGroupBoxCaption;
         private Krypton.Navigator.KryptonPage pagePanelsRibbonInactive;

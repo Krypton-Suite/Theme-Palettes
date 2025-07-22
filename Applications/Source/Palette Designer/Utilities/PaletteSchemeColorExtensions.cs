@@ -7,11 +7,6 @@
  */
 #endregion
 
-using System;
-using System.Drawing;
-using System.Reflection;
-using Krypton.Toolkit;
-
 namespace PaletteDesigner.Utilities;
 
 internal static class PaletteSchemeColorExtensions

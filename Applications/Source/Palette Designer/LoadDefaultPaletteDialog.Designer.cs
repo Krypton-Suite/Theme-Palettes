@@ -1,4 +1,4 @@
-using Krypton.Toolkit;
+#nullable enable
 
 namespace PaletteDesigner
 {
@@ -143,12 +143,12 @@ namespace PaletteDesigner
 
         #endregion
 
-        private KryptonPanel kryptonPanelButtons;
-        private KryptonButton kbtnOk;
-        private KryptonButton kbtnCancel;
-        private KryptonBorderEdge kryptonBorderEdge1;
-        private KryptonPanel kryptonPanelContent;
-        private KryptonComboBox kcmbThemes;
-        private KryptonLabel kryptonLabel1;
+        private KryptonPanel kryptonPanelButtons = null!;
+        private KryptonButton kbtnOk = null!;
+        private KryptonButton kbtnCancel = null!;
+        private KryptonBorderEdge kryptonBorderEdge1 = null!;
+        private KryptonPanel kryptonPanelContent = null!;
+        private KryptonComboBox kcmbThemes = null!;
+        private KryptonLabel kryptonLabel1 = null!;
     }
 }

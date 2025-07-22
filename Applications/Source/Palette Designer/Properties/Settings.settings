@@ -23,5 +23,8 @@
     <Setting Name="PropertyGridFontSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">9</Value>
     </Setting>
+    <Setting Name="SettingsControlPanelBounds" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0,0,550,200</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

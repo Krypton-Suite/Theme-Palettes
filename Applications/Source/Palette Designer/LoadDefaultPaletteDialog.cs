@@ -5,36 +5,49 @@
  */
 #endregion
 
-using System.Drawing;
-using System.Windows.Forms;
-using Krypton.Toolkit;
-using System.Linq;
+namespace PaletteDesigner;
 
-namespace PaletteDesigner
+public partial class LoadDefaultPaletteDialog : KryptonForm
 {
-    public partial class LoadDefaultPaletteDialog : KryptonForm
+    public LoadDefaultPaletteDialog()
     {
-        public LoadDefaultPaletteDialog()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            // Populate the combo box with available theme names without changing the global palette.
-            kcmbThemes.Items.AddRange(PaletteModeStrings.SupportedThemesMap
-                .Where(kvp => kvp.Value != PaletteMode.Custom)
-                .Select(kvp => kvp.Key)
-                .ToArray());
+        // Populate the combo box with available theme names without changing the global palette.
+        if (kcmbThemes != null)
+        {
+            kcmbThemes.Items.AddRange([
+                .. PaletteModeStrings.SupportedThemesMap
+                    .Where(kvp => kvp.Value != PaletteMode.Custom)
+                    .Select(kvp => kvp.Key)
+            ]);
 
             if (kcmbThemes.Items.Count > 0)
             {
                 kcmbThemes.SelectedIndex = 0;
             }
         }
-
-        public string SelectedThemeName => kcmbThemes.GetItemText(kcmbThemes.SelectedItem);
-
-        /// <summary>
-        /// Gets the selected palette mode corresponding to the chosen theme.
-        /// </summary>
-        public PaletteMode SelectedPaletteMode => ThemeManager.GetThemeManagerMode(SelectedThemeName);
     }
+
+    public string SelectedThemeName
+    {
+        get
+        {
+            // Fallback: try to map Microsoft365Silver palette mode to its display name
+            var silverName = PaletteModeStrings.SupportedThemesMap
+                .FirstOrDefault(kvp => kvp.Value == PaletteMode.Microsoft365Silver).Key;
+
+            if (kcmbThemes?.SelectedItem != null)
+            {
+                return kcmbThemes!.GetItemText(kcmbThemes.SelectedItem) ?? silverName;
+            }
+
+            return silverName ?? "Custom";
+        }
+    }
+
+    /// <summary>
+    /// Gets the selected palette mode corresponding to the chosen theme.
+    /// </summary>
+    public PaletteMode SelectedPaletteMode => ThemeManager.GetThemeManagerMode(SelectedThemeName);
 }
