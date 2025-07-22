@@ -13,8 +13,6 @@ namespace PaletteDesigner.Pages
         {
             InitializeComponent();
 
-            Dock = DockStyle.Fill;
-
             foreach (var item in Enum.GetValues(typeof(LabelStyle)))
             {
                 comboBoxLabelStyles.Items.Add(item);
