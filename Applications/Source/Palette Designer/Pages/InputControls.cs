@@ -18,8 +18,6 @@ namespace PaletteDesigner.Pages
         {
             InitializeComponent();
 
-            Dock = DockStyle.Fill;
-
             _textBoxes =
             [
                 ..new[]

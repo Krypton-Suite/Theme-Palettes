@@ -13,8 +13,6 @@ namespace PaletteDesigner.Pages
         {
             InitializeComponent();
 
-            Dock = DockStyle.Fill;
-
             //VisualContextMenu = CreateContextMenu(kcmEverything, kcmEverything.Palette, kcmEverything.PaletteMode,
             //    _redirector, _redirectorImages,
             //    kcmEverything.Items, kcmEverything.Enabled, false);

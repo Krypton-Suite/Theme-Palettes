@@ -17,9 +17,6 @@ public partial class ButtonsPage : UserControl
     {
         InitializeComponent();
 
-        // Ensure the buttons page fills the available space within its parent container
-        Dock = DockStyle.Fill;
-
         // Button fixed states
         buttonDisabled.SetFixedState(PaletteState.Disabled);
         buttonDefaultFocus.SetFixedState(PaletteState.NormalDefaultOverride);

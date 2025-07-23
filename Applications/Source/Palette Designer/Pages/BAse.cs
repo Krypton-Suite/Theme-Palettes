@@ -14,8 +14,6 @@ namespace PaletteDesigner.Pages
         public Base()
         {
             InitializeComponent();
-
-            Dock = DockStyle.Fill;
         }
 
         public void ApplyPalette(KryptonCustomPaletteBase palette) => kryptonPanel1.Palette = palette;

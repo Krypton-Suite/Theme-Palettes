@@ -14,8 +14,6 @@ namespace PaletteDesigner.Pages
         public BreadCrumbPage()
         {
             InitializeComponent();
-
-            Dock = DockStyle.Fill;
         }
     }
 }
