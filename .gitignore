@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# for development with AI, temp copies of Toolkit folders in same folder
+Krypton.Toolkit/
+TestForm/

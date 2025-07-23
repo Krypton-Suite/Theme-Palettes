@@ -4,11 +4,9 @@
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
  *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac & Ahmed Abdelhameed et al. 2017 - 2025. All rights reserved.
+ *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac, Ahmed Abdelhameed, tobitege et al. 2017 - 2025. All rights reserved.
  */
 #endregion
-
-using System.Threading.Tasks;
 
 namespace PaletteDesigner
 {
@@ -24,9 +22,29 @@ namespace PaletteDesigner
         private FormChromeRibbon _chromeRibbon;
         private readonly MostRecentlyUsedDocumentsManager _recentlyUsedDocumentsManager;
         private readonly SettingsManager _settingsManager = new();
+        private SettingsControlPanel? _settingsControlPanel;
+        private FormPaletteUpgradeTool? _paletteUpgradeToolForm;
+        private readonly DataGridView _colorTableGrid;
+
+        // Undo stack for color edits
+        private readonly Stack<(SchemeBaseColors EnumValue, Color OldColor)> _undoStack = new();
+
+        // Font size limits for grids/properties
+        private const float MinFontSize = 6f;
+        private const float MaxFontSize = 24f;
+
+        private Color? _activeColourFilter;
+        private string? _activeNameFilter;
+        private string? _lastColorFilterInput;
+
+        // Context menu for grid operations
+        private ContextMenuStrip? _contextMenu;
+        private ToolStripMenuItem? _toggleFormatMenuItem;
+        private bool _displayRgb = true; // default display format per property grid
         #endregion
 
         #region Identity
+
         /// <summary>
         /// Initialize a new instance of the Form1 class.
         /// </summary>
@@ -39,9 +57,80 @@ namespace PaletteDesigner
             _chromeTMS2 = new FormChromeTMS();
             _chromeRibbon = new FormChromeRibbon();
 
-            _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(recentThemesToolStripMenuItem, "Krypton Palette Designer", MyOwnRecentPaletteFileGotClicked_Handler, MyOwnRecentPaletteFilesGotCleared_Handler);
+            _recentlyUsedDocumentsManager = new MostRecentlyUsedDocumentsManager(
+                recentThemesToolStripMenuItem,
+                "Krypton Palette Designer",
+                MyOwnRecentPaletteFileGotClicked_Handler,
+                MyOwnRecentPaletteFilesGotCleared_Handler);
 
             KryptonManager.GlobalPaletteChanged += OnGlobalPaletteChanged;
+
+            // Apply saved global palette from settings
+            kryptonManager.GlobalPaletteMode = _settingsManager.GetTheme();
+
+            // --- Replace obsolete property grid with DataGridView ---
+            _colorTableGrid = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                ReadOnly = true,
+                SelectionMode = DataGridViewSelectionMode.CellSelect,
+                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
+                AllowUserToResizeColumns = true
+            };
+            _colorTableGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            _colorTableGrid.KeyDown += ColorTableGrid_KeyDown;
+            _colorTableGrid.EditingControlShowing += ColorTableGrid_EditingControlShowing;
+
+            SetupContextMenu();
+
+            _colorTableGrid.Columns.Add("#", "#");
+            _colorTableGrid.Columns.Add("Name", "Scheme Colors");
+            _colorTableGrid.Columns.Add("Value", "Color");
+
+            propertyGridKCT.Visible = false;
+            kryptonSplitContainerProperties.Panel2.Controls.Add(_colorTableGrid);
+
+            // Disable built-in button-spec tooltips – the help message is shown on click instead
+            kryptonHeaderGroupProperties.AllowButtonSpecToolTips = false;
+
+            // Apply saved font size
+            float savedSize = _settingsManager.GetPropertyGridFontSize();
+            savedSize = Math.Max(MinFontSize, Math.Min(MaxFontSize, savedSize));
+            if (Math.Abs(savedSize - propertyGrid.Font.Size) > 0.1f)
+            {
+                AdjustGridFont(savedSize - propertyGrid.Font.Size);
+            }
+
+            // Add font size adjustment buttons to the "Properties" header
+            var incFontSpec = new ButtonSpecHeaderGroup
+            {
+                UniqueName = "IncFont",
+                Text = "+",
+                ToolTipTitle = "Increase Font Size"
+            };
+            incFontSpec.Click += (_, __) => AdjustGridFont(1f);
+
+            var decFontSpec = new ButtonSpecHeaderGroup
+            {
+                UniqueName = "DecFont",
+                Text = "-",
+                ToolTipTitle = "Decrease Font Size"
+            };
+            decFontSpec.Click += (_, __) => AdjustGridFont(-1f);
+
+            var helpSpec = new ButtonSpecHeaderGroup
+            {
+                UniqueName = "HelpSpec",
+                Text = "?",
+                ToolTipTitle = "Palette Designer – Shortcuts"
+            };
+            helpSpec.Click += (_, __) => ShowHelpHint();
+
+            kryptonHeaderGroupProperties.ButtonSpecs.AddRange(new[] { incFontSpec, decFontSpec, helpSpec });
 
             _applyPalettesToBases =
             [
@@ -93,6 +182,16 @@ namespace PaletteDesigner
                     label1Live,
                     kryptonNavigatorTabs,
                     kryptonNavigator,
+                    kryptonNavigatorTop,
+                    kryptonNavigatorDesign,
+                    kryptonNavigatorDesignControls,
+                    kryptonNavigatorDesignPanels,
+                    kryptonNavigatorDesignHeaders,
+                    kryptonNavigatorDesignLabels,
+                    kryptonNavigatorDesignNavigator,
+                    kryptonNavigatorDesignSeparators,
+                    kryptonNavigatorDesignGrids,
+                    kryptonNavigatorDesignTabs,
                     kryptonGroupBox1,
                     kryptonGroupBox2,
                     kryptonGroupBox3,
@@ -107,7 +206,6 @@ namespace PaletteDesigner
                 }
 
             ];
-
 
             _applyPalettesToPanels =
             [
@@ -128,125 +226,23 @@ namespace PaletteDesigner
                 }
 
             ];
-
-            _applyPalettesToPages =
-            [
-                ..new[]
-                {
-                    pageTopButtonSpecs,
-                    pageTopButtons,
-                    pageTopControls,
-                    pageTopHeaderGroup,
-                    pageTopHeaders,
-                    pageTopLabels,
-                    pageTopNavigator,
-                    pageTopPanels,
-                    pageTopSeparators,
-                    pageTopChromeTMS,
-                    pageDesignButtonSpecs,
-                    pageDesignButtons,
-                    pageDesignControls,
-                    pageDesignHeaderGroup,
-                    pageDesignHeaders,
-                    pageDesignLabels,
-                    pageDesignNavigator,
-                    pageDesignPanels,
-                    pageDesignSeparators,
-                    pageDesignChromeTMS,
-                    pageControlsClient,
-                    pageControlsAlternate,
-                    pageControlsCustom1,
-                    pagePanelsClient,
-                    pagePanelsAlternate,
-                    pagePanelsCustom1,
-                    pageHeadersPrimary,
-                    pageHeadersSecondary,
-                    pageHeadersCustom1,
-                    pageHeadersCustom2,
-                    pageLabelsNormalControl,
-                    pageLabelsTitleControl,
-                    pageLabelsCustom1,
-                    pageLabelsCustom2,
-                    pageLabelsCustom3,
-                    pageSeparatorLowProfile,
-                    pageSeparatorHighProfile,
-                    pageSeparatorCustom1,
-                    navigatorPage1,
-                    navigatorPage2,
-                    pageNavigatorBarCheckButtonGroupOutside,
-                    pageNavigatorBarCheckButtonGroupInside,
-                    pageNavigatorBarCheckButtonGroupOnly,
-                    navigatorPage3,
-                    pageTopTabs,
-                    pageDesignTabs,
-                    pageTabHighProfile,
-                    pageTabStandardProfile,
-                    pageTabLowProfile,
-                    pageTabOneNote,
-                    pageTabCustom1,
-                    pageTabCustom2,
-                    pageTabCustom3,
-                    kryptonNavigatorTabs1,
-                    kryptonNavigatorTabs2,
-                    kryptonNavigatorTabs3,
-                    pageHeadersForm,
-                    kryptonPage1,
-                    pageLabelsNormalPanel,
-                    pageLabelsTitlePanel,
-                    pageControlsToolTip,
-                    pageLabelsToolTip,
-                    pageTopRibbon,
-                    pageDesignRibbon,
-                    pageControlsRibbon,
-                    pageLabelsKeyTip,
-                    pageTopCheckBox,
-                    pageDesignCheckBox,
-                    pageTopRadioButton,
-                    pageDesignRadioButton,
-                    pageDesignGrid,
-                    pageTopGrids,
-                    kryptonGridList,
-                    kryptonGridSheet,
-                    kryptonGridCustom1,
-                    pageLabelsSuperTip,
-                    pageTopInputControls,
-                    pageDesignInputControls,
-                    pageSeparatorHighInternalProfile,
-                    pageHeadersCalendar,
-                    pageTopDateTime,
-                    pageDesignDateTime,
-                    pageHeadersDockActive,
-                    pageHeadersDockInactive,
-                    pageTabDock,
-                    pageTabDockAutoHidden,
-                    pageControlsGroupBox,
-                    pageLabelsGroupBoxCaption,
-                    pagePanelsRibbonInactive,
-                    pageTopTrackBar,
-                    pageDesignTrackBar,
-                    pageLabelsBoldControl,
-                    pageLabelsItalicControl,
-                    pageLabelsBoldPanel,
-                    pageLabelsItalicPanel,
-                    pageTopLists,
-                    pageLists
-                }
-            ];
         }
+
         #endregion
 
         #region Operations
+
         private void New()
         {
             // If the current palette has been changed
             if (_dirty)
             {
                 // Ask user if the current palette should be saved
-                switch (MessageBox.Show(this,
+                switch (KryptonMessageBox.Show(this,
                                         @"Save changes to the current palette?",
                                         @"Palette Changed",
-                                        MessageBoxButtons.YesNoCancel,
-                                        MessageBoxIcon.Warning))
+                                        KryptonMessageBoxButtons.YesNoCancel,
+                                        KryptonMessageBoxIcon.Warning))
                 {
                     case DialogResult.Yes:
                         // Use existing save method
@@ -308,6 +304,47 @@ namespace PaletteDesigner
                         : string.Empty;
 
                     palette.ImportWithUpgrade(File.OpenRead(paletteFileName));
+
+                    Cursor = Cursors.Default;
+
+                    if (string.IsNullOrWhiteSpace(paletteFileName))
+                    {
+                        return;
+                    }
+
+                    // Need to unhook from any existing palette
+                    if (_palette != null)
+                    {
+                        _palette.PalettePaint -= OnPalettePaint;
+                        _palette.BasePaletteChanged -= OnBaseChanged;
+                    }
+
+                    // Use the new instance instead
+                    _palette = palette;
+                    _chromeTMS.LocalCustomPalette = palette;
+                    _chromeTMS2.LocalCustomPalette = palette;
+                    _chromeRibbon.OverridePalette = _palette;
+
+                    // We need to know when a change occurs to the palette settings
+                    _palette.PalettePaint += OnPalettePaint;
+                    _palette.BasePaletteChanged += OnBaseChanged;
+
+                    // Hook up the property grid to the palette
+                    propertyGrid.SelectedObject = _palette;
+
+                    // Use the loaded filename
+                    _filename = paletteFileName;
+
+                    // Reset the state flags
+                    _loaded = true;
+                    _dirty = false;
+
+                    // Apply the new palette to the design controls
+                    ApplyPalette();
+
+                    // Define the initial title bar string
+                    UpdateTitleBar();
+                    _recentlyUsedDocumentsManager.AddRecentFile(paletteFileName);
                 }
                 else
                 {
@@ -350,13 +387,14 @@ namespace PaletteDesigner
 
                         // Define the initial title bar string
                         UpdateTitleBar();
+
                         _recentlyUsedDocumentsManager.AddRecentFile(filename);
                     }
                 }
             }
             catch
             {
-                // Do not abort due to un supported xml file
+                // Do not abort due to unsupported xml file
                 _filename = string.Empty;
             }
         }
@@ -415,11 +453,11 @@ namespace PaletteDesigner
             if (_dirty)
             {
                 // Ask user if the current palette should be saved
-                switch (MessageBox.Show(this,
+                switch (KryptonMessageBox.Show(this,
                                         @"Save changes to the current palette?",
                                         @"Palette Changed",
-                                        MessageBoxButtons.YesNoCancel,
-                                        MessageBoxIcon.Warning))
+                                        KryptonMessageBoxButtons.YesNoCancel,
+                                        KryptonMessageBoxIcon.Warning))
                 {
                     case DialogResult.Yes:
                         // Use existing save method
@@ -433,14 +471,14 @@ namespace PaletteDesigner
 
             Close();
         }
+
         #endregion
 
         #region Palettes
 
         private readonly List<VisualControlBase> _applyPalettesToBases;
         private readonly List<KryptonPanel> _applyPalettesToPanels;
-        private readonly List<KryptonPage> _applyPalettesToPages;
-        private void CreateNewPalette()
+        private void CreateNewPalette(bool useCurrentGlobalPalette = false)
         {
             // Need to unhook from any existing palette
             if (_palette != null)
@@ -451,6 +489,13 @@ namespace PaletteDesigner
 
             // Create a fresh palette instance
             _palette = new KryptonCustomPaletteBase();
+
+            // Only use the current global palette when explicitly requested (e.g., when loading a default theme)
+            if (useCurrentGlobalPalette)
+            {
+                _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
+            }
+
             _chromeTMS.LocalCustomPalette = _palette;
             _chromeTMS2.LocalCustomPalette = _palette;
             _chromeRibbon.OverridePalette = _palette;
@@ -476,7 +521,7 @@ namespace PaletteDesigner
             UpdateTitleBar();
         }
 
-        private void OnBaseChanged(object sender, EventArgs e)
+        private void OnBaseChanged(object? sender, EventArgs e)
         {
             ApplyPalette();
         }
@@ -485,6 +530,11 @@ namespace PaletteDesigner
         {
             if (_palette == null)
             {
+                return;
+            }
+            if (InvokeRequired)
+            {
+                BeginInvoke((Action)ApplyPalette);
                 return;
             }
 
@@ -502,6 +552,92 @@ namespace PaletteDesigner
             buttonsPage1.ApplyPalette(_palette);
 
             UpdateChromeTMS();
+
+            // Set up right-hand property grid with the color table colors
+            PopulateColorTableGrid();
+
+            // Ensure the property grid reflects any programmatic palette changes
+            propertyGrid.Refresh();
+        }
+
+        private void PopulateColorTableGrid()
+        {
+            if (_palette == null) return;
+
+            _colorTableGrid.SuspendLayout();
+            _colorTableGrid.Rows.Clear();
+
+            var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
+            foreach (var (eVal, idx) in enumValues.Select((v, i) => (v, i)))
+            {
+                Color color = Color.Transparent;
+
+                // Try via reflection to call GetSchemeColor if present
+                var m = _palette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
+                if (m != null)
+                {
+                    try
+                    {
+                        if (m.Invoke(_palette, new object[] { eVal }) is Color col1)
+                        {
+                            color = col1;
+                        }
+                    }
+                    catch
+                    {
+                        color = Color.Transparent;
+                    }
+                }
+                else if (_palette is KryptonCustomPaletteBase kcp && kcp.BasePalette != null)
+                {
+                    var mb = kcp.BasePalette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
+                    if (mb != null)
+                    {
+                        try
+                        {
+                            if (mb.Invoke(kcp.BasePalette, new object[] { eVal }) is Color col2)
+                            {
+                                color = col2;
+                            }
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        // Fallback to scheme array
+                        var scheme = kcp.BasePalette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(kcp.BasePalette, null) as Color[];
+                        if (scheme != null && idx < scheme.Length)
+                        {
+                            color = scheme[idx];
+                        }
+                    }
+                }
+                else
+                {
+                    var scheme = _palette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(_palette, null) as Color[];
+                    if (scheme != null && idx < scheme.Length)
+                    {
+                        color = scheme[idx];
+                    }
+                }
+
+                int row = _colorTableGrid.Rows.Add(idx, eVal.ToString(), FormatColorString(color));
+                var cell = _colorTableGrid.Rows[row].Cells[2];
+                cell.Style.BackColor = color;
+                cell.Style.ForeColor = GetContrastColor(color);
+            }
+
+            _colorTableGrid.AutoResizeColumns();
+            UpdateColorGridRowHeights();
+            _colorTableGrid.ResumeLayout();
+        }
+
+        private static Color GetContrastColor(Color c)
+        {
+            double luminance = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B) / 255;
+            return luminance > 0.5 ? Color.Black : Color.White;
         }
 
         private void UpdateChromeTMS()
@@ -519,32 +655,43 @@ namespace PaletteDesigner
             _chromeTMS2.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
         }
 
-        private void OnPalettePaint(object sender, PaletteLayoutEventArgs e)
-        {
-            // Only interested the first time the palette is changed
-            if (!_dirty)
-            {
-                _dirty = true;
-                Task.Run(() => BeginInvoke(UpdateTitleBar));
-            }
-
-            // Do we need to setup a new renderer for the ToolMenuStatus page?
-            if (e.NeedColorTable)
-            {
-                UpdateChromeTMS();
-            }
-        }
         #endregion
 
         #region Event Handlers
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
             WindowState = _settingsManager.GetMaximised() ? FormWindowState.Maximized : FormWindowState.Normal;
+
+            // Load form starting position and bounding sizes
+            if (!_settingsManager.GetMaximised())
+            {
+                var savedBounds = _settingsManager.GetWindowBounds();
+                if (!savedBounds.IsEmpty)
+                {
+                    var adjusted = AdjustBoundsToVisibleScreens(savedBounds);
+                    StartPosition = FormStartPosition.Manual;
+                    Bounds = adjusted;
+                }
+            }
+
+            // Restore splitter distances
+            try
+            {
+                kryptonSplitContainerMain.SplitterDistance = _settingsManager.GetMainSplitterDistance();
+            }
+            catch { }
+            try
+            {
+                kryptonSplitContainerProperties.SplitterDistance = _settingsManager.GetPropertiesSplitterDistance();
+            }
+            catch { }
 
             // Populate the sample data set
             dataTable1.Rows.Add(@"One", @"Two", @"Three");
             dataTable1.Rows.Add(@"Uno", @"Dos", @"Tres");
             dataTable1.Rows.Add(@"Un", @"Deux", @"Trios");
+            dataTable1.Rows.Add(@"Eins", @"Zwei", @"Drei");
 
             // Add the chrome window to the Chrome + Strips page
             _chromeTMS = new FormChromeTMS
@@ -555,6 +702,7 @@ namespace PaletteDesigner
                 InertForm = true
             };
             _chromeTMS.Show();
+
             _chromeTMS2 = new FormChromeTMS
             {
                 TopLevel = false,
@@ -564,9 +712,7 @@ namespace PaletteDesigner
                 Enabled = false,
                 TextExtra = @"Disabled"
             };
-
             _chromeTMS2.ToolStripKryptonProgressBar.Enabled = false;
-
             _chromeTMS2.Show();
 
             // Add the chrome window with embedded Ribbon
@@ -578,7 +724,6 @@ namespace PaletteDesigner
                 InertForm = true
             };
             _chromeRibbon.Show();
-
 
             // CheckBox fixed states
             cbFocus.SetFixedState(true, true, false, false);
@@ -647,7 +792,99 @@ namespace PaletteDesigner
             CreateNewPalette();
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If the current palette has been changed
+            if (_dirty)
+            {
+                // Ask user if the current palette should be saved
+                switch (KryptonMessageBox.Show(this,
+                                        @"Save changes to the current palette?",
+                                        @"Palette Changed",
+                                        KryptonMessageBoxButtons.YesNoCancel,
+                                        KryptonMessageBoxIcon.Warning))
+                {
+                    case DialogResult.Yes:
+                        // Use existing save method
+                        Save();
+                        break;
+                    case DialogResult.Cancel:
+                        // Cancel the form closing
+                        e.Cancel = true;
+                        return;
+                }
+            }
+
+            _settingsManager.SetMaximised(WindowState == FormWindowState.Maximized);
+            var bounds = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
+            _settingsManager.SetWindowBounds(bounds);
+
+            // Save splitter distances
+            _settingsManager.SetMainSplitterDistance(kryptonSplitContainerMain.SplitterDistance);
+            _settingsManager.SetPropertiesSplitterDistance(kryptonSplitContainerProperties.SplitterDistance);
+
+            _settingsManager.SaveSettings();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            KryptonManager.GlobalPaletteChanged -= OnGlobalPaletteChanged;
+            base.OnFormClosed(e);
+        }
+
+        private void OnPalettePaint(object? sender, PaletteLayoutEventArgs e)
+        {
+            // Only interested the first time the palette is changed
+            if (!_dirty)
+            {
+                _dirty = true;
+                Task.Run(() => BeginInvoke(UpdateTitleBar));
+            }
+
+            // Do we need to setup a new renderer for the ToolMenuStatus page?
+            if (e.NeedColorTable)
+            {
+                UpdateChromeTMS();
+            }
+        }
+
         private void MenuNew_Click(object sender, EventArgs e) => New();
+
+        private void MenuNewFromDefault_Click(object? sender, EventArgs e)
+        {
+            using var dialog = new LoadDefaultPaletteDialog();
+            if (dialog.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            try
+            {
+                kryptonManager.GlobalPaletteMode = dialog.SelectedPaletteMode;
+
+                // Start with a fresh palette so that the default theme can be copied into it
+                CreateNewPalette(useCurrentGlobalPalette: true);
+
+                // Set state flags and filename
+                _dirty = true;
+                _loaded = false;
+                _filename = "Copy of " + dialog.SelectedThemeName;
+
+                // Define the initial title bar string
+                UpdateTitleBar();
+
+                // Copy all colors from the base palette into the custom palette
+                CopyColorsFromBasePalette();
+
+                ApplyPalette();
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
 
         private void MenuOpen_Click(object sender, EventArgs e) => Open();
 
@@ -923,12 +1160,119 @@ namespace PaletteDesigner
             dataGridViewDisabled.GridStyles.Style = gridStyle;
             dataGridViewNormal.GridStyles.Style = gridStyle;
         }
+
+        private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_paletteUpgradeToolForm == null || _paletteUpgradeToolForm.IsDisposed)
+            {
+                _paletteUpgradeToolForm = new FormPaletteUpgradeTool();
+                _paletteUpgradeToolForm.FormClosed += (_, __) => _paletteUpgradeToolForm = null;
+                _paletteUpgradeToolForm.Show(this);
+            }
+            else
+            {
+                if (_paletteUpgradeToolForm.Visible)
+                {
+                    _paletteUpgradeToolForm.Hide();
+                }
+                else
+                {
+                    _paletteUpgradeToolForm.Show();
+                    _paletteUpgradeToolForm.BringToFront();
+                }
+            }
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_settingsControlPanel == null || _settingsControlPanel.IsDisposed)
+            {
+                _settingsControlPanel = new SettingsControlPanel(kryptonManager);
+                _settingsControlPanel.FormClosed += (_, __) => _settingsControlPanel = null;
+                _settingsControlPanel.Show(this);
+            }
+            else
+            {
+                if (_settingsControlPanel.Visible)
+                {
+                    _settingsControlPanel.Hide();
+                }
+                else
+                {
+                    _settingsControlPanel.Show();
+                    _settingsControlPanel.BringToFront();
+                }
+            }
+        }
+
+        private void OnGlobalPaletteChanged(object? sender, EventArgs e)
+        {
+            if (!ReferenceEquals(sender, kryptonManager))
+            {
+                return;
+            }
+            if (_palette == null)
+            {
+                return;
+            }
+
+            _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
+
+            ApplyPalette();
+        }
+
         #endregion
 
         #region Implementation
+
         private void UpdateTitleBar() =>
             // Mark a changed file with a star
             Text = $@"Palette Designer - {_filename}{(_dirty ? "*" : string.Empty)}";
+
+        /// <summary>
+        /// Ensures window bounds are entirely or partially visible on at least one connected screen.
+        /// If not, it re-centers the window within the primary screen and adjusts size if necessary.
+        /// </summary>
+        private static Rectangle AdjustBoundsToVisibleScreens(Rectangle bounds) =>
+            WindowBoundsHelper.AdjustBoundsToVisibleScreens(bounds);
+
+        private void CopyColorsFromBasePalette()
+        {
+            if (_palette?.BasePalette == null)
+                return;
+
+            try
+            {
+                _palette.SuspendUpdates();
+
+                // We need to populate each section individually to avoid the HeaderForm null reference
+                try { _palette.ButtonStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.CalendarDay.PopulateFromBase(); } catch { }
+                try { _palette.ButtonSpecs.PopulateFromBase(); } catch { }
+                try { _palette.ControlStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.ContextMenu.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.DragDrop.PopulateFromBase(); } catch { }
+                try { _palette.FormStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.GridStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.HeaderStyles.PopulateFromBase(_palette.Common); } catch { } // This one throws
+                try { _palette.HeaderGroup.PopulateFromBase(); } catch { }
+                try { _palette.Images.PopulateFromBase(); } catch { }
+                try { _palette.InputControlStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.LabelStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.Navigator.PopulateFromBase(); } catch { }
+                try { _palette.PanelStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.Ribbon.PopulateFromBase(); } catch { }
+                try { _palette.SeparatorStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.TabStyles.PopulateFromBase(_palette.Common); } catch { }
+                try { _palette.TrackBar.PopulateFromBase(); } catch { }
+                try { _palette.ToolMenuStatus.PopulateFromBase(); } catch { }
+                try { _palette.CueHintText.PopulateFromBase(PaletteState.Normal); } catch { }
+            }
+            finally
+            {
+                _palette.ResumeUpdates();
+            }
+        }
 
         #endregion
 
@@ -937,12 +1281,12 @@ namespace PaletteDesigner
         private void MyOwnRecentPaletteFileGotClicked_Handler(object sender, EventArgs e)
         {
             var fileName = (sender as ToolStripItem)?.Text;
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(fileName) || _palette == null)
             {
                 return;
             }
 
-            if (!File.Exists(fileName))
+            if (!File.Exists(fileName!))
             {
                 if (KryptonMessageBox.Show($"{fileName} doesn't exist. Remove from `Recent Themes`?",
                         "File not found",
@@ -956,6 +1300,18 @@ namespace PaletteDesigner
             try
             {
                 _palette.Import(fileName!, false);
+
+                // Update application state
+                _filename = fileName!;
+                _loaded = true;
+                _dirty = false;
+
+                // Re-establish property grid binding and refresh UI
+                propertyGrid.SelectedObject = _palette;
+
+                ApplyPalette();
+
+                UpdateTitleBar();
             }
             catch
             {
@@ -971,43 +1327,567 @@ namespace PaletteDesigner
 
         #endregion
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => _settingsManager.SaveSettings();
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            KryptonManager.GlobalPaletteChanged -= OnGlobalPaletteChanged;
-            base.OnFormClosed(e);
-        }
-
-        private void OnGlobalPaletteChanged(object? sender, EventArgs e)
-        {
-            if (_palette == null)
-            {
-                return;
-            }
-
-            _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
-
-            ApplyPalette();
-        }
-
-        private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var paletteUpgradeTool = new FormPaletteUpgradeTool();
-
-            paletteUpgradeTool.Show();
-        }
-
-        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var controlPanel = new SettingsControlPanel();
-
-            controlPanel.Show(this);
-        }
-
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             ApplyPalette();
         }
+
+        private void ColorTableGrid_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (e.Control is TextBoxBase tb)
+            {
+                tb.ReadOnly = true;
+            }
+        }
+
+        private void ColorTableGrid_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F6)
+            {
+                e.Handled = true;
+                EditCurrentCellColor();
+                return;
+            }
+        }
+
+        private static void TryCopyToClipboard(string text)
+        {
+            const int retries = 5;
+            const int delay = 100;
+            for (int i = 0; i < retries; i++)
+            {
+                try
+                {
+                    Clipboard.SetDataObject(text, true);
+                    return;
+                }
+                catch (ExternalException)
+                {
+                    System.Threading.Thread.Sleep(delay);
+                }
+            }
+        }
+
+        private void EditCurrentCellColor()
+        {
+            if (_colorTableGrid.CurrentCell == null) return;
+
+            int rowIndex = _colorTableGrid.CurrentCell.RowIndex;
+            int colIndex = _colorTableGrid.CurrentCell.ColumnIndex;
+            if (rowIndex < 0 || rowIndex >= _colorTableGrid.Rows.Count || colIndex < 2) return;
+
+            var enumVal = (SchemeBaseColors)_colorTableGrid.Rows[rowIndex].Cells[0].Value!;
+
+            // Get current color
+            Color current = GetSchemeColorSafe(enumVal);
+
+            using var dlg = new LiveColorPickerDialog { Color = current };
+            dlg.LiveColorChanged += (_, args) =>
+            {
+                ApplySchemeColor(enumVal, args.Color);
+                UpdateGridRow(rowIndex, args.Color);
+            };
+
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                // Push undo
+                _undoStack.Push((enumVal, current));
+
+                ApplySchemeColor(enumVal, dlg.Color);
+                UpdateGridRow(rowIndex, dlg.Color);
+            }
+        }
+
+        private Color GetSchemeColorSafe(SchemeBaseColors val)
+        {
+            var m = _palette?.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
+            if (m != null)
+            {
+                try
+                {
+                    return (Color)m.Invoke(_palette, [val])!;
+                }
+                catch { }
+            }
+
+            var scheme = _palette?.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(_palette, null) as Color[];
+            if (scheme != null && (int)val < scheme.Length) return scheme[(int)val];
+
+            return Color.Transparent;
+        }
+
+        private void ApplySchemeColor(SchemeBaseColors val, Color newColor)
+        {
+            // Use the shared helper extension to update the palette and raise paint events
+            _palette?.SetSchemeColor(val, newColor);
+        }
+
+        private void UpdateGridRow(int rowIndex, Color color)
+        {
+            if (rowIndex < 0 || rowIndex >= _colorTableGrid.Rows.Count) return;
+            var row = _colorTableGrid.Rows[rowIndex];
+            row.Cells[2].Value = FormatColorString(color);
+            row.Cells[2].Style.BackColor = color;
+            row.Cells[2].Style.ForeColor = GetContrastColor(color);
+            _colorTableGrid.Refresh();
+        }
+
+        private string FormatColorString(Color c)
+        {
+            return _displayRgb
+                ? $"{c.R}; {c.G}; {c.B}"
+                : $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+
+        private void ToggleColourFormat()
+        {
+            _displayRgb = !_displayRgb;
+            if (_toggleFormatMenuItem != null)
+            {
+                _toggleFormatMenuItem.Text = _displayRgb ? "Show Hex Values" : "Show RGB Values";
+            }
+
+            foreach (DataGridViewRow row in _colorTableGrid.Rows)
+            {
+                if (row.IsNewRow) continue;
+                if (row.Cells[2].Style.BackColor is { } col)
+                {
+                    row.Cells[2].Value = FormatColorString(col);
+                }
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Z))
+            {
+                if (_undoStack.Count > 0)
+                {
+                    var (enumVal, oldColor) = _undoStack.Pop();
+                    ApplySchemeColor(enumVal, oldColor);
+                    // Find row index
+                    int idx = (int)enumVal;
+                    UpdateGridRow(idx, oldColor);
+                }
+                return true;
+            }
+
+            // Handle copy in color table grid
+            if (keyData == (Keys.Control | Keys.C) && _colorTableGrid.ContainsFocus)
+            {
+                if (_colorTableGrid.CurrentCell is { } cell)
+                {
+                    var text = cell.FormattedValue?.ToString() ?? cell.Value?.ToString();
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        TryCopyToClipboard(text!);
+                        return true;
+                    }
+                }
+            }
+
+            // Handle paste in color table grid
+            if (keyData == (Keys.Control | Keys.V) && _colorTableGrid.ContainsFocus)
+            {
+                string? clipText = System.Windows.Forms.Clipboard.GetText();
+                if (!string.IsNullOrWhiteSpace(clipText) && TryParseColorString(clipText, out var pastedColor))
+                {
+                    if (_colorTableGrid.CurrentCell != null && _colorTableGrid.CurrentCell.RowIndex >= 0)
+                    {
+                        int rowIndex = _colorTableGrid.CurrentCell.RowIndex;
+                        var enumVal = (SchemeBaseColors)_colorTableGrid.Rows[rowIndex].Cells[0].Value!;
+
+                        // push undo
+                        _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
+
+                        ApplySchemeColor(enumVal, pastedColor);
+                        UpdateGridRow(rowIndex, pastedColor);
+                    }
+                }
+                return true;
+            }
+
+            // Handle copy/paste in property grid (color properties)
+            bool propertyGridActive = propertyGrid.ContainsFocus;
+            if (propertyGridActive)
+            {
+                var selItem = propertyGrid.SelectedGridItem;
+                if (selItem?.PropertyDescriptor != null && selItem.PropertyDescriptor.PropertyType == typeof(Color))
+                {
+                    if (keyData == (Keys.Control | Keys.C))
+                    {
+                        if (selItem.Value is Color cVal)
+                        {
+                            TryCopyToClipboard($"#{cVal.R:X2}{cVal.G:X2}{cVal.B:X2}");
+                        }
+                        return true;
+                    }
+                    if (keyData == (Keys.Control | Keys.V))
+                    {
+                        string clip = System.Windows.Forms.Clipboard.GetText();
+                        if (TryParseColorString(clip, out var newCol))
+                        {
+                            try
+                            {
+                                selItem.PropertyDescriptor.SetValue((selItem.Parent?.Value ?? propertyGrid.SelectedObject)!, newCol);
+                                propertyGrid.Refresh();
+                                ApplyPalette();
+                            }
+                            catch { /* ignore failures */ }
+                        }
+                        return true;
+                    }
+                }
+            }
+
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                SearchForColor(); return true;
+            }
+
+            if (keyData == (Keys.Control | Keys.Shift | Keys.C))
+            {
+                FilterRowsByColour(); return true;
+            }
+
+            if (keyData == (Keys.Control | Keys.Shift | Keys.F))
+            {
+                FilterRowsByEnumSubstring(); return true;
+            }
+
+            if (keyData == (Keys.Control | Keys.Shift | Keys.R))
+            {
+                ClearRowFilter(); return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        #region Context Menu & Filters
+
+        private void SetupContextMenu()
+        {
+            _contextMenu = new ContextMenuStrip();
+            _contextMenu.Items.Add("Search Color...\tCtrl+F", null, (_, __) => SearchForColor());
+            _contextMenu.Items.Add("Filter by Color...\tCtrl+Shift+C", null, (_, __) => FilterRowsByColour());
+            _contextMenu.Items.Add("Filter by Name...\tCtrl+Shift+F", null, (_, __) => FilterRowsByEnumSubstring());
+            _contextMenu.Items.Add(new ToolStripSeparator());
+            _toggleFormatMenuItem = new ToolStripMenuItem("Show Hex Values", null, (_, __) => ToggleColourFormat());
+            _contextMenu.Items.Add(_toggleFormatMenuItem);
+            _contextMenu.Items.Add(new ToolStripSeparator());
+            _contextMenu.Items.Add("Reset Filters\tCtrl+Shift+R", null, (_, __) => ClearRowFilter());
+
+            // Insert export options
+            _contextMenu.Items.Add(new ToolStripSeparator());
+            _contextMenu.Items.Add("Export as CSV", null, (_, __) => ExportPaletteAsCsv());
+#if DEBUG
+            _contextMenu.Items.Add("Export as Class", null, (_, __) => ExportPaletteAsClass());
+#endif
+
+            _colorTableGrid.ContextMenuStrip = _contextMenu;
+        }
+
+        private static bool TryParseColorString(string? input, out Color color)
+        {
+            color = Color.Empty;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            input = input!.Trim();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            // Hex with #
+            if (input.StartsWith("#", StringComparison.Ordinal))
+            {
+                try
+                {
+                    color = ColorTranslator.FromHtml(input);
+                    return true;
+                }
+                catch { }
+            }
+
+            // Hex without #
+            if (input != null && (input.Length == 6 || input.Length == 8))
+            {
+                try
+                {
+                    color = ColorTranslator.FromHtml("#" + input);
+                    return true;
+                }
+                catch { }
+            }
+
+            // RGB triplet
+            if (input != null)
+            {
+                var parts = input.Split([',', ';'], StringSplitOptions.None);
+                if (parts.Length == 3 &&
+                    byte.TryParse(parts[0].Trim(), out byte r) &&
+                    byte.TryParse(parts[1].Trim(), out byte g) &&
+                    byte.TryParse(parts[2].Trim(), out byte b))
+                {
+                    color = Color.FromArgb(r, g, b);
+                    return true;
+                }
+            }
+
+            // Named color
+            if (input != null)
+            {
+                var named = Color.FromName(input);
+                if (named.IsKnownColor || named.IsNamedColor)
+                {
+                    color = named;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void SearchForColor()
+        {
+            string? input = KryptonInputBox.Show(new KryptonInputBoxData
+            {
+                Prompt = "Enter color to search (e.g. #FF0000 or 255,0,0):",
+                Caption = "Search Color",
+                DefaultResponse = "#"
+            });
+
+            if (!TryParseColorString(input, out var target))
+            {
+                return;
+            }
+
+            int startRow = _colorTableGrid.CurrentCell?.RowIndex ?? 0;
+            int totalRows = _colorTableGrid.Rows.Count;
+
+            for (int i = 1; i <= totalRows; i++)
+            {
+                int idx = (startRow + i) % totalRows;
+                var cell = _colorTableGrid.Rows[idx].Cells[2];
+                if (cell.Style.BackColor.ToArgb() == target.ToArgb())
+                {
+                    _colorTableGrid.CurrentCell = cell;
+                    return;
+                }
+            }
+            MessageBox.Show(this, "Color not found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void FilterRowsByColour()
+        {
+            string? input = KryptonInputBox.Show(new KryptonInputBoxData
+            {
+                Prompt = "Enter color to filter by (e.g. #FF0000 or 255,0,0):",
+                Caption = "Filter Rows – Color",
+                DefaultResponse = _lastColorFilterInput ?? "#"
+            });
+
+            if (!TryParseColorString(input, out var target)) return;
+
+            _activeColourFilter = target;
+            _lastColorFilterInput = input;
+            UpdateRowVisibility();
+        }
+
+        private void FilterRowsByEnumSubstring()
+        {
+            string? keyword = KryptonInputBox.Show(new KryptonInputBoxData
+            {
+                Prompt = "Enter text to filter Scheme Colors (contains, case-insensitive):",
+                Caption = "Filter Rows – SchemeBaseColors",
+                DefaultResponse = string.Empty
+            });
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                ClearRowFilter();
+                return;
+            }
+
+            _activeNameFilter = keyword.Trim();
+            UpdateRowVisibility();
+        }
+
+        private void ClearRowFilter()
+        {
+            _activeColourFilter = null;
+            _activeNameFilter = null;
+            UpdateRowVisibility();
+        }
+
+        private void UpdateRowVisibility()
+        {
+            _colorTableGrid.SuspendLayout();
+            try
+            {
+                foreach (DataGridViewRow row in _colorTableGrid.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    bool shouldBeVisible = RowPassesFilters(row);
+                    if (row.Visible != shouldBeVisible)
+                    {
+                        row.Visible = shouldBeVisible;
+                    }
+                }
+            }
+            finally
+            {
+                _colorTableGrid.ResumeLayout();
+                _colorTableGrid.Refresh();
+            }
+        }
+
+        private bool RowPassesFilters(DataGridViewRow row)
+        {
+            bool passesColour = true;
+            if (_activeColourFilter.HasValue)
+            {
+                passesColour = row.Cells[2].Style.BackColor.ToArgb() == _activeColourFilter.Value.ToArgb();
+            }
+
+            bool passesName = true;
+            if (!string.IsNullOrWhiteSpace(_activeNameFilter))
+            {
+                string name = row.Cells[1].Value?.ToString() ?? string.Empty;
+                passesName = name.IndexOf(_activeNameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
+            }
+            return passesColour && passesName;
+        }
+
+        private void AdjustGridFont(float delta)
+        {
+            float newSize = Math.Max(MinFontSize, Math.Min(propertyGrid.Font.Size + delta, MaxFontSize));
+            if (Math.Abs(newSize - propertyGrid.Font.Size) < 0.1f)
+            {
+                return; // No visible change required
+            }
+
+            // Update fonts for property grids
+            var newPropFont = new Font(propertyGrid.Font.FontFamily, newSize, propertyGrid.Font.Style);
+            propertyGrid.Font = newPropFont;
+            propertyGridKCT.Font = newPropFont;
+
+            // Update fonts for color table grid
+            var newGridFont = new Font(_colorTableGrid.Font.FontFamily, newSize, _colorTableGrid.Font.Style);
+            _colorTableGrid.Font = newGridFont;
+            _colorTableGrid.ColumnHeadersDefaultCellStyle.Font = newGridFont;
+            _colorTableGrid.DefaultCellStyle.Font = newGridFont;
+
+            UpdateColorGridRowHeights();
+
+            _colorTableGrid.AutoResizeColumns();
+            _colorTableGrid.Refresh();
+
+            _settingsManager.SetPropertyGridFontSize(newSize);
+        }
+
+        private void UpdateColorGridRowHeights()
+        {
+            int newHeight = TextRenderer.MeasureText("Ag", _colorTableGrid.Font).Height + 6;
+            _colorTableGrid.SuspendLayout();
+            try
+            {
+                _colorTableGrid.RowTemplate.Height = newHeight;
+                foreach (DataGridViewRow dgvr in _colorTableGrid.Rows)
+                {
+                    dgvr.Height = newHeight;
+                }
+            }
+            finally
+            {
+                _colorTableGrid.ResumeLayout();
+                _colorTableGrid.AutoResizeColumns();
+            }
+        }
+
+        private void ShowHelpHint()
+        {
+            const string body = "F6: Edit cell color\nCtrl+C / Ctrl+V: Copy / Paste color\nCtrl+F: Search color\nCtrl+Shift+C: Filter by color\nCtrl+Shift+F: Filter by name\nCtrl+Shift+R: Reset filters\nRight-click grid for context menu\n+ / –: Adjust font size";
+            MessageBox.Show(this, body, "Palette Designer – Shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ExportPaletteAsCsv()
+        {
+            string baseName = Path.GetFileNameWithoutExtension(_filename);
+            if (string.IsNullOrWhiteSpace(baseName) || baseName.StartsWith("(", StringComparison.Ordinal))
+            {
+                baseName = "CustomPalette";
+            }
+
+            using var dlg = new KryptonSaveFileDialog
+            {
+                DefaultExt = "csv",
+                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Title = "Export Palette as CSV",
+                FileName = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + ".csv"
+            };
+
+            if (dlg.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            try
+            {
+                using var sw = new StreamWriter(dlg.FileName, false, Encoding.UTF8);
+                sw.WriteLine("Id,Value,Name");
+
+                foreach (DataGridViewRow row in _colorTableGrid.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    var id = row.Cells[0].Value;
+                    var name = row.Cells[1].Value;
+                    var col = row.Cells[2].Style.BackColor;
+                    string value = $"#{col.R:X2}{col.G:X2}{col.B:X2}";
+                    sw.WriteLine($"{id},{value},{name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"Failed to export CSV.\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportPaletteAsClass()
+        {
+            if (_palette is null)
+            {
+                return;
+            }
+
+            string baseName = Path.GetFileNameWithoutExtension(_filename);
+            if (string.IsNullOrWhiteSpace(baseName) || baseName.StartsWith("(", StringComparison.Ordinal))
+            {
+                baseName = "CustomPalette";
+            }
+
+            string className = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + "_BaseScheme";
+
+            using var expDlg = new ExportBaseSchemeClass(_palette, className, _settingsManager);
+            expDlg.ShowDialog(this);
+        }
+
+        private static string ToColorExpr(Color c)
+        {
+            if (c.IsEmpty)
+            {
+                return "GlobalStaticValues.EMPTY_COLOR";
+            }
+
+            return c.A != 255
+                ? $"Color.FromArgb({c.A}, {c.R}, {c.G}, {c.B})"
+                : $"Color.FromArgb({c.R}, {c.G}, {c.B})";
+        }
+
+        #endregion
     }
 }

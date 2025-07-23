@@ -2,12 +2,12 @@
 
 partial class ButtonsPage
 {
-    /// <summary> 
+    /// <summary>
     /// Required designer variable.
     /// </summary>
     private System.ComponentModel.IContainer components = null;
 
-    /// <summary> 
+    /// <summary>
     /// Clean up any resources being used.
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -106,9 +106,9 @@ partial class ButtonsPage
             ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageButtonsCustom3)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // kryptonPanel1
-            // 
+            //
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
@@ -120,14 +120,14 @@ partial class ButtonsPage
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(799, 670);
             this.kryptonPanel1.TabIndex = 0;
-            // 
+            //
             // kryptonGroupBox3
-            // 
+            //
             this.kryptonGroupBox3.Location = new System.Drawing.Point(354, 316);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
-            // 
+            //
             // kryptonGroupBox3.Panel
-            // 
+            //
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton10);
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton11);
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonButton12);
@@ -137,9 +137,9 @@ partial class ButtonsPage
             this.kryptonGroupBox3.Size = new System.Drawing.Size(218, 321);
             this.kryptonGroupBox3.TabIndex = 32;
             this.kryptonGroupBox3.Values.Heading = "Krypton Buttons:";
-            // 
+            //
             // kryptonButton10
-            // 
+            //
             this.kryptonButton10.AutoSize = true;
             this.kryptonButton10.Enabled = false;
             this.kryptonButton10.Location = new System.Drawing.Point(4, 4);
@@ -149,9 +149,9 @@ partial class ButtonsPage
             this.kryptonButton10.TabIndex = 19;
             this.kryptonButton10.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton10.Values.Text = "Disabled";
-            // 
+            //
             // kryptonButton11
-            // 
+            //
             this.kryptonButton11.AutoSize = true;
             this.kryptonButton11.Enabled = false;
             this.kryptonButton11.Location = new System.Drawing.Point(4, 172);
@@ -161,9 +161,9 @@ partial class ButtonsPage
             this.kryptonButton11.TabIndex = 21;
             this.kryptonButton11.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton11.Values.Text = "Default + Focus";
-            // 
+            //
             // kryptonButton12
-            // 
+            //
             this.kryptonButton12.AutoSize = true;
             this.kryptonButton12.Enabled = false;
             this.kryptonButton12.Location = new System.Drawing.Point(4, 88);
@@ -173,9 +173,9 @@ partial class ButtonsPage
             this.kryptonButton12.TabIndex = 22;
             this.kryptonButton12.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton12.Values.Text = "Tracking";
-            // 
+            //
             // kryptonButton13
-            // 
+            //
             this.kryptonButton13.AutoSize = true;
             this.kryptonButton13.Location = new System.Drawing.Point(4, 224);
             this.kryptonButton13.Margin = new System.Windows.Forms.Padding(4);
@@ -184,9 +184,9 @@ partial class ButtonsPage
             this.kryptonButton13.TabIndex = 27;
             this.kryptonButton13.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton13.Values.Text = "Click - Hover - etc.";
-            // 
+            //
             // kryptonButton14
-            // 
+            //
             this.kryptonButton14.AutoSize = true;
             this.kryptonButton14.Enabled = false;
             this.kryptonButton14.Location = new System.Drawing.Point(4, 46);
@@ -196,9 +196,9 @@ partial class ButtonsPage
             this.kryptonButton14.TabIndex = 20;
             this.kryptonButton14.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton14.Values.Text = "Normal";
-            // 
+            //
             // kryptonButton15
-            // 
+            //
             this.kryptonButton15.AutoSize = true;
             this.kryptonButton15.Enabled = false;
             this.kryptonButton15.Location = new System.Drawing.Point(4, 130);
@@ -208,14 +208,14 @@ partial class ButtonsPage
             this.kryptonButton15.TabIndex = 23;
             this.kryptonButton15.Values.Image = global::PaletteDesigner.Properties.Resources.AppMenuClose;
             this.kryptonButton15.Values.Text = "Pressed";
-            // 
+            //
             // kryptonGroupBox2
-            // 
+            //
             this.kryptonGroupBox2.Location = new System.Drawing.Point(124, 316);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
-            // 
+            //
             // kryptonGroupBox2.Panel
-            // 
+            //
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton1);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton2);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonDropButton3);
@@ -225,9 +225,9 @@ partial class ButtonsPage
             this.kryptonGroupBox2.Size = new System.Drawing.Size(210, 321);
             this.kryptonGroupBox2.TabIndex = 31;
             this.kryptonGroupBox2.Values.Heading = "DropButtons:";
-            // 
+            //
             // kryptonDropButton1
-            // 
+            //
             this.kryptonDropButton1.AutoSize = true;
             this.kryptonDropButton1.Enabled = false;
             this.kryptonDropButton1.Location = new System.Drawing.Point(4, 4);
@@ -237,9 +237,9 @@ partial class ButtonsPage
             this.kryptonDropButton1.TabIndex = 19;
             this.kryptonDropButton1.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton1.Values.Text = "Disabled";
-            // 
+            //
             // kryptonDropButton2
-            // 
+            //
             this.kryptonDropButton2.AutoSize = true;
             this.kryptonDropButton2.Enabled = false;
             this.kryptonDropButton2.Location = new System.Drawing.Point(4, 172);
@@ -249,9 +249,9 @@ partial class ButtonsPage
             this.kryptonDropButton2.TabIndex = 21;
             this.kryptonDropButton2.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton2.Values.Text = "Default + Focus";
-            // 
+            //
             // kryptonDropButton3
-            // 
+            //
             this.kryptonDropButton3.AutoSize = true;
             this.kryptonDropButton3.Enabled = false;
             this.kryptonDropButton3.Location = new System.Drawing.Point(4, 88);
@@ -261,9 +261,9 @@ partial class ButtonsPage
             this.kryptonDropButton3.TabIndex = 22;
             this.kryptonDropButton3.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton3.Values.Text = "Tracking";
-            // 
+            //
             // kryptonDropButton4
-            // 
+            //
             this.kryptonDropButton4.AutoSize = true;
             this.kryptonDropButton4.Location = new System.Drawing.Point(4, 224);
             this.kryptonDropButton4.Margin = new System.Windows.Forms.Padding(4);
@@ -273,9 +273,9 @@ partial class ButtonsPage
             this.kryptonDropButton4.TabIndex = 27;
             this.kryptonDropButton4.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton4.Values.Text = "Click - Hover - etc.";
-            // 
+            //
             // kryptonDropButton5
-            // 
+            //
             this.kryptonDropButton5.AutoSize = true;
             this.kryptonDropButton5.Enabled = false;
             this.kryptonDropButton5.Location = new System.Drawing.Point(4, 46);
@@ -285,9 +285,9 @@ partial class ButtonsPage
             this.kryptonDropButton5.TabIndex = 20;
             this.kryptonDropButton5.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton5.Values.Text = "Normal";
-            // 
+            //
             // kryptonDropButton6
-            // 
+            //
             this.kryptonDropButton6.AutoSize = true;
             this.kryptonDropButton6.Enabled = false;
             this.kryptonDropButton6.Location = new System.Drawing.Point(4, 130);
@@ -297,14 +297,14 @@ partial class ButtonsPage
             this.kryptonDropButton6.TabIndex = 23;
             this.kryptonDropButton6.Values.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.kryptonDropButton6.Values.Text = "Pressed";
-            // 
+            //
             // kryptonGroupBox1
-            // 
+            //
             this.kryptonGroupBox1.Location = new System.Drawing.Point(121, 4);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
-            // 
+            //
             // kryptonGroupBox1.Panel
-            // 
+            //
             this.kryptonGroupBox1.Panel.Controls.Add(this.buttonDisabled);
             this.kryptonGroupBox1.Panel.Controls.Add(this.buttonDefaultFocus);
             this.kryptonGroupBox1.Panel.Controls.Add(this.buttonTracking);
@@ -317,9 +317,9 @@ partial class ButtonsPage
             this.kryptonGroupBox1.Size = new System.Drawing.Size(379, 256);
             this.kryptonGroupBox1.TabIndex = 30;
             this.kryptonGroupBox1.Values.Heading = "CheckButtons:";
-            // 
+            //
             // buttonDisabled
-            // 
+            //
             this.buttonDisabled.AutoSize = true;
             this.buttonDisabled.Enabled = false;
             this.buttonDisabled.Location = new System.Drawing.Point(4, 4);
@@ -329,9 +329,9 @@ partial class ButtonsPage
             this.buttonDisabled.TabIndex = 19;
             this.buttonDisabled.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDisabled.Values.Image")));
             this.buttonDisabled.Values.Text = "Disabled";
-            // 
+            //
             // buttonDefaultFocus
-            // 
+            //
             this.buttonDefaultFocus.AutoSize = true;
             this.buttonDefaultFocus.Enabled = false;
             this.buttonDefaultFocus.Location = new System.Drawing.Point(183, 4);
@@ -341,9 +341,9 @@ partial class ButtonsPage
             this.buttonDefaultFocus.TabIndex = 21;
             this.buttonDefaultFocus.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonDefaultFocus.Values.Image")));
             this.buttonDefaultFocus.Values.Text = "Default + Focus";
-            // 
+            //
             // buttonTracking
-            // 
+            //
             this.buttonTracking.AutoSize = true;
             this.buttonTracking.Enabled = false;
             this.buttonTracking.Location = new System.Drawing.Point(4, 88);
@@ -353,9 +353,9 @@ partial class ButtonsPage
             this.buttonTracking.TabIndex = 22;
             this.buttonTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonTracking.Values.Image")));
             this.buttonTracking.Values.Text = "Tracking";
-            // 
+            //
             // buttonLive
-            // 
+            //
             this.buttonLive.AutoSize = true;
             this.buttonLive.Location = new System.Drawing.Point(28, 181);
             this.buttonLive.Margin = new System.Windows.Forms.Padding(4);
@@ -364,9 +364,9 @@ partial class ButtonsPage
             this.buttonLive.TabIndex = 27;
             this.buttonLive.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
             this.buttonLive.Values.Text = "Click - Hover - etc.";
-            // 
+            //
             // buttonNormal
-            // 
+            //
             this.buttonNormal.AutoSize = true;
             this.buttonNormal.Enabled = false;
             this.buttonNormal.Location = new System.Drawing.Point(4, 46);
@@ -376,9 +376,9 @@ partial class ButtonsPage
             this.buttonNormal.TabIndex = 20;
             this.buttonNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonNormal.Values.Image")));
             this.buttonNormal.Values.Text = "Normal";
-            // 
+            //
             // buttonPressed
-            // 
+            //
             this.buttonPressed.AutoSize = true;
             this.buttonPressed.Enabled = false;
             this.buttonPressed.Location = new System.Drawing.Point(4, 130);
@@ -388,9 +388,9 @@ partial class ButtonsPage
             this.buttonPressed.TabIndex = 23;
             this.buttonPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonPressed.Values.Image")));
             this.buttonPressed.Values.Text = "Pressed";
-            // 
+            //
             // buttonCheckedNormal
-            // 
+            //
             this.buttonCheckedNormal.AutoSize = true;
             this.buttonCheckedNormal.Enabled = false;
             this.buttonCheckedNormal.Location = new System.Drawing.Point(183, 46);
@@ -400,9 +400,9 @@ partial class ButtonsPage
             this.buttonCheckedNormal.TabIndex = 24;
             this.buttonCheckedNormal.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedNormal.Values.Image")));
             this.buttonCheckedNormal.Values.Text = "Checked Normal";
-            // 
+            //
             // buttonCheckedPressed
-            // 
+            //
             this.buttonCheckedPressed.AutoSize = true;
             this.buttonCheckedPressed.Enabled = false;
             this.buttonCheckedPressed.Location = new System.Drawing.Point(183, 130);
@@ -412,9 +412,9 @@ partial class ButtonsPage
             this.buttonCheckedPressed.TabIndex = 26;
             this.buttonCheckedPressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedPressed.Values.Image")));
             this.buttonCheckedPressed.Values.Text = "Checked Pressed";
-            // 
+            //
             // buttonCheckedTracking
-            // 
+            //
             this.buttonCheckedTracking.AutoSize = true;
             this.buttonCheckedTracking.Enabled = false;
             this.buttonCheckedTracking.Location = new System.Drawing.Point(183, 88);
@@ -424,18 +424,18 @@ partial class ButtonsPage
             this.buttonCheckedTracking.TabIndex = 25;
             this.buttonCheckedTracking.Values.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckedTracking.Values.Image")));
             this.buttonCheckedTracking.Values.Text = "Checked Tracking";
-            // 
+            //
             // kryptonColorButton1
-            // 
+            //
             this.kryptonColorButton1.Location = new System.Drawing.Point(208, 274);
             this.kryptonColorButton1.Name = "kryptonColorButton1";
             this.kryptonColorButton1.Size = new System.Drawing.Size(212, 34);
             this.kryptonColorButton1.TabIndex = 28;
             this.kryptonColorButton1.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonColorButton1.Values.Image")));
             this.kryptonColorButton1.Values.Text = "kryptonColorButton1";
-            // 
+            //
             // borderDesignButtons
-            // 
+            //
             this.borderDesignButtons.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignButtons.Location = new System.Drawing.Point(112, 0);
             this.borderDesignButtons.Margin = new System.Windows.Forms.Padding(4);
@@ -443,9 +443,9 @@ partial class ButtonsPage
             this.borderDesignButtons.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignButtons.Size = new System.Drawing.Size(1, 670);
             this.borderDesignButtons.TabIndex = 18;
-            // 
+            //
             // kryptonNavigatorDesignButtons
-            // 
+            //
             this.kryptonNavigatorDesignButtons.AutoSize = true;
             this.kryptonNavigatorDesignButtons.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignButtons.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -510,9 +510,9 @@ partial class ButtonsPage
             this.kryptonNavigatorDesignButtons.TabIndex = 17;
             this.kryptonNavigatorDesignButtons.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignButtons.SelectedPageChanged += new System.EventHandler(this.kryptonNavigatorDesignButtons_SelectedPageChanged);
-            // 
+            //
             // pageButtonsStandalone
-            // 
+            //
             this.pageButtonsStandalone.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsStandalone.Flags = 65535;
             this.pageButtonsStandalone.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsStandalone.ImageLarge")));
@@ -527,9 +527,9 @@ partial class ButtonsPage
     "";
             this.pageButtonsStandalone.ToolTipTitle = "Page ToolTip";
             this.pageButtonsStandalone.UniqueName = "37C6B25023EE41AD37C6B25023EE41AD";
-            // 
+            //
             // pageButtonsAlternate
-            // 
+            //
             this.pageButtonsAlternate.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsAlternate.Flags = 65535;
             this.pageButtonsAlternate.LastVisibleSet = true;
@@ -541,9 +541,9 @@ partial class ButtonsPage
             this.pageButtonsAlternate.TextDescription = "Alternate is the alternative standalone button style.";
             this.pageButtonsAlternate.ToolTipTitle = "Page ToolTip";
             this.pageButtonsAlternate.UniqueName = "69A8A8D80810484369A8A8D808104843";
-            // 
+            //
             // pageButtonsLowProfile
-            // 
+            //
             this.pageButtonsLowProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsLowProfile.Flags = 65535;
             this.pageButtonsLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsLowProfile.ImageLarge")));
@@ -557,9 +557,9 @@ partial class ButtonsPage
             this.pageButtonsLowProfile.TextDescription = "Low Profile style is a less prominent variation for individual button instances.";
             this.pageButtonsLowProfile.ToolTipTitle = "Page ToolTip";
             this.pageButtonsLowProfile.UniqueName = "CEF16160BF1146BFCEF16160BF1146BF";
-            // 
+            //
             // pageButtonsBreadCrumb
-            // 
+            //
             this.pageButtonsBreadCrumb.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsBreadCrumb.Flags = 65535;
             this.pageButtonsBreadCrumb.LastVisibleSet = true;
@@ -571,9 +571,9 @@ partial class ButtonsPage
             this.pageButtonsBreadCrumb.TextDescription = "Bread Crumb is used to draw each individual crumb inside the KryptonBreadCrumb.";
             this.pageButtonsBreadCrumb.ToolTipTitle = "Page ToolTip";
             this.pageButtonsBreadCrumb.UniqueName = "9083C1AC254644EE9083C1AC254644EE";
-            // 
+            //
             // pageButtonCalendarDay
-            // 
+            //
             this.pageButtonCalendarDay.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonCalendarDay.Flags = 65535;
             this.pageButtonCalendarDay.LastVisibleSet = true;
@@ -585,9 +585,9 @@ partial class ButtonsPage
             this.pageButtonCalendarDay.TextDescription = "Calendar Day is used for drawing each day entry within the calendar.";
             this.pageButtonCalendarDay.ToolTipTitle = "Page ToolTip";
             this.pageButtonCalendarDay.UniqueName = "1C1B572BB01A40641C1B572BB01A4064";
-            // 
+            //
             // pageButtonsButtonSpec
-            // 
+            //
             this.pageButtonsButtonSpec.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsButtonSpec.Flags = 65535;
             this.pageButtonsButtonSpec.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsButtonSpec.ImageLarge")));
@@ -601,9 +601,9 @@ partial class ButtonsPage
             this.pageButtonsButtonSpec.TextDescription = "ButtonSpec is the default style for buttons created via ButtonSpec collections.";
             this.pageButtonsButtonSpec.ToolTipTitle = "Page ToolTip";
             this.pageButtonsButtonSpec.UniqueName = "31198AD4E0DB40BF31198AD4E0DB40BF";
-            // 
+            //
             // pageButtonsRibbonCluster
-            // 
+            //
             this.pageButtonsRibbonCluster.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsRibbonCluster.Flags = 65535;
             this.pageButtonsRibbonCluster.LastVisibleSet = true;
@@ -615,9 +615,9 @@ partial class ButtonsPage
             this.pageButtonsRibbonCluster.TextDescription = "Buttons inside a Ribbon cluster have their own style.";
             this.pageButtonsRibbonCluster.ToolTipTitle = "Page ToolTip";
             this.pageButtonsRibbonCluster.UniqueName = "40D019DF2E9A467340D019DF2E9A4673";
-            // 
+            //
             // pageButtonsNavigatorStack
-            // 
+            //
             this.pageButtonsNavigatorStack.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsNavigatorStack.Flags = 65535;
             this.pageButtonsNavigatorStack.LastVisibleSet = true;
@@ -629,9 +629,9 @@ partial class ButtonsPage
             this.pageButtonsNavigatorStack.TextDescription = "Navigator Stack is the default style for stack buttons in the KryptonNavigator.";
             this.pageButtonsNavigatorStack.ToolTipTitle = "Page ToolTip";
             this.pageButtonsNavigatorStack.UniqueName = "4AFE01312A0D4DBB4AFE01312A0D4DBB";
-            // 
+            //
             // pageButtonsNavigatorOverflow
-            // 
+            //
             this.pageButtonsNavigatorOverflow.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsNavigatorOverflow.Flags = 65535;
             this.pageButtonsNavigatorOverflow.LastVisibleSet = true;
@@ -644,9 +644,9 @@ partial class ButtonsPage
     "tlook modes.";
             this.pageButtonsNavigatorOverflow.ToolTipTitle = "Page ToolTip";
             this.pageButtonsNavigatorOverflow.UniqueName = "B2269535DD084621B2269535DD084621";
-            // 
+            //
             // pageButtonsNavigatorMini
-            // 
+            //
             this.pageButtonsNavigatorMini.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsNavigatorMini.Flags = 65535;
             this.pageButtonsNavigatorMini.LastVisibleSet = true;
@@ -659,9 +659,9 @@ partial class ButtonsPage
     "tor.";
             this.pageButtonsNavigatorMini.ToolTipTitle = "Page ToolTip";
             this.pageButtonsNavigatorMini.UniqueName = "AD5F157B621F4B10AD5F157B621F4B10";
-            // 
+            //
             // pageButtonsInputControl
-            // 
+            //
             this.pageButtonsInputControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsInputControl.Flags = 65535;
             this.pageButtonsInputControl.LastVisibleSet = true;
@@ -673,9 +673,9 @@ partial class ButtonsPage
             this.pageButtonsInputControl.TextDescription = "Input Control is used as the drop-down button inside input controls.";
             this.pageButtonsInputControl.ToolTipTitle = "Page ToolTip";
             this.pageButtonsInputControl.UniqueName = "563FAF44653F46E5563FAF44653F46E5";
-            // 
+            //
             // pageButtonsListItem
-            // 
+            //
             this.pageButtonsListItem.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsListItem.Flags = 65535;
             this.pageButtonsListItem.LastVisibleSet = true;
@@ -687,9 +687,9 @@ partial class ButtonsPage
             this.pageButtonsListItem.TextDescription = "List Item is used as the display of items inside lists.";
             this.pageButtonsListItem.ToolTipTitle = "Page ToolTip";
             this.pageButtonsListItem.UniqueName = "31BB921AEA374D7E31BB921AEA374D7E";
-            // 
+            //
             // pageButtonsGallery
-            // 
+            //
             this.pageButtonsGallery.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsGallery.Flags = 65535;
             this.pageButtonsGallery.LastVisibleSet = true;
@@ -701,9 +701,9 @@ partial class ButtonsPage
             this.pageButtonsGallery.TextDescription = "Gallery is the button style for the three up/down/dropdown control buttons.";
             this.pageButtonsGallery.ToolTipTitle = "Page ToolTip";
             this.pageButtonsGallery.UniqueName = "EF0BB7D061A34A41EF0BB7D061A34A41";
-            // 
+            //
             // pageButtonsForm
-            // 
+            //
             this.pageButtonsForm.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsForm.Flags = 65535;
             this.pageButtonsForm.LastVisibleSet = true;
@@ -715,9 +715,9 @@ partial class ButtonsPage
             this.pageButtonsForm.TextDescription = "Form style is used as the default for min/max/restore buttons on a KryptonForm.";
             this.pageButtonsForm.ToolTipTitle = "Page ToolTip";
             this.pageButtonsForm.UniqueName = "76C0F19D5CAC4E6B76C0F19D5CAC4E6B";
-            // 
+            //
             // pageButtonsFormClose
-            // 
+            //
             this.pageButtonsFormClose.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsFormClose.Flags = 65534;
             this.pageButtonsFormClose.LastVisibleSet = true;
@@ -729,9 +729,9 @@ partial class ButtonsPage
             this.pageButtonsFormClose.TextDescription = "Form Close style is used as the default for close buttons on a KryptonForm.";
             this.pageButtonsFormClose.ToolTipTitle = "Page ToolTip";
             this.pageButtonsFormClose.UniqueName = "0655DBDF14BD48A3CEA6FBAEC14F3E64";
-            // 
+            //
             // pageButtonsCommand
-            // 
+            //
             this.pageButtonsCommand.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsCommand.Flags = 65534;
             this.pageButtonsCommand.LastVisibleSet = true;
@@ -744,9 +744,9 @@ partial class ButtonsPage
     "";
             this.pageButtonsCommand.ToolTipTitle = "Page ToolTip";
             this.pageButtonsCommand.UniqueName = "BDF278722644422EF29A3E5CDD9CC5BA";
-            // 
+            //
             // pageButtonsCustom1
-            // 
+            //
             this.pageButtonsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsCustom1.Flags = 65535;
             this.pageButtonsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom1.ImageLarge")));
@@ -760,9 +760,9 @@ partial class ButtonsPage
             this.pageButtonsCustom1.TextDescription = "Custom 1 style inherits from Standalone and is intended for your own custom use.";
             this.pageButtonsCustom1.ToolTipTitle = "Page ToolTip";
             this.pageButtonsCustom1.UniqueName = "D5D960581C2941EAD5D960581C2941EA";
-            // 
+            //
             // pageButtonsCustom2
-            // 
+            //
             this.pageButtonsCustom2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsCustom2.Flags = 65535;
             this.pageButtonsCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom2.ImageLarge")));
@@ -776,9 +776,9 @@ partial class ButtonsPage
             this.pageButtonsCustom2.TextDescription = "Custom 2 style inherits from Standalone and is intended for your own custom use.";
             this.pageButtonsCustom2.ToolTipTitle = "Page ToolTip";
             this.pageButtonsCustom2.UniqueName = "B41A275F5EFB4B41B41A275F5EFB4B41";
-            // 
+            //
             // pageButtonsCustom3
-            // 
+            //
             this.pageButtonsCustom3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageButtonsCustom3.Flags = 65535;
             this.pageButtonsCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageButtonsCustom3.ImageLarge")));
@@ -792,10 +792,11 @@ partial class ButtonsPage
             this.pageButtonsCustom3.TextDescription = "Custom 3 style inherits from Standalone and is intended for your own custom use.";
             this.pageButtonsCustom3.ToolTipTitle = "Page ToolTip";
             this.pageButtonsCustom3.UniqueName = "C2E105865C8444A2C2E105865C8444A2";
-            // 
+            //
             // ButtonsPage
-            // 
+            //
             this.Controls.Add(this.kryptonPanel1);
+            this.Dock = DockStyle.Fill;
             this.Name = "ButtonsPage";
             this.Size = new System.Drawing.Size(799, 670);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
