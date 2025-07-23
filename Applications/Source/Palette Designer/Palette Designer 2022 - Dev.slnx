@@ -1,0 +1,29 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Canary" />
+    <BuildType Name="Debug" />
+    <BuildType Name="Installer" />
+    <BuildType Name="Nightly" />
+    <BuildType Name="Preview" />
+    <BuildType Name="Release" />
+    <BuildType Name="Signed" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="../../../../Standard-Toolkit/Source/Krypton Components/Krypton.Navigator/Krypton.Navigator 2022.csproj" />
+  <Project Path="../../../../Standard-Toolkit/Source/Krypton Components/Krypton.Ribbon/Krypton.Ribbon 2022.csproj">
+    <BuildType Solution="Canary|*" Project="Debug" />
+    <BuildType Solution="Installer|*" Project="Debug" />
+    <BuildType Solution="Nightly|*" Project="Debug" />
+    <BuildType Solution="Signed|*" Project="Debug" />
+  </Project>
+  <Project Path="../../../../Standard-Toolkit/Source/Krypton Components/Krypton.Toolkit/Krypton.Toolkit 2022.csproj" />
+  <Project Path="Palette Designer 2022.csproj">
+    <BuildType Solution="Canary|*" Project="Debug" />
+    <BuildType Solution="Installer|*" Project="Debug" />
+    <BuildType Solution="Nightly|*" Project="Debug" />
+    <BuildType Solution="Preview|*" Project="Debug" />
+    <BuildType Solution="Signed|*" Project="Debug" />
+  </Project>
+</Solution>
