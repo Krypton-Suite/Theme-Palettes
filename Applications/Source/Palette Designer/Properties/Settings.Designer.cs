@@ -154,5 +154,65 @@ namespace PaletteDesigner.Properties {
                 this["ExportClassFolder"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastImagePath {
+            get {
+                return ((string)(this["LastImagePath"]));
+            }
+            set {
+                this["LastImagePath"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastRegionStoragePath {
+            get {
+                return ((string)(this["LastRegionStoragePath"]));
+            }
+            set {
+                this["LastRegionStoragePath"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastImageFolder {
+            get {
+                return ((string)(this["LastImageFolder"]));
+            }
+            set {
+                this["LastImageFolder"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RestoreLastImageOnStartup {
+            get {
+                return ((bool)(this["RestoreLastImageOnStartup"]));
+            }
+            set {
+                this["RestoreLastImageOnStartup"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RestoreLastRegionsOnStartup {
+            get {
+                return ((bool)(this["RestoreLastRegionsOnStartup"]));
+            }
+            set {
+                this["RestoreLastRegionsOnStartup"] = value;
+            }
+        }
     }
 }

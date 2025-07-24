@@ -83,6 +83,7 @@ namespace PaletteDesigner
             this.pageTopTrackBar = new Krypton.Navigator.KryptonPage();
             this.pageTopMenuItems = new Krypton.Navigator.KryptonPage();
             this.pageTopToolTips = new Krypton.Navigator.KryptonPage();
+            this.pageTopImageViewer = new Krypton.Navigator.KryptonPage();
             this.kryptonPanelMainFill = new Krypton.Toolkit.KryptonPanel();
             this.kryptonSplitContainerMain = new Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonNavigatorDesign = new Krypton.Navigator.KryptonNavigator();
@@ -363,10 +364,28 @@ namespace PaletteDesigner
             this.menuPage1 = new PaletteDesigner.Pages.MenuPage();
             this.pageDesignToolTips = new Krypton.Navigator.KryptonPage();
             this.toolTipsPage1 = new PaletteDesigner.Pages.ToolTipsPage();
+            this.pageDesignImageViewer = new Krypton.Navigator.KryptonPage();
+            this.imageViewerControl = new PaletteDesigner.Pages.ImageViewerPage();
             this.kryptonHeaderGroupProperties = new Krypton.Toolkit.KryptonHeaderGroup();
+            this.buttonSpecIncFont = new Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.buttonSpecDecFont = new Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.buttonSpecHelp = new Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.kryptonSplitContainerProperties = new Krypton.Toolkit.KryptonSplitContainer();
-            this.propertyGridKCT = new System.Windows.Forms.PropertyGrid();
+            this.colorTableGrid = new System.Windows.Forms.DataGridView();
+            this.colorTableToolStrip = new System.Windows.Forms.ToolStrip();
+            this.filterToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.searchColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterSeparatorToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.resetFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.exportAsCsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAsClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toggleFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoFillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -410,6 +429,7 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageTopTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopMenuItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopToolTips)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageTopImageViewer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanelMainFill)).BeginInit();
             this.kryptonPanelMainFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerMain)).BeginInit();
@@ -637,6 +657,8 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignToolTips)).BeginInit();
             this.pageDesignToolTips.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageDesignImageViewer)).BeginInit();
+            this.pageDesignImageViewer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroupProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroupProperties.Panel)).BeginInit();
             this.kryptonHeaderGroupProperties.Panel.SuspendLayout();
@@ -838,7 +860,8 @@ namespace PaletteDesigner
             this.pageTopTabs,
             this.pageTopTrackBar,
             this.pageTopMenuItems,
-            this.pageTopToolTips});
+            this.pageTopToolTips,
+            this.pageTopImageViewer});
             this.kryptonNavigatorTop.SelectedIndex = 0;
             this.kryptonNavigatorTop.Size = new System.Drawing.Size(1162, 51);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
@@ -864,7 +887,7 @@ namespace PaletteDesigner
             this.pageTopRibbon.Name = "pageTopRibbon";
             this.pageTopRibbon.Size = new System.Drawing.Size(100, 100);
             this.pageTopRibbon.Text = "Ribbon";
-            this.pageTopRibbon.ToolTipTitle = "Page ToolTip";
+            this.pageTopRibbon.ToolTipTitle = "Page Ribbon";
             this.pageTopRibbon.UniqueName = "F7A49B746D4C486AF7A49B746D4C486A";
             //
             // pageTopLists
@@ -878,7 +901,7 @@ namespace PaletteDesigner
             this.pageTopLists.Name = "pageTopLists";
             this.pageTopLists.Size = new System.Drawing.Size(75, 81);
             this.pageTopLists.Text = "Lists";
-            this.pageTopLists.ToolTipTitle = "Page ToolTip";
+            this.pageTopLists.ToolTipTitle = "Page Lists";
             this.pageTopLists.UniqueName = "f7b778d5010243c187721c2618d605fe";
             //
             // pageTopControls
@@ -893,7 +916,7 @@ namespace PaletteDesigner
             this.pageTopControls.Name = "pageTopControls";
             this.pageTopControls.Size = new System.Drawing.Size(787, 50);
             this.pageTopControls.Text = "Controls";
-            this.pageTopControls.ToolTipTitle = "Page ToolTip";
+            this.pageTopControls.ToolTipTitle = "Page Controls";
             this.pageTopControls.UniqueName = "3BAC6637703940CB3BAC6637703940CB";
             //
             // pageTopInputControls
@@ -906,7 +929,7 @@ namespace PaletteDesigner
             this.pageTopInputControls.Name = "pageTopInputControls";
             this.pageTopInputControls.Size = new System.Drawing.Size(100, 100);
             this.pageTopInputControls.Text = "Input Controls";
-            this.pageTopInputControls.ToolTipTitle = "Page ToolTip";
+            this.pageTopInputControls.ToolTipTitle = "Page Input Controls";
             this.pageTopInputControls.UniqueName = "D367C5BB74D04696D367C5BB74D04696";
             //
             // pageTopButtonSpecs
@@ -921,7 +944,7 @@ namespace PaletteDesigner
             this.pageTopButtonSpecs.Name = "pageTopButtonSpecs";
             this.pageTopButtonSpecs.Size = new System.Drawing.Size(787, 50);
             this.pageTopButtonSpecs.Text = "ButtonSpecs";
-            this.pageTopButtonSpecs.ToolTipTitle = "Page ToolTip";
+            this.pageTopButtonSpecs.ToolTipTitle = "Page ButtonSpecs";
             this.pageTopButtonSpecs.UniqueName = "3482463805154E213482463805154E21";
             //
             // pageTopButtons
@@ -936,7 +959,7 @@ namespace PaletteDesigner
             this.pageTopButtons.Name = "pageTopButtons";
             this.pageTopButtons.Size = new System.Drawing.Size(787, 50);
             this.pageTopButtons.Text = "Buttons";
-            this.pageTopButtons.ToolTipTitle = "Page ToolTip";
+            this.pageTopButtons.ToolTipTitle = "Page Buttons";
             this.pageTopButtons.UniqueName = "56048893FA064ECE56048893FA064ECE";
             //
             // pageTopCheckBox
@@ -949,7 +972,7 @@ namespace PaletteDesigner
             this.pageTopCheckBox.Name = "pageTopCheckBox";
             this.pageTopCheckBox.Size = new System.Drawing.Size(100, 100);
             this.pageTopCheckBox.Text = "CheckBox";
-            this.pageTopCheckBox.ToolTipTitle = "Page ToolTip";
+            this.pageTopCheckBox.ToolTipTitle = "Page CheckBox";
             this.pageTopCheckBox.UniqueName = "745B9534A0BD44F7745B9534A0BD44F7";
             //
             // pageTopChromeTMS
@@ -964,7 +987,7 @@ namespace PaletteDesigner
             this.pageTopChromeTMS.Name = "pageTopChromeTMS";
             this.pageTopChromeTMS.Size = new System.Drawing.Size(787, 50);
             this.pageTopChromeTMS.Text = "Chrome + TMS";
-            this.pageTopChromeTMS.ToolTipTitle = "Page ToolTip";
+            this.pageTopChromeTMS.ToolTipTitle = "Page Chrome + TMS";
             this.pageTopChromeTMS.UniqueName = "E85832DBA6CF476EE85832DBA6CF476E";
             //
             // pageTopGrids
@@ -977,7 +1000,7 @@ namespace PaletteDesigner
             this.pageTopGrids.Name = "pageTopGrids";
             this.pageTopGrids.Size = new System.Drawing.Size(100, 100);
             this.pageTopGrids.Text = "Grids";
-            this.pageTopGrids.ToolTipTitle = "Page ToolTip";
+            this.pageTopGrids.ToolTipTitle = "Page Grids";
             this.pageTopGrids.UniqueName = "AF995F9D48C04DF2AF995F9D48C04DF2";
             //
             // pageTopHeaderGroup
@@ -992,7 +1015,7 @@ namespace PaletteDesigner
             this.pageTopHeaderGroup.Name = "pageTopHeaderGroup";
             this.pageTopHeaderGroup.Size = new System.Drawing.Size(787, 50);
             this.pageTopHeaderGroup.Text = "HeaderGroup";
-            this.pageTopHeaderGroup.ToolTipTitle = "Page ToolTip";
+            this.pageTopHeaderGroup.ToolTipTitle = "Page HeaderGroup";
             this.pageTopHeaderGroup.UniqueName = "4E56EC4CBFD442284E56EC4CBFD44228";
             //
             // pageTopHeaders
@@ -1007,7 +1030,7 @@ namespace PaletteDesigner
             this.pageTopHeaders.Name = "pageTopHeaders";
             this.pageTopHeaders.Size = new System.Drawing.Size(787, 50);
             this.pageTopHeaders.Text = "Headers";
-            this.pageTopHeaders.ToolTipTitle = "Page ToolTip";
+            this.pageTopHeaders.ToolTipTitle = "Page Headers";
             this.pageTopHeaders.UniqueName = "8C92BD9E0DED45D28C92BD9E0DED45D2";
             //
             // pageTopDateTime
@@ -1020,7 +1043,7 @@ namespace PaletteDesigner
             this.pageTopDateTime.Name = "pageTopDateTime";
             this.pageTopDateTime.Size = new System.Drawing.Size(100, 100);
             this.pageTopDateTime.Text = "Date Time";
-            this.pageTopDateTime.ToolTipTitle = "Page ToolTip";
+            this.pageTopDateTime.ToolTipTitle = "Page Date Time";
             this.pageTopDateTime.UniqueName = "26E3658BC339416626E3658BC3394166";
             //
             // pageTopLabels
@@ -1035,7 +1058,7 @@ namespace PaletteDesigner
             this.pageTopLabels.Name = "pageTopLabels";
             this.pageTopLabels.Size = new System.Drawing.Size(787, 50);
             this.pageTopLabels.Text = "Labels";
-            this.pageTopLabels.ToolTipTitle = "Page ToolTip";
+            this.pageTopLabels.ToolTipTitle = "Page Labels";
             this.pageTopLabels.UniqueName = "E32EFBB14A214C75E32EFBB14A214C75";
             //
             // pageTopNavigator
@@ -1050,7 +1073,7 @@ namespace PaletteDesigner
             this.pageTopNavigator.Name = "pageTopNavigator";
             this.pageTopNavigator.Size = new System.Drawing.Size(787, 50);
             this.pageTopNavigator.Text = "Navigator";
-            this.pageTopNavigator.ToolTipTitle = "Page ToolTip";
+            this.pageTopNavigator.ToolTipTitle = "Page Navigator";
             this.pageTopNavigator.UniqueName = "D7426FCF612042A2D7426FCF612042A2";
             //
             // pageTopPanels
@@ -1065,7 +1088,7 @@ namespace PaletteDesigner
             this.pageTopPanels.Name = "pageTopPanels";
             this.pageTopPanels.Size = new System.Drawing.Size(787, 50);
             this.pageTopPanels.Text = "Panels";
-            this.pageTopPanels.ToolTipTitle = "Page ToolTip";
+            this.pageTopPanels.ToolTipTitle = "Page Panels";
             this.pageTopPanels.UniqueName = "0E2D1DD7365B4A8F0E2D1DD7365B4A8F";
             //
             // pageTopRadioButton
@@ -1078,7 +1101,7 @@ namespace PaletteDesigner
             this.pageTopRadioButton.Name = "pageTopRadioButton";
             this.pageTopRadioButton.Size = new System.Drawing.Size(100, 100);
             this.pageTopRadioButton.Text = "RadioButton";
-            this.pageTopRadioButton.ToolTipTitle = "Page ToolTip";
+            this.pageTopRadioButton.ToolTipTitle = "Page RadioButton";
             this.pageTopRadioButton.UniqueName = "E7F6061FFA694A7DE7F6061FFA694A7D";
             //
             // pageTopSeparators
@@ -1093,7 +1116,7 @@ namespace PaletteDesigner
             this.pageTopSeparators.Name = "pageTopSeparators";
             this.pageTopSeparators.Size = new System.Drawing.Size(787, 50);
             this.pageTopSeparators.Text = "Separators";
-            this.pageTopSeparators.ToolTipTitle = "Page ToolTip";
+            this.pageTopSeparators.ToolTipTitle = "Page Separators";
             this.pageTopSeparators.UniqueName = "AA052D0D183F4125AA052D0D183F4125";
             //
             // pageTopTabs
@@ -1108,7 +1131,7 @@ namespace PaletteDesigner
             this.pageTopTabs.Name = "pageTopTabs";
             this.pageTopTabs.Size = new System.Drawing.Size(100, 100);
             this.pageTopTabs.Text = "Tabs";
-            this.pageTopTabs.ToolTipTitle = "Page ToolTip";
+            this.pageTopTabs.ToolTipTitle = "Page Tabs";
             this.pageTopTabs.UniqueName = "461B49C26EBB4816461B49C26EBB4816";
             //
             // pageTopTrackBar
@@ -1121,7 +1144,7 @@ namespace PaletteDesigner
             this.pageTopTrackBar.Name = "pageTopTrackBar";
             this.pageTopTrackBar.Size = new System.Drawing.Size(100, 100);
             this.pageTopTrackBar.Text = "TrackBar";
-            this.pageTopTrackBar.ToolTipTitle = "Page ToolTip";
+            this.pageTopTrackBar.ToolTipTitle = "Page TrackBar";
             this.pageTopTrackBar.UniqueName = "8EA51AFFC0D843D551B44BCB916273AC";
             //
             // pageTopMenuItems
@@ -1134,7 +1157,7 @@ namespace PaletteDesigner
             this.pageTopMenuItems.Name = "pageTopMenuItems";
             this.pageTopMenuItems.Size = new System.Drawing.Size(75, 81);
             this.pageTopMenuItems.Text = "Menu Items";
-            this.pageTopMenuItems.ToolTipTitle = "Page ToolTip";
+            this.pageTopMenuItems.ToolTipTitle = "Page Menu Items";
             this.pageTopMenuItems.UniqueName = "95c2ec35c075402bac013139a5f5b16a";
             //
             // pageTopToolTips
@@ -1148,6 +1171,41 @@ namespace PaletteDesigner
             this.pageTopToolTips.Text = "ToolTips";
             this.pageTopToolTips.ToolTipTitle = "Page ToolTip";
             this.pageTopToolTips.UniqueName = "a5f1868720aa41f2bdba83ff2b9fb8f1";
+            //
+            // pageTopImageViewer
+            //
+            this.pageTopImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pageTopImageViewer.Flags = 65534;
+            this.pageTopImageViewer.LastVisibleSet = true;
+            this.pageTopImageViewer.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageTopImageViewer.Name = "pageTopImageViewer";
+            this.pageTopImageViewer.Size = new System.Drawing.Size(100, 100);
+            this.pageTopImageViewer.Text = "Image Viewer";
+            this.pageTopImageViewer.ToolTipTitle = "Page Image Viewer";
+            this.pageTopImageViewer.UniqueName = "B916273AC8EA51AFFC0D843D551B44BC";
+            //
+            // pageDesignImageViewer
+            //
+            this.pageDesignImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pageDesignImageViewer.Controls.Add(this.imageViewerControl);
+            this.pageDesignImageViewer.Flags = 65534;
+            this.pageDesignImageViewer.LastVisibleSet = true;
+            this.pageDesignImageViewer.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignImageViewer.Name = "pageDesignImageViewer";
+            this.pageDesignImageViewer.Size = new System.Drawing.Size(100, 100);
+            this.pageDesignImageViewer.Text = "Design Image Viewer";
+            this.pageDesignImageViewer.TextDescription = "Image Viewer tool";
+            this.pageDesignImageViewer.TextTitle = "Image Viwer";
+            this.pageDesignImageViewer.ToolTipTitle = "Page Image Viwer";
+            this.pageDesignImageViewer.UniqueName = "6f05bdb3fdc53b69d40018357b40e5a8";
+            //
+            // imageViewerControl
+            //
+            this.imageViewerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageViewerControl.Location = new System.Drawing.Point(0, 0);
+            this.imageViewerControl.Name = "imageViewerControl";
+            this.imageViewerControl.Size = new System.Drawing.Size(100, 100);
+            this.imageViewerControl.TabIndex = 0;
             //
             // kryptonPanelMainFill
             //
@@ -1229,7 +1287,8 @@ namespace PaletteDesigner
             this.pageDesignTabs,
             this.pageDesignTrackBar,
             this.pageDesignMenuItems,
-            this.pageDesignToolTips});
+            this.pageDesignToolTips,
+            this.pageDesignImageViewer});
             this.kryptonNavigatorDesign.SelectedIndex = 0;
             this.kryptonNavigatorDesign.Size = new System.Drawing.Size(646, 577);
             this.kryptonNavigatorDesign.TabIndex = 2;
@@ -4639,7 +4698,7 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.Name = "pageDesignMenuItems";
             this.pageDesignMenuItems.Size = new System.Drawing.Size(75, 81);
             this.pageDesignMenuItems.Text = "Design Menu";
-            this.pageDesignMenuItems.TextDescription = "Menu Items appearance and colours";
+            this.pageDesignMenuItems.TextDescription = "Menu Items appearance and colors";
             this.pageDesignMenuItems.TextTitle = "Menu Items";
             this.pageDesignMenuItems.ToolTipTitle = "Page ToolTip";
             this.pageDesignMenuItems.UniqueName = "3b145a74e97040d083a4ebf8412d67ad";
@@ -4663,7 +4722,7 @@ namespace PaletteDesigner
             this.pageDesignToolTips.Name = "pageDesignToolTips";
             this.pageDesignToolTips.Size = new System.Drawing.Size(100, 100);
             this.pageDesignToolTips.Text = "Design ToolTips";
-            this.pageDesignToolTips.TextDescription = "Tool Tips appearance and colours";
+            this.pageDesignToolTips.TextDescription = "Tool Tips appearance and colors";
             this.pageDesignToolTips.TextTitle = "Tool Tips";
             this.pageDesignToolTips.ToolTipTitle = "Page ToolTip";
             this.pageDesignToolTips.UniqueName = "69d40018357b40e5a86f05bdb3fdc53b";
@@ -4679,6 +4738,11 @@ namespace PaletteDesigner
             //
             // kryptonHeaderGroupProperties
             //
+            this.kryptonHeaderGroupProperties.AllowButtonSpecToolTips = false;
+            this.kryptonHeaderGroupProperties.ButtonSpecs.AddRange(new Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.buttonSpecIncFont,
+            this.buttonSpecDecFont,
+            this.buttonSpecHelp});
             this.kryptonHeaderGroupProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroupProperties.HeaderVisibleSecondary = false;
             this.kryptonHeaderGroupProperties.Location = new System.Drawing.Point(0, 0);
@@ -4716,24 +4780,170 @@ namespace PaletteDesigner
             //
             // kryptonSplitContainerProperties.Panel2
             //
-            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.propertyGridKCT);
+            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableGrid);
+            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableToolStrip);
             this.kryptonSplitContainerProperties.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainerProperties.Size = new System.Drawing.Size(497, 545);
             this.kryptonSplitContainerProperties.SplitterDistance = 248;
             this.kryptonSplitContainerProperties.SplitterWidth = 7;
             this.kryptonSplitContainerProperties.TabIndex = 0;
             //
-            // propertyGridKCT
+            // colorTableGrid
             //
-            this.propertyGridKCT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGridKCT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGridKCT.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.propertyGridKCT.Location = new System.Drawing.Point(0, 0);
-            this.propertyGridKCT.Name = "propertyGridKCT";
-            this.propertyGridKCT.Size = new System.Drawing.Size(245, 545);
-            this.propertyGridKCT.TabIndex = 1;
-            this.propertyGridKCT.ToolbarVisible = true;
-            this.propertyGridKCT.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
+            this.colorTableGrid.AllowUserToAddRows = false;
+            this.colorTableGrid.AllowUserToDeleteRows = false;
+            this.colorTableGrid.AllowUserToResizeColumns = true;
+            this.colorTableGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.colorTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.colorTableGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorTableGrid.Location = new System.Drawing.Point(0, 0);
+            this.colorTableGrid.Name = "colorTableGrid";
+            this.colorTableGrid.ReadOnly = true;
+            this.colorTableGrid.RowHeadersVisible = false;
+            this.colorTableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.colorTableGrid.Size = new System.Drawing.Size(245, 545);
+            this.colorTableGrid.TabIndex = 1;
+            this.colorTableGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorTableGrid_KeyDown);
+            this.colorTableGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ColorTableGrid_EditingControlShowing);
+            //
+            // colorTableToolStrip
+            //
+            this.colorTableToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterToolStripDropDownButton,
+            this.exportToolStripDropDownButton,
+            this.optionsToolStripDropDownButton});
+            this.colorTableToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.colorTableToolStrip.Name = "colorTableToolStrip";
+            this.colorTableToolStrip.Size = new System.Drawing.Size(245, 25);
+            this.colorTableToolStrip.TabIndex = 0;
+            this.colorTableToolStrip.Text = "Color Table Tools";
+            //
+            // filterToolStripDropDownButton
+            //
+            this.filterToolStripDropDownButton.AutoToolTip = false;
+            this.filterToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.filterToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchColorToolStripMenuItem,
+            this.filterByColorToolStripMenuItem,
+            this.filterByNameToolStripMenuItem,
+            this.filterSeparatorToolStripSeparator,
+            this.resetFiltersToolStripMenuItem});
+            this.filterToolStripDropDownButton.Name = "filterToolStripDropDownButton";
+            this.filterToolStripDropDownButton.Size = new System.Drawing.Size(45, 22);
+            this.filterToolStripDropDownButton.Text = "Filter";
+            //
+            // searchColorToolStripMenuItem
+            //
+            this.searchColorToolStripMenuItem.Name = "searchColorToolStripMenuItem";
+            this.searchColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.searchColorToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchColorToolStripMenuItem.Text = "Search Color...";
+            this.searchColorToolStripMenuItem.Click += new System.EventHandler(this.SearchColorToolStripMenuItem_Click);
+            //
+            // filterByColorToolStripMenuItem
+            //
+            this.filterByColorToolStripMenuItem.Name = "filterByColorToolStripMenuItem";
+            this.filterByColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.C)));
+            this.filterByColorToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.filterByColorToolStripMenuItem.Text = "Filter by Color...";
+            this.filterByColorToolStripMenuItem.Click += new System.EventHandler(this.FilterByColorToolStripMenuItem_Click);
+            //
+            // filterByNameToolStripMenuItem
+            //
+            this.filterByNameToolStripMenuItem.Name = "filterByNameToolStripMenuItem";
+            this.filterByNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.F)));
+            this.filterByNameToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.filterByNameToolStripMenuItem.Text = "Filter by Name...";
+            this.filterByNameToolStripMenuItem.Click += new System.EventHandler(this.FilterByNameToolStripMenuItem_Click);
+            //
+            // filterSeparatorToolStripSeparator
+            //
+            this.filterSeparatorToolStripSeparator.Name = "filterSeparatorToolStripSeparator";
+            this.filterSeparatorToolStripSeparator.Size = new System.Drawing.Size(231, 6);
+            //
+            // resetFiltersToolStripMenuItem
+            //
+            this.resetFiltersToolStripMenuItem.Name = "resetFiltersToolStripMenuItem";
+            this.resetFiltersToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.R)));
+            this.resetFiltersToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.resetFiltersToolStripMenuItem.Text = "Reset Filters";
+            this.resetFiltersToolStripMenuItem.Click += new System.EventHandler(this.ResetFiltersToolStripMenuItem_Click);
+            //
+            // exportToolStripDropDownButton
+            //
+            this.exportToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.exportToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportAsCsvToolStripMenuItem,
+            this.exportAsClassToolStripMenuItem});
+            this.exportToolStripDropDownButton.AutoToolTip = false;
+            this.exportToolStripDropDownButton.Name = "exportToolStripDropDownButton";
+            this.exportToolStripDropDownButton.Size = new System.Drawing.Size(51, 22);
+            this.exportToolStripDropDownButton.Text = "Export";
+            //
+            // exportAsCsvToolStripMenuItem
+            //
+            this.exportAsCsvToolStripMenuItem.Name = "exportAsCsvToolStripMenuItem";
+            this.exportAsCsvToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exportAsCsvToolStripMenuItem.Text = "Export as CSV";
+            this.exportAsCsvToolStripMenuItem.Click += new System.EventHandler(this.ExportAsCsvToolStripMenuItem_Click);
+            //
+            // exportAsClassToolStripMenuItem
+            //
+            this.exportAsClassToolStripMenuItem.Name = "exportAsClassToolStripMenuItem";
+            this.exportAsClassToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exportAsClassToolStripMenuItem.Text = "Export as Class";
+            this.exportAsClassToolStripMenuItem.Click += new System.EventHandler(this.ExportAsClassToolStripMenuItem_Click);
+            //
+            // optionsToolStripDropDownButton
+            //
+            this.optionsToolStripDropDownButton.AutoToolTip = false;
+            this.optionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.optionsToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toggleFormatToolStripMenuItem,
+            this.autoFillToolStripMenuItem});
+            this.optionsToolStripDropDownButton.Name = "optionsToolStripDropDownButton";
+            this.optionsToolStripDropDownButton.Size = new System.Drawing.Size(56, 22);
+            this.optionsToolStripDropDownButton.Text = "Options";
+            //
+            // toggleFormatToolStripMenuItem
+            //
+            this.toggleFormatToolStripMenuItem.CheckOnClick = true;
+            this.toggleFormatToolStripMenuItem.Name = "toggleFormatToolStripMenuItem";
+            this.toggleFormatToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.toggleFormatToolStripMenuItem.Text = "Show Hex Values";
+            this.toggleFormatToolStripMenuItem.Click += new System.EventHandler(this.ToggleFormatToolStripMenuItem_Click);
+            //
+            // autoFillToolStripMenuItem
+            //
+            this.autoFillToolStripMenuItem.CheckOnClick = true;
+            this.autoFillToolStripMenuItem.Name = "autoFillToolStripMenuItem";
+            this.autoFillToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.autoFillToolStripMenuItem.Text = "Auto-Fill Color in Grid";
+            this.autoFillToolStripMenuItem.CheckedChanged += new System.EventHandler(this.AutoFillToolStripMenuItem_CheckedChanged);
+            //
+            // buttonSpecIncFont
+            //
+            this.buttonSpecIncFont.Text = "+";
+            this.buttonSpecIncFont.ToolTipTitle = "Increase Font Size";
+            this.buttonSpecIncFont.UniqueName = "IncFont";
+            this.buttonSpecIncFont.Click += new System.EventHandler(this.ButtonSpecIncFont_Click);
+            //
+            // buttonSpecDecFont
+            //
+            this.buttonSpecDecFont.Text = "-";
+            this.buttonSpecDecFont.ToolTipTitle = "Decrease Font Size";
+            this.buttonSpecDecFont.UniqueName = "DecFont";
+            this.buttonSpecDecFont.Click += new System.EventHandler(this.ButtonSpecDecFont_Click);
+            //
+            // buttonSpecHelp
+            //
+            this.buttonSpecHelp.Text = "?";
+            this.buttonSpecHelp.ToolTipTitle = "Palette Designer – Shortcuts";
+            this.buttonSpecHelp.UniqueName = "HelpSpec";
+            this.buttonSpecHelp.Click += new System.EventHandler(this.ButtonSpecHelp_Click);
             //
             // dataGridViewTextBoxColumn1
             //
@@ -4920,6 +5130,7 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageTopTabs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopMenuItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageTopImageViewer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopToolTips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanelMainFill)).EndInit();
             this.kryptonPanelMainFill.ResumeLayout(false);
@@ -5160,6 +5371,8 @@ namespace PaletteDesigner
             this.pageDesignTrackBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignMenuItems)).EndInit();
             this.pageDesignMenuItems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pageDesignImageViewer)).EndInit();
+            this.pageDesignImageViewer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignToolTips)).EndInit();
             this.pageDesignToolTips.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel1)).EndInit();
@@ -5232,7 +5445,20 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripMenuItem menuExit;
         private System.Windows.Forms.PropertyGrid propertyGrid;
         private Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainerProperties;
-        private System.Windows.Forms.PropertyGrid propertyGridKCT;
+        private System.Windows.Forms.DataGridView colorTableGrid;
+        private System.Windows.Forms.ToolStrip colorTableToolStrip;
+        private System.Windows.Forms.ToolStripDropDownButton filterToolStripDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem searchColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filterByColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filterByNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator filterSeparatorToolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem resetFiltersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton exportToolStripDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem exportAsCsvToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAsClassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton optionsToolStripDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem toggleFormatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoFillToolStripMenuItem;
         private Krypton.Toolkit.KryptonPanel borderDesignControls;
         private Krypton.Toolkit.KryptonLabel labelControlsNormal;
         private Krypton.Toolkit.KryptonLabel labelControlsDisabled;
@@ -5520,7 +5746,9 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageDesignMenuItems;
         private Krypton.Navigator.KryptonPage pageTopMenuItems;
         private Krypton.Navigator.KryptonPage pageTopToolTips;
+        private Krypton.Navigator.KryptonPage pageTopImageViewer;
         private Krypton.Navigator.KryptonPage pageDesignToolTips;
+        private Krypton.Navigator.KryptonPage pageDesignImageViewer;
         private Pages.ToolTipsPage toolTipsPage1;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem launchPaletteUpgradeToolToolStripMenuItem;
@@ -5531,5 +5759,9 @@ namespace PaletteDesigner
         private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn1;
         private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn2;
         private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn3;
+        private PaletteDesigner.Pages.ImageViewerPage imageViewerControl;
+        private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecIncFont;
+        private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecDecFont;
+        private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecHelp;
     }
 }

@@ -102,6 +102,21 @@ public class SettingsManager
     public void SetExportClassFolder(string path) => _settings.ExportClassFolder = path;
     public string GetExportClassFolder() => _settings.ExportClassFolder;
 
+    public void SetLastImagePath(string path) => _settings.LastImagePath = path;
+    public string GetLastImagePath() => _settings.LastImagePath;
+
+    public void SetLastRegionStoragePath(string path) => _settings.LastRegionStoragePath = path;
+    public string GetLastRegionStoragePath() => _settings.LastRegionStoragePath;
+
+    public void SetLastImageFolder(string folder) => _settings.LastImageFolder = folder;
+    public string GetLastImageFolder() => _settings.LastImageFolder;
+
+    public void SetRestoreLastImageOnStartup(bool value) => _settings.RestoreLastImageOnStartup = value;
+    public bool GetRestoreLastImageOnStartup() => _settings.RestoreLastImageOnStartup;
+
+    public void SetRestoreLastRegionsOnStartup(bool value) => _settings.RestoreLastRegionsOnStartup = value;
+    public bool GetRestoreLastRegionsOnStartup() => _settings.RestoreLastRegionsOnStartup;
+
     #endregion
 
     #region Public
@@ -172,6 +187,10 @@ public class SettingsManager
                 SetTheme(PaletteMode.Microsoft365Blue);
 
                 SetThemeSelectedIndex((int)PaletteMode.Microsoft365Silver);
+
+                SetRestoreLastImageOnStartup(true);
+
+                SetRestoreLastRegionsOnStartup(true);
             }
         }
         else
@@ -185,6 +204,10 @@ public class SettingsManager
             SetThemeSelectedIndex((int)PaletteMode.Microsoft365Silver);
 
             SetUpgradeOnImport(false);
+
+            SetRestoreLastImageOnStartup(true);
+
+            SetRestoreLastRegionsOnStartup(true);
         }
 
         SaveSettings(owner, useConfirmation);

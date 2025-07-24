@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+---
+- Do not add namespaces to C# files, but to `GlobalUsings.cs`
+- no single line statements, always use curly brackets to enclose code on separate lines
+- NEVER put a lambda into a designer file, it breaks the WinForm editor!
+- NO RUNTIME COMPONENT INITIALIZATION, ALL MUST BE IN WinForms' Designer.cs file!!!
+- WinForm event handlers on components should always be within the Designer.cs file, not in code-behind!

@@ -18,6 +18,8 @@ public partial class SettingsControlPanel : KryptonForm
     private bool _newStartMaximised;
     private int _newThemeIndex;
     private bool _newUpgradeOnImport;
+    private bool _newRestoreLastImage;
+    private bool _newRestoreLastRegions;
     private PaletteMode _originalPaletteMode;
     private bool _committed;
 
@@ -55,6 +57,12 @@ public partial class SettingsControlPanel : KryptonForm
         _newUpgradeOnImport = _settingsManager.GetUpgradeOnImport();
         kchkUpgradePalette.Checked = _newUpgradeOnImport;
 
+        _newRestoreLastImage = _settingsManager.GetRestoreLastImageOnStartup();
+        kchkRestoreLastImage.Checked = _newRestoreLastImage;
+
+        _newRestoreLastRegions = _settingsManager.GetRestoreLastRegionsOnStartup();
+        kchkRestoreLastRegions.Checked = _newRestoreLastRegions;
+
         // Ensure dialog theme is up to date
         PaletteMode = _settingsManager.GetTheme();
         EnableResetButton(false);
@@ -80,6 +88,18 @@ public partial class SettingsControlPanel : KryptonForm
     {
         // Buffer change
         _newUpgradeOnImport = kchkUpgradePalette.Checked;
+        EnableResetButton(true);
+    }
+
+    private void kchkRestoreLastImage_CheckedChanged(object sender, EventArgs e)
+    {
+        _newRestoreLastImage = kchkRestoreLastImage.Checked;
+        EnableResetButton(true);
+    }
+
+    private void kchkRestoreLastRegions_CheckedChanged(object sender, EventArgs e)
+    {
+        _newRestoreLastRegions = kchkRestoreLastRegions.Checked;
         EnableResetButton(true);
     }
 
@@ -129,6 +149,12 @@ public partial class SettingsControlPanel : KryptonForm
         _newUpgradeOnImport = _settingsManager.GetUpgradeOnImport();
         kchkUpgradePalette.Checked = _newUpgradeOnImport;
 
+        _newRestoreLastImage = _settingsManager.GetRestoreLastImageOnStartup();
+        kchkRestoreLastImage.Checked = _newRestoreLastImage;
+
+        _newRestoreLastRegions = _settingsManager.GetRestoreLastRegionsOnStartup();
+        kchkRestoreLastRegions.Checked = _newRestoreLastRegions;
+
         EnableResetButton(true);
     }
 
@@ -139,6 +165,9 @@ public partial class SettingsControlPanel : KryptonForm
         _committed = true;
         _settingsManager.SetMaximised(_newStartMaximised);
         _settingsManager.SetUpgradeOnImport(_newUpgradeOnImport);
+
+        _settingsManager.SetRestoreLastImageOnStartup(_newRestoreLastImage);
+        _settingsManager.SetRestoreLastRegionsOnStartup(_newRestoreLastRegions);
         // Apply theme selection
         var selectedName = ktcmbTheme.GetItemText(ktcmbTheme.SelectedItem);
         if (selectedName != null)
@@ -169,8 +198,8 @@ public partial class SettingsControlPanel : KryptonForm
             _settingsManager.SaveSettings(this, ask);
         }
 
-        // Apply the new global palette
-        ThemeManager.ApplyTheme(_settingsManager.GetTheme(), new KryptonManager());
+        // Apply the new global palette using the shared KryptonManager instance
+        ThemeManager.ApplyTheme(_settingsManager.GetTheme(), _manager);
         Close();
     }
 

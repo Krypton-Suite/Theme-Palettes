@@ -12,7 +12,7 @@ namespace PaletteDesigner.Utilities;
 internal static class PaletteSchemeColorExtensions
 {
     /// <summary>
-    /// Retrieves a scheme colour from the supplied palette. Works for PaletteMicrosoft365Base and
+    /// Retrieves a scheme color from the supplied palette. Works for PaletteMicrosoft365Base and
     /// the additional *Base palettes under Extra Themes.
     /// </summary>
     public static Color GetSchemeColor(this PaletteBase palette, SchemeBaseColors colorEnum)
@@ -48,7 +48,7 @@ internal static class PaletteSchemeColorExtensions
     }
 
     /// <summary>
-    /// Updates a single scheme colour on the supplied palette. Supports both built-in and reflection paths.
+    /// Updates a single scheme color on the supplied palette. Supports both built-in and reflection paths.
     /// </summary>
     public static void SetSchemeColor(this PaletteBase palette, SchemeBaseColors colorEnum, Color newColor)
     {
@@ -63,7 +63,7 @@ internal static class PaletteSchemeColorExtensions
         {
             setter.Invoke(palette, new object[] { colorEnum, newColor });
 
-            // Ensure BaseColors scheme stays in sync with the updated ribbon colour
+            // Ensure BaseColors scheme stays in sync with the updated ribbon color
             if (TryGetBaseScheme(palette, out var nativeScheme))
             {
                 string propName = colorEnum.ToString();
@@ -83,14 +83,14 @@ internal static class PaletteSchemeColorExtensions
         }
         else
         {
-            // First, invalidate cached colour table to ensure it will be rebuilt
+            // First, invalidate cached color table to ensure it will be rebuilt
             FieldInfo? tableField = palette.GetType().GetField("Table", BindingFlags.NonPublic | BindingFlags.Instance);
             if (tableField != null)
             {
                 tableField.SetValue(palette, null);
             }
 
-            // Reflection fallback: mutate colour array in-place
+            // Reflection fallback: mutate color array in-place
             Color[]? scheme = GetColorArray(palette);
             if (scheme is { Length: > 0 } && (int)colorEnum < scheme.Length)
             {
@@ -120,7 +120,7 @@ internal static class PaletteSchemeColorExtensions
                 }
             }
 
-            // Invalidate cached colour table again after updates
+            // Invalidate cached color table again after updates
             if (tableField != null)
             {
                 tableField.SetValue(palette, null);

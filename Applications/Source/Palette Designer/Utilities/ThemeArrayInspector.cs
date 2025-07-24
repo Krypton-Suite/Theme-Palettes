@@ -109,7 +109,10 @@ internal static class ThemeArrayInspector
 
     private static void EnsureEnumNamesCached(string sourceRoot)
     {
-        if (_cachedEnumNames != null) return;
+        if (_cachedEnumNames != null)
+        {
+            return;
+        }
 
         string enumPath = Path.Combine(sourceRoot, EnumFileRelativePath.Replace('/', Path.DirectorySeparatorChar));
         if (!File.Exists(enumPath))
@@ -135,7 +138,10 @@ internal static class ThemeArrayInspector
         for (int i = 0; i < arrayNames.Count; i++)
         {
             var name = arrayNames[i];
-            if (string.IsNullOrEmpty(name)) continue;
+            if (string.IsNullOrEmpty(name))
+            {
+                continue;
+            }
             if (!arrayLookup.ContainsKey(name))
             {
                 arrayLookup[name] = i;
@@ -266,7 +272,10 @@ internal static class ThemeArrayInspector
 
     private static string Normalize(string token)
     {
-        if (string.IsNullOrWhiteSpace(token)) return token;
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            return token;
+        }
 
         var aliases = new Dictionary<string, string>(StringComparer.Ordinal)
         {
