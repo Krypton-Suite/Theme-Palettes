@@ -213,6 +213,9 @@ namespace PaletteDesigner
             this.pageDesignChromeTMS = new Krypton.Navigator.KryptonPage();
             this.pageDesignGrid = new Krypton.Navigator.KryptonPage();
             this.dataGridViewDisabled = new Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonDataGridViewTextBoxColumn4 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.kryptonDataGridViewTextBoxColumn5 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.kryptonDataGridViewTextBoxColumn6 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.dataSetGrid = new System.Data.DataSet();
             this.dataTable1 = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -222,6 +225,9 @@ namespace PaletteDesigner
             this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.dataGridViewNormal = new Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonDataGridViewTextBoxColumn1 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.kryptonDataGridViewTextBoxColumn2 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.kryptonDataGridViewTextBoxColumn3 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.kryptonNavigatorDesignGrids = new Krypton.Navigator.KryptonNavigator();
             this.kryptonGridList = new Krypton.Navigator.KryptonPage();
             this.kryptonGridSheet = new Krypton.Navigator.KryptonPage();
@@ -370,9 +376,14 @@ namespace PaletteDesigner
             this.buttonSpecIncFont = new Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.buttonSpecDecFont = new Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.buttonSpecHelp = new Krypton.Toolkit.ButtonSpecHeaderGroup();
-            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.kryptonSplitContainerProperties = new Krypton.Toolkit.KryptonSplitContainer();
+            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.colorTableGrid = new System.Windows.Forms.DataGridView();
+            this.fastFilterPanel = new Krypton.Toolkit.KryptonPanel();
+            this.filterByNameButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.filterByColorButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.fastFilterTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.fastFilterLabel = new Krypton.Toolkit.KryptonLabel();
             this.colorTableToolStrip = new System.Windows.Forms.ToolStrip();
             this.filterToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.searchColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -386,6 +397,7 @@ namespace PaletteDesigner
             this.optionsToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.toggleFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoFillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kryptonCheckSetQuickFilterButtons = new Krypton.Toolkit.KryptonCheckSet(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -399,12 +411,6 @@ namespace PaletteDesigner
             this.kryptonPage1 = new Krypton.Navigator.KryptonPage();
             this.kryptonCheckSetLabels = new Krypton.Toolkit.KryptonCheckSet(this.components);
             this.kryptonCheckSet1 = new Krypton.Toolkit.KryptonCheckSet(this.components);
-            this.kryptonDataGridViewTextBoxColumn1 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn2 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn3 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn4 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn5 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn6 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorTop)).BeginInit();
             this.kryptonNavigatorTop.SuspendLayout();
@@ -669,6 +675,11 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel2)).BeginInit();
             this.kryptonSplitContainerProperties.Panel2.SuspendLayout();
             this.kryptonSplitContainerProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorTableGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastFilterPanel)).BeginInit();
+            this.fastFilterPanel.SuspendLayout();
+            this.colorTableToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSetQuickFilterButtons)).BeginInit();
             this.mainToolStripContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup9.Panel)).BeginInit();
@@ -691,7 +702,7 @@ namespace PaletteDesigner
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.mainMenuStrip.Size = new System.Drawing.Size(1162, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1170, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip";
             //
@@ -718,17 +729,17 @@ namespace PaletteDesigner
             this.menuNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuNew.Name = "menuNew";
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuNew.Size = new System.Drawing.Size(155, 22);
+            this.menuNew.Size = new System.Drawing.Size(249, 22);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.MenuNew_Click);
             //
             // menuNewFromDefault
             //
-            this.menuNewFromDefault.Image = ((System.Drawing.Image)(resources.GetObject("menuNew.Image")));
+            this.menuNewFromDefault.Image = ((System.Drawing.Image)(resources.GetObject("menuNewFromDefault.Image")));
             this.menuNewFromDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuNewFromDefault.Name = "menuNewFromDefault";
             this.menuNewFromDefault.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuNewFromDefault.Size = new System.Drawing.Size(155, 22);
+            this.menuNewFromDefault.Size = new System.Drawing.Size(249, 22);
             this.menuNewFromDefault.Text = "New from Default Theme";
             this.menuNewFromDefault.Click += new System.EventHandler(this.MenuNewFromDefault_Click);
             //
@@ -738,14 +749,14 @@ namespace PaletteDesigner
             this.menuOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuOpen.Name = "menuOpen";
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuOpen.Size = new System.Drawing.Size(155, 22);
+            this.menuOpen.Size = new System.Drawing.Size(249, 22);
             this.menuOpen.Text = "Open...";
             this.menuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             //
             // menuSep1
             //
             this.menuSep1.Name = "menuSep1";
-            this.menuSep1.Size = new System.Drawing.Size(152, 6);
+            this.menuSep1.Size = new System.Drawing.Size(246, 6);
             //
             // menuSave
             //
@@ -753,7 +764,7 @@ namespace PaletteDesigner
             this.menuSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSave.Name = "menuSave";
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuSave.Size = new System.Drawing.Size(155, 22);
+            this.menuSave.Size = new System.Drawing.Size(249, 22);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.MenuSave_Click);
             //
@@ -762,30 +773,30 @@ namespace PaletteDesigner
             this.menuSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("menuSaveAs.Image")));
             this.menuSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSaveAs.Name = "menuSaveAs";
-            this.menuSaveAs.Size = new System.Drawing.Size(155, 22);
+            this.menuSaveAs.Size = new System.Drawing.Size(249, 22);
             this.menuSaveAs.Text = "Save As...";
             this.menuSaveAs.Click += new System.EventHandler(this.MenuSaveAs_Click);
             //
             // menuSep2
             //
             this.menuSep2.Name = "menuSep2";
-            this.menuSep2.Size = new System.Drawing.Size(152, 6);
+            this.menuSep2.Size = new System.Drawing.Size(246, 6);
             //
             // recentThemesToolStripMenuItem
             //
             this.recentThemesToolStripMenuItem.Name = "recentThemesToolStripMenuItem";
-            this.recentThemesToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.recentThemesToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.recentThemesToolStripMenuItem.Text = "&Recent Themes";
             //
             // toolStripMenuItem1
             //
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(246, 6);
             //
             // menuExit
             //
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(155, 22);
+            this.menuExit.Size = new System.Drawing.Size(249, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.MenuExit_Click);
             //
@@ -863,7 +874,7 @@ namespace PaletteDesigner
             this.pageTopToolTips,
             this.pageTopImageViewer});
             this.kryptonNavigatorTop.SelectedIndex = 0;
-            this.kryptonNavigatorTop.Size = new System.Drawing.Size(1162, 51);
+            this.kryptonNavigatorTop.Size = new System.Drawing.Size(1170, 51);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5, 5, 5, 0);
             this.kryptonNavigatorTop.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
@@ -896,7 +907,7 @@ namespace PaletteDesigner
             this.pageTopLists.Flags = 65534;
             this.pageTopLists.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonGActual;
             this.pageTopLists.LastVisibleSet = true;
-            this.pageTopLists.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pageTopLists.Margin = new System.Windows.Forms.Padding(2);
             this.pageTopLists.MinimumSize = new System.Drawing.Size(38, 41);
             this.pageTopLists.Name = "pageTopLists";
             this.pageTopLists.Size = new System.Drawing.Size(75, 81);
@@ -1152,7 +1163,7 @@ namespace PaletteDesigner
             this.pageTopMenuItems.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopMenuItems.Flags = 65534;
             this.pageTopMenuItems.LastVisibleSet = true;
-            this.pageTopMenuItems.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pageTopMenuItems.Margin = new System.Windows.Forms.Padding(2);
             this.pageTopMenuItems.MinimumSize = new System.Drawing.Size(38, 41);
             this.pageTopMenuItems.Name = "pageTopMenuItems";
             this.pageTopMenuItems.Size = new System.Drawing.Size(75, 81);
@@ -1184,37 +1195,14 @@ namespace PaletteDesigner
             this.pageTopImageViewer.ToolTipTitle = "Page Image Viewer";
             this.pageTopImageViewer.UniqueName = "B916273AC8EA51AFFC0D843D551B44BC";
             //
-            // pageDesignImageViewer
-            //
-            this.pageDesignImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageDesignImageViewer.Controls.Add(this.imageViewerControl);
-            this.pageDesignImageViewer.Flags = 65534;
-            this.pageDesignImageViewer.LastVisibleSet = true;
-            this.pageDesignImageViewer.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageDesignImageViewer.Name = "pageDesignImageViewer";
-            this.pageDesignImageViewer.Size = new System.Drawing.Size(100, 100);
-            this.pageDesignImageViewer.Text = "Design Image Viewer";
-            this.pageDesignImageViewer.TextDescription = "Image Viewer tool";
-            this.pageDesignImageViewer.TextTitle = "Image Viwer";
-            this.pageDesignImageViewer.ToolTipTitle = "Page Image Viwer";
-            this.pageDesignImageViewer.UniqueName = "6f05bdb3fdc53b69d40018357b40e5a8";
-            //
-            // imageViewerControl
-            //
-            this.imageViewerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageViewerControl.Location = new System.Drawing.Point(0, 0);
-            this.imageViewerControl.Name = "imageViewerControl";
-            this.imageViewerControl.Size = new System.Drawing.Size(100, 100);
-            this.imageViewerControl.TabIndex = 0;
-            //
             // kryptonPanelMainFill
             //
             this.kryptonPanelMainFill.Controls.Add(this.kryptonSplitContainerMain);
             this.kryptonPanelMainFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanelMainFill.Location = new System.Drawing.Point(0, 75);
             this.kryptonPanelMainFill.Name = "kryptonPanelMainFill";
-            this.kryptonPanelMainFill.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.kryptonPanelMainFill.Size = new System.Drawing.Size(1162, 587);
+            this.kryptonPanelMainFill.Padding = new System.Windows.Forms.Padding(5);
+            this.kryptonPanelMainFill.Size = new System.Drawing.Size(1170, 563);
             this.kryptonPanelMainFill.TabIndex = 2;
             //
             // kryptonSplitContainerMain
@@ -1233,8 +1221,8 @@ namespace PaletteDesigner
             this.kryptonSplitContainerMain.Panel2.Controls.Add(this.kryptonHeaderGroupProperties);
             this.kryptonSplitContainerMain.Panel2MinSize = 200;
             this.kryptonSplitContainerMain.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainerMain.Size = new System.Drawing.Size(1152, 577);
-            this.kryptonSplitContainerMain.SplitterDistance = 646;
+            this.kryptonSplitContainerMain.Size = new System.Drawing.Size(1160, 553);
+            this.kryptonSplitContainerMain.SplitterDistance = 650;
             this.kryptonSplitContainerMain.SplitterWidth = 7;
             this.kryptonSplitContainerMain.TabIndex = 0;
             //
@@ -1290,7 +1278,7 @@ namespace PaletteDesigner
             this.pageDesignToolTips,
             this.pageDesignImageViewer});
             this.kryptonNavigatorDesign.SelectedIndex = 0;
-            this.kryptonNavigatorDesign.Size = new System.Drawing.Size(646, 577);
+            this.kryptonNavigatorDesign.Size = new System.Drawing.Size(650, 553);
             this.kryptonNavigatorDesign.TabIndex = 2;
             this.kryptonNavigatorDesign.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesign_SelectedPageChanged);
@@ -1303,8 +1291,8 @@ namespace PaletteDesigner
             this.pageDesignRibbon.LastVisibleSet = true;
             this.pageDesignRibbon.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageDesignRibbon.Name = "pageDesignRibbon";
-            this.pageDesignRibbon.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
-            this.pageDesignRibbon.Size = new System.Drawing.Size(644, 524);
+            this.pageDesignRibbon.Padding = new System.Windows.Forms.Padding(20);
+            this.pageDesignRibbon.Size = new System.Drawing.Size(648, 500);
             this.pageDesignRibbon.Text = "Design Ribbon";
             this.pageDesignRibbon.TextDescription = "Preview appearance of the Ribbon control.";
             this.pageDesignRibbon.TextTitle = "";
@@ -1319,7 +1307,7 @@ namespace PaletteDesigner
             this.pageLists.Controls.Add(this.kryptonGroupBox1);
             this.pageLists.Flags = 65534;
             this.pageLists.LastVisibleSet = true;
-            this.pageLists.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pageLists.Margin = new System.Windows.Forms.Padding(2);
             this.pageLists.MinimumSize = new System.Drawing.Size(38, 41);
             this.pageLists.Name = "pageLists";
             this.pageLists.Size = new System.Drawing.Size(644, 544);
@@ -1332,7 +1320,7 @@ namespace PaletteDesigner
             // kryptonGroupBox3
             //
             this.kryptonGroupBox3.Location = new System.Drawing.Point(16, 353);
-            this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(2);
             //
             // kryptonGroupBox3.Panel
             //
@@ -1354,7 +1342,7 @@ namespace PaletteDesigner
             listViewItem1,
             listViewItem2});
             this.kryptonListView3.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListView3.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView3.Name = "kryptonListView3";
             this.kryptonListView3.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView3.Size = new System.Drawing.Size(168, 107);
@@ -1373,7 +1361,7 @@ namespace PaletteDesigner
             "List 2",
             "List 3"});
             this.kryptonListBox3.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListBox3.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListBox3.Name = "kryptonListBox3";
             this.kryptonListBox3.ScrollAlwaysVisible = true;
             this.kryptonListBox3.Size = new System.Drawing.Size(98, 110);
@@ -1382,7 +1370,7 @@ namespace PaletteDesigner
             // kryptonGroupBox2
             //
             this.kryptonGroupBox2.Location = new System.Drawing.Point(18, 176);
-            this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(2);
             //
             // kryptonGroupBox2.Panel
             //
@@ -1404,7 +1392,7 @@ namespace PaletteDesigner
             listViewItem3,
             listViewItem4});
             this.kryptonListView2.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListView2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView2.Name = "kryptonListView2";
             this.kryptonListView2.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView2.Size = new System.Drawing.Size(168, 107);
@@ -1424,7 +1412,7 @@ namespace PaletteDesigner
             "List 2",
             "List 3"});
             this.kryptonListBox2.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListBox2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListBox2.Name = "kryptonListBox2";
             this.kryptonListBox2.ScrollAlwaysVisible = true;
             this.kryptonListBox2.Size = new System.Drawing.Size(98, 110);
@@ -1434,7 +1422,7 @@ namespace PaletteDesigner
             //
             this.kryptonGroupBox1.Enabled = false;
             this.kryptonGroupBox1.Location = new System.Drawing.Point(16, 2);
-            this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(2);
             //
             // kryptonGroupBox1.Panel
             //
@@ -1460,7 +1448,7 @@ namespace PaletteDesigner
             listViewItem5,
             listViewItem6});
             this.kryptonListView1.Location = new System.Drawing.Point(159, 11);
-            this.kryptonListView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListView1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListView1.Name = "kryptonListView1";
             this.kryptonListView1.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView1.Size = new System.Drawing.Size(168, 107);
@@ -1480,7 +1468,7 @@ namespace PaletteDesigner
             "List 2",
             "List 3"});
             this.kryptonListBox1.Location = new System.Drawing.Point(16, 6);
-            this.kryptonListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kryptonListBox1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonListBox1.Name = "kryptonListBox1";
             this.kryptonListBox1.ScrollAlwaysVisible = true;
             this.kryptonListBox1.Size = new System.Drawing.Size(98, 110);
@@ -2273,17 +2261,19 @@ namespace PaletteDesigner
             this.pageDesignButtons.Name = "pageDesignButtons";
             this.pageDesignButtons.Size = new System.Drawing.Size(643, 546);
             this.pageDesignButtons.Text = "Design Buttons";
-            this.pageDesignButtons.TextDescription = "Standalone is the main button style and intended for individual button instances.";
+            this.pageDesignButtons.TextDescription = "Standalone is the main button style and intended for individual button instances." +
+    "";
             this.pageDesignButtons.TextTitle = "Standalone";
             this.pageDesignButtons.ToolTipTitle = "Page ToolTip";
             this.pageDesignButtons.UniqueName = "5F8CCF195F9E4E775F8CCF195F9E4E77";
             //
             // buttonsPage1
             //
+            this.buttonsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonsPage1.Location = new System.Drawing.Point(0, 0);
-            this.buttonsPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonsPage1.Margin = new System.Windows.Forms.Padding(2);
             this.buttonsPage1.Name = "buttonsPage1";
-            this.buttonsPage1.Size = new System.Drawing.Size(650, 544);
+            this.buttonsPage1.Size = new System.Drawing.Size(643, 546);
             this.buttonsPage1.TabIndex = 0;
             //
             // pageDesignCheckBox
@@ -2309,7 +2299,7 @@ namespace PaletteDesigner
             this.pageDesignCheckBox.LastVisibleSet = true;
             this.pageDesignCheckBox.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageDesignCheckBox.Name = "pageDesignCheckBox";
-            this.pageDesignCheckBox.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pageDesignCheckBox.Padding = new System.Windows.Forms.Padding(20);
             this.pageDesignCheckBox.Size = new System.Drawing.Size(462, 524);
             this.pageDesignCheckBox.Text = "Design CheckBox";
             this.pageDesignCheckBox.TextDescription = "Preview appearance of the CheckBox control.";
@@ -2466,7 +2456,7 @@ namespace PaletteDesigner
             this.pageDesignChromeTMS.LastVisibleSet = true;
             this.pageDesignChromeTMS.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageDesignChromeTMS.Name = "pageDesignChromeTMS";
-            this.pageDesignChromeTMS.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pageDesignChromeTMS.Padding = new System.Windows.Forms.Padding(20);
             this.pageDesignChromeTMS.Size = new System.Drawing.Size(462, 524);
             this.pageDesignChromeTMS.Text = "Design Chrome + TMS";
             this.pageDesignChromeTMS.TextDescription = "Preview settings for custom chrome and Tool, Menu, Context and Status strips.";
@@ -2512,6 +2502,27 @@ namespace PaletteDesigner
             this.dataGridViewDisabled.RowHeadersWidth = 51;
             this.dataGridViewDisabled.Size = new System.Drawing.Size(308, 136);
             this.dataGridViewDisabled.TabIndex = 21;
+            //
+            // kryptonDataGridViewTextBoxColumn4
+            //
+            this.kryptonDataGridViewTextBoxColumn4.DataPropertyName = "Column1";
+            this.kryptonDataGridViewTextBoxColumn4.HeaderText = "Column1";
+            this.kryptonDataGridViewTextBoxColumn4.Name = "kryptonDataGridViewTextBoxColumn4";
+            this.kryptonDataGridViewTextBoxColumn4.Width = 75;
+            //
+            // kryptonDataGridViewTextBoxColumn5
+            //
+            this.kryptonDataGridViewTextBoxColumn5.DataPropertyName = "Column2";
+            this.kryptonDataGridViewTextBoxColumn5.HeaderText = "Column2";
+            this.kryptonDataGridViewTextBoxColumn5.Name = "kryptonDataGridViewTextBoxColumn5";
+            this.kryptonDataGridViewTextBoxColumn5.Width = 75;
+            //
+            // kryptonDataGridViewTextBoxColumn6
+            //
+            this.kryptonDataGridViewTextBoxColumn6.DataPropertyName = "Column3";
+            this.kryptonDataGridViewTextBoxColumn6.HeaderText = "Column3";
+            this.kryptonDataGridViewTextBoxColumn6.Name = "kryptonDataGridViewTextBoxColumn6";
+            this.kryptonDataGridViewTextBoxColumn6.Width = 75;
             //
             // dataSetGrid
             //
@@ -2601,6 +2612,27 @@ namespace PaletteDesigner
             this.dataGridViewNormal.RowHeadersWidth = 51;
             this.dataGridViewNormal.Size = new System.Drawing.Size(308, 136);
             this.dataGridViewNormal.TabIndex = 2;
+            //
+            // kryptonDataGridViewTextBoxColumn1
+            //
+            this.kryptonDataGridViewTextBoxColumn1.DataPropertyName = "Column1";
+            this.kryptonDataGridViewTextBoxColumn1.HeaderText = "Column1";
+            this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
+            this.kryptonDataGridViewTextBoxColumn1.Width = 75;
+            //
+            // kryptonDataGridViewTextBoxColumn2
+            //
+            this.kryptonDataGridViewTextBoxColumn2.DataPropertyName = "Column2";
+            this.kryptonDataGridViewTextBoxColumn2.HeaderText = "Column2";
+            this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
+            this.kryptonDataGridViewTextBoxColumn2.Width = 75;
+            //
+            // kryptonDataGridViewTextBoxColumn3
+            //
+            this.kryptonDataGridViewTextBoxColumn3.DataPropertyName = "Column3";
+            this.kryptonDataGridViewTextBoxColumn3.HeaderText = "Column3";
+            this.kryptonDataGridViewTextBoxColumn3.Name = "kryptonDataGridViewTextBoxColumn3";
+            this.kryptonDataGridViewTextBoxColumn3.Width = 75;
             //
             // kryptonNavigatorDesignGrids
             //
@@ -4693,7 +4725,7 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.Controls.Add(this.menuPage1);
             this.pageDesignMenuItems.Flags = 65534;
             this.pageDesignMenuItems.LastVisibleSet = true;
-            this.pageDesignMenuItems.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pageDesignMenuItems.Margin = new System.Windows.Forms.Padding(2);
             this.pageDesignMenuItems.MinimumSize = new System.Drawing.Size(38, 41);
             this.pageDesignMenuItems.Name = "pageDesignMenuItems";
             this.pageDesignMenuItems.Size = new System.Drawing.Size(75, 81);
@@ -4731,18 +4763,39 @@ namespace PaletteDesigner
             //
             this.toolTipsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolTipsPage1.Location = new System.Drawing.Point(0, 0);
-            this.toolTipsPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolTipsPage1.Margin = new System.Windows.Forms.Padding(4);
             this.toolTipsPage1.Name = "toolTipsPage1";
             this.toolTipsPage1.Size = new System.Drawing.Size(100, 100);
             this.toolTipsPage1.TabIndex = 0;
             //
+            // pageDesignImageViewer
+            //
+            this.pageDesignImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pageDesignImageViewer.Controls.Add(this.imageViewerControl);
+            this.pageDesignImageViewer.Flags = 65534;
+            this.pageDesignImageViewer.LastVisibleSet = true;
+            this.pageDesignImageViewer.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageDesignImageViewer.Name = "pageDesignImageViewer";
+            this.pageDesignImageViewer.Size = new System.Drawing.Size(100, 100);
+            this.pageDesignImageViewer.Text = "Design Image Viewer";
+            this.pageDesignImageViewer.TextDescription = "Image Viewer tool";
+            this.pageDesignImageViewer.TextTitle = "Image Viwer";
+            this.pageDesignImageViewer.ToolTipTitle = "Page Image Viwer";
+            this.pageDesignImageViewer.UniqueName = "6f05bdb3fdc53b69d40018357b40e5a8";
+            //
+            // imageViewerControl
+            //
+            this.imageViewerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageViewerControl.Location = new System.Drawing.Point(0, 0);
+            this.imageViewerControl.Name = "imageViewerControl";
+            this.imageViewerControl.Size = new System.Drawing.Size(100, 100);
+            this.imageViewerControl.TabIndex = 0;
+            //
             // kryptonHeaderGroupProperties
             //
-            this.kryptonHeaderGroupProperties.AllowButtonSpecToolTips = false;
-            this.kryptonHeaderGroupProperties.ButtonSpecs.AddRange(new Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.buttonSpecIncFont,
-            this.buttonSpecDecFont,
-            this.buttonSpecHelp});
+            this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecIncFont);
+            this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecDecFont);
+            this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecHelp);
             this.kryptonHeaderGroupProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroupProperties.HeaderVisibleSecondary = false;
             this.kryptonHeaderGroupProperties.Location = new System.Drawing.Point(0, 0);
@@ -4750,179 +4803,10 @@ namespace PaletteDesigner
             // kryptonHeaderGroupProperties.Panel
             //
             this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.kryptonSplitContainerProperties);
-            this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(499, 577);
+            this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(503, 553);
             this.kryptonHeaderGroupProperties.TabIndex = 0;
             this.kryptonHeaderGroupProperties.ValuesPrimary.Heading = "Properties";
             this.kryptonHeaderGroupProperties.ValuesPrimary.Image = null;
-            //
-            // propertyGrid
-            //
-            this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.propertyGrid.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(497, 545);
-            this.propertyGrid.TabIndex = 0;
-            this.propertyGrid.ToolbarVisible = false;
-            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
-            //
-            // kryptonSplitContainerProperties
-            //
-            this.kryptonSplitContainerProperties.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainerProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainerProperties.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainerProperties.Name = "kryptonSplitContainerProperties";
-            //
-            // kryptonSplitContainerProperties.Panel1
-            //
-            this.kryptonSplitContainerProperties.Panel1.Controls.Add(this.propertyGrid);
-            //
-            // kryptonSplitContainerProperties.Panel2
-            //
-            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableGrid);
-            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableToolStrip);
-            this.kryptonSplitContainerProperties.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainerProperties.Size = new System.Drawing.Size(497, 545);
-            this.kryptonSplitContainerProperties.SplitterDistance = 248;
-            this.kryptonSplitContainerProperties.SplitterWidth = 7;
-            this.kryptonSplitContainerProperties.TabIndex = 0;
-            //
-            // colorTableGrid
-            //
-            this.colorTableGrid.AllowUserToAddRows = false;
-            this.colorTableGrid.AllowUserToDeleteRows = false;
-            this.colorTableGrid.AllowUserToResizeColumns = true;
-            this.colorTableGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.colorTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.colorTableGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorTableGrid.Location = new System.Drawing.Point(0, 0);
-            this.colorTableGrid.Name = "colorTableGrid";
-            this.colorTableGrid.ReadOnly = true;
-            this.colorTableGrid.RowHeadersVisible = false;
-            this.colorTableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.colorTableGrid.Size = new System.Drawing.Size(245, 545);
-            this.colorTableGrid.TabIndex = 1;
-            this.colorTableGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorTableGrid_KeyDown);
-            this.colorTableGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ColorTableGrid_EditingControlShowing);
-            //
-            // colorTableToolStrip
-            //
-            this.colorTableToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filterToolStripDropDownButton,
-            this.exportToolStripDropDownButton,
-            this.optionsToolStripDropDownButton});
-            this.colorTableToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.colorTableToolStrip.Name = "colorTableToolStrip";
-            this.colorTableToolStrip.Size = new System.Drawing.Size(245, 25);
-            this.colorTableToolStrip.TabIndex = 0;
-            this.colorTableToolStrip.Text = "Color Table Tools";
-            //
-            // filterToolStripDropDownButton
-            //
-            this.filterToolStripDropDownButton.AutoToolTip = false;
-            this.filterToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.filterToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchColorToolStripMenuItem,
-            this.filterByColorToolStripMenuItem,
-            this.filterByNameToolStripMenuItem,
-            this.filterSeparatorToolStripSeparator,
-            this.resetFiltersToolStripMenuItem});
-            this.filterToolStripDropDownButton.Name = "filterToolStripDropDownButton";
-            this.filterToolStripDropDownButton.Size = new System.Drawing.Size(45, 22);
-            this.filterToolStripDropDownButton.Text = "Filter";
-            //
-            // searchColorToolStripMenuItem
-            //
-            this.searchColorToolStripMenuItem.Name = "searchColorToolStripMenuItem";
-            this.searchColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.searchColorToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.searchColorToolStripMenuItem.Text = "Search Color...";
-            this.searchColorToolStripMenuItem.Click += new System.EventHandler(this.SearchColorToolStripMenuItem_Click);
-            //
-            // filterByColorToolStripMenuItem
-            //
-            this.filterByColorToolStripMenuItem.Name = "filterByColorToolStripMenuItem";
-            this.filterByColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-            | System.Windows.Forms.Keys.C)));
-            this.filterByColorToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.filterByColorToolStripMenuItem.Text = "Filter by Color...";
-            this.filterByColorToolStripMenuItem.Click += new System.EventHandler(this.FilterByColorToolStripMenuItem_Click);
-            //
-            // filterByNameToolStripMenuItem
-            //
-            this.filterByNameToolStripMenuItem.Name = "filterByNameToolStripMenuItem";
-            this.filterByNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-            | System.Windows.Forms.Keys.F)));
-            this.filterByNameToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.filterByNameToolStripMenuItem.Text = "Filter by Name...";
-            this.filterByNameToolStripMenuItem.Click += new System.EventHandler(this.FilterByNameToolStripMenuItem_Click);
-            //
-            // filterSeparatorToolStripSeparator
-            //
-            this.filterSeparatorToolStripSeparator.Name = "filterSeparatorToolStripSeparator";
-            this.filterSeparatorToolStripSeparator.Size = new System.Drawing.Size(231, 6);
-            //
-            // resetFiltersToolStripMenuItem
-            //
-            this.resetFiltersToolStripMenuItem.Name = "resetFiltersToolStripMenuItem";
-            this.resetFiltersToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-            | System.Windows.Forms.Keys.R)));
-            this.resetFiltersToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.resetFiltersToolStripMenuItem.Text = "Reset Filters";
-            this.resetFiltersToolStripMenuItem.Click += new System.EventHandler(this.ResetFiltersToolStripMenuItem_Click);
-            //
-            // exportToolStripDropDownButton
-            //
-            this.exportToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.exportToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportAsCsvToolStripMenuItem,
-            this.exportAsClassToolStripMenuItem});
-            this.exportToolStripDropDownButton.AutoToolTip = false;
-            this.exportToolStripDropDownButton.Name = "exportToolStripDropDownButton";
-            this.exportToolStripDropDownButton.Size = new System.Drawing.Size(51, 22);
-            this.exportToolStripDropDownButton.Text = "Export";
-            //
-            // exportAsCsvToolStripMenuItem
-            //
-            this.exportAsCsvToolStripMenuItem.Name = "exportAsCsvToolStripMenuItem";
-            this.exportAsCsvToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.exportAsCsvToolStripMenuItem.Text = "Export as CSV";
-            this.exportAsCsvToolStripMenuItem.Click += new System.EventHandler(this.ExportAsCsvToolStripMenuItem_Click);
-            //
-            // exportAsClassToolStripMenuItem
-            //
-            this.exportAsClassToolStripMenuItem.Name = "exportAsClassToolStripMenuItem";
-            this.exportAsClassToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.exportAsClassToolStripMenuItem.Text = "Export as Class";
-            this.exportAsClassToolStripMenuItem.Click += new System.EventHandler(this.ExportAsClassToolStripMenuItem_Click);
-            //
-            // optionsToolStripDropDownButton
-            //
-            this.optionsToolStripDropDownButton.AutoToolTip = false;
-            this.optionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.optionsToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toggleFormatToolStripMenuItem,
-            this.autoFillToolStripMenuItem});
-            this.optionsToolStripDropDownButton.Name = "optionsToolStripDropDownButton";
-            this.optionsToolStripDropDownButton.Size = new System.Drawing.Size(56, 22);
-            this.optionsToolStripDropDownButton.Text = "Options";
-            //
-            // toggleFormatToolStripMenuItem
-            //
-            this.toggleFormatToolStripMenuItem.CheckOnClick = true;
-            this.toggleFormatToolStripMenuItem.Name = "toggleFormatToolStripMenuItem";
-            this.toggleFormatToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.toggleFormatToolStripMenuItem.Text = "Show Hex Values";
-            this.toggleFormatToolStripMenuItem.Click += new System.EventHandler(this.ToggleFormatToolStripMenuItem_Click);
-            //
-            // autoFillToolStripMenuItem
-            //
-            this.autoFillToolStripMenuItem.CheckOnClick = true;
-            this.autoFillToolStripMenuItem.Name = "autoFillToolStripMenuItem";
-            this.autoFillToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.autoFillToolStripMenuItem.Text = "Auto-Fill Color in Grid";
-            this.autoFillToolStripMenuItem.CheckedChanged += new System.EventHandler(this.AutoFillToolStripMenuItem_CheckedChanged);
             //
             // buttonSpecIncFont
             //
@@ -4944,6 +4828,233 @@ namespace PaletteDesigner
             this.buttonSpecHelp.ToolTipTitle = "Palette Designer – Shortcuts";
             this.buttonSpecHelp.UniqueName = "HelpSpec";
             this.buttonSpecHelp.Click += new System.EventHandler(this.ButtonSpecHelp_Click);
+            //
+            // kryptonSplitContainerProperties
+            //
+            this.kryptonSplitContainerProperties.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainerProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainerProperties.Location = new System.Drawing.Point(0, 0);
+            //
+            // kryptonSplitContainerProperties.Panel1
+            //
+            this.kryptonSplitContainerProperties.Panel1.Controls.Add(this.propertyGrid);
+            //
+            // kryptonSplitContainerProperties.Panel2
+            //
+            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableGrid);
+            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.fastFilterPanel);
+            this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableToolStrip);
+            this.kryptonSplitContainerProperties.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
+            this.kryptonSplitContainerProperties.Size = new System.Drawing.Size(501, 521);
+            this.kryptonSplitContainerProperties.SplitterDistance = 248;
+            this.kryptonSplitContainerProperties.SplitterWidth = 7;
+            this.kryptonSplitContainerProperties.TabIndex = 0;
+            //
+            // propertyGrid
+            //
+            this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.propertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.Size = new System.Drawing.Size(248, 521);
+            this.propertyGrid.TabIndex = 0;
+            this.propertyGrid.ToolbarVisible = false;
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
+            //
+            // colorTableGrid
+            //
+            this.colorTableGrid.AllowUserToAddRows = false;
+            this.colorTableGrid.AllowUserToDeleteRows = false;
+            this.colorTableGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.colorTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.colorTableGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorTableGrid.Location = new System.Drawing.Point(0, 102);
+            this.colorTableGrid.Name = "colorTableGrid";
+            this.colorTableGrid.ReadOnly = true;
+            this.colorTableGrid.RowHeadersVisible = false;
+            this.colorTableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.colorTableGrid.Size = new System.Drawing.Size(246, 419);
+            this.colorTableGrid.TabIndex = 1;
+            this.colorTableGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ColorTableGrid_EditingControlShowing);
+            this.colorTableGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorTableGrid_KeyDown);
+            //
+            // fastFilterPanel
+            //
+            this.fastFilterPanel.Controls.Add(this.filterByNameButton);
+            this.fastFilterPanel.Controls.Add(this.filterByColorButton);
+            this.fastFilterPanel.Controls.Add(this.fastFilterTextBox);
+            this.fastFilterPanel.Controls.Add(this.fastFilterLabel);
+            this.fastFilterPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fastFilterPanel.Location = new System.Drawing.Point(0, 25);
+            this.fastFilterPanel.Name = "fastFilterPanel";
+            this.fastFilterPanel.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
+            this.fastFilterPanel.Size = new System.Drawing.Size(246, 77);
+            this.fastFilterPanel.TabIndex = 2;
+            //
+            // filterByNameButton
+            //
+            this.filterByNameButton.Checked = true;
+            this.filterByNameButton.Location = new System.Drawing.Point(121, 37);
+            this.filterByNameButton.Name = "filterByNameButton";
+            this.filterByNameButton.Size = new System.Drawing.Size(100, 28);
+            this.filterByNameButton.TabIndex = 3;
+            this.filterByNameButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.filterByNameButton.Values.Text = "Name";
+            this.filterByNameButton.CheckedChanged += new System.EventHandler(this.FilterModeButton_CheckedChanged);
+            //
+            // filterByColorButton
+            //
+            this.filterByColorButton.Location = new System.Drawing.Point(6, 37);
+            this.filterByColorButton.Name = "filterByColorButton";
+            this.filterByColorButton.Size = new System.Drawing.Size(100, 28);
+            this.filterByColorButton.TabIndex = 2;
+            this.filterByColorButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.filterByColorButton.Values.Text = "Color";
+            this.filterByColorButton.CheckedChanged += new System.EventHandler(this.FilterModeButton_CheckedChanged);
+            //
+            // fastFilterTextBox
+            //
+            this.fastFilterTextBox.Location = new System.Drawing.Point(81, 8);
+            this.fastFilterTextBox.Name = "fastFilterTextBox";
+            this.fastFilterTextBox.Size = new System.Drawing.Size(140, 23);
+            this.fastFilterTextBox.TabIndex = 1;
+            this.fastFilterTextBox.TabStop = false;
+            this.fastFilterTextBox.TextChanged += new System.EventHandler(this.FastFilterTextBox_TextChanged);
+            //
+            // fastFilterLabel
+            //
+            this.fastFilterLabel.Location = new System.Drawing.Point(12, 11);
+            this.fastFilterLabel.Name = "fastFilterLabel";
+            this.fastFilterLabel.Size = new System.Drawing.Size(65, 20);
+            this.fastFilterLabel.TabIndex = 0;
+            this.fastFilterLabel.Values.Text = "Fast Filter:";
+            //
+            // colorTableToolStrip
+            //
+            this.colorTableToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.colorTableToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterToolStripDropDownButton,
+            this.exportToolStripDropDownButton,
+            this.optionsToolStripDropDownButton});
+            this.colorTableToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.colorTableToolStrip.Name = "colorTableToolStrip";
+            this.colorTableToolStrip.Size = new System.Drawing.Size(246, 25);
+            this.colorTableToolStrip.TabIndex = 0;
+            this.colorTableToolStrip.Text = "Color Table Tools";
+            //
+            // filterToolStripDropDownButton
+            //
+            this.filterToolStripDropDownButton.AutoToolTip = false;
+            this.filterToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.filterToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchColorToolStripMenuItem,
+            this.filterByColorToolStripMenuItem,
+            this.filterByNameToolStripMenuItem,
+            this.filterSeparatorToolStripSeparator,
+            this.resetFiltersToolStripMenuItem});
+            this.filterToolStripDropDownButton.Name = "filterToolStripDropDownButton";
+            this.filterToolStripDropDownButton.Size = new System.Drawing.Size(46, 22);
+            this.filterToolStripDropDownButton.Text = "Filter";
+            //
+            // searchColorToolStripMenuItem
+            //
+            this.searchColorToolStripMenuItem.Name = "searchColorToolStripMenuItem";
+            this.searchColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.searchColorToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.searchColorToolStripMenuItem.Text = "Search Color...";
+            this.searchColorToolStripMenuItem.Click += new System.EventHandler(this.SearchColorToolStripMenuItem_Click);
+            //
+            // filterByColorToolStripMenuItem
+            //
+            this.filterByColorToolStripMenuItem.Name = "filterByColorToolStripMenuItem";
+            this.filterByColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.C)));
+            this.filterByColorToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.filterByColorToolStripMenuItem.Text = "Filter by Color...";
+            this.filterByColorToolStripMenuItem.Click += new System.EventHandler(this.FilterByColorToolStripMenuItem_Click);
+            //
+            // filterByNameToolStripMenuItem
+            //
+            this.filterByNameToolStripMenuItem.Name = "filterByNameToolStripMenuItem";
+            this.filterByNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.F)));
+            this.filterByNameToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.filterByNameToolStripMenuItem.Text = "Filter by Name...";
+            this.filterByNameToolStripMenuItem.Click += new System.EventHandler(this.FilterByNameToolStripMenuItem_Click);
+            //
+            // filterSeparatorToolStripSeparator
+            //
+            this.filterSeparatorToolStripSeparator.Name = "filterSeparatorToolStripSeparator";
+            this.filterSeparatorToolStripSeparator.Size = new System.Drawing.Size(229, 6);
+            //
+            // resetFiltersToolStripMenuItem
+            //
+            this.resetFiltersToolStripMenuItem.Name = "resetFiltersToolStripMenuItem";
+            this.resetFiltersToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.R)));
+            this.resetFiltersToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.resetFiltersToolStripMenuItem.Text = "Reset Filters";
+            this.resetFiltersToolStripMenuItem.Click += new System.EventHandler(this.ResetFiltersToolStripMenuItem_Click);
+            //
+            // exportToolStripDropDownButton
+            //
+            this.exportToolStripDropDownButton.AutoToolTip = false;
+            this.exportToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.exportToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportAsCsvToolStripMenuItem,
+            this.exportAsClassToolStripMenuItem});
+            this.exportToolStripDropDownButton.Name = "exportToolStripDropDownButton";
+            this.exportToolStripDropDownButton.Size = new System.Drawing.Size(54, 22);
+            this.exportToolStripDropDownButton.Text = "Export";
+            //
+            // exportAsCsvToolStripMenuItem
+            //
+            this.exportAsCsvToolStripMenuItem.Name = "exportAsCsvToolStripMenuItem";
+            this.exportAsCsvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportAsCsvToolStripMenuItem.Text = "Export as CSV";
+            this.exportAsCsvToolStripMenuItem.Click += new System.EventHandler(this.ExportAsCsvToolStripMenuItem_Click);
+            //
+            // exportAsClassToolStripMenuItem
+            //
+            this.exportAsClassToolStripMenuItem.Name = "exportAsClassToolStripMenuItem";
+            this.exportAsClassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportAsClassToolStripMenuItem.Text = "Export as Class";
+            this.exportAsClassToolStripMenuItem.Click += new System.EventHandler(this.ExportAsClassToolStripMenuItem_Click);
+            //
+            // optionsToolStripDropDownButton
+            //
+            this.optionsToolStripDropDownButton.AutoToolTip = false;
+            this.optionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.optionsToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toggleFormatToolStripMenuItem,
+            this.autoFillToolStripMenuItem});
+            this.optionsToolStripDropDownButton.Name = "optionsToolStripDropDownButton";
+            this.optionsToolStripDropDownButton.Size = new System.Drawing.Size(62, 22);
+            this.optionsToolStripDropDownButton.Text = "Options";
+            //
+            // toggleFormatToolStripMenuItem
+            //
+            this.toggleFormatToolStripMenuItem.CheckOnClick = true;
+            this.toggleFormatToolStripMenuItem.Name = "toggleFormatToolStripMenuItem";
+            this.toggleFormatToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.toggleFormatToolStripMenuItem.Text = "Show Hex Values";
+            this.toggleFormatToolStripMenuItem.Click += new System.EventHandler(this.ToggleFormatToolStripMenuItem_Click);
+            //
+            // autoFillToolStripMenuItem
+            //
+            this.autoFillToolStripMenuItem.CheckOnClick = true;
+            this.autoFillToolStripMenuItem.Name = "autoFillToolStripMenuItem";
+            this.autoFillToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.autoFillToolStripMenuItem.Text = "Auto-Fill Color in Grid";
+            this.autoFillToolStripMenuItem.CheckedChanged += new System.EventHandler(this.AutoFillToolStripMenuItem_CheckedChanged);
+            //
+            // kryptonCheckSetQuickFilterButtons
+            //
+            this.kryptonCheckSetQuickFilterButtons.CheckButtons.Add(this.filterByColorButton);
+            this.kryptonCheckSetQuickFilterButtons.CheckButtons.Add(this.filterByNameButton);
+            this.kryptonCheckSetQuickFilterButtons.CheckedButton = this.filterByNameButton;
+            this.kryptonCheckSetQuickFilterButtons.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetQuickFilterButtons_CheckedButtonChanged);
             //
             // dataGridViewTextBoxColumn1
             //
@@ -4998,11 +5109,11 @@ namespace PaletteDesigner
             //
             // mainToolStripContainer.ContentPanel
             //
-            this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1162, 642);
+            this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1170, 613);
             this.mainToolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainToolStripContainer.Location = new System.Drawing.Point(0, 0);
             this.mainToolStripContainer.Name = "mainToolStripContainer";
-            this.mainToolStripContainer.Size = new System.Drawing.Size(1162, 662);
+            this.mainToolStripContainer.Size = new System.Drawing.Size(1170, 638);
             this.mainToolStripContainer.TabIndex = 0;
             this.mainToolStripContainer.Text = "toolStripContainer1";
             //
@@ -5048,53 +5159,11 @@ namespace PaletteDesigner
             this.kryptonCheckSetLabels.CheckedButton = this.labelsPanelClient;
             this.kryptonCheckSetLabels.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetLabels_CheckedButtonChanged);
             //
-            // kryptonDataGridViewTextBoxColumn1
-            //
-            this.kryptonDataGridViewTextBoxColumn1.DataPropertyName = "Column1";
-            this.kryptonDataGridViewTextBoxColumn1.HeaderText = "Column1";
-            this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
-            this.kryptonDataGridViewTextBoxColumn1.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn2
-            //
-            this.kryptonDataGridViewTextBoxColumn2.DataPropertyName = "Column2";
-            this.kryptonDataGridViewTextBoxColumn2.HeaderText = "Column2";
-            this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
-            this.kryptonDataGridViewTextBoxColumn2.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn3
-            //
-            this.kryptonDataGridViewTextBoxColumn3.DataPropertyName = "Column3";
-            this.kryptonDataGridViewTextBoxColumn3.HeaderText = "Column3";
-            this.kryptonDataGridViewTextBoxColumn3.Name = "kryptonDataGridViewTextBoxColumn3";
-            this.kryptonDataGridViewTextBoxColumn3.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn4
-            //
-            this.kryptonDataGridViewTextBoxColumn4.DataPropertyName = "Column1";
-            this.kryptonDataGridViewTextBoxColumn4.HeaderText = "Column1";
-            this.kryptonDataGridViewTextBoxColumn4.Name = "kryptonDataGridViewTextBoxColumn4";
-            this.kryptonDataGridViewTextBoxColumn4.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn5
-            //
-            this.kryptonDataGridViewTextBoxColumn5.DataPropertyName = "Column2";
-            this.kryptonDataGridViewTextBoxColumn5.HeaderText = "Column2";
-            this.kryptonDataGridViewTextBoxColumn5.Name = "kryptonDataGridViewTextBoxColumn5";
-            this.kryptonDataGridViewTextBoxColumn5.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn6
-            //
-            this.kryptonDataGridViewTextBoxColumn6.DataPropertyName = "Column3";
-            this.kryptonDataGridViewTextBoxColumn6.HeaderText = "Column3";
-            this.kryptonDataGridViewTextBoxColumn6.Name = "kryptonDataGridViewTextBoxColumn6";
-            this.kryptonDataGridViewTextBoxColumn6.Width = 75;
-            //
             // MainForm
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 662);
+            this.ClientSize = new System.Drawing.Size(1170, 638);
             this.Controls.Add(this.kryptonPanelMainFill);
             this.Controls.Add(this.kryptonNavigatorTop);
             this.Controls.Add(this.mainMenuStrip);
@@ -5130,8 +5199,8 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageTopTabs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopMenuItems)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageTopImageViewer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageTopToolTips)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageTopImageViewer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanelMainFill)).EndInit();
             this.kryptonPanelMainFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerMain.Panel1)).EndInit();
@@ -5371,20 +5440,28 @@ namespace PaletteDesigner
             this.pageDesignTrackBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignMenuItems)).EndInit();
             this.pageDesignMenuItems.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pageDesignImageViewer)).EndInit();
-            this.pageDesignImageViewer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignToolTips)).EndInit();
             this.pageDesignToolTips.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel1)).EndInit();
-            this.kryptonSplitContainerProperties.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel2)).EndInit();
-            this.kryptonSplitContainerProperties.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties)).EndInit();
-            this.kryptonSplitContainerProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pageDesignImageViewer)).EndInit();
+            this.pageDesignImageViewer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroupProperties.Panel)).EndInit();
             this.kryptonHeaderGroupProperties.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroupProperties)).EndInit();
             this.kryptonHeaderGroupProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel1)).EndInit();
+            this.kryptonSplitContainerProperties.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties.Panel2)).EndInit();
+            this.kryptonSplitContainerProperties.Panel2.ResumeLayout(false);
+            this.kryptonSplitContainerProperties.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainerProperties)).EndInit();
+            this.kryptonSplitContainerProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.colorTableGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastFilterPanel)).EndInit();
+            this.fastFilterPanel.ResumeLayout(false);
+            this.fastFilterPanel.PerformLayout();
+            this.colorTableToolStrip.ResumeLayout(false);
+            this.colorTableToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSetQuickFilterButtons)).EndInit();
             this.mainToolStripContainer.ResumeLayout(false);
             this.mainToolStripContainer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup9.Panel)).EndInit();
@@ -5453,6 +5530,9 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripMenuItem filterByNameToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator filterSeparatorToolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem resetFiltersToolStripMenuItem;
+        private Krypton.Toolkit.KryptonPanel fastFilterPanel;
+        private Krypton.Toolkit.KryptonLabel fastFilterLabel;
+        private Krypton.Toolkit.KryptonTextBox fastFilterTextBox;
         private System.Windows.Forms.ToolStripDropDownButton exportToolStripDropDownButton;
         private System.Windows.Forms.ToolStripMenuItem exportAsCsvToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportAsClassToolStripMenuItem;
@@ -5763,5 +5843,9 @@ namespace PaletteDesigner
         private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecIncFont;
         private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecDecFont;
         private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecHelp;
+        private Krypton.Toolkit.KryptonCheckButton filterByColorButton;
+        private Krypton.Toolkit.KryptonCheckButton filterByNameButton;
+        private Krypton.Toolkit.KryptonCheckSet kryptonCheckSetQuickFilterButtons;
+
     }
 }

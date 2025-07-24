@@ -118,10 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>540, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="menuNew.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAMhJREFUOE/tkTsOAiEURbGw0MTKUhehcQHqPo0Zu9mAiZ1bYAX8lIAFa0Aenww4
+        aMbCzuLkDZ93uDDIWovs/bDw9XZ0JRsPAFnRLF3jwzXtvECctn7s5imlG8bYNcE5PwshVqUAPkJTk9V9
+        3DBSSs0TUXQhhKw7AZwKQAKYTEnCdWqCQhIShKYuQZRhjMdvBP46QfD6BqH6NzDGzHJBDkjyBL2/IKWc
+        1BoTpSCitZ5C7E8nJ6oCmKxtrvEX/FDQwsJA2p7geyx6AqT5908FML4ZAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="menuNewFromDefault.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAMhJREFUOE/tkTsOAiEURbGw0MTKUhehcQHqPo0Zu9mAiZ1bYAX8lIAFa0Aenww4
@@ -1782,7 +1791,7 @@
 </value>
   </data>
   <metadata name="dataSetGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>794, 27</value>
+    <value>1322, 17</value>
   </metadata>
   <data name="kryptonGridList.ImageLarge" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5245,14 +5254,20 @@
         zJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlmzJlm
 </value>
   </data>
+  <metadata name="colorTableToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="kryptonCheckSetQuickFilterButtons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>216, 17</value>
+  </metadata>
   <metadata name="kryptonManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>196, 22</value>
+    <value>713, 17</value>
   </metadata>
   <metadata name="kryptonCheckSetLabels.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>382, 25</value>
+    <value>896, 17</value>
   </metadata>
   <metadata name="kryptonCheckSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>606, 24</value>
+    <value>1128, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -183,6 +183,7 @@ namespace PaletteDesigner
                 }
 
             ];
+
             if (imageViewerControl != null)
             {
                 imageViewerControl.ColorSampled += ImageViewerControl_ColorSampled;
@@ -607,12 +608,6 @@ namespace PaletteDesigner
             {
                 Cursor = originalCursor;
             }
-        }
-
-        private static Color GetContrastColor(Color c)
-        {
-            double luminance = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B) / 255;
-            return luminance > 0.5 ? Color.Black : Color.White;
         }
 
         private void UpdateChromeTMS()
@@ -1279,13 +1274,6 @@ namespace PaletteDesigner
             // Mark a changed file with a star
             Text = $@"Palette Designer - {_filename}{(_dirty ? "*" : string.Empty)}";
 
-        /// <summary>
-        /// Ensures window bounds are entirely or partially visible on at least one connected screen.
-        /// If not, it re-centers the window within the primary screen and adjusts size if necessary.
-        /// </summary>
-        private static Rectangle AdjustBoundsToVisibleScreens(Rectangle bounds) =>
-            WindowBoundsHelper.AdjustBoundsToVisibleScreens(bounds);
-
         private void CopyColorsFromBasePalette()
         {
             if (_palette?.BasePalette == null)
@@ -1397,24 +1385,6 @@ namespace PaletteDesigner
                 e.Handled = true;
                 EditCurrentCellColor();
                 return;
-            }
-        }
-
-        private static void TryCopyToClipboard(string text)
-        {
-            const int retries = 5;
-            const int delay = 100;
-            for (int i = 0; i < retries; i++)
-            {
-                try
-                {
-                    Clipboard.SetDataObject(text, true);
-                    return;
-                }
-                catch (ExternalException)
-                {
-                    System.Threading.Thread.Sleep(delay);
-                }
             }
         }
 
@@ -1722,70 +1692,6 @@ namespace PaletteDesigner
             colorTableGrid.ContextMenuStrip = _contextMenu;
         }
 
-        private static bool TryParseColorString(string? input, out Color color)
-        {
-            color = Color.Empty;
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                return false;
-            }
-
-            input = input!.Trim();
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                return false;
-            }
-
-            // Hex with #
-            if (input.StartsWith("#", StringComparison.Ordinal))
-            {
-                try
-                {
-                    color = ColorTranslator.FromHtml(input);
-                    return true;
-                }
-                catch { }
-            }
-
-            // Hex without #
-            if (input != null && (input.Length == 6 || input.Length == 8))
-            {
-                try
-                {
-                    color = ColorTranslator.FromHtml("#" + input);
-                    return true;
-                }
-                catch { }
-            }
-
-            // RGB triplet
-            if (input != null)
-            {
-                var parts = input.Split([',', ';'], StringSplitOptions.None);
-                if (parts.Length == 3 &&
-                    byte.TryParse(parts[0].Trim(), out byte r) &&
-                    byte.TryParse(parts[1].Trim(), out byte g) &&
-                    byte.TryParse(parts[2].Trim(), out byte b))
-                {
-                    color = Color.FromArgb(r, g, b);
-                    return true;
-                }
-            }
-
-            // Named color
-            if (input != null)
-            {
-                var named = Color.FromName(input);
-                if (named.IsKnownColor || named.IsNamedColor)
-                {
-                    color = named;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         private void SearchForColor()
         {
             string defaultValue = "#";
@@ -1877,6 +1783,60 @@ namespace PaletteDesigner
         {
             _activeColorFilter = null;
             _activeNameFilter = null;
+            if (fastFilterTextBox != null && fastFilterTextBox.TextLength > 0)
+            {
+                fastFilterTextBox.Text = string.Empty;
+            }
+            UpdateFilterUI();
+        }
+
+        private void FastFilterTextBox_TextChanged(object? sender, EventArgs e)
+        {
+            ApplyQuickFilter();
+        }
+
+        private void FilterModeButton_CheckedChanged(object? sender, EventArgs e)
+        {
+            ApplyQuickFilter();
+        }
+
+        private void KryptonCheckSetQuickFilterButtons_CheckedButtonChanged(object sender, EventArgs e)
+        {
+            ApplyQuickFilter();
+        }
+
+        private void ApplyQuickFilter()
+        {
+            if (fastFilterTextBox == null)
+            {
+                return;
+            }
+
+            string input = fastFilterTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                ClearRowFilter();
+                return;
+            }
+
+            if (filterByColorButton != null && filterByColorButton.Checked)
+            {
+                if (!TryParseColorString(input, out Color parsed))
+                {
+                    return; // Invalid color string; do not change filters
+                }
+
+                _activeColorFilter = parsed;
+                _lastColorFilterInput = input;
+                _activeNameFilter = null;
+            }
+            else
+            {
+                _activeColorFilter = null;
+                _activeNameFilter = input.Trim();
+            }
+
             UpdateFilterUI();
         }
 
@@ -1927,29 +1887,6 @@ namespace PaletteDesigner
             finally
             {
                 Cursor = originalCursor;
-            }
-        }
-
-        private static void SetRedraw(Control control, bool redraw)
-        {
-            const int WM_SETREDRAW = 0x000B;
-            SendMessage(control.Handle, WM_SETREDRAW, redraw ? 1 : 0, IntPtr.Zero);
-        }
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
-
-        private void UpdateFilterUI(bool filterRows = true)
-        {
-            bool hasActiveFilter = _activeColorFilter.HasValue || !string.IsNullOrWhiteSpace(_activeNameFilter);
-            filterToolStripDropDownButton.Text = hasActiveFilter ? "Filter*" : "Filter";
-
-            filterByColorToolStripMenuItem.Checked = _activeColorFilter.HasValue;
-            filterByNameToolStripMenuItem.Checked = !string.IsNullOrWhiteSpace(_activeNameFilter);
-
-            if (filterRows)
-            {
-                UpdateRowVisibility();
             }
         }
 
@@ -2108,18 +2045,6 @@ namespace PaletteDesigner
             expDlg.ShowDialog(this);
         }
 
-        private static string ToColorExpr(Color c)
-        {
-            if (c.IsEmpty)
-            {
-                return "GlobalStaticValues.EMPTY_COLOR";
-            }
-
-            return c.A != 255
-                ? $"Color.FromArgb({c.A}, {c.R}, {c.G}, {c.B})"
-                : $"Color.FromArgb({c.R}, {c.G}, {c.B})";
-        }
-
         #endregion
 
         #region ButtonSpec Event Handlers
@@ -2210,6 +2135,128 @@ namespace PaletteDesigner
             if (autoFillToolStripMenuItem != null)
             {
                 autoFillToolStripMenuItem.Checked = _autoFillFromViewer;
+            }
+        }
+
+        #endregion
+
+        #region Static Helpers
+
+        private static Color GetContrastColor(Color c)
+        {
+            double luminance = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B) / 255;
+            return luminance > 0.5 ? Color.Black : Color.White;
+        }
+
+        /// <summary>
+        /// Ensures window bounds are entirely or partially visible on at least one connected screen.
+        /// If not, it re-centers the window within the primary screen and adjusts size if necessary.
+        /// </summary>
+        private static Rectangle AdjustBoundsToVisibleScreens(Rectangle bounds) =>
+            WindowBoundsHelper.AdjustBoundsToVisibleScreens(bounds);
+
+        private static void TryCopyToClipboard(string text)
+        {
+            const int retries = 5;
+            const int delay = 100;
+            for (int i = 0; i < retries; i++)
+            {
+                try
+                {
+                    Clipboard.SetDataObject(text, true);
+                    return;
+                }
+                catch (ExternalException)
+                {
+                    System.Threading.Thread.Sleep(delay);
+                }
+            }
+        }
+
+        private static bool TryParseColorString(string? input, out Color color)
+        {
+            color = Color.Empty;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            input = input!.Trim();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            // Hex with #
+            if (input.StartsWith("#", StringComparison.Ordinal))
+            {
+                try
+                {
+                    color = ColorTranslator.FromHtml(input);
+                    return true;
+                }
+                catch { }
+            }
+
+            // Hex without #
+            if (input != null && (input.Length == 6 || input.Length == 8))
+            {
+                try
+                {
+                    color = ColorTranslator.FromHtml("#" + input);
+                    return true;
+                }
+                catch { }
+            }
+
+            // RGB triplet
+            if (input != null)
+            {
+                var parts = input.Split([',', ';'], StringSplitOptions.None);
+                if (parts.Length == 3 &&
+                    byte.TryParse(parts[0].Trim(), out byte r) &&
+                    byte.TryParse(parts[1].Trim(), out byte g) &&
+                    byte.TryParse(parts[2].Trim(), out byte b))
+                {
+                    color = Color.FromArgb(r, g, b);
+                    return true;
+                }
+            }
+
+            // Named color
+            if (input != null)
+            {
+                var named = Color.FromName(input);
+                if (named.IsKnownColor || named.IsNamedColor)
+                {
+                    color = named;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void SetRedraw(Control control, bool redraw)
+        {
+            const int WM_SETREDRAW = 0x000B;
+            SendMessage(control.Handle, WM_SETREDRAW, redraw ? 1 : 0, IntPtr.Zero);
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
+
+        private void UpdateFilterUI(bool filterRows = true)
+        {
+            bool hasActiveFilter = _activeColorFilter.HasValue || !string.IsNullOrWhiteSpace(_activeNameFilter);
+            filterToolStripDropDownButton.Text = hasActiveFilter ? "Filter*" : "Filter";
+
+            filterByColorToolStripMenuItem.Checked = _activeColorFilter.HasValue;
+            filterByNameToolStripMenuItem.Checked = !string.IsNullOrWhiteSpace(_activeNameFilter);
+
+            if (filterRows)
+            {
+                UpdateRowVisibility();
             }
         }
 

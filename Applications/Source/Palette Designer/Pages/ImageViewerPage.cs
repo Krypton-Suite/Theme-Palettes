@@ -9,22 +9,19 @@ namespace PaletteDesigner.Pages;
 
 public partial class ImageViewerPage : UserControl
 {
+    #region Variables
+
     private Image? _currentImage;
     private Point _lastMousePos;
     private bool _mouseInside;
-    private readonly System.Windows.Forms.Timer _uiTimer = new() { Interval = 100 }; // 100ms refresh
+    private readonly System.Windows.Forms.Timer _uiTimer = new() { Interval = 50 }; // 100ms refresh
     private bool _showCrosshair = true;
+    private Cursor? _prevCursor;
 
     // Persistence fields
     private string? _lastImagePath;
     private string? _lastRegionPath;
     private string? _lastImageFolder;
-
-    public event EventHandler<ColorSampledEventArgs>? ColorSampled;
-
-    public string? LastImagePath => _lastImagePath;
-    public string? LastRegionPath => _lastRegionPath;
-    public string? LastImageFolder => _lastImageFolder;
 
     // Region handling
     private readonly List<RegionInfo> _regions = [];
@@ -36,12 +33,21 @@ public partial class ImageViewerPage : UserControl
     private RegionInfo? _currentRegionDraft;
     private RegionInfo? _selectedRegion;
     private bool _spacePanMode;
-    private Cursor? _prevCursor;
+
+    public event EventHandler<ColorSampledEventArgs>? ColorSampled;
+
+    public string? LastImagePath => _lastImagePath;
+    public string? LastRegionPath => _lastRegionPath;
+    public string? LastImageFolder => _lastImageFolder;
+
+    #endregion Variables
 
     /// <summary>
     /// Indicates unsaved changes in the regions collection.
     /// </summary>
     public bool HasUnsavedRegionChanges => _regionsDirty;
+
+    #region Identity
 
     public ImageViewerPage()
     {
@@ -64,15 +70,9 @@ public partial class ImageViewerPage : UserControl
         catch { /* ignore if ZoomLevels collection not available */ }
     }
 
-    private void ToolStripButtonZoomIn_Click(object? sender, EventArgs e)
-    {
-        AdjustZoom(10);
-    }
+    #endregion Identity
 
-    private void ToolStripButtonZoomOut_Click(object? sender, EventArgs e)
-    {
-        AdjustZoom(-10);
-    }
+    #region ImageBox Event Handlers
 
     private void ImageBox_MouseLeave(object? sender, EventArgs e)
     {
@@ -93,13 +93,6 @@ public partial class ImageViewerPage : UserControl
     private void ImageBox_ZoomChanged(object? sender, EventArgs e)
     {
         statusZoomLabel.Text = $"Zoom: {imageBox.Zoom}%";
-    }
-
-    private void AdjustZoom(int delta)
-    {
-        int newZoom = imageBox.Zoom + delta;
-        newZoom = Math.Max(1, Math.Min(800, newZoom));
-        imageBox.Zoom = newZoom;
     }
 
     private void ImageBox_Paint(object? sender, PaintEventArgs e)
@@ -129,6 +122,7 @@ public partial class ImageViewerPage : UserControl
             e.Graphics.DrawRectangle(pen, dispRect);
             e.Graphics.DrawString(r.Label, Font, Brushes.LimeGreen, dispRect.Location);
         }
+
         if (_currentRegionDraft != null)
         {
             var dispRect = ImageRectToDisplay(_currentRegionDraft.Rect);
@@ -156,42 +150,6 @@ public partial class ImageViewerPage : UserControl
 
         // Request repaint so crosshair/region updates render
         imageBox.Invalidate();
-    }
-
-    private void UpdateStatus()
-    {
-        if (_currentImage == null)
-        {
-            statusLabel.Text = string.Empty;
-            toolStripHex.Text = string.Empty;
-            toolStripR.Text = string.Empty;
-            toolStripG.Text = string.Empty;
-            toolStripB.Text = string.Empty;
-            return;
-        }
-
-        if (!_mouseInside)
-        {
-            return; // Don't update if mouse is not inside
-        }
-
-        var imgPoint = imageBox.PointToImage(_lastMousePos);
-        if (imgPoint.X < 0 || imgPoint.Y < 0 || imgPoint.X >= _currentImage.Width || imgPoint.Y >= _currentImage.Height)
-        {
-            statusLabel.Text = string.Empty;
-            return;
-        }
-        Color c = ((Bitmap)_currentImage).GetPixel(imgPoint.X, imgPoint.Y);
-        statusLabel.Text = $"X: {imgPoint.X} / Y: {imgPoint.Y}  ||  {_currentImage.Width}px x {_currentImage.Height}px  ||  ";
-        toolStripHex.Text = $"HEX: #{c.R:X2}{c.G:X2}{c.B:X2}";
-        toolStripR.Text = c.R.ToString();
-        toolStripG.Text = c.G.ToString();
-        toolStripB.Text = c.B.ToString();
-    }
-
-    private void InitialiseTimer()
-    {
-        _uiTimer.Tick += (_, __) => UpdateStatus();
     }
 
     private void ImageBox_MouseClick(object? sender, MouseEventArgs e)
@@ -223,14 +181,188 @@ public partial class ImageViewerPage : UserControl
         {
             return;
         }
+
         Color c = ((Bitmap)_currentImage).GetPixel(imgPoint.X, imgPoint.Y);
         colorPreviewLabel.BackColor = c;
         OnColorSampled(imgPoint, c);
     }
 
-    public void ApplyPalette(KryptonCustomPaletteBase palette)
+    private void ImageBox_MouseWheel(object? sender, MouseEventArgs e)
     {
-        kryptonPanel1.Palette = palette;
+        int stepPerTick = (ModifierKeys & Keys.Control) == Keys.Control ? 50 : 10;
+        int ticks = e.Delta / System.Windows.Forms.SystemInformation.MouseWheelScrollDelta;
+        if (ticks == 0)
+        {
+            ticks = Math.Sign(e.Delta);
+        }
+        AdjustZoom(stepPerTick * ticks);
+
+        // Prevent ImageBox or parent controls from applying additional zoom
+        if (e is HandledMouseEventArgs hme)
+        {
+            hme.Handled = true;
+        }
+    }
+
+    private void ImageBox_KeyDown(object? sender, KeyEventArgs e)
+    {
+        // Zoom shortcuts
+        if (e.Control && (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus))
+        {
+            AdjustZoom(10);
+            e.Handled = true;
+            return;
+        }
+
+        if (e.Control && (e.KeyCode == Keys.Subtract || e.KeyCode == Keys.OemMinus))
+        {
+            AdjustZoom(-10);
+            e.Handled = true;
+            return;
+        }
+
+        // Temporary pan-hand (space)
+        if (e.KeyCode == Keys.Space && !_spacePanMode)
+        {
+            _spacePanMode = true;
+            _prevCursor = imageBox.Cursor;
+            imageBox.Cursor = Cursors.Hand;
+            e.Handled = true;
+            return;
+        }
+
+        // Delete selected region
+        if (e.KeyCode == Keys.Delete)
+        {
+            if (_selectedRegion != null && _regions.Contains(_selectedRegion))
+            {
+                _regions.Remove(_selectedRegion);
+                _selectedRegion = null;
+                _regionsDirty = true;
+                imageBox.Invalidate();
+            }
+            e.Handled = true;
+            return;
+        }
+    }
+
+    private void ImageBox_KeyUp(object? sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Space && _spacePanMode)
+        {
+            _spacePanMode = false;
+            imageBox.Cursor = _prevCursor ?? Cursors.Default;
+            e.Handled = true;
+        }
+    }
+
+    private void ImageBox_PreviewKeyDown(object? sender, PreviewKeyDownEventArgs e)
+    {
+        if (e.KeyCode == Keys.Space)
+        {
+            e.IsInputKey = true;
+        }
+    }
+
+    #endregion
+
+    #region ImageBox Region Drawing
+
+    private void ImageBox_MouseDown(object? sender, MouseEventArgs e)
+    {
+        if (_spacePanMode)
+        {
+            return; // allow panning while holding space
+        }
+
+        if (!_regionMode || _currentImage == null)
+        {
+            return;
+        }
+
+        if (e.Button != MouseButtons.Left)
+        {
+            return;
+        }
+
+        _isDrawing = true;
+        _startPt = e.Location;
+
+        // Use high-precision conversion to image coordinates (avoids integer rounding errors)
+        _startImgPt = DisplayPointToImage(_startPt);
+        _currentRegionDraft = new RegionInfo { Label = "", Rect = new RectangleF() };
+    }
+
+    private void ImageBox_MouseUp(object? sender, MouseEventArgs e)
+    {
+        if (!_isDrawing || _currentRegionDraft == null)
+        {
+            return;
+        }
+
+        _isDrawing = false;
+        if (_currentRegionDraft.Rect.Width < 5 || _currentRegionDraft.Rect.Height < 5)
+        {
+            _currentRegionDraft = null;
+            imageBox.Invalidate();
+            return;
+        }
+
+        string? label = KryptonInputBox.Show(new KryptonInputBoxData
+        {
+            Prompt = "Enter label for region:",
+            Caption = "Label Region",
+            DefaultResponse = "Region"
+        });
+
+        _currentRegionDraft.Label = string.IsNullOrWhiteSpace(label) ? "Region" : label!.Trim();
+        _regions.Add(_currentRegionDraft);
+        _regionsDirty = true;
+        _currentRegionDraft = null;
+        imageBox.Invalidate();
+    }
+
+    private void ImageBox_MouseDoubleClick(object? sender, MouseEventArgs e)
+    {
+        if (_currentImage == null)
+        {
+            return;
+        }
+
+        var imgPt = DisplayPointToImage(e.Location);
+        var region = _regions.FirstOrDefault(r => r.Rect.Contains(imgPt));
+        if (region == null)
+        {
+            return;
+        }
+
+        string? label = KryptonInputBox.Show(new KryptonInputBoxData
+        {
+            Prompt = "Edit label:",
+            Caption = "Edit Region Label",
+            DefaultResponse = region.Label
+        });
+
+        if (label != null)
+        {
+            region.Label = label.Trim();
+            _regionsDirty = true;
+            imageBox.Invalidate();
+        }
+    }
+
+    #endregion
+
+    #region Events
+
+    private void ToolStripButtonZoomIn_Click(object? sender, EventArgs e)
+    {
+        AdjustZoom(10);
+    }
+
+    private void ToolStripButtonZoomOut_Click(object? sender, EventArgs e)
+    {
+        AdjustZoom(-10);
     }
 
     private void OnColorSampled(Point location, Color color) =>
@@ -296,6 +428,114 @@ public partial class ImageViewerPage : UserControl
         }
     }
 
+    private void ZoomMenuItem_Click(object? sender, EventArgs e)
+    {
+        if (sender is ToolStripMenuItem mi)
+        {
+            if (mi.Tag is int factor)
+            {
+                imageBox.Zoom = factor;
+            }
+            else if (mi.Tag?.ToString() == "Fit")
+            {
+                FitToWindow();
+            }
+        }
+    }
+
+    private void ToolStripButtonCrosshair_Click(object? sender, EventArgs e)
+    {
+        _showCrosshair = toolStripButtonCrosshair.Checked;
+        imageBox.Invalidate();
+    }
+
+    private void ToolStripButtonRegionMode_CheckedChanged(object? sender, EventArgs e)
+    {
+        _regionMode = toolStripButtonRegionMode.Checked;
+    }
+
+    private void ToolStripButtonSaveRegions_Click(object? sender, EventArgs e)
+    {
+        SaveRegions();
+    }
+
+    private void ToolStripButtonLoadRegions_Click(object? sender, EventArgs e)
+    {
+        LoadRegions();
+    }
+
+    #endregion
+
+    #region Implementation
+
+    private void AdjustZoom(int delta)
+    {
+        int newZoom = imageBox.Zoom + delta;
+        newZoom = Math.Max(1, Math.Min(800, newZoom));
+        imageBox.Zoom = newZoom;
+    }
+
+    private void FitToWindow()
+    {
+        if (_currentImage == null)
+        {
+            return;
+        }
+
+        if (imageBox.ClientSize.Width == 0 || imageBox.ClientSize.Height == 0)
+        {
+            return;
+        }
+
+        double scaleX = imageBox.ClientSize.Width / (double)_currentImage.Width;
+        double scaleY = imageBox.ClientSize.Height / (double)_currentImage.Height;
+        int percent = (int)(Math.Min(scaleX, scaleY) * 100);
+        percent = Math.Max(1, Math.Min(800, percent));
+        imageBox.Zoom = percent;
+    }
+
+    private void UpdateStatus()
+    {
+        if (_currentImage == null)
+        {
+            statusLabel.Text = string.Empty;
+            toolStripHex.Text = string.Empty;
+            toolStripR.Text = string.Empty;
+            toolStripG.Text = string.Empty;
+            toolStripB.Text = string.Empty;
+            return;
+        }
+
+        if (!_mouseInside)
+        {
+            return; // Don't update if mouse is not inside
+        }
+
+        var imgPoint = imageBox.PointToImage(_lastMousePos);
+        if (imgPoint.X < 0 || imgPoint.Y < 0 || imgPoint.X >= _currentImage.Width || imgPoint.Y >= _currentImage.Height)
+        {
+            statusLabel.Text = string.Empty;
+            return;
+        }
+
+        Color c = ((Bitmap)_currentImage).GetPixel(imgPoint.X, imgPoint.Y);
+        statusLabel.Text = $"X: {imgPoint.X} / Y: {imgPoint.Y}  ||  {_currentImage.Width}px x {_currentImage.Height}px  ||  ";
+        toolStripHex.Text = $"HEX: #{c.R:X2}{c.G:X2}{c.B:X2}";
+        toolStripR.Text = c.R.ToString();
+        toolStripG.Text = c.G.ToString();
+        toolStripB.Text = c.B.ToString();
+    }
+
+    private void InitialiseTimer()
+    {
+        _uiTimer.Tick += (_, __) => UpdateStatus();
+    }
+
+    public void ApplyPalette(KryptonCustomPaletteBase palette)
+    {
+        kryptonPanel1.Palette = palette;
+    }
+
     private bool ConfirmImageReplacement(string dialogTitle)
     {
         if (!_regionsDirty)
@@ -315,134 +555,9 @@ public partial class ImageViewerPage : UserControl
             KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
     }
 
-    private void ZoomMenuItem_Click(object? sender, EventArgs e)
+    public void SetLastImageFolder(string? folder)
     {
-        if (sender is ToolStripMenuItem mi)
-        {
-            if (mi.Tag is int factor)
-            {
-                imageBox.Zoom = factor;
-            }
-            else if (mi.Tag?.ToString() == "Fit")
-            {
-                FitToWindow();
-            }
-        }
-    }
-
-    private void FitToWindow()
-    {
-        if (_currentImage == null)
-        {
-            return;
-        }
-        if (imageBox.ClientSize.Width == 0 || imageBox.ClientSize.Height == 0)
-        {
-            return;
-        }
-        double scaleX = imageBox.ClientSize.Width / (double)_currentImage.Width;
-        double scaleY = imageBox.ClientSize.Height / (double)_currentImage.Height;
-        int percent = (int)(Math.Min(scaleX, scaleY) * 100);
-        percent = Math.Max(1, Math.Min(800, percent));
-        imageBox.Zoom = percent;
-    }
-
-    private void ImageBox_MouseWheel(object? sender, MouseEventArgs e)
-    {
-        int stepPerTick = (ModifierKeys & Keys.Control) == Keys.Control ? 50 : 10;
-        int ticks = e.Delta / System.Windows.Forms.SystemInformation.MouseWheelScrollDelta;
-        if (ticks == 0)
-        {
-            ticks = Math.Sign(e.Delta);
-        }
-        AdjustZoom(stepPerTick * ticks);
-
-        // Prevent ImageBox or parent controls from applying additional zoom
-        if (e is HandledMouseEventArgs hme)
-        {
-            hme.Handled = true;
-        }
-    }
-
-    private void ToolStripButtonCrosshair_Click(object? sender, EventArgs e)
-    {
-        _showCrosshair = toolStripButtonCrosshair.Checked;
-        imageBox.Invalidate();
-    }
-
-    #region Region Drawing
-
-    private void ImageBox_MouseDown(object? sender, MouseEventArgs e)
-    {
-        if (_spacePanMode)
-        {
-            return; // allow panning while holding space
-        }
-        if (!_regionMode || _currentImage == null)
-        {
-            return;
-        }
-        if (e.Button != MouseButtons.Left)
-        {
-            return;
-        }
-        _isDrawing = true;
-        _startPt = e.Location;
-        // Use high-precision conversion to image coordinates (avoids integer rounding errors)
-        _startImgPt = DisplayPointToImage(_startPt);
-        _currentRegionDraft = new RegionInfo { Label = "", Rect = new RectangleF() };
-    }
-
-    private void ImageBox_MouseUp(object? sender, MouseEventArgs e)
-    {
-        if (!_isDrawing || _currentRegionDraft == null)
-        {
-            return;
-        }
-        _isDrawing = false;
-        if (_currentRegionDraft.Rect.Width < 5 || _currentRegionDraft.Rect.Height < 5)
-        {
-            _currentRegionDraft = null;
-            imageBox.Invalidate();
-            return;
-        }
-        string? label = KryptonInputBox.Show(new KryptonInputBoxData
-        {
-            Prompt = "Enter label for region:",
-            Caption = "Label Region",
-            DefaultResponse = "Region"
-        });
-        _currentRegionDraft.Label = string.IsNullOrWhiteSpace(label) ? "Region" : label!.Trim();
-        _regions.Add(_currentRegionDraft);
-        _regionsDirty = true;
-        _currentRegionDraft = null;
-        imageBox.Invalidate();
-    }
-
-    private void ImageBox_MouseDoubleClick(object? sender, MouseEventArgs e)
-    {
-        if (_currentImage == null)
-        {
-            return;
-        }
-        var imgPt = DisplayPointToImage(e.Location);
-        var region = _regions.FirstOrDefault(r => r.Rect.Contains(imgPt));
-        if (region == null)
-        {
-            return;
-        }
-        string? label = KryptonInputBox.Show(new KryptonInputBoxData
-        {
-            Prompt = "Edit label:",
-            Caption = "Edit Region Label",
-            DefaultResponse = region.Label
-        });
-        if (label != null)
-        {
-            region.Label = label.Trim();
-            _regionsDirty = true;
-            imageBox.Invalidate();
-        }
+        _lastImageFolder = string.IsNullOrWhiteSpace(folder) ? null : folder;
     }
 
     #endregion
@@ -459,6 +574,7 @@ public partial class ImageViewerPage : UserControl
         // Use high-precision conversion to minimise rounding artefacts
         var tl = DisplayPointToImage(new Point(disp.Left, disp.Top));
         var br = DisplayPointToImage(new Point(disp.Right, disp.Bottom));
+
         return RectangleF.FromLTRB(tl.X, tl.Y, br.X, br.Y);
     }
 
@@ -476,6 +592,7 @@ public partial class ImageViewerPage : UserControl
         int y = (int)(vp.Top + imgRect.Top * scale);
         int w = (int)(imgRect.Width * scale);
         int h = (int)(imgRect.Height * scale);
+
         return new Rectangle(x, y, w, h);
     }
 
@@ -505,15 +622,18 @@ public partial class ImageViewerPage : UserControl
     {
         _regions.Clear();
         _regionsDirty = false;
+
         LoadImage(image);
     }
 
     public bool LoadImageFile(string filePath)
     {
-        if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
+        if (string.IsNullOrWhiteSpace(filePath)
+            || !File.Exists(filePath))
         {
             return false;
         }
+
         try
         {
             using var img = Image.FromFile(filePath);
@@ -524,7 +644,8 @@ public partial class ImageViewerPage : UserControl
             _lastImageFolder = Path.GetDirectoryName(filePath);
             return true;
         }
-        catch { return false; }
+        catch { }
+        return false;
     }
 
     private void LoadImage(Image img)
@@ -541,12 +662,14 @@ public partial class ImageViewerPage : UserControl
         statusLabel.Text = string.Empty;
         statusZoomLabel.Text = "Zoom: 100%";
         colorPreviewLabel.BackColor = Color.Transparent;
+
         UpdateStatus();
     }
 
     public bool LoadRegionsFile(string filePath)
     {
-        if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
+        if (string.IsNullOrWhiteSpace(filePath)
+            || !File.Exists(filePath))
         {
             return false;
         }
@@ -557,7 +680,8 @@ public partial class ImageViewerPage : UserControl
     private void LoadRegions()
     {
         using var ofd = new System.Windows.Forms.OpenFileDialog {
-            Filter = "XML files|*.xml", Title = "Load Regions"
+            Filter = "XML files|*.xml",
+            Title = "Load Regions"
         };
 
         if (ofd.ShowDialog(this) != DialogResult.OK)
@@ -604,9 +728,24 @@ public partial class ImageViewerPage : UserControl
                 KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
             return false;
         }
-        string initDir = _lastRegionPath != null ? Path.GetDirectoryName(_lastRegionPath)! : _lastImageFolder ?? (_lastImagePath != null ? Path.GetDirectoryName(_lastImagePath)! : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-        using var sfd = new System.Windows.Forms.SaveFileDialog { Filter = "XML files|*.xml", Title = "Save Regions", InitialDirectory = initDir };
-        if (sfd.ShowDialog(this) != DialogResult.OK) return false;
+        string initDir = _lastRegionPath != null
+            ? Path.GetDirectoryName(_lastRegionPath)!
+            : _lastImageFolder ??
+               (_lastImagePath != null
+                ? Path.GetDirectoryName(_lastImagePath)!
+                : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+        using var sfd = new System.Windows.Forms.SaveFileDialog
+        {
+            Filter = "XML files|*.xml",
+            Title = "Save Regions",
+            InitialDirectory = initDir
+        };
+
+        if (sfd.ShowDialog(this) != DialogResult.OK)
+        {
+            return false;
+        }
+
         try
         {
             var xs = new XmlSerializer(typeof(List<RegionInfo>));
@@ -626,84 +765,6 @@ public partial class ImageViewerPage : UserControl
 
     #endregion
 
-    private void ToolStripButtonRegionMode_CheckedChanged(object? sender, EventArgs e)
-    {
-        _regionMode = toolStripButtonRegionMode.Checked;
-    }
-
-    private void ToolStripButtonSaveRegions_Click(object? sender, EventArgs e)
-    {
-        SaveRegions();
-    }
-
-    private void ToolStripButtonLoadRegions_Click(object? sender, EventArgs e)
-    {
-        LoadRegions();
-    }
-
-    public void SetLastImageFolder(string? folder)
-    {
-        _lastImageFolder = string.IsNullOrWhiteSpace(folder) ? null : folder;
-    }
-
-    private void ImageBox_KeyDown(object? sender, KeyEventArgs e)
-    {
-        // Zoom shortcuts
-        if (e.Control && (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus))
-        {
-            AdjustZoom(10);
-            e.Handled = true;
-            return;
-        }
-        if (e.Control && (e.KeyCode == Keys.Subtract || e.KeyCode == Keys.OemMinus))
-        {
-            AdjustZoom(-10);
-            e.Handled = true;
-            return;
-        }
-
-        // Temporary pan-hand (space)
-        if (e.KeyCode == Keys.Space && !_spacePanMode)
-        {
-            _spacePanMode = true;
-            _prevCursor = imageBox.Cursor;
-            imageBox.Cursor = Cursors.Hand;
-            e.Handled = true;
-            return;
-        }
-
-        // Delete selected region
-        if (e.KeyCode == Keys.Delete)
-        {
-            if (_selectedRegion != null && _regions.Contains(_selectedRegion))
-            {
-                _regions.Remove(_selectedRegion);
-                _selectedRegion = null;
-                _regionsDirty = true;
-                imageBox.Invalidate();
-            }
-            e.Handled = true;
-            return;
-        }
-    }
-
-    private void ImageBox_KeyUp(object? sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Space && _spacePanMode)
-        {
-            _spacePanMode = false;
-            imageBox.Cursor = _prevCursor ?? Cursors.Default;
-            e.Handled = true;
-        }
-    }
-
-    private void ImageBox_PreviewKeyDown(object? sender, PreviewKeyDownEventArgs e)
-    {
-        if (e.KeyCode == Keys.Space)
-        {
-            e.IsInputKey = true;
-        }
-    }
 }
 
 internal sealed class RegionInfo
@@ -712,14 +773,8 @@ internal sealed class RegionInfo
     public RectangleF Rect { get; set; }
 }
 
-public sealed class ColorSampledEventArgs : EventArgs
+public sealed class ColorSampledEventArgs(Point location, Color color) : EventArgs
 {
-    public ColorSampledEventArgs(Point location, Color color)
-    {
-        Location = location;
-        Color = color;
-    }
-
-    public Point Location { get; }
-    public Color Color { get; }
+    public Point Location { get; } = location;
+    public Color Color { get; } = color;
 }

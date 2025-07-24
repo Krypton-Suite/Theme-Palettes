@@ -2,78 +2,96 @@
 /*
  *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner(aka Wagnerp) & Simon Coghlan(aka Smurf-IV), tobitege et al. 2023 - 2025. All rights reserved.
+ *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac, Ahmed Abdelhameed, tobitege et al. 2023 - 2025. All rights reserved.
  *
  */
 #endregion
 
 namespace PaletteDesigner.Utilities;
 
-internal class PaletteUpgradeUtilities
+public static class PaletteUpgradeUtilities
 {
-    #region Identity
-
-    public PaletteUpgradeUtilities()
-    {
-    }
-
-    #endregion
-
     #region Implementation
 
-    public static void PerformUpgrade(Stream inputStream)
+    public static MemoryStream PerformUpgrade(Stream inputStream)
+    {
+        using var reader = new StreamReader(inputStream);
+        string xmlContent = reader.ReadToEnd();
+
+        using var streamReader = new StreamReader(Resources.v6to20);
+        using var xmlTextReader = XmlReader.Create(streamReader);
+
+        var xslCompiledTransform = new XslCompiledTransform();
+        xslCompiledTransform.Load(xmlTextReader);
+
+        string transformedXml = XmlHelpers.TransformXml(xslCompiledTransform, xmlContent);
+
+        var outputStream = new MemoryStream();
+        using var writer = new StreamWriter(outputStream, new UTF8Encoding(false), 1024, true);
+
+        writer.WriteLine("<?xml version=\"1.0\"?>");
+        writer.Write(transformedXml);
+        writer.Flush();
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
+
+    public static void UpgradeFile(string inputFilePath, string outputFilePath)
+    {
+        // Read input file
+        string xmlContent = File.ReadAllText(inputFilePath);
+
+        // Detect version and apply appropriate transformation
+        int inputVersion = DetectPaletteVersion(xmlContent);
+        string transformedXml = ApplyUpgradeTransformation(xmlContent, inputVersion);
+
+        // Write output file
+        using var writer = new StreamWriter(outputFilePath, false, new UTF8Encoding(false));
+        writer.WriteLine("<?xml version=\"1.0\"?>");
+        writer.Write(transformedXml);
+    }
+
+    public static int DetectPaletteVersion(string xmlContent)
     {
         try
         {
-            using var reader = new StreamReader(inputStream);
+            var doc = new XmlDocument();
+            doc.LoadXml(xmlContent);
 
-            string end = reader.ReadToEnd();
-
-            reader.Close();
-
-            using (var streamReader = new StreamReader(Resources.v6to20))
+            var versionNode = doc.SelectSingleNode("//Version");
+            if (versionNode != null && int.TryParse(versionNode.InnerText, out int version))
             {
-                using (var xmlTextReader = XmlReader.Create(streamReader))
-                {
-                    var xslCompiledTransform = new XslCompiledTransform();
-
-                    xslCompiledTransform.Load(xmlTextReader);
-
-                    end = TransformXml(xslCompiledTransform, end);
-                }
+                return version;
             }
-
-            using var ms = new MemoryStream();
-
-            using (var writer = new StreamWriter(ms, new UTF8Encoding(false, true), 1024, true))
-            {
-                writer.WriteLine("<?xml version=\"1.0\"?>");
-                writer.Write(end);
-                writer.Flush();
-                writer.Close();
-            }
-
-            ms.Position = 0;
         }
-        catch (Exception)
+        catch
         {
+            // Fallback to default if detection fails
         }
+
+        return 1; // Default to oldest version if detection fails
     }
 
-    private static string TransformXml(XslCompiledTransform transform, string xml)
+    public static string ApplyUpgradeTransformation(string xmlContent, int inputVersion)
     {
-        using var reader = new StringReader(xml);
-        using var writer = new StringWriter();
-        using var xmlTextReader = new XmlTextReader(reader);
-        using var xmlTextWriter = new XmlTextWriter(writer)
+        const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
+
+        string result = xmlContent;
+
+        // Apply v2to6 transformation if needed
+        if (inputVersion < 6)
         {
-            Formatting = Formatting.Indented,
-            Indentation = 4
-        };
+            result = XmlHelpers.TransformXmlWithResource(Resources.v2to6, result);
+        }
 
-        transform.Transform(xmlTextReader, xmlTextWriter);
+        // Apply v6to20 transformation if needed
+        if (inputVersion < MAXIMUM_PALETTE_FILE_VERSION)
+        {
+            result = XmlHelpers.TransformXmlWithResource(Resources.v6to20, result);
+        }
 
-        return writer.ToString();
+        return result;
     }
 
     #endregion
