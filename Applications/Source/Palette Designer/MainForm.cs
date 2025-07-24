@@ -598,6 +598,12 @@ namespace PaletteDesigner
                     }
 
                     int row = colorTableGrid.Rows.Add(idx, eVal.ToString(), FormatColorString(color));
+
+                    // Determine visibility based on active filters (fast filter / color filter)
+                    bool passesColor = !_activeColorFilter.HasValue || color.ToArgb() == _activeColorFilter.Value.ToArgb();
+                    bool passesName = string.IsNullOrWhiteSpace(_activeNameFilter) || eVal.ToString().IndexOf(_activeNameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
+                    colorTableGrid.Rows[row].Visible = passesColor && passesName;
+
                     var cell = colorTableGrid.Rows[row].Cells[2];
                     cell.Style.BackColor = color;
                     cell.Style.ForeColor = GetContrastColor(color);
@@ -608,8 +614,6 @@ namespace PaletteDesigner
                 colorTableGrid.AutoResizeColumns();
                 UpdateColorGridRowHeights();
                 colorTableGrid.ResumeLayout();
-                // Restore any active filters after repopulating
-                ApplyQuickFilter();
             }
             finally
             {
@@ -1573,6 +1577,7 @@ namespace PaletteDesigner
             row.Cells[2].Style.ForeColor = GetContrastColor(color);
             row.Cells[2].Style.SelectionBackColor = color;
             row.Cells[2].Style.SelectionForeColor = GetContrastColor(color);
+            colorTableGrid.InvalidateRow(rowIndex);
             colorTableGrid.Refresh();
         }
 
