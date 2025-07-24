@@ -608,6 +608,8 @@ namespace PaletteDesigner
                 colorTableGrid.AutoResizeColumns();
                 UpdateColorGridRowHeights();
                 colorTableGrid.ResumeLayout();
+                // Restore any active filters after repopulating
+                ApplyQuickFilter();
             }
             finally
             {
