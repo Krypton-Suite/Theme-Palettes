@@ -117,6 +117,9 @@ public class SettingsManager
     public void SetRestoreLastRegionsOnStartup(bool value) => _settings.RestoreLastRegionsOnStartup = value;
     public bool GetRestoreLastRegionsOnStartup() => _settings.RestoreLastRegionsOnStartup;
 
+    public void SetFastFilterText(string text) => _settings.FastFilterText = text;
+    public string GetFastFilterText() => _settings.FastFilterText;
+
     #endregion
 
     #region Public

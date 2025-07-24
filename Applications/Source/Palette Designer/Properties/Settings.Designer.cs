@@ -214,5 +214,17 @@ namespace PaletteDesigner.Properties {
                 this["RestoreLastRegionsOnStartup"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FastFilterText {
+            get {
+                return ((string)(this["FastFilterText"]));
+            }
+            set {
+                this["FastFilterText"] = value;
+            }
+        }
     }
 }

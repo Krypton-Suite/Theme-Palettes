@@ -28,6 +28,8 @@ namespace PaletteDesigner
 
         // Undo stack for color edits
         private readonly Stack<(SchemeBaseColors EnumValue, Color OldColor)> _undoStack = new();
+        // Tracks last known PropertyGrid path for each SchemeBaseColors entry
+        private readonly Dictionary<SchemeBaseColors, string> _enumToPath = new();
 
         // Font size limits for grids/properties
         private const float MinFontSize = 6f;
@@ -488,7 +490,7 @@ namespace PaletteDesigner
             ApplyPalette();
         }
 
-        private void ApplyPalette()
+        private void ApplyPalette(bool populateTable = true)
         {
             if (_palette == null)
             {
@@ -496,7 +498,7 @@ namespace PaletteDesigner
             }
             if (InvokeRequired)
             {
-                BeginInvoke((Action)ApplyPalette);
+                BeginInvoke((Action)(() => ApplyPalette(populateTable)));
                 return;
             }
 
@@ -515,11 +517,12 @@ namespace PaletteDesigner
 
             UpdateChromeTMS();
 
-            // Set up right-hand property grid with the color table colors
-            PopulateColorTableGrid();
-
-            // Ensure the property grid reflects any programmatic palette changes
-            propertyGrid.Refresh();
+            // Optionally refresh the color table and property grid
+            if (populateTable)
+            {
+                PopulateColorTableGrid();
+                propertyGrid.Refresh();
+            }
         }
 
         private void PopulateColorTableGrid()
@@ -598,6 +601,8 @@ namespace PaletteDesigner
                     var cell = colorTableGrid.Rows[row].Cells[2];
                     cell.Style.BackColor = color;
                     cell.Style.ForeColor = GetContrastColor(color);
+                    cell.Style.SelectionBackColor = color;
+                    cell.Style.SelectionForeColor = GetContrastColor(color);
                 }
 
                 colorTableGrid.AutoResizeColumns();
@@ -802,6 +807,13 @@ namespace PaletteDesigner
 
             CreateNewPalette();
 
+            // Restore fast filter text from settings
+            string savedFilterText = _settingsManager.GetFastFilterText();
+            if (!string.IsNullOrEmpty(savedFilterText))
+            {
+                fastFilterTextBox.Text = savedFilterText;
+            }
+
             // Initialize filter UI state (without filtering rows during startup)
             UpdateFilterUI(false);
         }
@@ -867,6 +879,9 @@ namespace PaletteDesigner
                 _settingsManager.SetLastRegionStoragePath(imageViewerControl.LastRegionPath ?? string.Empty);
                 _settingsManager.SetLastImageFolder(imageViewerControl.LastImageFolder ?? string.Empty);
             }
+
+            // Save fast filter text
+            _settingsManager.SetFastFilterText(fastFilterTextBox.Text ?? string.Empty);
 
             _settingsManager.SaveSettings();
         }
@@ -1367,7 +1382,57 @@ namespace PaletteDesigner
 
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
+            // Map edited property back to SchemeBaseColors enum and apply it
+            if (e.ChangedItem == null) return;
+            string path = GetGridItemFullPath(e.ChangedItem);
+            var basePal = _palette?.BasePalette;
+            if (basePal != null)
+            {
+                try
+                {
+                    SchemeBaseColors enumVal;
+                    try
+                    {
+                        enumVal = PaletteDesigner.Utilities.PaletteMapper.MapPathToSchemeEnum(basePal, path);
+                    }
+                    catch
+                    {
+                        // fallback: if we already have mapping stored for this path
+                        enumVal = _enumToPath.FirstOrDefault(kvp => kvp.Value == path).Key;
+                        if (!_enumToPath.ContainsKey(enumVal))
+                        {
+                            // Cannot map, abort
+                            return;
+                        }
+                    }
+                    // Determine the new color from the property grid change
+                    object? valueObj = e.ChangedItem?.Value;
+                    Color newColor;
+                    if (valueObj is Color col)
+                    {
+                        newColor = col;
+                    }
+                    else if (valueObj is string colValue)
+                    {
+                        newColor = ColorTranslator.FromHtml(colValue);
+                    }
+                    else
+                    {
+                        newColor = PaletteDesigner.Utilities.PaletteMapper.GetColorByPath(basePal, path);
+                    }
+                    _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
+                    ApplySchemeColor(enumVal, newColor);
+                    UpdateGridRow((int)enumVal, newColor);
+                }
+                catch { }
+            }
             ApplyPalette();
+            // Push latest base-palette colors into override properties
+            CopyColorsFromBasePalette();
+            // Rebind grid to pick up override values (single assignment to preserve state)
+            propertyGrid.SelectedObject = _palette;
+            // Refresh the grid to show updated overrides without collapsing nodes
+            propertyGrid.Refresh();
         }
 
         private void ColorTableGrid_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
@@ -1388,16 +1453,15 @@ namespace PaletteDesigner
             }
         }
 
+        private void ColorTableGrid_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
+            => EditCurrentCellColor();
+
         private void EditCurrentCellColor()
         {
-            if (colorTableGrid.CurrentCell == null)
-            {
-                return;
-            }
-
-            int rowIndex = colorTableGrid.CurrentCell.RowIndex;
-            int colIndex = colorTableGrid.CurrentCell.ColumnIndex;
-            if (rowIndex < 0 || rowIndex >= colorTableGrid.Rows.Count || colIndex < 2)
+            int rowIndex = colorTableGrid.CurrentCell?.RowIndex ?? -1;
+            // Only skip column-header clicks: RowIndex == -1 indicates header.
+            // RowIndex == 0 is the first data row, so we don't use <1.
+            if (rowIndex < 0 || rowIndex >= colorTableGrid.Rows.Count)
             {
                 return;
             }
@@ -1410,17 +1474,30 @@ namespace PaletteDesigner
             using var dlg = new LiveColorPickerDialog { Color = current };
             dlg.LiveColorChanged += (_, args) =>
             {
-                ApplySchemeColor(enumVal, args.Color);
-                UpdateGridRow(rowIndex, args.Color);
+                _undoStack.Push((enumVal, current));
+                DelegateColorChange(enumVal, args.Color, rowIndex);
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                // Push undo
                 _undoStack.Push((enumVal, current));
+                DelegateColorChange(enumVal, dlg.Color, rowIndex);
+            }
+        }
 
-                ApplySchemeColor(enumVal, dlg.Color);
-                UpdateGridRow(rowIndex, dlg.Color);
+        // Inserted helper for delegating color updates
+        private void DelegateColorChange(SchemeBaseColors enumVal, Color newColor, int rowIndex)
+        {
+            // Write color into palette and update the table cell
+            ApplySchemeColor(enumVal, newColor);
+            UpdateGridRow(rowIndex, newColor);
+            ApplyPalette(populateTable: false);
+            // Delegate to PropertyGrid helper for override entry
+            if (_palette != null && (_palette.BasePalette ?? _palette) != null)
+            {
+                var paths = PaletteDesigner.Utilities.PaletteMapper.FindPathsForEnum(_palette, _palette.BasePalette ?? _palette, enumVal);
+                if (paths.Count > 0)
+                    PropertyGridHelper.UpdatePropertyEntry(propertyGrid, paths[0], newColor);
             }
         }
 
@@ -1444,8 +1521,42 @@ namespace PaletteDesigner
 
         private void ApplySchemeColor(SchemeBaseColors val, Color newColor)
         {
-            // Use the shared helper extension to update the palette and raise paint events
-            _palette?.SetSchemeColor(val, newColor);
+            // Ensure the new color is written into the base palette (where SchemeColors and BaseScheme live)
+            var basePal = _palette?.BasePalette;
+            if (basePal != null)
+            {
+                basePal.SetSchemeColor(val, newColor);
+            }
+            else
+            {
+                // Fallback to custom palette if no BasePalette set
+                _palette?.SetSchemeColor(val, newColor);
+            }
+
+            // Refresh the property grid so new base value shows through
+
+            if (_palette != null)
+            {
+                if (!_enumToPath.TryGetValue(val, out var mappedPath))
+                {
+                    // discover paths once
+                    var paths = PaletteDesigner.Utilities.PaletteMapper.FindPathsForEnum(_palette, basePal ?? _palette, val);
+                    foreach (var p in paths)
+                    {
+                        _enumToPath[val] = p; // store first path
+                        PaletteDesigner.Utilities.PaletteMapper.SetColorByPath(_palette, p, newColor);
+                    }
+                }
+                else
+                {
+                    PaletteDesigner.Utilities.PaletteMapper.SetColorByPath(_palette, mappedPath, newColor);
+                }
+
+                if (propertyGrid.SelectedObject != null)
+                {
+                    propertyGrid.Refresh();
+                }
+            }
         }
 
         private void UpdateGridRow(int rowIndex, Color color)
@@ -1458,6 +1569,8 @@ namespace PaletteDesigner
             row.Cells[2].Value = FormatColorString(color);
             row.Cells[2].Style.BackColor = color;
             row.Cells[2].Style.ForeColor = GetContrastColor(color);
+            row.Cells[2].Style.SelectionBackColor = color;
+            row.Cells[2].Style.SelectionForeColor = GetContrastColor(color);
             colorTableGrid.Refresh();
         }
 
@@ -1569,6 +1682,7 @@ namespace PaletteDesigner
 
                         ApplySchemeColor(enumVal, pastedColor);
                         UpdateGridRow(rowIndex, pastedColor);
+                        // ApplyPalette();
                     }
                 }
                 return true;
@@ -2072,6 +2186,7 @@ namespace PaletteDesigner
                     _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
                     ApplySchemeColor(enumVal, e.Color);
                     UpdateGridRow(rowIndex, e.Color);
+                    // ApplyPalette();
 
                     // Move selection to column 1 (Name) so color change is visible
                     colorTableGrid.CurrentCell = colorTableGrid.Rows[rowIndex].Cells[1];
@@ -2261,5 +2376,18 @@ namespace PaletteDesigner
         }
 
         #endregion
+
+        // Helper to reconstruct full property path from a GridItem
+        private string GetGridItemFullPath(GridItem item)
+        {
+            var labels = new Stack<string>();
+            while (item != null)
+            {
+                if (item.Label != null)
+                    labels.Push(item.Label);
+                item = item.Parent!;
+            }
+            return string.Join(".", labels);
+        }
     }
 }
