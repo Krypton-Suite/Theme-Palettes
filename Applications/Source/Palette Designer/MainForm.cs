@@ -45,6 +45,8 @@ namespace PaletteDesigner
         private ToolStripMenuItem? _autoFillMenuItem;
         private bool _autoFillFromViewer;
         private bool _displayRgb = true; // default display format per property grid
+        // regex instance to filter set color strings in the filterbox
+        private Regex _regexFilterBoxFontColor = new(@"\d+;\d+;\d+");
 
         #endregion
 
@@ -819,9 +821,11 @@ namespace PaletteDesigner
             {
                 fastFilterTextBox.Text = savedFilterText;
             }
-
-            // Initialize filter UI state (without filtering rows during startup)
-            UpdateFilterUI(false);
+            else
+            {
+                // Initialize filter UI state (without filtering rows during startup)
+                UpdateFilterUI(false);
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1584,7 +1588,7 @@ namespace PaletteDesigner
         private string FormatColorString(Color c)
         {
             return _displayRgb
-                ? $"{c.R}; {c.G}; {c.B}"
+                ? $"{c.R};{c.G};{c.B}"
                 : $"#{c.R:X2}{c.G:X2}{c.B:X2}";
         }
 
@@ -1913,6 +1917,18 @@ namespace PaletteDesigner
 
         private void FastFilterTextBox_TextChanged(object? sender, EventArgs e)
         {
+            string input = fastFilterTextBox.Text;
+
+            bool looksNumeric = input.Length > 0 && char.IsDigit(input[0]);
+            bool matchesRgbTriplet = _regexFilterBoxFontColor.IsMatch(input);
+
+            // Only auto-select the color filter if it is not already selected
+            // and the input appears to be a color string.
+            if (!filterByColorButton.Checked && (looksNumeric || matchesRgbTriplet))
+            {
+                filterByColorButton.Checked = true;
+            }
+
             ApplyQuickFilter();
         }
 
@@ -1941,7 +1957,7 @@ namespace PaletteDesigner
                 return;
             }
 
-            if (filterByColorButton != null && filterByColorButton.Checked)
+            if (filterByColorButton.Checked)
             {
                 if (!TryParseColorString(input, out Color parsed))
                 {
@@ -1968,41 +1984,55 @@ namespace PaletteDesigner
             {
                 Cursor = Cursors.WaitCursor;
 
-                // Prevent all redraws during the operation
-                SetRedraw(colorTableGrid, false);
+                // save the autosize state and disable it.
+                // this stops the cells from redrawing over and over again
+                colorTableGrid.SuspendLayout();
+
+                var autoSizeRows = colorTableGrid.AutoSizeRowsMode;
+                var autoSizeCols = colorTableGrid.AutoSizeColumnsMode;
+
+                colorTableGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                colorTableGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
                 try
                 {
-                    colorTableGrid.SuspendLayout();
+                    // clean all spaces from the textbox before we begin
+                    fastFilterTextBox.Text = fastFilterTextBox.Text.Replace(" ", string.Empty);
 
-                    // Batch all visibility changes
-                    var visibilityChanges = new List<(DataGridViewRow Row, bool ShouldBeVisible)>();
-
-                    foreach (DataGridViewRow row in colorTableGrid.Rows)
+                    // if the filterbox is empty, all rows will be visible
+                    if (fastFilterTextBox.Text.Length == 0
+                        && colorTableGrid.Rows.Count != colorTableGrid.DisplayedRowCount(true))
                     {
-                        if (row.IsNewRow)
+                        foreach (DataGridViewRow row in colorTableGrid.Rows)
                         {
-                            continue;
-                        }
-                        bool shouldBeVisible = RowPassesFilters(row);
-                        if (row.Visible != shouldBeVisible)
-                        {
-                            visibilityChanges.Add((row, shouldBeVisible));
+                            row.Visible = true;
                         }
                     }
-
-                    // Apply all changes at once
-                    foreach (var (row, shouldBeVisible) in visibilityChanges)
+                    else
                     {
-                        row.Visible = shouldBeVisible;
-                    }
+                        // if we are looking for a font string it must contain 3 integers separated by 2 semicolons
+                        if (filterByNameButton.Checked
+                            || (filterByColorButton.Checked && _regexFilterBoxFontColor.IsMatch(fastFilterTextBox.Text)))
+                        {
+                            foreach (DataGridViewRow row in colorTableGrid.Rows)
+                            {
+                                if (row.IsNewRow)
+                                {
+                                    continue;
+                                }
 
-                    colorTableGrid.ResumeLayout(false);
+                                row.Visible = RowPassesFilters(row);
+                            }
+                        }
+                    }
                 }
                 finally
                 {
-                    // Re-enable redraws and force a single refresh
-                    SetRedraw(colorTableGrid, true);
-                    colorTableGrid.Refresh();
+                    colorTableGrid.ResumeLayout(false);
+
+                    // restore autosizing
+                    colorTableGrid.AutoSizeRowsMode = autoSizeRows;
+                    colorTableGrid.AutoSizeColumnsMode = autoSizeCols;
                 }
             }
             finally
@@ -2013,19 +2043,27 @@ namespace PaletteDesigner
 
         private bool RowPassesFilters(DataGridViewRow row)
         {
-            bool passesColor = true;
-            if (_activeColorFilter.HasValue)
-            {
-                passesColor = row.Cells[2].Style.BackColor.ToArgb() == _activeColorFilter.Value.ToArgb();
-            }
+            string s;
 
-            bool passesName = true;
-            if (!string.IsNullOrWhiteSpace(_activeNameFilter))
+            if (filterByNameButton.Checked)
             {
-                string name = row.Cells[1].Value?.ToString() ?? string.Empty;
-                passesName = name.IndexOf(_activeNameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
+                s = row.Cells[1].Value?.ToString() ?? string.Empty;
+                return s.Length > 0
+                    ? s.IndexOf(fastFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) > 0
+                    : false;
             }
-            return passesColor && passesName;
+            else if (filterByColorButton.Checked)
+            {
+                s = row.Cells[2].Value?.ToString() ?? string.Empty;
+                return fastFilterTextBox.Text.Equals(s);
+            }
+            else
+            {
+                // Fallback: assume color filter and silently activate it.
+                filterByColorButton.Checked = true;
+                s = row.Cells[2].Value?.ToString() ?? string.Empty;
+                return fastFilterTextBox.Text.Equals(s);
+            }
         }
 
         private void AdjustGridFont(float delta)
