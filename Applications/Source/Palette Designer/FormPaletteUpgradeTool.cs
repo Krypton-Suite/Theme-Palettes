@@ -4,7 +4,7 @@
  *  © Component Factory Pty Ltd, 2006 - 2016, (Version 4.5.0.0) All rights reserved.
  *
  *  New BSD 3-Clause License (https://github.com/Krypton-Suite/Standard-Toolkit/blob/master/LICENSE)
- *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac & Ahmed Abdelhameed, tobitege et al. 2017 - 2025. All rights reserved.
+ *  Modifications by Peter Wagner (aka Wagnerp), Simon Coghlan (aka Smurf-IV), Giduac, Ahmed Abdelhameed, tobitege et al. 2017 - 2025. All rights reserved.
  */
 #endregion
 
@@ -85,28 +85,6 @@ public partial class FormPaletteUpgradeTool : KryptonForm
         }
 
         return -1;
-    }
-
-    /// <summary>
-    /// Transforms the XML.
-    /// </summary>
-    /// <param name="transform">The transform.</param>
-    /// <param name="xml">The XML.</param>
-    /// <returns></returns>
-    private static string TransformXml(XslCompiledTransform transform, string xml)
-    {
-        using (var reader = new StringReader(xml))
-
-        using (var writer = new StringWriter())
-
-        using (var xmlReader = new XmlTextReader(reader))
-
-        using (var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented, Indentation = 4 })
-        {
-            transform.Transform(xmlReader, xmlWriter);
-
-            return writer.ToString();
-        }
     }
 
     /// <summary>
@@ -210,49 +188,19 @@ public partial class FormPaletteUpgradeTool : KryptonForm
     {
         try
         {
-            // Read the original palette XML
-            string xml;
-            using (var reader = new StreamReader(krtbInput.Text))
-            {
-                xml = reader.ReadToEnd();
-            }
-
-            // Apply the required transformation(s)
-            if (GetInputVersionNumber() < 6)
-            {
-                var transform = new XslCompiledTransform();
-                transform.Load(new XmlTextReader(new StringReader(Resources.v2to6)));
-                xml = TransformXml(transform, xml);
-            }
-            else if (GetInputVersionNumber() < MAXIMUM_PALETTE_FILE_VERSION)
-            {
-                var transform = new XslCompiledTransform();
-
-                using (var sr = new StringReader(Resources.v6to20))
-
-                using (var xr = XmlReader.Create(sr))
-                {
-                    transform.Load(xr);
-                }
-                xml = TransformXml(transform, xml);
-            }
-
-            // Write the upgraded XML to the chosen output file
-            using (var writer = new StreamWriter(krtbOutput.Text, false))
-            {
-                writer.WriteLine("<?xml version=\"1.0\"?>");
-                writer.Write(xml);
-            }
+            PaletteUpgradeUtilities.UpgradeFile(krtbInput.Text, krtbOutput.Text);
 
             string message = $"Input file: {krtbInput.Text}\nOutput file: {krtbOutput.Text}\n\nUpgrade from version '{_inputVersionNumber}' to version '{MAXIMUM_PALETTE_FILE_VERSION}' has succeeded.";
 
-            KryptonMessageBox.Show(this, message, "Upgrade Success", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
+            KryptonMessageBox.Show(this, message, "Upgrade Success",
+                KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
 
             kbtnUpgrade.Enabled = false;
         }
         catch (Exception exc)
         {
-            KryptonMessageBox.Show(this, $"Error: {exc.Message}", "Upgrade Error", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
+            KryptonMessageBox.Show(this, $"Error: {exc.Message}", "Upgrade Error",
+                KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
         }
     }
 
@@ -279,7 +227,13 @@ public partial class FormPaletteUpgradeTool : KryptonForm
                     break;
                 case < MINIMUM_PALETTE_FILE_VERSION:
                     {
-                        string[] fileName = ["File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", MINIMUM_PALETTE_FILE_VERSION.ToString(), "' and upwards."
+                        // who came up with this idea?!
+                        string[] fileName = ["File '", openFileDialog.FileName,
+                            "' contains palette format version '",
+                            paletteFileVersionNumber.ToString(),
+                            "'.\nPalette upgrade tool can only upgrade version '",
+                            MINIMUM_PALETTE_FILE_VERSION.ToString(),
+                            "' and upwards."
                         ];
 
                         KryptonMessageBox.Show(this,
@@ -304,7 +258,13 @@ public partial class FormPaletteUpgradeTool : KryptonForm
                     }
                 default:
                     {
-                        string[] fileName1 = ["File '", openFileDialog.FileName, "' contains palette format version '", paletteFileVersionNumber.ToString(), "'.\nPalette upgrade tool can only upgrade version '", 17.ToString(), "' and below."
+                        string[] fileName1 = ["File '",
+                            openFileDialog.FileName,
+                            "' contains palette format version '",
+                            paletteFileVersionNumber.ToString(),
+                            "'.\nPalette upgrade tool can only upgrade version '",
+                            17.ToString(),
+                            "' and below."
                         ];
 
                         KryptonMessageBox.Show(this,

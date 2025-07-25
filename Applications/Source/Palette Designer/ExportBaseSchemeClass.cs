@@ -108,9 +108,17 @@ public partial class ExportBaseSchemeClass : KryptonForm
         }
     }
 
-    private static string ToColorExpr(Color c) => c.IsEmpty
-        ? "GlobalStaticValues.EMPTY_COLOR"
-        : (c.A != 255 ? $"Color.FromArgb({c.A}, {c.R}, {c.G}, {c.B})" : $"Color.FromArgb({c.R}, {c.G}, {c.B})");
+    private static string ToColorExpr(Color c)
+    {
+        if (c.IsEmpty)
+        {
+            return "GlobalStaticValues.EMPTY_COLOR";
+        }
+
+        return c.A != 255
+            ? $"Color.FromArgb({c.A}, {c.R}, {c.G}, {c.B})"
+            : $"Color.FromArgb({c.R}, {c.G}, {c.B})";
+    }
 
     private static string GenerateSchemeClassCode(KryptonCustomPaletteBase palette, string className)
     {

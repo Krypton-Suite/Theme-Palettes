@@ -55,6 +55,8 @@
 
   <ItemGroup>
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageReference Include="Cyotek.Windows.Forms.ImageBox" Version="2.0.0-alpha.1" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240615" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +64,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\InputControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\ImageViewerPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
