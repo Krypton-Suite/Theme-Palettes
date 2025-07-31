@@ -320,6 +320,9 @@ public static class PaletteMapper
     private static readonly Regex _ribbonQATOverflowRegex = new(@"^RibbonQATOverflow([1-2])$", RegexOptions.Compiled);
     private static readonly Regex _ribbonDropArrowRegex = new(@"^RibbonDropArrow(Dark|Light)$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGalleryRegex = new(@"^RibbonGallery(Back(Normal|Tracking)|Back([12])|Border)$", RegexOptions.Compiled);
+    private static readonly Regex _appMenuDocsBackRegex = new(@"^AppButtonMenuDocsBack$", RegexOptions.Compiled);
+    private static readonly Regex _formHeaderShortLongRegex = new(@"^FormHeader(Short|Long)(Active|Inactive)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGalleryBackRegex = new(@"^RibbonGalleryBack(?:(Tracking|Normal)|([12]))?$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGroupsAreaAnyRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled); // keep but map to Ribbon.Tab/Group styles below
     private static readonly Regex _buttonClusterRegex = new(@"^ButtonClusterButton(Back|Border)([12])$", RegexOptions.Compiled);
     private static readonly Regex _gridListRegex = new(@"^GridList(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
@@ -423,16 +426,11 @@ public static class PaletteMapper
                 string idx = m.Groups[4].Success ? m.Groups[4].Value : "1";
                 return $"{rootPart}.StatePressed.BackColor{idx}";
             }
-            if (enumName == "AppButtonMenuDocsBack")
-            {
-                // Direct mapping to single BackColor property
-                return "Ribbon.RibbonAppMenuOuter.StateNormal.BackColor1";
-            }
+            // AppButtonMenuDocs mapping
+            if (_appMenuDocsBackRegex.IsMatch(enumName))
+                return "Ribbon.RibbonAppMenuDocs.BackColor1";
             if (enumName == "AppButtonMenuDocsText")
-            {
-                // Direct mapping to Ribbon object graph
-                return "Ribbon.RibbonAppMenuDocsText.StateNormal.Text.Color1";
-            }
+                return "Ribbon.RibbonAppMenuDocsEntry.TextColor";
         }
 
         // Generic Button state mapping (Pressed/Checked/Selected Begin/End)
@@ -468,11 +466,11 @@ public static class PaletteMapper
             // Text colors for RibbonTab
             if (enumName == "RibbonTabTextNormal")
             {
-                return "Ribbon.RibbonTab.StateNormal.Text.Color1";
+                return "Ribbon.RibbonTab.StateNormal.TextColor";
             }
             if (enumName == "RibbonTabTextChecked")
             {
-                return "Ribbon.RibbonTab.StateCheckedNormal.Text.Color1";
+                return "Ribbon.RibbonTab.StateCheckedNormal.TextColor";
             }
 
             string stateToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Selected | Tracking | Highlight
@@ -582,10 +580,8 @@ public static class PaletteMapper
             string stateToken  = m.Groups[2].Value; // Active / Inactive
 
             string stylePart = string.IsNullOrEmpty(lengthToken) ? "FormHeader" : $"FormHeader{lengthToken}";
-            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            // Some builds expose Short/Long under HeaderStyles.Form, not FormHeader*
-            // Try the more common Form cluster first; if it fails, reflection fallback will handle.
-            return $"HeaderStyles.Form.{statePart}.Content.ShortText.Color1";
+            string statePart = stateToken == "Active" ? "Active" : "Inactive";
+            return $"HeaderStyles.{stylePart}.State{statePart}.TextColor";
         }
 
         // FormButtonBorderCheck mapping
