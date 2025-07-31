@@ -2557,9 +2557,31 @@ namespace PaletteDesigner
         {
             // Update the grid row corresponding to the changed color
             UpdateGridRow((int)e.Index, e.NewColor);
+
+            // Keep override property in sync so the PropertyGrid reflects the change
+            if (_palette != null)
+            {
+                // Try cached mapping first
+                if (!_enumToPath.TryGetValue(e.Index, out string? path) || string.IsNullOrWhiteSpace(path))
+                {
+                    // Resolve and cache the path if not yet known
+                    path = PaletteMapper.ResolvePath(_palette, e.Index);
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        _enumToPath[e.Index] = path;
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(path))
+                {
+                    PaletteMapper.SetColorByPath(_palette, path, e.NewColor);
+                }
+            }
+
             // Refresh the property grid so new base value shows through
             propertyGrid.Refresh();
-            // Apply the palette to the design controls
+
+            // Apply the palette to the design controls without repopulating the table
             ApplyPalette(populateTable: false);
         }
     }
