@@ -10,17 +10,86 @@ using System.Linq;
 
 namespace PaletteDesigner.Utilities;
 
-public static class PaletteMapper
+public static partial class PaletteMapper
 {
+    #region Section Regexes
+
     // Regex for Ribbon Tab mappings to BaseScheme
     private static readonly Regex _ribbonTabSelectedRegex  = new(@"^RibbonTabSelected([1-5])$", RegexOptions.Compiled);
     private static readonly Regex _ribbonTabTrackingRegex  = new(@"^RibbonTabTracking([1-4])$", RegexOptions.Compiled);
     private static readonly Regex _ribbonTabHighlightRegex = new(@"^RibbonTabHighlight([1-5])$", RegexOptions.Compiled);
+    // === Automatic enum->property path resolver ===
+    private static readonly Regex _buttonNormalRegex = new(@"^ButtonNormal(?:(Default|Navigator))?(Border|Back)([0-9]?)$", RegexOptions.Compiled);
+    private static readonly Regex _textButtonRegex   = new(@"^TextButton(Form)?(Normal|Tracking|Pressed|Checked)$", RegexOptions.Compiled);
+    private static readonly Regex _formButtonRegex  = new(@"^FormButton(Border|Back([12]))(Track|Pressed|Checked|CheckTrack)?$", RegexOptions.Compiled);
+    private static readonly Regex _buttonStateRegex = new(@"^Button(Pressed|Checked|Selected)(Begin|End)$", RegexOptions.Compiled);
+    // AppButton: Back/Outer/Inner/Border/MenuDocs*
+    private static readonly Regex _appButtonRegex   = new(@"^AppButton(Back([123])|Border|Outer([123])|Inner([12])|MenuDocs(Back|Text))$", RegexOptions.Compiled);
+    // RibbonTab: do not use Highlight state (use Tracking colors instead)
+    private static readonly Regex _ribbonTabRegex   = new(@"^RibbonTab(?:(Selected|Tracking|Highlight)([1-5])|SeparatorColor|Text(Normal|Checked))$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupRegex = new(@"^RibbonGroup(?:(Area|Border)([1-5])|Title([12]))$", RegexOptions.Compiled);
+    private static readonly Regex _headerRegex      = new(@"^Header(Primary|Secondary)(Back([12])|Text)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupExtraRegex = new(@"^RibbonGroup(?:(Collapsed)(Back|Border)([12])|(Dialog)([A-Za-z]+)|(Separator)([1-3]?))$", RegexOptions.Compiled);
+    // Form chrome families (no Form.StateNormal in Krypton)
+    private static readonly Regex _formBorderRegex        = new(@"^FormBorder(Active|Inactive)(Dark|Light)?$", RegexOptions.Compiled);
+    private static readonly Regex _formBorderHeaderRegex  = new(@"^FormBorderHeader(Active|Inactive)([12])?$", RegexOptions.Compiled);
+    private static readonly Regex _formHeaderRegex        = new(@"^FormHeader(Short|Long)?(Active|Inactive)$", RegexOptions.Compiled);
+    private static readonly Regex _formButtonBorderCheckRegex = new(@"^FormButtonBorderCheck$", RegexOptions.Compiled);
+    private static readonly Regex _panelAlternativeRegex = new(@"^PanelAlternative$", RegexOptions.Compiled);
+    private static readonly Regex _controlBorderRegex   = new(@"^ControlBorder$", RegexOptions.Compiled);
+    private static readonly Regex _altPressedRegex      = new(@"^AlternatePressed(Back|Border)([12])$", RegexOptions.Compiled);
+    private static readonly Regex _separatorHighRegex   = new(@"^SeparatorHigh(InternalBorder|Border)([12])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupsAreaRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonMinimizeBarRegex = new(@"^RibbonMinimizeBarDark$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupFrameRegex = new(@"^RibbonGroupFrame(Border|Inside)([12])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupSeparatorRegex = new(@"^RibbonGroupSeparator(Dark|Light)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupTitleTextRegex = new(@"^RibbonGroupTitleText$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonQATMiniRegex = new(@"^RibbonQATMini([1-5])(I?)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonQATFullRegex = new(@"^RibbonQATFullbar([1-3])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonQATButtonRegex = new(@"^RibbonQATButton(Dark|Light)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonQATOverflowRegex = new(@"^RibbonQATOverflow([1-2])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonDropArrowRegex = new(@"^RibbonDropArrow(Dark|Light)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGalleryRegex = new(@"^RibbonGallery(Back(Normal|Tracking)|Back([12])|Border)$", RegexOptions.Compiled);
+    private static readonly Regex _appMenuDocsBackRegex = new(@"^AppButtonMenuDocsBack$", RegexOptions.Compiled);
+    private static readonly Regex _formHeaderShortLongRegex = new(@"^FormHeader(Short|Long)(Active|Inactive)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGalleryBackRegex = new(@"^RibbonGalleryBack(?:(Tracking|Normal)|([12]))?$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupsAreaAnyRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled); // keep but map to Ribbon.Tab/Group styles below
+    private static readonly Regex _buttonClusterRegex = new(@"^ButtonClusterButton(Back|Border)([12])$", RegexOptions.Compiled);
+    private static readonly Regex _gridListRegex = new(@"^GridList(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
+    private static readonly Regex _gridSheetColRegex = new(@"^GridSheetCol(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
+    private static readonly Regex _gridSheetRowRegex = new(@"^GridSheetRow(Normal|Pressed|Selected)$", RegexOptions.Compiled);
+    private static readonly Regex _gridDataCellRegex = new(@"^GridDataCell(Border|Selected)$", RegexOptions.Compiled);
+    private static readonly Regex _navigatorMiniRegex = new(@"^NavigatorMiniBackColor$", RegexOptions.Compiled);
+    private static readonly Regex _buttonNavigatorRegex = new(@"^ButtonNavigator(Border|Text|Track|Pressed|Checked)([12])?$", RegexOptions.Compiled);
+    private static readonly Regex _inputTextRegex     = new(@"^InputControlText(Normal|Disabled)$", RegexOptions.Compiled);
+    private static readonly Regex _inputBorderRegex   = new(@"^InputControlBorder(Normal|Disabled)$", RegexOptions.Compiled);
+    private static readonly Regex _inputBackRegex     = new(@"^InputControlBack(Disabled|Inactive)$", RegexOptions.Compiled);
+    private static readonly Regex _inputDropDownRegex = new(@"^InputDropDown(Normal|Disabled)([12])$", RegexOptions.Compiled);
+    private static readonly Regex _toolTipBottomRegex = new(@"^ToolTipBottom$", RegexOptions.Compiled);
+    private static readonly Regex _trackBarRegex      = new(@"^TrackBar(TopTrack|BottomTrack|FillTrack|OutsidePosition|BorderPosition|TickMarks)$", RegexOptions.Compiled);
+    private static readonly Regex _contextMenuHeadingRegex = new(@"^ContextMenuHeadingBack$", RegexOptions.Compiled);
+    private static readonly Regex _headerDockInactiveRegex = new(@"^HeaderDockInactiveBack([12])$", RegexOptions.Compiled);
+
+    #endregion Section Regexes
 
     // Manual overrides for enum name -> property path when reflection search cannot find a match
     // Currently empty; kept for rare edge cases that cannot be auto-resolved
     private static readonly Dictionary<string, string> _enumToPathOverrides = new(StringComparer.Ordinal);
 
+    /// <summary>
+    /// Attempts to fetch a manually-defined property path for the supplied
+    /// <paramref name="enumName"/> from <see cref="_enumToPathOverrides"/>.
+    /// </summary>
+    /// <param name="enumName">
+    /// Name of the <see cref="SchemeBaseColors"/> enum value to resolve.
+    /// </param>
+    /// <param name="path">
+    /// When this method returns, contains the resolved property path if one is
+    /// registered; otherwise <see langword="null"/>.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if a manual mapping was found; otherwise <see langword="false"/>.
+    /// </returns>
     public static bool TryGetManualPath(string enumName, out string path) => _enumToPathOverrides.TryGetValue(enumName, out path);
 
     /// <summary>
@@ -33,8 +102,17 @@ public static class PaletteMapper
     }
 
     /// <summary>
-    /// Returns missing enums and also outputs their attempted grammar path (null if none).
+    /// Same as <see cref="GetMissingEnums(PaletteBase)"/>, but also outputs the
+    /// grammar path that was attempted for each enum (if any).
     /// </summary>
+    /// <param name="palette">Palette instance to inspect.</param>
+    /// <param name="attemptedGrammar">
+    /// A dictionary mapping enum names to the grammar-derived path that was
+    /// tried (or <see langword="null"/> if grammar mapping failed).
+    /// </param>
+    /// <returns>
+    /// Collection of enum names that remain unresolved.
+    /// </returns>
     public static IReadOnlyCollection<string> GetMissingEnums(PaletteBase palette, out Dictionary<string, string?> attemptedGrammar)
     {
         if (palette == null) throw new ArgumentNullException(nameof(palette));
@@ -63,6 +141,20 @@ public static class PaletteMapper
         return missing;
     }
 
+    /// <summary>
+    /// Retrieves the <see cref="Color"/> located at the specified dot-separated
+    /// <paramref name="propertyPath"/>.
+    /// The method understands a variety of special-case aliases (TrackBar,
+    /// ToolTip, ButtonStyles, etc.) before falling back to reflection.
+    /// </summary>
+    /// <param name="palette">Palette that supplies colors and style helpers.</param>
+    /// <param name="propertyPath">
+    /// Dot-notation path (e.g. <c>"ButtonStyles.Standalone.StateNormal.Back.Color1"</c>).
+    /// </param>
+    /// <returns>The color stored at the indicated location.</returns>
+    /// <exception cref="ArgumentException">
+    /// Thrown when the supplied path is syntactically invalid or cannot be resolved.
+    /// </exception>
     public static Color GetColorByPath(PaletteBase palette, string propertyPath)
     {
         string[] parts = propertyPath.Split('.');
@@ -205,7 +297,14 @@ public static class PaletteMapper
         return GetColorByReflection(palette, parts);
     }
 
-    // Helper to reach the current base color scheme if available
+    /// <summary>
+    /// Attempts to obtain the current <see cref="KryptonColorSchemeBase"/>
+    /// instance that underpins the supplied <paramref name="palette"/>.
+    /// </summary>
+    /// <param name="palette">Palette to interrogate.</param>
+    /// <returns>
+    /// The backing color scheme if discoverable; otherwise <see langword="null"/>.
+    /// </returns>
     private static KryptonColorSchemeBase? GetBaseScheme(PaletteBase palette)
     {
         // KryptonCustomPaletteBase stores a private _basePalette and exposes SchemeColors; not directly the scheme.
@@ -236,6 +335,16 @@ public static class PaletteMapper
         return null;
     }
 
+    /// <summary>
+    /// Performs a simple reflection walk across <paramref name="root"/> using
+    /// <paramref name="parts"/> as the sequence of property names to traverse.
+    /// </summary>
+    /// <param name="root">Root object from which to start reflection.</param>
+    /// <param name="parts">Individual path segments.</param>
+    /// <returns>The <see cref="Color"/> found at the end of the chain.</returns>
+    /// <exception cref="ArgumentException">
+    /// Thrown when traversal fails to locate a <see cref="Color"/> property.
+    /// </exception>
     private static Color GetColorByReflection(object root, string[] parts)
     {
         object? current = root;
@@ -259,6 +368,17 @@ public static class PaletteMapper
         throw new ArgumentException("Invalid property path: " + string.Join(".", parts));
     }
 
+    /// <summary>
+    /// Maps a palette property path back to the corresponding
+    /// <see cref="SchemeBaseColors"/> enumeration value by comparing the color
+    /// stored at the path with all colors exposed by the palette’s base scheme.
+    /// </summary>
+    /// <param name="palette">Palette supplying both path and scheme colors.</param>
+    /// <param name="propertyPath">Dot-notation property path.</param>
+    /// <returns>The enum value whose color matches <paramref name="propertyPath"/>.</returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no enum value matches the color found at the path.
+    /// </exception>
     public static SchemeBaseColors MapPathToSchemeEnum(PaletteBase palette, string propertyPath)
     {
         Color target = GetColorByPath(palette, propertyPath);
@@ -274,6 +394,19 @@ public static class PaletteMapper
         throw new InvalidOperationException("No matching SchemeBaseColors for color " + target);
     }
 
+    /// <summary>
+    /// Safe variant of <see cref="MapPathToSchemeEnum"/> that returns a boolean
+    /// instead of throwing.
+    /// </summary>
+    /// <param name="palette">Palette to search.</param>
+    /// <param name="propertyPath">Dot-notation path.</param>
+    /// <param name="result">
+    /// When this method returns, contains the resolved enum value if mapping
+    /// succeeded.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> when mapping succeeds; otherwise <see langword="false"/>.
+    /// </returns>
     public static bool TryMapPathToSchemeEnum(PaletteBase palette, string propertyPath, out SchemeBaseColors result)
     {
         try
@@ -288,627 +421,172 @@ public static class PaletteMapper
         }
     }
 
-    // === Automatic enum->property path resolver ===
-    private static readonly Regex _buttonNormalRegex = new(@"^ButtonNormal(?:(Default|Navigator))?(Border|Back)([0-9]?)$", RegexOptions.Compiled);
-    private static readonly Regex _textButtonRegex   = new(@"^TextButton(Form)?(Normal|Tracking|Pressed|Checked)$", RegexOptions.Compiled);
-    private static readonly Regex _formButtonRegex  = new(@"^FormButton(Border|Back([12]))(Track|Pressed|Checked|CheckTrack)?$", RegexOptions.Compiled);
-    private static readonly Regex _buttonStateRegex = new(@"^Button(Pressed|Checked|Selected)(Begin|End)$", RegexOptions.Compiled);
-    // AppButton: Back/Outer/Inner/Border/MenuDocs*
-    private static readonly Regex _appButtonRegex   = new(@"^AppButton(Back([123])|Border|Outer([123])|Inner([12])|MenuDocs(Back|Text))$", RegexOptions.Compiled);
-    // RibbonTab: do not use Highlight state (use Tracking colors instead)
-    private static readonly Regex _ribbonTabRegex   = new(@"^RibbonTab(?:(Selected|Tracking|Highlight)([1-5])|SeparatorColor|Text(Normal|Checked))$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupRegex = new(@"^RibbonGroup(?:(Area|Border)([1-5])|Title([12]))$", RegexOptions.Compiled);
-    private static readonly Regex _headerRegex      = new(@"^Header(Primary|Secondary)(Back([12])|Text)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupExtraRegex = new(@"^RibbonGroup(?:(Collapsed)(Back|Border)([12])|(Dialog)([A-Za-z]+)|(Separator)([1-3]?))$", RegexOptions.Compiled);
-    // Form chrome families (no Form.StateNormal in Krypton)
-    private static readonly Regex _formBorderRegex        = new(@"^FormBorder(Active|Inactive)(Dark|Light)?$", RegexOptions.Compiled);
-    private static readonly Regex _formBorderHeaderRegex  = new(@"^FormBorderHeader(Active|Inactive)([12])?$", RegexOptions.Compiled);
-    private static readonly Regex _formHeaderRegex        = new(@"^FormHeader(Short|Long)?(Active|Inactive)$", RegexOptions.Compiled);
-    private static readonly Regex _formButtonBorderCheckRegex = new(@"^FormButtonBorderCheck$", RegexOptions.Compiled);
-    private static readonly Regex _panelAlternativeRegex = new(@"^PanelAlternative$", RegexOptions.Compiled);
-    private static readonly Regex _controlBorderRegex   = new(@"^ControlBorder$", RegexOptions.Compiled);
-    private static readonly Regex _altPressedRegex      = new(@"^AlternatePressed(Back|Border)([12])$", RegexOptions.Compiled);
-    private static readonly Regex _separatorHighRegex   = new(@"^SeparatorHigh(InternalBorder|Border)([12])$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupsAreaRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonMinimizeBarRegex = new(@"^RibbonMinimizeBarDark$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupFrameRegex = new(@"^RibbonGroupFrame(Border|Inside)([12])$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupSeparatorRegex = new(@"^RibbonGroupSeparator(Dark|Light)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupTitleTextRegex = new(@"^RibbonGroupTitleText$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonQATMiniRegex = new(@"^RibbonQATMini([1-5])(I?)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonQATFullRegex = new(@"^RibbonQATFullbar([1-3])$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonQATButtonRegex = new(@"^RibbonQATButton(Dark|Light)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonQATOverflowRegex = new(@"^RibbonQATOverflow([1-2])$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonDropArrowRegex = new(@"^RibbonDropArrow(Dark|Light)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGalleryRegex = new(@"^RibbonGallery(Back(Normal|Tracking)|Back([12])|Border)$", RegexOptions.Compiled);
-    private static readonly Regex _appMenuDocsBackRegex = new(@"^AppButtonMenuDocsBack$", RegexOptions.Compiled);
-    private static readonly Regex _formHeaderShortLongRegex = new(@"^FormHeader(Short|Long)(Active|Inactive)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGalleryBackRegex = new(@"^RibbonGalleryBack(?:(Tracking|Normal)|([12]))?$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupsAreaAnyRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled); // keep but map to Ribbon.Tab/Group styles below
-    private static readonly Regex _buttonClusterRegex = new(@"^ButtonClusterButton(Back|Border)([12])$", RegexOptions.Compiled);
-    private static readonly Regex _gridListRegex = new(@"^GridList(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
-    private static readonly Regex _gridSheetColRegex = new(@"^GridSheetCol(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
-    private static readonly Regex _gridSheetRowRegex = new(@"^GridSheetRow(Normal|Pressed|Selected)$", RegexOptions.Compiled);
-    private static readonly Regex _gridDataCellRegex = new(@"^GridDataCell(Border|Selected)$", RegexOptions.Compiled);
-    private static readonly Regex _navigatorMiniRegex = new(@"^NavigatorMiniBackColor$", RegexOptions.Compiled);
-    private static readonly Regex _buttonNavigatorRegex = new(@"^ButtonNavigator(Border|Text|Track|Pressed|Checked)([12])?$", RegexOptions.Compiled);
-    private static readonly Regex _inputTextRegex     = new(@"^InputControlText(Normal|Disabled)$", RegexOptions.Compiled);
-    private static readonly Regex _inputBorderRegex   = new(@"^InputControlBorder(Normal|Disabled)$", RegexOptions.Compiled);
-    private static readonly Regex _inputBackRegex     = new(@"^InputControlBack(Disabled|Inactive)$", RegexOptions.Compiled);
-    private static readonly Regex _inputDropDownRegex = new(@"^InputDropDown(Normal|Disabled)([12])$", RegexOptions.Compiled);
-    private static readonly Regex _toolTipBottomRegex = new(@"^ToolTipBottom$", RegexOptions.Compiled);
-    private static readonly Regex _trackBarRegex      = new(@"^TrackBar(TopTrack|BottomTrack|FillTrack|OutsidePosition|BorderPosition|TickMarks)$", RegexOptions.Compiled);
-    private static readonly Regex _contextMenuHeadingRegex = new(@"^ContextMenuHeadingBack$", RegexOptions.Compiled);
-    private static readonly Regex _headerDockInactiveRegex = new(@"^HeaderDockInactiveBack([12])$", RegexOptions.Compiled);
+    // Insert dictionary grouping for regex categories
+    private static readonly Dictionary<string, List<Regex>> _grammarRegexGroups = new(StringComparer.Ordinal)
+    {
+        ["Button"] = new List<Regex>
+        {
+            _buttonNormalRegex,
+            _buttonStateRegex,
+            _buttonClusterRegex,
+            _buttonNavigatorRegex
+        },
+        ["TextButton"] = new List<Regex>
+        {
+            _textButtonRegex
+        },
+        ["FormButton"] = new List<Regex>
+        {
+            _formButtonRegex,
+            _formButtonBorderCheckRegex
+        },
+        ["AppButton"] = new List<Regex>
+        {
+            _appButtonRegex,
+            _appMenuDocsBackRegex
+        },
+        ["Ribbon"] = new List<Regex>
+        {
+            _ribbonTabRegex,
+            _ribbonGroupRegex,
+            _ribbonGroupExtraRegex,
+            _ribbonGroupsAreaRegex,
+            _ribbonGroupsAreaAnyRegex,
+            _ribbonGroupFrameRegex,
+            _ribbonGroupSeparatorRegex,
+            _ribbonGroupTitleTextRegex,
+            _ribbonQATMiniRegex,
+            _ribbonQATFullRegex,
+            _ribbonQATButtonRegex,
+            _ribbonQATOverflowRegex,
+            _ribbonDropArrowRegex,
+            _ribbonGalleryRegex,
+            _ribbonGalleryBackRegex,
+            _ribbonMinimizeBarRegex
+        },
+        ["Grid"] = new List<Regex>
+        {
+            _gridListRegex,
+            _gridSheetColRegex,
+            _gridSheetRowRegex,
+            _gridDataCellRegex
+        },
+        ["InputControl"] = new List<Regex>
+        {
+            _inputTextRegex,
+            _inputBorderRegex,
+            _inputBackRegex,
+            _inputDropDownRegex
+        },
+        ["Panel"] = new List<Regex>
+        {
+            _panelAlternativeRegex,
+            _controlBorderRegex
+        },
+        ["Form"] = new List<Regex>
+        {
+            _formBorderRegex,
+            _formBorderHeaderRegex,
+            _formHeaderRegex,
+            _formHeaderShortLongRegex
+        },
+        ["AlternatePressed"] = new List<Regex>
+        {
+            _altPressedRegex
+        },
+        ["Separator"] = new List<Regex>
+        {
+            _separatorHighRegex
+        },
+        ["NavigatorMini"] = new List<Regex>
+        {
+            _navigatorMiniRegex
+        },
+        ["ToolTip"] = new List<Regex>
+        {
+            _toolTipBottomRegex
+        },
+        ["TrackBar"] = new List<Regex>
+        {
+            _trackBarRegex
+        },
+        ["ContextMenu"] = new List<Regex>
+        {
+            _contextMenuHeadingRegex
+        },
+        ["Header"] = new List<Regex>
+        {
+            _headerRegex
+        },
+        ["HeaderDockInactive"] = new List<Regex>
+        {
+            _headerDockInactiveRegex
+        }
+    };
 
+    /// <summary>
+    /// Attempts to translate <paramref name="enumName"/> into a palette property
+    /// path by applying regular-expression grammar rules grouped in
+    /// <see cref="_grammarRegexGroups"/>.
+    /// </summary>
+    /// <param name="enumName">Name of a <see cref="SchemeBaseColors"/> value.</param>
+    /// <returns>
+    /// The calculated path if a grammar rule matches; otherwise
+    /// <see langword="null"/>.
+    /// </returns>
     private static string? TryGrammarMap(string enumName)
     {
-        var m = _buttonNormalRegex.Match(enumName);
-        if (m.Success)
-        {
-            string modifier = m.Groups[1].Value;
-            string group = m.Groups[2].Value;
-            string index = m.Groups[3].Value;
+        // Prefix-based routing for grammar mapping
+        if (enumName.StartsWith("TextButton", StringComparison.Ordinal))
+            return TryMapTextButton(enumName);
+        if (enumName.StartsWith("FormButton", StringComparison.Ordinal))
+            return TryMapFormButton(enumName);
+        if (enumName.StartsWith("AppButton", StringComparison.Ordinal))
+            return TryMapAppButton(enumName);
+        if (enumName.StartsWith("Button", StringComparison.Ordinal))
+            return TryMapButton(enumName);
+        if (enumName.StartsWith("Ribbon", StringComparison.Ordinal))
+            return TryMapRibbon(enumName);
+        if (enumName.StartsWith("Grid", StringComparison.Ordinal))
+            return TryMapGrid(enumName);
+        if (enumName.StartsWith("InputControl", StringComparison.Ordinal))
+            return TryMapInputControl(enumName);
+        if (enumName.StartsWith("Panel", StringComparison.Ordinal))
+            return TryMapPanel(enumName);
+        if (enumName.StartsWith("Form", StringComparison.Ordinal))
+            return TryMapForm(enumName);
+        if (enumName.StartsWith("AlternatePressed", StringComparison.Ordinal))
+            return TryMapAlternatePressed(enumName);
+        if (enumName.StartsWith("Separator", StringComparison.Ordinal))
+            return TryMapSeparator(enumName);
+        if (enumName.StartsWith("NavigatorMini", StringComparison.Ordinal))
+            return TryMapNavigatorMini(enumName);
+        if (enumName.StartsWith("ToolTip", StringComparison.Ordinal))
+            return TryMapToolTip(enumName);
+        if (enumName.StartsWith("TrackBar", StringComparison.Ordinal))
+            return TryMapTrackBar(enumName);
+        if (enumName.StartsWith("ContextMenu", StringComparison.Ordinal))
+            return TryMapContextMenu(enumName);
+        if (enumName.StartsWith("HeaderDockInactive", StringComparison.Ordinal))
+            return TryMapHeaderDockInactive(enumName);
+        if (enumName.StartsWith("Header", StringComparison.Ordinal))
+            return TryMapHeader(enumName);
 
-            string stylePart = modifier == "Navigator" ? "ButtonNavigatorStack" : "ButtonStandalone";
-            string statePart = modifier == "Default" ? "NormalDefaultOverride" : "Normal";
-            string groupPartRoot = group == "Border" ? "Border" : "Back";
-            string indexPart = string.IsNullOrEmpty(index) ? "1" : index;
-
-            return $"ButtonStyles.{stylePart}.State{statePart}.{groupPartRoot}.Color{indexPart}";
-        }
-
-        // TextButton* mapping
-        m = _textButtonRegex.Match(enumName);
-        if (m.Success)
-        {
-            bool isForm = m.Groups[1].Success;
-            string stateToken = m.Groups[2].Value;
-
-            string stylePart = isForm ? "ButtonForm" : "Standalone";
-            string statePart = stateToken switch
-            {
-                "Normal" => "Normal",
-                "Tracking" => "Tracking",
-                "Pressed" => "Pressed",
-                "Checked" => "CheckedNormal",
-                _ => "Normal"
-            };
-
-            return $"ButtonStyles.{(isForm ? "ButtonForm" : "ButtonStandalone")}.State{statePart}.Text.Color1";
-        }
-
-        // FormButton* mapping
-        m = _formButtonRegex.Match(enumName);
-        if (m.Success)
-        {
-            string groupToken = m.Groups[1].Value; // Border or Back1/Back2
-            string indexToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty; // 1 or 2 (for Back)
-            string stateToken = m.Groups[3].Success ? m.Groups[3].Value : ""; // Track, Pressed, Checked, CheckTrack
-
-            string stylePart = "ButtonForm";
-            string statePart = stateToken switch
-            {
-                "Track" => "Tracking",
-                "Pressed" => "Pressed",
-                "Checked" => "CheckedNormal",
-                "CheckTrack" => "CheckedTracking",
-                _ => "Normal"
-            };
-
-            string groupRoot = groupToken.StartsWith("Border") ? "Border" : "Back";
-            string groupPart = groupRoot + ".Color" + (string.IsNullOrEmpty(indexToken) ? "1" : indexToken);
-
-            return $"ButtonStyles.{stylePart}.State{statePart}.{groupPart}";
-        }
-
-        // AppButton* mapping (correct Krypton objects)
-        m = _appButtonRegex.Match(enumName);
-        if (m.Success)
-        {
-            string rootPart = "Ribbon.RibbonAppButton";
-            if (enumName.StartsWith("AppButtonBorder"))
-            {
-                // Border is under ControlStyles.ControlRibbonAppMenu -> Border.Color1
-                return "ControlStyles.ControlRibbonAppMenu.StateNormal.Border.Color1";
-            }
-            if (enumName.StartsWith("AppButtonBack"))
-            {
-                string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-                return $"{rootPart}.StateNormal.BackColor{idx}";
-            }
-            if (enumName.StartsWith("AppButtonOuter"))
-            {
-                string idx = m.Groups[3].Success ? m.Groups[3].Value : "1";
-                return $"{rootPart}.StateTracking.BackColor{idx}";
-            }
-            if (enumName.StartsWith("AppButtonInner"))
-            {
-                string idx = m.Groups[4].Success ? m.Groups[4].Value : "1";
-                return $"{rootPart}.StatePressed.BackColor{idx}";
-            }
-            // AppButtonMenuDocs mapping
-            if (_appMenuDocsBackRegex.IsMatch(enumName))
-                return "Ribbon.RibbonAppMenuDocs.BackColor1";
-            if (enumName == "AppButtonMenuDocsText")
-                return "Ribbon.RibbonAppMenuDocsEntry.TextColor";
-        }
-
-        // Generic Button state mapping (Pressed/Checked/Selected Begin/End)
-        m = _buttonStateRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value;
-            string partToken  = m.Groups[2].Value; // Begin or End
-
-            string stylePart = "ButtonStandalone";
-            string statePart = stateToken switch
-            {
-                "Pressed"  => "Pressed",
-                "Checked"  => "CheckedNormal",
-                "Selected" => "Tracking",
-                _ => "Normal"
-            };
-
-            string backPart = "Back.Color" + (partToken == "End" ? "2" : "1");
-            return $"ButtonStyles.{stylePart}.State{statePart}.{backPart}";
-        }
-
-        // RibbonTab* mapping
-        m = _ribbonTabRegex.Match(enumName);
-        if (m.Success)
-        {
-            if (enumName == "RibbonTabSeparatorColor")
-            {
-                // Defer to reflection; separator can vary across builds.
-                return null;
-            }
-
-            // Text colors for RibbonTab
-            if (enumName == "RibbonTabTextNormal")
-            {
-                return "Ribbon.RibbonTab.StateNormal.TextColor";
-            }
-            if (enumName == "RibbonTabTextChecked")
-            {
-                return "Ribbon.RibbonTab.StateCheckedNormal.TextColor";
-            }
-
-            string stateToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Selected | Tracking | Highlight
-            string indexToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty;
-
-            if (!string.IsNullOrEmpty(stateToken))
-            {
-                string statePart = stateToken switch
-                {
-                    "Selected"  => "CheckedNormal",
-                    "Tracking"  => "Tracking",
-                    // Highlight uses Tracking colors
-                    "Highlight" => "Tracking",
-                    _           => "Normal"
-                };
-
-                string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
-
-                // Map directly to BackColorN property as shown in Krypton object structure
-                return $"Ribbon.RibbonTab.State{statePart}.BackColor{idx}";
-            }
-
-            return null;
-        }
-
-        // RibbonGroup* mapping
-        m = _ribbonGroupRegex.Match(enumName);
-        if (m.Success)
-        {
-            string areaToken  = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Area or Border
-            string indexToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty; // 1-5
-            bool isTitle      = m.Groups[3].Success;
-
-            string stylePart = "RibbonGroup" + (areaToken == "Border" ? "Border" : areaToken == "Area" ? "Area" : "Title");
-            string groupPart;
-            string idx = string.IsNullOrEmpty(indexToken) ? (isTitle ? "1" : "1") : indexToken;
-
-            if (isTitle)
-            {
-                // Title colours map to text
-                groupPart = $"TextColor";
-            }
-            else if (areaToken == "Border")
-            {
-                groupPart = $"BorderColor{idx}";
-            }
-            else // Area (Back)
-            {
-                groupPart = $"BackColor{idx}";
-            }
-
-            return $"Ribbon.{stylePart}.StateNormal.{groupPart}";
-        }
-
-        // Header* mapping
-        m = _headerRegex.Match(enumName);
-        if (m.Success)
-        {
-            string primaryToken = m.Groups[1].Value; // Primary or Secondary
-            string groupToken  = m.Groups[2].Value; // Back1/Back2 or Text
-            string indexToken  = m.Groups[3].Success ? m.Groups[3].Value : string.Empty; // 1 or 2 for Back
-
-            string stylePart = primaryToken == "Primary" ? "HeaderPrimary" : "HeaderSecondary";
-            string groupPart;
-            if (groupToken.StartsWith("Back"))
-            {
-                string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
-                groupPart = $"Back.Color{idx}";
-            }
-            else // Text
-            {
-                groupPart = "Content.ShortText.Color1";
-            }
-
-            return $"HeaderStyles.{stylePart}.StateNormal.{groupPart}";
-        }
-
-        // Form chrome mapping (no Form.StateNormal in Krypton)
-        m = _formBorderRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value; // Active / Inactive
-            string shadeToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty; // Dark / Light / empty
-
-            string colorIdx  = shadeToken == "Dark" ? "2" : "1";
-            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            // ControlClient or ControlRibbon depending on current chrome; prefer ControlRibbon per guidance
-            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{colorIdx}";
-        }
-
-        // FormBorderHeader* mapping -> ControlClient/ControlRibbon? Spec says border colors from ControlRibbon
-        m = _formBorderHeaderRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value; // Active / Inactive
-            string idx        = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{idx}";
-        }
-
-        // FormHeaderShort/Long mapping -> prefer Content.ShortText for broader build compatibility
-        m = _formHeaderRegex.Match(enumName);
-        if (m.Success)
-        {
-            // Corrected to match actual Krypton object structure
-            string lengthToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Short / Long / empty
-            string stateToken  = m.Groups[2].Value; // Active / Inactive
-
-            string stylePart = string.IsNullOrEmpty(lengthToken) ? "FormHeader" : $"FormHeader{lengthToken}";
-            string statePart = stateToken == "Active" ? "Active" : "Inactive";
-            return $"HeaderStyles.{stylePart}.State{statePart}.TextColor";
-        }
-
-        // FormButtonBorderCheck mapping
-        if (_formButtonBorderCheckRegex.IsMatch(enumName))
-        {
-            return "ButtonStyles.ButtonForm.StateCheckedNormal.Border.Color1";
-        }
-
-        // Panel/Control mapping
-        if (_panelAlternativeRegex.IsMatch(enumName))
-        {
-            return "PanelStyles.PanelAlternate.StateNormal.Back.Color1";
-        }
-        if (_controlBorderRegex.IsMatch(enumName))
-        {
-            return "PanelStyles.PanelClient.StateNormal.Back.Color1";
-        }
-
-        // AlternatePressed* mapping (ButtonAlternate style)
-        m = _altPressedRegex.Match(enumName);
-        if (m.Success)
-        {
-            string groupToken = m.Groups[1].Value; // Back or Border
-            string idx        = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string groupPart  = (groupToken == "Back" ? "Back" : "Border") + ".Color" + idx;
-            return $"ButtonStyles.ButtonAlternate.StatePressed.{groupPart}";
-        }
-
-        // SeparatorHigh* mapping
-        m = _separatorHighRegex.Match(enumName);
-        if (m.Success)
-        {
-            string internalToken = m.Groups[1].Value; // InternalBorder or Border
-            string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string stylePart = internalToken == "InternalBorder" ? "SeparatorHighInternalProfile" : "SeparatorHighProfile";
-            return $"SeparatorStyles.{stylePart}.StateNormal.Border.Color{idx}";
-        }
-
-        // Ribbon chrome mapping
-        m = _ribbonGroupsAreaRegex.Match(enumName);
-        if (m.Success)
-        {
-            // Map GroupsArea to Ribbon.RibbonGroupArea
-            string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonGroupArea.StateNormal.Back.Color{idx}";
-        }
-        if (_ribbonMinimizeBarRegex.IsMatch(enumName))
-        {
-            // Use Ribbon object graph per screenshot
-            return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color2";
-        }
-        m = _ribbonGroupFrameRegex.Match(enumName);
-        if (m.Success)
-        {
-            string part = m.Groups[1].Value; // Border or Inside
-            string idx  = m.Groups[2].Value;
-            string groupPart = (part == "Border" ? "Border" : "Back") + ".Color" + idx;
-            return $"Ribbon.RibbonGroupFrame.StateNormal.{groupPart}";
-        }
-        m = _ribbonGroupSeparatorRegex.Match(enumName);
-        if (m.Success)
-        {
-            string darkLight = m.Groups[1].Value; // Dark or Light
-            string idx = darkLight == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonGroupSeparator.StateNormal.Border.Color{idx}";
-        }
-        if (_ribbonGroupTitleTextRegex.IsMatch(enumName))
-        {
-            return "Ribbon.RibbonGroupTitle.StateNormal.Text.Color1";
-        }
-        m = _ribbonQATMiniRegex.Match(enumName);
-        if (m.Success)
-        {
-            string idx = m.Groups[1].Value;
-            bool inactive = m.Groups[2].Success;
-            string state = inactive ? "StateInactive" : "StateNormal";
-            return $"Ribbon.RibbonQATMinibar.{state}.Back.Color{idx}";
-        }
-        m = _ribbonQATFullRegex.Match(enumName);
-        if (m.Success)
-        {
-            string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonQATFullbar.StateNormal.Back.Color{idx}";
-        }
-        m = _ribbonQATButtonRegex.Match(enumName);
-        if (m.Success)
-        {
-            string shade = m.Groups[1].Value; // Dark / Light
-            string colorIdx = shade == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonQATButton.StateNormal.Border.Color{colorIdx}";
-        }
-        m = _ribbonQATOverflowRegex.Match(enumName);
-        if (m.Success)
-        {
-            string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonQATOverflow.StateNormal.Back.Color{idx}";
-        }
-        m = _ribbonDropArrowRegex.Match(enumName);
-        if (m.Success)
-        {
-            // Final correction for RibbonDropArrow mapping
-            string shade = m.Groups[1].Value; // Dark or Light
-            return $"Ribbon.RibbonGeneral.StateNormal.DropArrow.{(shade == "Dark" ? "Dark" : "Light")}";
-        }
-        m = _ribbonGalleryRegex.Match(enumName);
-        if (m.Success)
-        {
-            if (enumName == "RibbonGalleryBorder")
-            {
-                return "Ribbon.RibbonGalleryBorder.StateNormal.Border.Color1";
-            }
-            if (enumName.StartsWith("RibbonGalleryBackTracking", StringComparison.Ordinal))
-            {
-                return "Ribbon.RibbonGalleryBack.StateTracking.BackColor1";
-            }
-            if (enumName.StartsWith("RibbonGalleryBackNormal", StringComparison.Ordinal))
-            {
-                return "Ribbon.RibbonGalleryBack.StateNormal.BackColor1";
-            }
-            if (enumName.StartsWith("RibbonGalleryBack", StringComparison.Ordinal))
-            {
-                string idx = m.Groups[3].Success ? m.Groups[3].Value : "1";
-                return $"Ribbon.RibbonGalleryBack.StateNormal.BackColor{idx}";
-            }
-        }
-        // REMOVED: Duplicate RibbonTab BaseScheme mappings - already handled in primary RibbonTab section
-
-        // Remove duplicate Ribbon Tab BaseScheme mapping block; handled earlier with object graph paths
-
-        // Grid & Navigator mapping
-        m = _buttonClusterRegex.Match(enumName);
-        if (m.Success)
-        {
-            string groupToken = m.Groups[1].Value; // Back or Border
-            string idx = m.Groups[2].Value;
-            string groupPart = (groupToken == "Back" ? "Back" : "Border") + ".Color" + idx;
-            return $"ButtonStyles.ButtonCluster.StateNormal.{groupPart}";
-        }
-        m = _gridListRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value; // Normal/Pressed/Selected
-            string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            if (stateToken == "Pressed")
-            {
-                // Pressed = HeaderRow/HeaderColumn, not DataCell
-                return $"GridStyles.GridList.StatePressed.HeaderRow.Back.Color{idx}";
-            }
-            if (stateToken == "Selected")
-            {
-                // Selected colors in GridStyles.GridList.StateSelected.DataCell.*
-                return $"GridStyles.GridList.StateSelected.DataCell.Back.Color{idx}";
-            }
-            return $"GridStyles.GridList.StateNormal.DataCell.Back.Color{idx}";
-        }
-        m = _gridSheetColRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value;
-            string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string statePart = stateToken switch { "Normal"=>"Normal", "Pressed"=>"Pressed", _=>"Selected" };
-            return $"GridStyles.GridSheet.State{statePart}.HeaderColumn.Back.Color{idx}";
-        }
-        m = _gridSheetRowRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value;
-            string statePart = stateToken switch { "Normal"=>"Normal", "Pressed"=>"Pressed", _=>"Selected" };
-            return $"GridStyles.GridSheet.State{statePart}.HeaderRow.Back.Color1";
-        }
-        m = _gridDataCellRegex.Match(enumName);
-        if (m.Success)
-        {
-            string part = m.Groups[1].Value; // Border or Selected
-            if (part == "Border")
-            {
-                return "GridStyles.GridList.StateNormal.DataCell.Border.Color1";
-            }
-            else
-            {
-                return "GridStyles.GridList.StateSelected.DataCell.Back.Color1";
-            }
-        }
-        if (_navigatorMiniRegex.IsMatch(enumName))
-        {
-            // Final correction to match actual Krypton object structure
-            return "Navigator.NavigatorMini.StateNormal.HeaderGroup.BackColor1";
-        }
-        m = _buttonNavigatorRegex.Match(enumName);
-        if (m.Success)
-        {
-            string part = m.Groups[1].Value; // Border/Text/Track/Pressed/Checked
-            string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string statePart = part switch { "Track"=>"Tracking", "Pressed"=>"Pressed", "Checked"=>"CheckedNormal", _=>"Normal" };
-            string groupPart;
-            if (part == "Border") groupPart = $"Border.Color{idx}";
-            else if (part == "Text") groupPart = "Text.Color1";
-            else groupPart = $"Back.Color{idx}";
-            return $"ButtonStyles.ButtonNavigatorStack.State{statePart}.{groupPart}";
-        }
-
-        // Input Controls mapping
-        m = _inputTextRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value; // Normal or Disabled
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Text.Color1";
-        }
-        m = _inputBorderRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value;
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Border.Color1";
-        }
-        m = _inputBackRegex.Match(enumName);
-        if (m.Success)
-        {
-            string kind = m.Groups[1].Value; // Disabled or Inactive
-            string statePart = kind == "Disabled" ? "Disabled" : "Normal";
-            return $"InputControl.InputControlStandalone.State{statePart}.Back.Color1";
-        }
-        m = _inputDropDownRegex.Match(enumName);
-        if (m.Success)
-        {
-            string stateToken = m.Groups[1].Value;
-            string idx = m.Groups[2].Value;
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Back.Color{idx}";
-        }
-        if (_toolTipBottomRegex.IsMatch(enumName))
-        {
-            // ToolTip colors come from ControlStyles.ControlToolTip in this build
-            return "ControlStyles.ControlToolTip.StateNormal.Border.Color1";
-        }
-
-        // Context menu heading mapping
-        if (_contextMenuHeadingRegex.IsMatch(enumName))
-        {
-            return "ContextMenu.ContextMenuHeading.StateNormal.Back.Color1";
-        }
-
-        // HeaderDockInactive mapping
-        m = _headerDockInactiveRegex.Match(enumName);
-        if (m.Success)
-        {
-            string idx = m.Groups[1].Value;
-            return $"HeaderStyles.HeaderDockInactive.StateNormal.Back.Color{idx}";
-        }
-
-        // TrackBar mapping -> KryptonPaletteTrackBar.State*.{Tick|Track|Position}.Color1
-        m = _trackBarRegex.Match(enumName);
-        if (m.Success)
-        {
-            string part = m.Groups[1].Value; // TickMarks | TopTrack | BottomTrack | FillTrack | OutsidePosition | BorderPosition
-            return part switch
-            {
-                "TickMarks"       => "TrackBar.StateNormal.Tick.Color1",
-                "TopTrack"        => "TrackBar.StateNormal.Track.Color1",
-                "BottomTrack"     => "TrackBar.StateNormal.Track.Color1",
-                "FillTrack"       => "TrackBar.StateNormal.Track.Color1",
-                "OutsidePosition" => "TrackBar.StateNormal.Position.Color1",
-                "BorderPosition"  => "TrackBar.StateNormal.Position.Color1",
-                _                 => "TrackBar.StateNormal.Position.Color1"
-            };
-        }
-
-        // TrackBar mapping
-        m = _trackBarRegex.Match(enumName);
-        if (m.Success)
-        {
-            // Map directly to top-level TrackBar properties exposed by the base scheme
-            string part = m.Groups[1].Value;
-            return part switch
-            {
-                "TickMarks"       => "TrackBar.TickMarks",
-                "TopTrack"        => "TrackBar.TopTrack",
-                "BottomTrack"     => "TrackBar.BottomTrack",
-                "FillTrack"       => "TrackBar.FillTrack",
-                "OutsidePosition" => "TrackBar.OutsidePosition",
-                "BorderPosition"  => "TrackBar.BorderPosition",
-                _                 => "TrackBar.OutsidePosition"
-            };
-        }
-
-        // RibbonGroup Collapsed/Dialog/Separator mapping
-        m = _ribbonGroupExtraRegex.Match(enumName);
-        if (m.Success)
-        {
-            if (m.Groups[1].Success) // Collapsed
-            {
-                string groupToken = m.Groups[2].Value; // Back or Border
-                string idx        = m.Groups[3].Value;
-                string groupPart  = (groupToken == "Border" ? "Border" : "Back") + ".Color" + (string.IsNullOrEmpty(idx) ? "1" : idx);
-                return $"Ribbon.RibbonGroupCollapsed.StateNormal.{groupPart}";
-            }
-            if (m.Groups[4].Success) // Dialog
-            {
-                string dialogPart = m.Groups[5].Value; // e.g., Border, LightShade, DarkShade, Glyph, Back
-                string groupPart;
-                if (dialogPart.Equals("Border", StringComparison.OrdinalIgnoreCase))
-                {
-                    groupPart = "Border.Color1";
-                }
-                else if (dialogPart.Equals("Back", StringComparison.OrdinalIgnoreCase))
-                {
-                    groupPart = "Back.Color1";
-                }
-                else // Glyph / LightShade / DarkShade treated as Text
-                {
-                    groupPart = "Text.Color1";
-                }
-                return $"Ribbon.RibbonGroupDialog.StateNormal.{groupPart}";
-            }
-            if (m.Groups[6].Success) // Separator
-            {
-                string idx = m.Groups[7].Value;
-                string groupPart = "Border.Color" + (string.IsNullOrEmpty(idx) ? "1" : idx);
-                return $"Ribbon.RibbonGroupSeparator.StateNormal.{groupPart}";
-            }
-        }
-
-        // TODO: extend grammar rules for other control families
         return null;
     }
 
+    /// <summary>
+    /// Resolves a <see cref="SchemeBaseColors"/> value to its property path
+    /// using the following strategy:
+    /// 1. Manual overrides
+    /// 2. Grammar-based mapping
+    /// 3. Recursive reflection search (slow)
+    /// </summary>
+    /// <param name="palette">Palette whose structure is inspected.</param>
+    /// <param name="enumVal">Enum value to resolve.</param>
+    /// <returns>
+    /// Matching property path if found; otherwise <see langword="null"/>.
+    /// </returns>
     public static string? ResolvePath(PaletteBase palette, SchemeBaseColors enumVal)
     {
         string name = enumVal.ToString();
@@ -930,6 +608,15 @@ public static class PaletteMapper
         return FindPathsForEnum(palette, palette, enumVal, doRecursive: true).FirstOrDefault();
     }
 
+    /// <summary>
+    /// Sets a palette color located at <paramref name="propertyPath"/> to the
+    /// supplied <paramref name="newColor"/>.
+    /// The method understands the same alias rules as
+    /// <see cref="GetColorByPath"/>.
+    /// </summary>
+    /// <param name="root">Root palette or object graph.</param>
+    /// <param name="propertyPath">Dot-notation path to the color property.</param>
+    /// <param name="newColor">Color to apply.</param>
     public static void SetColorByPath(object root, string propertyPath, Color newColor)
     {
         if (root == null)
@@ -987,6 +674,23 @@ public static class PaletteMapper
         }
     }
 
+    /// <summary>
+    /// Performs a depth-limited recursive reflection search to locate every
+    /// property path within <paramref name="root"/> whose value equals the
+    /// color associated with <paramref name="enumVal"/> in
+    /// <paramref name="palette"/>.
+    /// </summary>
+    /// <param name="root">Starting object for the search.</param>
+    /// <param name="palette">
+    /// Palette whose base scheme provides the target color.
+    /// </param>
+    /// <param name="enumVal">Enum value whose color is matched.</param>
+    /// <param name="doRecursive">
+    /// If <see langword="true"/>, the object graph is walked recursively.
+    /// </param>
+    /// <returns>
+    /// List of dot-notation property paths that match the enum color.
+    /// </returns>
     public static List<string> FindPathsForEnum(object root, PaletteBase palette, SchemeBaseColors enumVal, bool doRecursive = false)
     {
         var result = new List<string>();
@@ -1055,6 +759,11 @@ public static class PaletteMapper
         return result;
     }
 
+    /// <summary>
+    /// Equality comparer that enforces reference equality semantics, allowing
+    /// the search algorithms to maintain a visited-object set without being
+    /// confused by value equality implementations.
+    /// </summary>
     private sealed class ReferenceEqualityComparer : IEqualityComparer<object>
     {
         public static readonly ReferenceEqualityComparer Instance = new();

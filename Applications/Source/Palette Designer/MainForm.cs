@@ -2310,50 +2310,84 @@ namespace PaletteDesigner
 
         private void RefreshSchemeFromOverrides()
         {
-            if (_palette == null) return;
-
-            foreach (SchemeBaseColors enumVal in Enum.GetValues(typeof(SchemeBaseColors)))
+            if (_palette == null)
             {
-                // 1) reflection search
-                string? path = PaletteMapper.ResolvePath(_palette, enumVal);
-
-                // 2) manual overrides
-                if (path == null && PaletteMapper.TryGetManualPath(enumVal.ToString(), out var manual))
-                    path = manual;
-
-                Color final;
-                if (path != null)
-                {
-                    // colour comes from overrides
-                    try   { final = PaletteMapper.GetColorByPath(_palette, path); }
-                    catch (Exception e)
-                    {
-                        //System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}' -> {e.Message}");
-                        System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}'");
-                        continue;
-                    } // bad path – skip
-                }
-                else if (_palette.BasePalette != null)
-                {
-                    // 3) fallback to the BasePalette’s scheme colour
-                    final = _palette.BasePalette.GetSchemeColor(enumVal);
-                }
-                else
-                {
-                    continue; // nothing to set
-                }
-
-                _palette.SetSchemeColor(enumVal, final);
+                return;
             }
-            #if DEBUG
-            // diagnostic output of enums that STILL have no value (unlikely now)
-            //var stillMissing = PaletteMapper.GetMissingEnums(_palette, out var attempted);
-            //foreach (string m in stillMissing)
-            //{
-            //    attempted.TryGetValue(m, out var pathHint);
-            //    System.Diagnostics.Debug.WriteLine($"[MISSING] {m}  (grammar = {pathHint ?? "<none>"})");
-            //}
-            #endif
+
+            // Suspend palette notifications and grid redraw for performance
+            _palette.SuspendUpdates();
+            SetRedraw(colorTableGrid, false);
+
+            var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
+
+            using (var waitDlg = new ModalWaitDialog(true, 0, enumValues.Length))
+            {
+                // Manually center the wait dialog over the main form
+                waitDlg.StartPosition = FormStartPosition.Manual;
+                // Update descriptive message via reflection to avoid modifying toolkit
+                var lblField = typeof(ModalWaitDialog).GetField("labelMessage", global::System.Reflection.BindingFlags.Instance | global::System.Reflection.BindingFlags.NonPublic);
+                if (lblField?.GetValue(waitDlg) is KryptonLabel lbl)
+                {
+                    lbl.Text = "Processing color mappings, please wait...";
+                }
+                waitDlg.Show(this);
+                waitDlg.Location = new Point(
+                    this.Left + (this.Width - waitDlg.Width) / 2,
+                    this.Top + (this.Height - waitDlg.Height) / 2);
+                waitDlg.UpdateDialog();
+
+                for (int idx = 0; idx < enumValues.Length; idx++)
+                {
+                    var enumVal = enumValues[idx];
+
+                    // 1) reflection search
+                    string? path = PaletteMapper.ResolvePath(_palette, enumVal);
+
+                    // 2) manual overrides
+                    if (path == null && PaletteMapper.TryGetManualPath(enumVal.ToString(), out var manual))
+                    {
+                        path = manual;
+                    }
+
+                    Color final;
+                    if (path != null)
+                    {
+                        // colour comes from overrides
+                        try
+                        {
+                            final = PaletteMapper.GetColorByPath(_palette, path);
+                        }
+                        catch
+                        {
+                            continue; // bad path – skip to next
+                        }
+                    }
+                    else if (_palette.BasePalette != null)
+                    {
+                        // 3) fallback to the BasePalette’s scheme colour
+                        final = _palette.BasePalette.GetSchemeColor(enumVal);
+                    }
+                    else
+                    {
+                        continue; // nothing to set
+                    }
+
+                    _palette.SetSchemeColor(enumVal, final);
+
+                    // Update progress bar deterministically
+                    waitDlg.UpdateProgressBarValue(idx + 1);
+                    waitDlg.UpdateDialog();
+                }
+
+                waitDlg.Close();
+            }
+
+            // Resume updates and redraw UI
+            _palette.ResumeUpdates();
+            SetRedraw(colorTableGrid, true);
+            colorTableGrid.Invalidate();
+            ApplyPalette(populateTable: false);
         }
 
         #endregion
