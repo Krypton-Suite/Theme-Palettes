@@ -226,5 +226,17 @@ namespace PaletteDesigner.Properties {
                 this["FastFilterText"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string FastFilterMode {
+            get {
+                return ((string)(this["FastFilterMode"]));
+            }
+            set {
+                this["FastFilterMode"] = value;
+            }
+        }
     }
 }

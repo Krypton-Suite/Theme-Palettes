@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;net481;net8.0-windows;net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>net472;net48;net481;net8.0-windows;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>..\..\Binaries\Krypton Palette\$(Configuration)\</OutputPath>

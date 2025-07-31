@@ -45,8 +45,10 @@ namespace PaletteDesigner
         private ToolStripMenuItem? _autoFillMenuItem;
         private bool _autoFillFromViewer;
         private bool _displayRgb = true; // default display format per property grid
-        // regex instance to filter set color strings in the filterbox
-        private Regex _regexFilterBoxFontColor = new(@"\d+;\d+;\d+");
+        // regex instance to detect full RGB triplet strings in the filter box (exact 3 digits per component)
+        private Regex _regexFilterBoxFontColor = new(@"^\d{1,3};\d{1,3};\d{1,3}$");
+        // regex instance to detect full hex color strings (#RRGGBB or #AARRGGBB)
+        private Regex _regexFilterBoxHexColor = new(@"^#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$");
 
         #endregion
 
@@ -75,9 +77,18 @@ namespace PaletteDesigner
             // Apply saved global palette from settings
             kryptonManager.GlobalPaletteMode = _settingsManager.GetTheme();
 
+            // Keep colorTableGrid visible and fixed width during window resize
+            kryptonSplitContainerProperties.Panel2MinSize = colorTableGrid.PreferredSize.Width;
+            kryptonSplitContainerProperties.FixedPanel = FixedPanel.Panel2;
+
             colorTableGrid.Columns.Add("#", "#");
             colorTableGrid.Columns.Add("Name", "Scheme Colors");
             colorTableGrid.Columns.Add("Value", "Color");
+            colorTableGrid.Columns.Add("Color", "");
+            colorTableGrid.Columns[3].Width = 60;
+            colorTableGrid.Columns[3].ReadOnly = true;
+            colorTableGrid.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+            colorTableGrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
             SetupContextMenu();
 
@@ -192,6 +203,17 @@ namespace PaletteDesigner
             {
                 imageViewerControl.ColorSampled += ImageViewerControl_ColorSampled;
             }
+
+            // Restore last used filter mode
+            bool colorFilterMode = _settingsManager.GetFastFilterMode() == "0";
+            if (colorFilterMode)
+            {
+                filterByColorButton.Checked = true;
+            }
+            else
+            {
+                filterByNameButton.Checked = true;
+            }
         }
 
         #endregion
@@ -222,6 +244,7 @@ namespace PaletteDesigner
 
             // Generate a fresh palette from scratch
             CreateNewPalette();
+            ApplyQuickFilter(false);
         }
 
         private void Open()
@@ -283,6 +306,7 @@ namespace PaletteDesigner
                     {
                         _palette.PalettePaint -= OnPalettePaint;
                         _palette.BasePaletteChanged -= OnBaseChanged;
+                        _palette.SchemeColorChanged -= OnPaletteSchemeColorChanged;
                     }
 
                     // Use the new instance instead
@@ -294,9 +318,14 @@ namespace PaletteDesigner
                     // We need to know when a change occurs to the palette settings
                     _palette.PalettePaint += OnPalettePaint;
                     _palette.BasePaletteChanged += OnBaseChanged;
+                    _palette.SchemeColorChanged += OnPaletteSchemeColorChanged;
 
                     // Hook up the property grid to the palette
                     propertyGrid.SelectedObject = _palette;
+
+                    // Align scheme array with overrides
+                    _palette.ApplyScheme(_palette.BasePalette ?? _palette);
+                    RefreshSchemeFromOverrides();
 
                     // Use the loaded filename
                     _filename = paletteFileName;
@@ -307,6 +336,9 @@ namespace PaletteDesigner
 
                     // Apply the new palette to the design controls
                     ApplyPalette();
+
+                    // Ensure fast-filter is reapplied (clears filter if empty)
+                    ApplyQuickFilter(false);
 
                     // Define the initial title bar string
                     UpdateTitleBar();
@@ -326,6 +358,7 @@ namespace PaletteDesigner
                         {
                             _palette.PalettePaint -= OnPalettePaint;
                             _palette.BasePaletteChanged -= OnBaseChanged;
+                            _palette.SchemeColorChanged -= OnPaletteSchemeColorChanged;
                         }
 
                         // Use the new instance instead
@@ -337,9 +370,14 @@ namespace PaletteDesigner
                         // We need to know when a change occurs to the palette settings
                         _palette.PalettePaint += OnPalettePaint;
                         _palette.BasePaletteChanged += OnBaseChanged;
+                        _palette.SchemeColorChanged += OnPaletteSchemeColorChanged;
 
                         // Hook up the property grid to the palette
                         propertyGrid.SelectedObject = _palette;
+
+                        // Align scheme array with overrides
+                        _palette.ApplyScheme(_palette.BasePalette ?? _palette);
+                        RefreshSchemeFromOverrides();
 
                         // Use the loaded filename
                         _filename = filename;
@@ -350,6 +388,9 @@ namespace PaletteDesigner
 
                         // Apply the new palette to the design controls
                         ApplyPalette();
+
+                        // Ensure fast-filter is reapplied (clears filter if empty)
+                        ApplyQuickFilter(false);
 
                         // Define the initial title bar string
                         UpdateTitleBar();
@@ -447,11 +488,9 @@ namespace PaletteDesigner
         private void CreateNewPalette(bool useCurrentGlobalPalette = false)
         {
             // Need to unhook from any existing palette
-            if (_palette != null)
-            {
-                _palette.PalettePaint -= OnPalettePaint;
-                _palette.BasePaletteChanged -= OnBaseChanged;
-            }
+            _palette?.PalettePaint -= OnPalettePaint;
+            _palette?.BasePaletteChanged -= OnBaseChanged;
+            _palette?.SchemeColorChanged -= OnPaletteSchemeColorChanged;
 
             // Create a fresh palette instance
             _palette = new KryptonCustomPaletteBase();
@@ -469,6 +508,7 @@ namespace PaletteDesigner
             // We need to know when a change occurs to the palette settings
             _palette.PalettePaint += OnPalettePaint;
             _palette.BasePaletteChanged += OnBaseChanged;
+            _palette.SchemeColorChanged += OnPaletteSchemeColorChanged;
 
             // Hook up the property grid to the palette
             propertyGrid.SelectedObject = _palette;
@@ -490,6 +530,9 @@ namespace PaletteDesigner
         private void OnBaseChanged(object? sender, EventArgs e)
         {
             ApplyPalette();
+            // Re-subscribe to the event in case the base palette changed
+            _palette?.SchemeColorChanged -= OnPaletteSchemeColorChanged;
+            _palette?.SchemeColorChanged += OnPaletteSchemeColorChanged;
         }
 
         private void ApplyPalette(bool populateTable = true)
@@ -525,6 +568,12 @@ namespace PaletteDesigner
                 PopulateColorTableGrid();
                 propertyGrid.Refresh();
             }
+            else
+            {
+                // Force immediate repaint of all controls without repopulating grids
+                Invalidate(true);
+                Update();
+            }
         }
 
         private void PopulateColorTableGrid()
@@ -546,74 +595,25 @@ namespace PaletteDesigner
                 var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
                 foreach (var (eVal, idx) in enumValues.Select((v, i) => (v, i)))
                 {
-                    Color color = Color.Transparent;
+                    Color color = _palette.GetSchemeColor(eVal);
 
-                    // Try via reflection to call GetSchemeColor if present
-                    var m = _palette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
-                    if (m != null)
+                    var colorStr = FormatColorString(color);
+                    int row = colorTableGrid.Rows.Add(idx, eVal.ToString(), colorStr, "");
+                    colorTableGrid.Rows[row].Visible = RowPassesFilters(colorTableGrid.Rows[row]);
+
+                    // Set color swatch in the new column
+                    var swatchCell = colorTableGrid.Rows[row].Cells[3];
+                    if (string.IsNullOrEmpty(colorStr))
                     {
-                        try
-                        {
-                            if (m.Invoke(_palette, new object[] { eVal }) is Color col1)
-                            {
-                                color = col1;
-                            }
-                        }
-                        catch
-                        {
-                            color = Color.Transparent;
-                        }
+                        color = Color.White;
                     }
-                    else if (_palette is KryptonCustomPaletteBase kcp && kcp.BasePalette != null)
-                    {
-                        var mb = kcp.BasePalette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
-                        if (mb != null)
-                        {
-                            try
-                            {
-                                if (mb.Invoke(kcp.BasePalette, new object[] { eVal }) is Color col2)
-                                {
-                                    color = col2;
-                                }
-                            }
-                            catch
-                            {
-                            }
-                        }
-                        else
-                        {
-                            // Fallback to scheme array
-                            var scheme = kcp.BasePalette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(kcp.BasePalette, null) as Color[];
-                            if (scheme != null && idx < scheme.Length)
-                            {
-                                color = scheme[idx];
-                            }
-                        }
-                    }
-                    else
-                    {
-                        var scheme = _palette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(_palette, null) as Color[];
-                        if (scheme != null && idx < scheme.Length)
-                        {
-                            color = scheme[idx];
-                        }
-                    }
-
-                    int row = colorTableGrid.Rows.Add(idx, eVal.ToString(), FormatColorString(color));
-
-                    // Determine visibility based on active filters (fast filter / color filter)
-                    bool passesColor = !_activeColorFilter.HasValue || color.ToArgb() == _activeColorFilter.Value.ToArgb();
-                    bool passesName = string.IsNullOrWhiteSpace(_activeNameFilter) || eVal.ToString().IndexOf(_activeNameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
-                    colorTableGrid.Rows[row].Visible = passesColor && passesName;
-
-                    var cell = colorTableGrid.Rows[row].Cells[2];
-                    cell.Style.BackColor = color;
-                    cell.Style.ForeColor = GetContrastColor(color);
-                    cell.Style.SelectionBackColor = color;
-                    cell.Style.SelectionForeColor = GetContrastColor(color);
+                    swatchCell.Style.BackColor = color;
+                    swatchCell.Style.ForeColor = color;
+                    swatchCell.Style.SelectionBackColor = color;
+                    swatchCell.Style.SelectionForeColor = color;
                 }
 
-                colorTableGrid.AutoResizeColumns();
+                AutoResizeAndFixSwatchColumn();
                 UpdateColorGridRowHeights();
                 colorTableGrid.ResumeLayout();
             }
@@ -893,6 +893,9 @@ namespace PaletteDesigner
             // Save fast filter text
             _settingsManager.SetFastFilterText(fastFilterTextBox.Text ?? string.Empty);
 
+            // Save last used filter mode
+            _settingsManager.SetFastFilterMode(filterByColorButton.Checked ? "0" : "1");
+
             _settingsManager.SaveSettings();
         }
 
@@ -936,6 +939,7 @@ namespace PaletteDesigner
 
                 // Start with a fresh palette so that the default theme can be copied into it
                 CreateNewPalette(useCurrentGlobalPalette: true);
+                RefreshSchemeFromOverrides();
 
                 // Set state flags and filename
                 _dirty = true;
@@ -949,6 +953,7 @@ namespace PaletteDesigner
                 CopyColorsFromBasePalette();
 
                 ApplyPalette();
+                ApplyQuickFilter(false);
             }
             finally
             {
@@ -1372,9 +1377,12 @@ namespace PaletteDesigner
                 // Re-establish property grid binding and refresh UI
                 propertyGrid.SelectedObject = _palette;
 
+                RefreshSchemeFromOverrides();
+
                 ApplyPalette();
 
                 UpdateTitleBar();
+                ApplyQuickFilter(false);
             }
             catch
             {
@@ -1431,18 +1439,18 @@ namespace PaletteDesigner
                         newColor = PaletteDesigner.Utilities.PaletteMapper.GetColorByPath(basePal, path);
                     }
                     _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
-                    ApplySchemeColor(enumVal, newColor);
-                    UpdateGridRow((int)enumVal, newColor);
+                    _palette?.SetSchemeColor(enumVal, newColor);
                 }
                 catch { }
             }
-            ApplyPalette();
             // Push latest base-palette colors into override properties
             CopyColorsFromBasePalette();
             // Rebind grid to pick up override values (single assignment to preserve state)
             propertyGrid.SelectedObject = _palette;
             // Refresh the grid to show updated overrides without collapsing nodes
             propertyGrid.Refresh();
+            // Apply the palette to the design controls
+            ApplyPalette(populateTable: false);
         }
 
         private void ColorTableGrid_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
@@ -1485,88 +1493,22 @@ namespace PaletteDesigner
             dlg.LiveColorChanged += (_, args) =>
             {
                 _undoStack.Push((enumVal, current));
-                DelegateColorChange(enumVal, args.Color, rowIndex);
+                _palette?.SetSchemeColor(enumVal, args.Color);
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 _undoStack.Push((enumVal, current));
-                DelegateColorChange(enumVal, dlg.Color, rowIndex);
+                _palette?.SetSchemeColor(enumVal, dlg.Color);
             }
-        }
 
-        // Inserted helper for delegating color updates
-        private void DelegateColorChange(SchemeBaseColors enumVal, Color newColor, int rowIndex)
-        {
-            // Write color into palette and update the table cell
-            ApplySchemeColor(enumVal, newColor);
-            UpdateGridRow(rowIndex, newColor);
-            ApplyPalette(populateTable: false);
-            // Delegate to PropertyGrid helper for override entry
-            if (_palette != null && (_palette.BasePalette ?? _palette) != null)
-            {
-                var paths = PaletteDesigner.Utilities.PaletteMapper.FindPathsForEnum(_palette, _palette.BasePalette ?? _palette, enumVal);
-                if (paths.Count > 0)
-                    PropertyGridHelper.UpdatePropertyEntry(propertyGrid, paths[0], newColor);
-            }
+            // Ensure the property grid is updated to reflect the new color
+            propertyGrid.Refresh();
         }
 
         private Color GetSchemeColorSafe(SchemeBaseColors val)
         {
-            var m = _palette?.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
-            if (m != null)
-            {
-                try
-                {
-                    return (Color)m.Invoke(_palette, [val])!;
-                }
-                catch { }
-            }
-
-            var scheme = _palette?.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(_palette, null) as Color[];
-            if (scheme != null && (int)val < scheme.Length) return scheme[(int)val];
-
-            return Color.Transparent;
-        }
-
-        private void ApplySchemeColor(SchemeBaseColors val, Color newColor)
-        {
-            // Ensure the new color is written into the base palette (where SchemeColors and BaseScheme live)
-            var basePal = _palette?.BasePalette;
-            if (basePal != null)
-            {
-                basePal.SetSchemeColor(val, newColor);
-            }
-            else
-            {
-                // Fallback to custom palette if no BasePalette set
-                _palette?.SetSchemeColor(val, newColor);
-            }
-
-            // Refresh the property grid so new base value shows through
-
-            if (_palette != null)
-            {
-                if (!_enumToPath.TryGetValue(val, out var mappedPath))
-                {
-                    // discover paths once
-                    var paths = PaletteDesigner.Utilities.PaletteMapper.FindPathsForEnum(_palette, basePal ?? _palette, val);
-                    foreach (var p in paths)
-                    {
-                        _enumToPath[val] = p; // store first path
-                        PaletteDesigner.Utilities.PaletteMapper.SetColorByPath(_palette, p, newColor);
-                    }
-                }
-                else
-                {
-                    PaletteDesigner.Utilities.PaletteMapper.SetColorByPath(_palette, mappedPath, newColor);
-                }
-
-                if (propertyGrid.SelectedObject != null)
-                {
-                    propertyGrid.Refresh();
-                }
-            }
+            return _palette?.GetSchemeColor(val) ?? Color.Transparent;
         }
 
         private void UpdateGridRow(int rowIndex, Color color)
@@ -1576,17 +1518,25 @@ namespace PaletteDesigner
                 return;
             }
             var row = colorTableGrid.Rows[rowIndex];
-            row.Cells[2].Value = FormatColorString(color);
-            row.Cells[2].Style.BackColor = color;
-            row.Cells[2].Style.ForeColor = GetContrastColor(color);
-            row.Cells[2].Style.SelectionBackColor = color;
-            row.Cells[2].Style.SelectionForeColor = GetContrastColor(color);
+            var colorStr = FormatColorString(color);
+            if (string.IsNullOrEmpty(colorStr))
+            {
+                color = Color.White;
+            }
+            row.Cells[2].Value = colorStr;
+            row.Cells[3].Style.BackColor = color;
+            row.Cells[3].Style.ForeColor = color;
+            row.Cells[3].Style.SelectionBackColor = color;
+            row.Cells[3].Style.SelectionForeColor = color;
             colorTableGrid.InvalidateRow(rowIndex);
             colorTableGrid.Refresh();
         }
 
         private string FormatColorString(Color c)
         {
+            // Treat empty or fully transparent colors as no value
+            if (c.IsEmpty || c.A == 0)
+                return string.Empty;
             return _displayRgb
                 ? $"{c.R};{c.G};{c.B}"
                 : $"#{c.R:X2}{c.G:X2}{c.B:X2}";
@@ -1612,10 +1562,9 @@ namespace PaletteDesigner
                         {
                             continue;
                         }
-                        if (row.Cells[2].Style.BackColor is { } col)
-                        {
-                            row.Cells[2].Value = FormatColorString(col);
-                        }
+                        // Use the swatch cell (column 3) to get the actual color
+                        var col = row.Cells[3].Style.BackColor;
+                        row.Cells[2].Value = FormatColorString(col);
                     }
                 }
                 finally
@@ -1650,15 +1599,48 @@ namespace PaletteDesigner
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // If focus is on filter text box, let it handle its own keyboard input (including clipboard)
+            if (fastFilterTextBox.Focused)
+            {
+                if (keyData == (Keys.Control | Keys.F))
+                {
+                    SearchForColor();
+                    return true;
+                }
+
+                if (keyData == (Keys.Control | Keys.Shift | Keys.C))
+                {
+                    FilterRowsByColor();
+                    return true;
+                }
+
+                if (keyData == (Keys.Control | Keys.Shift | Keys.F))
+                {
+                    FilterRowsByEnumSubstring();
+                    return true;
+                }
+
+                if (keyData == (Keys.Control | Keys.Shift | Keys.R))
+                {
+                    ClearRowFilter();
+                    return true;
+                }
+
+                // Default to allow the textbox to process other keys (Ctrl+X/C/V, etc.)
+                return false;
+            }
+
             if (keyData == (Keys.Control | Keys.Z))
             {
                 if (_undoStack.Count > 0)
                 {
                     var (enumVal, oldColor) = _undoStack.Pop();
-                    ApplySchemeColor(enumVal, oldColor);
+                    _palette?.SetSchemeColor(enumVal, oldColor);
                     // Find row index
                     int idx = (int)enumVal;
                     UpdateGridRow(idx, oldColor);
+                    // Ensure the property grid is updated to reflect the new color
+                    propertyGrid.Refresh();
                 }
                 return true;
             }
@@ -1691,9 +1673,10 @@ namespace PaletteDesigner
                         // push undo
                         _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
 
-                        ApplySchemeColor(enumVal, pastedColor);
+                        _palette?.SetSchemeColor(enumVal, pastedColor);
                         UpdateGridRow(rowIndex, pastedColor);
-                        // ApplyPalette();
+                        // Ensure the property grid is updated to reflect the new color
+                        propertyGrid.Refresh();
                     }
                 }
                 return true;
@@ -1732,25 +1715,6 @@ namespace PaletteDesigner
                 }
             }
 
-            if (keyData == (Keys.Control | Keys.F))
-            {
-                SearchForColor(); return true;
-            }
-
-            if (keyData == (Keys.Control | Keys.Shift | Keys.C))
-            {
-                FilterRowsByColor(); return true;
-            }
-
-            if (keyData == (Keys.Control | Keys.Shift | Keys.F))
-            {
-                FilterRowsByEnumSubstring(); return true;
-            }
-
-            if (keyData == (Keys.Control | Keys.Shift | Keys.R))
-            {
-                ClearRowFilter(); return true;
-            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -1915,21 +1879,56 @@ namespace PaletteDesigner
             UpdateFilterUI();
         }
 
-        private void FastFilterTextBox_TextChanged(object? sender, EventArgs e)
+        private void ColorFilterBtn_SelectedColorChanged(object sender, ColorEventArgs e)
         {
-            string input = fastFilterTextBox.Text;
-
-            bool looksNumeric = input.Length > 0 && char.IsDigit(input[0]);
-            bool matchesRgbTriplet = _regexFilterBoxFontColor.IsMatch(input);
-
-            // Only auto-select the color filter if it is not already selected
-            // and the input appears to be a color string.
-            if (!filterByColorButton.Checked && (looksNumeric || matchesRgbTriplet))
-            {
-                filterByColorButton.Checked = true;
-            }
+            filterByColorButton.Checked = true;
+            fastFilterTextBox.Text = $"#{e.Color.R:X2}{e.Color.G:X2}{e.Color.B:X2}".ToLower();
 
             ApplyQuickFilter();
+        }
+
+        private void FastFilterTextBox_TextChanged(object? sender, EventArgs e)
+        {
+            ApplyQuickFilter();
+        }
+
+        // Restrict filter textbox input based on format: digits for RGB or hex chars for Hex mode
+        private void FastFilterTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Always allow control keys
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            if (filterByNameButton.Checked)
+            {
+                // Name filter: allow only letters
+                if (char.IsLetter(e.KeyChar))
+                {
+                    return;
+                }
+                e.Handled = true;
+                return;
+            }
+
+            // Color filter mode: allow letters (for named colors), digits, '#', ';', ','
+            if (char.IsLetter(e.KeyChar))
+            {
+                e.KeyChar = char.ToLowerInvariant(e.KeyChar);
+                return;
+            }
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == ';' || e.KeyChar == ',')
+                return;
+            if (e.KeyChar == '#')
+            {
+                // Only allow '#' as first char and only one occurrence
+                if (fastFilterTextBox.SelectionStart == 0 && !fastFilterTextBox.Text.Contains('#'))
+                    return;
+                e.Handled = true;
+                return;
+            }
+
+            // Disallow everything else
+            e.Handled = true;
         }
 
         private void FilterModeButton_CheckedChanged(object? sender, EventArgs e)
@@ -1942,30 +1941,32 @@ namespace PaletteDesigner
             ApplyQuickFilter();
         }
 
-        private void ApplyQuickFilter()
+        private void ApplyQuickFilter(bool clearOnEmpty = true)
         {
-            if (fastFilterTextBox == null)
-            {
-                return;
-            }
-
             string input = fastFilterTextBox.Text;
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                ClearRowFilter();
+                if (clearOnEmpty)
+                {
+                    ClearRowFilter();
+                }
                 return;
             }
 
             if (filterByColorButton.Checked)
             {
-                if (!TryParseColorString(input, out Color parsed))
+                // Try exact color parse: if succeeds, set active color, otherwise clear it (will fallback to substring match)
+                if (TryParseColorString(input, out Color parsed))
                 {
-                    return; // Invalid color string; do not change filters
+                    _activeColorFilter = parsed;
+                    _lastColorFilterInput = input;
                 }
-
-                _activeColorFilter = parsed;
-                _lastColorFilterInput = input;
+                else
+                {
+                    _activeColorFilter = null;
+                    _lastColorFilterInput = input;
+                }
                 _activeNameFilter = null;
             }
             else
@@ -2010,9 +2011,8 @@ namespace PaletteDesigner
                     }
                     else
                     {
-                        // if we are looking for a font string it must contain 3 integers separated by 2 semicolons
-                        if (filterByNameButton.Checked
-                            || (filterByColorButton.Checked && _regexFilterBoxFontColor.IsMatch(fastFilterTextBox.Text)))
+                        // filter by name or color
+                        if (filterByNameButton.Checked || filterByColorButton.Checked)
                         {
                             foreach (DataGridViewRow row in colorTableGrid.Rows)
                             {
@@ -2041,29 +2041,42 @@ namespace PaletteDesigner
             }
         }
 
+        // Helper for color-based filtering: tries parse, then exact match on color or substring match on text
+        private bool MatchesColorFilter(string input, DataGridViewRow row)
+        {
+            // Skip rows with no displayed color text (e.g., transparent)
+            var cellText = row.Cells[2].Value?.ToString() ?? string.Empty;
+            if (string.IsNullOrEmpty(cellText))
+                return false;
+
+            // If input is a full RGB or hex spec, parse and compare against the swatch
+            if (_regexFilterBoxFontColor.IsMatch(input) ||
+                _regexFilterBoxHexColor.IsMatch(input))
+            {
+                if (TryParseColorString(input, out Color targetColor))
+                {
+                    var rowColor = row.Cells[3].Style.BackColor;
+                    return rowColor.ToArgb() == targetColor.ToArgb();
+                }
+                return false;
+            }
+
+            // Otherwise fallback to textual "starts with" matching on cell text
+            return cellText.StartsWith(input, StringComparison.OrdinalIgnoreCase);
+        }
+
         private bool RowPassesFilters(DataGridViewRow row)
         {
-            string s;
-
+            var input = fastFilterTextBox.Text.Trim();
             if (filterByNameButton.Checked)
             {
-                s = row.Cells[1].Value?.ToString() ?? string.Empty;
-                return s.Length > 0
-                    ? s.IndexOf(fastFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) > 0
-                    : false;
+                var s = row.Cells[1].Value?.ToString() ?? string.Empty;
+                return s.Length > 0 &&
+                       s.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
             }
-            else if (filterByColorButton.Checked)
-            {
-                s = row.Cells[2].Value?.ToString() ?? string.Empty;
-                return fastFilterTextBox.Text.Equals(s);
-            }
-            else
-            {
-                // Fallback: assume color filter and silently activate it.
-                filterByColorButton.Checked = true;
-                s = row.Cells[2].Value?.ToString() ?? string.Empty;
-                return fastFilterTextBox.Text.Equals(s);
-            }
+            // Default to color filter if not name filter
+            filterByColorButton.Checked = true;
+            return MatchesColorFilter(input, row);
         }
 
         private void AdjustGridFont(float delta)
@@ -2086,7 +2099,7 @@ namespace PaletteDesigner
 
             UpdateColorGridRowHeights();
 
-            colorTableGrid.AutoResizeColumns();
+            AutoResizeAndFixSwatchColumn();
             colorTableGrid.Refresh();
 
             _settingsManager.SetPropertyGridFontSize(newSize);
@@ -2114,7 +2127,6 @@ namespace PaletteDesigner
                 finally
                 {
                     colorTableGrid.ResumeLayout();
-                    colorTableGrid.AutoResizeColumns();
                 }
             }
             finally
@@ -2229,12 +2241,10 @@ namespace PaletteDesigner
                 {
                     var enumVal = (SchemeBaseColors)colorTableGrid.Rows[rowIndex].Cells[0].Value!;
                     _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
-                    ApplySchemeColor(enumVal, e.Color);
+                    _palette?.SetSchemeColor(enumVal, e.Color);
                     UpdateGridRow(rowIndex, e.Color);
-                    // ApplyPalette();
-
-                    // Move selection to column 1 (Name) so color change is visible
-                    colorTableGrid.CurrentCell = colorTableGrid.Rows[rowIndex].Cells[1];
+                    // Ensure the property grid is updated to reflect the new color
+                    propertyGrid.Refresh();
                 }
             }
         }
@@ -2298,6 +2308,53 @@ namespace PaletteDesigner
             }
         }
 
+        private void RefreshSchemeFromOverrides()
+        {
+            if (_palette == null) return;
+
+            foreach (SchemeBaseColors enumVal in Enum.GetValues(typeof(SchemeBaseColors)))
+            {
+                // 1) reflection search
+                string? path = PaletteMapper.ResolvePath(_palette, enumVal);
+
+                // 2) manual overrides
+                if (path == null && PaletteMapper.TryGetManualPath(enumVal.ToString(), out var manual))
+                    path = manual;
+
+                Color final;
+                if (path != null)
+                {
+                    // colour comes from overrides
+                    try   { final = PaletteMapper.GetColorByPath(_palette, path); }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}' -> {e.Message}");
+                        continue;
+                    } // bad path – skip
+                }
+                else if (_palette.BasePalette != null)
+                {
+                    // 3) fallback to the BasePalette’s scheme colour
+                    final = _palette.BasePalette.GetSchemeColor(enumVal);
+                }
+                else
+                {
+                    continue; // nothing to set
+                }
+
+                _palette.SetSchemeColor(enumVal, final);
+            }
+            #if DEBUG
+            // diagnostic output of enums that STILL have no value (unlikely now)
+            var stillMissing = PaletteMapper.GetMissingEnums(_palette, out var attempted);
+            foreach (string m in stillMissing)
+            {
+                attempted.TryGetValue(m, out var pathHint);
+                System.Diagnostics.Debug.WriteLine($"[MISSING] {m}  (grammar = {pathHint ?? "<none>"})");
+            }
+            #endif
+        }
+
         #endregion
 
         #region Static Helpers
@@ -2342,6 +2399,7 @@ namespace PaletteDesigner
             }
 
             input = input!.Trim();
+            input = input.Replace(" ", string.Empty);
             if (string.IsNullOrWhiteSpace(input))
             {
                 return false;
@@ -2433,6 +2491,25 @@ namespace PaletteDesigner
                 item = item.Parent!;
             }
             return string.Join(".", labels);
+        }
+
+        // Helper to resize columns and fix the swatch column width
+        private void AutoResizeAndFixSwatchColumn()
+        {
+            colorTableGrid.AutoResizeColumns();
+            var swatchCol = colorTableGrid.Columns[3];
+            swatchCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            swatchCol.Width = 60;
+        }
+
+        private void OnPaletteSchemeColorChanged(object? sender, SchemeColorChangedEventArgs e)
+        {
+            // Update the grid row corresponding to the changed color
+            UpdateGridRow((int)e.Index, e.NewColor);
+            // Refresh the property grid so new base value shows through
+            propertyGrid.Refresh();
+            // Apply the palette to the design controls
+            ApplyPalette(populateTable: false);
         }
     }
 }
