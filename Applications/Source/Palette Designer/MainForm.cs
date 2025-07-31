@@ -324,7 +324,15 @@ namespace PaletteDesigner
                     propertyGrid.SelectedObject = _palette;
 
                     // Align scheme array with overrides
-                    _palette.ApplyScheme(_palette.BasePalette ?? _palette);
+                    if (_palette.BasePalette != null)
+                    {
+                        var schemeField = _palette.BasePalette.GetType()
+                            .GetField("BaseColors", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+                        if (schemeField?.GetValue(_palette.BasePalette) is KryptonColorSchemeBase scheme)
+                        {
+                            _palette.ApplyScheme(scheme);
+                        }
+                    }
                     RefreshSchemeFromOverrides();
 
                     // Use the loaded filename
@@ -376,7 +384,15 @@ namespace PaletteDesigner
                         propertyGrid.SelectedObject = _palette;
 
                         // Align scheme array with overrides
-                        _palette.ApplyScheme(_palette.BasePalette ?? _palette);
+                        if (_palette.BasePalette != null)
+                        {
+                            var schemeField = _palette.BasePalette.GetType()
+                                .GetField("BaseColors", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+                            if (schemeField?.GetValue(_palette.BasePalette) is KryptonColorSchemeBase scheme)
+                            {
+                                _palette.ApplyScheme(scheme);
+                            }
+                        }
                         RefreshSchemeFromOverrides();
 
                         // Use the loaded filename
