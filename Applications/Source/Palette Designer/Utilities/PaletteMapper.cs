@@ -12,6 +12,11 @@ namespace PaletteDesigner.Utilities;
 
 public static class PaletteMapper
 {
+    // Regex for Ribbon Tab mappings to BaseScheme
+    private static readonly Regex _ribbonTabSelectedRegex  = new(@"^RibbonTabSelected([1-5])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonTabTrackingRegex  = new(@"^RibbonTabTracking([1-4])$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonTabHighlightRegex = new(@"^RibbonTabHighlight([1-5])$", RegexOptions.Compiled);
+
     // Manual overrides for enum name -> property path when reflection search cannot find a match
     // Currently empty; kept for rare edge cases that cannot be auto-resolved
     private static readonly Dictionary<string, string> _enumToPathOverrides = new(StringComparer.Ordinal);
@@ -62,6 +67,39 @@ public static class PaletteMapper
     {
         string[] parts = propertyPath.Split('.');
         int stateIndex = Array.FindIndex(parts, p => p.StartsWith("State", StringComparison.Ordinal));
+
+        // TrackBar and Base-scheme aliases: resolve via KryptonColorSchemeBase when given as flat tokens
+        // e.g., "TrackBar.TickMarks" -> palette.BaseScheme.TrackBarTickMarks
+        if (stateIndex == -1 && parts.Length == 2 && parts[0] == "TrackBar")
+        {
+            // Map TrackBar.<Part> -> TrackBar<Part> on BaseScheme
+            string baseProp = "TrackBar" + parts[1];
+            var scheme = GetBaseScheme(palette);
+            if (scheme != null)
+            {
+                var piScheme = scheme.GetType().GetProperty(baseProp, BindingFlags.Public | BindingFlags.Instance);
+                if (piScheme != null && piScheme.PropertyType == typeof(Color))
+                {
+                    return (Color)piScheme.GetValue(scheme)!;
+                }
+            }
+            // fall through to reflection chain if not found
+        }
+
+        // ToolTip bottom alias: allow "ToolTip.StateNormal.Border.Color1" to fetch from BaseScheme.ToolTipBottom
+        if (parts.Length == 4 && parts[0] == "ToolTip" && parts[1] == "StateNormal" && parts[2] == "Border")
+        {
+            var scheme = GetBaseScheme(palette);
+            if (scheme != null)
+            {
+                var piScheme = scheme.GetType().GetProperty("ToolTipBottom", BindingFlags.Public | BindingFlags.Instance);
+                if (piScheme != null && piScheme.PropertyType == typeof(Color))
+                {
+                    return (Color)piScheme.GetValue(scheme)!;
+                }
+            }
+            // fall through if not present
+        }
 
         // Fast generic fallback when no State segment present (direct property chain)
         if (stateIndex == -1)
@@ -114,6 +152,16 @@ public static class PaletteMapper
                 ? parts[stateIndex + 2].Substring("Color".Length)
                 : "1";
 
+        // Handle Ribbon BackColorN direct properties (no Back group)
+        if (parts.Length > stateIndex + 1 && parts[stateIndex - 1] == "Ribbon" && groupKey.StartsWith("BackColor", StringComparison.Ordinal))
+        {
+            string idx = groupKey.Substring("BackColor".Length);
+            if (Enum.TryParse(parts[stateIndex - 1], out PaletteBackStyle _))
+            {
+                // Not used; fall-through to reflection works better for these
+            }
+        }
+
         // Special case for ButtonStyles.Standalone which maps to ButtonStandalone
         if (parts.Length > 1 && parts[0] == "ButtonStyles" && styleKey == "Standalone")
         {
@@ -155,6 +203,37 @@ public static class PaletteMapper
         }
 
         return GetColorByReflection(palette, parts);
+    }
+
+    // Helper to reach the current base color scheme if available
+    private static KryptonColorSchemeBase? GetBaseScheme(PaletteBase palette)
+    {
+        // KryptonCustomPaletteBase stores a private _basePalette and exposes SchemeColors; not directly the scheme.
+        // However, many PaletteBase implementations expose a BaseScheme or equivalent. Try common names via reflection.
+        var pi = palette.GetType().GetProperty("BaseScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                 ?? palette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                 ?? palette.GetType().GetProperty("Scheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        if (pi != null)
+        {
+            var scheme = pi.GetValue(palette) as KryptonColorSchemeBase;
+            if (scheme != null) return scheme;
+        }
+
+        // Some palettes keep a reference to a base palette that can expose the scheme
+        var basePalettePi = palette.GetType().GetProperty("BasePalette", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        var basePalette = basePalettePi?.GetValue(palette);
+        if (basePalette != null)
+        {
+            var piScheme = basePalette.GetType().GetProperty("BaseScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                          ?? basePalette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                          ?? basePalette.GetType().GetProperty("Scheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (piScheme != null)
+            {
+                return piScheme.GetValue(basePalette) as KryptonColorSchemeBase;
+            }
+        }
+
+        return null;
     }
 
     private static Color GetColorByReflection(object root, string[] parts)
@@ -214,11 +293,14 @@ public static class PaletteMapper
     private static readonly Regex _textButtonRegex   = new(@"^TextButton(Form)?(Normal|Tracking|Pressed|Checked)$", RegexOptions.Compiled);
     private static readonly Regex _formButtonRegex  = new(@"^FormButton(Border|Back([12]))(Track|Pressed|Checked|CheckTrack)?$", RegexOptions.Compiled);
     private static readonly Regex _buttonStateRegex = new(@"^Button(Pressed|Checked|Selected)(Begin|End)$", RegexOptions.Compiled);
+    // AppButton: Back/Outer/Inner/Border/MenuDocs*
     private static readonly Regex _appButtonRegex   = new(@"^AppButton(Back([123])|Border|Outer([123])|Inner([12])|MenuDocs(Back|Text))$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonTabRegex   = new(@"^RibbonTab(?:(Selected|Tracking|Highlight)([1-5])|SeparatorColor)$", RegexOptions.Compiled);
+    // RibbonTab: do not use Highlight state (use Tracking colors instead)
+    private static readonly Regex _ribbonTabRegex   = new(@"^RibbonTab(?:(Selected|Tracking|Highlight)([1-5])|SeparatorColor|Text(Normal|Checked))$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGroupRegex = new(@"^RibbonGroup(?:(Area|Border)([1-5])|Title([12]))$", RegexOptions.Compiled);
     private static readonly Regex _headerRegex      = new(@"^Header(Primary|Secondary)(Back([12])|Text)$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGroupExtraRegex = new(@"^RibbonGroup(?:(Collapsed)(Back|Border)([12])|(Dialog)([A-Za-z]+)|(Separator)([1-3]?))$", RegexOptions.Compiled);
+    // Form chrome families (no Form.StateNormal in Krypton)
     private static readonly Regex _formBorderRegex        = new(@"^FormBorder(Active|Inactive)(Dark|Light)?$", RegexOptions.Compiled);
     private static readonly Regex _formBorderHeaderRegex  = new(@"^FormBorderHeader(Active|Inactive)([12])?$", RegexOptions.Compiled);
     private static readonly Regex _formHeaderRegex        = new(@"^FormHeader(Short|Long)?(Active|Inactive)$", RegexOptions.Compiled);
@@ -238,6 +320,7 @@ public static class PaletteMapper
     private static readonly Regex _ribbonQATOverflowRegex = new(@"^RibbonQATOverflow([1-2])$", RegexOptions.Compiled);
     private static readonly Regex _ribbonDropArrowRegex = new(@"^RibbonDropArrow(Dark|Light)$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGalleryRegex = new(@"^RibbonGallery(Back(Normal|Tracking)|Back([12])|Border)$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupsAreaAnyRegex = new(@"^RibbonGroupsArea([1-5])$", RegexOptions.Compiled); // keep but map to Ribbon.Tab/Group styles below
     private static readonly Regex _buttonClusterRegex = new(@"^ButtonClusterButton(Back|Border)([12])$", RegexOptions.Compiled);
     private static readonly Regex _gridListRegex = new(@"^GridList(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
     private static readonly Regex _gridSheetColRegex = new(@"^GridSheetCol(Normal|Pressed|Selected)([12])?$", RegexOptions.Compiled);
@@ -315,14 +398,15 @@ public static class PaletteMapper
             return $"ButtonStyles.{stylePart}.State{statePart}.{groupPart}";
         }
 
-        // AppButton* mapping
+        // AppButton* mapping (correct Krypton objects)
         m = _appButtonRegex.Match(enumName);
         if (m.Success)
         {
             string rootPart = "Ribbon.RibbonAppButton";
             if (enumName.StartsWith("AppButtonBorder"))
             {
-                return $"{rootPart}.Border.Color1";
+                // Border is under ControlStyles.ControlRibbonAppMenu -> Border.Color1
+                return "ControlStyles.ControlRibbonAppMenu.StateNormal.Border.Color1";
             }
             if (enumName.StartsWith("AppButtonBack"))
             {
@@ -332,21 +416,22 @@ public static class PaletteMapper
             if (enumName.StartsWith("AppButtonOuter"))
             {
                 string idx = m.Groups[3].Success ? m.Groups[3].Value : "1";
-                return $"{rootPart}.StateNormal.BackColor{idx}";
+                return $"{rootPart}.StateTracking.BackColor{idx}";
             }
             if (enumName.StartsWith("AppButtonInner"))
             {
                 string idx = m.Groups[4].Success ? m.Groups[4].Value : "1";
-                int colorIdx = idx == "1" ? 4 : 5;
-                return $"{rootPart}.Back.Color{colorIdx}";
+                return $"{rootPart}.StatePressed.BackColor{idx}";
             }
             if (enumName == "AppButtonMenuDocsBack")
             {
-                return $"{rootPart}.Back.Color1";
+                // Direct mapping to single BackColor property
+                return "Ribbon.RibbonAppMenuOuter.StateNormal.BackColor1";
             }
             if (enumName == "AppButtonMenuDocsText")
             {
-                return $"{rootPart}.Border.Color1";
+                // Direct mapping to Ribbon object graph
+                return "Ribbon.RibbonAppMenuDocsText.StateNormal.Text.Color1";
             }
         }
 
@@ -376,23 +461,41 @@ public static class PaletteMapper
         {
             if (enumName == "RibbonTabSeparatorColor")
             {
-                return "Ribbon.RibbonTab.StateNormal.Border.Color1";
+                // Defer to reflection; separator can vary across builds.
+                return null;
             }
 
-            string stateToken = m.Groups[1].Value; // Selected | Tracking | Highlight
-            string indexToken = m.Groups[2].Value;
-
-            string statePart = stateToken switch
+            // Text colors for RibbonTab
+            if (enumName == "RibbonTabTextNormal")
             {
-                "Selected"  => "Selected",
-                "Tracking"  => "Tracking",
-                "Highlight" => "Highlight",
-                _           => "Normal"
-            };
+                return "Ribbon.RibbonTab.StateNormal.Text.Color1";
+            }
+            if (enumName == "RibbonTabTextChecked")
+            {
+                return "Ribbon.RibbonTab.StateCheckedNormal.Text.Color1";
+            }
 
-            string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
+            string stateToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Selected | Tracking | Highlight
+            string indexToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty;
 
-            return $"Ribbon.RibbonTab.State{statePart}.Back.Color{idx}";
+            if (!string.IsNullOrEmpty(stateToken))
+            {
+                string statePart = stateToken switch
+                {
+                    "Selected"  => "CheckedNormal",
+                    "Tracking"  => "Tracking",
+                    // Highlight uses Tracking colors
+                    "Highlight" => "Tracking",
+                    _           => "Normal"
+                };
+
+                string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
+
+                // Map directly to BackColorN property as shown in Krypton object structure
+                return $"Ribbon.RibbonTab.State{statePart}.BackColor{idx}";
+            }
+
+            return null;
         }
 
         // RibbonGroup* mapping
@@ -410,15 +513,15 @@ public static class PaletteMapper
             if (isTitle)
             {
                 // Title colours map to text
-                groupPart = $"Text.Color{idx}";
+                groupPart = $"TextColor";
             }
             else if (areaToken == "Border")
             {
-                groupPart = $"Border.Color{idx}";
+                groupPart = $"BorderColor{idx}";
             }
             else // Area (Back)
             {
-                groupPart = $"Back.Color{idx}";
+                groupPart = $"BackColor{idx}";
             }
 
             return $"Ribbon.{stylePart}.StateNormal.{groupPart}";
@@ -441,13 +544,13 @@ public static class PaletteMapper
             }
             else // Text
             {
-                groupPart = "Text.Color1";
+                groupPart = "Content.ShortText.Color1";
             }
 
             return $"HeaderStyles.{stylePart}.StateNormal.{groupPart}";
         }
 
-        // Form chrome mapping
+        // Form chrome mapping (no Form.StateNormal in Krypton)
         m = _formBorderRegex.Match(enumName);
         if (m.Success)
         {
@@ -455,27 +558,34 @@ public static class PaletteMapper
             string shadeToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty; // Dark / Light / empty
 
             string colorIdx  = shadeToken == "Dark" ? "2" : "1";
-            return $"Form.StateNormal.Border.Color{colorIdx}";
+            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
+            // ControlClient or ControlRibbon depending on current chrome; prefer ControlRibbon per guidance
+            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{colorIdx}";
         }
 
-        // FormBorderHeader* mapping
+        // FormBorderHeader* mapping -> ControlClient/ControlRibbon? Spec says border colors from ControlRibbon
         m = _formBorderHeaderRegex.Match(enumName);
         if (m.Success)
         {
             string stateToken = m.Groups[1].Value; // Active / Inactive
             string idx        = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            return $"FormHeader.StateNormal.Border.Color{idx}";
+            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
+            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{idx}";
         }
 
-        // FormHeaderShort/Long mapping
+        // FormHeaderShort/Long mapping -> prefer Content.ShortText for broader build compatibility
         m = _formHeaderRegex.Match(enumName);
         if (m.Success)
         {
+            // Corrected to match actual Krypton object structure
             string lengthToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Short / Long / empty
             string stateToken  = m.Groups[2].Value; // Active / Inactive
 
             string stylePart = string.IsNullOrEmpty(lengthToken) ? "FormHeader" : $"FormHeader{lengthToken}";
-            return $"{stylePart}.StateNormal.Text.Color1";
+            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
+            // Some builds expose Short/Long under HeaderStyles.Form, not FormHeader*
+            // Try the more common Form cluster first; if it fails, reflection fallback will handle.
+            return $"HeaderStyles.Form.{statePart}.Content.ShortText.Color1";
         }
 
         // FormButtonBorderCheck mapping
@@ -518,11 +628,13 @@ public static class PaletteMapper
         m = _ribbonGroupsAreaRegex.Match(enumName);
         if (m.Success)
         {
+            // Map GroupsArea to Ribbon.RibbonGroupArea
             string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonGroupsArea.StateNormal.Back.Color{idx}";
+            return $"Ribbon.RibbonGroupArea.StateNormal.Back.Color{idx}";
         }
         if (_ribbonMinimizeBarRegex.IsMatch(enumName))
         {
+            // Use Ribbon object graph per screenshot
             return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color2";
         }
         m = _ribbonGroupFrameRegex.Match(enumName);
@@ -549,8 +661,8 @@ public static class PaletteMapper
         {
             string idx = m.Groups[1].Value;
             bool inactive = m.Groups[2].Success;
-            string statePart = inactive ? "Inactive" : "Active";
-            return $"Ribbon.RibbonQATMini.State{statePart}.Back.Color{idx}";
+            string state = inactive ? "StateInactive" : "StateNormal";
+            return $"Ribbon.RibbonQATMinibar.{state}.Back.Color{idx}";
         }
         m = _ribbonQATFullRegex.Match(enumName);
         if (m.Success)
@@ -562,8 +674,8 @@ public static class PaletteMapper
         if (m.Success)
         {
             string shade = m.Groups[1].Value; // Dark / Light
-            string idx = shade == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonQATButton.StateNormal.Border.Color{idx}";
+            string colorIdx = shade == "Dark" ? "1" : "2";
+            return $"Ribbon.RibbonQATButton.StateNormal.Border.Color{colorIdx}";
         }
         m = _ribbonQATOverflowRegex.Match(enumName);
         if (m.Success)
@@ -574,31 +686,34 @@ public static class PaletteMapper
         m = _ribbonDropArrowRegex.Match(enumName);
         if (m.Success)
         {
-            string shade = m.Groups[1].Value;
-            string idx = shade == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonDropArrow.StateNormal.Border.Color{idx}";
+            // Final correction for RibbonDropArrow mapping
+            string shade = m.Groups[1].Value; // Dark or Light
+            return $"Ribbon.RibbonGeneral.StateNormal.DropArrow.{(shade == "Dark" ? "Dark" : "Light")}";
         }
         m = _ribbonGalleryRegex.Match(enumName);
         if (m.Success)
         {
             if (enumName == "RibbonGalleryBorder")
             {
-                return "Ribbon.RibbonGallery.StateNormal.Border.Color1";
+                return "Ribbon.RibbonGalleryBorder.StateNormal.Border.Color1";
             }
-            if (enumName.StartsWith("RibbonGalleryBackNormal"))
+            if (enumName.StartsWith("RibbonGalleryBackTracking", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGallery.StateNormal.Back.Color1";
+                return "Ribbon.RibbonGalleryBack.StateTracking.BackColor1";
             }
-            if (enumName.StartsWith("RibbonGalleryBackTracking"))
+            if (enumName.StartsWith("RibbonGalleryBackNormal", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGallery.StateTracking.Back.Color1";
+                return "Ribbon.RibbonGalleryBack.StateNormal.BackColor1";
             }
-            if (enumName.StartsWith("RibbonGalleryBack"))
+            if (enumName.StartsWith("RibbonGalleryBack", StringComparison.Ordinal))
             {
                 string idx = m.Groups[3].Success ? m.Groups[3].Value : "1";
-                return $"Ribbon.RibbonGallery.StateNormal.Back.Color{idx}";
+                return $"Ribbon.RibbonGalleryBack.StateNormal.BackColor{idx}";
             }
         }
+        // REMOVED: Duplicate RibbonTab BaseScheme mappings - already handled in primary RibbonTab section
+
+        // Remove duplicate Ribbon Tab BaseScheme mapping block; handled earlier with object graph paths
 
         // Grid & Navigator mapping
         m = _buttonClusterRegex.Match(enumName);
@@ -614,8 +729,17 @@ public static class PaletteMapper
         {
             string stateToken = m.Groups[1].Value; // Normal/Pressed/Selected
             string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string statePart = stateToken switch { "Normal" => "Normal", "Pressed" => "Pressed", _ => "Selected" };
-            return $"GridStyles.GridList.State{statePart}.DataCell.Back.Color{idx}";
+            if (stateToken == "Pressed")
+            {
+                // Pressed = HeaderRow/HeaderColumn, not DataCell
+                return $"GridStyles.GridList.StatePressed.HeaderRow.Back.Color{idx}";
+            }
+            if (stateToken == "Selected")
+            {
+                // Selected colors in GridStyles.GridList.StateSelected.DataCell.*
+                return $"GridStyles.GridList.StateSelected.DataCell.Back.Color{idx}";
+            }
+            return $"GridStyles.GridList.StateNormal.DataCell.Back.Color{idx}";
         }
         m = _gridSheetColRegex.Match(enumName);
         if (m.Success)
@@ -647,7 +771,8 @@ public static class PaletteMapper
         }
         if (_navigatorMiniRegex.IsMatch(enumName))
         {
-            return "Navigator.NavigatorMiniTab.StateNormal.Back.Color1";
+            // Final correction to match actual Krypton object structure
+            return "Navigator.NavigatorMini.StateNormal.HeaderGroup.BackColor1";
         }
         m = _buttonNavigatorRegex.Match(enumName);
         if (m.Success)
@@ -694,7 +819,8 @@ public static class PaletteMapper
         }
         if (_toolTipBottomRegex.IsMatch(enumName))
         {
-            return "ToolTip.ToolTip.Standard.StateNormal.Back.Color2";
+            // ToolTip colors come from ControlStyles.ControlToolTip in this build
+            return "ControlStyles.ControlToolTip.StateNormal.Border.Color1";
         }
 
         // Context menu heading mapping
@@ -711,19 +837,38 @@ public static class PaletteMapper
             return $"HeaderStyles.HeaderDockInactive.StateNormal.Back.Color{idx}";
         }
 
+        // TrackBar mapping -> KryptonPaletteTrackBar.State*.{Tick|Track|Position}.Color1
+        m = _trackBarRegex.Match(enumName);
+        if (m.Success)
+        {
+            string part = m.Groups[1].Value; // TickMarks | TopTrack | BottomTrack | FillTrack | OutsidePosition | BorderPosition
+            return part switch
+            {
+                "TickMarks"       => "TrackBar.StateNormal.Tick.Color1",
+                "TopTrack"        => "TrackBar.StateNormal.Track.Color1",
+                "BottomTrack"     => "TrackBar.StateNormal.Track.Color1",
+                "FillTrack"       => "TrackBar.StateNormal.Track.Color1",
+                "OutsidePosition" => "TrackBar.StateNormal.Position.Color1",
+                "BorderPosition"  => "TrackBar.StateNormal.Position.Color1",
+                _                 => "TrackBar.StateNormal.Position.Color1"
+            };
+        }
+
         // TrackBar mapping
         m = _trackBarRegex.Match(enumName);
         if (m.Success)
         {
+            // Map directly to top-level TrackBar properties exposed by the base scheme
             string part = m.Groups[1].Value;
             return part switch
             {
-                "TickMarks" => "TrackBar.TrackBar.StateNormal.Tick.Color1",
-                "TopTrack" => "TrackBar.TrackBar.StateNormal.Track.Color1",
-                "BottomTrack" => "TrackBar.TrackBar.StateNormal.Track.Color2",
-                "FillTrack" => "TrackBar.TrackBar.StateNormal.Track.Color3",
-                "OutsidePosition" => "TrackBar.TrackBar.StateNormal.Position.Color1",
-                _ => "TrackBar.TrackBar.StateNormal.Position.Color2"
+                "TickMarks"       => "TrackBar.TickMarks",
+                "TopTrack"        => "TrackBar.TopTrack",
+                "BottomTrack"     => "TrackBar.BottomTrack",
+                "FillTrack"       => "TrackBar.FillTrack",
+                "OutsidePosition" => "TrackBar.OutsidePosition",
+                "BorderPosition"  => "TrackBar.BorderPosition",
+                _                 => "TrackBar.OutsidePosition"
             };
         }
 

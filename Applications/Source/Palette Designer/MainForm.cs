@@ -2328,7 +2328,8 @@ namespace PaletteDesigner
                     try   { final = PaletteMapper.GetColorByPath(_palette, path); }
                     catch (Exception e)
                     {
-                        System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}' -> {e.Message}");
+                        //System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}' -> {e.Message}");
+                        System.Diagnostics.Debug.WriteLine($"[PATH_ERROR] {enumVal}: '{path}'");
                         continue;
                     } // bad path – skip
                 }
@@ -2346,12 +2347,12 @@ namespace PaletteDesigner
             }
             #if DEBUG
             // diagnostic output of enums that STILL have no value (unlikely now)
-            var stillMissing = PaletteMapper.GetMissingEnums(_palette, out var attempted);
-            foreach (string m in stillMissing)
-            {
-                attempted.TryGetValue(m, out var pathHint);
-                System.Diagnostics.Debug.WriteLine($"[MISSING] {m}  (grammar = {pathHint ?? "<none>"})");
-            }
+            //var stillMissing = PaletteMapper.GetMissingEnums(_palette, out var attempted);
+            //foreach (string m in stillMissing)
+            //{
+            //    attempted.TryGetValue(m, out var pathHint);
+            //    System.Diagnostics.Debug.WriteLine($"[MISSING] {m}  (grammar = {pathHint ?? "<none>"})");
+            //}
             #endif
         }
 
