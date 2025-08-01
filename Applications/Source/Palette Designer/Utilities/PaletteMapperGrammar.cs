@@ -111,6 +111,10 @@ public static partial class PaletteMapper
     /// <returns>The mapped property path, or <c>null</c> if not recognized.</returns>
     private static string? TryMapFormButton(string enumName)
     {
+        if (_formButtonBorderCheckRegex.IsMatch(enumName))
+        {
+            return "ButtonStyles.ButtonForm.StateCheckedNormal.Border.Color1";
+        }
         var m = _formButtonRegex.Match(enumName);
         if (m.Success)
         {
@@ -186,8 +190,7 @@ public static partial class PaletteMapper
         {
             if (enumName == "RibbonTabSeparatorColor")
             {
-                // Defer to reflection; separator can vary across builds.
-                return null;
+                return "Ribbon.RibbonGeneral.StateNormal.SeparatorColor";
             }
 
             // Text colors for RibbonTab
@@ -678,7 +681,7 @@ public static partial class PaletteMapper
         if (_panelAlternativeRegex.IsMatch(enumName))
             return "PanelStyles.PanelAlternate.StateNormal.Back.Color1";
         if (_controlBorderRegex.IsMatch(enumName))
-            return "PanelStyles.PanelClient.StateNormal.Back.Color1";
+            return "ControlStyles.ControlClient.StateNormal.Border.Color1";
         return null;
     }
 

@@ -478,6 +478,8 @@ public static partial class PaletteMapper
         ["Ribbon"]           = TryMapRibbon,
         ["Grid"]             = TryMapGrid,
         ["InputControl"]     = TryMapInputControl,
+        ["InputDropDown"]    = TryMapInputControl,
+        ["ControlBorder"]    = TryMapPanel,
         ["Panel"]            = TryMapPanel,
         ["Form"]             = TryMapForm,
         ["AlternatePressed"] = TryMapAlternatePressed,
