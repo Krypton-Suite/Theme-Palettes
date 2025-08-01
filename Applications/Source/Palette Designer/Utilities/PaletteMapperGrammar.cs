@@ -263,10 +263,30 @@ public static partial class PaletteMapper
             string idx = m.Groups[1].Value;
             return $"Ribbon.RibbonGroupArea.StateNormal.Back.Color{idx}";
         }
+        if (enumName == "RibbonMinimizeBarLight")
+        {
+            return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color1";
+        }
         if (_ribbonMinimizeBarRegex.IsMatch(enumName))
         {
-            // Use Ribbon object graph per screenshot
+            // Dark variant uses Color2, light uses Color1
             return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color2";
+        }
+        // RibbonGroup Border/Title context tracking
+        if (enumName.StartsWith("RibbonGroupBorderContext", StringComparison.Ordinal))
+        {
+            string idx = enumName.Substring("RibbonGroupBorderContext".Length);
+            idx = string.IsNullOrEmpty(idx) ? "1" : idx;
+            return $"Ribbon.RibbonGroupBorder.StateContextChecked.BorderColor{idx}";
+        }
+        if (enumName.StartsWith("RibbonGroupTitleContext", StringComparison.Ordinal))
+        {
+            // Title context uses TextColor (no index differentiation in object model)
+            return "Ribbon.RibbonGroupTitle.StateContextChecked.TextColor";
+        }
+        if (enumName.StartsWith("RibbonGroupTitleTracking", StringComparison.Ordinal))
+        {
+            return "Ribbon.RibbonGroupTitle.StateTracking.TextColor";
         }
         m = _ribbonGroupFrameRegex.Match(enumName);
         if (m.Success)
@@ -528,6 +548,10 @@ public static partial class PaletteMapper
     /// <returns>The mapped property path, or <c>null</c> if not recognized.</returns>
     private static string? TryMapHeader(string enumName)
     {
+        if (enumName == "HeaderText")
+        {
+            return "HeaderStyles.HeaderPrimary.StateNormal.Content.ShortText.Color1";
+        }
         var m = _headerRegex.Match(enumName);
         if (m.Success)
         {
@@ -649,11 +673,28 @@ public static partial class PaletteMapper
     /// <returns>The mapped property path, or <c>null</c> if not recognized.</returns>
     private static string? TryMapPanel(string enumName)
     {
+        if (enumName == "PanelClient")
+            return "PanelStyles.PanelClient.StateNormal.Back.Color1";
         if (_panelAlternativeRegex.IsMatch(enumName))
             return "PanelStyles.PanelAlternate.StateNormal.Back.Color1";
         if (_controlBorderRegex.IsMatch(enumName))
             return "PanelStyles.PanelClient.StateNormal.Back.Color1";
         return null;
+    }
+
+    /// <summary>
+    /// Maps TextLabel* SchemeBaseColors names to palette property paths.
+    /// </summary>
+    /// <param name="enumName">Enum name to resolve.</param>
+    /// <returns>The mapped property path, or <c>null</c> if not recognized.</returns>
+    private static string? TryMapLabel(string enumName)
+    {
+        return enumName switch
+        {
+            "TextLabelControl" => "LabelStyles.LabelCommon.StateNormal.ShortText.Color1",
+            "TextLabelPanel"   => "LabelStyles.LabelCaptionPanel.StateNormal.ShortText.Color1",
+            _ => null
+        };
     }
 
     /// <summary>
@@ -670,7 +711,8 @@ public static partial class PaletteMapper
             string shadeToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty; // Dark / Light / empty
             string colorIdx = shadeToken == "Dark" ? "2" : "1";
             string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{colorIdx}";
+            // Use FormMain style (Main application window) instead of generic FormCommon
+            return $"FormStyles.FormMain.{statePart}.Border.Color{colorIdx}";
         }
 
         m = _formBorderHeaderRegex.Match(enumName);
@@ -679,17 +721,40 @@ public static partial class PaletteMapper
             string stateToken = m.Groups[1].Value;
             string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
             string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            return $"ControlStyles.ControlRibbon.{statePart}.Border.Color{idx}";
+            // Map to HeaderForm style rather than generic FormCommon border
+            return $"HeaderStyles.HeaderForm.{statePart}.Border.Color{idx}";
+        }
+
+        // FormMain background colors (Back.Color1/2) mapping
+        if (enumName.StartsWith("FormMainBack", StringComparison.Ordinal))
+        {
+            var mBack = System.Text.RegularExpressions.Regex.Match(enumName, @"^FormMainBack(?:(Active|Inactive))?([12])$");
+            if (mBack.Success)
+            {
+                string stateToken = mBack.Groups[1].Success ? mBack.Groups[1].Value : "Active"; // default Active if omitted
+                string idx = string.IsNullOrEmpty(mBack.Groups[2].Value) ? "1" : mBack.Groups[2].Value;
+                string statePart = stateToken == "Inactive" ? "StateInactive" : "StateActive";
+                return $"FormStyles.FormMain.{statePart}.Back.Color{idx}";
+            }
         }
 
         m = _formHeaderRegex.Match(enumName);
         if (m.Success)
         {
             string lengthToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Short / Long / empty
-            string stateToken = m.Groups[2].Value;
-            string stylePart = string.IsNullOrEmpty(lengthToken) ? "FormHeader" : $"FormHeader{lengthToken}";
-            string statePart = stateToken == "Active" ? "Active" : "Inactive";
-            return $"HeaderStyles.{stylePart}.State{statePart}.TextColor";
+            string stateToken  = m.Groups[2].Value; // Active / Inactive
+            string statePart   = stateToken == "Active" ? "Active" : "Inactive";
+
+            if (lengthToken == "Short")
+            {
+                return $"HeaderStyles.HeaderForm.State{statePart}.Content.ShortText.Color1";
+            }
+            if (lengthToken == "Long")
+            {
+                return $"HeaderStyles.HeaderForm.State{statePart}.Content.LongText.Color1";
+            }
+            // Fallback for unspecified length – default to short text
+            return $"HeaderStyles.HeaderForm.State{statePart}.Content.ShortText.Color1";
         }
         if (_formButtonBorderCheckRegex.IsMatch(enumName))
             return "ButtonStyles.ButtonForm.StateCheckedNormal.Border.Color1";

@@ -29,7 +29,7 @@ public static partial class PaletteMapper
     private static readonly Regex _ribbonTabRegex   = new(@"^RibbonTab(?:(Selected|Tracking|Highlight)([1-5])|SeparatorColor|Text(Normal|Checked))$", RegexOptions.Compiled);
     private static readonly Regex _ribbonGroupRegex = new(@"^RibbonGroup(?:(Area|Border)([1-5])|Title([12]))$", RegexOptions.Compiled);
     private static readonly Regex _headerRegex      = new(@"^Header(Primary|Secondary)(Back([12])|Text)$", RegexOptions.Compiled);
-    private static readonly Regex _ribbonGroupExtraRegex = new(@"^RibbonGroup(?:(Collapsed)(Back|Border)([12])|(Dialog)([A-Za-z]+)|(Separator)([1-3]?))$", RegexOptions.Compiled);
+    private static readonly Regex _ribbonGroupExtraRegex = new(@"^RibbonGroup(?:(Collapsed)(Back|Border)([1-4])|(Dialog)([A-Za-z]+)|(Separator)([1-3]?))$", RegexOptions.Compiled);
     // Form chrome families (no Form.StateNormal in Krypton)
     private static readonly Regex _formBorderRegex        = new(@"^FormBorder(Active|Inactive)(Dark|Light)?$", RegexOptions.Compiled);
     private static readonly Regex _formBorderHeaderRegex  = new(@"^FormBorderHeader(Active|Inactive)([12])?$", RegexOptions.Compiled);
@@ -72,9 +72,28 @@ public static partial class PaletteMapper
 
     #endregion Section Regexes
 
-    // Manual overrides for enum name -> property path when reflection search cannot find a match
-    // Currently empty; kept for rare edge cases that cannot be auto-resolved
-    private static readonly Dictionary<string, string> _enumToPathOverrides = new(StringComparer.Ordinal);
+    // Manual overrides for enum name -> property path when reflection search cannot find a (valid) match
+    private static readonly Dictionary<string, string> _enumToPathOverrides = new(StringComparer.Ordinal)
+    {
+        // Tool/StatusStrip & related menu colors
+        ["StatusStripText"]   = "ToolMenuStatus.StatusStrip.ToolStripText",
+        ["ButtonBorder"]      = "ToolMenuStatus.Button.ButtonBorder",
+        ["SeparatorLight"]    = "ToolMenuStatus.Separator.SeparatorLight",
+        ["SeparatorDark"]     = "ToolMenuStatus.Separator.SeparatorDark",
+        ["GripLight"]         = "ToolMenuStatus.Grip.GripLight",
+        ["GripDark"]          = "ToolMenuStatus.Grip.GripDark",
+        ["ToolStripBack"]     = "ToolMenuStatus.ToolStrip.ToolStripGradientMiddle",
+        ["StatusStripLight"]  = "ToolMenuStatus.StatusStrip.ToolStripGradientBegin",
+        ["StatusStripDark"]   = "ToolMenuStatus.StatusStrip.ToolStripGradientEnd",
+        ["ImageMargin"]       = "ToolMenuStatus.MenuStrip.ToolStripDropDownBackground",
+        ["ToolStripBegin"]    = "ToolMenuStatus.ToolStrip.ToolStripGradientBegin",
+        ["ToolStripMiddle"]   = "ToolMenuStatus.ToolStrip.ToolStripGradientMiddle",
+        ["ToolStripEnd"]      = "ToolMenuStatus.ToolStrip.ToolStripGradientEnd",
+        ["OverflowBegin"]     = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientBegin",
+        ["OverflowMiddle"]    = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientMiddle",
+        ["OverflowEnd"]       = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientEnd",
+        ["ToolStripBorder"]   = "ToolMenuStatus.ToolStrip.ToolStripBorder"
+    };
 
     /// <summary>
     /// Attempts to fetch a manually-defined property path for the supplied
@@ -381,7 +400,26 @@ public static partial class PaletteMapper
     /// </exception>
     public static SchemeBaseColors MapPathToSchemeEnum(PaletteBase palette, string propertyPath)
     {
-        Color target = GetColorByPath(palette, propertyPath);
+        if (palette == null) throw new ArgumentNullException(nameof(palette));
+        if (string.IsNullOrWhiteSpace(propertyPath)) throw new ArgumentNullException(nameof(propertyPath));
+
+        // 1) Fast path – try to invert the grammar mapping directly
+        // Adjust legacy alias where Standalone appears without the "Button" prefix
+        string adjustedPath = propertyPath.StartsWith("ButtonStyles.Standalone.", StringComparison.Ordinal)
+            ? "ButtonStyles.ButtonStandalone." + propertyPath.Substring("ButtonStyles.Standalone.".Length)
+            : propertyPath;
+
+        foreach (SchemeBaseColors val in Enum.GetValues(typeof(SchemeBaseColors)))
+        {
+            string? grammarPath = TryGrammarMap(val.ToString());
+            if (!string.IsNullOrEmpty(grammarPath) && string.Equals(grammarPath, adjustedPath, StringComparison.Ordinal))
+            {
+                return val; // grammar provided an exact structural match
+            }
+        }
+
+        // 2) Fallback – compare actual colours (existing behaviour)
+        Color target = GetColorByPath(palette, adjustedPath);
 
         foreach (SchemeBaseColors val in Enum.GetValues(typeof(SchemeBaseColors)))
         {
@@ -421,157 +459,45 @@ public static partial class PaletteMapper
         }
     }
 
-    // Insert dictionary grouping for regex categories
-    private static readonly Dictionary<string, List<Regex>> _grammarRegexGroups = new(StringComparer.Ordinal)
-    {
-        ["Button"] = new List<Regex>
-        {
-            _buttonNormalRegex,
-            _buttonStateRegex,
-            _buttonClusterRegex,
-            _buttonNavigatorRegex
-        },
-        ["TextButton"] = new List<Regex>
-        {
-            _textButtonRegex
-        },
-        ["FormButton"] = new List<Regex>
-        {
-            _formButtonRegex,
-            _formButtonBorderCheckRegex
-        },
-        ["AppButton"] = new List<Regex>
-        {
-            _appButtonRegex,
-            _appMenuDocsBackRegex
-        },
-        ["Ribbon"] = new List<Regex>
-        {
-            _ribbonTabRegex,
-            _ribbonGroupRegex,
-            _ribbonGroupExtraRegex,
-            _ribbonGroupsAreaRegex,
-            _ribbonGroupsAreaAnyRegex,
-            _ribbonGroupFrameRegex,
-            _ribbonGroupSeparatorRegex,
-            _ribbonGroupTitleTextRegex,
-            _ribbonQATMiniRegex,
-            _ribbonQATFullRegex,
-            _ribbonQATButtonRegex,
-            _ribbonQATOverflowRegex,
-            _ribbonDropArrowRegex,
-            _ribbonGalleryRegex,
-            _ribbonGalleryBackRegex,
-            _ribbonMinimizeBarRegex
-        },
-        ["Grid"] = new List<Regex>
-        {
-            _gridListRegex,
-            _gridSheetColRegex,
-            _gridSheetRowRegex,
-            _gridDataCellRegex
-        },
-        ["InputControl"] = new List<Regex>
-        {
-            _inputTextRegex,
-            _inputBorderRegex,
-            _inputBackRegex,
-            _inputDropDownRegex
-        },
-        ["Panel"] = new List<Regex>
-        {
-            _panelAlternativeRegex,
-            _controlBorderRegex
-        },
-        ["Form"] = new List<Regex>
-        {
-            _formBorderRegex,
-            _formBorderHeaderRegex,
-            _formHeaderRegex,
-            _formHeaderShortLongRegex
-        },
-        ["AlternatePressed"] = new List<Regex>
-        {
-            _altPressedRegex
-        },
-        ["Separator"] = new List<Regex>
-        {
-            _separatorHighRegex
-        },
-        ["NavigatorMini"] = new List<Regex>
-        {
-            _navigatorMiniRegex
-        },
-        ["ToolTip"] = new List<Regex>
-        {
-            _toolTipBottomRegex
-        },
-        ["TrackBar"] = new List<Regex>
-        {
-            _trackBarRegex
-        },
-        ["ContextMenu"] = new List<Regex>
-        {
-            _contextMenuHeadingRegex
-        },
-        ["Header"] = new List<Regex>
-        {
-            _headerRegex
-        },
-        ["HeaderDockInactive"] = new List<Regex>
-        {
-            _headerDockInactiveRegex
-        }
-    };
-
     /// <summary>
     /// Attempts to translate <paramref name="enumName"/> into a palette property
-    /// path by applying regular-expression grammar rules grouped in
-    /// <see cref="_grammarRegexGroups"/>.
+    /// path by applying a set of regular-expression grammar rules implemented in
+    /// the dedicated TryMap* helper methods.
     /// </summary>
     /// <param name="enumName">Name of a <see cref="SchemeBaseColors"/> value.</param>
     /// <returns>
     /// The calculated path if a grammar rule matches; otherwise
     /// <see langword="null"/>.
     /// </returns>
+    private static readonly Dictionary<string, Func<string,string?>> _prefixMap = new(StringComparer.Ordinal)
+    {
+        ["TextButton"]       = TryMapTextButton,
+        ["FormButton"]       = TryMapFormButton,
+        ["AppButton"]        = TryMapAppButton,
+        ["Button"]           = TryMapButton,
+        ["Ribbon"]           = TryMapRibbon,
+        ["Grid"]             = TryMapGrid,
+        ["InputControl"]     = TryMapInputControl,
+        ["Panel"]            = TryMapPanel,
+        ["Form"]             = TryMapForm,
+        ["AlternatePressed"] = TryMapAlternatePressed,
+        ["Separator"]        = TryMapSeparator,
+        ["NavigatorMini"]    = TryMapNavigatorMini,
+        ["ToolTip"]          = TryMapToolTip,
+        ["TrackBar"]         = TryMapTrackBar,
+        ["ContextMenu"]      = TryMapContextMenu,
+        ["HeaderDockInactive"] = TryMapHeaderDockInactive,
+        ["Header"]           = TryMapHeader,
+        ["TextLabel"]        = TryMapLabel
+    };
+
     private static string? TryGrammarMap(string enumName)
     {
-        // Prefix-based routing for grammar mapping
-        if (enumName.StartsWith("TextButton", StringComparison.Ordinal))
-            return TryMapTextButton(enumName);
-        if (enumName.StartsWith("FormButton", StringComparison.Ordinal))
-            return TryMapFormButton(enumName);
-        if (enumName.StartsWith("AppButton", StringComparison.Ordinal))
-            return TryMapAppButton(enumName);
-        if (enumName.StartsWith("Button", StringComparison.Ordinal))
-            return TryMapButton(enumName);
-        if (enumName.StartsWith("Ribbon", StringComparison.Ordinal))
-            return TryMapRibbon(enumName);
-        if (enumName.StartsWith("Grid", StringComparison.Ordinal))
-            return TryMapGrid(enumName);
-        if (enumName.StartsWith("InputControl", StringComparison.Ordinal))
-            return TryMapInputControl(enumName);
-        if (enumName.StartsWith("Panel", StringComparison.Ordinal))
-            return TryMapPanel(enumName);
-        if (enumName.StartsWith("Form", StringComparison.Ordinal))
-            return TryMapForm(enumName);
-        if (enumName.StartsWith("AlternatePressed", StringComparison.Ordinal))
-            return TryMapAlternatePressed(enumName);
-        if (enumName.StartsWith("Separator", StringComparison.Ordinal))
-            return TryMapSeparator(enumName);
-        if (enumName.StartsWith("NavigatorMini", StringComparison.Ordinal))
-            return TryMapNavigatorMini(enumName);
-        if (enumName.StartsWith("ToolTip", StringComparison.Ordinal))
-            return TryMapToolTip(enumName);
-        if (enumName.StartsWith("TrackBar", StringComparison.Ordinal))
-            return TryMapTrackBar(enumName);
-        if (enumName.StartsWith("ContextMenu", StringComparison.Ordinal))
-            return TryMapContextMenu(enumName);
-        if (enumName.StartsWith("HeaderDockInactive", StringComparison.Ordinal))
-            return TryMapHeaderDockInactive(enumName);
-        if (enumName.StartsWith("Header", StringComparison.Ordinal))
-            return TryMapHeader(enumName);
-
+        foreach (var kvp in _prefixMap)
+        {
+            if (enumName.StartsWith(kvp.Key, StringComparison.Ordinal))
+                return kvp.Value(enumName);
+        }
         return null;
     }
 
@@ -604,8 +530,29 @@ public static partial class PaletteMapper
             return grammarPath;
         }
 
-        // 3) reflection search fallback
-        return FindPathsForEnum(palette, palette, enumVal, doRecursive: true).FirstOrDefault();
+        // 3) reflection search fallback – may return multiple candidates
+        var candidates = FindPathsForEnum(palette, palette, enumVal, doRecursive: true);
+        if (candidates.Count == 0)
+        {
+            return null;
+        }
+
+        // Prefer paths that do not traverse Redirectors or ButtonSpecs, which are
+        // internal indirections we cannot reliably write back to.
+        foreach (var p in candidates)
+        {
+            if (!p.Contains(".Redirector.", StringComparison.Ordinal) &&
+                !p.Contains(".Target.", StringComparison.Ordinal) &&
+                !p.Contains(".InternalKCT.", StringComparison.Ordinal) &&
+                !p.StartsWith("ToolMenuStatus", StringComparison.Ordinal) &&
+                !p.Contains(".ColorMap", StringComparison.Ordinal))
+            {
+                return p;
+            }
+        }
+
+        // Fallback to the first result if all contain redirectors
+        return candidates[0];
     }
 
     /// <summary>

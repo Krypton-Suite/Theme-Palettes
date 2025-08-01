@@ -30,6 +30,9 @@ namespace PaletteDesigner
         private readonly Stack<(SchemeBaseColors EnumValue, Color OldColor)> _undoStack = new();
         // Tracks last known PropertyGrid path for each SchemeBaseColors entry
         private readonly Dictionary<SchemeBaseColors, string> _enumToPath = new();
+        // Maps each SchemeBaseColors value to its DataGridView row index for fast updates
+        // This makes access future-proof in case there are additions to `SchemeBaseColors`!
+        private readonly Dictionary<SchemeBaseColors, int> _enumToGridRow = new();
 
         // Font size limits for grids/properties
         private const float MinFontSize = 6f;
@@ -607,6 +610,7 @@ namespace PaletteDesigner
 
                 colorTableGrid.SuspendLayout();
                 colorTableGrid.Rows.Clear();
+                _enumToGridRow.Clear();
 
                 var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
                 foreach (var (eVal, idx) in enumValues.Select((v, i) => (v, i)))
@@ -615,6 +619,7 @@ namespace PaletteDesigner
 
                     var colorStr = FormatColorString(color);
                     int row = colorTableGrid.Rows.Add(idx, eVal.ToString(), colorStr, "");
+                    _enumToGridRow[eVal] = row;
                     colorTableGrid.Rows[row].Visible = RowPassesFilters(colorTableGrid.Rows[row]);
 
                     // Set color swatch in the new column
@@ -842,6 +847,9 @@ namespace PaletteDesigner
                 // Initialize filter UI state (without filtering rows during startup)
                 UpdateFilterUI(false);
             }
+
+            // Pre-cache enum-to-path mappings for faster color edits
+            PrefillEnumToPath();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1419,6 +1427,18 @@ namespace PaletteDesigner
             // Map edited property back to SchemeBaseColors enum and apply it
             if (e.ChangedItem == null) return;
             string path = GetGridItemFullPath(e.ChangedItem);
+            // Strip designer root prefixes that are not part of the palette object graph used by the mapper
+            const string rootPrefix = "KryptonCustomPaletteBase.";
+            if (path.StartsWith(rootPrefix, StringComparison.Ordinal))
+            {
+                path = path.Substring(rootPrefix.Length);
+            }
+            int visualsIdx = path.IndexOf("Visuals.", StringComparison.Ordinal);
+            if (visualsIdx >= 0)
+            {
+                path = path.Substring(visualsIdx + "Visuals.".Length);
+            }
+
             var basePal = _palette?.BasePalette;
             if (basePal != null)
             {
@@ -1439,6 +1459,7 @@ namespace PaletteDesigner
                             return;
                         }
                     }
+
                     // Determine the new color from the property grid change
                     object? valueObj = e.ChangedItem?.Value;
                     Color newColor;
@@ -1454,10 +1475,14 @@ namespace PaletteDesigner
                     {
                         newColor = PaletteDesigner.Utilities.PaletteMapper.GetColorByPath(basePal, path);
                     }
+
                     _undoStack.Push((enumVal, GetSchemeColorSafe(enumVal)));
                     _palette?.SetSchemeColor(enumVal, newColor);
                 }
-                catch { }
+                catch (Exception exc)
+                {
+                    Debug.WriteLine(exc.Message);
+                }
             }
             // Push latest base-palette colors into override properties
             CopyColorsFromBasePalette();
@@ -1534,6 +1559,36 @@ namespace PaletteDesigner
                 return;
             }
             var row = colorTableGrid.Rows[rowIndex];
+            ApplyColorToRow(row, color);
+            colorTableGrid.InvalidateRow(rowIndex);
+            colorTableGrid.Refresh();
+        }
+
+        // Overload that resolves the row index via the enum value look-up table
+        private void UpdateGridRow(SchemeBaseColors enumVal, Color color)
+        {
+            if (_enumToGridRow.TryGetValue(enumVal, out int rowIndex))
+            {
+                UpdateGridRow(rowIndex, color);
+            }
+            else
+            {
+                // Fallback – linear search (should be rare)
+                foreach (DataGridViewRow row in colorTableGrid.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    if (row.Cells.Count > 1 && row.Cells[1].Value?.ToString() == enumVal.ToString())
+                    {
+                        ApplyColorToRow(row, color);
+                        colorTableGrid.InvalidateRow(row.Index);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ApplyColorToRow(DataGridViewRow row, Color color)
+        {
             var colorStr = FormatColorString(color);
             if (string.IsNullOrEmpty(colorStr))
             {
@@ -1544,8 +1599,6 @@ namespace PaletteDesigner
             row.Cells[3].Style.ForeColor = color;
             row.Cells[3].Style.SelectionBackColor = color;
             row.Cells[3].Style.SelectionForeColor = color;
-            colorTableGrid.InvalidateRow(rowIndex);
-            colorTableGrid.Refresh();
         }
 
         private string FormatColorString(Color c)
@@ -2529,6 +2582,30 @@ namespace PaletteDesigner
             }
         }
 
+        /// <summary>
+        /// Cache all enum-to-path mappings upfront for faster look-ups.
+        /// </summary>
+        private void PrefillEnumToPath()
+        {
+            if (_palette == null)
+            {
+                return;
+            }
+
+            foreach (SchemeBaseColors val in Enum.GetValues(typeof(SchemeBaseColors)))
+            {
+                if (_enumToPath.ContainsKey(val))
+                {
+                    continue;
+                }
+
+                string? path = PaletteMapper.ResolvePath(_palette, val);
+                if (!string.IsNullOrWhiteSpace(path))
+                {
+                    _enumToPath[val] = path;
+                }
+            }
+        }
         #endregion
 
         // Helper to reconstruct full property path from a GridItem
@@ -2556,7 +2633,7 @@ namespace PaletteDesigner
         private void OnPaletteSchemeColorChanged(object? sender, SchemeColorChangedEventArgs e)
         {
             // Update the grid row corresponding to the changed color
-            UpdateGridRow((int)e.Index, e.NewColor);
+            UpdateGridRow(e.Index, e.NewColor);
 
             // Keep override property in sync so the PropertyGrid reflects the change
             if (_palette != null)
