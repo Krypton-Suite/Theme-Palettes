@@ -162,7 +162,6 @@ namespace PaletteDesigner
                     kryptonNavigatorDesignLabels,
                     kryptonNavigatorDesignNavigator,
                     kryptonNavigatorDesignSeparators,
-                    kryptonNavigatorDesignGrids,
                     kryptonNavigatorDesignTabs,
                     kryptonGroupBox1,
                     kryptonGroupBox2,
@@ -553,12 +552,12 @@ namespace PaletteDesigner
             _applyPalettesToBases.ForEach(vcb => vcb.LocalCustomPalette = _palette);
             _applyPalettesToPanels.ForEach(pnl => pnl.Palette = _palette);
 
-            dataGridViewDisabled.Palette = _palette;
-            dataGridViewNormal.Palette = _palette;
             kryptonListView1.LocalCustomPalette = _palette;
 
+            // Apply to refactored pages
             inputControls1.ApplyPalette(_palette);
             controlsPage1.ApplyPalette(_palette);
+            gridPage1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
             menuPage1.ApplyPalette(_palette);
             toolTipsPage1.ApplyPalette(_palette);
@@ -675,12 +674,6 @@ namespace PaletteDesigner
                 kryptonSplitContainerProperties.SplitterDistance = _settingsManager.GetPropertiesSplitterDistance();
             }
             catch { }
-
-            // Populate the sample data set
-            dataTable1.Rows.Add(@"One", @"Two", @"Three");
-            dataTable1.Rows.Add(@"Uno", @"Dos", @"Tres");
-            dataTable1.Rows.Add(@"Un", @"Deux", @"Trios");
-            dataTable1.Rows.Add(@"Eins", @"Zwei", @"Drei");
 
             // Add the chrome window to the Chrome + Strips page
             _chromeTMS = new FormChromeTMS
@@ -1169,30 +1162,8 @@ namespace PaletteDesigner
             separator1Pressed.SeparatorStyle = separatorStyle;
             separator1Live.SeparatorStyle = separatorStyle;
         }
-
-        private void KryptonNavigatorDesignGrids_SelectedPageChanged(object sender, EventArgs e)
-        {
-            if (kryptonNavigatorDesignGrids.SelectedPage == null)
-            {
-                return;
-            }
-            // Update the design page text with the selected style information
-            pageDesignGrid.TextTitle = kryptonNavigatorDesignGrids.SelectedPage.Text;
-            pageDesignGrid.TextDescription = kryptonNavigatorDesignGrids.SelectedPage.TextDescription;
-
-            // Work out the navigator mode required
-            DataGridViewStyle gridStyle = kryptonNavigatorDesignGrids.SelectedIndex switch
-            {
-                0 => DataGridViewStyle.List,
-                1 => DataGridViewStyle.Sheet,
-                2 => DataGridViewStyle.Custom1,
-                _ => DataGridViewStyle.List
-            };
-
-            // Update all the displayed controls with the new styles
-            dataGridViewDisabled.GridStyles.Style = gridStyle;
-            dataGridViewNormal.GridStyles.Style = gridStyle;
-        }
+        // Grids page is now self-contained in Pages/GridPage
+        // Removed legacy KryptonNavigatorDesignGrids_SelectedPageChanged handler; logic lives in Pages/GridPage
 
         private void LaunchPaletteUpgradeToolToolStripMenuItem_Click(object sender, EventArgs e)
         {

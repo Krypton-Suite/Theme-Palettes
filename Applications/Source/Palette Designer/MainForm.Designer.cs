@@ -203,26 +203,7 @@ namespace PaletteDesigner
             this.kryptonCheckBox1 = new Krypton.Toolkit.KryptonCheckBox();
             this.pageDesignChromeTMS = new Krypton.Navigator.KryptonPage();
             this.pageDesignGrid = new Krypton.Navigator.KryptonPage();
-            this.dataGridViewDisabled = new Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonDataGridViewTextBoxColumn4 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn5 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn6 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.dataSetGrid = new System.Data.DataSet();
-            this.dataTable1 = new System.Data.DataTable();
-            this.dataColumn1 = new System.Data.DataColumn();
-            this.dataColumn2 = new System.Data.DataColumn();
-            this.dataColumn3 = new System.Data.DataColumn();
-            this.labelGridDisabled = new Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
-            this.dataGridViewNormal = new Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonDataGridViewTextBoxColumn1 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn2 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonDataGridViewTextBoxColumn3 = new Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.kryptonNavigatorDesignGrids = new Krypton.Navigator.KryptonNavigator();
-            this.kryptonGridList = new Krypton.Navigator.KryptonPage();
-            this.kryptonGridSheet = new Krypton.Navigator.KryptonPage();
-            this.kryptonGridCustom1 = new Krypton.Navigator.KryptonPage();
+            this.gridPage1 = new PaletteDesigner.Pages.GridPage();
             this.pageDesignHeaderGroup = new Krypton.Navigator.KryptonPage();
             this.labelHeaderGroupNormal = new Krypton.Toolkit.KryptonLabel();
             this.headerGroup1Disabled = new Krypton.Toolkit.KryptonHeaderGroup();
@@ -390,12 +371,6 @@ namespace PaletteDesigner
             this.toggleFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoFillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonCheckSetQuickFilterButtons = new Krypton.Toolkit.KryptonCheckSet(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.kryptonGroup9 = new Krypton.Toolkit.KryptonGroup();
             this.kryptonGroup10 = new Krypton.Toolkit.KryptonGroup();
@@ -482,15 +457,6 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignChromeTMS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignGrid)).BeginInit();
             this.pageDesignGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDisabled)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNormal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignGrids)).BeginInit();
-            this.kryptonNavigatorDesignGrids.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridSheet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridCustom1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignHeaderGroup)).BeginInit();
             this.pageDesignHeaderGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.headerGroup1Disabled)).BeginInit();
@@ -2276,12 +2242,7 @@ namespace PaletteDesigner
             // pageDesignGrid
             //
             this.pageDesignGrid.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageDesignGrid.Controls.Add(this.dataGridViewDisabled);
-            this.pageDesignGrid.Controls.Add(this.labelGridDisabled);
-            this.pageDesignGrid.Controls.Add(this.kryptonLabel2);
-            this.pageDesignGrid.Controls.Add(this.kryptonLabel1);
-            this.pageDesignGrid.Controls.Add(this.dataGridViewNormal);
-            this.pageDesignGrid.Controls.Add(this.kryptonNavigatorDesignGrids);
+            this.pageDesignGrid.Controls.Add(this.gridPage1);
             this.pageDesignGrid.Flags = 65535;
             this.pageDesignGrid.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignGrid.ImageSmall")));
             this.pageDesignGrid.LastVisibleSet = true;
@@ -2294,254 +2255,13 @@ namespace PaletteDesigner
             this.pageDesignGrid.ToolTipTitle = "Page ToolTip";
             this.pageDesignGrid.UniqueName = "7D705293CDE747FF7D705293CDE747FF";
             //
-            // dataGridViewDisabled
+            // gridPage1
             //
-            this.dataGridViewDisabled.AutoGenerateColumns = false;
-            this.dataGridViewDisabled.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewDisabled.ColumnHeadersHeight = 36;
-            this.dataGridViewDisabled.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kryptonDataGridViewTextBoxColumn4,
-            this.kryptonDataGridViewTextBoxColumn5,
-            this.kryptonDataGridViewTextBoxColumn6});
-            this.dataGridViewDisabled.DataMember = "Table1";
-            this.dataGridViewDisabled.DataSource = this.dataSetGrid;
-            this.dataGridViewDisabled.Enabled = false;
-            this.dataGridViewDisabled.Location = new System.Drawing.Point(100, 250);
-            this.dataGridViewDisabled.Name = "dataGridViewDisabled";
-            this.dataGridViewDisabled.RowHeadersWidth = 51;
-            this.dataGridViewDisabled.Size = new System.Drawing.Size(308, 136);
-            this.dataGridViewDisabled.TabIndex = 21;
-            //
-            // kryptonDataGridViewTextBoxColumn4
-            //
-            this.kryptonDataGridViewTextBoxColumn4.DataPropertyName = "Column1";
-            this.kryptonDataGridViewTextBoxColumn4.HeaderText = "Column1";
-            this.kryptonDataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn4.Name = "kryptonDataGridViewTextBoxColumn4";
-            this.kryptonDataGridViewTextBoxColumn4.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn5
-            //
-            this.kryptonDataGridViewTextBoxColumn5.DataPropertyName = "Column2";
-            this.kryptonDataGridViewTextBoxColumn5.HeaderText = "Column2";
-            this.kryptonDataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn5.Name = "kryptonDataGridViewTextBoxColumn5";
-            this.kryptonDataGridViewTextBoxColumn5.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn6
-            //
-            this.kryptonDataGridViewTextBoxColumn6.DataPropertyName = "Column3";
-            this.kryptonDataGridViewTextBoxColumn6.HeaderText = "Column3";
-            this.kryptonDataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn6.Name = "kryptonDataGridViewTextBoxColumn6";
-            this.kryptonDataGridViewTextBoxColumn6.Width = 75;
-            //
-            // dataSetGrid
-            //
-            this.dataSetGrid.DataSetName = "NewDataSet";
-            this.dataSetGrid.Tables.AddRange(new System.Data.DataTable[] {
-            this.dataTable1});
-            //
-            // dataTable1
-            //
-            this.dataTable1.Columns.AddRange(new System.Data.DataColumn[] {
-            this.dataColumn1,
-            this.dataColumn2,
-            this.dataColumn3});
-            this.dataTable1.Namespace = "";
-            this.dataTable1.TableName = "Table1";
-            //
-            // dataColumn1
-            //
-            this.dataColumn1.Caption = "Column1";
-            this.dataColumn1.ColumnName = "Column1";
-            this.dataColumn1.Namespace = "";
-            //
-            // dataColumn2
-            //
-            this.dataColumn2.Caption = "Column2";
-            this.dataColumn2.ColumnName = "Column2";
-            this.dataColumn2.Namespace = "";
-            //
-            // dataColumn3
-            //
-            this.dataColumn3.Caption = "Column3";
-            this.dataColumn3.ColumnName = "Column3";
-            this.dataColumn3.Namespace = "";
-            //
-            // labelGridDisabled
-            //
-            this.labelGridDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelGridDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelGridDisabled.Location = new System.Drawing.Point(100, 219);
-            this.labelGridDisabled.Name = "labelGridDisabled";
-            this.labelGridDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelGridDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelGridDisabled.TabIndex = 22;
-            this.labelGridDisabled.Values.Text = "Disabled";
-            //
-            // kryptonLabel2
-            //
-            this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel2.Location = new System.Drawing.Point(999, 401);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(78, 29);
-            this.kryptonLabel2.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel2.TabIndex = 23;
-            this.kryptonLabel2.Values.Text = "Normal";
-            //
-            // kryptonLabel1
-            //
-            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonLabel1.Location = new System.Drawing.Point(100, 24);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(78, 29);
-            this.kryptonLabel1.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel1.TabIndex = 24;
-            this.kryptonLabel1.Values.Text = "Normal";
-            //
-            // dataGridViewNormal
-            //
-            this.dataGridViewNormal.AutoGenerateColumns = false;
-            this.dataGridViewNormal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewNormal.ColumnHeadersHeight = 36;
-            this.dataGridViewNormal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kryptonDataGridViewTextBoxColumn1,
-            this.kryptonDataGridViewTextBoxColumn2,
-            this.kryptonDataGridViewTextBoxColumn3});
-            this.dataGridViewNormal.DataMember = "Table1";
-            this.dataGridViewNormal.DataSource = this.dataSetGrid;
-            this.dataGridViewNormal.Location = new System.Drawing.Point(100, 55);
-            this.dataGridViewNormal.Name = "dataGridViewNormal";
-            this.dataGridViewNormal.RowHeadersWidth = 51;
-            this.dataGridViewNormal.Size = new System.Drawing.Size(308, 136);
-            this.dataGridViewNormal.TabIndex = 2;
-            //
-            // kryptonDataGridViewTextBoxColumn1
-            //
-            this.kryptonDataGridViewTextBoxColumn1.DataPropertyName = "Column1";
-            this.kryptonDataGridViewTextBoxColumn1.HeaderText = "Column1";
-            this.kryptonDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
-            this.kryptonDataGridViewTextBoxColumn1.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn2
-            //
-            this.kryptonDataGridViewTextBoxColumn2.DataPropertyName = "Column2";
-            this.kryptonDataGridViewTextBoxColumn2.HeaderText = "Column2";
-            this.kryptonDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
-            this.kryptonDataGridViewTextBoxColumn2.Width = 75;
-            //
-            // kryptonDataGridViewTextBoxColumn3
-            //
-            this.kryptonDataGridViewTextBoxColumn3.DataPropertyName = "Column3";
-            this.kryptonDataGridViewTextBoxColumn3.HeaderText = "Column3";
-            this.kryptonDataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.kryptonDataGridViewTextBoxColumn3.Name = "kryptonDataGridViewTextBoxColumn3";
-            this.kryptonDataGridViewTextBoxColumn3.Width = 75;
-            //
-            // kryptonNavigatorDesignGrids
-            //
-            this.kryptonNavigatorDesignGrids.AutoSize = true;
-            this.kryptonNavigatorDesignGrids.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
-            this.kryptonNavigatorDesignGrids.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignGrids.Bar.BarMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignGrids.Bar.BarMultiline = Krypton.Navigator.BarMultiline.Singleline;
-            this.kryptonNavigatorDesignGrids.Bar.BarOrientation = Krypton.Toolkit.VisualOrientation.Left;
-            this.kryptonNavigatorDesignGrids.Bar.CheckButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.kryptonNavigatorDesignGrids.Bar.ItemAlignment = Krypton.Toolkit.RelativePositionAlign.Near;
-            this.kryptonNavigatorDesignGrids.Bar.ItemMaximumSize = new System.Drawing.Size(200, 200);
-            this.kryptonNavigatorDesignGrids.Bar.ItemMinimumSize = new System.Drawing.Size(20, 20);
-            this.kryptonNavigatorDesignGrids.Bar.ItemOrientation = Krypton.Toolkit.ButtonOrientation.FixedTop;
-            this.kryptonNavigatorDesignGrids.Bar.ItemSizing = Krypton.Navigator.BarItemSizing.SameWidthAndHeight;
-            this.kryptonNavigatorDesignGrids.Bar.TabBorderStyle = Krypton.Toolkit.TabBorderStyle.RoundedOutsizeMedium;
-            this.kryptonNavigatorDesignGrids.Bar.TabStyle = Krypton.Toolkit.TabStyle.HighProfile;
-            this.kryptonNavigatorDesignGrids.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.None;
-            this.kryptonNavigatorDesignGrids.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.kryptonNavigatorDesignGrids.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
-            this.kryptonNavigatorDesignGrids.Button.ContextButtonAction = Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigatorDesignGrids.Button.ContextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignGrids.Button.ContextMenuMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignGrids.Button.ContextMenuMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignGrids.Button.NextButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignGrids.Button.NextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignGrids.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignGrids.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignGrids.ControlKryptonFormFeatures = false;
-            this.kryptonNavigatorDesignGrids.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonNavigatorDesignGrids.Location = new System.Drawing.Point(0, 0);
-            this.kryptonNavigatorDesignGrids.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
-            this.kryptonNavigatorDesignGrids.Owner = null;
-            this.kryptonNavigatorDesignGrids.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.kryptonNavigatorDesignGrids.Pages.AddRange(new Krypton.Navigator.KryptonPage[] {
-            this.kryptonGridList,
-            this.kryptonGridSheet,
-            this.kryptonGridCustom1});
-            this.kryptonNavigatorDesignGrids.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
-            this.kryptonNavigatorDesignGrids.SelectedIndex = 0;
-            this.kryptonNavigatorDesignGrids.Size = new System.Drawing.Size(71, 524);
-            this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
-            this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignGrids.StateCommon.Bar.BarPaddingTabs = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignGrids.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignGrids.TabIndex = 1;
-            this.kryptonNavigatorDesignGrids.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignGrids.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignGrids_SelectedPageChanged);
-            //
-            // kryptonGridList
-            //
-            this.kryptonGridList.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonGridList.Flags = 65535;
-            this.kryptonGridList.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridList.ImageLarge")));
-            this.kryptonGridList.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridList.ImageMedium")));
-            this.kryptonGridList.LastVisibleSet = true;
-            this.kryptonGridList.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonGridList.Name = "kryptonGridList";
-            this.kryptonGridList.Size = new System.Drawing.Size(50, 500);
-            this.kryptonGridList.Text = "List";
-            this.kryptonGridList.TextDescription = "List is the default grid style.";
-            this.kryptonGridList.ToolTipTitle = "Page ToolTip";
-            this.kryptonGridList.UniqueName = "7E5F74E3999D471E7E5F74E3999D471E";
-            //
-            // kryptonGridSheet
-            //
-            this.kryptonGridSheet.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonGridSheet.Flags = 65535;
-            this.kryptonGridSheet.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridSheet.ImageLarge")));
-            this.kryptonGridSheet.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridSheet.ImageMedium")));
-            this.kryptonGridSheet.LastVisibleSet = true;
-            this.kryptonGridSheet.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonGridSheet.Name = "kryptonGridSheet";
-            this.kryptonGridSheet.Size = new System.Drawing.Size(50, 500);
-            this.kryptonGridSheet.Text = "Sheet";
-            this.kryptonGridSheet.TextDescription = "Sheet is used when a worksheet style is required.";
-            this.kryptonGridSheet.ToolTipTitle = "Page ToolTip";
-            this.kryptonGridSheet.UniqueName = "39D1B70212CD455D39D1B70212CD455D";
-            //
-            // kryptonGridCustom1
-            //
-            this.kryptonGridCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonGridCustom1.Flags = 65535;
-            this.kryptonGridCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridCustom1.ImageLarge")));
-            this.kryptonGridCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridCustom1.ImageMedium")));
-            this.kryptonGridCustom1.LastVisibleSet = true;
-            this.kryptonGridCustom1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonGridCustom1.Name = "kryptonGridCustom1";
-            this.kryptonGridCustom1.Size = new System.Drawing.Size(50, 500);
-            this.kryptonGridCustom1.Text = "Custom 1";
-            this.kryptonGridCustom1.TextDescription = "Custom 1 style inherits from List and is intended for your own custom use.";
-            this.kryptonGridCustom1.ToolTipTitle = "Page ToolTip";
-            this.kryptonGridCustom1.UniqueName = "4BC73FB0DC704F514BC73FB0DC704F51";
+            this.gridPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridPage1.Location = new System.Drawing.Point(0, 0);
+            this.gridPage1.Name = "gridPage1";
+            this.gridPage1.Size = new System.Drawing.Size(462, 524);
+            this.gridPage1.TabIndex = 0;
             //
             // pageDesignHeaderGroup
             //
@@ -4892,57 +4612,6 @@ namespace PaletteDesigner
             this.kryptonCheckSetQuickFilterButtons.CheckedButton = this.filterByNameButton;
             this.kryptonCheckSetQuickFilterButtons.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetQuickFilterButtons_CheckedButtonChanged);
             //
-            // dataGridViewTextBoxColumn1
-            //
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Column1";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Column1";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            //
-            // dataGridViewTextBoxColumn2
-            //
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Column2";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Column2";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 80;
-            //
-            // dataGridViewTextBoxColumn3
-            //
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Column3";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 80;
-            //
-            // dataGridViewTextBoxColumn4
-            //
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Column1";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Column1";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 80;
-            //
-            // dataGridViewTextBoxColumn5
-            //
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Column2";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Column2";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 80;
-            //
-            // dataGridViewTextBoxColumn6
-            //
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Column3";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Column3";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 80;
-            //
-            // mainToolStripContainer
-            //
-            //
             // mainToolStripContainer.ContentPanel
             //
             this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1187, 565);
@@ -5078,16 +4747,6 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignChromeTMS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignGrid)).EndInit();
             this.pageDesignGrid.ResumeLayout(false);
-            this.pageDesignGrid.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDisabled)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNormal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignGrids)).EndInit();
-            this.kryptonNavigatorDesignGrids.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridSheet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGridCustom1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignHeaderGroup)).EndInit();
             this.pageDesignHeaderGroup.ResumeLayout(false);
             this.pageDesignHeaderGroup.PerformLayout();
@@ -5553,26 +5212,7 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageDesignGrid;
         private Krypton.Navigator.KryptonPage pageTopGrids;
         private Krypton.Toolkit.KryptonCheckSet kryptonCheckSet1;
-        private Krypton.Navigator.KryptonNavigator kryptonNavigatorDesignGrids;
-        private Krypton.Navigator.KryptonPage kryptonGridList;
-        private Krypton.Navigator.KryptonPage kryptonGridSheet;
-        private Krypton.Navigator.KryptonPage kryptonGridCustom1;
-        private Krypton.Toolkit.KryptonDataGridView dataGridViewNormal;
-        private Krypton.Toolkit.KryptonDataGridView dataGridViewDisabled;
-        private Krypton.Toolkit.KryptonLabel labelGridDisabled;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private System.Data.DataSet dataSetGrid;
-        private System.Data.DataTable dataTable1;
-        private System.Data.DataColumn dataColumn1;
-        private System.Data.DataColumn dataColumn2;
-        private System.Data.DataColumn dataColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private PaletteDesigner.Pages.GridPage gridPage1;
         private Krypton.Navigator.KryptonPage pageLabelsSuperTip;
         private Krypton.Navigator.KryptonPage pageTopInputControls;
         private Krypton.Navigator.KryptonPage pageDesignInputControls;
@@ -5642,12 +5282,6 @@ namespace PaletteDesigner
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem launchPaletteUpgradeToolToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem2;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn4;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn5;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn6;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn1;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn2;
-        private KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn3;
         private PaletteDesigner.Pages.ImageViewerPage imageViewerControl;
         private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecIncFont;
         private Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecDecFont;
