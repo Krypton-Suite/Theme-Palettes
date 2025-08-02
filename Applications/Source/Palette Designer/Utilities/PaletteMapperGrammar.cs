@@ -5,10 +5,6 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
 namespace PaletteDesigner.Utilities;
 
 public static partial class PaletteMapper
@@ -28,29 +24,35 @@ public static partial class PaletteMapper
             var index = m.Groups[3].Value;
 
             var stylePart = modifier == "Navigator" ? "ButtonNavigatorStack" : "ButtonStandalone";
-            var statePart = modifier == "Default" ? "NormalDefaultOverride" : "Normal";
             var groupPartRoot = group == "Border" ? "Border" : "Back";
             var indexPart = string.IsNullOrEmpty(index) ? "1" : index;
 
-            return $"ButtonStyles.{stylePart}.State{statePart}.{groupPartRoot}.Color{indexPart}";
+            // Use OverrideDefault property for Default modifier, otherwise explicit StateNormal
+            if (modifier == "Default")
+            {
+                return $"ButtonStyles.{stylePart}.OverrideDefault.{groupPartRoot}.Color{indexPart}";
+            }
+
+            return $"ButtonStyles.{stylePart}.StateNormal.{groupPartRoot}.Color{indexPart}";
         }
 
         m = _buttonStateRegex.Match(enumName);
         if (m.Success)
         {
             var stateToken = m.Groups[1].Value;
-            var partToken = m.Groups[2].Value;
+            var partToken  = m.Groups[2].Value;
 
-            var stylePart = "ButtonStandalone";
-            var statePart = stateToken switch
+            var stylePart  = "ButtonStandalone";
+            var statePart  = stateToken switch
             {
-                "Pressed" => "Pressed",
-                "Checked" => "CheckedNormal",
+                "Pressed"  => "Pressed",
+                "Checked"  => "CheckedNormal",
                 "Selected" => "Tracking",
                 _ => "Normal"
             };
 
             var backPart = "Back.Color" + (partToken == "End" ? "2" : "1");
+
             return $"ButtonStyles.{stylePart}.State{statePart}.{backPart}";
         }
 
@@ -60,6 +62,7 @@ public static partial class PaletteMapper
             var groupToken = m.Groups[1].Value;
             var idx = m.Groups[2].Value;
             var groupPart = (groupToken == "Back" ? "Back" : "Border") + ".Color" + idx;
+
             return $"ButtonStyles.ButtonCluster.StateNormal.{groupPart}";
         }
 
@@ -69,7 +72,8 @@ public static partial class PaletteMapper
             var part = m.Groups[1].Value;
             var idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
             var statePart = part switch { "Track" => "Tracking", "Pressed" => "Pressed", "Checked" => "CheckedNormal", _ => "Normal" };
-            var groupPart = part == "Border" ? $"Border.Color{idx}" : part == "Text" ? "Text.Color1" : $"Back.Color{idx}";
+            var groupPart = part == "Border" ? $"Border.Color{idx}" : part == "Text" ? "Content.ShortText.Color1" : $"Back.Color{idx}";
+
             return $"ButtonStyles.ButtonNavigatorStack.State{statePart}.{groupPart}";
         }
 
@@ -89,7 +93,7 @@ public static partial class PaletteMapper
             bool isForm = m.Groups[1].Success;
             string stateToken = m.Groups[2].Value;
 
-            string stylePart = isForm ? "ButtonForm" : "Standalone";
+            string stylePart = isForm ? "ButtonForm" : "ButtonStandalone";
             string statePart = stateToken switch
             {
                 "Normal" => "Normal",
@@ -99,7 +103,8 @@ public static partial class PaletteMapper
                 _ => "Normal"
             };
 
-            return $"ButtonStyles.{(isForm ? "ButtonForm" : "ButtonStandalone")}.State{statePart}.Text.Color1";
+            // Use Content.ShortText for text buttons instead of Text.Color1
+            return $"ButtonStyles.{stylePart}.State{statePart}.Content.ShortText.Color1";
         }
         return null;
     }
@@ -115,6 +120,7 @@ public static partial class PaletteMapper
         {
             return "ButtonStyles.ButtonForm.StateCheckedNormal.Border.Color1";
         }
+
         var m = _formButtonRegex.Match(enumName);
         if (m.Success)
         {
@@ -171,9 +177,13 @@ public static partial class PaletteMapper
                 return $"{rootPart}.StatePressed.BackColor{idx}";
             }
             if (_appMenuDocsBackRegex.IsMatch(enumName))
+            {
                 return "Ribbon.RibbonAppMenuDocs.BackColor1";
+            }
             if (enumName == "AppButtonMenuDocsText")
+            {
                 return "Ribbon.RibbonAppMenuDocsEntry.TextColor";
+            }
         }
         return null;
     }
@@ -210,8 +220,8 @@ public static partial class PaletteMapper
             {
                 string statePart = stateToken switch
                 {
-                    "Selected" => "CheckedNormal",
-                    "Tracking" => "Tracking",
+                    "Selected"  => "CheckedNormal",
+                    "Tracking"  => "Tracking",
                     "Highlight" => "Tracking",
                     _ => "Normal"
                 };
@@ -234,29 +244,9 @@ public static partial class PaletteMapper
             string stylePart = "RibbonGroup" + (areaToken == "Border" ? "Border" : areaToken == "Area" ? "Area" : "Title");
             string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
             string groupPart = isTitle ? "TextColor" : areaToken == "Border" ? $"BorderColor{idx}" : $"BackColor{idx}";
+
             return $"Ribbon.{stylePart}.StateNormal.{groupPart}";
         }
-
-        m = _headerRegex.Match(enumName);
-        if (m.Success)
-        {
-            string primaryToken = m.Groups[1].Value;
-            string groupToken = m.Groups[2].Value;
-            string indexToken = m.Groups[3].Success ? m.Groups[3].Value : string.Empty;
-            string stylePart = primaryToken == "Primary" ? "HeaderPrimary" : "HeaderSecondary";
-            string groupPart;
-            if (groupToken.StartsWith("Back"))
-            {
-                string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
-                groupPart = $"Back.Color{idx}";
-            }
-            else
-            {
-                groupPart = "Content.ShortText.Color1";
-            }
-            return $"HeaderStyles.{stylePart}.StateNormal.{groupPart}";
-        }
-
 
         // Ribbon chrome mapping
         m = _ribbonGroupsAreaRegex.Match(enumName);
@@ -452,8 +442,8 @@ public static partial class PaletteMapper
     {
         if (_navigatorMiniRegex.IsMatch(enumName))
         {
-            // Final correction to match actual Krypton object structure
-            return "Navigator.NavigatorMini.StateNormal.HeaderGroup.BackColor1";
+            // Map directly to base scheme property for mini navigator
+            return "BaseScheme.NavigatorMiniBackColor";
         }
         return null;
     }
@@ -523,7 +513,8 @@ public static partial class PaletteMapper
     {
         if (_contextMenuHeadingRegex.IsMatch(enumName))
         {
-            return "ContextMenu.ContextMenuHeading.StateNormal.Back.Color1";
+            // Map to the Heading sub-property on KryptonPaletteContextMenu
+            return "ContextMenu.Heading.StateNormal.Back.Color1";
         }
         return null;
     }
@@ -569,7 +560,9 @@ public static partial class PaletteMapper
                 groupPart = $"Back.Color{idx}";
             }
             else
+            {
                 groupPart = "Content.ShortText.Color1";
+            }
             return $"HeaderStyles.{stylePart}.StateNormal.{groupPart}";
         }
         return null;
@@ -622,10 +615,7 @@ public static partial class PaletteMapper
             {
                 return "GridStyles.GridList.StateNormal.DataCell.Border.Color1";
             }
-            else
-            {
-                return "GridStyles.GridList.StateSelected.DataCell.Back.Color1";
-            }
+            return "GridStyles.GridList.StateSelected.DataCell.Back.Color1";
         }
         return null;
     }
@@ -637,34 +627,31 @@ public static partial class PaletteMapper
     /// <returns>The mapped property path, or <c>null</c> if not recognized.</returns>
     private static string? TryMapInputControl(string enumName)
     {
+        // Map InputControlText to content text color, border/back to appropriate groups
         var m = _inputTextRegex.Match(enumName);
         if (m.Success)
         {
-            string stateToken = m.Groups[1].Value; // Normal or Disabled
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Text.Color1";
+            var statePart = m.Groups[1].Value == "Normal" ? "Normal" : "Disabled";
+            return $"InputControlStyles.InputControlStandalone.State{statePart}.Content.ShortText.Color1";
         }
         m = _inputBorderRegex.Match(enumName);
         if (m.Success)
         {
-            string stateToken = m.Groups[1].Value;
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Border.Color1";
+            var statePart = m.Groups[1].Value == "Normal" ? "Normal" : "Disabled";
+            return $"InputControlStyles.InputControlStandalone.State{statePart}.Border.Color1";
         }
         m = _inputBackRegex.Match(enumName);
         if (m.Success)
         {
-            string kind = m.Groups[1].Value; // Disabled or Inactive
-            string statePart = kind == "Disabled" ? "Disabled" : "Normal";
-            return $"InputControl.InputControlStandalone.State{statePart}.Back.Color1";
+            var statePart = m.Groups[1].Value == "Disabled" ? "Disabled" : "Normal";
+            return $"InputControlStyles.InputControlStandalone.State{statePart}.Back.Color1";
         }
         m = _inputDropDownRegex.Match(enumName);
         if (m.Success)
         {
-            string stateToken = m.Groups[1].Value;
-            string idx = m.Groups[2].Value;
-            string statePart = stateToken == "Normal" ? "Normal" : "Disabled";
-            return $"InputControl.InputControlStandalone.State{statePart}.Back.Color{idx}";
+            var statePart = m.Groups[1].Value == "Normal" ? "Normal" : "Disabled";
+            var idx = m.Groups[2].Value;
+            return $"InputControlStyles.InputControlStandalone.State{statePart}.Back.Color{idx}";
         }
         return null;
     }
@@ -677,11 +664,17 @@ public static partial class PaletteMapper
     private static string? TryMapPanel(string enumName)
     {
         if (enumName == "PanelClient")
+        {
             return "PanelStyles.PanelClient.StateNormal.Back.Color1";
+        }
         if (_panelAlternativeRegex.IsMatch(enumName))
+        {
             return "PanelStyles.PanelAlternate.StateNormal.Back.Color1";
+        }
         if (_controlBorderRegex.IsMatch(enumName))
-            return "ControlStyles.ControlClient.StateNormal.Border.Color1";
+        {
+            return "ControlStyles.ControlClient.StateNormal.Back.Color1";
+        }
         return null;
     }
 
@@ -723,8 +716,8 @@ public static partial class PaletteMapper
         {
             string stateToken = m.Groups[1].Value;
             string idx = m.Groups[2].Success ? m.Groups[2].Value : "1";
-            string statePart = stateToken == "Active" ? "StateActive" : "StateInactive";
-            // Map to HeaderForm style rather than generic FormCommon border
+            // KryptonPaletteHeader only exposes StateNormal and StateDisabled
+            string statePart = stateToken == "Active" ? "StateNormal" : "StateDisabled";
             return $"HeaderStyles.HeaderForm.{statePart}.Border.Color{idx}";
         }
 
@@ -744,9 +737,10 @@ public static partial class PaletteMapper
         m = _formHeaderRegex.Match(enumName);
         if (m.Success)
         {
-            string lengthToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Short / Long / empty
-            string stateToken  = m.Groups[2].Value; // Active / Inactive
-            string statePart   = stateToken == "Active" ? "Active" : "Inactive";
+            string lengthToken = m.Groups[1].Success ? m.Groups[1].Value : string.Empty; // Short/Long
+            string stateToken  = m.Groups[2].Value; // Active/Inactive
+            // Map Active to Normal, Inactive to Disabled
+            string statePart   = stateToken == "Active" ? "Normal" : "Disabled";
 
             if (lengthToken == "Short")
             {
@@ -759,8 +753,6 @@ public static partial class PaletteMapper
             // Fallback for unspecified length – default to short text
             return $"HeaderStyles.HeaderForm.State{statePart}.Content.ShortText.Color1";
         }
-        if (_formButtonBorderCheckRegex.IsMatch(enumName))
-            return "ButtonStyles.ButtonForm.StateCheckedNormal.Border.Color1";
         return null;
     }
 }

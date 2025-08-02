@@ -61,6 +61,8 @@ namespace PaletteDesigner
             this.launchPaletteUpgradeToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebuildPaletteMappingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonNavigatorTop = new Krypton.Navigator.KryptonNavigator();
             this.pageTopRibbon = new Krypton.Navigator.KryptonPage();
             this.pageTopLists = new Krypton.Navigator.KryptonPage();
@@ -409,6 +411,22 @@ namespace PaletteDesigner
             this.kryptonGroup9 = new Krypton.Toolkit.KryptonGroup();
             this.kryptonGroup10 = new Krypton.Toolkit.KryptonGroup();
             this.kryptonManager = new Krypton.Toolkit.KryptonManager(this.components);
+            //
+            // toolsToolStripMenuItem
+            //
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rebuildPaletteMappingToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            //
+            // rebuildPaletteMappingToolStripMenuItem
+            //
+            this.rebuildPaletteMappingToolStripMenuItem.Enabled = false;
+            this.rebuildPaletteMappingToolStripMenuItem.Name = "rebuildPaletteMappingToolStripMenuItem";
+            this.rebuildPaletteMappingToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.rebuildPaletteMappingToolStripMenuItem.Text = "Rebuild Palette Mapping...";
+            this.rebuildPaletteMappingToolStripMenuItem.Click += new System.EventHandler(this.rebuildPaletteMappingToolStripMenuItem_Click);
             this.kryptonPage1 = new Krypton.Navigator.KryptonPage();
             this.kryptonCheckSetLabels = new Krypton.Toolkit.KryptonCheckSet(this.components);
             this.kryptonCheckSet1 = new Krypton.Toolkit.KryptonCheckSet(this.components);
@@ -692,23 +710,24 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSetLabels)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSet1)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // mainMenuStrip
-            // 
+            //
             this.mainMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.mainMenuStrip.Size = new System.Drawing.Size(1187, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip";
-            // 
+            //
             // menuFile
-            // 
+            //
             this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuNew,
             this.menuNewFromDefault,
@@ -723,9 +742,9 @@ namespace PaletteDesigner
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(37, 20);
             this.menuFile.Text = "File";
-            // 
+            //
             // menuNew
-            // 
+            //
             this.menuNew.Image = ((System.Drawing.Image)(resources.GetObject("menuNew.Image")));
             this.menuNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuNew.Name = "menuNew";
@@ -733,9 +752,9 @@ namespace PaletteDesigner
             this.menuNew.Size = new System.Drawing.Size(249, 22);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.MenuNew_Click);
-            // 
+            //
             // menuNewFromDefault
-            // 
+            //
             this.menuNewFromDefault.Image = ((System.Drawing.Image)(resources.GetObject("menuNewFromDefault.Image")));
             this.menuNewFromDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuNewFromDefault.Name = "menuNewFromDefault";
@@ -743,9 +762,9 @@ namespace PaletteDesigner
             this.menuNewFromDefault.Size = new System.Drawing.Size(249, 22);
             this.menuNewFromDefault.Text = "New from Default Theme";
             this.menuNewFromDefault.Click += new System.EventHandler(this.MenuNewFromDefault_Click);
-            // 
+            //
             // menuOpen
-            // 
+            //
             this.menuOpen.Image = ((System.Drawing.Image)(resources.GetObject("menuOpen.Image")));
             this.menuOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuOpen.Name = "menuOpen";
@@ -753,14 +772,14 @@ namespace PaletteDesigner
             this.menuOpen.Size = new System.Drawing.Size(249, 22);
             this.menuOpen.Text = "Open...";
             this.menuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
-            // 
+            //
             // menuSep1
-            // 
+            //
             this.menuSep1.Name = "menuSep1";
             this.menuSep1.Size = new System.Drawing.Size(246, 6);
-            // 
+            //
             // menuSave
-            // 
+            //
             this.menuSave.Image = ((System.Drawing.Image)(resources.GetObject("menuSave.Image")));
             this.menuSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSave.Name = "menuSave";
@@ -768,41 +787,41 @@ namespace PaletteDesigner
             this.menuSave.Size = new System.Drawing.Size(249, 22);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.MenuSave_Click);
-            // 
+            //
             // menuSaveAs
-            // 
+            //
             this.menuSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("menuSaveAs.Image")));
             this.menuSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuSaveAs.Name = "menuSaveAs";
             this.menuSaveAs.Size = new System.Drawing.Size(249, 22);
             this.menuSaveAs.Text = "Save As...";
             this.menuSaveAs.Click += new System.EventHandler(this.MenuSaveAs_Click);
-            // 
+            //
             // menuSep2
-            // 
+            //
             this.menuSep2.Name = "menuSep2";
             this.menuSep2.Size = new System.Drawing.Size(246, 6);
-            // 
+            //
             // recentThemesToolStripMenuItem
-            // 
+            //
             this.recentThemesToolStripMenuItem.Name = "recentThemesToolStripMenuItem";
             this.recentThemesToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.recentThemesToolStripMenuItem.Text = "&Recent Themes";
-            // 
+            //
             // toolStripMenuItem1
-            // 
+            //
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(246, 6);
-            // 
+            //
             // menuExit
-            // 
+            //
             this.menuExit.Name = "menuExit";
             this.menuExit.Size = new System.Drawing.Size(249, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.MenuExit_Click);
-            // 
+            //
             // optionsToolStripMenuItem
-            // 
+            //
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.launchPaletteUpgradeToolToolStripMenuItem,
             this.toolStripMenuItem2,
@@ -810,29 +829,29 @@ namespace PaletteDesigner
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "&Options";
-            // 
+            //
             // launchPaletteUpgradeToolToolStripMenuItem
-            // 
+            //
             this.launchPaletteUpgradeToolToolStripMenuItem.Name = "launchPaletteUpgradeToolToolStripMenuItem";
             this.launchPaletteUpgradeToolToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.launchPaletteUpgradeToolToolStripMenuItem.Text = "Launch Palette &Upgrade Tool";
             this.launchPaletteUpgradeToolToolStripMenuItem.Click += new System.EventHandler(this.LaunchPaletteUpgradeToolToolStripMenuItem_Click);
-            // 
+            //
             // toolStripMenuItem2
-            // 
+            //
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(226, 6);
-            // 
+            //
             // settingsToolStripMenuItem
-            // 
+            //
             this.settingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("settingsToolStripMenuItem.Image")));
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.settingsToolStripMenuItem.Text = "Se&ttings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
-            // 
+            //
             // kryptonNavigatorTop
-            // 
+            //
             this.kryptonNavigatorTop.AutoSize = true;
             this.kryptonNavigatorTop.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.NextPrevious;
             this.kryptonNavigatorTop.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
@@ -888,9 +907,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorTop.TabIndex = 1;
             this.kryptonNavigatorTop.Text = "kryptonNavigator1";
             this.kryptonNavigatorTop.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorTop_SelectedPageChanged);
-            // 
+            //
             // pageTopRibbon
-            // 
+            //
             this.pageTopRibbon.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopRibbon.Flags = 65535;
             this.pageTopRibbon.ImageSmall = global::PaletteDesigner.Properties.Resources.TopRibbon;
@@ -901,9 +920,9 @@ namespace PaletteDesigner
             this.pageTopRibbon.Text = "Ribbon";
             this.pageTopRibbon.ToolTipTitle = "Page Ribbon";
             this.pageTopRibbon.UniqueName = "F7A49B746D4C486AF7A49B746D4C486A";
-            // 
+            //
             // pageTopLists
-            // 
+            //
             this.pageTopLists.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopLists.Flags = 65534;
             this.pageTopLists.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonGActual;
@@ -915,9 +934,9 @@ namespace PaletteDesigner
             this.pageTopLists.Text = "Lists";
             this.pageTopLists.ToolTipTitle = "Page Lists";
             this.pageTopLists.UniqueName = "f7b778d5010243c187721c2618d605fe";
-            // 
+            //
             // pageTopControls
-            // 
+            //
             this.pageTopControls.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopControls.Flags = 65535;
             this.pageTopControls.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopControls.ImageLarge")));
@@ -930,9 +949,9 @@ namespace PaletteDesigner
             this.pageTopControls.Text = "Controls";
             this.pageTopControls.ToolTipTitle = "Page Controls";
             this.pageTopControls.UniqueName = "3BAC6637703940CB3BAC6637703940CB";
-            // 
+            //
             // pageTopInputControls
-            // 
+            //
             this.pageTopInputControls.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopInputControls.Flags = 65535;
             this.pageTopInputControls.ImageSmall = ((System.Drawing.Bitmap)(resources.GetObject("pageTopInputControls.ImageSmall")));
@@ -943,9 +962,9 @@ namespace PaletteDesigner
             this.pageTopInputControls.Text = "Input Controls";
             this.pageTopInputControls.ToolTipTitle = "Page Input Controls";
             this.pageTopInputControls.UniqueName = "D367C5BB74D04696D367C5BB74D04696";
-            // 
+            //
             // pageTopButtonSpecs
-            // 
+            //
             this.pageTopButtonSpecs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopButtonSpecs.Flags = 65535;
             this.pageTopButtonSpecs.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopButtonSpecs.ImageLarge")));
@@ -958,9 +977,9 @@ namespace PaletteDesigner
             this.pageTopButtonSpecs.Text = "ButtonSpecs";
             this.pageTopButtonSpecs.ToolTipTitle = "Page ButtonSpecs";
             this.pageTopButtonSpecs.UniqueName = "3482463805154E213482463805154E21";
-            // 
+            //
             // pageTopButtons
-            // 
+            //
             this.pageTopButtons.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopButtons.Flags = 65535;
             this.pageTopButtons.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopButtons.ImageLarge")));
@@ -973,9 +992,9 @@ namespace PaletteDesigner
             this.pageTopButtons.Text = "Buttons";
             this.pageTopButtons.ToolTipTitle = "Page Buttons";
             this.pageTopButtons.UniqueName = "56048893FA064ECE56048893FA064ECE";
-            // 
+            //
             // pageTopCheckBox
-            // 
+            //
             this.pageTopCheckBox.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopCheckBox.Flags = 65535;
             this.pageTopCheckBox.ImageSmall = global::PaletteDesigner.Properties.Resources.TopCB;
@@ -986,9 +1005,9 @@ namespace PaletteDesigner
             this.pageTopCheckBox.Text = "CheckBox";
             this.pageTopCheckBox.ToolTipTitle = "Page CheckBox";
             this.pageTopCheckBox.UniqueName = "745B9534A0BD44F7745B9534A0BD44F7";
-            // 
+            //
             // pageTopChromeTMS
-            // 
+            //
             this.pageTopChromeTMS.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopChromeTMS.Flags = 65535;
             this.pageTopChromeTMS.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopChromeTMS.ImageLarge")));
@@ -1001,9 +1020,9 @@ namespace PaletteDesigner
             this.pageTopChromeTMS.Text = "Chrome + TMS";
             this.pageTopChromeTMS.ToolTipTitle = "Page Chrome + TMS";
             this.pageTopChromeTMS.UniqueName = "E85832DBA6CF476EE85832DBA6CF476E";
-            // 
+            //
             // pageTopGrids
-            // 
+            //
             this.pageTopGrids.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopGrids.Flags = 65535;
             this.pageTopGrids.ImageSmall = global::PaletteDesigner.Properties.Resources.TopGrid;
@@ -1014,9 +1033,9 @@ namespace PaletteDesigner
             this.pageTopGrids.Text = "Grids";
             this.pageTopGrids.ToolTipTitle = "Page Grids";
             this.pageTopGrids.UniqueName = "AF995F9D48C04DF2AF995F9D48C04DF2";
-            // 
+            //
             // pageTopHeaderGroup
-            // 
+            //
             this.pageTopHeaderGroup.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopHeaderGroup.Flags = 65535;
             this.pageTopHeaderGroup.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaderGroup.ImageLarge")));
@@ -1029,9 +1048,9 @@ namespace PaletteDesigner
             this.pageTopHeaderGroup.Text = "HeaderGroup";
             this.pageTopHeaderGroup.ToolTipTitle = "Page HeaderGroup";
             this.pageTopHeaderGroup.UniqueName = "4E56EC4CBFD442284E56EC4CBFD44228";
-            // 
+            //
             // pageTopHeaders
-            // 
+            //
             this.pageTopHeaders.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopHeaders.Flags = 65535;
             this.pageTopHeaders.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopHeaders.ImageLarge")));
@@ -1044,9 +1063,9 @@ namespace PaletteDesigner
             this.pageTopHeaders.Text = "Headers";
             this.pageTopHeaders.ToolTipTitle = "Page Headers";
             this.pageTopHeaders.UniqueName = "8C92BD9E0DED45D28C92BD9E0DED45D2";
-            // 
+            //
             // pageTopDateTime
-            // 
+            //
             this.pageTopDateTime.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopDateTime.Flags = 65535;
             this.pageTopDateTime.ImageSmall = global::PaletteDesigner.Properties.Resources.TopDT;
@@ -1057,9 +1076,9 @@ namespace PaletteDesigner
             this.pageTopDateTime.Text = "Date Time";
             this.pageTopDateTime.ToolTipTitle = "Page Date Time";
             this.pageTopDateTime.UniqueName = "26E3658BC339416626E3658BC3394166";
-            // 
+            //
             // pageTopLabels
-            // 
+            //
             this.pageTopLabels.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopLabels.Flags = 65535;
             this.pageTopLabels.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopLabels.ImageLarge")));
@@ -1072,9 +1091,9 @@ namespace PaletteDesigner
             this.pageTopLabels.Text = "Labels";
             this.pageTopLabels.ToolTipTitle = "Page Labels";
             this.pageTopLabels.UniqueName = "E32EFBB14A214C75E32EFBB14A214C75";
-            // 
+            //
             // pageTopNavigator
-            // 
+            //
             this.pageTopNavigator.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopNavigator.Flags = 65535;
             this.pageTopNavigator.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopNavigator.ImageLarge")));
@@ -1087,9 +1106,9 @@ namespace PaletteDesigner
             this.pageTopNavigator.Text = "Navigator";
             this.pageTopNavigator.ToolTipTitle = "Page Navigator";
             this.pageTopNavigator.UniqueName = "D7426FCF612042A2D7426FCF612042A2";
-            // 
+            //
             // pageTopPanels
-            // 
+            //
             this.pageTopPanels.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopPanels.Flags = 65535;
             this.pageTopPanels.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopPanels.ImageLarge")));
@@ -1102,9 +1121,9 @@ namespace PaletteDesigner
             this.pageTopPanels.Text = "Panels";
             this.pageTopPanels.ToolTipTitle = "Page Panels";
             this.pageTopPanels.UniqueName = "0E2D1DD7365B4A8F0E2D1DD7365B4A8F";
-            // 
+            //
             // pageTopRadioButton
-            // 
+            //
             this.pageTopRadioButton.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopRadioButton.Flags = 65535;
             this.pageTopRadioButton.ImageSmall = global::PaletteDesigner.Properties.Resources.TopRB;
@@ -1115,9 +1134,9 @@ namespace PaletteDesigner
             this.pageTopRadioButton.Text = "RadioButton";
             this.pageTopRadioButton.ToolTipTitle = "Page RadioButton";
             this.pageTopRadioButton.UniqueName = "E7F6061FFA694A7DE7F6061FFA694A7D";
-            // 
+            //
             // pageTopSeparators
-            // 
+            //
             this.pageTopSeparators.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopSeparators.Flags = 65535;
             this.pageTopSeparators.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopSeparators.ImageLarge")));
@@ -1130,9 +1149,9 @@ namespace PaletteDesigner
             this.pageTopSeparators.Text = "Separators";
             this.pageTopSeparators.ToolTipTitle = "Page Separators";
             this.pageTopSeparators.UniqueName = "AA052D0D183F4125AA052D0D183F4125";
-            // 
+            //
             // pageTopTabs
-            // 
+            //
             this.pageTopTabs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopTabs.Flags = 65535;
             this.pageTopTabs.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTopTabs.ImageLarge")));
@@ -1145,9 +1164,9 @@ namespace PaletteDesigner
             this.pageTopTabs.Text = "Tabs";
             this.pageTopTabs.ToolTipTitle = "Page Tabs";
             this.pageTopTabs.UniqueName = "461B49C26EBB4816461B49C26EBB4816";
-            // 
+            //
             // pageTopTrackBar
-            // 
+            //
             this.pageTopTrackBar.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopTrackBar.Flags = 65534;
             this.pageTopTrackBar.ImageSmall = global::PaletteDesigner.Properties.Resources.TopTrackBar2;
@@ -1158,9 +1177,9 @@ namespace PaletteDesigner
             this.pageTopTrackBar.Text = "TrackBar";
             this.pageTopTrackBar.ToolTipTitle = "Page TrackBar";
             this.pageTopTrackBar.UniqueName = "8EA51AFFC0D843D551B44BCB916273AC";
-            // 
+            //
             // pageTopMenuItems
-            // 
+            //
             this.pageTopMenuItems.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopMenuItems.Flags = 65534;
             this.pageTopMenuItems.LastVisibleSet = true;
@@ -1171,9 +1190,9 @@ namespace PaletteDesigner
             this.pageTopMenuItems.Text = "Menu Items";
             this.pageTopMenuItems.ToolTipTitle = "Page Menu Items";
             this.pageTopMenuItems.UniqueName = "95c2ec35c075402bac013139a5f5b16a";
-            // 
+            //
             // pageTopToolTips
-            // 
+            //
             this.pageTopToolTips.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopToolTips.Flags = 65534;
             this.pageTopToolTips.LastVisibleSet = true;
@@ -1183,9 +1202,9 @@ namespace PaletteDesigner
             this.pageTopToolTips.Text = "ToolTips";
             this.pageTopToolTips.ToolTipTitle = "Page ToolTip";
             this.pageTopToolTips.UniqueName = "a5f1868720aa41f2bdba83ff2b9fb8f1";
-            // 
+            //
             // pageTopImageViewer
-            // 
+            //
             this.pageTopImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTopImageViewer.Flags = 65534;
             this.pageTopImageViewer.LastVisibleSet = true;
@@ -1195,9 +1214,9 @@ namespace PaletteDesigner
             this.pageTopImageViewer.Text = "Image Viewer";
             this.pageTopImageViewer.ToolTipTitle = "Page Image Viewer";
             this.pageTopImageViewer.UniqueName = "B916273AC8EA51AFFC0D843D551B44BC";
-            // 
+            //
             // kryptonPanelMainFill
-            // 
+            //
             this.kryptonPanelMainFill.Controls.Add(this.kryptonSplitContainerMain);
             this.kryptonPanelMainFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanelMainFill.Location = new System.Drawing.Point(0, 75);
@@ -1205,20 +1224,20 @@ namespace PaletteDesigner
             this.kryptonPanelMainFill.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.kryptonPanelMainFill.Size = new System.Drawing.Size(1187, 510);
             this.kryptonPanelMainFill.TabIndex = 2;
-            // 
+            //
             // kryptonSplitContainerMain
-            // 
+            //
             this.kryptonSplitContainerMain.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainerMain.Location = new System.Drawing.Point(5, 5);
-            // 
+            //
             // kryptonSplitContainerMain.Panel1
-            // 
+            //
             this.kryptonSplitContainerMain.Panel1.Controls.Add(this.kryptonNavigatorDesign);
             this.kryptonSplitContainerMain.Panel1MinSize = 200;
-            // 
+            //
             // kryptonSplitContainerMain.Panel2
-            // 
+            //
             this.kryptonSplitContainerMain.Panel2.Controls.Add(this.kryptonHeaderGroupProperties);
             this.kryptonSplitContainerMain.Panel2MinSize = 200;
             this.kryptonSplitContainerMain.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
@@ -1226,9 +1245,9 @@ namespace PaletteDesigner
             this.kryptonSplitContainerMain.SplitterDistance = 658;
             this.kryptonSplitContainerMain.SplitterWidth = 7;
             this.kryptonSplitContainerMain.TabIndex = 0;
-            // 
+            //
             // kryptonNavigatorDesign
-            // 
+            //
             this.kryptonNavigatorDesign.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.Context;
             this.kryptonNavigatorDesign.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
             this.kryptonNavigatorDesign.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
@@ -1283,9 +1302,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesign.TabIndex = 2;
             this.kryptonNavigatorDesign.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesign.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesign_SelectedPageChanged);
-            // 
+            //
             // pageDesignRibbon
-            // 
+            //
             this.pageDesignRibbon.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignRibbon.Flags = 65535;
             this.pageDesignRibbon.ImageSmall = global::PaletteDesigner.Properties.Resources.KryptonRibbon;
@@ -1299,9 +1318,9 @@ namespace PaletteDesigner
             this.pageDesignRibbon.TextTitle = "";
             this.pageDesignRibbon.ToolTipTitle = "Page ToolTip";
             this.pageDesignRibbon.UniqueName = "6830FEAFE07347856830FEAFE0734785";
-            // 
+            //
             // pageLists
-            // 
+            //
             this.pageLists.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLists.Controls.Add(this.kryptonGroupBox3);
             this.pageLists.Controls.Add(this.kryptonGroupBox2);
@@ -1317,22 +1336,22 @@ namespace PaletteDesigner
             this.pageLists.TextTitle = "";
             this.pageLists.ToolTipTitle = "Page ToolTip";
             this.pageLists.UniqueName = "210efe52832f430db303ff35cafe9dca";
-            // 
+            //
             // kryptonGroupBox3
-            // 
+            //
             this.kryptonGroupBox3.Location = new System.Drawing.Point(16, 353);
             this.kryptonGroupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            // 
+            //
             // kryptonGroupBox3.Panel
-            // 
+            //
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonListView3);
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonListBox3);
             this.kryptonGroupBox3.Size = new System.Drawing.Size(601, 162);
             this.kryptonGroupBox3.TabIndex = 2;
             this.kryptonGroupBox3.Values.Heading = "Always Active";
-            // 
+            //
             // kryptonListView3
-            // 
+            //
             this.kryptonListView3.CheckBoxes = true;
             this.kryptonListView3.FullRowSelect = true;
             this.kryptonListView3.GridLines = true;
@@ -1348,9 +1367,9 @@ namespace PaletteDesigner
             this.kryptonListView3.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView3.Size = new System.Drawing.Size(168, 107);
             this.kryptonListView3.TabIndex = 1;
-            // 
+            //
             // kryptonListBox3
-            // 
+            //
             this.kryptonListBox3.Items.AddRange(new object[] {
             "List 1",
             "List 2",
@@ -1367,22 +1386,22 @@ namespace PaletteDesigner
             this.kryptonListBox3.ScrollAlwaysVisible = true;
             this.kryptonListBox3.Size = new System.Drawing.Size(98, 110);
             this.kryptonListBox3.TabIndex = 0;
-            // 
+            //
             // kryptonGroupBox2
-            // 
+            //
             this.kryptonGroupBox2.Location = new System.Drawing.Point(18, 176);
             this.kryptonGroupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            // 
+            //
             // kryptonGroupBox2.Panel
-            // 
+            //
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonListView2);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonListBox2);
             this.kryptonGroupBox2.Size = new System.Drawing.Size(601, 162);
             this.kryptonGroupBox2.TabIndex = 1;
             this.kryptonGroupBox2.Values.Heading = "Enabled";
-            // 
+            //
             // kryptonListView2
-            // 
+            //
             this.kryptonListView2.CheckBoxes = true;
             this.kryptonListView2.FullRowSelect = true;
             this.kryptonListView2.GridLines = true;
@@ -1398,9 +1417,9 @@ namespace PaletteDesigner
             this.kryptonListView2.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView2.Size = new System.Drawing.Size(168, 107);
             this.kryptonListView2.TabIndex = 1;
-            // 
+            //
             // kryptonListBox2
-            // 
+            //
             this.kryptonListBox2.AlwaysActive = false;
             this.kryptonListBox2.Items.AddRange(new object[] {
             "List 1",
@@ -1418,23 +1437,23 @@ namespace PaletteDesigner
             this.kryptonListBox2.ScrollAlwaysVisible = true;
             this.kryptonListBox2.Size = new System.Drawing.Size(98, 110);
             this.kryptonListBox2.TabIndex = 0;
-            // 
+            //
             // kryptonGroupBox1
-            // 
+            //
             this.kryptonGroupBox1.Enabled = false;
             this.kryptonGroupBox1.Location = new System.Drawing.Point(16, 2);
             this.kryptonGroupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            // 
+            //
             // kryptonGroupBox1.Panel
-            // 
+            //
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonListView1);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonListBox1);
             this.kryptonGroupBox1.Size = new System.Drawing.Size(601, 167);
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "Disabled";
-            // 
+            //
             // kryptonListView1
-            // 
+            //
             this.kryptonListView1.CheckBoxes = true;
             this.kryptonListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -1454,9 +1473,9 @@ namespace PaletteDesigner
             this.kryptonListView1.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.kryptonListView1.Size = new System.Drawing.Size(168, 107);
             this.kryptonListView1.TabIndex = 1;
-            // 
+            //
             // kryptonListBox1
-            // 
+            //
             this.kryptonListBox1.Enabled = false;
             this.kryptonListBox1.Items.AddRange(new object[] {
             "List 1",
@@ -1474,9 +1493,9 @@ namespace PaletteDesigner
             this.kryptonListBox1.ScrollAlwaysVisible = true;
             this.kryptonListBox1.Size = new System.Drawing.Size(98, 110);
             this.kryptonListBox1.TabIndex = 0;
-            // 
+            //
             // pageDesignControls
-            // 
+            //
             this.pageDesignControls.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignControls.Controls.Add(this.labelControlsNormal);
             this.pageDesignControls.Controls.Add(this.labelControlsDisabled);
@@ -1497,11 +1516,11 @@ namespace PaletteDesigner
             this.pageDesignControls.TextTitle = "Client";
             this.pageDesignControls.ToolTipTitle = "Page ToolTip";
             this.pageDesignControls.UniqueName = "4E35E207BBA941404E35E207BBA94140";
-            // 
+            //
             // labelControlsNormal
-            // 
-            this.labelControlsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelControlsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelControlsNormal.Location = new System.Drawing.Point(283, 30);
@@ -1510,11 +1529,11 @@ namespace PaletteDesigner
             this.labelControlsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelControlsNormal.TabIndex = 0;
             this.labelControlsNormal.Values.Text = "Normal";
-            // 
+            //
             // labelControlsDisabled
-            // 
-            this.labelControlsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelControlsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControlsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelControlsDisabled.Location = new System.Drawing.Point(119, 30);
@@ -1523,30 +1542,30 @@ namespace PaletteDesigner
             this.labelControlsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelControlsDisabled.TabIndex = 1;
             this.labelControlsDisabled.Values.Text = "Disabled";
-            // 
+            //
             // control1Normal
-            // 
+            //
             this.control1Normal.Location = new System.Drawing.Point(283, 62);
             this.control1Normal.Size = new System.Drawing.Size(100, 100);
             this.control1Normal.TabIndex = 17;
-            // 
+            //
             // control1Disabled
-            // 
+            //
             this.control1Disabled.Location = new System.Drawing.Point(119, 62);
             this.control1Disabled.Size = new System.Drawing.Size(100, 100);
             this.control1Disabled.TabIndex = 16;
-            // 
+            //
             // borderDesignControls
-            // 
+            //
             this.borderDesignControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignControls.Location = new System.Drawing.Point(73, 0);
             this.borderDesignControls.Name = "borderDesignControls";
             this.borderDesignControls.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignControls.Size = new System.Drawing.Size(1, 544);
             this.borderDesignControls.TabIndex = 2;
-            // 
+            //
             // kryptonNavigatorDesignControls
-            // 
+            //
             this.kryptonNavigatorDesignControls.AutoSize = true;
             this.kryptonNavigatorDesignControls.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignControls.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -1596,9 +1615,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignControls.TabIndex = 0;
             this.kryptonNavigatorDesignControls.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignControls.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignControls_SelectedPageChanged);
-            // 
+            //
             // pageControlsClient
-            // 
+            //
             this.pageControlsClient.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsClient.Flags = 65535;
             this.pageControlsClient.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsClient.ImageLarge")));
@@ -1611,9 +1630,9 @@ namespace PaletteDesigner
             this.pageControlsClient.TextDescription = "Client is the main style for the client area of Krypton controls.";
             this.pageControlsClient.ToolTipTitle = "Page ToolTip";
             this.pageControlsClient.UniqueName = "793D41956B3D4D08793D41956B3D4D08";
-            // 
+            //
             // pageControlsAlternate
-            // 
+            //
             this.pageControlsAlternate.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsAlternate.Flags = 65535;
             this.pageControlsAlternate.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsAlternate.ImageLarge")));
@@ -1626,9 +1645,9 @@ namespace PaletteDesigner
             this.pageControlsAlternate.TextDescription = "Alternate provides a complementary variation on the Client style.";
             this.pageControlsAlternate.ToolTipTitle = "Page ToolTip";
             this.pageControlsAlternate.UniqueName = "3CAAD74A17C5495F3CAAD74A17C5495F";
-            // 
+            //
             // pageControlsGroupBox
-            // 
+            //
             this.pageControlsGroupBox.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsGroupBox.Flags = 65534;
             this.pageControlsGroupBox.LastVisibleSet = true;
@@ -1639,9 +1658,9 @@ namespace PaletteDesigner
             this.pageControlsGroupBox.TextDescription = "GroupBox is applied as the default for KryptonGroupBox instances.";
             this.pageControlsGroupBox.ToolTipTitle = "Page ToolTip";
             this.pageControlsGroupBox.UniqueName = "6CA021C81DD0411F4DBD2ECCA0F3662A";
-            // 
+            //
             // pageControlsToolTip
-            // 
+            //
             this.pageControlsToolTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsToolTip.Flags = 65535;
             this.pageControlsToolTip.LastVisibleSet = true;
@@ -1652,9 +1671,9 @@ namespace PaletteDesigner
             this.pageControlsToolTip.TextDescription = "ToolTip is used for popup windows showing additional context information.";
             this.pageControlsToolTip.ToolTipTitle = "Page ToolTip";
             this.pageControlsToolTip.UniqueName = "096439269AC64A7A096439269AC64A7A";
-            // 
+            //
             // pageControlsRibbon
-            // 
+            //
             this.pageControlsRibbon.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsRibbon.Flags = 65535;
             this.pageControlsRibbon.LastVisibleSet = true;
@@ -1665,9 +1684,9 @@ namespace PaletteDesigner
             this.pageControlsRibbon.TextDescription = "Ribbon is used to achieve a compatible appearance to that of the Ribbon.";
             this.pageControlsRibbon.ToolTipTitle = "Page ToolTip";
             this.pageControlsRibbon.UniqueName = "F858E7BA110E48CBF858E7BA110E48CB";
-            // 
+            //
             // pageControlsCustom1
-            // 
+            //
             this.pageControlsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageControlsCustom1.Flags = 65535;
             this.pageControlsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsCustom1.ImageLarge")));
@@ -1680,9 +1699,9 @@ namespace PaletteDesigner
             this.pageControlsCustom1.TextDescription = "Custom 1 style inherits from Client and is intended for your own custom use.";
             this.pageControlsCustom1.ToolTipTitle = "Page ToolTip";
             this.pageControlsCustom1.UniqueName = "B62AC6932C204028B62AC6932C204028";
-            // 
+            //
             // pageDesignInputControls
-            // 
+            //
             this.pageDesignInputControls.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignInputControls.Controls.Add(this.inputControls1);
             this.pageDesignInputControls.Flags = 65535;
@@ -1696,18 +1715,18 @@ namespace PaletteDesigner
             this.pageDesignInputControls.TextTitle = "Standalone";
             this.pageDesignInputControls.ToolTipTitle = "Page ToolTip";
             this.pageDesignInputControls.UniqueName = "D26489B08AA04FD0D26489B08AA04FD0";
-            // 
+            //
             // inputControls1
-            // 
+            //
             this.inputControls1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputControls1.Location = new System.Drawing.Point(0, 0);
             this.inputControls1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.inputControls1.Name = "inputControls1";
             this.inputControls1.Size = new System.Drawing.Size(644, 544);
             this.inputControls1.TabIndex = 0;
-            // 
+            //
             // pageDesignButtonSpecs
-            // 
+            //
             this.pageDesignButtonSpecs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignButtonSpecs.Controls.Add(this.buttonSpecG4);
             this.pageDesignButtonSpecs.Controls.Add(this.buttonSpecG3);
@@ -1732,9 +1751,9 @@ namespace PaletteDesigner
             this.pageDesignButtonSpecs.TextTitle = "";
             this.pageDesignButtonSpecs.ToolTipTitle = "Page ToolTip";
             this.pageDesignButtonSpecs.UniqueName = "AD2886A4AC96475BAD2886A4AC96475B";
-            // 
+            //
             // buttonSpecG4
-            // 
+            //
             this.buttonSpecG4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecG4.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG4.ButtonSpecs.Add(this.buttonSpecGeneric2);
@@ -1747,19 +1766,19 @@ namespace PaletteDesigner
             this.buttonSpecG4.Values.Description = "";
             this.buttonSpecG4.Values.Heading = "Disabled";
             this.buttonSpecG4.Values.Image = null;
-            // 
+            //
             // buttonSpecGeneric1
-            // 
+            //
             this.buttonSpecGeneric1.Image = global::PaletteDesigner.Properties.Resources.document_new;
             this.buttonSpecGeneric1.UniqueName = "E3ECD10B03184164E3ECD10B03184164";
-            // 
+            //
             // buttonSpecGeneric2
-            // 
+            //
             this.buttonSpecGeneric2.Image = global::PaletteDesigner.Properties.Resources.environment;
             this.buttonSpecGeneric2.UniqueName = "E2BD1D4F0EE64328E2BD1D4F0EE64328";
-            // 
+            //
             // buttonSpecG3
-            // 
+            //
             this.buttonSpecG3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecG3.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG3.ButtonSpecs.Add(this.buttonSpecGeneric2);
@@ -1771,9 +1790,9 @@ namespace PaletteDesigner
             this.buttonSpecG3.Values.Description = "";
             this.buttonSpecG3.Values.Heading = "Disabled";
             this.buttonSpecG3.Values.Image = null;
-            // 
+            //
             // buttonSpecG2
-            // 
+            //
             this.buttonSpecG2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecG2.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG2.ButtonSpecs.Add(this.buttonSpecGeneric2);
@@ -1785,9 +1804,9 @@ namespace PaletteDesigner
             this.buttonSpecG2.Values.Description = "";
             this.buttonSpecG2.Values.Heading = "Header2";
             this.buttonSpecG2.Values.Image = null;
-            // 
+            //
             // buttonSpecG1
-            // 
+            //
             this.buttonSpecG1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecG1.ButtonSpecs.Add(this.buttonSpecGeneric1);
             this.buttonSpecG1.ButtonSpecs.Add(this.buttonSpecGeneric2);
@@ -1798,9 +1817,9 @@ namespace PaletteDesigner
             this.buttonSpecG1.Values.Description = "";
             this.buttonSpecG1.Values.Heading = "Header1";
             this.buttonSpecG1.Values.Image = null;
-            // 
+            //
             // buttonSpecT4
-            // 
+            //
             this.buttonSpecT4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecT4.ButtonSpecs.Add(this.buttonSpecAny32);
             this.buttonSpecT4.ButtonSpecs.Add(this.buttonSpecAny31);
@@ -1827,89 +1846,89 @@ namespace PaletteDesigner
             this.buttonSpecT4.Values.Description = "";
             this.buttonSpecT4.Values.Heading = "Disabled";
             this.buttonSpecT4.Values.Image = null;
-            // 
+            //
             // buttonSpecAny32
-            // 
+            //
             this.buttonSpecAny32.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny32.UniqueName = "D966DA3688534126D966DA3688534126";
-            // 
+            //
             // buttonSpecAny31
-            // 
+            //
             this.buttonSpecAny31.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny31.UniqueName = "24881A5C3CD7484F24881A5C3CD7484F";
-            // 
+            //
             // buttonSpecAny30
-            // 
+            //
             this.buttonSpecAny30.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny30.UniqueName = "9E75280CB89B46CA9E75280CB89B46CA";
-            // 
+            //
             // buttonSpecAny29
-            // 
+            //
             this.buttonSpecAny29.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny29.UniqueName = "AA43031B0FEC4AF8AA43031B0FEC4AF8";
-            // 
+            //
             // buttonSpecAny13
-            // 
+            //
             this.buttonSpecAny13.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny13.UniqueName = "7846E1DEE7074BB27846E1DEE7074BB2";
-            // 
+            //
             // buttonSpecAny14
-            // 
+            //
             this.buttonSpecAny14.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny14.UniqueName = "3AB250A5C5A345C13AB250A5C5A345C1";
-            // 
+            //
             // buttonSpecAny15
-            // 
+            //
             this.buttonSpecAny15.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny15.UniqueName = "441CC54390784327441CC54390784327";
-            // 
+            //
             // buttonSpecAny16
-            // 
+            //
             this.buttonSpecAny16.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny16.UniqueName = "277B00322C984668277B00322C984668";
-            // 
+            //
             // buttonSpecAny63
-            // 
+            //
             this.buttonSpecAny63.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny63.UniqueName = "4870673740E54FC3508C587FBCC6C0B5";
-            // 
+            //
             // buttonSpecAny64
-            // 
+            //
             this.buttonSpecAny64.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny64.UniqueName = "20657E8FABC04EEED2AF1A185670DE36";
-            // 
+            //
             // buttonSpecAny48
-            // 
+            //
             this.buttonSpecAny48.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny48.UniqueName = "D382E33950F648BFD382E33950F648BF";
-            // 
+            //
             // buttonSpecAny49
-            // 
+            //
             this.buttonSpecAny49.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny49.UniqueName = "DDB1428C84944F88DDB1428C84944F88";
-            // 
+            //
             // buttonSpecAny50
-            // 
+            //
             this.buttonSpecAny50.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny50.UniqueName = "0DEC427FE55A40100DEC427FE55A4010";
-            // 
+            //
             // buttonSpecAny51
-            // 
+            //
             this.buttonSpecAny51.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny51.UniqueName = "D8FD73FF3B1144CED8FD73FF3B1144CE";
-            // 
+            //
             // buttonSpecAny55
-            // 
+            //
             this.buttonSpecAny55.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny55.UniqueName = "ADE166B708AA4F7DADE166B708AA4F7D";
-            // 
+            //
             // buttonSpecAny56
-            // 
+            //
             this.buttonSpecAny56.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny56.UniqueName = "D1A2751D743A4671D1A2751D743A4671";
-            // 
+            //
             // buttonSpecT3
-            // 
+            //
             this.buttonSpecT3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecT3.ButtonSpecs.Add(this.buttonSpecAny28);
             this.buttonSpecT3.ButtonSpecs.Add(this.buttonSpecAny27);
@@ -1935,89 +1954,89 @@ namespace PaletteDesigner
             this.buttonSpecT3.Values.Description = "";
             this.buttonSpecT3.Values.Heading = "Disabled";
             this.buttonSpecT3.Values.Image = null;
-            // 
+            //
             // buttonSpecAny28
-            // 
+            //
             this.buttonSpecAny28.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny28.UniqueName = "5C9E40DBFF67472B5C9E40DBFF67472B";
-            // 
+            //
             // buttonSpecAny27
-            // 
+            //
             this.buttonSpecAny27.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny27.UniqueName = "D083298345F74B62D083298345F74B62";
-            // 
+            //
             // buttonSpecAny26
-            // 
+            //
             this.buttonSpecAny26.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny26.UniqueName = "18769F9D74FB47A118769F9D74FB47A1";
-            // 
+            //
             // buttonSpecAny25
-            // 
+            //
             this.buttonSpecAny25.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny25.UniqueName = "3E7909E2B5C64C4A3E7909E2B5C64C4A";
-            // 
+            //
             // buttonSpecAny9
-            // 
+            //
             this.buttonSpecAny9.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny9.UniqueName = "9C7B8F356F214F419C7B8F356F214F41";
-            // 
+            //
             // buttonSpecAny10
-            // 
+            //
             this.buttonSpecAny10.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny10.UniqueName = "8BF5656D58804D618BF5656D58804D61";
-            // 
+            //
             // buttonSpecAny11
-            // 
+            //
             this.buttonSpecAny11.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny11.UniqueName = "D9FC19B53D634F19D9FC19B53D634F19";
-            // 
+            //
             // buttonSpecAny12
-            // 
+            //
             this.buttonSpecAny12.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny12.UniqueName = "C34EAD69BFAF4CD4C34EAD69BFAF4CD4";
-            // 
+            //
             // buttonSpecAny61
-            // 
+            //
             this.buttonSpecAny61.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny61.UniqueName = "B14387545DF641EEFEA7734ED77BAFA2";
-            // 
+            //
             // buttonSpecAny62
-            // 
+            //
             this.buttonSpecAny62.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny62.UniqueName = "7F6783F61FEF4D2F01BC70A81AF20DF4";
-            // 
+            //
             // buttonSpecAny41
-            // 
+            //
             this.buttonSpecAny41.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny41.UniqueName = "28C3C35837724C5E28C3C35837724C5E";
-            // 
+            //
             // buttonSpecAny42
-            // 
+            //
             this.buttonSpecAny42.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny42.UniqueName = "33FE2E62F13B445E33FE2E62F13B445E";
-            // 
+            //
             // buttonSpecAny43
-            // 
+            //
             this.buttonSpecAny43.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny43.UniqueName = "4E04DE795D1C43FF4E04DE795D1C43FF";
-            // 
+            //
             // buttonSpecAny44
-            // 
+            //
             this.buttonSpecAny44.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny44.UniqueName = "DCFF5679445B46E0DCFF5679445B46E0";
-            // 
+            //
             // buttonSpecAny53
-            // 
+            //
             this.buttonSpecAny53.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny53.UniqueName = "3C6A9576CC634DA73C6A9576CC634DA7";
-            // 
+            //
             // buttonSpecAny54
-            // 
+            //
             this.buttonSpecAny54.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny54.UniqueName = "697C060DC92C491D697C060DC92C491D";
-            // 
+            //
             // buttonSpecT2
-            // 
+            //
             this.buttonSpecT2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecT2.ButtonSpecs.Add(this.buttonSpecAny24);
             this.buttonSpecT2.ButtonSpecs.Add(this.buttonSpecAny23);
@@ -2043,89 +2062,89 @@ namespace PaletteDesigner
             this.buttonSpecT2.Values.Description = "";
             this.buttonSpecT2.Values.Heading = "Header2";
             this.buttonSpecT2.Values.Image = null;
-            // 
+            //
             // buttonSpecAny24
-            // 
+            //
             this.buttonSpecAny24.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny24.UniqueName = "DCE3DBB8ECB948C9DCE3DBB8ECB948C9";
-            // 
+            //
             // buttonSpecAny23
-            // 
+            //
             this.buttonSpecAny23.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny23.UniqueName = "E3137CCE36FF4E11E3137CCE36FF4E11";
-            // 
+            //
             // buttonSpecAny22
-            // 
+            //
             this.buttonSpecAny22.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny22.UniqueName = "1DD7F90A3C0A494C1DD7F90A3C0A494C";
-            // 
+            //
             // buttonSpecAny21
-            // 
+            //
             this.buttonSpecAny21.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny21.UniqueName = "2E2FC7337157478F2E2FC7337157478F";
-            // 
+            //
             // buttonSpecAny5
-            // 
+            //
             this.buttonSpecAny5.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny5.UniqueName = "064B5F1CCCC24795064B5F1CCCC24795";
-            // 
+            //
             // buttonSpecAny6
-            // 
+            //
             this.buttonSpecAny6.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny6.UniqueName = "519EBD952A024210519EBD952A024210";
-            // 
+            //
             // buttonSpecAny7
-            // 
+            //
             this.buttonSpecAny7.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny7.UniqueName = "C7D28483934446A6C7D28483934446A6";
-            // 
+            //
             // buttonSpecAny8
-            // 
+            //
             this.buttonSpecAny8.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny8.UniqueName = "1B2D8870C92F453F1B2D8870C92F453F";
-            // 
+            //
             // buttonSpecAny59
-            // 
+            //
             this.buttonSpecAny59.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny59.UniqueName = "B2E349E046DE4EFDE0A61BF0F55DF83C";
-            // 
+            //
             // buttonSpecAny60
-            // 
+            //
             this.buttonSpecAny60.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny60.UniqueName = "E11D4FD39CFF46FEC3859CFE529C0B20";
-            // 
+            //
             // buttonSpecAny33
-            // 
+            //
             this.buttonSpecAny33.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny33.UniqueName = "D8799F9F897E4AE4D8799F9F897E4AE4";
-            // 
+            //
             // buttonSpecAny38
-            // 
+            //
             this.buttonSpecAny38.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny38.UniqueName = "B6D5E93171BF47A4B6D5E93171BF47A4";
-            // 
+            //
             // buttonSpecAny39
-            // 
+            //
             this.buttonSpecAny39.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny39.UniqueName = "72C99E766FCF4E2072C99E766FCF4E20";
-            // 
+            //
             // buttonSpecAny40
-            // 
+            //
             this.buttonSpecAny40.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny40.UniqueName = "2C9A72BD23954DD82C9A72BD23954DD8";
-            // 
+            //
             // buttonSpecAny47
-            // 
+            //
             this.buttonSpecAny47.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny47.UniqueName = "B5F9E4469C2846FDB5F9E4469C2846FD";
-            // 
+            //
             // buttonSpecAny52
-            // 
+            //
             this.buttonSpecAny52.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny52.UniqueName = "0EFF1D41CC604FD00EFF1D41CC604FD0";
-            // 
+            //
             // buttonSpecT1
-            // 
+            //
             this.buttonSpecT1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.buttonSpecT1.ButtonSpecs.Add(this.buttonSpecAny20);
             this.buttonSpecT1.ButtonSpecs.Add(this.buttonSpecAny19);
@@ -2150,107 +2169,107 @@ namespace PaletteDesigner
             this.buttonSpecT1.Values.Description = "";
             this.buttonSpecT1.Values.Heading = "Header1";
             this.buttonSpecT1.Values.Image = null;
-            // 
+            //
             // buttonSpecAny20
-            // 
+            //
             this.buttonSpecAny20.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny20.UniqueName = "AF08F29D8981468DAF08F29D8981468D";
-            // 
+            //
             // buttonSpecAny19
-            // 
+            //
             this.buttonSpecAny19.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
             this.buttonSpecAny19.UniqueName = "F74ABC1CB84F4403F74ABC1CB84F4403";
-            // 
+            //
             // buttonSpecAny18
-            // 
+            //
             this.buttonSpecAny18.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowRight;
             this.buttonSpecAny18.UniqueName = "DB5F0890BC944C98DB5F0890BC944C98";
-            // 
+            //
             // buttonSpecAny17
-            // 
+            //
             this.buttonSpecAny17.Type = Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
             this.buttonSpecAny17.UniqueName = "F53F319649A04B9AF53F319649A04B9A";
-            // 
+            //
             // buttonSpecAny4
-            // 
+            //
             this.buttonSpecAny4.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
             this.buttonSpecAny4.UniqueName = "FF0A19FAD5324D8DFF0A19FAD5324D8D";
-            // 
+            //
             // buttonSpecAny3
-            // 
+            //
             this.buttonSpecAny3.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Next;
             this.buttonSpecAny3.UniqueName = "F73579B2DA6348C5F73579B2DA6348C5";
-            // 
+            //
             // buttonSpecAny2
-            // 
+            //
             this.buttonSpecAny2.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny2.UniqueName = "30AB8A391A3D474930AB8A391A3D4749";
-            // 
+            //
             // buttonSpecAny1
-            // 
+            //
             this.buttonSpecAny1.Type = Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "AF4C13CF1AA14B78AF4C13CF1AA14B78";
-            // 
+            //
             // buttonSpecAny57
-            // 
+            //
             this.buttonSpecAny57.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonExpand;
             this.buttonSpecAny57.UniqueName = "7D09362B81C6477B638F653E2A5E0A75";
-            // 
+            //
             // buttonSpecAny58
-            // 
+            //
             this.buttonSpecAny58.Type = Krypton.Toolkit.PaletteButtonSpecStyle.RibbonMinimize;
             this.buttonSpecAny58.UniqueName = "98A4817C07FE4AC3E2A1235FA4CD6FD8";
-            // 
+            //
             // buttonSpecAny34
-            // 
+            //
             this.buttonSpecAny34.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
             this.buttonSpecAny34.UniqueName = "0318BFE0697946700318BFE069794670";
-            // 
+            //
             // buttonSpecAny35
-            // 
+            //
             this.buttonSpecAny35.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormMax;
             this.buttonSpecAny35.UniqueName = "2161BA5EA78E40872161BA5EA78E4087";
-            // 
+            //
             // buttonSpecAny36
-            // 
+            //
             this.buttonSpecAny36.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormRestore;
             this.buttonSpecAny36.UniqueName = "6576F4A3796842596576F4A379684259";
-            // 
+            //
             // buttonSpecAny37
-            // 
+            //
             this.buttonSpecAny37.Type = Krypton.Toolkit.PaletteButtonSpecStyle.FormClose;
             this.buttonSpecAny37.UniqueName = "6869A67401AF4E146869A67401AF4E14";
-            // 
+            //
             // buttonSpecAny46
-            // 
+            //
             this.buttonSpecAny46.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinHorizontal;
             this.buttonSpecAny46.UniqueName = "633E45685BE04C5C633E45685BE04C5C";
-            // 
+            //
             // buttonSpecAny45
-            // 
+            //
             this.buttonSpecAny45.Type = Krypton.Toolkit.PaletteButtonSpecStyle.PinVertical;
             this.buttonSpecAny45.UniqueName = "800E16C661F74C02800E16C661F74C02";
-            // 
+            //
             // labelButtonSpecsTyped
-            // 
+            //
             this.labelButtonSpecsTyped.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelButtonSpecsTyped.Location = new System.Drawing.Point(18, 24);
             this.labelButtonSpecsTyped.Name = "labelButtonSpecsTyped";
             this.labelButtonSpecsTyped.Size = new System.Drawing.Size(172, 29);
             this.labelButtonSpecsTyped.TabIndex = 29;
             this.labelButtonSpecsTyped.Values.Text = "Typed ButtonSpec";
-            // 
+            //
             // labelButtonSpecsGeneric
-            // 
+            //
             this.labelButtonSpecsGeneric.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelButtonSpecsGeneric.Location = new System.Drawing.Point(18, 244);
             this.labelButtonSpecsGeneric.Name = "labelButtonSpecsGeneric";
             this.labelButtonSpecsGeneric.Size = new System.Drawing.Size(184, 29);
             this.labelButtonSpecsGeneric.TabIndex = 30;
             this.labelButtonSpecsGeneric.Values.Text = "Generic ButtonSpec";
-            // 
+            //
             // pageDesignButtons
-            // 
+            //
             this.pageDesignButtons.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignButtons.Controls.Add(this.buttonsPage1);
             this.pageDesignButtons.Flags = 65535;
@@ -2267,18 +2286,18 @@ namespace PaletteDesigner
             this.pageDesignButtons.TextTitle = "Standalone";
             this.pageDesignButtons.ToolTipTitle = "Page ToolTip";
             this.pageDesignButtons.UniqueName = "5F8CCF195F9E4E775F8CCF195F9E4E77";
-            // 
+            //
             // buttonsPage1
-            // 
+            //
             this.buttonsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonsPage1.Location = new System.Drawing.Point(0, 0);
             this.buttonsPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonsPage1.Name = "buttonsPage1";
             this.buttonsPage1.Size = new System.Drawing.Size(643, 546);
             this.buttonsPage1.TabIndex = 0;
-            // 
+            //
             // pageDesignCheckBox
-            // 
+            //
             this.pageDesignCheckBox.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignCheckBox.Controls.Add(this.cbLive);
             this.pageDesignCheckBox.Controls.Add(this.cbFocus);
@@ -2307,9 +2326,9 @@ namespace PaletteDesigner
             this.pageDesignCheckBox.TextTitle = "";
             this.pageDesignCheckBox.ToolTipTitle = "Page ToolTip";
             this.pageDesignCheckBox.UniqueName = "AC64FA4302814AFBAC64FA4302814AFB";
-            // 
+            //
             // cbLive
-            // 
+            //
             this.cbLive.Checked = true;
             this.cbLive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbLive.Location = new System.Drawing.Point(205, 228);
@@ -2318,17 +2337,17 @@ namespace PaletteDesigner
             this.cbLive.TabIndex = 14;
             this.cbLive.ThreeState = true;
             this.cbLive.Values.Text = "Live";
-            // 
+            //
             // cbFocus
-            // 
+            //
             this.cbFocus.Location = new System.Drawing.Point(205, 190);
             this.cbFocus.Name = "cbFocus";
             this.cbFocus.Size = new System.Drawing.Size(55, 20);
             this.cbFocus.TabIndex = 13;
             this.cbFocus.Values.Text = "Focus";
-            // 
+            //
             // cbIndeterminateTracking
-            // 
+            //
             this.cbIndeterminateTracking.Checked = true;
             this.cbIndeterminateTracking.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIndeterminateTracking.Location = new System.Drawing.Point(23, 266);
@@ -2336,9 +2355,9 @@ namespace PaletteDesigner
             this.cbIndeterminateTracking.Size = new System.Drawing.Size(150, 20);
             this.cbIndeterminateTracking.TabIndex = 12;
             this.cbIndeterminateTracking.Values.Text = "Indeterminate Tracking";
-            // 
+            //
             // cbIndeterminatePressed
-            // 
+            //
             this.cbIndeterminatePressed.Checked = true;
             this.cbIndeterminatePressed.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIndeterminatePressed.Location = new System.Drawing.Point(23, 304);
@@ -2346,9 +2365,9 @@ namespace PaletteDesigner
             this.cbIndeterminatePressed.Size = new System.Drawing.Size(145, 20);
             this.cbIndeterminatePressed.TabIndex = 11;
             this.cbIndeterminatePressed.Values.Text = "Indeterminate Pressed";
-            // 
+            //
             // cbIndeterminateNormal
-            // 
+            //
             this.cbIndeterminateNormal.Checked = true;
             this.cbIndeterminateNormal.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIndeterminateNormal.Location = new System.Drawing.Point(23, 228);
@@ -2356,9 +2375,9 @@ namespace PaletteDesigner
             this.cbIndeterminateNormal.Size = new System.Drawing.Size(144, 20);
             this.cbIndeterminateNormal.TabIndex = 10;
             this.cbIndeterminateNormal.Values.Text = "Indeterminate Normal";
-            // 
+            //
             // cbIndeterminateDisabled
-            // 
+            //
             this.cbIndeterminateDisabled.Checked = true;
             this.cbIndeterminateDisabled.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIndeterminateDisabled.Location = new System.Drawing.Point(23, 190);
@@ -2366,9 +2385,9 @@ namespace PaletteDesigner
             this.cbIndeterminateDisabled.Size = new System.Drawing.Size(151, 20);
             this.cbIndeterminateDisabled.TabIndex = 9;
             this.cbIndeterminateDisabled.Values.Text = "Indeterminate Disabled";
-            // 
+            //
             // cbCheckedTracking
-            // 
+            //
             this.cbCheckedTracking.Checked = true;
             this.cbCheckedTracking.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCheckedTracking.Location = new System.Drawing.Point(205, 99);
@@ -2376,9 +2395,9 @@ namespace PaletteDesigner
             this.cbCheckedTracking.Size = new System.Drawing.Size(120, 20);
             this.cbCheckedTracking.TabIndex = 8;
             this.cbCheckedTracking.Values.Text = "Checked Tracking";
-            // 
+            //
             // cbCheckedPressed
-            // 
+            //
             this.cbCheckedPressed.Checked = true;
             this.cbCheckedPressed.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCheckedPressed.Location = new System.Drawing.Point(205, 137);
@@ -2386,9 +2405,9 @@ namespace PaletteDesigner
             this.cbCheckedPressed.Size = new System.Drawing.Size(115, 20);
             this.cbCheckedPressed.TabIndex = 7;
             this.cbCheckedPressed.Values.Text = "Checked Pressed";
-            // 
+            //
             // cbCheckedNormal
-            // 
+            //
             this.cbCheckedNormal.Checked = true;
             this.cbCheckedNormal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCheckedNormal.Location = new System.Drawing.Point(205, 61);
@@ -2396,9 +2415,9 @@ namespace PaletteDesigner
             this.cbCheckedNormal.Size = new System.Drawing.Size(114, 20);
             this.cbCheckedNormal.TabIndex = 6;
             this.cbCheckedNormal.Values.Text = "Checked Normal";
-            // 
+            //
             // cbCheckedDisabled
-            // 
+            //
             this.cbCheckedDisabled.Checked = true;
             this.cbCheckedDisabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCheckedDisabled.Location = new System.Drawing.Point(205, 23);
@@ -2406,49 +2425,49 @@ namespace PaletteDesigner
             this.cbCheckedDisabled.Size = new System.Drawing.Size(121, 20);
             this.cbCheckedDisabled.TabIndex = 5;
             this.cbCheckedDisabled.Values.Text = "Checked Disabled";
-            // 
+            //
             // cbUncheckedTracking
-            // 
+            //
             this.cbUncheckedTracking.Location = new System.Drawing.Point(23, 99);
             this.cbUncheckedTracking.Name = "cbUncheckedTracking";
             this.cbUncheckedTracking.Size = new System.Drawing.Size(133, 20);
             this.cbUncheckedTracking.TabIndex = 4;
             this.cbUncheckedTracking.Values.Text = "Unchecked Tracking";
-            // 
+            //
             // cbUncheckedPressed
-            // 
+            //
             this.cbUncheckedPressed.Location = new System.Drawing.Point(23, 137);
             this.cbUncheckedPressed.Name = "cbUncheckedPressed";
             this.cbUncheckedPressed.Size = new System.Drawing.Size(129, 20);
             this.cbUncheckedPressed.TabIndex = 3;
             this.cbUncheckedPressed.Values.Text = "Unchecked Pressed";
-            // 
+            //
             // cbUncheckedNormal
-            // 
+            //
             this.cbUncheckedNormal.Location = new System.Drawing.Point(23, 61);
             this.cbUncheckedNormal.Name = "cbUncheckedNormal";
             this.cbUncheckedNormal.Size = new System.Drawing.Size(128, 20);
             this.cbUncheckedNormal.TabIndex = 2;
             this.cbUncheckedNormal.Values.Text = "Unchecked Normal";
-            // 
+            //
             // cbUncheckedDisabled
-            // 
+            //
             this.cbUncheckedDisabled.Location = new System.Drawing.Point(23, 23);
             this.cbUncheckedDisabled.Name = "cbUncheckedDisabled";
             this.cbUncheckedDisabled.Size = new System.Drawing.Size(134, 20);
             this.cbUncheckedDisabled.TabIndex = 1;
             this.cbUncheckedDisabled.Values.Text = "Unchecked Disabled";
-            // 
+            //
             // kryptonCheckBox1
-            // 
+            //
             this.kryptonCheckBox1.Location = new System.Drawing.Point(880, 29);
             this.kryptonCheckBox1.Name = "kryptonCheckBox1";
             this.kryptonCheckBox1.Size = new System.Drawing.Size(134, 20);
             this.kryptonCheckBox1.TabIndex = 0;
             this.kryptonCheckBox1.Values.Text = "Unchecked Disabled";
-            // 
+            //
             // pageDesignChromeTMS
-            // 
+            //
             this.pageDesignChromeTMS.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignChromeTMS.Flags = 65535;
             this.pageDesignChromeTMS.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignChromeTMS.ImageLarge")));
@@ -2464,9 +2483,9 @@ namespace PaletteDesigner
             this.pageDesignChromeTMS.TextTitle = "";
             this.pageDesignChromeTMS.ToolTipTitle = "Page ToolTip";
             this.pageDesignChromeTMS.UniqueName = "988127D1979643E7988127D1979643E7";
-            // 
+            //
             // pageDesignGrid
-            // 
+            //
             this.pageDesignGrid.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignGrid.Controls.Add(this.dataGridViewDisabled);
             this.pageDesignGrid.Controls.Add(this.labelGridDisabled);
@@ -2485,9 +2504,9 @@ namespace PaletteDesigner
             this.pageDesignGrid.TextTitle = "List";
             this.pageDesignGrid.ToolTipTitle = "Page ToolTip";
             this.pageDesignGrid.UniqueName = "7D705293CDE747FF7D705293CDE747FF";
-            // 
+            //
             // dataGridViewDisabled
-            // 
+            //
             this.dataGridViewDisabled.AutoGenerateColumns = false;
             this.dataGridViewDisabled.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewDisabled.ColumnHeadersHeight = 36;
@@ -2503,68 +2522,68 @@ namespace PaletteDesigner
             this.dataGridViewDisabled.RowHeadersWidth = 51;
             this.dataGridViewDisabled.Size = new System.Drawing.Size(308, 136);
             this.dataGridViewDisabled.TabIndex = 21;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn4
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn4.DataPropertyName = "Column1";
             this.kryptonDataGridViewTextBoxColumn4.HeaderText = "Column1";
             this.kryptonDataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn4.Name = "kryptonDataGridViewTextBoxColumn4";
             this.kryptonDataGridViewTextBoxColumn4.Width = 75;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn5
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn5.DataPropertyName = "Column2";
             this.kryptonDataGridViewTextBoxColumn5.HeaderText = "Column2";
             this.kryptonDataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn5.Name = "kryptonDataGridViewTextBoxColumn5";
             this.kryptonDataGridViewTextBoxColumn5.Width = 75;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn6
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn6.DataPropertyName = "Column3";
             this.kryptonDataGridViewTextBoxColumn6.HeaderText = "Column3";
             this.kryptonDataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn6.Name = "kryptonDataGridViewTextBoxColumn6";
             this.kryptonDataGridViewTextBoxColumn6.Width = 75;
-            // 
+            //
             // dataSetGrid
-            // 
+            //
             this.dataSetGrid.DataSetName = "NewDataSet";
             this.dataSetGrid.Tables.AddRange(new System.Data.DataTable[] {
             this.dataTable1});
-            // 
+            //
             // dataTable1
-            // 
+            //
             this.dataTable1.Columns.AddRange(new System.Data.DataColumn[] {
             this.dataColumn1,
             this.dataColumn2,
             this.dataColumn3});
             this.dataTable1.Namespace = "";
             this.dataTable1.TableName = "Table1";
-            // 
+            //
             // dataColumn1
-            // 
+            //
             this.dataColumn1.Caption = "Column1";
             this.dataColumn1.ColumnName = "Column1";
             this.dataColumn1.Namespace = "";
-            // 
+            //
             // dataColumn2
-            // 
+            //
             this.dataColumn2.Caption = "Column2";
             this.dataColumn2.ColumnName = "Column2";
             this.dataColumn2.Namespace = "";
-            // 
+            //
             // dataColumn3
-            // 
+            //
             this.dataColumn3.Caption = "Column3";
             this.dataColumn3.ColumnName = "Column3";
             this.dataColumn3.Namespace = "";
-            // 
+            //
             // labelGridDisabled
-            // 
-            this.labelGridDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelGridDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelGridDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelGridDisabled.Location = new System.Drawing.Point(100, 219);
@@ -2573,11 +2592,11 @@ namespace PaletteDesigner
             this.labelGridDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelGridDisabled.TabIndex = 22;
             this.labelGridDisabled.Values.Text = "Disabled";
-            // 
+            //
             // kryptonLabel2
-            // 
-            this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel2.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel2.Location = new System.Drawing.Point(999, 401);
@@ -2586,11 +2605,11 @@ namespace PaletteDesigner
             this.kryptonLabel2.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel2.TabIndex = 23;
             this.kryptonLabel2.Values.Text = "Normal";
-            // 
+            //
             // kryptonLabel1
-            // 
-            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel1.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel1.Location = new System.Drawing.Point(100, 24);
@@ -2599,9 +2618,9 @@ namespace PaletteDesigner
             this.kryptonLabel1.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Normal";
-            // 
+            //
             // dataGridViewNormal
-            // 
+            //
             this.dataGridViewNormal.AutoGenerateColumns = false;
             this.dataGridViewNormal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewNormal.ColumnHeadersHeight = 36;
@@ -2616,33 +2635,33 @@ namespace PaletteDesigner
             this.dataGridViewNormal.RowHeadersWidth = 51;
             this.dataGridViewNormal.Size = new System.Drawing.Size(308, 136);
             this.dataGridViewNormal.TabIndex = 2;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn1
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn1.DataPropertyName = "Column1";
             this.kryptonDataGridViewTextBoxColumn1.HeaderText = "Column1";
             this.kryptonDataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
             this.kryptonDataGridViewTextBoxColumn1.Width = 75;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn2
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn2.DataPropertyName = "Column2";
             this.kryptonDataGridViewTextBoxColumn2.HeaderText = "Column2";
             this.kryptonDataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
             this.kryptonDataGridViewTextBoxColumn2.Width = 75;
-            // 
+            //
             // kryptonDataGridViewTextBoxColumn3
-            // 
+            //
             this.kryptonDataGridViewTextBoxColumn3.DataPropertyName = "Column3";
             this.kryptonDataGridViewTextBoxColumn3.HeaderText = "Column3";
             this.kryptonDataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.kryptonDataGridViewTextBoxColumn3.Name = "kryptonDataGridViewTextBoxColumn3";
             this.kryptonDataGridViewTextBoxColumn3.Width = 75;
-            // 
+            //
             // kryptonNavigatorDesignGrids
-            // 
+            //
             this.kryptonNavigatorDesignGrids.AutoSize = true;
             this.kryptonNavigatorDesignGrids.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignGrids.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -2689,9 +2708,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignGrids.TabIndex = 1;
             this.kryptonNavigatorDesignGrids.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignGrids.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignGrids_SelectedPageChanged);
-            // 
+            //
             // kryptonGridList
-            // 
+            //
             this.kryptonGridList.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonGridList.Flags = 65535;
             this.kryptonGridList.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridList.ImageLarge")));
@@ -2704,9 +2723,9 @@ namespace PaletteDesigner
             this.kryptonGridList.TextDescription = "List is the default grid style.";
             this.kryptonGridList.ToolTipTitle = "Page ToolTip";
             this.kryptonGridList.UniqueName = "7E5F74E3999D471E7E5F74E3999D471E";
-            // 
+            //
             // kryptonGridSheet
-            // 
+            //
             this.kryptonGridSheet.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonGridSheet.Flags = 65535;
             this.kryptonGridSheet.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridSheet.ImageLarge")));
@@ -2719,9 +2738,9 @@ namespace PaletteDesigner
             this.kryptonGridSheet.TextDescription = "Sheet is used when a worksheet style is required.";
             this.kryptonGridSheet.ToolTipTitle = "Page ToolTip";
             this.kryptonGridSheet.UniqueName = "39D1B70212CD455D39D1B70212CD455D";
-            // 
+            //
             // kryptonGridCustom1
-            // 
+            //
             this.kryptonGridCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonGridCustom1.Flags = 65535;
             this.kryptonGridCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonGridCustom1.ImageLarge")));
@@ -2734,9 +2753,9 @@ namespace PaletteDesigner
             this.kryptonGridCustom1.TextDescription = "Custom 1 style inherits from List and is intended for your own custom use.";
             this.kryptonGridCustom1.ToolTipTitle = "Page ToolTip";
             this.kryptonGridCustom1.UniqueName = "4BC73FB0DC704F514BC73FB0DC704F51";
-            // 
+            //
             // pageDesignHeaderGroup
-            // 
+            //
             this.pageDesignHeaderGroup.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignHeaderGroup.Controls.Add(this.labelHeaderGroupNormal);
             this.pageDesignHeaderGroup.Controls.Add(this.headerGroup1Disabled);
@@ -2755,9 +2774,9 @@ namespace PaletteDesigner
             this.pageDesignHeaderGroup.TextTitle = "";
             this.pageDesignHeaderGroup.ToolTipTitle = "Page ToolTip";
             this.pageDesignHeaderGroup.UniqueName = "CB297B68CBD74B36CB297B68CBD74B36";
-            // 
+            //
             // labelHeaderGroupNormal
-            // 
+            //
             this.labelHeaderGroupNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelHeaderGroupNormal.Location = new System.Drawing.Point(229, 23);
             this.labelHeaderGroupNormal.Name = "labelHeaderGroupNormal";
@@ -2765,16 +2784,16 @@ namespace PaletteDesigner
             this.labelHeaderGroupNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelHeaderGroupNormal.TabIndex = 0;
             this.labelHeaderGroupNormal.Values.Text = "Normal";
-            // 
+            //
             // headerGroup1Disabled
-            // 
+            //
             this.headerGroup1Disabled.Location = new System.Drawing.Point(28, 55);
             this.headerGroup1Disabled.Size = new System.Drawing.Size(158, 150);
             this.headerGroup1Disabled.TabIndex = 14;
             this.headerGroup1Disabled.ValuesPrimary.Image = ((System.Drawing.Image)(resources.GetObject("headerGroup1Disabled.ValuesPrimary.Image")));
-            // 
+            //
             // labelHeaderGroupDisabled
-            // 
+            //
             this.labelHeaderGroupDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelHeaderGroupDisabled.Location = new System.Drawing.Point(28, 23);
             this.labelHeaderGroupDisabled.Name = "labelHeaderGroupDisabled";
@@ -2782,16 +2801,16 @@ namespace PaletteDesigner
             this.labelHeaderGroupDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelHeaderGroupDisabled.TabIndex = 15;
             this.labelHeaderGroupDisabled.Values.Text = "Disabled";
-            // 
+            //
             // headerGroup1Normal
-            // 
+            //
             this.headerGroup1Normal.Location = new System.Drawing.Point(229, 55);
             this.headerGroup1Normal.Size = new System.Drawing.Size(158, 150);
             this.headerGroup1Normal.TabIndex = 17;
             this.headerGroup1Normal.ValuesPrimary.Image = ((System.Drawing.Image)(resources.GetObject("headerGroup1Normal.ValuesPrimary.Image")));
-            // 
+            //
             // pageDesignHeaders
-            // 
+            //
             this.pageDesignHeaders.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignHeaders.Controls.Add(this.header1Normal);
             this.pageDesignHeaders.Controls.Add(this.header1Disabled);
@@ -2810,9 +2829,9 @@ namespace PaletteDesigner
             this.pageDesignHeaders.TextTitle = "Primary";
             this.pageDesignHeaders.ToolTipTitle = "Page ToolTip";
             this.pageDesignHeaders.UniqueName = "33E0FA62E6E7438B33E0FA62E6E7438B";
-            // 
+            //
             // header1Normal
-            // 
+            //
             this.header1Normal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.header1Normal.HeaderStyle = Krypton.Toolkit.HeaderStyle.Secondary;
             this.header1Normal.Location = new System.Drawing.Point(125, 97);
@@ -2822,9 +2841,9 @@ namespace PaletteDesigner
             this.header1Normal.Values.Description = "Normal";
             this.header1Normal.Values.Heading = "Normal";
             this.header1Normal.Values.Image = ((System.Drawing.Image)(resources.GetObject("header1Normal.Values.Image")));
-            // 
+            //
             // header1Disabled
-            // 
+            //
             this.header1Disabled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.header1Disabled.Location = new System.Drawing.Point(125, 31);
             this.header1Disabled.Name = "header1Disabled";
@@ -2833,18 +2852,18 @@ namespace PaletteDesigner
             this.header1Disabled.Values.Description = "Disabled";
             this.header1Disabled.Values.Heading = "Disabled";
             this.header1Disabled.Values.Image = ((System.Drawing.Image)(resources.GetObject("header1Disabled.Values.Image")));
-            // 
+            //
             // borderDesignHeaders
-            // 
+            //
             this.borderDesignHeaders.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignHeaders.Location = new System.Drawing.Point(91, 0);
             this.borderDesignHeaders.Name = "borderDesignHeaders";
             this.borderDesignHeaders.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignHeaders.Size = new System.Drawing.Size(1, 524);
             this.borderDesignHeaders.TabIndex = 2;
-            // 
+            //
             // kryptonNavigatorDesignHeaders
-            // 
+            //
             this.kryptonNavigatorDesignHeaders.AutoSize = true;
             this.kryptonNavigatorDesignHeaders.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignHeaders.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -2896,9 +2915,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignHeaders.TabIndex = 0;
             this.kryptonNavigatorDesignHeaders.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignHeaders.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignHeaders_SelectedPageChanged);
-            // 
+            //
             // pageHeadersPrimary
-            // 
+            //
             this.pageHeadersPrimary.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersPrimary.Flags = 65535;
             this.pageHeadersPrimary.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersPrimary.ImageLarge")));
@@ -2911,9 +2930,9 @@ namespace PaletteDesigner
             this.pageHeadersPrimary.TextDescription = "Primary is intended for main headers that provide section titles.";
             this.pageHeadersPrimary.ToolTipTitle = "Page ToolTip";
             this.pageHeadersPrimary.UniqueName = "029BADD125B4480F029BADD125B4480F";
-            // 
+            //
             // pageHeadersSecondary
-            // 
+            //
             this.pageHeadersSecondary.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersSecondary.Flags = 65535;
             this.pageHeadersSecondary.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersSecondary.ImageLarge")));
@@ -2926,9 +2945,9 @@ namespace PaletteDesigner
             this.pageHeadersSecondary.TextDescription = "Secondary is intended for headers that provide subsiduary titles.";
             this.pageHeadersSecondary.ToolTipTitle = "Page ToolTip";
             this.pageHeadersSecondary.UniqueName = "2AC1A7E0307540202AC1A7E030754020";
-            // 
+            //
             // pageHeadersDockActive
-            // 
+            //
             this.pageHeadersDockActive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersDockActive.Flags = 65535;
             this.pageHeadersDockActive.LastVisibleSet = true;
@@ -2938,9 +2957,9 @@ namespace PaletteDesigner
             this.pageHeadersDockActive.Text = "Dock Active";
             this.pageHeadersDockActive.ToolTipTitle = "Page ToolTip";
             this.pageHeadersDockActive.UniqueName = "72D516AF5DB94F2872D516AF5DB94F28";
-            // 
+            //
             // pageHeadersDockInactive
-            // 
+            //
             this.pageHeadersDockInactive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersDockInactive.Flags = 65535;
             this.pageHeadersDockInactive.LastVisibleSet = true;
@@ -2950,9 +2969,9 @@ namespace PaletteDesigner
             this.pageHeadersDockInactive.Text = "Dock Inactive";
             this.pageHeadersDockInactive.ToolTipTitle = "Page ToolTip";
             this.pageHeadersDockInactive.UniqueName = "C2A22856527D4EADC2A22856527D4EAD";
-            // 
+            //
             // pageHeadersCalendar
-            // 
+            //
             this.pageHeadersCalendar.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersCalendar.Flags = 65535;
             this.pageHeadersCalendar.LastVisibleSet = true;
@@ -2963,9 +2982,9 @@ namespace PaletteDesigner
             this.pageHeadersCalendar.TextDescription = "Calendar is used by the header for each month within the month calendar.";
             this.pageHeadersCalendar.ToolTipTitle = "Page ToolTip";
             this.pageHeadersCalendar.UniqueName = "13FCD78E50BB452213FCD78E50BB4522";
-            // 
+            //
             // pageHeadersForm
-            // 
+            //
             this.pageHeadersForm.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersForm.Flags = 65535;
             this.pageHeadersForm.LastVisibleSet = true;
@@ -2976,9 +2995,9 @@ namespace PaletteDesigner
             this.pageHeadersForm.TextDescription = "Form style is used for a KryptonForm caption.";
             this.pageHeadersForm.ToolTipTitle = "Page ToolTip";
             this.pageHeadersForm.UniqueName = "DE94B0270ED04A76DE94B0270ED04A76";
-            // 
+            //
             // pageHeadersCustom1
-            // 
+            //
             this.pageHeadersCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersCustom1.Flags = 65535;
             this.pageHeadersCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom1.ImageLarge")));
@@ -2991,9 +3010,9 @@ namespace PaletteDesigner
             this.pageHeadersCustom1.TextDescription = "Custom 1 style inherits from Primary and is intended for your own custom use.";
             this.pageHeadersCustom1.ToolTipTitle = "Page ToolTip";
             this.pageHeadersCustom1.UniqueName = "6479999CC99C40C16479999CC99C40C1";
-            // 
+            //
             // pageHeadersCustom2
-            // 
+            //
             this.pageHeadersCustom2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageHeadersCustom2.Flags = 65535;
             this.pageHeadersCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageHeadersCustom2.ImageLarge")));
@@ -3006,9 +3025,9 @@ namespace PaletteDesigner
             this.pageHeadersCustom2.TextDescription = "Custom 2 style inherits from Primary and is intended for your own custom use.";
             this.pageHeadersCustom2.ToolTipTitle = "Page ToolTip";
             this.pageHeadersCustom2.UniqueName = "50874B0E8E3648F550874B0E8E3648F5";
-            // 
+            //
             // pageDesignDateTime
-            // 
+            //
             this.pageDesignDateTime.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignDateTime.Controls.Add(this.kryptonLabel6);
             this.pageDesignDateTime.Controls.Add(this.kryptonLabel7);
@@ -3024,11 +3043,11 @@ namespace PaletteDesigner
             this.pageDesignDateTime.TextTitle = "";
             this.pageDesignDateTime.ToolTipTitle = "Page ToolTip";
             this.pageDesignDateTime.UniqueName = "FABDD900CD914394FABDD900CD914394";
-            // 
+            //
             // kryptonLabel6
-            // 
-            this.kryptonLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.kryptonLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel6.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel6.Location = new System.Drawing.Point(24, 21);
@@ -3037,11 +3056,11 @@ namespace PaletteDesigner
             this.kryptonLabel6.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel6.TabIndex = 0;
             this.kryptonLabel6.Values.Text = "Normal";
-            // 
+            //
             // kryptonLabel7
-            // 
-            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonLabel7.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.kryptonLabel7.Location = new System.Drawing.Point(24, 268);
@@ -3050,9 +3069,9 @@ namespace PaletteDesigner
             this.kryptonLabel7.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonLabel7.TabIndex = 1;
             this.kryptonLabel7.Values.Text = "Disabled";
-            // 
+            //
             // monthCalendarDisabled
-            // 
+            //
             this.monthCalendarDisabled.Enabled = false;
             this.monthCalendarDisabled.Location = new System.Drawing.Point(24, 303);
             this.monthCalendarDisabled.Name = "monthCalendarDisabled";
@@ -3062,9 +3081,9 @@ namespace PaletteDesigner
             this.monthCalendarDisabled.Size = new System.Drawing.Size(259, 182);
             this.monthCalendarDisabled.TabIndex = 1;
             this.monthCalendarDisabled.TodayDate = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
-            // 
+            //
             // monthCalendarEnabled
-            // 
+            //
             this.monthCalendarEnabled.Location = new System.Drawing.Point(24, 55);
             this.monthCalendarEnabled.Name = "monthCalendarEnabled";
             this.monthCalendarEnabled.SelectionEnd = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
@@ -3073,9 +3092,9 @@ namespace PaletteDesigner
             this.monthCalendarEnabled.Size = new System.Drawing.Size(259, 182);
             this.monthCalendarEnabled.TabIndex = 0;
             this.monthCalendarEnabled.TodayDate = new System.DateTime(2009, 7, 24, 0, 0, 0, 0);
-            // 
+            //
             // pageDesignLabels
-            // 
+            //
             this.pageDesignLabels.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignLabels.Controls.Add(this.labelsControlToolTip);
             this.pageDesignLabels.Controls.Add(this.labelsControlCustom1);
@@ -3097,9 +3116,9 @@ namespace PaletteDesigner
             this.pageDesignLabels.TextTitle = "Normal";
             this.pageDesignLabels.ToolTipTitle = "Page ToolTip";
             this.pageDesignLabels.UniqueName = "A67BA3ECD78B4145A67BA3ECD78B4145";
-            // 
+            //
             // labelsControlToolTip
-            // 
+            //
             this.labelsControlToolTip.AutoSize = true;
             this.labelsControlToolTip.Location = new System.Drawing.Point(322, 213);
             this.labelsControlToolTip.Name = "labelsControlToolTip";
@@ -3107,9 +3126,9 @@ namespace PaletteDesigner
             this.labelsControlToolTip.TabIndex = 29;
             this.labelsControlToolTip.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlToolTip.Values.Text = "Control - ToolTip";
-            // 
+            //
             // labelsControlCustom1
-            // 
+            //
             this.labelsControlCustom1.AutoSize = true;
             this.labelsControlCustom1.Location = new System.Drawing.Point(322, 250);
             this.labelsControlCustom1.Name = "labelsControlCustom1";
@@ -3117,9 +3136,9 @@ namespace PaletteDesigner
             this.labelsControlCustom1.TabIndex = 28;
             this.labelsControlCustom1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlCustom1.Values.Text = "Control - Custom 1";
-            // 
+            //
             // labelsControlAlternate
-            // 
+            //
             this.labelsControlAlternate.AutoSize = true;
             this.labelsControlAlternate.Location = new System.Drawing.Point(322, 176);
             this.labelsControlAlternate.Name = "labelsControlAlternate";
@@ -3127,9 +3146,9 @@ namespace PaletteDesigner
             this.labelsControlAlternate.TabIndex = 27;
             this.labelsControlAlternate.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlAlternate.Values.Text = "Control - Alternate";
-            // 
+            //
             // labelsControlClient
-            // 
+            //
             this.labelsControlClient.AutoSize = true;
             this.labelsControlClient.Location = new System.Drawing.Point(322, 139);
             this.labelsControlClient.Name = "labelsControlClient";
@@ -3137,9 +3156,9 @@ namespace PaletteDesigner
             this.labelsControlClient.TabIndex = 26;
             this.labelsControlClient.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsControlClient.Values.Text = "Control - Client";
-            // 
+            //
             // labelsPanelCustom1
-            // 
+            //
             this.labelsPanelCustom1.AutoSize = true;
             this.labelsPanelCustom1.Location = new System.Drawing.Point(322, 102);
             this.labelsPanelCustom1.Name = "labelsPanelCustom1";
@@ -3147,9 +3166,9 @@ namespace PaletteDesigner
             this.labelsPanelCustom1.TabIndex = 25;
             this.labelsPanelCustom1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelCustom1.Values.Text = "Panel - Custom 1";
-            // 
+            //
             // labelsPanelAlternate
-            // 
+            //
             this.labelsPanelAlternate.AutoSize = true;
             this.labelsPanelAlternate.Location = new System.Drawing.Point(322, 65);
             this.labelsPanelAlternate.Name = "labelsPanelAlternate";
@@ -3157,9 +3176,9 @@ namespace PaletteDesigner
             this.labelsPanelAlternate.TabIndex = 24;
             this.labelsPanelAlternate.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelAlternate.Values.Text = "Panel - Alternate";
-            // 
+            //
             // labelsPanelClient
-            // 
+            //
             this.labelsPanelClient.AutoSize = true;
             this.labelsPanelClient.Checked = true;
             this.labelsPanelClient.Location = new System.Drawing.Point(322, 28);
@@ -3168,9 +3187,9 @@ namespace PaletteDesigner
             this.labelsPanelClient.TabIndex = 23;
             this.labelsPanelClient.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.labelsPanelClient.Values.Text = "Panel - Client";
-            // 
+            //
             // panelLabelsBackground
-            // 
+            //
             this.panelLabelsBackground.Controls.Add(this.label1Disabled);
             this.panelLabelsBackground.Controls.Add(this.label1Live);
             this.panelLabelsBackground.Controls.Add(this.label1Normal);
@@ -3181,9 +3200,9 @@ namespace PaletteDesigner
             this.panelLabelsBackground.Name = "panelLabelsBackground";
             this.panelLabelsBackground.Size = new System.Drawing.Size(179, 302);
             this.panelLabelsBackground.TabIndex = 22;
-            // 
+            //
             // label1Disabled
-            // 
+            //
             this.label1Disabled.Enabled = false;
             this.label1Disabled.Location = new System.Drawing.Point(10, 21);
             this.label1Disabled.Name = "label1Disabled";
@@ -3192,9 +3211,9 @@ namespace PaletteDesigner
             this.label1Disabled.Values.ExtraText = "(Label)";
             this.label1Disabled.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
             this.label1Disabled.Values.Text = "Disabled";
-            // 
+            //
             // label1Live
-            // 
+            //
             this.label1Live.Location = new System.Drawing.Point(10, 256);
             this.label1Live.Name = "label1Live";
             this.label1Live.Size = new System.Drawing.Size(113, 20);
@@ -3202,9 +3221,9 @@ namespace PaletteDesigner
             this.label1Live.Values.ExtraText = "(LinkLabel)";
             this.label1Live.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Live.Values.Image")));
             this.label1Live.Values.Text = "Live";
-            // 
+            //
             // label1Normal
-            // 
+            //
             this.label1Normal.Enabled = false;
             this.label1Normal.Location = new System.Drawing.Point(10, 68);
             this.label1Normal.Name = "label1Normal";
@@ -3213,9 +3232,9 @@ namespace PaletteDesigner
             this.label1Normal.Values.ExtraText = "(Label)";
             this.label1Normal.Values.Image = global::PaletteDesigner.Properties.Resources.environment;
             this.label1Normal.Values.Text = "Normal";
-            // 
+            //
             // label1Pressed
-            // 
+            //
             this.label1Pressed.Enabled = false;
             this.label1Pressed.Location = new System.Drawing.Point(10, 210);
             this.label1Pressed.Name = "label1Pressed";
@@ -3224,9 +3243,9 @@ namespace PaletteDesigner
             this.label1Pressed.Values.ExtraText = "(LinkLabel)";
             this.label1Pressed.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Pressed.Values.Image")));
             this.label1Pressed.Values.Text = "Pressed";
-            // 
+            //
             // label1NotVisited
-            // 
+            //
             this.label1NotVisited.Enabled = false;
             this.label1NotVisited.Location = new System.Drawing.Point(10, 115);
             this.label1NotVisited.Name = "label1NotVisited";
@@ -3235,9 +3254,9 @@ namespace PaletteDesigner
             this.label1NotVisited.Values.ExtraText = "(LinkLabel)";
             this.label1NotVisited.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1NotVisited.Values.Image")));
             this.label1NotVisited.Values.Text = "NotVisited";
-            // 
+            //
             // label1Visited
-            // 
+            //
             this.label1Visited.Enabled = false;
             this.label1Visited.LinkVisited = true;
             this.label1Visited.Location = new System.Drawing.Point(10, 162);
@@ -3247,18 +3266,18 @@ namespace PaletteDesigner
             this.label1Visited.Values.ExtraText = "(LinkLabel)";
             this.label1Visited.Values.Image = ((System.Drawing.Image)(resources.GetObject("label1Visited.Values.Image")));
             this.label1Visited.Values.Text = "Visited";
-            // 
+            //
             // borderDesignLabels
-            // 
+            //
             this.borderDesignLabels.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignLabels.Location = new System.Drawing.Point(111, 0);
             this.borderDesignLabels.Name = "borderDesignLabels";
             this.borderDesignLabels.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignLabels.Size = new System.Drawing.Size(1, 546);
             this.borderDesignLabels.TabIndex = 2;
-            // 
+            //
             // kryptonNavigatorDesignLabels
-            // 
+            //
             this.kryptonNavigatorDesignLabels.AutoSize = true;
             this.kryptonNavigatorDesignLabels.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignLabels.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -3317,9 +3336,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignLabels.TabIndex = 0;
             this.kryptonNavigatorDesignLabels.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignLabels.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignLabels_SelectedPageChanged);
-            // 
+            //
             // pageLabelsNormalControl
-            // 
+            //
             this.pageLabelsNormalControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsNormalControl.Flags = 65535;
             this.pageLabelsNormalControl.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsNormalControl.ImageLarge")));
@@ -3332,9 +3351,9 @@ namespace PaletteDesigner
             this.pageLabelsNormalControl.TextDescription = "Normal is appropriate for standard control labelling on control background.";
             this.pageLabelsNormalControl.ToolTipTitle = "Page ToolTip";
             this.pageLabelsNormalControl.UniqueName = "D99435D742664C78D99435D742664C78";
-            // 
+            //
             // pageLabelsBoldControl
-            // 
+            //
             this.pageLabelsBoldControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsBoldControl.Flags = 65534;
             this.pageLabelsBoldControl.LastVisibleSet = true;
@@ -3345,9 +3364,9 @@ namespace PaletteDesigner
             this.pageLabelsBoldControl.TextDescription = "Bold is appropriate for a title labelling on control background.";
             this.pageLabelsBoldControl.ToolTipTitle = "Page ToolTip";
             this.pageLabelsBoldControl.UniqueName = "2655D77FAE1E43CEA580F88B6B5B847F";
-            // 
+            //
             // pageLabelsItalicControl
-            // 
+            //
             this.pageLabelsItalicControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsItalicControl.Flags = 65534;
             this.pageLabelsItalicControl.LastVisibleSet = true;
@@ -3358,9 +3377,9 @@ namespace PaletteDesigner
             this.pageLabelsItalicControl.TextDescription = "Italic is appropriate for emphasised labelling on control background.";
             this.pageLabelsItalicControl.ToolTipTitle = "Page ToolTip";
             this.pageLabelsItalicControl.UniqueName = "AEAB36C86860427109BD0A116BFAE079";
-            // 
+            //
             // pageLabelsTitleControl
-            // 
+            //
             this.pageLabelsTitleControl.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsTitleControl.Flags = 65535;
             this.pageLabelsTitleControl.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsTitleControl.ImageLarge")));
@@ -3373,9 +3392,9 @@ namespace PaletteDesigner
             this.pageLabelsTitleControl.TextDescription = "Title provides a section level heading label on a control background.";
             this.pageLabelsTitleControl.ToolTipTitle = "Page ToolTip";
             this.pageLabelsTitleControl.UniqueName = "1AEC405D45FF409F1AEC405D45FF409F";
-            // 
+            //
             // pageLabelsNormalPanel
-            // 
+            //
             this.pageLabelsNormalPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsNormalPanel.Flags = 65535;
             this.pageLabelsNormalPanel.LastVisibleSet = true;
@@ -3386,9 +3405,9 @@ namespace PaletteDesigner
             this.pageLabelsNormalPanel.TextDescription = "Normal is appropriate for standard control labelling on panel background.";
             this.pageLabelsNormalPanel.ToolTipTitle = "Page ToolTip";
             this.pageLabelsNormalPanel.UniqueName = "B4348A5A020A4975B4348A5A020A4975";
-            // 
+            //
             // pageLabelsBoldPanel
-            // 
+            //
             this.pageLabelsBoldPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsBoldPanel.Flags = 65534;
             this.pageLabelsBoldPanel.LastVisibleSet = true;
@@ -3399,9 +3418,9 @@ namespace PaletteDesigner
             this.pageLabelsBoldPanel.TextDescription = "Bold is appropriate for a title labelling on panel background.";
             this.pageLabelsBoldPanel.ToolTipTitle = "Page ToolTip";
             this.pageLabelsBoldPanel.UniqueName = "DDD2818C933545C40C9951BB2EB53236";
-            // 
+            //
             // pageLabelsItalicPanel
-            // 
+            //
             this.pageLabelsItalicPanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsItalicPanel.Flags = 65534;
             this.pageLabelsItalicPanel.LastVisibleSet = true;
@@ -3412,9 +3431,9 @@ namespace PaletteDesigner
             this.pageLabelsItalicPanel.TextDescription = "Bold is appropriate for emphasised labelling on panel background.";
             this.pageLabelsItalicPanel.ToolTipTitle = "Page ToolTip";
             this.pageLabelsItalicPanel.UniqueName = "A486542B05874C5B01A1CC57F04B5DDD";
-            // 
+            //
             // pageLabelsTitlePanel
-            // 
+            //
             this.pageLabelsTitlePanel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsTitlePanel.Flags = 65535;
             this.pageLabelsTitlePanel.LastVisibleSet = true;
@@ -3425,9 +3444,9 @@ namespace PaletteDesigner
             this.pageLabelsTitlePanel.TextDescription = "Title provides a section level heading label on a panel background.";
             this.pageLabelsTitlePanel.ToolTipTitle = "Page ToolTip";
             this.pageLabelsTitlePanel.UniqueName = "BE9B0B8178754F1DBE9B0B8178754F1D";
-            // 
+            //
             // pageLabelsGroupBoxCaption
-            // 
+            //
             this.pageLabelsGroupBoxCaption.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsGroupBoxCaption.Flags = 65534;
             this.pageLabelsGroupBoxCaption.LastVisibleSet = true;
@@ -3438,9 +3457,9 @@ namespace PaletteDesigner
             this.pageLabelsGroupBoxCaption.TextDescription = "GroupBox is used as the default for KryptonGroupBox captions.";
             this.pageLabelsGroupBoxCaption.ToolTipTitle = "Page ToolTip";
             this.pageLabelsGroupBoxCaption.UniqueName = "1EC7B61904E6464AC3B9421F8525CD6B";
-            // 
+            //
             // pageLabelsToolTip
-            // 
+            //
             this.pageLabelsToolTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsToolTip.Flags = 65535;
             this.pageLabelsToolTip.LastVisibleSet = true;
@@ -3451,9 +3470,9 @@ namespace PaletteDesigner
             this.pageLabelsToolTip.TextDescription = "ToolTip is used for popup windows showing additional context information. ";
             this.pageLabelsToolTip.ToolTipTitle = "Page ToolTip";
             this.pageLabelsToolTip.UniqueName = "CC3585CB2B2C41E5CC3585CB2B2C41E5";
-            // 
+            //
             // pageLabelsSuperTip
-            // 
+            //
             this.pageLabelsSuperTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsSuperTip.Flags = 65535;
             this.pageLabelsSuperTip.LastVisibleSet = true;
@@ -3464,9 +3483,9 @@ namespace PaletteDesigner
             this.pageLabelsSuperTip.TextDescription = "SuperTip is used for tool tips that have extensive information presented. ";
             this.pageLabelsSuperTip.ToolTipTitle = "Page ToolTip";
             this.pageLabelsSuperTip.UniqueName = "BE5B1CF32EF44838BE5B1CF32EF44838";
-            // 
+            //
             // pageLabelsKeyTip
-            // 
+            //
             this.pageLabelsKeyTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsKeyTip.Flags = 65535;
             this.pageLabelsKeyTip.LastVisibleSet = true;
@@ -3477,9 +3496,9 @@ namespace PaletteDesigner
             this.pageLabelsKeyTip.TextDescription = "KeyTip is used for key tips that are available from the Ribbon control.";
             this.pageLabelsKeyTip.ToolTipTitle = "Page ToolTip";
             this.pageLabelsKeyTip.UniqueName = "5D653A63119F42735D653A63119F4273";
-            // 
+            //
             // pageLabelsCustom1
-            // 
+            //
             this.pageLabelsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsCustom1.Flags = 65535;
             this.pageLabelsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom1.ImageLarge")));
@@ -3493,9 +3512,9 @@ namespace PaletteDesigner
             this.pageLabelsCustom1.TextDescription = "Custom 1 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom1.ToolTipTitle = "Page ToolTip";
             this.pageLabelsCustom1.UniqueName = "0151150A154A46550151150A154A4655";
-            // 
+            //
             // pageLabelsCustom2
-            // 
+            //
             this.pageLabelsCustom2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsCustom2.Flags = 65535;
             this.pageLabelsCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom2.ImageLarge")));
@@ -3508,9 +3527,9 @@ namespace PaletteDesigner
             this.pageLabelsCustom2.TextDescription = "Custom 2 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom2.ToolTipTitle = "Page ToolTip";
             this.pageLabelsCustom2.UniqueName = "A4C6C58300A049F1A4C6C58300A049F1";
-            // 
+            //
             // pageLabelsCustom3
-            // 
+            //
             this.pageLabelsCustom3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageLabelsCustom3.Flags = 65535;
             this.pageLabelsCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageLabelsCustom3.ImageLarge")));
@@ -3523,9 +3542,9 @@ namespace PaletteDesigner
             this.pageLabelsCustom3.TextDescription = "Custom 3 style inherits from Normal and is intended for your own custom use.";
             this.pageLabelsCustom3.ToolTipTitle = "Page ToolTip";
             this.pageLabelsCustom3.UniqueName = "F52072C5744F4F4BF52072C5744F4F4B";
-            // 
+            //
             // pageDesignNavigator
-            // 
+            //
             this.pageDesignNavigator.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignNavigator.Controls.Add(this.borderDesignNavigator);
             this.pageDesignNavigator.Controls.Add(this.kryptonNavigatorDesignNavigator);
@@ -3543,18 +3562,18 @@ namespace PaletteDesigner
             this.pageDesignNavigator.TextTitle = "Bar Outside";
             this.pageDesignNavigator.ToolTipTitle = "Page ToolTip";
             this.pageDesignNavigator.UniqueName = "9BBFFF2D3B7340759BBFFF2D3B734075";
-            // 
+            //
             // borderDesignNavigator
-            // 
+            //
             this.borderDesignNavigator.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignNavigator.Location = new System.Drawing.Point(82, 0);
             this.borderDesignNavigator.Name = "borderDesignNavigator";
             this.borderDesignNavigator.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignNavigator.Size = new System.Drawing.Size(1, 524);
             this.borderDesignNavigator.TabIndex = 2;
-            // 
+            //
             // kryptonNavigatorDesignNavigator
-            // 
+            //
             this.kryptonNavigatorDesignNavigator.AutoSize = true;
             this.kryptonNavigatorDesignNavigator.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignNavigator.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -3601,9 +3620,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignNavigator.TabIndex = 1;
             this.kryptonNavigatorDesignNavigator.Text = "kryptonNavigator2";
             this.kryptonNavigatorDesignNavigator.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignNavigator_SelectedPageChanged);
-            // 
+            //
             // pageNavigatorBarCheckButtonGroupOutside
-            // 
+            //
             this.pageNavigatorBarCheckButtonGroupOutside.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageNavigatorBarCheckButtonGroupOutside.Flags = 65535;
             this.pageNavigatorBarCheckButtonGroupOutside.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOutside.ImageLarge")));
@@ -3616,9 +3635,9 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupOutside.TextDescription = "Appearance of when using Bar-CheckButton-Group-Outside mode.";
             this.pageNavigatorBarCheckButtonGroupOutside.ToolTipTitle = "Page ToolTip";
             this.pageNavigatorBarCheckButtonGroupOutside.UniqueName = "E1B857DDACDB4BD0E1B857DDACDB4BD0";
-            // 
+            //
             // pageNavigatorBarCheckButtonGroupInside
-            // 
+            //
             this.pageNavigatorBarCheckButtonGroupInside.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageNavigatorBarCheckButtonGroupInside.Flags = 65535;
             this.pageNavigatorBarCheckButtonGroupInside.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupInside.ImageLarge")));
@@ -3631,9 +3650,9 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupInside.TextDescription = "Appearance of when using Bar-CheckButton-Group-Inside mode.";
             this.pageNavigatorBarCheckButtonGroupInside.ToolTipTitle = "Page ToolTip";
             this.pageNavigatorBarCheckButtonGroupInside.UniqueName = "6A4E2798803249E16A4E2798803249E1";
-            // 
+            //
             // pageNavigatorBarCheckButtonGroupOnly
-            // 
+            //
             this.pageNavigatorBarCheckButtonGroupOnly.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageNavigatorBarCheckButtonGroupOnly.Flags = 65535;
             this.pageNavigatorBarCheckButtonGroupOnly.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageNavigatorBarCheckButtonGroupOnly.ImageLarge")));
@@ -3646,9 +3665,9 @@ namespace PaletteDesigner
             this.pageNavigatorBarCheckButtonGroupOnly.TextDescription = "Appearance of when using Bar-CheckButton-Group-Only mode.";
             this.pageNavigatorBarCheckButtonGroupOnly.ToolTipTitle = "Page ToolTip";
             this.pageNavigatorBarCheckButtonGroupOnly.UniqueName = "F3DC6001778D4E74F3DC6001778D4E74";
-            // 
+            //
             // kryptonNavigator
-            // 
+            //
             this.kryptonNavigator.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.Context;
             this.kryptonNavigator.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.None;
             this.kryptonNavigator.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.ShowEnabled;
@@ -3673,9 +3692,9 @@ namespace PaletteDesigner
             this.kryptonNavigator.Size = new System.Drawing.Size(305, 164);
             this.kryptonNavigator.TabIndex = 0;
             this.kryptonNavigator.Text = "kryptonNavigator1";
-            // 
+            //
             // navigatorPage1
-            // 
+            //
             this.navigatorPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.navigatorPage1.Flags = 65535;
             this.navigatorPage1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage1.ImageLarge")));
@@ -3690,9 +3709,9 @@ namespace PaletteDesigner
             this.navigatorPage1.TextTitle = "Page 1 Title";
             this.navigatorPage1.ToolTipTitle = "Page ToolTip";
             this.navigatorPage1.UniqueName = "0F261EE6276D46750F261EE6276D4675";
-            // 
+            //
             // navigatorPage2
-            // 
+            //
             this.navigatorPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.navigatorPage2.Flags = 65535;
             this.navigatorPage2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage2.ImageLarge")));
@@ -3707,9 +3726,9 @@ namespace PaletteDesigner
             this.navigatorPage2.TextTitle = "Page 2 Title";
             this.navigatorPage2.ToolTipTitle = "Page ToolTip";
             this.navigatorPage2.UniqueName = "7DA5619C242940C27DA5619C242940C2";
-            // 
+            //
             // navigatorPage3
-            // 
+            //
             this.navigatorPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.navigatorPage3.Flags = 65535;
             this.navigatorPage3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("navigatorPage3.ImageLarge")));
@@ -3724,9 +3743,9 @@ namespace PaletteDesigner
             this.navigatorPage3.TextTitle = "Page 3 Title";
             this.navigatorPage3.ToolTipTitle = "Page ToolTip";
             this.navigatorPage3.UniqueName = "11A56E5E346E446811A56E5E346E4468";
-            // 
+            //
             // pageDesignPanels
-            // 
+            //
             this.pageDesignPanels.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignPanels.Controls.Add(this.panel1Normal);
             this.pageDesignPanels.Controls.Add(this.panel1Disabled);
@@ -3747,25 +3766,25 @@ namespace PaletteDesigner
             this.pageDesignPanels.TextTitle = "Client";
             this.pageDesignPanels.ToolTipTitle = "Page ToolTip";
             this.pageDesignPanels.UniqueName = "EE705AFEB9CF4F77EE705AFEB9CF4F77";
-            // 
+            //
             // panel1Normal
-            // 
+            //
             this.panel1Normal.Location = new System.Drawing.Point(311, 62);
             this.panel1Normal.Name = "panel1Normal";
             this.panel1Normal.Size = new System.Drawing.Size(100, 100);
             this.panel1Normal.TabIndex = 19;
-            // 
+            //
             // panel1Disabled
-            // 
+            //
             this.panel1Disabled.Location = new System.Drawing.Point(147, 62);
             this.panel1Disabled.Name = "panel1Disabled";
             this.panel1Disabled.Size = new System.Drawing.Size(100, 100);
             this.panel1Disabled.TabIndex = 18;
-            // 
+            //
             // labelPanelsNormal
-            // 
-            this.labelPanelsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelPanelsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelPanelsNormal.Location = new System.Drawing.Point(311, 30);
@@ -3774,11 +3793,11 @@ namespace PaletteDesigner
             this.labelPanelsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelPanelsNormal.TabIndex = 20;
             this.labelPanelsNormal.Values.Text = "Normal";
-            // 
+            //
             // labelPanelsDisabled
-            // 
-            this.labelPanelsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelPanelsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPanelsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelPanelsDisabled.Location = new System.Drawing.Point(147, 30);
@@ -3787,18 +3806,18 @@ namespace PaletteDesigner
             this.labelPanelsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelPanelsDisabled.TabIndex = 21;
             this.labelPanelsDisabled.Values.Text = "Disabled";
-            // 
+            //
             // borderDesignPanels
-            // 
+            //
             this.borderDesignPanels.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignPanels.Location = new System.Drawing.Point(103, 0);
             this.borderDesignPanels.Name = "borderDesignPanels";
             this.borderDesignPanels.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignPanels.Size = new System.Drawing.Size(1, 535);
             this.borderDesignPanels.TabIndex = 3;
-            // 
+            //
             // kryptonNavigatorDesignPanels
-            // 
+            //
             this.kryptonNavigatorDesignPanels.AutoSize = true;
             this.kryptonNavigatorDesignPanels.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignPanels.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -3846,9 +3865,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignPanels.TabIndex = 0;
             this.kryptonNavigatorDesignPanels.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignPanels.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignPanels_SelectedPageChanged);
-            // 
+            //
             // pagePanelsClient
-            // 
+            //
             this.pagePanelsClient.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pagePanelsClient.Flags = 65535;
             this.pagePanelsClient.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsClient.ImageLarge")));
@@ -3861,9 +3880,9 @@ namespace PaletteDesigner
             this.pagePanelsClient.TextDescription = "Client is the main style for client area of Krypton panels.";
             this.pagePanelsClient.ToolTipTitle = "Page ToolTip";
             this.pagePanelsClient.UniqueName = "1A269CE0027348FC1A269CE0027348FC";
-            // 
+            //
             // pagePanelsAlternate
-            // 
+            //
             this.pagePanelsAlternate.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pagePanelsAlternate.Flags = 65535;
             this.pagePanelsAlternate.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsAlternate.ImageLarge")));
@@ -3876,9 +3895,9 @@ namespace PaletteDesigner
             this.pagePanelsAlternate.TextDescription = "Alternate provides a complementary variation on the Client style.";
             this.pagePanelsAlternate.ToolTipTitle = "Page ToolTip";
             this.pagePanelsAlternate.UniqueName = "F407695F3F8248E8F407695F3F8248E8";
-            // 
+            //
             // pagePanelsRibbonInactive
-            // 
+            //
             this.pagePanelsRibbonInactive.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pagePanelsRibbonInactive.Flags = 65534;
             this.pagePanelsRibbonInactive.LastVisibleSet = true;
@@ -3890,9 +3909,9 @@ namespace PaletteDesigner
     ".";
             this.pagePanelsRibbonInactive.ToolTipTitle = "Page ToolTip";
             this.pagePanelsRibbonInactive.UniqueName = "F845E88E002141E95A8A6C312967412C";
-            // 
+            //
             // pagePanelsCustom1
-            // 
+            //
             this.pagePanelsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pagePanelsCustom1.Flags = 65535;
             this.pagePanelsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pagePanelsCustom1.ImageLarge")));
@@ -3905,9 +3924,9 @@ namespace PaletteDesigner
             this.pagePanelsCustom1.TextDescription = "Custom 1 style inherits from Client and is intended for your own custom use.";
             this.pagePanelsCustom1.ToolTipTitle = "Page ToolTip";
             this.pagePanelsCustom1.UniqueName = "45478B81AC53416E45478B81AC53416E";
-            // 
+            //
             // pageDesignRadioButton
-            // 
+            //
             this.pageDesignRadioButton.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignRadioButton.Controls.Add(this.rbLive2);
             this.pageDesignRadioButton.Controls.Add(this.kryptonRadioButton11);
@@ -3932,43 +3951,43 @@ namespace PaletteDesigner
             this.pageDesignRadioButton.TextTitle = "";
             this.pageDesignRadioButton.ToolTipTitle = "Page ToolTip";
             this.pageDesignRadioButton.UniqueName = "811E936E8774488C811E936E8774488C";
-            // 
+            //
             // rbLive2
-            // 
+            //
             this.rbLive2.Location = new System.Drawing.Point(205, 99);
             this.rbLive2.Name = "rbLive2";
             this.rbLive2.Size = new System.Drawing.Size(54, 20);
             this.rbLive2.TabIndex = 11;
             this.rbLive2.Values.Text = "Live 2";
-            // 
+            //
             // kryptonRadioButton11
-            // 
+            //
             this.kryptonRadioButton11.Location = new System.Drawing.Point(902, 15);
             this.kryptonRadioButton11.Name = "kryptonRadioButton11";
             this.kryptonRadioButton11.Size = new System.Drawing.Size(29, 20);
             this.kryptonRadioButton11.TabIndex = 10;
             this.kryptonRadioButton11.Values.Text = "2";
-            // 
+            //
             // rbLive1
-            // 
+            //
             this.rbLive1.Checked = true;
             this.rbLive1.Location = new System.Drawing.Point(205, 61);
             this.rbLive1.Name = "rbLive1";
             this.rbLive1.Size = new System.Drawing.Size(54, 20);
             this.rbLive1.TabIndex = 9;
             this.rbLive1.Values.Text = "Live 1";
-            // 
+            //
             // rbFocus
-            // 
+            //
             this.rbFocus.AutoCheck = false;
             this.rbFocus.Location = new System.Drawing.Point(205, 23);
             this.rbFocus.Name = "rbFocus";
             this.rbFocus.Size = new System.Drawing.Size(54, 20);
             this.rbFocus.TabIndex = 8;
             this.rbFocus.Values.Text = "Focus";
-            // 
+            //
             // rbCheckedTracking
-            // 
+            //
             this.rbCheckedTracking.AutoCheck = false;
             this.rbCheckedTracking.Checked = true;
             this.rbCheckedTracking.Location = new System.Drawing.Point(23, 266);
@@ -3976,9 +3995,9 @@ namespace PaletteDesigner
             this.rbCheckedTracking.Size = new System.Drawing.Size(119, 20);
             this.rbCheckedTracking.TabIndex = 7;
             this.rbCheckedTracking.Values.Text = "Checked Tracking";
-            // 
+            //
             // rbCheckedPressed
-            // 
+            //
             this.rbCheckedPressed.AutoCheck = false;
             this.rbCheckedPressed.Checked = true;
             this.rbCheckedPressed.Location = new System.Drawing.Point(23, 304);
@@ -3986,9 +4005,9 @@ namespace PaletteDesigner
             this.rbCheckedPressed.Size = new System.Drawing.Size(114, 20);
             this.rbCheckedPressed.TabIndex = 6;
             this.rbCheckedPressed.Values.Text = "Checked Pressed";
-            // 
+            //
             // rbCheckedNormal
-            // 
+            //
             this.rbCheckedNormal.AutoCheck = false;
             this.rbCheckedNormal.Checked = true;
             this.rbCheckedNormal.Location = new System.Drawing.Point(23, 228);
@@ -3996,9 +4015,9 @@ namespace PaletteDesigner
             this.rbCheckedNormal.Size = new System.Drawing.Size(113, 20);
             this.rbCheckedNormal.TabIndex = 5;
             this.rbCheckedNormal.Values.Text = "Checked Normal";
-            // 
+            //
             // rbCheckedDisabled
-            // 
+            //
             this.rbCheckedDisabled.AutoCheck = false;
             this.rbCheckedDisabled.Checked = true;
             this.rbCheckedDisabled.Location = new System.Drawing.Point(23, 190);
@@ -4006,45 +4025,45 @@ namespace PaletteDesigner
             this.rbCheckedDisabled.Size = new System.Drawing.Size(120, 20);
             this.rbCheckedDisabled.TabIndex = 4;
             this.rbCheckedDisabled.Values.Text = "Checked Disabled";
-            // 
+            //
             // rbUncheckedTracking
-            // 
+            //
             this.rbUncheckedTracking.AutoCheck = false;
             this.rbUncheckedTracking.Location = new System.Drawing.Point(23, 99);
             this.rbUncheckedTracking.Name = "rbUncheckedTracking";
             this.rbUncheckedTracking.Size = new System.Drawing.Size(132, 20);
             this.rbUncheckedTracking.TabIndex = 3;
             this.rbUncheckedTracking.Values.Text = "Unchecked Tracking";
-            // 
+            //
             // rbUncheckedPressed
-            // 
+            //
             this.rbUncheckedPressed.AutoCheck = false;
             this.rbUncheckedPressed.Location = new System.Drawing.Point(23, 137);
             this.rbUncheckedPressed.Name = "rbUncheckedPressed";
             this.rbUncheckedPressed.Size = new System.Drawing.Size(128, 20);
             this.rbUncheckedPressed.TabIndex = 2;
             this.rbUncheckedPressed.Values.Text = "Unchecked Pressed";
-            // 
+            //
             // rbUncheckedNormal
-            // 
+            //
             this.rbUncheckedNormal.AutoCheck = false;
             this.rbUncheckedNormal.Location = new System.Drawing.Point(23, 61);
             this.rbUncheckedNormal.Name = "rbUncheckedNormal";
             this.rbUncheckedNormal.Size = new System.Drawing.Size(127, 20);
             this.rbUncheckedNormal.TabIndex = 1;
             this.rbUncheckedNormal.Values.Text = "Unchecked Normal";
-            // 
+            //
             // rbUncheckedDisabled
-            // 
+            //
             this.rbUncheckedDisabled.AutoCheck = false;
             this.rbUncheckedDisabled.Location = new System.Drawing.Point(23, 23);
             this.rbUncheckedDisabled.Name = "rbUncheckedDisabled";
             this.rbUncheckedDisabled.Size = new System.Drawing.Size(133, 20);
             this.rbUncheckedDisabled.TabIndex = 0;
             this.rbUncheckedDisabled.Values.Text = "Unchecked Disabled";
-            // 
+            //
             // pageDesignSeparators
-            // 
+            //
             this.pageDesignSeparators.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignSeparators.Controls.Add(this.separator1Live);
             this.pageDesignSeparators.Controls.Add(this.labelSeparatorsLive);
@@ -4071,42 +4090,42 @@ namespace PaletteDesigner
             this.pageDesignSeparators.TextTitle = "Low Profile";
             this.pageDesignSeparators.ToolTipTitle = "Page ToolTip";
             this.pageDesignSeparators.UniqueName = "118C899194BC4323118C899194BC4323";
-            // 
+            //
             // separator1Live
-            // 
+            //
             this.separator1Live.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Live.Location = new System.Drawing.Point(201, 332);
             this.separator1Live.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // separator1Live.Panel1
-            // 
+            //
             this.separator1Live.Panel1.Controls.Add(this.kryptonGroup11);
-            // 
+            //
             // separator1Live.Panel2
-            // 
+            //
             this.separator1Live.Panel2.Controls.Add(this.kryptonGroup12);
             this.separator1Live.Size = new System.Drawing.Size(100, 80);
             this.separator1Live.SplitterDistance = 32;
             this.separator1Live.TabIndex = 24;
-            // 
+            //
             // kryptonGroup11
-            // 
+            //
             this.kryptonGroup11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup11.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup11.Size = new System.Drawing.Size(100, 32);
             this.kryptonGroup11.TabIndex = 0;
-            // 
+            //
             // kryptonGroup12
-            // 
+            //
             this.kryptonGroup12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup12.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup12.Size = new System.Drawing.Size(100, 43);
             this.kryptonGroup12.TabIndex = 0;
-            // 
+            //
             // labelSeparatorsLive
-            // 
-            this.labelSeparatorsLive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelSeparatorsLive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsLive.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsLive.Location = new System.Drawing.Point(209, 301);
@@ -4115,73 +4134,73 @@ namespace PaletteDesigner
             this.labelSeparatorsLive.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsLive.TabIndex = 25;
             this.labelSeparatorsLive.Values.Text = "Tracking";
-            // 
+            //
             // separator1Pressed
-            // 
+            //
             this.separator1Pressed.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Pressed.Location = new System.Drawing.Point(284, 193);
             this.separator1Pressed.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // separator1Pressed.Panel1
-            // 
+            //
             this.separator1Pressed.Panel1.Controls.Add(this.kryptonGroup7);
-            // 
+            //
             // separator1Pressed.Panel2
-            // 
+            //
             this.separator1Pressed.Panel2.Controls.Add(this.kryptonGroup8);
             this.separator1Pressed.Size = new System.Drawing.Size(100, 80);
             this.separator1Pressed.SplitterDistance = 32;
             this.separator1Pressed.TabIndex = 22;
-            // 
+            //
             // kryptonGroup7
-            // 
+            //
             this.kryptonGroup7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup7.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup7.Size = new System.Drawing.Size(100, 32);
             this.kryptonGroup7.TabIndex = 0;
-            // 
+            //
             // kryptonGroup8
-            // 
+            //
             this.kryptonGroup8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup8.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup8.Size = new System.Drawing.Size(100, 43);
             this.kryptonGroup8.TabIndex = 0;
-            // 
+            //
             // separator1Tracking
-            // 
+            //
             this.separator1Tracking.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Tracking.Location = new System.Drawing.Point(120, 193);
             this.separator1Tracking.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // separator1Tracking.Panel1
-            // 
+            //
             this.separator1Tracking.Panel1.Controls.Add(this.kryptonGroup5);
-            // 
+            //
             // separator1Tracking.Panel2
-            // 
+            //
             this.separator1Tracking.Panel2.Controls.Add(this.kryptonGroup6);
             this.separator1Tracking.Size = new System.Drawing.Size(100, 80);
             this.separator1Tracking.SplitterDistance = 32;
             this.separator1Tracking.TabIndex = 21;
-            // 
+            //
             // kryptonGroup5
-            // 
+            //
             this.kryptonGroup5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup5.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup5.Size = new System.Drawing.Size(100, 32);
             this.kryptonGroup5.TabIndex = 0;
-            // 
+            //
             // kryptonGroup6
-            // 
+            //
             this.kryptonGroup6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup6.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup6.Size = new System.Drawing.Size(100, 43);
             this.kryptonGroup6.TabIndex = 0;
-            // 
+            //
             // labelSeparatorsPressed
-            // 
-            this.labelSeparatorsPressed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelSeparatorsPressed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsPressed.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsPressed.Location = new System.Drawing.Point(295, 162);
@@ -4190,11 +4209,11 @@ namespace PaletteDesigner
             this.labelSeparatorsPressed.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsPressed.TabIndex = 26;
             this.labelSeparatorsPressed.Values.Text = "Pressed";
-            // 
+            //
             // labelSeparatorsTracking
-            // 
-            this.labelSeparatorsTracking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelSeparatorsTracking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsTracking.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsTracking.Location = new System.Drawing.Point(130, 162);
@@ -4203,74 +4222,74 @@ namespace PaletteDesigner
             this.labelSeparatorsTracking.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsTracking.TabIndex = 27;
             this.labelSeparatorsTracking.Values.Text = "Tracking";
-            // 
+            //
             // separator1Normal
-            // 
+            //
             this.separator1Normal.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Normal.Location = new System.Drawing.Point(283, 62);
             this.separator1Normal.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // separator1Normal.Panel1
-            // 
+            //
             this.separator1Normal.Panel1.Controls.Add(this.kryptonGroup3);
-            // 
+            //
             // separator1Normal.Panel2
-            // 
+            //
             this.separator1Normal.Panel2.Controls.Add(this.kryptonGroup4);
             this.separator1Normal.Size = new System.Drawing.Size(100, 80);
             this.separator1Normal.SplitterDistance = 31;
             this.separator1Normal.TabIndex = 18;
-            // 
+            //
             // kryptonGroup3
-            // 
+            //
             this.kryptonGroup3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup3.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup3.Size = new System.Drawing.Size(100, 31);
             this.kryptonGroup3.TabIndex = 0;
-            // 
+            //
             // kryptonGroup4
-            // 
+            //
             this.kryptonGroup4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup4.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup4.Size = new System.Drawing.Size(100, 44);
             this.kryptonGroup4.TabIndex = 0;
-            // 
+            //
             // separator1Disabled
-            // 
+            //
             this.separator1Disabled.Cursor = System.Windows.Forms.Cursors.Default;
             this.separator1Disabled.Enabled = false;
             this.separator1Disabled.Location = new System.Drawing.Point(119, 62);
             this.separator1Disabled.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // separator1Disabled.Panel1
-            // 
+            //
             this.separator1Disabled.Panel1.Controls.Add(this.kryptonGroup1);
-            // 
+            //
             // separator1Disabled.Panel2
-            // 
+            //
             this.separator1Disabled.Panel2.Controls.Add(this.kryptonGroup2);
             this.separator1Disabled.Size = new System.Drawing.Size(100, 80);
             this.separator1Disabled.SplitterDistance = 32;
             this.separator1Disabled.TabIndex = 15;
-            // 
+            //
             // kryptonGroup1
-            // 
+            //
             this.kryptonGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup1.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup1.Size = new System.Drawing.Size(100, 32);
             this.kryptonGroup1.TabIndex = 0;
-            // 
+            //
             // kryptonGroup2
-            // 
+            //
             this.kryptonGroup2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup2.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup2.Size = new System.Drawing.Size(100, 43);
             this.kryptonGroup2.TabIndex = 0;
-            // 
+            //
             // labelSeparatorsNormal
-            // 
-            this.labelSeparatorsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelSeparatorsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsNormal.Location = new System.Drawing.Point(298, 30);
@@ -4279,11 +4298,11 @@ namespace PaletteDesigner
             this.labelSeparatorsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsNormal.TabIndex = 28;
             this.labelSeparatorsNormal.Values.Text = "Normal";
-            // 
+            //
             // labelSeparatorsDisabled
-            // 
-            this.labelSeparatorsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.labelSeparatorsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSeparatorsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
             this.labelSeparatorsDisabled.Location = new System.Drawing.Point(129, 30);
@@ -4292,18 +4311,18 @@ namespace PaletteDesigner
             this.labelSeparatorsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.labelSeparatorsDisabled.TabIndex = 29;
             this.labelSeparatorsDisabled.Values.Text = "Disabled";
-            // 
+            //
             // borderDesignSeparators
-            // 
+            //
             this.borderDesignSeparators.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignSeparators.Location = new System.Drawing.Point(89, 0);
             this.borderDesignSeparators.Name = "borderDesignSeparators";
             this.borderDesignSeparators.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignSeparators.Size = new System.Drawing.Size(1, 500);
             this.borderDesignSeparators.TabIndex = 4;
-            // 
+            //
             // kryptonNavigatorDesignSeparators
-            // 
+            //
             this.kryptonNavigatorDesignSeparators.AutoSize = true;
             this.kryptonNavigatorDesignSeparators.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
             this.kryptonNavigatorDesignSeparators.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
@@ -4351,9 +4370,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignSeparators.TabIndex = 0;
             this.kryptonNavigatorDesignSeparators.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignSeparators.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignSeparators_SelectedPageChanged);
-            // 
+            //
             // pageSeparatorLowProfile
-            // 
+            //
             this.pageSeparatorLowProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageSeparatorLowProfile.Flags = 65535;
             this.pageSeparatorLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorLowProfile.ImageLarge")));
@@ -4366,9 +4385,9 @@ namespace PaletteDesigner
             this.pageSeparatorLowProfile.TextDescription = "Low Profile style is a low visibility display of a separator.";
             this.pageSeparatorLowProfile.ToolTipTitle = "Page ToolTip";
             this.pageSeparatorLowProfile.UniqueName = "7E5F74E3999D471E7E5F74E3999D471E";
-            // 
+            //
             // pageSeparatorHighProfile
-            // 
+            //
             this.pageSeparatorHighProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageSeparatorHighProfile.Flags = 65535;
             this.pageSeparatorHighProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorHighProfile.ImageLarge")));
@@ -4381,9 +4400,9 @@ namespace PaletteDesigner
             this.pageSeparatorHighProfile.TextDescription = "High Profile style is a high visibility display of a separator.";
             this.pageSeparatorHighProfile.ToolTipTitle = "Page ToolTip";
             this.pageSeparatorHighProfile.UniqueName = "39D1B70212CD455D39D1B70212CD455D";
-            // 
+            //
             // pageSeparatorHighInternalProfile
-            // 
+            //
             this.pageSeparatorHighInternalProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageSeparatorHighInternalProfile.Flags = 65535;
             this.pageSeparatorHighInternalProfile.LastVisibleSet = true;
@@ -4395,9 +4414,9 @@ namespace PaletteDesigner
     "r.";
             this.pageSeparatorHighInternalProfile.ToolTipTitle = "Page ToolTip";
             this.pageSeparatorHighInternalProfile.UniqueName = "7F6D49E45426410C7F6D49E45426410C";
-            // 
+            //
             // pageSeparatorCustom1
-            // 
+            //
             this.pageSeparatorCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageSeparatorCustom1.Flags = 65535;
             this.pageSeparatorCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageSeparatorCustom1.ImageLarge")));
@@ -4411,9 +4430,9 @@ namespace PaletteDesigner
     "";
             this.pageSeparatorCustom1.ToolTipTitle = "Page ToolTip";
             this.pageSeparatorCustom1.UniqueName = "4BC73FB0DC704F514BC73FB0DC704F51";
-            // 
+            //
             // pageDesignTabs
-            // 
+            //
             this.pageDesignTabs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignTabs.Controls.Add(this.kryptonNavigatorTabs);
             this.pageDesignTabs.Controls.Add(this.borderDesignTabs);
@@ -4431,9 +4450,9 @@ namespace PaletteDesigner
             this.pageDesignTabs.TextTitle = "High Profile";
             this.pageDesignTabs.ToolTipTitle = "Page ToolTip";
             this.pageDesignTabs.UniqueName = "BB6FE3D4975E4116BB6FE3D4975E4116";
-            // 
+            //
             // kryptonNavigatorTabs
-            // 
+            //
             this.kryptonNavigatorTabs.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.Context;
             this.kryptonNavigatorTabs.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.None;
             this.kryptonNavigatorTabs.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.ShowEnabled;
@@ -4458,9 +4477,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs.Size = new System.Drawing.Size(285, 150);
             this.kryptonNavigatorTabs.TabIndex = 4;
             this.kryptonNavigatorTabs.Text = "kryptonNavigator1";
-            // 
+            //
             // kryptonNavigatorTabs1
-            // 
+            //
             this.kryptonNavigatorTabs1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonNavigatorTabs1.Flags = 65535;
             this.kryptonNavigatorTabs1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs1.ImageLarge")));
@@ -4473,9 +4492,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs1.Text = "Page 1";
             this.kryptonNavigatorTabs1.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs1.UniqueName = "E903D110CD804DC4E903D110CD804DC4";
-            // 
+            //
             // kryptonNavigatorTabs2
-            // 
+            //
             this.kryptonNavigatorTabs2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonNavigatorTabs2.Flags = 65535;
             this.kryptonNavigatorTabs2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs2.ImageLarge")));
@@ -4488,9 +4507,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs2.Text = "Page 2";
             this.kryptonNavigatorTabs2.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs2.UniqueName = "49A9A449D97C4EBF49A9A449D97C4EBF";
-            // 
+            //
             // kryptonNavigatorTabs3
-            // 
+            //
             this.kryptonNavigatorTabs3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonNavigatorTabs3.Flags = 65535;
             this.kryptonNavigatorTabs3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("kryptonNavigatorTabs3.ImageLarge")));
@@ -4503,18 +4522,18 @@ namespace PaletteDesigner
             this.kryptonNavigatorTabs3.Text = "Page 3";
             this.kryptonNavigatorTabs3.ToolTipTitle = "Page ToolTip";
             this.kryptonNavigatorTabs3.UniqueName = "ECD1F28E6CB04389ECD1F28E6CB04389";
-            // 
+            //
             // borderDesignTabs
-            // 
+            //
             this.borderDesignTabs.Dock = System.Windows.Forms.DockStyle.Left;
             this.borderDesignTabs.Location = new System.Drawing.Point(116, 0);
             this.borderDesignTabs.Name = "borderDesignTabs";
             this.borderDesignTabs.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
             this.borderDesignTabs.Size = new System.Drawing.Size(1, 524);
             this.borderDesignTabs.TabIndex = 3;
-            // 
+            //
             // kryptonNavigatorDesignTabs
-            // 
+            //
             this.kryptonNavigatorDesignTabs.AutoSize = true;
             this.kryptonNavigatorDesignTabs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.kryptonNavigatorDesignTabs.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
@@ -4568,9 +4587,9 @@ namespace PaletteDesigner
             this.kryptonNavigatorDesignTabs.TabIndex = 0;
             this.kryptonNavigatorDesignTabs.Text = "kryptonNavigator1";
             this.kryptonNavigatorDesignTabs.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignTabs_SelectedPageChanged);
-            // 
+            //
             // pageTabHighProfile
-            // 
+            //
             this.pageTabHighProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabHighProfile.Flags = 65535;
             this.pageTabHighProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabHighProfile.ImageLarge")));
@@ -4583,9 +4602,9 @@ namespace PaletteDesigner
             this.pageTabHighProfile.TextDescription = "High Profile is appropriate when the selected page needs to stand out.";
             this.pageTabHighProfile.ToolTipTitle = "Page ToolTip";
             this.pageTabHighProfile.UniqueName = "961DD89D8D7D4D3A961DD89D8D7D4D3A";
-            // 
+            //
             // pageTabStandardProfile
-            // 
+            //
             this.pageTabStandardProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabStandardProfile.Flags = 65535;
             this.pageTabStandardProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabStandardProfile.ImageLarge")));
@@ -4598,9 +4617,9 @@ namespace PaletteDesigner
             this.pageTabStandardProfile.TextDescription = "Standard Profile is appropriate for most scenarios.";
             this.pageTabStandardProfile.ToolTipTitle = "Page ToolTip";
             this.pageTabStandardProfile.UniqueName = "2C53C6F94E0B4FDA2C53C6F94E0B4FDA";
-            // 
+            //
             // pageTabLowProfile
-            // 
+            //
             this.pageTabLowProfile.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabLowProfile.Flags = 65535;
             this.pageTabLowProfile.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabLowProfile.ImageLarge")));
@@ -4613,9 +4632,9 @@ namespace PaletteDesigner
             this.pageTabLowProfile.TextDescription = "Low Profile is appropriate when only the selected page should be obvious.";
             this.pageTabLowProfile.ToolTipTitle = "Page ToolTip";
             this.pageTabLowProfile.UniqueName = "A335C92A46184429A335C92A46184429";
-            // 
+            //
             // pageTabOneNote
-            // 
+            //
             this.pageTabOneNote.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabOneNote.Flags = 65535;
             this.pageTabOneNote.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabOneNote.ImageLarge")));
@@ -4628,9 +4647,9 @@ namespace PaletteDesigner
             this.pageTabOneNote.TextDescription = "OneNote is intended to mimic Microsoft OneNote appearance.";
             this.pageTabOneNote.ToolTipTitle = "Page ToolTip";
             this.pageTabOneNote.UniqueName = "7C4EFCBA6FBE4F967C4EFCBA6FBE4F96";
-            // 
+            //
             // pageTabDock
-            // 
+            //
             this.pageTabDock.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabDock.Flags = 65535;
             this.pageTabDock.LastVisibleSet = true;
@@ -4640,9 +4659,9 @@ namespace PaletteDesigner
             this.pageTabDock.Text = "Dock";
             this.pageTabDock.ToolTipTitle = "Page ToolTip";
             this.pageTabDock.UniqueName = "560DFB2C3B88492C560DFB2C3B88492C";
-            // 
+            //
             // pageTabDockAutoHidden
-            // 
+            //
             this.pageTabDockAutoHidden.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabDockAutoHidden.Flags = 65535;
             this.pageTabDockAutoHidden.LastVisibleSet = true;
@@ -4652,9 +4671,9 @@ namespace PaletteDesigner
             this.pageTabDockAutoHidden.Text = "Dock AutoHidden";
             this.pageTabDockAutoHidden.ToolTipTitle = "Page ToolTip";
             this.pageTabDockAutoHidden.UniqueName = "028B6F04D305460D028B6F04D305460D";
-            // 
+            //
             // pageTabCustom1
-            // 
+            //
             this.pageTabCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabCustom1.Flags = 65535;
             this.pageTabCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom1.ImageLarge")));
@@ -4668,9 +4687,9 @@ namespace PaletteDesigner
     ".";
             this.pageTabCustom1.ToolTipTitle = "Page ToolTip";
             this.pageTabCustom1.UniqueName = "4A48F80727744A084A48F80727744A08";
-            // 
+            //
             // pageTabCustom2
-            // 
+            //
             this.pageTabCustom2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabCustom2.Flags = 65535;
             this.pageTabCustom2.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom2.ImageLarge")));
@@ -4684,9 +4703,9 @@ namespace PaletteDesigner
     ".";
             this.pageTabCustom2.ToolTipTitle = "Page ToolTip";
             this.pageTabCustom2.UniqueName = "53D7EF6ADEF446CD53D7EF6ADEF446CD";
-            // 
+            //
             // pageTabCustom3
-            // 
+            //
             this.pageTabCustom3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageTabCustom3.Flags = 65535;
             this.pageTabCustom3.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageTabCustom3.ImageLarge")));
@@ -4700,9 +4719,9 @@ namespace PaletteDesigner
     ".";
             this.pageTabCustom3.ToolTipTitle = "Page ToolTip";
             this.pageTabCustom3.UniqueName = "52AD6D85A1384C6252AD6D85A1384C62";
-            // 
+            //
             // pageDesignTrackBar
-            // 
+            //
             this.pageDesignTrackBar.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignTrackBar.Controls.Add(this.trackBar1);
             this.pageDesignTrackBar.Flags = 65534;
@@ -4716,18 +4735,18 @@ namespace PaletteDesigner
             this.pageDesignTrackBar.TextTitle = "TrackBar";
             this.pageDesignTrackBar.ToolTipTitle = "Page ToolTip";
             this.pageDesignTrackBar.UniqueName = "6D312EEA9B3748726AAE3B39676B082E";
-            // 
+            //
             // trackBar1
-            // 
+            //
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trackBar1.Location = new System.Drawing.Point(0, 0);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(644, 546);
             this.trackBar1.TabIndex = 0;
-            // 
+            //
             // pageDesignMenuItems
-            // 
+            //
             this.pageDesignMenuItems.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignMenuItems.Controls.Add(this.menuPage1);
             this.pageDesignMenuItems.Flags = 65534;
@@ -4741,18 +4760,18 @@ namespace PaletteDesigner
             this.pageDesignMenuItems.TextTitle = "Menu Items";
             this.pageDesignMenuItems.ToolTipTitle = "Page ToolTip";
             this.pageDesignMenuItems.UniqueName = "3b145a74e97040d083a4ebf8412d67ad";
-            // 
+            //
             // menuPage1
-            // 
+            //
             this.menuPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuPage1.Location = new System.Drawing.Point(0, 0);
             this.menuPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.menuPage1.Name = "menuPage1";
             this.menuPage1.Size = new System.Drawing.Size(75, 81);
             this.menuPage1.TabIndex = 0;
-            // 
+            //
             // pageDesignToolTips
-            // 
+            //
             this.pageDesignToolTips.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignToolTips.Controls.Add(this.toolTipsPage1);
             this.pageDesignToolTips.Flags = 65534;
@@ -4765,18 +4784,18 @@ namespace PaletteDesigner
             this.pageDesignToolTips.TextTitle = "Tool Tips";
             this.pageDesignToolTips.ToolTipTitle = "Page ToolTip";
             this.pageDesignToolTips.UniqueName = "69d40018357b40e5a86f05bdb3fdc53b";
-            // 
+            //
             // toolTipsPage1
-            // 
+            //
             this.toolTipsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolTipsPage1.Location = new System.Drawing.Point(0, 0);
             this.toolTipsPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.toolTipsPage1.Name = "toolTipsPage1";
             this.toolTipsPage1.Size = new System.Drawing.Size(100, 100);
             this.toolTipsPage1.TabIndex = 0;
-            // 
+            //
             // pageDesignImageViewer
-            // 
+            //
             this.pageDesignImageViewer.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.pageDesignImageViewer.Controls.Add(this.imageViewerControl);
             this.pageDesignImageViewer.Flags = 65534;
@@ -4789,66 +4808,66 @@ namespace PaletteDesigner
             this.pageDesignImageViewer.TextTitle = "Image Viwer";
             this.pageDesignImageViewer.ToolTipTitle = "Page Image Viwer";
             this.pageDesignImageViewer.UniqueName = "6f05bdb3fdc53b69d40018357b40e5a8";
-            // 
+            //
             // imageViewerControl
-            // 
+            //
             this.imageViewerControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageViewerControl.Location = new System.Drawing.Point(0, 0);
             this.imageViewerControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.imageViewerControl.Name = "imageViewerControl";
             this.imageViewerControl.Size = new System.Drawing.Size(100, 100);
             this.imageViewerControl.TabIndex = 0;
-            // 
+            //
             // kryptonHeaderGroupProperties
-            // 
+            //
             this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecIncFont);
             this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecDecFont);
             this.kryptonHeaderGroupProperties.ButtonSpecs.Add(this.buttonSpecHelp);
             this.kryptonHeaderGroupProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroupProperties.HeaderVisibleSecondary = false;
             this.kryptonHeaderGroupProperties.Location = new System.Drawing.Point(0, 0);
-            // 
+            //
             // kryptonHeaderGroupProperties.Panel
-            // 
+            //
             this.kryptonHeaderGroupProperties.Panel.Controls.Add(this.kryptonSplitContainerProperties);
             this.kryptonHeaderGroupProperties.Size = new System.Drawing.Size(512, 500);
             this.kryptonHeaderGroupProperties.TabIndex = 0;
             this.kryptonHeaderGroupProperties.ValuesPrimary.Heading = "Properties";
             this.kryptonHeaderGroupProperties.ValuesPrimary.Image = null;
-            // 
+            //
             // buttonSpecIncFont
-            // 
+            //
             this.buttonSpecIncFont.Text = "+";
             this.buttonSpecIncFont.ToolTipTitle = "Increase Font Size";
             this.buttonSpecIncFont.UniqueName = "IncFont";
             this.buttonSpecIncFont.Click += new System.EventHandler(this.ButtonSpecIncFont_Click);
-            // 
+            //
             // buttonSpecDecFont
-            // 
+            //
             this.buttonSpecDecFont.Text = "-";
             this.buttonSpecDecFont.ToolTipTitle = "Decrease Font Size";
             this.buttonSpecDecFont.UniqueName = "DecFont";
             this.buttonSpecDecFont.Click += new System.EventHandler(this.ButtonSpecDecFont_Click);
-            // 
+            //
             // buttonSpecHelp
-            // 
+            //
             this.buttonSpecHelp.Text = "?";
             this.buttonSpecHelp.ToolTipTitle = "Palette Designer – Shortcuts";
             this.buttonSpecHelp.UniqueName = "HelpSpec";
             this.buttonSpecHelp.Click += new System.EventHandler(this.ButtonSpecHelp_Click);
-            // 
+            //
             // kryptonSplitContainerProperties
-            // 
+            //
             this.kryptonSplitContainerProperties.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainerProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainerProperties.Location = new System.Drawing.Point(0, 0);
-            // 
+            //
             // kryptonSplitContainerProperties.Panel1
-            // 
+            //
             this.kryptonSplitContainerProperties.Panel1.Controls.Add(this.propertyGrid);
-            // 
+            //
             // kryptonSplitContainerProperties.Panel2
-            // 
+            //
             this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableGrid);
             this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.fastFilterPanel);
             this.kryptonSplitContainerProperties.Panel2.Controls.Add(this.colorTableToolStrip);
@@ -4857,9 +4876,9 @@ namespace PaletteDesigner
             this.kryptonSplitContainerProperties.SplitterDistance = 248;
             this.kryptonSplitContainerProperties.SplitterWidth = 7;
             this.kryptonSplitContainerProperties.TabIndex = 0;
-            // 
+            //
             // propertyGrid
-            // 
+            //
             this.propertyGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -4869,9 +4888,9 @@ namespace PaletteDesigner
             this.propertyGrid.TabIndex = 0;
             this.propertyGrid.ToolbarVisible = false;
             this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
-            // 
+            //
             // colorTableGrid
-            // 
+            //
             this.colorTableGrid.AllowUserToAddRows = false;
             this.colorTableGrid.AllowUserToDeleteRows = false;
             this.colorTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -4887,9 +4906,9 @@ namespace PaletteDesigner
             this.colorTableGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ColorTableGrid_CellDoubleClick);
             this.colorTableGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ColorTableGrid_EditingControlShowing);
             this.colorTableGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorTableGrid_KeyDown);
-            // 
+            //
             // fastFilterPanel
-            // 
+            //
             this.fastFilterPanel.Controls.Add(this.ColorFilterBtn);
             this.fastFilterPanel.Controls.Add(this.filterByNameButton);
             this.fastFilterPanel.Controls.Add(this.filterByColorButton);
@@ -4901,9 +4920,9 @@ namespace PaletteDesigner
             this.fastFilterPanel.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
             this.fastFilterPanel.Size = new System.Drawing.Size(255, 77);
             this.fastFilterPanel.TabIndex = 2;
-            // 
+            //
             // ColorFilterBtn
-            // 
+            //
             this.ColorFilterBtn.CustomColorPreviewShape = Krypton.Toolkit.KryptonColorButtonCustomColorPreviewShape.RoundedSquare;
             this.ColorFilterBtn.Location = new System.Drawing.Point(167, 10);
             this.ColorFilterBtn.Name = "ColorFilterBtn";
@@ -4914,9 +4933,9 @@ namespace PaletteDesigner
             this.ColorFilterBtn.Values.Text = "Colors";
             this.ColorFilterBtn.Visible = false;
             this.ColorFilterBtn.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.ColorFilterBtn_SelectedColorChanged);
-            // 
+            //
             // filterByNameButton
-            // 
+            //
             this.filterByNameButton.Checked = true;
             this.filterByNameButton.Location = new System.Drawing.Point(83, 37);
             this.filterByNameButton.Name = "filterByNameButton";
@@ -4925,9 +4944,9 @@ namespace PaletteDesigner
             this.filterByNameButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.filterByNameButton.Values.Text = "Name";
             this.filterByNameButton.CheckedChanged += new System.EventHandler(this.FilterModeButton_CheckedChanged);
-            // 
+            //
             // filterByColorButton
-            // 
+            //
             this.filterByColorButton.Location = new System.Drawing.Point(6, 37);
             this.filterByColorButton.Name = "filterByColorButton";
             this.filterByColorButton.Size = new System.Drawing.Size(67, 28);
@@ -4935,9 +4954,9 @@ namespace PaletteDesigner
             this.filterByColorButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.filterByColorButton.Values.Text = "Color";
             this.filterByColorButton.CheckedChanged += new System.EventHandler(this.FilterModeButton_CheckedChanged);
-            // 
+            //
             // fastFilterTextBox
-            // 
+            //
             this.fastFilterTextBox.Location = new System.Drawing.Point(81, 8);
             this.fastFilterTextBox.MaxLength = 9;
             this.fastFilterTextBox.Name = "fastFilterTextBox";
@@ -4946,9 +4965,9 @@ namespace PaletteDesigner
             this.fastFilterTextBox.TabStop = false;
             this.fastFilterTextBox.TextChanged += new System.EventHandler(this.FastFilterTextBox_TextChanged);
             this.fastFilterTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FastFilterTextBox_KeyPress);
-            // 
+            //
             // fastFilterLabel
-            // 
+            //
             this.fastFilterLabel.LabelStyle = Krypton.Toolkit.LabelStyle.NormalControl;
             this.fastFilterLabel.Location = new System.Drawing.Point(8, 12);
             this.fastFilterLabel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -4956,9 +4975,9 @@ namespace PaletteDesigner
             this.fastFilterLabel.Size = new System.Drawing.Size(65, 20);
             this.fastFilterLabel.TabIndex = 0;
             this.fastFilterLabel.Values.Text = "Fast Filter:";
-            // 
+            //
             // colorTableToolStrip
-            // 
+            //
             this.colorTableToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.colorTableToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.colorTableToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -4970,9 +4989,9 @@ namespace PaletteDesigner
             this.colorTableToolStrip.Size = new System.Drawing.Size(255, 25);
             this.colorTableToolStrip.TabIndex = 0;
             this.colorTableToolStrip.Text = "Color Table Tools";
-            // 
+            //
             // filterToolStripDropDownButton
-            // 
+            //
             this.filterToolStripDropDownButton.AutoToolTip = false;
             this.filterToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.filterToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -4984,49 +5003,49 @@ namespace PaletteDesigner
             this.filterToolStripDropDownButton.Name = "filterToolStripDropDownButton";
             this.filterToolStripDropDownButton.Size = new System.Drawing.Size(46, 22);
             this.filterToolStripDropDownButton.Text = "Filter";
-            // 
+            //
             // searchColorToolStripMenuItem
-            // 
+            //
             this.searchColorToolStripMenuItem.Name = "searchColorToolStripMenuItem";
             this.searchColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.searchColorToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.searchColorToolStripMenuItem.Text = "Search Color...";
             this.searchColorToolStripMenuItem.Click += new System.EventHandler(this.SearchColorToolStripMenuItem_Click);
-            // 
+            //
             // filterByColorToolStripMenuItem
-            // 
+            //
             this.filterByColorToolStripMenuItem.Name = "filterByColorToolStripMenuItem";
-            this.filterByColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.filterByColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.C)));
             this.filterByColorToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.filterByColorToolStripMenuItem.Text = "Filter by Color...";
             this.filterByColorToolStripMenuItem.Click += new System.EventHandler(this.FilterByColorToolStripMenuItem_Click);
-            // 
+            //
             // filterByNameToolStripMenuItem
-            // 
+            //
             this.filterByNameToolStripMenuItem.Name = "filterByNameToolStripMenuItem";
-            this.filterByNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.filterByNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.F)));
             this.filterByNameToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.filterByNameToolStripMenuItem.Text = "Filter by Name...";
             this.filterByNameToolStripMenuItem.Click += new System.EventHandler(this.FilterByNameToolStripMenuItem_Click);
-            // 
+            //
             // filterSeparatorToolStripSeparator
-            // 
+            //
             this.filterSeparatorToolStripSeparator.Name = "filterSeparatorToolStripSeparator";
             this.filterSeparatorToolStripSeparator.Size = new System.Drawing.Size(229, 6);
-            // 
+            //
             // resetFiltersToolStripMenuItem
-            // 
+            //
             this.resetFiltersToolStripMenuItem.Name = "resetFiltersToolStripMenuItem";
-            this.resetFiltersToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.resetFiltersToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.R)));
             this.resetFiltersToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.resetFiltersToolStripMenuItem.Text = "Reset Filters";
             this.resetFiltersToolStripMenuItem.Click += new System.EventHandler(this.ResetFiltersToolStripMenuItem_Click);
-            // 
+            //
             // exportToolStripDropDownButton
-            // 
+            //
             this.exportToolStripDropDownButton.AutoToolTip = false;
             this.exportToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.exportToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -5035,23 +5054,23 @@ namespace PaletteDesigner
             this.exportToolStripDropDownButton.Name = "exportToolStripDropDownButton";
             this.exportToolStripDropDownButton.Size = new System.Drawing.Size(54, 22);
             this.exportToolStripDropDownButton.Text = "Export";
-            // 
+            //
             // exportAsCsvToolStripMenuItem
-            // 
+            //
             this.exportAsCsvToolStripMenuItem.Name = "exportAsCsvToolStripMenuItem";
             this.exportAsCsvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportAsCsvToolStripMenuItem.Text = "Export as CSV";
             this.exportAsCsvToolStripMenuItem.Click += new System.EventHandler(this.ExportAsCsvToolStripMenuItem_Click);
-            // 
+            //
             // exportAsClassToolStripMenuItem
-            // 
+            //
             this.exportAsClassToolStripMenuItem.Name = "exportAsClassToolStripMenuItem";
             this.exportAsClassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportAsClassToolStripMenuItem.Text = "Export as Class";
             this.exportAsClassToolStripMenuItem.Click += new System.EventHandler(this.ExportAsClassToolStripMenuItem_Click);
-            // 
+            //
             // optionsToolStripDropDownButton
-            // 
+            //
             this.optionsToolStripDropDownButton.AutoToolTip = false;
             this.optionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.optionsToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -5060,83 +5079,83 @@ namespace PaletteDesigner
             this.optionsToolStripDropDownButton.Name = "optionsToolStripDropDownButton";
             this.optionsToolStripDropDownButton.Size = new System.Drawing.Size(62, 22);
             this.optionsToolStripDropDownButton.Text = "Options";
-            // 
+            //
             // toggleFormatToolStripMenuItem
-            // 
+            //
             this.toggleFormatToolStripMenuItem.CheckOnClick = true;
             this.toggleFormatToolStripMenuItem.Name = "toggleFormatToolStripMenuItem";
             this.toggleFormatToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.toggleFormatToolStripMenuItem.Text = "Show Hex Values";
             this.toggleFormatToolStripMenuItem.Click += new System.EventHandler(this.ToggleFormatToolStripMenuItem_Click);
-            // 
+            //
             // autoFillToolStripMenuItem
-            // 
+            //
             this.autoFillToolStripMenuItem.CheckOnClick = true;
             this.autoFillToolStripMenuItem.Name = "autoFillToolStripMenuItem";
             this.autoFillToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.autoFillToolStripMenuItem.Text = "Auto-Fill Color in Grid";
             this.autoFillToolStripMenuItem.CheckedChanged += new System.EventHandler(this.AutoFillToolStripMenuItem_CheckedChanged);
-            // 
+            //
             // kryptonCheckSetQuickFilterButtons
-            // 
+            //
             this.kryptonCheckSetQuickFilterButtons.CheckButtons.Add(this.filterByColorButton);
             this.kryptonCheckSetQuickFilterButtons.CheckButtons.Add(this.filterByNameButton);
             this.kryptonCheckSetQuickFilterButtons.CheckedButton = this.filterByNameButton;
             this.kryptonCheckSetQuickFilterButtons.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetQuickFilterButtons_CheckedButtonChanged);
-            // 
+            //
             // dataGridViewTextBoxColumn1
-            // 
+            //
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Column1";
             this.dataGridViewTextBoxColumn1.HeaderText = "Column1";
             this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
+            //
             // dataGridViewTextBoxColumn2
-            // 
+            //
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Column2";
             this.dataGridViewTextBoxColumn2.HeaderText = "Column2";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Width = 80;
-            // 
+            //
             // dataGridViewTextBoxColumn3
-            // 
+            //
             this.dataGridViewTextBoxColumn3.DataPropertyName = "Column3";
             this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Width = 80;
-            // 
+            //
             // dataGridViewTextBoxColumn4
-            // 
+            //
             this.dataGridViewTextBoxColumn4.DataPropertyName = "Column1";
             this.dataGridViewTextBoxColumn4.HeaderText = "Column1";
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 80;
-            // 
+            //
             // dataGridViewTextBoxColumn5
-            // 
+            //
             this.dataGridViewTextBoxColumn5.DataPropertyName = "Column2";
             this.dataGridViewTextBoxColumn5.HeaderText = "Column2";
             this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 80;
-            // 
+            //
             // dataGridViewTextBoxColumn6
-            // 
+            //
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Column3";
             this.dataGridViewTextBoxColumn6.HeaderText = "Column3";
             this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.Width = 80;
-            // 
+            //
             // mainToolStripContainer
-            // 
-            // 
+            //
+            //
             // mainToolStripContainer.ContentPanel
-            // 
+            //
             this.mainToolStripContainer.ContentPanel.Size = new System.Drawing.Size(1187, 565);
             this.mainToolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainToolStripContainer.Location = new System.Drawing.Point(0, 0);
@@ -5144,28 +5163,28 @@ namespace PaletteDesigner
             this.mainToolStripContainer.Size = new System.Drawing.Size(1187, 585);
             this.mainToolStripContainer.TabIndex = 0;
             this.mainToolStripContainer.Text = "toolStripContainer1";
-            // 
+            //
             // kryptonGroup9
-            // 
+            //
             this.kryptonGroup9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup9.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup9.Size = new System.Drawing.Size(100, 47);
             this.kryptonGroup9.TabIndex = 0;
-            // 
+            //
             // kryptonGroup10
-            // 
+            //
             this.kryptonGroup10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonGroup10.Location = new System.Drawing.Point(0, 0);
             this.kryptonGroup10.Size = new System.Drawing.Size(100, 49);
             this.kryptonGroup10.TabIndex = 0;
-            // 
+            //
             // kryptonManager
-            // 
+            //
             this.kryptonManager.ToolkitStrings.MessageBoxStrings.LessDetails = "L&ess Details...";
             this.kryptonManager.ToolkitStrings.MessageBoxStrings.MoreDetails = "&More Details...";
-            // 
+            //
             // kryptonPage1
-            // 
+            //
             this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonPage1.Flags = 65535;
             this.kryptonPage1.LastVisibleSet = true;
@@ -5174,9 +5193,9 @@ namespace PaletteDesigner
             this.kryptonPage1.Size = new System.Drawing.Size(100, 100);
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "692231678AB8425E692231678AB8425E";
-            // 
+            //
             // kryptonCheckSetLabels
-            // 
+            //
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsPanelClient);
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsPanelAlternate);
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsPanelCustom1);
@@ -5186,9 +5205,9 @@ namespace PaletteDesigner
             this.kryptonCheckSetLabels.CheckButtons.Add(this.labelsControlToolTip);
             this.kryptonCheckSetLabels.CheckedButton = this.labelsPanelClient;
             this.kryptonCheckSetLabels.CheckedButtonChanged += new System.EventHandler(this.KryptonCheckSetLabels_CheckedButtonChanged);
-            // 
+            //
             // MainForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 585);
@@ -5875,5 +5894,8 @@ namespace PaletteDesigner
         private Krypton.Toolkit.KryptonCheckButton filterByNameButton;
         private Krypton.Toolkit.KryptonCheckSet kryptonCheckSetQuickFilterButtons;
         private KryptonColorButton ColorFilterBtn;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rebuildPaletteMappingToolStripMenuItem;
+
     }
 }
