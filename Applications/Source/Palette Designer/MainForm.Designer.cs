@@ -103,18 +103,7 @@ namespace PaletteDesigner
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.kryptonListBox1 = new Krypton.Toolkit.KryptonListBox();
             this.pageDesignControls = new Krypton.Navigator.KryptonPage();
-            this.labelControlsNormal = new Krypton.Toolkit.KryptonLabel();
-            this.labelControlsDisabled = new Krypton.Toolkit.KryptonLabel();
-            this.control1Normal = new Krypton.Toolkit.KryptonGroup();
-            this.control1Disabled = new Krypton.Toolkit.KryptonGroup();
-            this.borderDesignControls = new Krypton.Toolkit.KryptonPanel();
-            this.kryptonNavigatorDesignControls = new Krypton.Navigator.KryptonNavigator();
-            this.pageControlsClient = new Krypton.Navigator.KryptonPage();
-            this.pageControlsAlternate = new Krypton.Navigator.KryptonPage();
-            this.pageControlsGroupBox = new Krypton.Navigator.KryptonPage();
-            this.pageControlsToolTip = new Krypton.Navigator.KryptonPage();
-            this.pageControlsRibbon = new Krypton.Navigator.KryptonPage();
-            this.pageControlsCustom1 = new Krypton.Navigator.KryptonPage();
+            this.controlsPage1 = new PaletteDesigner.Pages.ControlsPage();
             this.pageDesignInputControls = new Krypton.Navigator.KryptonPage();
             this.inputControls1 = new PaletteDesigner.Pages.InputControls();
             this.pageDesignButtonSpecs = new Krypton.Navigator.KryptonPage();
@@ -482,21 +471,6 @@ namespace PaletteDesigner
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignControls)).BeginInit();
             this.pageDesignControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Normal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Normal.Panel)).BeginInit();
-            this.control1Normal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Disabled)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Disabled.Panel)).BeginInit();
-            this.control1Disabled.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.borderDesignControls)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignControls)).BeginInit();
-            this.kryptonNavigatorDesignControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsClient)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsAlternate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsGroupBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsToolTip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsRibbon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsCustom1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignInputControls)).BeginInit();
             this.pageDesignInputControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtonSpecs)).BeginInit();
@@ -1497,12 +1471,10 @@ namespace PaletteDesigner
             // pageDesignControls
             //
             this.pageDesignControls.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageDesignControls.Controls.Add(this.labelControlsNormal);
-            this.pageDesignControls.Controls.Add(this.labelControlsDisabled);
-            this.pageDesignControls.Controls.Add(this.control1Normal);
-            this.pageDesignControls.Controls.Add(this.control1Disabled);
-            this.pageDesignControls.Controls.Add(this.borderDesignControls);
-            this.pageDesignControls.Controls.Add(this.kryptonNavigatorDesignControls);
+            // Embed new ControlsPage user control and dock fill
+            this.controlsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlsPage1.Name = "controlsPage1";
+            this.pageDesignControls.Controls.Add(this.controlsPage1);
             this.pageDesignControls.Flags = 65535;
             this.pageDesignControls.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignControls.ImageLarge")));
             this.pageDesignControls.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageDesignControls.ImageMedium")));
@@ -1516,189 +1488,6 @@ namespace PaletteDesigner
             this.pageDesignControls.TextTitle = "Client";
             this.pageDesignControls.ToolTipTitle = "Page ToolTip";
             this.pageDesignControls.UniqueName = "4E35E207BBA941404E35E207BBA94140";
-            //
-            // labelControlsNormal
-            //
-            this.labelControlsNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControlsNormal.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelControlsNormal.Location = new System.Drawing.Point(283, 30);
-            this.labelControlsNormal.Name = "labelControlsNormal";
-            this.labelControlsNormal.Size = new System.Drawing.Size(78, 29);
-            this.labelControlsNormal.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelControlsNormal.TabIndex = 0;
-            this.labelControlsNormal.Values.Text = "Normal";
-            //
-            // labelControlsDisabled
-            //
-            this.labelControlsDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControlsDisabled.LabelStyle = Krypton.Toolkit.LabelStyle.TitleControl;
-            this.labelControlsDisabled.Location = new System.Drawing.Point(119, 30);
-            this.labelControlsDisabled.Name = "labelControlsDisabled";
-            this.labelControlsDisabled.Size = new System.Drawing.Size(88, 29);
-            this.labelControlsDisabled.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.labelControlsDisabled.TabIndex = 1;
-            this.labelControlsDisabled.Values.Text = "Disabled";
-            //
-            // control1Normal
-            //
-            this.control1Normal.Location = new System.Drawing.Point(283, 62);
-            this.control1Normal.Size = new System.Drawing.Size(100, 100);
-            this.control1Normal.TabIndex = 17;
-            //
-            // control1Disabled
-            //
-            this.control1Disabled.Location = new System.Drawing.Point(119, 62);
-            this.control1Disabled.Size = new System.Drawing.Size(100, 100);
-            this.control1Disabled.TabIndex = 16;
-            //
-            // borderDesignControls
-            //
-            this.borderDesignControls.Dock = System.Windows.Forms.DockStyle.Left;
-            this.borderDesignControls.Location = new System.Drawing.Point(73, 0);
-            this.borderDesignControls.Name = "borderDesignControls";
-            this.borderDesignControls.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.HeaderPrimary;
-            this.borderDesignControls.Size = new System.Drawing.Size(1, 544);
-            this.borderDesignControls.TabIndex = 2;
-            //
-            // kryptonNavigatorDesignControls
-            //
-            this.kryptonNavigatorDesignControls.AutoSize = true;
-            this.kryptonNavigatorDesignControls.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
-            this.kryptonNavigatorDesignControls.Bar.BarMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignControls.Bar.BarMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignControls.Bar.BarMultiline = Krypton.Navigator.BarMultiline.Singleline;
-            this.kryptonNavigatorDesignControls.Bar.BarOrientation = Krypton.Toolkit.VisualOrientation.Left;
-            this.kryptonNavigatorDesignControls.Bar.CheckButtonStyle = Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.kryptonNavigatorDesignControls.Bar.ItemAlignment = Krypton.Toolkit.RelativePositionAlign.Near;
-            this.kryptonNavigatorDesignControls.Bar.ItemMaximumSize = new System.Drawing.Size(200, 200);
-            this.kryptonNavigatorDesignControls.Bar.ItemMinimumSize = new System.Drawing.Size(20, 20);
-            this.kryptonNavigatorDesignControls.Bar.ItemOrientation = Krypton.Toolkit.ButtonOrientation.FixedTop;
-            this.kryptonNavigatorDesignControls.Bar.ItemSizing = Krypton.Navigator.BarItemSizing.SameWidthAndHeight;
-            this.kryptonNavigatorDesignControls.Bar.TabBorderStyle = Krypton.Toolkit.TabBorderStyle.RoundedOutsizeMedium;
-            this.kryptonNavigatorDesignControls.Bar.TabStyle = Krypton.Toolkit.TabStyle.HighProfile;
-            this.kryptonNavigatorDesignControls.Button.ButtonDisplayLogic = Krypton.Navigator.ButtonDisplayLogic.None;
-            this.kryptonNavigatorDesignControls.Button.CloseButtonAction = Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.kryptonNavigatorDesignControls.Button.CloseButtonDisplay = Krypton.Navigator.ButtonDisplay.Hide;
-            this.kryptonNavigatorDesignControls.Button.ContextButtonAction = Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigatorDesignControls.Button.ContextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignControls.Button.ContextMenuMapImage = Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigatorDesignControls.Button.ContextMenuMapText = Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigatorDesignControls.Button.NextButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignControls.Button.NextButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignControls.Button.PreviousButtonAction = Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigatorDesignControls.Button.PreviousButtonDisplay = Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigatorDesignControls.ControlKryptonFormFeatures = false;
-            this.kryptonNavigatorDesignControls.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonNavigatorDesignControls.Location = new System.Drawing.Point(0, 0);
-            this.kryptonNavigatorDesignControls.NavigatorMode = Krypton.Navigator.NavigatorMode.BarCheckButtonOnly;
-            this.kryptonNavigatorDesignControls.Owner = null;
-            this.kryptonNavigatorDesignControls.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.kryptonNavigatorDesignControls.Pages.AddRange(new Krypton.Navigator.KryptonPage[] {
-            this.pageControlsClient,
-            this.pageControlsAlternate,
-            this.pageControlsGroupBox,
-            this.pageControlsToolTip,
-            this.pageControlsRibbon,
-            this.pageControlsCustom1});
-            this.kryptonNavigatorDesignControls.Panel.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelAlternate;
-            this.kryptonNavigatorDesignControls.SelectedIndex = 0;
-            this.kryptonNavigatorDesignControls.Size = new System.Drawing.Size(73, 544);
-            this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingInside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingOnly = new System.Windows.Forms.Padding(5);
-            this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingOutside = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignControls.StateCommon.Bar.BarPaddingTabs = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignControls.StateCommon.Bar.ButtonPadding = new System.Windows.Forms.Padding(-1);
-            this.kryptonNavigatorDesignControls.TabIndex = 0;
-            this.kryptonNavigatorDesignControls.Text = "kryptonNavigator1";
-            this.kryptonNavigatorDesignControls.SelectedPageChanged += new System.EventHandler(this.KryptonNavigatorDesignControls_SelectedPageChanged);
-            //
-            // pageControlsClient
-            //
-            this.pageControlsClient.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsClient.Flags = 65535;
-            this.pageControlsClient.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsClient.ImageLarge")));
-            this.pageControlsClient.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsClient.ImageMedium")));
-            this.pageControlsClient.LastVisibleSet = true;
-            this.pageControlsClient.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsClient.Name = "pageControlsClient";
-            this.pageControlsClient.Size = new System.Drawing.Size(50, 500);
-            this.pageControlsClient.Text = "Client";
-            this.pageControlsClient.TextDescription = "Client is the main style for the client area of Krypton controls.";
-            this.pageControlsClient.ToolTipTitle = "Page ToolTip";
-            this.pageControlsClient.UniqueName = "793D41956B3D4D08793D41956B3D4D08";
-            //
-            // pageControlsAlternate
-            //
-            this.pageControlsAlternate.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsAlternate.Flags = 65535;
-            this.pageControlsAlternate.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsAlternate.ImageLarge")));
-            this.pageControlsAlternate.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsAlternate.ImageMedium")));
-            this.pageControlsAlternate.LastVisibleSet = true;
-            this.pageControlsAlternate.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsAlternate.Name = "pageControlsAlternate";
-            this.pageControlsAlternate.Size = new System.Drawing.Size(50, 500);
-            this.pageControlsAlternate.Text = "Alternate";
-            this.pageControlsAlternate.TextDescription = "Alternate provides a complementary variation on the Client style.";
-            this.pageControlsAlternate.ToolTipTitle = "Page ToolTip";
-            this.pageControlsAlternate.UniqueName = "3CAAD74A17C5495F3CAAD74A17C5495F";
-            //
-            // pageControlsGroupBox
-            //
-            this.pageControlsGroupBox.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsGroupBox.Flags = 65534;
-            this.pageControlsGroupBox.LastVisibleSet = true;
-            this.pageControlsGroupBox.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsGroupBox.Name = "pageControlsGroupBox";
-            this.pageControlsGroupBox.Size = new System.Drawing.Size(100, 100);
-            this.pageControlsGroupBox.Text = "GroupBox";
-            this.pageControlsGroupBox.TextDescription = "GroupBox is applied as the default for KryptonGroupBox instances.";
-            this.pageControlsGroupBox.ToolTipTitle = "Page ToolTip";
-            this.pageControlsGroupBox.UniqueName = "6CA021C81DD0411F4DBD2ECCA0F3662A";
-            //
-            // pageControlsToolTip
-            //
-            this.pageControlsToolTip.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsToolTip.Flags = 65535;
-            this.pageControlsToolTip.LastVisibleSet = true;
-            this.pageControlsToolTip.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsToolTip.Name = "pageControlsToolTip";
-            this.pageControlsToolTip.Size = new System.Drawing.Size(100, 100);
-            this.pageControlsToolTip.Text = "ToolTip";
-            this.pageControlsToolTip.TextDescription = "ToolTip is used for popup windows showing additional context information.";
-            this.pageControlsToolTip.ToolTipTitle = "Page ToolTip";
-            this.pageControlsToolTip.UniqueName = "096439269AC64A7A096439269AC64A7A";
-            //
-            // pageControlsRibbon
-            //
-            this.pageControlsRibbon.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsRibbon.Flags = 65535;
-            this.pageControlsRibbon.LastVisibleSet = true;
-            this.pageControlsRibbon.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsRibbon.Name = "pageControlsRibbon";
-            this.pageControlsRibbon.Size = new System.Drawing.Size(300, 200);
-            this.pageControlsRibbon.Text = "Ribbon";
-            this.pageControlsRibbon.TextDescription = "Ribbon is used to achieve a compatible appearance to that of the Ribbon.";
-            this.pageControlsRibbon.ToolTipTitle = "Page ToolTip";
-            this.pageControlsRibbon.UniqueName = "F858E7BA110E48CBF858E7BA110E48CB";
-            //
-            // pageControlsCustom1
-            //
-            this.pageControlsCustom1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageControlsCustom1.Flags = 65535;
-            this.pageControlsCustom1.ImageLarge = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsCustom1.ImageLarge")));
-            this.pageControlsCustom1.ImageMedium = ((System.Drawing.Bitmap)(resources.GetObject("pageControlsCustom1.ImageMedium")));
-            this.pageControlsCustom1.LastVisibleSet = true;
-            this.pageControlsCustom1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.pageControlsCustom1.Name = "pageControlsCustom1";
-            this.pageControlsCustom1.Size = new System.Drawing.Size(50, 500);
-            this.pageControlsCustom1.Text = "Custom 1";
-            this.pageControlsCustom1.TextDescription = "Custom 1 style inherits from Client and is intended for your own custom use.";
-            this.pageControlsCustom1.ToolTipTitle = "Page ToolTip";
-            this.pageControlsCustom1.UniqueName = "B62AC6932C204028B62AC6932C204028";
             //
             // pageDesignInputControls
             //
@@ -5276,21 +5065,6 @@ namespace PaletteDesigner
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignControls)).EndInit();
             this.pageDesignControls.ResumeLayout(false);
             this.pageDesignControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Normal.Panel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Normal)).EndInit();
-            this.control1Normal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.control1Disabled.Panel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.control1Disabled)).EndInit();
-            this.control1Disabled.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.borderDesignControls)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigatorDesignControls)).EndInit();
-            this.kryptonNavigatorDesignControls.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsClient)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsAlternate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsGroupBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsToolTip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsRibbon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageControlsCustom1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignInputControls)).EndInit();
             this.pageDesignInputControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageDesignButtonSpecs)).EndInit();
@@ -5549,10 +5323,6 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageDesignPanels;
         private Krypton.Navigator.KryptonPage pageDesignSeparators;
         private Krypton.Navigator.KryptonPage pageDesignChromeTMS;
-        private Krypton.Navigator.KryptonNavigator kryptonNavigatorDesignControls;
-        private Krypton.Navigator.KryptonPage pageControlsClient;
-        private Krypton.Navigator.KryptonPage pageControlsAlternate;
-        private Krypton.Navigator.KryptonPage pageControlsCustom1;
         private Krypton.Toolkit.KryptonPanel kryptonPanelMainFill;
         private Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainerMain;
         private Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroupProperties;
@@ -5586,11 +5356,6 @@ namespace PaletteDesigner
         private System.Windows.Forms.ToolStripDropDownButton optionsToolStripDropDownButton;
         private System.Windows.Forms.ToolStripMenuItem toggleFormatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoFillToolStripMenuItem;
-        private Krypton.Toolkit.KryptonPanel borderDesignControls;
-        private Krypton.Toolkit.KryptonLabel labelControlsNormal;
-        private Krypton.Toolkit.KryptonLabel labelControlsDisabled;
-        private Krypton.Toolkit.KryptonGroup control1Normal;
-        private Krypton.Toolkit.KryptonGroup control1Disabled;
         private Krypton.Toolkit.KryptonLabel labelHeaderGroupNormal;
         private Krypton.Toolkit.KryptonLabel labelHeaderGroupDisabled;
         private Krypton.Toolkit.KryptonHeaderGroup headerGroup1Disabled;
@@ -5749,12 +5514,10 @@ namespace PaletteDesigner
         private Krypton.Toolkit.KryptonCheckButton labelsControlCustom1;
         private Krypton.Toolkit.KryptonCheckButton labelsControlAlternate;
         private Krypton.Toolkit.KryptonCheckButton labelsControlClient;
-        private Krypton.Navigator.KryptonPage pageControlsToolTip;
         private Krypton.Navigator.KryptonPage pageLabelsToolTip;
         private Krypton.Toolkit.KryptonCheckButton labelsControlToolTip;
         private Krypton.Navigator.KryptonPage pageTopRibbon;
         private Krypton.Navigator.KryptonPage pageDesignRibbon;
-        private Krypton.Navigator.KryptonPage pageControlsRibbon;
         private Krypton.Navigator.KryptonPage pageLabelsKeyTip;
         private Krypton.Navigator.KryptonPage pageTopCheckBox;
         private Krypton.Navigator.KryptonPage pageDesignCheckBox;
@@ -5833,7 +5596,6 @@ namespace PaletteDesigner
         private Krypton.Navigator.KryptonPage pageHeadersDockInactive;
         private Krypton.Navigator.KryptonPage pageTabDock;
         private Krypton.Navigator.KryptonPage pageTabDockAutoHidden;
-        private Krypton.Navigator.KryptonPage pageControlsGroupBox;
         private Krypton.Navigator.KryptonPage pageLabelsGroupBoxCaption;
         private Krypton.Navigator.KryptonPage pagePanelsRibbonInactive;
         private Krypton.Toolkit.ButtonSpecAny buttonSpecAny63;
@@ -5896,6 +5658,7 @@ namespace PaletteDesigner
         private KryptonColorButton ColorFilterBtn;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rebuildPaletteMappingToolStripMenuItem;
+        private PaletteDesigner.Pages.ControlsPage controlsPage1;
 
     }
 }

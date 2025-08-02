@@ -121,8 +121,6 @@ namespace PaletteDesigner
                     buttonSpecG2,
                     buttonSpecG3,
                     buttonSpecG4,
-                    control1Disabled,
-                    control1Normal,
                     headerGroup1Disabled,
                     headerGroup1Normal,
                     header1Disabled,
@@ -159,7 +157,6 @@ namespace PaletteDesigner
                     label1Live,
                     kryptonNavigatorTabs,
                     kryptonNavigatorDesign,
-                    kryptonNavigatorDesignControls,
                     kryptonNavigatorDesignPanels,
                     kryptonNavigatorDesignHeaders,
                     kryptonNavigatorDesignLabels,
@@ -193,7 +190,6 @@ namespace PaletteDesigner
                     borderDesignLabels,
                     borderDesignHeaders,
                     borderDesignPanels,
-                    borderDesignControls,
                     borderDesignNavigator,
                     borderDesignTabs,
                     panelLabelsBackground,
@@ -562,6 +558,7 @@ namespace PaletteDesigner
             kryptonListView1.LocalCustomPalette = _palette;
 
             inputControls1.ApplyPalette(_palette);
+            controlsPage1.ApplyPalette(_palette);
             trackBar1.ApplyPalette(_palette);
             menuPage1.ApplyPalette(_palette);
             toolTipsPage1.ApplyPalette(_palette);
@@ -742,10 +739,6 @@ namespace PaletteDesigner
             rbUncheckedNormal.SetFixedState(false, true, false, false);
             rbUncheckedTracking.SetFixedState(false, true, true, false);
             rbUncheckedPressed.SetFixedState(false, true, false, true);
-
-            // Control fixed states
-            control1Disabled.SetFixedState(PaletteState.Disabled);
-            control1Normal.SetFixedState(PaletteState.Normal);
 
             // HeaderGroup fixed states
             headerGroup1Disabled.SetFixedState(PaletteState.Disabled);
@@ -991,56 +984,6 @@ namespace PaletteDesigner
         private void KryptonNavigatorDesign_SelectedPageChanged(object sender, EventArgs e) =>
             // Reflect change in the top navigator
             kryptonNavigatorTop.SelectedIndex = kryptonNavigatorDesign.SelectedIndex;
-
-        private void KryptonNavigatorDesignControls_SelectedPageChanged(object sender, EventArgs e)
-        {
-            if (kryptonNavigatorDesignControls.SelectedPage == null)
-            {
-                return;
-            }
-            // Update the design page text with the selected style information
-            pageDesignControls.TextTitle = kryptonNavigatorDesignControls.SelectedPage.Text;
-            pageDesignControls.TextDescription = kryptonNavigatorDesignControls.SelectedPage.TextDescription;
-
-            PaletteBackStyle backStyle;
-            PaletteBorderStyle borderStyle;
-
-            // Work out the group styles to be used
-            switch (kryptonNavigatorDesignControls.SelectedIndex)
-            {
-                default:
-                //case 0:
-                    backStyle = PaletteBackStyle.ControlClient;
-                    borderStyle = PaletteBorderStyle.ControlClient;
-                    break;
-                case 1:
-                    backStyle = PaletteBackStyle.ControlAlternate;
-                    borderStyle = PaletteBorderStyle.ControlAlternate;
-                    break;
-                case 2:
-                    backStyle = PaletteBackStyle.ControlGroupBox;
-                    borderStyle = PaletteBorderStyle.ControlGroupBox;
-                    break;
-                case 3:
-                    backStyle = PaletteBackStyle.ControlToolTip;
-                    borderStyle = PaletteBorderStyle.ControlToolTip;
-                    break;
-                case 4:
-                    backStyle = PaletteBackStyle.ControlRibbon;
-                    borderStyle = PaletteBorderStyle.ControlRibbon;
-                    break;
-                case 5:
-                    backStyle = PaletteBackStyle.ControlCustom1;
-                    borderStyle = PaletteBorderStyle.ControlCustom1;
-                    break;
-            }
-
-            // Update all the displayed controls with the new styles
-            control1Disabled.GroupBackStyle = backStyle;
-            control1Disabled.GroupBorderStyle = borderStyle;
-            control1Normal.GroupBackStyle = backStyle;
-            control1Normal.GroupBorderStyle = borderStyle;
-        }
 
         private void KryptonNavigatorDesignHeaders_SelectedPageChanged(object sender, EventArgs e)
         {
