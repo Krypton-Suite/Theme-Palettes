@@ -96,10 +96,10 @@ public static partial class PaletteMapper
             string stylePart = isForm ? "ButtonForm" : "ButtonStandalone";
             string statePart = stateToken switch
             {
-                "Normal" => "Normal",
+                "Normal"   => "Normal",
                 "Tracking" => "Tracking",
-                "Pressed" => "Pressed",
-                "Checked" => "CheckedNormal",
+                "Pressed"  => "Pressed",
+                "Checked"  => "CheckedNormal",
                 _ => "Normal"
             };
 
@@ -200,7 +200,7 @@ public static partial class PaletteMapper
         {
             if (enumName == "RibbonTabSeparatorColor")
             {
-                return "Ribbon.RibbonGeneral.StateNormal.SeparatorColor";
+                return "Ribbon.RibbonGeneral.TabSeparatorColor";
             }
 
             // Text colors for RibbonTab
@@ -241,11 +241,24 @@ public static partial class PaletteMapper
             string indexToken = m.Groups[2].Success ? m.Groups[2].Value : string.Empty;
             bool isTitle = m.Groups[3].Success;
 
-            string stylePart = "RibbonGroup" + (areaToken == "Border" ? "Border" : areaToken == "Area" ? "Area" : "Title");
             string idx = string.IsNullOrEmpty(indexToken) ? "1" : indexToken;
-            string groupPart = isTitle ? "TextColor" : areaToken == "Border" ? $"BorderColor{idx}" : $"BackColor{idx}";
 
-            return $"Ribbon.{stylePart}.StateNormal.{groupPart}";
+            if (isTitle)
+            {
+                // Title colours live on RibbonGroupNormalTitle.StateNormal.TextColor
+                return "Ribbon.RibbonGroupNormalTitle.StateNormal.TextColor";
+            }
+
+            if (areaToken == "Border")
+            {
+                // Normal border uses BackColorN properties
+                return $"Ribbon.RibbonGroupNormalBorder.StateNormal.BackColor{idx}";
+            }
+            else // Area
+            {
+                // Group area default colours are in StateCheckedNormal
+                return $"Ribbon.RibbonGroupArea.StateCheckedNormal.BackColor{idx}";
+            }
         }
 
         // Ribbon chrome mapping
@@ -254,51 +267,54 @@ public static partial class PaletteMapper
         {
             // Map GroupsArea to Ribbon.RibbonGroupArea
             string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonGroupArea.StateNormal.Back.Color{idx}";
+            return $"Ribbon.RibbonGroupArea.StateCheckedNormal.BackColor{idx}";
         }
         if (enumName == "RibbonMinimizeBarLight")
         {
-            return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color1";
+            return "Ribbon.RibbonGeneral.MinimizeBarLightColor";
         }
         if (_ribbonMinimizeBarRegex.IsMatch(enumName))
         {
             // Dark variant uses Color2, light uses Color1
-            return "Ribbon.RibbonMinimizeBar.StateNormal.Back.Color2";
+            return "Ribbon.RibbonGeneral.MinimizeBarDarkColor";
         }
         // RibbonGroup Border/Title context tracking
         if (enumName.StartsWith("RibbonGroupBorderContext", StringComparison.Ordinal))
         {
             string idx = enumName.Substring("RibbonGroupBorderContext".Length);
             idx = string.IsNullOrEmpty(idx) ? "1" : idx;
-            return $"Ribbon.RibbonGroupBorder.StateContextChecked.BorderColor{idx}";
+            return $"Ribbon.RibbonGroupNormalBorder.StateContextNormal.BackColor{idx}";
         }
         if (enumName.StartsWith("RibbonGroupTitleContext", StringComparison.Ordinal))
         {
             // Title context uses TextColor (no index differentiation in object model)
-            return "Ribbon.RibbonGroupTitle.StateContextChecked.TextColor";
+            return "Ribbon.RibbonGroupNormalTitle.StateContextNormal.TextColor";
         }
         if (enumName.StartsWith("RibbonGroupTitleTracking", StringComparison.Ordinal))
         {
-            return "Ribbon.RibbonGroupTitle.StateTracking.TextColor";
+            return "Ribbon.RibbonGroupNormalTitle.StateTracking.TextColor";
         }
         m = _ribbonGroupFrameRegex.Match(enumName);
         if (m.Success)
         {
             string part = m.Groups[1].Value; // Border or Inside
             string idx  = m.Groups[2].Value;
-            string groupPart = (part == "Border" ? "Border" : "Back") + ".Color" + idx;
-            return $"Ribbon.RibbonGroupFrame.StateNormal.{groupPart}";
+            // Map to the correct collapsed frame objects
+            return part == "Border"
+                ? $"Ribbon.RibbonGroupCollapsedFrameBorder.StateNormal.BackColor{idx}"
+                : $"Ribbon.RibbonGroupCollapsedFrameBack.StateNormal.BackColor{idx}";
         }
         m = _ribbonGroupSeparatorRegex.Match(enumName);
         if (m.Success)
         {
             string darkLight = m.Groups[1].Value; // Dark or Light
-            string idx = darkLight == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonGroupSeparator.StateNormal.Border.Color{idx}";
+            return darkLight == "Dark"
+                ? "Ribbon.RibbonGeneral.GroupSeparatorDark"
+                : "Ribbon.RibbonGeneral.GroupSeparatorLight";
         }
         if (_ribbonGroupTitleTextRegex.IsMatch(enumName))
         {
-            return "Ribbon.RibbonGroupTitle.StateNormal.Text.Color1";
+            return "Ribbon.RibbonGroupNormalTitle.StateNormal.TextColor";
         }
         m = _ribbonQATMiniRegex.Match(enumName);
         if (m.Success)
@@ -306,53 +322,54 @@ public static partial class PaletteMapper
             string idx = m.Groups[1].Value;
             bool inactive = m.Groups[2].Success;
             string state = inactive ? "StateInactive" : "StateNormal";
-            return $"Ribbon.RibbonQATMinibar.{state}.Back.Color{idx}";
+            return $"Ribbon.RibbonQATMinibar.{state}.BackColor{idx}";
         }
         m = _ribbonQATFullRegex.Match(enumName);
         if (m.Success)
         {
             string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonQATFullbar.StateNormal.Back.Color{idx}";
+            return $"Ribbon.RibbonQATFullbar.BackColor{idx}";
         }
         m = _ribbonQATButtonRegex.Match(enumName);
         if (m.Success)
         {
             string shade = m.Groups[1].Value;
-            string colorIdx = shade == "Dark" ? "1" : "2";
-            return $"Ribbon.RibbonQATButton.StateNormal.Border.Color{colorIdx}";
+            return shade == "Dark"
+                ? "Ribbon.RibbonGeneral.QATButtonDarkColor"
+                : "Ribbon.RibbonGeneral.QATButtonLightColor";
         }
         m = _ribbonQATOverflowRegex.Match(enumName);
         if (m.Success)
         {
             string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonQATOverflow.StateNormal.Back.Color{idx}";
+            return $"Ribbon.RibbonQATOverflow.BackColor{idx}";
         }
         m = _ribbonDropArrowRegex.Match(enumName);
         if (m.Success)
         {
             // Final correction for RibbonDropArrow mapping
             string shade = m.Groups[1].Value; // Dark or Light
-            return $"Ribbon.RibbonGeneral.StateNormal.DropArrow.{(shade == "Dark" ? "Dark" : "Light")}";
+            return shade == "Dark" ? "Ribbon.RibbonGeneral.DropArrowDark" : "Ribbon.RibbonGeneral.DropArrowLight";
         }
         m = _ribbonGalleryRegex.Match(enumName);
         if (m.Success)
         {
             if (enumName == "RibbonGalleryBorder")
             {
-                return "Ribbon.RibbonGalleryBorder.StateNormal.Border.Color1";
+                return "Ribbon.RibbonGalleryBorder.BackColor1";
             }
             if (enumName.StartsWith("RibbonGalleryBackTracking", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGalleryBack.StateTracking.BackColor1";
+                return "Ribbon.RibbonGalleryBack.BackColor2";
             }
             if (enumName.StartsWith("RibbonGalleryBackNormal", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGalleryBack.StateNormal.BackColor1";
+                return "Ribbon.RibbonGalleryBack.BackColor1";
             }
             if (enumName.StartsWith("RibbonGalleryBack", StringComparison.Ordinal))
             {
                 string idx = m.Groups[3].Success ? m.Groups[3].Value : "1";
-                return $"Ribbon.RibbonGalleryBack.StateNormal.BackColor{idx}";
+                return $"Ribbon.RibbonGalleryBack.BackColor{idx}";
             }
         }
 
@@ -364,33 +381,29 @@ public static partial class PaletteMapper
             if (m.Groups[1].Success) // Collapsed
             {
                 string groupToken = m.Groups[2].Value; // Back or Border
-                string idx        = m.Groups[3].Value;
-                string groupPart  = (groupToken == "Border" ? "Border" : "Back") + ".Color" + (string.IsNullOrEmpty(idx) ? "1" : idx);
-                return $"Ribbon.RibbonGroupCollapsed.StateNormal.{groupPart}";
+                string idx        = string.IsNullOrEmpty(m.Groups[3].Value) ? "1" : m.Groups[3].Value;
+
+                if (groupToken == "Border")
+                {
+                    return $"Ribbon.RibbonGroupCollapsedBorder.StateNormal.BackColor{idx}";
+                }
+
+                // Back colours
+                return $"Ribbon.RibbonGroupCollapsedBack.StateNormal.BackColor{idx}";
             }
             if (m.Groups[4].Success) // Dialog
             {
-                string dialogPart = m.Groups[5].Value; // e.g., Border, LightShade, DarkShade, Glyph, Back
-                string groupPart;
-                if (dialogPart.Equals("Border", StringComparison.OrdinalIgnoreCase))
-                {
-                    groupPart = "Border.Color1";
-                }
-                else if (dialogPart.Equals("Back", StringComparison.OrdinalIgnoreCase))
-                {
-                    groupPart = "Back.Color1";
-                }
-                else // Glyph / LightShade / DarkShade treated as Text
-                {
-                    groupPart = "Text.Color1";
-                }
-                return $"Ribbon.RibbonGroupDialog.StateNormal.{groupPart}";
+                string dialogPart = m.Groups[5].Value;
+                bool dark = dialogPart.Equals("DarkShade", StringComparison.OrdinalIgnoreCase) ||
+                             dialogPart.Equals("Border", StringComparison.OrdinalIgnoreCase) ||
+                             dialogPart.Equals("Glyph", StringComparison.OrdinalIgnoreCase);
+                return dark ? "Ribbon.RibbonGeneral.GroupDialogDark" : "Ribbon.RibbonGeneral.GroupDialogLight";
             }
             if (m.Groups[6].Success) // Separator
             {
-                string idx = m.Groups[7].Value;
-                string groupPart = "Border.Color" + (string.IsNullOrEmpty(idx) ? "1" : idx);
-                return $"Ribbon.RibbonGroupSeparator.StateNormal.{groupPart}";
+                string idx = string.IsNullOrEmpty(m.Groups[7].Value) ? "1" : m.Groups[7].Value;
+                bool dark = idx == "1";
+                return dark ? "Ribbon.RibbonGeneral.GroupSeparatorDark" : "Ribbon.RibbonGeneral.GroupSeparatorLight";
             }
         }
 
@@ -442,8 +455,7 @@ public static partial class PaletteMapper
     {
         if (_navigatorMiniRegex.IsMatch(enumName))
         {
-            // Map directly to base scheme property for mini navigator
-            return "BaseScheme.NavigatorMiniBackColor";
+            return "ButtonStyles.ButtonNavigatorMini.StateNormal.Back.Color1";
         }
         return null;
     }
@@ -513,8 +525,8 @@ public static partial class PaletteMapper
     {
         if (_contextMenuHeadingRegex.IsMatch(enumName))
         {
-            // Map to the Heading sub-property on KryptonPaletteContextMenu
-            return "ContextMenu.Heading.StateNormal.Back.Color1";
+            // Correct path: ContextMenu.StateCommon.Heading.Back.Color1
+            return "ContextMenu.StateCommon.Heading.Back.Color1";
         }
         return null;
     }
@@ -665,15 +677,17 @@ public static partial class PaletteMapper
     {
         if (enumName == "PanelClient")
         {
-            return "PanelStyles.PanelClient.StateNormal.Back.Color1";
+            // PaletteBack is the state itself, so map directly to Color1
+            return "PanelStyles.PanelClient.StateNormal.Color1";
         }
         if (_panelAlternativeRegex.IsMatch(enumName))
         {
-            return "PanelStyles.PanelAlternate.StateNormal.Back.Color1";
+            // Remove invalid 'Back.' segment
+            return "PanelStyles.PanelAlternate.StateNormal.Color1";
         }
         if (_controlBorderRegex.IsMatch(enumName))
         {
-            return "ControlStyles.ControlClient.StateNormal.Back.Color1";
+            return "ControlStyles.ControlClient.StateNormal.Border.Color1";
         }
         return null;
     }

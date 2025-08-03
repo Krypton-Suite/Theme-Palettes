@@ -149,21 +149,21 @@ public static partial class PaletteMapper
     private static readonly Dictionary<string, string> _enumToPathOverrides = new(StringComparer.Ordinal)
     {
         // Tool/StatusStrip & related menu colors
-        ["StatusStripText"]   = "ToolMenuStatus.StatusStrip.ToolStripText",
-        ["ButtonBorder"]      = "ToolMenuStatus.Button.ButtonBorder",
+        ["StatusStripText"]   = "ToolMenuStatus.StatusStrip.StatusStripText",
+        ["ButtonBorder"]      = "ToolMenuStatus.Button.ButtonPressedBorder",
         ["SeparatorLight"]    = "ToolMenuStatus.Separator.SeparatorLight",
         ["SeparatorDark"]     = "ToolMenuStatus.Separator.SeparatorDark",
         ["GripLight"]         = "ToolMenuStatus.Grip.GripLight",
         ["GripDark"]          = "ToolMenuStatus.Grip.GripDark",
         ["ToolStripBack"]     = "ToolMenuStatus.ToolStrip.ToolStripGradientMiddle",
-        ["StatusStripLight"]  = "ToolMenuStatus.StatusStrip.ToolStripGradientBegin",
-        ["StatusStripDark"]   = "ToolMenuStatus.StatusStrip.ToolStripGradientEnd",
-        ["ImageMargin"]       = "ToolMenuStatus.MenuStrip.ToolStripDropDownBackground",
+        ["StatusStripLight"]  = "ToolMenuStatus.StatusStrip.StatusStripGradientBegin",
+        ["StatusStripDark"]   = "ToolMenuStatus.StatusStrip.StatusStripGradientEnd",
+        ["ImageMargin"]       = "ToolMenuStatus.ToolStrip.ToolStripDropDownBackground",
         ["ToolStripBegin"]    = "ToolMenuStatus.ToolStrip.ToolStripGradientBegin",
         ["ToolStripMiddle"]   = "ToolMenuStatus.ToolStrip.ToolStripGradientMiddle",
         ["ToolStripEnd"]      = "ToolMenuStatus.ToolStrip.ToolStripGradientEnd",
         ["OverflowBegin"]     = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientBegin",
-        ["OverflowMiddle"]    = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientMiddle",
+        ["OverflowMiddle"]    = "ToolMenuStatus.ToolStrip.ToolStripGradientMiddle",
         ["OverflowEnd"]       = "ToolMenuStatus.ToolStrip.ToolStripPanelGradientEnd",
         ["ToolStripBorder"]   = "ToolMenuStatus.ToolStrip.ToolStripBorder"
     };
@@ -395,8 +395,8 @@ public static partial class PaletteMapper
     {
         // KryptonCustomPaletteBase stores a private _basePalette and exposes SchemeColors; not directly the scheme.
         // However, many PaletteBase implementations expose a BaseScheme or equivalent. Try common names via reflection.
-        var pi = palette.GetType().GetProperty("BaseScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                 ?? palette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+        // Only attempt ColorScheme or Scheme properties; BaseScheme removed as it does not exist
+        var pi = palette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                  ?? palette.GetType().GetProperty("Scheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
         if (pi != null)
         {
@@ -409,8 +409,8 @@ public static partial class PaletteMapper
         var basePalette = basePalettePi?.GetValue(palette);
         if (basePalette != null)
         {
-            var piScheme = basePalette.GetType().GetProperty("BaseScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                          ?? basePalette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            // Only attempt ColorScheme or Scheme on the base palette; BaseScheme removed
+            var piScheme = basePalette.GetType().GetProperty("ColorScheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                           ?? basePalette.GetType().GetProperty("Scheme", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (piScheme != null)
             {
