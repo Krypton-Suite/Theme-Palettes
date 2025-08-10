@@ -1837,14 +1837,6 @@ namespace PaletteDesigner
             UpdateFilterUI();
         }
 
-        private void ColorFilterBtn_SelectedColorChanged(object sender, ColorEventArgs e)
-        {
-            filterByColorButton.Checked = true;
-            fastFilterTextBox.Text = $"#{e.Color.R:X2}{e.Color.G:X2}{e.Color.B:X2}".ToLower();
-
-            ApplyQuickFilter();
-        }
-
         private void FastFilterTextBox_TextChanged(object? sender, EventArgs e)
         {
             ApplyQuickFilter();
@@ -2014,7 +2006,13 @@ namespace PaletteDesigner
                 if (TryParseColorString(input, out Color targetColor))
                 {
                     var rowColor = row.Cells[3].Style.BackColor;
-                    return rowColor.ToArgb() == targetColor.ToArgb();
+                    if (rowColor.ToArgb() == targetColor.ToArgb())
+                    {
+                        return true;
+                    }
+                    // Fallback: allow textual "starts with" match when the exact parsed color does not match
+                    // This keeps incremental typing (e.g., "30;57;9") behaving intuitively.
+                    return cellText.StartsWith(input, StringComparison.OrdinalIgnoreCase);
                 }
                 return false;
             }
@@ -2263,6 +2261,34 @@ namespace PaletteDesigner
             if (autoFillToolStripMenuItem != null)
             {
                 autoFillToolStripMenuItem.Checked = _autoFillFromViewer;
+            }
+        }
+
+        private void ColorFilterBtn_Click(object? sender, EventArgs e)
+        {
+            Color initial = Color.White;
+            if (colorTableGrid.CurrentCell != null && colorTableGrid.CurrentCell.RowIndex >= 0)
+            {
+                int rowIndex = colorTableGrid.CurrentCell.RowIndex;
+                if (rowIndex >= 0 && rowIndex < colorTableGrid.Rows.Count)
+                {
+                    initial = colorTableGrid.Rows[rowIndex].Cells[3].Style.BackColor;
+                }
+            }
+            else if (_activeColorFilter.HasValue)
+            {
+                initial = _activeColorFilter.Value;
+            }
+
+            using (var dlg = new LiveColorPickerDialog { Color = initial })
+            {
+                dlg.ShowExtraControls = false;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    var c = dlg.Color;
+                    filterByColorButton.Checked = true;
+                    fastFilterTextBox.Text = string.Format("{0};{1};{2}", c.R, c.G, c.B);
+                }
             }
         }
 

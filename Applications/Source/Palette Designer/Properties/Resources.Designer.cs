@@ -123,6 +123,36 @@ namespace PaletteDesigner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap color {
+            get {
+                object obj = ResourceManager.GetObject("color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color24 {
+            get {
+                object obj = ResourceManager.GetObject("color24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Delete {
+            get {
+                object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_new {
             get {
                 object obj = ResourceManager.GetObject("document_new", resourceCulture);
@@ -398,7 +428,7 @@ namespace PaletteDesigner.Properties {
         ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
         ///    &lt;KryptonPalette Version=&quot;6&quot;&gt;
-        ///      &lt;xsl:attri [rest of string was truncated]&quot;;.
+        ///      &lt;xsl:attribute na [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string v2to6 {
             get {
@@ -414,7 +444,7 @@ namespace PaletteDesigner.Properties {
         ///    &lt;xsl:comment&gt;For more information about Krypton visit https://github.com/Krypton-Suite/Standard-Toolkit&lt;/xsl:comment&gt;
         ///    &lt;xsl:comment&gt;WARNING: Modifying this file may render it invalid for importing.&lt;/xsl:comment&gt;
         ///    &lt;KryptonPalette Version=&quot;20&quot;&gt;
-        ///      &lt;xsl:attr [rest of string was truncated]&quot;;.
+        ///      &lt;xsl:attribute n [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string v6to20 {
             get {

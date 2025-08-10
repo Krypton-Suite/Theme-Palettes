@@ -15,6 +15,10 @@ namespace PaletteDesigner.Utilities;
 /// </summary>
 internal sealed class LiveColorPickerDialog : Cyotek.Windows.Forms.ColorPickerDialog
 {
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public bool ShowExtraControls { get; set; } = true;
+
     private readonly CheckBox _chkLive;
     private readonly FlowLayoutPanel _bottomPanel;
     private readonly Button _btnReset;
@@ -65,7 +69,7 @@ internal sealed class LiveColorPickerDialog : Cyotek.Windows.Forms.ColorPickerDi
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        if (!_panelAdded)
+        if (!_panelAdded && ShowExtraControls)
         {
             _panelAdded = true;
             _initialColor = Color;
