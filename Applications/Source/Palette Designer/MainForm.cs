@@ -938,9 +938,11 @@ namespace PaletteDesigner
             {
                 kryptonManager.GlobalPaletteMode = dialog.SelectedPaletteMode;
 
-                // Start with a fresh palette so that the default theme can be copied into it
+                // Start with a fresh palette that inherits from the selected global palette
                 CreateNewPalette(useCurrentGlobalPalette: true);
-                RefreshSchemeFromOverrides();
+                // For a new-from-default palette, copy all colors directly from the base palette.
+                // Avoid grammar/path processing here to prevent transient wrong mappings.
+                CopyColorsFromBasePalette();
 
                 // Set state flags and filename
                 _dirty = true;
@@ -950,8 +952,7 @@ namespace PaletteDesigner
                 // Define the initial title bar string
                 UpdateTitleBar();
 
-                // Copy all colors from the base palette into the custom palette
-                CopyColorsFromBasePalette();
+                // Colors already copied above
 
                 ApplyPalette();
                 ApplyQuickFilter(false);
@@ -1424,12 +1425,17 @@ namespace PaletteDesigner
             {
                 _undoStack.Push((enumVal, current));
                 _palette?.SetSchemeColor(enumVal, args.Color);
+                // Ensure the grid reflects live updates even if external listeners don't propagate
+                UpdateGridRow(enumVal, args.Color);
+                propertyGrid.Refresh();
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 _undoStack.Push((enumVal, current));
                 _palette?.SetSchemeColor(enumVal, dlg.Color);
+                // Explicitly refresh the grid in case the palette event was not received
+                UpdateGridRow(enumVal, dlg.Color);
             }
 
             // Ensure the property grid is updated to reflect the new color
@@ -2374,10 +2380,16 @@ namespace PaletteDesigner
                             {
                                 // Get via compiled delegate
                                 Color fast = PaletteMapper.GetColorFast(_palette, fastPath);
-                                // If empty, fall back to base palette
-                                final = (fast.ToArgb() == 0 && _palette.BasePalette != null)
-                                    ? _palette.BasePalette.GetSchemeColor(enumVal)
-                                    : fast;
+                                // If empty, prefer the base palette when available, otherwise keep the file-provided value
+                                if (fast.ToArgb() == 0)
+                                {
+                                    // Preserve the file-provided override when we cannot resolve a fast path
+                                    final = fileValue;
+                                }
+                                else
+                                {
+                                    final = fast;
+                                }
                             }
                         }
                         catch
@@ -2388,10 +2400,8 @@ namespace PaletteDesigner
                     }
                     else
                     {
-                        // No mapping; use base palette if available, otherwise file override
-                        final = _palette.BasePalette != null
-                            ? _palette.BasePalette.GetSchemeColor(enumVal)
-                            : fileValue;
+                        // No mapping; keep the file-provided override value
+                        final = fileValue;
                     }
                     _palette.SetSchemeColor(enumVal, final);
                     // Update progress bar deterministically

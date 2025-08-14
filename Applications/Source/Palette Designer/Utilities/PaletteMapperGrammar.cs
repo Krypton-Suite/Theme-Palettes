@@ -200,6 +200,7 @@ public static partial class PaletteMapper
         {
             if (enumName == "RibbonTabSeparatorColor")
             {
+                // PaletteRibbonGeneral exposes TabSeparatorColor at General level (no State)
                 return "Ribbon.RibbonGeneral.TabSeparatorColor";
             }
 
@@ -251,13 +252,13 @@ public static partial class PaletteMapper
 
             if (areaToken == "Border")
             {
-                // Normal border uses BackColorN properties
+                // Border colors live in RibbonGroupNormalBorder.StateNormal.BackColorN
                 return $"Ribbon.RibbonGroupNormalBorder.StateNormal.BackColor{idx}";
             }
             else // Area
             {
-                // Group area default colours are in StateCheckedNormal
-                return $"Ribbon.RibbonGroupArea.StateCheckedNormal.BackColor{idx}";
+                // Area colors for non-context groups use StateNormal
+                return $"Ribbon.RibbonGroupArea.StateNormal.BackColor{idx}";
             }
         }
 
@@ -267,7 +268,7 @@ public static partial class PaletteMapper
         {
             // Map GroupsArea to Ribbon.RibbonGroupArea
             string idx = m.Groups[1].Value;
-            return $"Ribbon.RibbonGroupArea.StateCheckedNormal.BackColor{idx}";
+            return $"Ribbon.RibbonGroupArea.StateNormal.BackColor{idx}";
         }
         if (enumName == "RibbonMinimizeBarLight")
         {
@@ -321,13 +322,14 @@ public static partial class PaletteMapper
         {
             string idx = m.Groups[1].Value;
             bool inactive = m.Groups[2].Success;
-            string state = inactive ? "StateInactive" : "StateNormal";
+            string state = inactive ? "StateInactive" : "StateActive";
             return $"Ribbon.RibbonQATMinibar.{state}.BackColor{idx}";
         }
         m = _ribbonQATFullRegex.Match(enumName);
         if (m.Success)
         {
             string idx = m.Groups[1].Value;
+            // QAT fullbar has a single PaletteRibbonBack without State; map directly
             return $"Ribbon.RibbonQATFullbar.BackColor{idx}";
         }
         m = _ribbonQATButtonRegex.Match(enumName);
@@ -342,6 +344,7 @@ public static partial class PaletteMapper
         if (m.Success)
         {
             string idx = m.Groups[1].Value;
+            // QAT overflow is also a single PaletteRibbonBack
             return $"Ribbon.RibbonQATOverflow.BackColor{idx}";
         }
         m = _ribbonDropArrowRegex.Match(enumName);
@@ -360,11 +363,12 @@ public static partial class PaletteMapper
             }
             if (enumName.StartsWith("RibbonGalleryBackTracking", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGalleryBack.BackColor2";
+                // Tracking maps to StateTracking on PaletteRibbonBack
+                return "Ribbon.RibbonGalleryBack.StateTracking.BackColor1";
             }
             if (enumName.StartsWith("RibbonGalleryBackNormal", StringComparison.Ordinal))
             {
-                return "Ribbon.RibbonGalleryBack.BackColor1";
+                return "Ribbon.RibbonGalleryBack.StateNormal.BackColor1";
             }
             if (enumName.StartsWith("RibbonGalleryBack", StringComparison.Ordinal))
             {
