@@ -86,7 +86,8 @@ public partial class ExportBaseSchemeClass : KryptonForm
 
         if (File.Exists(path))
         {
-            var res = KryptonMessageBox.Show(this, $"{fileNameInput} already exists. Overwrite?", "Confirm Overwrite", KryptonMessageBoxButtons.YesNo, KryptonMessageBoxIcon.Question);
+            var res = KryptonMessageBox.Show(this, $"{fileNameInput} already exists. Overwrite?", "Confirm Overwrite",
+                        KryptonMessageBoxButtons.YesNo, KryptonMessageBoxIcon.Question);
             if (res != DialogResult.Yes)
             {
                 return;
@@ -136,7 +137,8 @@ public partial class ExportBaseSchemeClass : KryptonForm
         sb.AppendLine();
         sb.AppendLine($"public sealed class {className} : KryptonColorSchemeBase");
         sb.AppendLine("{");
-        const int braceCol = 59;
+
+        const int braceCol = 59; // works best with current enum names
         foreach (var val in enumValues)
         {
             Color col = GetSchemeColorSafe(palette, val);
@@ -154,46 +156,6 @@ public partial class ExportBaseSchemeClass : KryptonForm
 
     private static Color GetSchemeColorSafe(KryptonCustomPaletteBase? palette, SchemeBaseColors val)
     {
-        if (palette == null)
-        {
-            return GlobalStaticValues.EMPTY_COLOR;
-        }
-
-        var m = palette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
-        if (m != null)
-        {
-            try
-            {
-                return (Color)m.Invoke(palette, new object[] { val })!;
-            }
-            catch { }
-        }
-
-        if (palette is KryptonCustomPaletteBase kcp && kcp.BasePalette != null)
-        {
-            var mb = kcp.BasePalette.GetType().GetMethod("GetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
-            if (mb != null)
-            {
-                try
-                {
-                    return (Color)mb.Invoke(kcp.BasePalette, new object[] { val })!;
-                }
-                catch { }
-            }
-
-            var schemeArr = kcp.BasePalette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(kcp.BasePalette, null) as Color[];
-            if (schemeArr != null && (int)val < schemeArr.Length)
-            {
-                return schemeArr[(int)val];
-            }
-        }
-
-        var scheme = palette.GetType().GetMethod("GetSchemeColors", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(palette, null) as Color[];
-        if (scheme != null && (int)val < scheme.Length)
-        {
-            return scheme[(int)val];
-        }
-
-        return GlobalStaticValues.EMPTY_COLOR;
+        return palette?.GetSchemeColor(val) ?? GlobalStaticValues.EMPTY_COLOR;
     }
 }

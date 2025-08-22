@@ -58,6 +58,7 @@ internal static class PaletteSchemeColorExtensions
         }
 
         // Prefer native method if present
+        // TODO: tobitege: this is currently NOT working as the methods must be implemented in PaletteBase!
         MethodInfo? setter = palette.GetType().GetMethod("SetSchemeColor", BindingFlags.Public | BindingFlags.Instance);
         if (setter != null)
         {
@@ -98,6 +99,8 @@ internal static class PaletteSchemeColorExtensions
             }
 
             // Attempt to update BaseColors scheme property if present
+            // TODO: tobitege: this does update the base palette, not the one we're using! remove?
+            /*
             if (TryGetBaseScheme(palette, out var baseScheme))
             {
                 string propName = colorEnum.ToString();
@@ -119,6 +122,7 @@ internal static class PaletteSchemeColorExtensions
                     }
                 }
             }
+            */
 
             // Invalidate cached color table again after updates
             if (tableField != null)

@@ -119,6 +119,9 @@ public class SettingsManager
 
     public void SetFastFilterText(string text) => _settings.FastFilterText = text;
     public string GetFastFilterText() => _settings.FastFilterText;
+    // Remember last used filter mode ("0" = Color, "1" = Name)
+    public void SetFastFilterMode(string mode) => _settings.FastFilterMode = mode;
+    public string GetFastFilterMode() => _settings.FastFilterMode;
 
     #endregion
 
