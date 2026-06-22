@@ -16,7 +16,7 @@ public partial class FormPaletteUpgradeTool : KryptonForm
 
     private const int MINIMUM_PALETTE_FILE_VERSION = 2;
 
-    private const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
+    private const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticConstants.CURRENT_SUPPORTED_PALETTE_VERSION;
 
     #endregion
 

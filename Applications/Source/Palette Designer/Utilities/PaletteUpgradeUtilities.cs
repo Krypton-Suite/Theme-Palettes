@@ -75,7 +75,7 @@ public static class PaletteUpgradeUtilities
 
     public static string ApplyUpgradeTransformation(string xmlContent, int inputVersion)
     {
-        const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
+        const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticConstants.CURRENT_SUPPORTED_PALETTE_VERSION;
 
         string result = xmlContent;
 
