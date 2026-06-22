@@ -412,9 +412,9 @@ namespace PaletteDesigner
                 Application.DoEvents();
 
                 // Rebuild mapping for current palette
-                Utilities.PaletteMappingCache.Regenerate(_palette);
+                PaletteMappingCache.Regenerate(_palette);
 
-                int count = Utilities.PaletteMappingCache.Map.Count;
+                int count = PaletteMappingCache.Map.Count;
                 KryptonMessageBox.Show(this, $"Mapping regenerated ({count} entries).", @"Rebuild Palette Mapping", KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -460,20 +460,25 @@ namespace PaletteDesigner
 
             // 3) Property-grid binding
             propertyGrid.SelectedObject = _palette;
+            propertyGrid.Refresh();
 
             // 3a) Load mapping cache if it exists (no regeneration yet)
-            Utilities.PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
+            PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
 
             // 4) Refresh all colors from overrides
-            RefreshSchemeFromOverrides();
+            // This compares and reloads colors based on the SchemeBaseColors enum,
+            // but some themes have different combinations,
+            // and this function causes unexpected changes.
+            //RefreshSchemeFromOverrides();
 
             // 5) Persist cache to disk if it was newly created or updated during path resolution
-            Utilities.PaletteMappingCache.Save();
+            PaletteMappingCache.Save();
 
             // 6) Update state & UI
             _filename = filename;
             _loaded   = true;
             _dirty    = false;
+            kryptonManager.GlobalPaletteMode = _palette.BasePaletteMode;
 
             ApplyPalette();          // push colours to sample controls
             ApplyQuickFilter(false); // re-apply/clear fast filter
@@ -487,6 +492,7 @@ namespace PaletteDesigner
 
         private readonly List<VisualControlBase> _applyPalettesToBases;
         private readonly List<KryptonPanel> _applyPalettesToPanels;
+
         private void CreateNewPalette(bool useCurrentGlobalPalette = false)
         {
             // Need to unhook from any existing palette
@@ -501,6 +507,11 @@ namespace PaletteDesigner
             if (useCurrentGlobalPalette)
             {
                 _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
+                //kryptonManager.GlobalPaletteMode = _palette.BasePaletteMode;
+            }
+            else
+            {
+                kryptonManager.GlobalPaletteMode = ThemeManager.DefaultGlobalPalette;
             }
 
             _chromeTMS.LocalCustomPalette = _palette;
@@ -514,6 +525,7 @@ namespace PaletteDesigner
 
             // Hook up the property grid to the palette
             propertyGrid.SelectedObject = _palette;
+            propertyGrid.Refresh();
 
             // Does not have a filename as yet
             _filename = "(New Palette)";
@@ -811,7 +823,7 @@ namespace PaletteDesigner
             CreateNewPalette();
 
             // Load palette mapping cache once at startup (no regeneration)
-            Utilities.PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
+            PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
 
             // Restore fast filter text from settings
             string savedFilterText = _settingsManager.GetFastFilterText();
@@ -1333,13 +1345,18 @@ namespace PaletteDesigner
                 path = path.Substring(visualsIdx + "Visuals.".Length);
             }
 
+            if (path == "BasePaletteMode")
+            {
+                kryptonManager.GlobalPaletteMode = (PaletteMode)e.ChangedItem.Value!;
+            }
+
             var basePal = _palette?.BasePalette;
             if (basePal != null)
             {
                 try
                 {
                     SchemeBaseColors enumVal;
-                    if (!PaletteDesigner.Utilities.PaletteMapper.MapPathToSchemeEnum(basePal, path, out enumVal))
+                    if (!PaletteMapper.MapPathToSchemeEnum(basePal, path, out enumVal))
                     {
                         // fallback: if we already have mapping stored for this path
                         enumVal = _enumToPath.FirstOrDefault(kvp => kvp.Value == path).Key;
@@ -1375,7 +1392,8 @@ namespace PaletteDesigner
                 }
             }
             // Push latest base-palette colors into override properties
-            CopyColorsFromBasePalette();
+            //This populates all the properties; for that, there's already a "New from Default Theme" option
+            //CopyColorsFromBasePalette();
             // Rebind grid to pick up override values (single assignment to preserve state)
             propertyGrid.SelectedObject = _palette;
             // Refresh the grid to show updated overrides without collapsing nodes
@@ -2117,7 +2135,7 @@ namespace PaletteDesigner
                 DefaultExt = "csv",
                 Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
                 Title = "Export Palette as CSV",
-                FileName = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + ".csv"
+                FileName = IdentifierUtilities.SanitizeIdentifier(baseName) + ".csv"
             };
 
             if (dlg.ShowDialog(this) != DialogResult.OK)
@@ -2172,7 +2190,7 @@ namespace PaletteDesigner
                 baseName = "CustomPalette";
             }
 
-            string className = Utilities.IdentifierUtilities.SanitizeIdentifier(baseName) + "_BaseScheme";
+            string className = IdentifierUtilities.SanitizeIdentifier(baseName) + "_BaseScheme";
 
             using var expDlg = new ExportBaseSchemeClass(_palette, className, _settingsManager);
             expDlg.ShowDialog(this);
@@ -2367,7 +2385,7 @@ namespace PaletteDesigner
                                 ? "ButtonStyles.ButtonStandalone." + path.Substring("ButtonStyles.Standalone.".Length)
                                 : path;
                             // Register mapping in cache
-                            Utilities.PaletteMappingCache.Add(enumVal.ToString(), fastPath);
+                            PaletteMappingCache.Add(enumVal.ToString(), fastPath);
                             // Preserve file override if it differs from base palette, else fetch from graph or base palette
                             Color baseValue = _palette.BasePalette != null
                                 ? _palette.BasePalette.GetSchemeColor(enumVal)
