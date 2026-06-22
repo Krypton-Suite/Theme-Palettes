@@ -507,7 +507,6 @@ namespace PaletteDesigner
             if (useCurrentGlobalPalette)
             {
                 _palette.BasePalette = KryptonManager.CurrentGlobalPalette;
-                //kryptonManager.GlobalPaletteMode = _palette.BasePaletteMode;
             }
             else
             {
