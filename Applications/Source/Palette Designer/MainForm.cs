@@ -347,6 +347,7 @@ public partial class MainForm : KryptonForm
         Application.DoEvents();
         try
         {
+            KryptonThemePreview.AssignGeneratedThumbnail(_palette);
             _palette.Export(filename, true, false);
             _filename = filename;
             _loaded = true;
@@ -513,10 +514,12 @@ public partial class MainForm : KryptonForm
 
             _palette.SetPaletteName(themeName);
             _collectionThemeName = themeName;
+            KryptonThemePreview.AssignGeneratedThumbnail(_palette);
             KryptonPaletteFile.AddToCollection(_filename, _palette, replaceExisting: true);
             return;
         }
 
+        KryptonThemePreview.AssignGeneratedThumbnail(_palette);
         _palette.Export(_filename, true, false);
     }
 
