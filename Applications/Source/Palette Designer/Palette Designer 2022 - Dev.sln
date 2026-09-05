@@ -12,9 +12,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palette Designer 2022", "Pa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Ribbon 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Ribbon\Krypton.Ribbon 2022.csproj", "{2E2BD19B-E282-4841-9CF4-CD8959E90EED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krypton.Interop", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Interop\Krypton.Interop.csproj", "{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Toolkit 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj", "{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Navigator 2022", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Navigator\Krypton.Navigator 2022.csproj", "{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krypton.Toolkit.Utilities", "..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit.Utilities\Krypton.Toolkit.Utilities.csproj", "{3417FECF-6475-433C-94CB-CB6482416D3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,20 @@ Global
 		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Signed|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E2BD19B-E282-4841-9CF4-CD8959E90EED}.Signed|Any CPU.Build.0 = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Canary|Any CPU.Build.0 = Canary|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Installer|Any CPU.ActiveCfg = Installer|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Installer|Any CPU.Build.0 = Installer|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Nightly|Any CPU.ActiveCfg = Nightly|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Nightly|Any CPU.Build.0 = Nightly|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Preview|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Preview|Any CPU.Build.0 = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Signed|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4929B7D-7C26-4ACB-AD3C-0F020BA260CF}.Signed|Any CPU.Build.0 = Debug|Any CPU
 		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
 		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Canary|Any CPU.Build.0 = Canary|Any CPU
 		{1C9EB8A1-038D-4EDA-A0BD-170F5F0FBF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -83,6 +101,20 @@ Global
 		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Signed|Any CPU.ActiveCfg = Signed|Any CPU
 		{DACF11DB-18E9-41B0-B3F5-8AE469B25E2B}.Signed|Any CPU.Build.0 = Signed|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Canary|Any CPU.Build.0 = Canary|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Installer|Any CPU.ActiveCfg = Installer|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Installer|Any CPU.Build.0 = Installer|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Nightly|Any CPU.ActiveCfg = Nightly|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Nightly|Any CPU.Build.0 = Nightly|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Preview|Any CPU.ActiveCfg = Debug|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Preview|Any CPU.Build.0 = Debug|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Signed|Any CPU.ActiveCfg = Debug|Any CPU
+		{3417FECF-6475-433C-94CB-CB6482416D3D}.Signed|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

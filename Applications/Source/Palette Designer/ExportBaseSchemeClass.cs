@@ -154,8 +154,5 @@ public partial class ExportBaseSchemeClass : KryptonForm
         return sb.ToString();
     }
 
-    private static Color GetSchemeColorSafe(KryptonCustomPaletteBase? palette, SchemeBaseColors val)
-    {
-        return palette?.GetSchemeColor(val) ?? GlobalStaticValues.EMPTY_COLOR;
-    }
+    private static Color GetSchemeColorSafe(KryptonCustomPaletteBase? palette, SchemeBaseColors val) => palette?.GetSchemeColor(val) ?? SharedStaticVariables.EMPTY_COLOR;
 }
