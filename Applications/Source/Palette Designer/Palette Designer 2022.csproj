@@ -38,19 +38,27 @@
     <Content Include="Resources\TopTMS.png" />
   </ItemGroup>
 
+  <!-- Prefer sibling Standard-Toolkit project references when present (Dev and Nuget solutions).
+       NuGet packages are used only when the toolkit working tree is not cloned beside Theme-Palettes.
+       #2117 APIs such as KryptonPaletteFile ship in alpha/nightly Toolkit builds before Canary packages. -->
+  <PropertyGroup>
+    <_SiblingToolkitProject>..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj</_SiblingToolkitProject>
+  </PropertyGroup>
+
   <Choose>
-    <When Condition="'$(SolutionName.Endswith(`Nuget`))'">
-      <ItemGroup>
-        <PackageReference Include="Krypton.Standard.Toolkit.Canary" Version="110.26.8.236-beta" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
+    <When Condition="Exists('$(_SiblingToolkitProject)')">
       <ItemGroup>
         <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Interop\Krypton.Interop.csproj" />
         <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Navigator\Krypton.Navigator 2022.csproj" />
         <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Ribbon\Krypton.Ribbon 2022.csproj" />
         <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit\Krypton.Toolkit 2022.csproj" />
+        <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Themes\Krypton.Themes.csproj" />
         <ProjectReference Include="..\..\..\..\Standard-Toolkit\Source\Krypton Components\Krypton.Toolkit.Utilities\Krypton.Toolkit.Utilities.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Krypton.Standard.Toolkit.Canary" Version="110.26.8.236-beta" />
       </ItemGroup>
     </Otherwise>
   </Choose>

@@ -30,6 +30,18 @@ public partial class FormChromeRibbon : KryptonForm
             LocalCustomPalette = value;
             kryptonPanel1.Palette = value;
             kryptonRibbon1.LocalCustomPalette = value;
+            RefreshControlBoxChrome();
+        }
+    }
+
+    private void RefreshControlBoxChrome()
+    {
+        RecreateMinMaxCloseButtons();
+        if (IsHandleCreated)
+        {
+            PerformNeedPaint(true);
+            Invalidate(true);
+            Update();
         }
     }
     #endregion

@@ -62,6 +62,21 @@ public partial class MainForm : KryptonForm
     private Image _paletteDropperImage;
     private readonly string? _startupPalettePath;
 
+    /// <summary>
+    /// Prevents re-entrant palette load/refresh while a ModalWaitDialog is pumping DoEvents.
+    /// </summary>
+    private bool _paletteOperationInProgress;
+
+    /// <summary>
+    /// True after <see cref="MainForm_Load"/> completes; blocks menu actions that re-enter during startup.
+    /// </summary>
+    private bool _initialLoadComplete;
+
+    /// <summary>
+    /// Tracks whether <see cref="SetRedraw"/> disabled paint on <see cref="colorTableGrid"/>.
+    /// </summary>
+    private bool _colorGridRedrawSuspended;
+
     #endregion
 
     #region Identity
@@ -73,7 +88,7 @@ public partial class MainForm : KryptonForm
     {
         InitializeComponent();
         KryptonPaletteFile.EnsureShellAssociations(TryGetOpenWithExecutable());
-        InsertEditPackMenuItem();
+        InsertPaletteFileMenuItems();
         _startupPalettePath = GetCommandLinePalettePath();
 
         _filename = string.Empty;
@@ -302,25 +317,24 @@ public partial class MainForm : KryptonForm
         }
     }
 
-    private void SaveAs()
+    private void SaveAs(bool forceKthemex = false)
     {
         if (_palette == null)
         {
             return;
         }
 
-        using var dialog = new KryptonSaveFileDialog
-        {
-            OverwritePrompt = true,
-            DefaultExt = KryptonPaletteFile.Extension,
-            Filter = KryptonPaletteFile.DialogFilter,
-            Title = @"Save Palette As"
-        };
-
+        using var dialog = CreateKthemexSaveDialog(forceKthemex ? @"Save as .kthemex" : @"Save Palette As", forceKthemex);
         if (_loaded && File.Exists(_filename))
         {
             dialog.InitialDirectory = Path.GetDirectoryName(_filename);
-            dialog.FileName = Path.GetFileName(_filename);
+            dialog.FileName = forceKthemex
+                ? Path.ChangeExtension(Path.GetFileName(_filename), KryptonPaletteFile.Extension)
+                : Path.GetFileName(_filename);
+        }
+        else if (forceKthemex)
+        {
+            dialog.FileName = SuggestedKthemexFileName();
         }
 
         if (dialog.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.FileName))
@@ -333,7 +347,7 @@ public partial class MainForm : KryptonForm
         {
             var confirm = KryptonMessageBox.Show(this,
                 $@"'{Path.GetFileName(filename)}' is a multi-theme .ktheme collection. Saving will replace the entire pack with this single theme."
-                + "\n\nUse File > Edit .ktheme collection... to add or update a named theme in the collection.",
+                + "\n\nUse File > Manage .ktheme collection... to add or update a named theme in the collection.",
                 @"Replace palette collection?",
                 KryptonMessageBoxButtons.YesNo,
                 KryptonMessageBoxIcon.Warning);
@@ -430,10 +444,15 @@ public partial class MainForm : KryptonForm
 
     #region Palettes
 
-    private bool TryOpenPaletteFile(string path, bool addToRecentList, string? preferredThemeName = null)
+    private bool TryOpenPaletteFile(string path, bool addToRecentList, string? preferredThemeName = null, bool skipThemePrompt = false)
     {
         try
         {
+            if (!skipThemePrompt && !TrySelectOpenPath(ref path, ref preferredThemeName))
+            {
+                return false;
+            }
+
             var palette = new KryptonCustomPaletteBase();
             string? collectionTheme = null;
 
@@ -523,63 +542,654 @@ public partial class MainForm : KryptonForm
         _palette.Export(_filename, true, false);
     }
 
+    private bool TrySelectOpenPath(ref string path, ref string? preferredThemeName)
+    {
+        if (!string.IsNullOrEmpty(preferredThemeName))
+        {
+            return true;
+        }
+
+        var isCollection = KryptonPaletteFile.IsCollection(path);
+        if (isCollection)
+        {
+            var names = KryptonPaletteFile.GetThemeNames(path);
+            if (names.Length == 0)
+            {
+                throw new InvalidOperationException("The pack does not contain any named themes.");
+            }
+
+            if (names.Length > 1)
+            {
+                var themeName = PromptCollectionTheme(path, names);
+                if (string.IsNullOrEmpty(themeName))
+                {
+                    return false;
+                }
+
+                preferredThemeName = themeName;
+                return true;
+            }
+        }
+
+        return TryPromptSiblingPalettes(ref path, ref preferredThemeName);
+    }
+
+    private bool TryPromptSiblingPalettes(ref string path, ref string? preferredThemeName)
+    {
+        var directory = Path.GetDirectoryName(path);
+        if (string.IsNullOrWhiteSpace(directory) || !Directory.Exists(directory))
+        {
+            return true;
+        }
+
+        var items = KryptonPaletteFileThemeItem.FromDirectory(directory,
+            searchSubdirectories: false,
+            includeKthemex: true,
+            includeKtheme: true,
+            includeXml: false,
+            loadThumbnails: true);
+        try
+        {
+            if (items.Length <= 1)
+            {
+                return true;
+            }
+
+            var selectedIndex = IndexOfThemeItem(items, path, preferredThemeName);
+            var names = new string[items.Length];
+            var thumbs = new Image?[items.Length];
+            for (var i = 0; i < items.Length; i++)
+            {
+                names[i] = items[i].DisplayName;
+                thumbs[i] = items[i].Thumbnail;
+            }
+
+            var chosen = PromptThemeList(
+                @"Select theme to edit",
+                $"'{Path.GetFileName(directory)}' contains {items.Length} palette files. Choose the theme to edit.",
+                names,
+                thumbs,
+                selectedIndex);
+            if (chosen < 0)
+            {
+                return false;
+            }
+
+            var selected = items[chosen];
+            path = selected.FilePath;
+            preferredThemeName = selected.IsCollection && !string.IsNullOrWhiteSpace(selected.ThemeName)
+                ? selected.ThemeName
+                : null;
+            return true;
+        }
+        finally
+        {
+            DisposeLoadedThumbnails(items);
+        }
+    }
+
     private string? PromptCollectionTheme(string path, string[] names)
     {
-        using var prompt = new KryptonForm
+        Image?[] thumbs;
+        try
         {
-            Text = @"Select collection theme",
+            thumbs = KryptonPaletteFile.GetThemeThumbnails(path);
+        }
+        catch (Exception)
+        {
+            thumbs = new Image?[names.Length];
+        }
+
+        try
+        {
+            var chosen = PromptThemeList(
+                @"Select collection theme",
+                $"'{Path.GetFileName(path)}' contains {names.Length} themes. Choose one to edit.",
+                names,
+                thumbs,
+                selectedIndex: 0);
+            return chosen < 0 ? null : names[chosen];
+        }
+        finally
+        {
+            for (var i = 0; i < thumbs.Length; i++)
+            {
+                thumbs[i]?.Dispose();
+            }
+        }
+    }
+
+    private int PromptThemeList(string title, string prompt, string[] names, Image?[] thumbs, int selectedIndex)
+    {
+        var icons = new List<Image>(names.Length);
+        var listItems = new List<KryptonListItem>(names.Length);
+        using var dialog = new KryptonForm
+        {
+            Text = title,
             StartPosition = FormStartPosition.CenterParent,
             FormBorderStyle = FormBorderStyle.FixedDialog,
-            ClientSize = new Size(420, 140),
+            ClientSize = new Size(480, 360),
             MaximizeBox = false,
             MinimizeBox = false,
             ShowInTaskbar = false
         };
-        var label = new KryptonWrapLabel
+        try
         {
-            Dock = DockStyle.Top,
-            AutoSize = false,
-            Height = 40,
-            Text = $"'{Path.GetFileName(path)}' contains {names.Length} themes. Choose one to edit."
-        };
-        var combo = new KryptonComboBox
+            var label = new KryptonWrapLabel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = false,
+                Height = 48,
+                Text = prompt
+            };
+            var list = new KryptonListBox
+            {
+                Dock = DockStyle.Fill
+            };
+            for (var i = 0; i < names.Length; i++)
+            {
+                var thumbnail = i < thumbs.Length ? thumbs[i] : null;
+                var icon = KryptonPaletteFile.CreateThemeIcon(thumbnail, 32);
+                icons.Add(icon);
+                var item = new KryptonListItem(names[i], string.Empty, icon);
+                listItems.Add(item);
+                list.Items.Add(item);
+            }
+
+            if (names.Length > 0)
+            {
+                list.SelectedIndex = selectedIndex >= 0 && selectedIndex < names.Length ? selectedIndex : 0;
+            }
+
+            var buttons = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Bottom,
+                FlowDirection = FlowDirection.RightToLeft,
+                Height = 40,
+                Padding = new Padding(8)
+            };
+            var ok = new KryptonButton { Text = @"OK", DialogResult = DialogResult.OK, Width = 80 };
+            var cancel = new KryptonButton { Text = @"Cancel", DialogResult = DialogResult.Cancel, Width = 80 };
+            buttons.Controls.Add(ok);
+            buttons.Controls.Add(cancel);
+            list.DoubleClick += (_, _) =>
+            {
+                if (list.SelectedIndex >= 0)
+                {
+                    dialog.DialogResult = DialogResult.OK;
+                    dialog.Close();
+                }
+            };
+            dialog.Controls.Add(list);
+            dialog.Controls.Add(buttons);
+            dialog.Controls.Add(label);
+            dialog.AcceptButton = ok;
+            dialog.CancelButton = cancel;
+            var selected = dialog.ShowDialog(this) == DialogResult.OK ? list.SelectedIndex : -1;
+            list.Items.Clear();
+            return selected;
+        }
+        finally
         {
-            DropDownStyle = ComboBoxStyle.DropDownList,
-            Dock = DockStyle.Top,
-            Height = 24
-        };
-        combo.Items.AddRange(names);
-        combo.SelectedIndex = 0;
-        var buttons = new FlowLayoutPanel
+            for (var i = 0; i < listItems.Count; i++)
+            {
+                listItems[i].Image = null;
+                listItems[i].Dispose();
+            }
+
+            for (var i = 0; i < icons.Count; i++)
+            {
+                icons[i].Dispose();
+            }
+        }
+    }
+
+    private void InsertPaletteFileMenuItems()
+    {
+        var openIndex = menuFile.DropDownItems.IndexOf(menuOpen);
+        if (openIndex >= 0)
         {
-            Dock = DockStyle.Bottom,
-            FlowDirection = FlowDirection.RightToLeft,
-            Height = 40,
-            Padding = new Padding(8)
+            menuFile.DropDownItems.Insert(openIndex + 1,
+                CreateFileMenuItem(@"Open palette folder...", MenuOpenPaletteFolder_Click));
+        }
+
+        var index = menuFile.DropDownItems.IndexOf(menuSaveAs);
+        if (index < 0)
+        {
+            index = menuFile.DropDownItems.Count - 1;
+        }
+
+        var insertAt = index + 1;
+        menuFile.DropDownItems.Insert(insertAt++, CreateFileMenuItem(@"Save as .kthemex...", MenuSaveAsKthemex_Click));
+        menuFile.DropDownItems.Insert(insertAt++, CreateFileMenuItem(@"Extract to .kthemex...", MenuExtractKthemex_Click));
+        menuFile.DropDownItems.Insert(insertAt++, new ToolStripSeparator());
+        menuFile.DropDownItems.Insert(insertAt++, CreateFileMenuItem(@"Add to .ktheme collection...", MenuAddToCollection_Click));
+        menuFile.DropDownItems.Insert(insertAt++, CreateFileMenuItem(@"Create .ktheme collection from folder...", MenuCreateCollectionFromFolder_Click));
+        menuFile.DropDownItems.Insert(insertAt++, CreateFileMenuItem(@"Switch theme...", MenuSwitchTheme_Click));
+        menuFile.DropDownItems.Insert(insertAt, CreateFileMenuItem(@"Manage .ktheme collection...", MenuEditKpalPack_Click));
+    }
+
+    private static ToolStripMenuItem CreateFileMenuItem(string text, EventHandler click)
+    {
+        var item = new ToolStripMenuItem(text);
+        item.Click += click;
+        return item;
+    }
+
+    private static int IndexOfThemeItem(KryptonPaletteFileThemeItem[] items, string path, string? themeName)
+    {
+        for (var i = 0; i < items.Length; i++)
+        {
+            if (!string.Equals(items[i].FilePath, path, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (string.IsNullOrEmpty(themeName)
+                || string.Equals(items[i].ThemeName, themeName, StringComparison.OrdinalIgnoreCase))
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private static void DisposeLoadedThumbnails(KryptonPaletteFileThemeItem[] items)
+    {
+        for (var i = 0; i < items.Length; i++)
+        {
+            var thumbnail = items[i].Thumbnail;
+            if (thumbnail == null)
+            {
+                continue;
+            }
+
+            items[i].Thumbnail = null;
+            thumbnail.Dispose();
+        }
+    }
+
+    private bool ConfirmDiscardOrSave()
+    {
+        if (!_dirty)
+        {
+            return true;
+        }
+
+        switch (KryptonMessageBox.Show(this,
+                    @"Save changes to the current palette?",
+                    @"Palette Changed",
+                    KryptonMessageBoxButtons.YesNoCancel,
+                    KryptonMessageBoxIcon.Warning))
+        {
+            case DialogResult.Yes:
+                Save();
+                return !_dirty;
+            case DialogResult.Cancel:
+                return false;
+            default:
+                return true;
+        }
+    }
+
+    private string SuggestedKthemexFileName()
+    {
+        var name = _palette?.GetPaletteName();
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            name = _collectionThemeName;
+        }
+
+        if (string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(_filename))
+        {
+            name = Path.GetFileNameWithoutExtension(_filename);
+        }
+
+        if (string.IsNullOrWhiteSpace(name) || string.Equals(name, "(New Palette)", StringComparison.OrdinalIgnoreCase))
+        {
+            name = @"Theme";
+        }
+
+        return Path.ChangeExtension(name, KryptonPaletteFile.Extension);
+    }
+
+    private static KryptonSaveFileDialog CreateKthemexSaveDialog(string title, bool kthemexOnly)
+    {
+        var dialog = new KryptonSaveFileDialog
+        {
+            OverwritePrompt = true,
+            DefaultExt = KryptonPaletteFile.Extension,
+            Filter = kthemexOnly
+                ? @"Krypton theme files (*.kthemex)|*.kthemex|All files (*.*)|*.*"
+                : KryptonPaletteFile.DialogFilter,
+            Title = title
         };
-        var ok = new KryptonButton { Text = @"OK", DialogResult = DialogResult.OK, Width = 80 };
-        var cancel = new KryptonButton { Text = @"Cancel", DialogResult = DialogResult.Cancel, Width = 80 };
-        buttons.Controls.Add(ok);
-        buttons.Controls.Add(cancel);
-        prompt.Controls.Add(buttons);
-        prompt.Controls.Add(combo);
-        prompt.Controls.Add(label);
-        prompt.AcceptButton = ok;
-        prompt.CancelButton = cancel;
-        return prompt.ShowDialog(this) == DialogResult.OK
-            ? combo.SelectedItem as string
+        return dialog;
+    }
+
+    private string? BrowsePaletteFolder(string title)
+    {
+        using var dialog = new KryptonFolderBrowserDialog
+        {
+            Title = title
+        };
+        if (_loaded && File.Exists(_filename))
+        {
+            var directory = Path.GetDirectoryName(_filename);
+            if (!string.IsNullOrWhiteSpace(directory))
+            {
+                dialog.SelectedPath = directory;
+            }
+        }
+
+        return dialog.ShowDialog(this) == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath)
+            ? dialog.SelectedPath
             : null;
     }
 
-    private void InsertEditPackMenuItem()
+    private void OpenPaletteFolder()
     {
-        var item = new ToolStripMenuItem(@"Edit .ktheme collection...")
+        if (!ConfirmDiscardOrSave())
         {
-            Name = @"menuEditKpalCollection"
+            return;
+        }
+
+        var directory = BrowsePaletteFolder(@"Open palette folder");
+        if (string.IsNullOrWhiteSpace(directory))
+        {
+            return;
+        }
+
+        var folder = directory!;
+        var items = KryptonPaletteFileThemeItem.FromDirectory(folder,
+            searchSubdirectories: true,
+            includeKthemex: true,
+            includeKtheme: true,
+            includeXml: false,
+            loadThumbnails: true);
+        try
+        {
+            if (items.Length == 0)
+            {
+                KryptonMessageBox.Show(this,
+                    @"No .kthemex or .ktheme palette files were found in that folder.",
+                    @"Open palette folder",
+                    KryptonMessageBoxButtons.OK,
+                    KryptonMessageBoxIcon.Information);
+                return;
+            }
+
+            var chosen = 0;
+            if (items.Length > 1)
+            {
+                var names = new string[items.Length];
+                var thumbs = new Image?[items.Length];
+                for (var i = 0; i < items.Length; i++)
+                {
+                    names[i] = items[i].DisplayName;
+                    thumbs[i] = items[i].Thumbnail;
+                }
+
+                chosen = PromptThemeList(
+                    @"Select theme to edit",
+                    $"Choose a theme from '{folder}'.",
+                    names,
+                    thumbs,
+                    selectedIndex: 0);
+                if (chosen < 0)
+                {
+                    return;
+                }
+            }
+
+            var selected = items[chosen];
+            Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            try
+            {
+                TryOpenPaletteFile(selected.FilePath, addToRecentList: true,
+                    preferredThemeName: string.IsNullOrWhiteSpace(selected.ThemeName) ? null : selected.ThemeName,
+                    skipThemePrompt: true);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+        finally
+        {
+            DisposeLoadedThumbnails(items);
+        }
+    }
+
+    private void ExtractToKthemex()
+    {
+        if (_palette == null)
+        {
+            return;
+        }
+
+        using var dialog = CreateKthemexSaveDialog(@"Extract to .kthemex", kthemexOnly: true);
+        dialog.FileName = SuggestedKthemexFileName();
+        if (_loaded && File.Exists(_filename))
+        {
+            dialog.InitialDirectory = Path.GetDirectoryName(_filename);
+        }
+
+        if (dialog.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.FileName))
+        {
+            return;
+        }
+
+        Cursor = Cursors.WaitCursor;
+        Application.DoEvents();
+        try
+        {
+            KryptonThemePreview.AssignGeneratedThumbnail(_palette);
+            _palette.Export(dialog.FileName, true, false);
+            KryptonMessageBox.Show(this,
+                $"Extracted '{Path.GetFileName(dialog.FileName)}'.",
+                @"Extract to .kthemex",
+                KryptonMessageBoxButtons.OK,
+                KryptonMessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            KryptonMessageBox.Show(this, ex.Message, @"Extract to .kthemex",
+                KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
+        }
+        finally
+        {
+            Cursor = Cursors.Default;
+        }
+    }
+
+    private void AddCurrentToCollection()
+    {
+        if (_palette == null)
+        {
+            return;
+        }
+
+        var themeName = _palette.GetPaletteName();
+        if (string.IsNullOrWhiteSpace(themeName))
+        {
+            themeName = _collectionThemeName;
+        }
+
+        if (string.IsNullOrWhiteSpace(themeName) && _loaded && !string.IsNullOrWhiteSpace(_filename))
+        {
+            themeName = Path.GetFileNameWithoutExtension(_filename);
+        }
+
+        var collectionThemeName = string.IsNullOrWhiteSpace(themeName)
+                                  || string.Equals(themeName, "(New Palette)", StringComparison.OrdinalIgnoreCase)
+            ? @"Theme"
+            : themeName!;
+        _palette.SetPaletteName(collectionThemeName);
+
+        using var dialog = new KryptonSaveFileDialog
+        {
+            OverwritePrompt = false,
+            CheckFileExists = false,
+            DefaultExt = KryptonPaletteFile.BinaryExtension,
+            Filter = @"Krypton theme containers (*.ktheme)|*.ktheme|All files (*.*)|*.*",
+            Title = @"Add to .ktheme collection",
+            FileName = Path.ChangeExtension(collectionThemeName, KryptonPaletteFile.BinaryExtension)
         };
-        item.Click += MenuEditKpalPack_Click;
-        var index = menuFile.DropDownItems.IndexOf(menuSaveAs);
-        menuFile.DropDownItems.Insert(index < 0 ? menuFile.DropDownItems.Count : index + 1, item);
+        if (_loaded && File.Exists(_filename))
+        {
+            dialog.InitialDirectory = Path.GetDirectoryName(_filename);
+        }
+
+        if (dialog.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.FileName))
+        {
+            return;
+        }
+
+        var collectionPath = dialog.FileName;
+        var replaceExisting = false;
+        if (File.Exists(collectionPath) && KryptonPaletteFile.IsCollection(collectionPath))
+        {
+            var names = KryptonPaletteFile.GetThemeNames(collectionPath);
+            if (names.Any(name => string.Equals(name, collectionThemeName, StringComparison.OrdinalIgnoreCase)))
+            {
+                var replace = KryptonMessageBox.Show(this,
+                    $"'{collectionThemeName}' is already in '{Path.GetFileName(collectionPath)}'. Replace it?",
+                    @"Add to .ktheme collection",
+                    KryptonMessageBoxButtons.YesNo,
+                    KryptonMessageBoxIcon.Question);
+                if (replace != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                replaceExisting = true;
+            }
+        }
+
+        Cursor = Cursors.WaitCursor;
+        Application.DoEvents();
+        try
+        {
+            KryptonThemePreview.AssignGeneratedThumbnail(_palette);
+            KryptonPaletteFile.AddToCollection(collectionPath, _palette, replaceExisting);
+            KryptonMessageBox.Show(this,
+                $"Added '{collectionThemeName}' to '{Path.GetFileName(collectionPath)}'.",
+                @"Add to .ktheme collection",
+                KryptonMessageBoxButtons.OK,
+                KryptonMessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            KryptonMessageBox.Show(this, ex.Message, @"Add to .ktheme collection",
+                KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
+        }
+        finally
+        {
+            Cursor = Cursors.Default;
+        }
+    }
+
+    private void CreateCollectionFromFolder()
+    {
+        var directory = BrowsePaletteFolder(@"Create .ktheme collection from folder");
+        if (string.IsNullOrWhiteSpace(directory))
+        {
+            return;
+        }
+
+        var folder = directory!;
+        using var dialog = new KryptonSaveFileDialog
+        {
+            OverwritePrompt = true,
+            DefaultExt = KryptonPaletteFile.BinaryExtension,
+            Filter = @"Krypton theme containers (*.ktheme)|*.ktheme|All files (*.*)|*.*",
+            Title = @"Save .ktheme collection",
+            FileName = Path.ChangeExtension(
+                Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)) ?? @"Themes",
+                KryptonPaletteFile.BinaryExtension)
+        };
+        dialog.InitialDirectory = folder;
+        if (dialog.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.FileName))
+        {
+            return;
+        }
+
+        Cursor = Cursors.WaitCursor;
+        Application.DoEvents();
+        try
+        {
+            KryptonPaletteFile.ExportCollectionFromDirectory(dialog.FileName, folder);
+            var open = KryptonMessageBox.Show(this,
+                $"Created '{Path.GetFileName(dialog.FileName)}' from '{folder}'.\n\nOpen a theme from the new collection?",
+                @"Create .ktheme collection",
+                KryptonMessageBoxButtons.YesNo,
+                KryptonMessageBoxIcon.Question);
+            if (open != DialogResult.Yes || !ConfirmDiscardOrSave())
+            {
+                return;
+            }
+
+            TryOpenPaletteFile(dialog.FileName, addToRecentList: true);
+        }
+        catch (Exception ex)
+        {
+            KryptonMessageBox.Show(this, ex.Message, @"Create .ktheme collection",
+                KryptonMessageBoxButtons.OK, KryptonMessageBoxIcon.Error);
+        }
+        finally
+        {
+            Cursor = Cursors.Default;
+        }
+    }
+
+    private void SwitchTheme()
+    {
+        if (!ConfirmDiscardOrSave())
+        {
+            return;
+        }
+
+        if (_loaded && File.Exists(_filename) && KryptonPaletteFile.IsCollection(_filename))
+        {
+            var names = KryptonPaletteFile.GetThemeNames(_filename);
+            if (names.Length > 1)
+            {
+                var themeName = PromptCollectionTheme(_filename, names);
+                if (string.IsNullOrEmpty(themeName))
+                {
+                    return;
+                }
+
+                TryOpenPaletteFile(_filename, addToRecentList: false, preferredThemeName: themeName, skipThemePrompt: true);
+                return;
+            }
+        }
+
+        if (_loaded && File.Exists(_filename))
+        {
+            var path = _filename;
+            string? preferred = _collectionThemeName;
+            var directory = Path.GetDirectoryName(_filename);
+            var siblingCount = string.IsNullOrWhiteSpace(directory)
+                ? 0
+                : KryptonPaletteFileThemeItem.FromDirectory(directory!, searchSubdirectories: false,
+                    includeKthemex: true, includeKtheme: true, includeXml: false, loadThumbnails: false).Length;
+            if (siblingCount > 1)
+            {
+                if (!TryPromptSiblingPalettes(ref path, ref preferred))
+                {
+                    return;
+                }
+
+                TryOpenPaletteFile(path, addToRecentList: true, preferredThemeName: preferred, skipThemePrompt: true);
+                return;
+            }
+        }
+
+        OpenPaletteFolder();
     }
 
     private void MenuEditKpalPack_Click(object? sender, EventArgs e)
@@ -632,48 +1242,61 @@ public partial class MainForm : KryptonForm
         string filename,
         bool addToRecentList = true)
     {
-        // 1) Unhook old palette
-        if (_palette != null)
+        if (_paletteOperationInProgress)
         {
-            _palette.PalettePaint -= OnPalettePaint;
-            _palette.BasePaletteChanged -= OnBaseChanged;
-            _palette.SchemeColorChanged -= OnPaletteSchemeColorChanged;
+            return;
         }
 
-        // 2) Store & wire the new palette
-        _palette = palette;
-        _chromeTMS.LocalCustomPalette = palette;
-        _chromeTMS2.LocalCustomPalette = palette;
-        _chromeRibbon.OverridePalette = palette;
-
-        _palette.PalettePaint += OnPalettePaint;
-        _palette.BasePaletteChanged += OnBaseChanged;
-        _palette.SchemeColorChanged += OnPaletteSchemeColorChanged;
-
-        // 3) Property-grid binding
-        propertyGrid.SelectedObject = _palette;
-
-        // 3a) Load mapping cache if it exists (no regeneration yet)
-        Utilities.PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
-
-        // 4) Refresh all colors from overrides
-        RefreshSchemeFromOverrides();
-
-        // 5) Persist cache to disk if it was newly created or updated during path resolution
-        Utilities.PaletteMappingCache.Save();
-
-        // 6) Update state & UI
-        _filename = filename;
-        _loaded = true;
-        _dirty = false;
-
-        ApplyPalette(); // push colours to sample controls
-        ApplyQuickFilter(false); // re-apply/clear fast filter
-        UpdateTitleBar();
-
-        if (addToRecentList)
+        _paletteOperationInProgress = true;
+        try
         {
-            _recentlyUsedDocumentsManager.AddRecentFile(filename);
+            // 1) Unhook old palette
+            if (_palette != null)
+            {
+                _palette.PalettePaint -= OnPalettePaint;
+                _palette.BasePaletteChanged -= OnBaseChanged;
+                _palette.SchemeColorChanged -= OnPaletteSchemeColorChanged;
+            }
+
+            // 2) Store & wire the new palette
+            _palette = palette;
+            _chromeTMS.LocalCustomPalette = palette;
+            _chromeTMS2.LocalCustomPalette = palette;
+            _chromeRibbon.OverridePalette = palette;
+
+            _palette.PalettePaint += OnPalettePaint;
+            _palette.BasePaletteChanged += OnBaseChanged;
+            _palette.SchemeColorChanged += OnPaletteSchemeColorChanged;
+
+            // 3) Property-grid binding
+            propertyGrid.SelectedObject = _palette;
+
+            // 3a) Load mapping cache if it exists (no regeneration yet)
+            Utilities.PaletteMappingCache.Initialise(_palette!, regenerateIfMissing: false);
+
+            // 4) Refresh all colors from overrides
+            RefreshSchemeFromOverrides();
+
+            // 5) Persist cache to disk if it was newly created or updated during path resolution
+            Utilities.PaletteMappingCache.Save();
+
+            // 6) Update state & UI
+            _filename = filename;
+            _loaded = true;
+            _dirty = false;
+
+            ApplyPalette(); // push colours to sample controls
+            ApplyQuickFilter(false); // re-apply/clear fast filter
+            UpdateTitleBar();
+
+            if (addToRecentList)
+            {
+                _recentlyUsedDocumentsManager.AddRecentFile(filename);
+            }
+        }
+        finally
+        {
+            _paletteOperationInProgress = false;
         }
     }
 
@@ -740,7 +1363,7 @@ public partial class MainForm : KryptonForm
 
         if (InvokeRequired)
         {
-            BeginInvoke((Action)(() => ApplyPalette(populateTable)));
+            RunWhenHandleReady(() => ApplyPalette(populateTable));
             return;
         }
 
@@ -759,6 +1382,7 @@ public partial class MainForm : KryptonForm
         buttonsPage1.ApplyPalette(_palette);
 
         UpdateChromeTMS();
+        RefreshChromePreviewForms();
 
         // Optionally refresh the color table and property grid
         if (populateTable)
@@ -785,7 +1409,8 @@ public partial class MainForm : KryptonForm
         try
         {
             Cursor = Cursors.WaitCursor;
-            Application.DoEvents();
+            // Do not pump the message queue here. DoEvents during Load/ApplyPalette
+            // allows menu clicks (e.g. Randomize) to re-enter and dispose wait dialogs.
 
             colorTableGrid.SuspendLayout();
             colorTableGrid.Rows.Clear();
@@ -837,6 +1462,34 @@ public partial class MainForm : KryptonForm
         // Get the new toolstrip renderer based on the design palette
         _chromeTMS.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
         _chromeTMS2.OverrideToolStripRenderer = renderer.RenderToolStrip(_palette);
+    }
+
+    private void RefreshChromePreviewForms()
+    {
+        if (_palette == null)
+        {
+            return;
+        }
+
+        // Assigning the same instance does not raise PaletteChanged; always force control-box chrome refresh.
+        _chromeTMS.LocalCustomPalette = _palette;
+        RefreshChromeControlBox(_chromeTMS);
+
+        _chromeTMS2.LocalCustomPalette = _palette;
+        RefreshChromeControlBox(_chromeTMS2);
+
+        _chromeRibbon.OverridePalette = _palette;
+    }
+
+    private static void RefreshChromeControlBox(KryptonForm form)
+    {
+        form.RecreateMinMaxCloseButtons();
+        if (form.IsHandleCreated)
+        {
+            form.PerformNeedPaint(true);
+            form.Invalidate(true);
+            form.Update();
+        }
     }
 
     #endregion
@@ -1034,6 +1687,7 @@ public partial class MainForm : KryptonForm
 
         // Pre-cache enum-to-path mappings for faster color edits
         PrefillEnumToPath();
+        _initialLoadComplete = true;
     }
 
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1120,7 +1774,7 @@ public partial class MainForm : KryptonForm
         if (!_dirty)
         {
             _dirty = true;
-            Task.Run(() => BeginInvoke(UpdateTitleBar));
+            RunWhenHandleReady(UpdateTitleBar);
         }
 
         // Do we need to setup a new renderer for the ToolMenuStatus page?
@@ -1176,6 +1830,18 @@ public partial class MainForm : KryptonForm
     private void MenuSave_Click(object sender, EventArgs e) => Save();
 
     private void MenuSaveAs_Click(object sender, EventArgs e) => SaveAs();
+
+    private void MenuSaveAsKthemex_Click(object? sender, EventArgs e) => SaveAs(forceKthemex: true);
+
+    private void MenuExtractKthemex_Click(object? sender, EventArgs e) => ExtractToKthemex();
+
+    private void MenuOpenPaletteFolder_Click(object? sender, EventArgs e) => OpenPaletteFolder();
+
+    private void MenuAddToCollection_Click(object? sender, EventArgs e) => AddCurrentToCollection();
+
+    private void MenuCreateCollectionFromFolder_Click(object? sender, EventArgs e) => CreateCollectionFromFolder();
+
+    private void MenuSwitchTheme_Click(object? sender, EventArgs e) => SwitchTheme();
 
 
     private void MenuExit_Click(object sender, EventArgs e) => Exit();
@@ -1452,6 +2118,26 @@ public partial class MainForm : KryptonForm
             ? _filename
             : $"{_filename} [{_collectionThemeName}]";
         Text = $@"Palette Designer - {title}{(_dirty ? "*" : string.Empty)}";
+    }
+
+    /// <summary>
+    /// Marshals <paramref name="action"/> to the UI thread when the form handle exists.
+    /// </summary>
+    private void RunWhenHandleReady(Action action)
+    {
+        if (IsDisposed || !IsHandleCreated)
+        {
+            return;
+        }
+
+        if (InvokeRequired)
+        {
+            BeginInvoke(action);
+        }
+        else
+        {
+            action();
+        }
     }
 
     private void CopyColorsFromBasePalette()
@@ -2471,7 +3157,6 @@ public partial class MainForm : KryptonForm
         try
         {
             Cursor = Cursors.WaitCursor;
-            Application.DoEvents();
 
             colorTableGrid.SuspendLayout();
             try
@@ -2718,102 +3403,130 @@ public partial class MainForm : KryptonForm
             return;
         }
 
+        var palette = _palette;
+
         // Suspend palette notifications and grid redraw for performance
-        _palette.SuspendUpdates();
-        SetRedraw(colorTableGrid, false);
+        palette.SuspendUpdates();
+        _colorGridRedrawSuspended = TrySetRedraw(colorTableGrid, false);
 
-        var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
-        // Snapshot all file-loaded overrides so we can preserve them
-        var loadedOverrides = enumValues.ToDictionary(ev => ev, ev => _palette.GetSchemeColor(ev));
-
-        using (var waitDlg = new ModalWaitDialog(true, 0, enumValues.Length))
+        try
         {
-            // Manually center the wait dialog over the main form
-            waitDlg.StartPosition = FormStartPosition.Manual;
-            // Update descriptive message via reflection to avoid modifying toolkit
-            var lblField = typeof(ModalWaitDialog).GetField("labelMessage",
-                global::System.Reflection.BindingFlags.Instance
-                | global::System.Reflection.BindingFlags.NonPublic);
-            if (lblField?.GetValue(waitDlg) is KryptonLabel lbl)
+            var enumValues = (SchemeBaseColors[])Enum.GetValues(typeof(SchemeBaseColors));
+            // Snapshot all file-loaded overrides so we can preserve them
+            var loadedOverrides = enumValues.ToDictionary(ev => ev, ev => palette.GetSchemeColor(ev));
+
+            using (var waitDlg = new ModalWaitDialog(true, 0, enumValues.Length))
             {
-                lbl.Text = "Processing color mappings, please wait...";
-            }
-
-            waitDlg.Show(this);
-            waitDlg.Location = new Point(
-                this.Left + (this.Width - waitDlg.Width) / 2,
-                this.Top + (this.Height - waitDlg.Height) / 2);
-            waitDlg.UpdateDialog();
-
-            for (int idx = 0; idx < enumValues.Length; idx++)
-            {
-                var enumVal = enumValues[idx];
-                // Determine mapped path, if any
-                string? path = PaletteMapper.ResolvePath(_palette, enumVal);
-                if (path == null && PaletteMapper.TryGetManualPath(enumVal.ToString(), out var manual))
-                    path = manual;
-
-                // File-loaded override for this enum
-                Color fileValue = loadedOverrides[enumVal];
-                Color final;
-                if (path != null)
+                // Manually center the wait dialog over the main form
+                waitDlg.StartPosition = FormStartPosition.Manual;
+                // Update descriptive message via reflection to avoid modifying toolkit
+                var lblField = typeof(ModalWaitDialog).GetField("labelMessage",
+                    global::System.Reflection.BindingFlags.Instance
+                    | global::System.Reflection.BindingFlags.NonPublic);
+                if (lblField?.GetValue(waitDlg) is KryptonLabel lbl)
                 {
-                    try
+                    lbl.Text = "Processing color mappings, please wait...";
+                }
+
+                waitDlg.Show(this);
+                waitDlg.Location = new Point(
+                    this.Left + (this.Width - waitDlg.Width) / 2,
+                    this.Top + (this.Height - waitDlg.Height) / 2);
+                waitDlg.UpdateDialog();
+
+                for (int idx = 0; idx < enumValues.Length; idx++)
+                {
+                    // Modeless Close()/Dispose (or nested DoEvents) can invalidate the dialog mid-loop
+                    if (waitDlg.IsDisposed)
                     {
-                        // Normalize for fast lookup
-                        string fastPath = path.StartsWith("ButtonStyles.Standalone.", StringComparison.Ordinal)
-                            ? "ButtonStyles.ButtonStandalone." + path.Substring("ButtonStyles.Standalone.".Length)
-                            : path;
-                        // Register mapping in cache
-                        Utilities.PaletteMappingCache.Add(enumVal.ToString(), fastPath);
-                        // Preserve file override if it differs from base palette, else fetch from graph or base palette
-                        Color baseValue = _palette.BasePalette != null
-                            ? _palette.BasePalette.GetSchemeColor(enumVal)
-                            : fileValue;
-                        if (fileValue != baseValue)
+                        break;
+                    }
+
+                    var enumVal = enumValues[idx];
+                    // Determine mapped path, if any
+                    string? path = PaletteMapper.ResolvePath(palette, enumVal);
+                    if (path == null && PaletteMapper.TryGetManualPath(enumVal.ToString(), out var manual))
+                    {
+                        path = manual;
+                    }
+
+                    // File-loaded override for this enum
+                    Color fileValue = loadedOverrides[enumVal];
+                    Color final;
+                    if (path != null)
+                    {
+                        try
                         {
-                            final = fileValue;
-                        }
-                        else
-                        {
-                            // Get via compiled delegate
-                            Color fast = PaletteMapper.GetColorFast(_palette, fastPath);
-                            // If empty, prefer the base palette when available, otherwise keep the file-provided value
-                            if (fast.ToArgb() == 0)
+                            // Normalize for fast lookup
+                            string fastPath = path.StartsWith("ButtonStyles.Standalone.", StringComparison.Ordinal)
+                                ? "ButtonStyles.ButtonStandalone." + path.Substring("ButtonStyles.Standalone.".Length)
+                                : path;
+                            // Register mapping in cache
+                            Utilities.PaletteMappingCache.Add(enumVal.ToString(), fastPath);
+                            // Preserve file override if it differs from base palette, else fetch from graph or base palette
+                            Color baseValue = palette.BasePalette != null
+                                ? palette.BasePalette.GetSchemeColor(enumVal)
+                                : fileValue;
+                            if (fileValue != baseValue)
                             {
-                                // Preserve the file-provided override when we cannot resolve a fast path
                                 final = fileValue;
                             }
                             else
                             {
-                                final = fast;
+                                // Get via compiled delegate
+                                Color fast = PaletteMapper.GetColorFast(palette, fastPath);
+                                // If empty, prefer the base palette when available, otherwise keep the file-provided value
+                                if (fast.ToArgb() == 0)
+                                {
+                                    // Preserve the file-provided override when we cannot resolve a fast path
+                                    final = fileValue;
+                                }
+                                else
+                                {
+                                    final = fast;
+                                }
                             }
                         }
+                        catch
+                        {
+                            // On error, keep file override
+                            final = fileValue;
+                        }
                     }
-                    catch
+                    else
                     {
-                        // On error, keep file override
+                        // No mapping; keep the file-provided override value
                         final = fileValue;
                     }
+
+                    palette.SetSchemeColor(enumVal, final);
+                    // Update progress bar deterministically
+                    waitDlg.UpdateProgressBarValue(idx + 1);
+                    waitDlg.UpdateDialog();
                 }
-                else
+
+                // Hide rather than Close: Close() disposes modeless forms immediately,
+                // which races with UpdateDialog/DoEvents still in flight.
+                if (!waitDlg.IsDisposed)
                 {
-                    // No mapping; keep the file-provided override value
-                    final = fileValue;
+                    waitDlg.Hide();
                 }
-
-                _palette.SetSchemeColor(enumVal, final);
-                // Update progress bar deterministically
-                waitDlg.UpdateProgressBarValue(idx + 1);
-                waitDlg.UpdateDialog();
             }
-
-            waitDlg.Close();
+        }
+        finally
+        {
+            palette.ResumeUpdates();
+            if (_colorGridRedrawSuspended)
+            {
+                TrySetRedraw(colorTableGrid, true);
+                _colorGridRedrawSuspended = false;
+            }
         }
 
-        // Resume updates and redraw UI
-        _palette.ResumeUpdates();
-        SetRedraw(colorTableGrid, true);
+        if (IsDisposed || colorTableGrid.IsDisposed)
+        {
+            return;
+        }
 
         // Rebuild the grid so the freshly-set scheme values appear
         PopulateColorTableGrid();
@@ -2925,10 +3638,16 @@ public partial class MainForm : KryptonForm
         return false;
     }
 
-    private static void SetRedraw(Control control, bool redraw)
+    private static bool TrySetRedraw(Control control, bool redraw)
     {
+        if (control.IsDisposed || !control.IsHandleCreated)
+        {
+            return false;
+        }
+
         const int WM_SETREDRAW = 0x000B;
         SendMessage(control.Handle, WM_SETREDRAW, redraw ? 1 : 0, IntPtr.Zero);
+        return true;
     }
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -3037,6 +3756,11 @@ public partial class MainForm : KryptonForm
 
     private void randomizeToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (!_initialLoadComplete || _paletteOperationInProgress)
+        {
+            return;
+        }
+
         var randomSeed = KryptonCustomThemeGenerator.CreateRandomSeed();
 
         if (_palette != null)
