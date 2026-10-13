@@ -16,7 +16,7 @@ public partial class FormPaletteUpgradeTool : KryptonForm
 
     private const int MINIMUM_PALETTE_FILE_VERSION = 2;
 
-    private const int MAXIMUM_PALETTE_FILE_VERSION = GlobalStaticValues.CURRENT_SUPPORTED_PALETTE_VERSION;
+    private const int MAXIMUM_PALETTE_FILE_VERSION = SharedStaticConstants.CURRENT_SUPPORTED_PALETTE_VERSION;
 
     #endregion
 
@@ -209,7 +209,8 @@ public partial class FormPaletteUpgradeTool : KryptonForm
         KryptonOpenFileDialog openFileDialog = new()
         {
             Title = @"Open an existing Krypton palette file:",
-            Filter = @"Krypton palette XML files (*.xml)|*.xml"
+            Filter = @"Krypton palette XML files (*.kthemex;*.xml)|*.kthemex;*.xml",
+            DefaultExt = KryptonPaletteFile.Extension
         };
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -295,7 +296,8 @@ public partial class FormPaletteUpgradeTool : KryptonForm
         KryptonSaveFileDialog saveFileDialog = new()
         {
             Title = @"Save Krypton palette file as:",
-            Filter = @"Krypton palette XML files (*.xml)|*.xml",
+            Filter = @"Krypton palette XML files (*.kthemex;*.xml)|*.kthemex;*.xml",
+            DefaultExt = KryptonPaletteFile.Extension,
             InitialDirectory = Path.GetDirectoryName(krtbOutput.Text),
             FileName = Path.GetFileName(krtbOutput.Text)
         };

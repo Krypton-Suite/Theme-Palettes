@@ -5,128 +5,127 @@
  */
 #endregion
 
-namespace PaletteDesigner.Pages
+namespace PaletteDesigner.Pages;
+
+public partial class InputControls : UserControl
 {
-    public partial class InputControls : UserControl
+    private readonly List<KryptonTextBox> _textBoxes;
+    private readonly List<KryptonComboBox> _comboBoxes;
+    private readonly List<KryptonRichTextBox> _richTextBoxes;
+    private readonly List<KryptonNumericUpDown> _numericUpDowns;
+
+    public InputControls()
     {
-        private readonly List<KryptonTextBox> _textBoxes;
-        private readonly List<KryptonComboBox> _comboBoxes;
-        private readonly List<KryptonRichTextBox> _richTextBoxes;
-        private readonly List<KryptonNumericUpDown> _numericUpDowns;
+        InitializeComponent();
 
-        public InputControls()
-        {
-            InitializeComponent();
-
-            _textBoxes =
-            [
-                ..new[]
-                {
-                    textBoxDisabled,
-                    textBoxNormal,
-                    textBoxActive,
-
-
-                    multiDisabled,
-                    multiNormal,
-                    multiActive
-                }
-            ];
-
-            _richTextBoxes =
-            [
-                ..new[]
-                {
-                    rtbDisabled,
-                    rtbNormal,
-                    rtbActive
-                }
-            ];
-
-            _comboBoxes =
-            [
-                ..new[]
-                {
-                    comboBoxDisabled,
-                    comboBoxDisabled2,
-                    comboBoxNormal,
-                    comboBoxNormal2,
-                    comboBoxActive,
-                    comboBoxActive2
-                }
-            ];
-            _numericUpDowns =
-            [
-                ..new[]
-                {
-                    numericDisabled,
-                    numericNormal,
-                    numericActive
-                }
-            ];
-
-            // Input controls fixed states
-            textBoxNormal.SetFixedState(false);
-            textBoxActive.SetFixedState(true);
-            rtbNormal.SetFixedState(false);
-            rtbActive.SetFixedState(true);
-            multiNormal.SetFixedState(false);
-            multiActive.SetFixedState(true);
-            comboBoxNormal.SetFixedState(false);
-            comboBoxActive.SetFixedState(true);
-            numericNormal.SetFixedState(false);
-            numericActive.SetFixedState(true);
-
-            KryptonNavigatorDesignInputControls_SelectedPageChanged(this, EventArgs.Empty);
-        }
-
-        public void ApplyPalette(KryptonCustomPaletteBase palette)
-        {
-            _textBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _comboBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _richTextBoxes.ForEach(control => control.LocalCustomPalette = palette);
-            _numericUpDowns.ForEach(control => control.LocalCustomPalette = palette);
-
-            kryptonPanel1.Palette = palette;
-        }
-
-        private void KryptonNavigatorDesignInputControls_SelectedPageChanged(object sender, System.EventArgs e)
-        {
-            // Update the design page text with the selected style information
-            //pageDesignInputControls.TextTitle = kryptonNavigatorDesignInputControls.SelectedPage.Text;
-            //pageDesignInputControls.TextDescription = kryptonNavigatorDesignInputControls.SelectedPage.TextDescription;
-
-            InputControlStyle inputControlStyle;
-            var alwaysActive = true;
-
-            // Work out the input control style to be used
-            switch (kryptonNavigatorDesignInputControls.SelectedIndex)
+        _textBoxes =
+        [
+            ..new[]
             {
-                default:
-                //case 0:
-                    inputControlStyle = InputControlStyle.Standalone;
-                    break;
-                case 1:
-                    inputControlStyle = InputControlStyle.Ribbon;
-                    alwaysActive = false;
-                    break;
-                case 2:
-                    inputControlStyle = InputControlStyle.Custom1;
-                    break;
+                textBoxDisabled,
+                textBoxNormal,
+                textBoxActive,
+
+
+                multiDisabled,
+                multiNormal,
+                multiActive
             }
+        ];
 
-            // Update all the displayed controls with the new styles
-            _textBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            _comboBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            _richTextBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
-            _numericUpDowns.ForEach(control => control.InputControlStyle = inputControlStyle);
+        _richTextBoxes =
+        [
+            ..new[]
+            {
+                rtbDisabled,
+                rtbNormal,
+                rtbActive
+            }
+        ];
 
-            _textBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            _comboBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            _richTextBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
-            _numericUpDowns.ForEach(control => control.AlwaysActive = alwaysActive);
+        _comboBoxes =
+        [
+            ..new[]
+            {
+                comboBoxDisabled,
+                comboBoxDisabled2,
+                comboBoxNormal,
+                comboBoxNormal2,
+                comboBoxActive,
+                comboBoxActive2
+            }
+        ];
+        _numericUpDowns =
+        [
+            ..new[]
+            {
+                numericDisabled,
+                numericNormal,
+                numericActive
+            }
+        ];
 
+        // Input controls fixed states
+        textBoxNormal.SetFixedState(false);
+        textBoxActive.SetFixedState(true);
+        rtbNormal.SetFixedState(false);
+        rtbActive.SetFixedState(true);
+        multiNormal.SetFixedState(false);
+        multiActive.SetFixedState(true);
+        comboBoxNormal.SetFixedState(false);
+        comboBoxActive.SetFixedState(true);
+        numericNormal.SetFixedState(false);
+        numericActive.SetFixedState(true);
+
+        KryptonNavigatorDesignInputControls_SelectedPageChanged(this, EventArgs.Empty);
+    }
+
+    public void ApplyPalette(KryptonCustomPaletteBase palette)
+    {
+        _textBoxes.ForEach(control => control.LocalCustomPalette = palette);
+        _comboBoxes.ForEach(control => control.LocalCustomPalette = palette);
+        _richTextBoxes.ForEach(control => control.LocalCustomPalette = palette);
+        _numericUpDowns.ForEach(control => control.LocalCustomPalette = palette);
+
+        kryptonPanel1.Palette = palette;
+    }
+
+    private void KryptonNavigatorDesignInputControls_SelectedPageChanged(object sender, System.EventArgs e)
+    {
+        // Update the design page text with the selected style information
+        //pageDesignInputControls.TextTitle = kryptonNavigatorDesignInputControls.SelectedPage.Text;
+        //pageDesignInputControls.TextDescription = kryptonNavigatorDesignInputControls.SelectedPage.TextDescription;
+
+        InputControlStyle inputControlStyle;
+        var alwaysActive = true;
+
+        // Work out the input control style to be used
+        switch (kryptonNavigatorDesignInputControls.SelectedIndex)
+        {
+            default:
+                //case 0:
+                inputControlStyle = InputControlStyle.Standalone;
+                break;
+            case 1:
+                inputControlStyle = InputControlStyle.Ribbon;
+                alwaysActive = false;
+                break;
+            case 2:
+                inputControlStyle = InputControlStyle.Custom1;
+                break;
         }
+
+        // Update all the displayed controls with the new styles
+        _textBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+        _comboBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+        _richTextBoxes.ForEach(control => control.InputControlStyle = inputControlStyle);
+        _numericUpDowns.ForEach(control => control.InputControlStyle = inputControlStyle);
+
+        _textBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+        _comboBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+        _richTextBoxes.ForEach(control => control.AlwaysActive = alwaysActive);
+        _numericUpDowns.ForEach(control => control.AlwaysActive = alwaysActive);
 
     }
+
 }

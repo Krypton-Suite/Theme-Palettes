@@ -7,13 +7,12 @@
  */
 #endregion
 
-namespace PaletteDesigner.Pages
+namespace PaletteDesigner.Pages;
+
+public partial class BreadCrumbPage : UserControl
 {
-    public partial class BreadCrumbPage : UserControl
+    public BreadCrumbPage()
     {
-        public BreadCrumbPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

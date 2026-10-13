@@ -31,6 +31,8 @@ global using System.Xml.Xsl;
 global using Cyotek.Windows.Forms;
 global using Krypton.Navigator;
 global using Krypton.Toolkit;
+global using Krypton.Toolkit.Utilities;
+global using Krypton.Interop;
 global using PaletteDesigner.Pages;
 global using PaletteDesigner.Properties;
 global using PaletteDesigner.Utilities;
