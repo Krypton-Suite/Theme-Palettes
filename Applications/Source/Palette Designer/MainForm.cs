@@ -3462,7 +3462,7 @@ public partial class MainForm : KryptonForm
                                 ? "ButtonStyles.ButtonStandalone." + path.Substring("ButtonStyles.Standalone.".Length)
                                 : path;
                             // Register mapping in cache
-                            Utilities.PaletteMappingCache.Add(enumVal.ToString(), fastPath);
+                            PaletteMappingCache.Add(enumVal.ToString(), fastPath);
                             // Preserve file override if it differs from base palette, else fetch from graph or base palette
                             Color baseValue = palette.BasePalette != null
                                 ? palette.BasePalette.GetSchemeColor(enumVal)
