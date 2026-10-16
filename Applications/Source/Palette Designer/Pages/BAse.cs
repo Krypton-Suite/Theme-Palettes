@@ -7,15 +7,14 @@
  */
 #endregion
 
-namespace PaletteDesigner.Pages
-{
-    public partial class Base : UserControl
-    {
-        public Base()
-        {
-            InitializeComponent();
-        }
+namespace PaletteDesigner.Pages;
 
-        public void ApplyPalette(KryptonCustomPaletteBase palette) => kryptonPanel1.Palette = palette;
+public partial class Base : UserControl
+{
+    public Base()
+    {
+        InitializeComponent();
     }
+
+    public void ApplyPalette(KryptonCustomPaletteBase palette) => kryptonPanel1.Palette = palette;
 }

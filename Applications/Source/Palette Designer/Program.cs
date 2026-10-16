@@ -12,32 +12,31 @@
 
 using System.Runtime.InteropServices;
 
-namespace PaletteDesigner
+namespace PaletteDesigner;
+
+internal static class Program
 {
-    internal static class Program
-    {
 #if NETFRAMEWORK
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
 #endif
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            // Enable High-DPI support for Windows Forms
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    private static void Main()
+    {
+        // Enable High-DPI support for Windows Forms
 #if NETFRAMEWORK
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 SetProcessDPIAware();
             }
 #else
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+        Application.SetHighDpiMode(HighDpiMode.SystemAware);
 #endif
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new MainForm());
     }
 }
